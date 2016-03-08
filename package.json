@@ -1,6 +1,6 @@
 {
   "name": "mdl-ext",
-  "version": "0.0.1-beta.0",
+  "version": "0.0.1-beta.1",
   "description": "Components based on the Google Material Design Lite framework",
   "main": "lib/index.js",
   "scripts": {
@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/leifoolsen/mdl-ext#readme",
   "peerDependencies": {
-    "material-design-icons": "^>= 2.2.0",
+    "material-design-icons": ">= 2.2.0",
     "material-design-lite": ">= 1.1.0 < 2"
   },
   "devDependencies": {
