@@ -33,11 +33,12 @@
  */
 
 // 1. Configuration and helpers
+@import 'material-design-lite/src/variables';
+@import 'material-design-lite/src/mixins';
 @import 'variables';
 @import 'mixins';
 
 // 2. Vendors
-@import 'material-design-lite/src/variables';
 
 // 3. Base stuff
 

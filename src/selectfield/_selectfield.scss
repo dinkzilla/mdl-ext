@@ -39,8 +39,8 @@
  *   https://github.com/mebibou/mdl-selectfield
  */
 
-@import "../../node_modules/material-design-lite/src/variables";
-@import "../../node_modules/material-design-lite/src/mixins";
+//@import "../../node_modules/material-design-lite/src/variables";
+//@import "../../node_modules/material-design-lite/src/mixins";
 @import "../mixins";
 
 // The container for the whole component.
@@ -240,7 +240,6 @@
   margin-left: $input-text-button-size;
 
   @include material-animation-default();
-  display: inline-block;
 
   // Safari (possibly others) need to be convinced that this field is actually
   // visible, otherwise it cannot be tabbed to nor focused via a <label>.

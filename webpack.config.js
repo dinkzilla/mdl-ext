@@ -7,16 +7,16 @@ const webpack = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+//const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 const env = require('yargs').argv.mode;
 
-const cssLoader = [
+const css_loader = [
   'css-loader?sourceMap',
   'postcss-loader'
 ].join('!');
 
-const styleLoader = [
+const sass_loader = [
   'css-loader?sourceMap',
   'postcss-loader',
   'resolve-url-loader',
@@ -37,12 +37,12 @@ else {
 
 var config = {
   entry: {
-    lavu: [
-      path.join(__dirname, 'src/lavu-mdl.scss'), // Styles
+    'mdl-ext': [
+      path.join(__dirname, 'src/mdl-ext.scss'), // Styles
       path.join(__dirname, 'src/index.js')       // Add your application's scripts last
     ],
     mdl: [                                    // Scripts packaged into 'vendor.js'
-      path.join(__dirname, 'src/vendor.scss')
+      //path.join(__dirname, 'src/vendor.scss')
       // +++ other 3'rd party
     ]
   },
@@ -83,12 +83,12 @@ var config = {
       {
         test: /\.scss$/,
         include: path.join(__dirname, 'src'),
-        loader: ExtractTextPlugin.extract('style-loader', styleLoader)
+        loader: ExtractTextPlugin.extract('style-loader', sass_loader)
       },
       {
         test: /\.css$/,
         include: path.join(__dirname, 'src'),
-        loader: ExtractTextPlugin.extract('style-loader', cssLoader)
+        loader: ExtractTextPlugin.extract('style-loader', css_loader)
       }
     ]
   },

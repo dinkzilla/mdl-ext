@@ -2,7 +2,7 @@
   "name": "mdl-ext",
   "version": "0.0.0-beta.0",
   "description": "Components based on the Google Material Design Lite framework",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "dev": "./node_modules/.bin/webpack --progress --colors --watch --mode=dev",
     "eslint": "./node_modules/.bin/eslint ./src",
@@ -33,6 +33,10 @@
     "url": "https://github.com/leifoolsen/mdl-ext/issues"
   },
   "homepage": "https://github.com/leifoolsen/mdl-ext#readme",
+  "peerDependencies": {
+    "material-design-icons": "2.2.0",
+    "material-design-lite": "1.1.2"
+  },
   "devDependencies": {
     "autoprefixer": "6.3.3",
     "babel-cli": "6.6.5",
@@ -60,15 +64,13 @@
     "jsdom": "8.1.0",
     "jsdomify": "2.0.1",
     "jshint": "2.9.1",
-    "material-design-icons": "2.2.0",
-    "material-design-lite": "1.1.2",
     "mocha": "2.4.5",
     "node-sass": "3.4.2",
     "null-loader": "0.1.1",
     "postcss-loader": "0.8.1",
     "require-uncached": "1.0.2",
     "resolve-url-loader": "1.4.3",
-    "roboto-fontface": "0.4.5",
+    "roboto-fontface": "^0.4.5",
     "sass-loader": "3.1.2",
     "sinon": "1.17.3",
     "style-loader": "0.13.0",
