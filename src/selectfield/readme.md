@@ -53,7 +53,8 @@ whose value matches the `select` element's `id` value, and a short string to be 
 </div>
 ```
 
-&nbsp;5. Add one or more MDLEXT classes, separated by spaces, to the div container, select field, label, and error message using the `class` attribute.
+&nbsp;5. Add one or more MDLEXT classes, separated by spaces, to the select field container, 
+select element, label element, and error message using the `class` attribute.
 ```html
 <div class="mdlext-selectfield mdlext-js-selectfield">
   <select id="some-id" class="mdlext-selectfield__select">
