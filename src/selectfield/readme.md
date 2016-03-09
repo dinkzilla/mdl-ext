@@ -109,8 +109,6 @@ Select field with a standard label and error message.
 ```
 
 
-
-
 ## Configuration options
 
 The MDL CSS classes apply various predefined visual and behavioral enhancements to the text field. The table below lists the available classes and their effects.

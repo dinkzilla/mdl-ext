@@ -73,13 +73,13 @@ require('mdl-ext');
  
 ## Components
 
-### Selectfield
+### [Selectfield](./src/selectfield/)
 ![Selectfield](./etc/select-element.png)
 
 The Material Design Lite Ext (MDLEXT) [**select field** component](./src/selectfield/) is an enhanced version 
 of the standard [HTML `<select>`] (https://developer.mozilla.org/en/docs/Web/HTML/Element/select) element.
 
-### Components under development
+#### Components under development
 * Accordion
 * Bordered input fields
 * File input
