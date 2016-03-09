@@ -58,7 +58,7 @@ $ npm install --save-dev roboto-fontface"
 @import 'mdl-ext/src/selectfield/selectfield';
 ```
 
-**Import material-design-lite and mdl-ext**
+**Import material-design-lite and mdl-ext in your "main" js file**
 ```javascript
 import 'material-design-lite/material';
 import 'mdl-ext';
@@ -73,15 +73,16 @@ require('mdl-ext');
  
 ## Components
 
-### [Selectfield](./src/selectfield/)
+### Selectfield
 ![Selectfield](./etc/select-element.png)
 
-The HTML ```<select>``` element represents a control that presents a menu of options. 
-Material Design Lite does not provide it's own component for the ```<select>``` element.
+The Material Design Lite Ext (MDLEXT) [**select field** component](./src/selectfield/) is an enhanced version 
+of the standard [HTML `<select>`] (https://developer.mozilla.org/en/docs/Web/HTML/Element/select) element.
 
 ### Components under development
 * Accordion
 * Bordered input fields
+* File input
 
 ## Notes
 You can download or clone a demo project from here: https://github.com/leifoolsen/mdl-webpack
