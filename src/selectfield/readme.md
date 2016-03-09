@@ -15,7 +15,7 @@ This component relates to the guidelines given in [Materials Design spesificatio
 
 ### To include a MDLEXT **select field** component:
 
-&nbsp;1. Code a `<div>` element to hold the text field.
+&nbsp;1. Code a `<div>` element to hold the select field.
 ```html
 <div>
 ...
@@ -111,7 +111,8 @@ Select field with a standard label and error message.
 
 ## Configuration options
 
-The MDL CSS classes apply various predefined visual and behavioral enhancements to the text field. The table below lists the available classes and their effects.
+The MDL CSS classes apply various predefined visual and behavioral enhancements to the select field. 
+The table below lists the available classes and their effects.
 
 | MDL class | Effect | Remarks |
 |-----------|--------|---------|
@@ -121,7 +122,7 @@ The MDL CSS classes apply various predefined visual and behavioral enhancements 
 | `mdlext-selectfield__label` | Defines element as selectfield label | Required on label element for select elements |
 | `mdlext-selectfield--floating-label` | Applies *floating label* effect | Optional; goes on "outer" div element |
 | `mdlext-selectfield__error` | Defines span as an MDL error message | Optional; goes on span element for MDL select element with *pattern*|
-| `is-invalid` | Defines the textfield as invalid on initial load. | Optional on `mdlext-selectfield` element |
+| `is-invalid` | Defines the selectfield as invalid on initial load. | Optional on `mdlext-selectfield` element |
 <!--
 | `mdlext-selectfield--expandable` | Defines a div as an MDL expandable select field container | For expandable select fields, required on "outer" div element |
 | `mdl-button` | Defines label as an MDL icon button | For expandable select fields, required on "outer" div's label element |
@@ -132,6 +133,10 @@ The MDL CSS classes apply various predefined visual and behavioral enhancements 
 
 >**Note:** Disabled versions of each select field type are provided, and are invoked with the standard HTML boolean attribute `disabled`. `<select class="mdlext-selectfield__select" id="select-id" name="select-id" disabled>`
 >This attribute may be added or removed programmatically via scripting.
+
+
+## How to use the component programmatically
+The tests provides examples on how to use the component [programmatically](https://github.com/leifoolsen/mdl-ext/blob/master/test/selectfield/selectfield.spec.js)
 
 ### Credits 
 The Select component is based on the following sources:
