@@ -47,7 +47,7 @@
    * @constructor
    * @param {HTMLElement} element The element that will be upgraded.
    */
-  var MaterialExtSelectfield = function MaterialExtSelectfield(element) {
+  const MaterialExtSelectfield = function MaterialExtSelectfield(element) {
     this.element_ = element;
     this.init(); // Initialize instance.
   };

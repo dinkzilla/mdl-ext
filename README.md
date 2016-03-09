@@ -1,17 +1,23 @@
 # mdl-ext
 
+[![travis build](https://img.shields.io/travis/leifoolsen/mdl-ext.svg?style=flat-square)](https://travis-ci.org/leifoolsen/mdl-ext)
+[![codecov coverage](https://img.shields.io/codecov/c/github/leifoolsen/mdl-ext.svg?style=flat-square)](https://codecov.io/github/leifoolsen/mdl-ext)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
+[![version](https://img.shields.io/npm/v/mdl-ext.svg?style=flat-square)](http://npm.im/mdl-ext)
+
 Components based on the [Google Material Design Lite](https://github.com/google/material-design-lite) framework.
 
 ## Install
-```sh
-$ npm install --save mdl-ext
-```
-
 If you haven't done so already, install [Material Design Lite](https://github.com/google/material-design-lite) and [Material Design Icons](https://github.com/google/material-design-icons).
 
 ```sh
 $ npm install --save-dev material-design-icons
 $ npm install --save material-design-lite
+```
+
+Install **mdl-ext**
+```sh
+$ npm install --save mdl-ext
 ```
 
 Optionally install [Font Roboto](https://github.com/choffmeister/roboto-fontface-bower)
