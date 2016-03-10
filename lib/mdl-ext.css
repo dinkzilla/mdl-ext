@@ -30,6 +30,14 @@
  * limitations under the License.
  */
 
+/* -----------------------------------------------
+ * Override Material Design Lite variables
+ * ----------------------------------------------- */
+
+/*
+ * Modified from: http://blustemy.io/drawing-pure-css-arrows-with-mixins/
+ */
+
 /**
  * Copyright 2015 Google Inc. All Rights Reserved.
  *
@@ -262,10 +270,6 @@
 /* Animations */
 
 /* Dialog */
-
-/*
- * Modified from: http://blustemy.io/drawing-pure-css-arrows-with-mixins/
- */
 
 /**
  * Copyright 2015 Google Inc. All Rights Reserved.

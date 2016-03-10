@@ -2,7 +2,7 @@
   "name": "mdl-ext",
   "version": "0.0.0-semantically-released",
   "description": "Components based on the Google Material Design Lite framework",
-  "main": "lib/index.js",
+  "main": "lib/mdl-ext.js",
   "scripts": {
     "commit": "git-cz",
     "dev": "./node_modules/.bin/webpack --progress --colors --watch --mode=dev",
@@ -13,7 +13,7 @@
     "check-coverage": "./node_modules/.bin/istanbul check-coverage --statements 85 --branches 70 --functions 100 --lines 90",
     "report-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/codecov",
     "prebuild": "rm -rf lib && ./node_modules/.bin/webpack",
-    "build": "./node_modules/.bin/webpack --mode=build",
+    "build": "./node_modules/.bin/webpack -p --mode=build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "config": {
@@ -32,15 +32,16 @@
     "url": "https://github.com/leifoolsen/mdl-ext.git"
   },
   "keywords": [
-    "mdl",
-    "material-design-lite",
     "es6",
     "es7",
     "EcmaScript 2015",
     "EcmaScript 2016",
     "css",
     "sass",
-    "webpack"
+    "webpack",
+    "mdl",
+    "material-design-lite",
+    "select"
   ],
   "author": "Leif Olsen (https://github.com/leifoolsen)",
   "license": "Apache-2.0",

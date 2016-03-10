@@ -8,16 +8,16 @@
 Components based on the [Google Material Design Lite](https://github.com/google/material-design-lite) framework.
 
 ## Install
+Install **mdl-ext**
+```sh
+$ npm install --save mdl-ext
+```
+
 If you haven't done so already, install [Material Design Lite](https://github.com/google/material-design-lite) and [Material Design Icons](https://github.com/google/material-design-icons).
 
 ```sh
 $ npm install --save-dev material-design-icons
 $ npm install --save material-design-lite
-```
-
-Install **mdl-ext**
-```sh
-$ npm install --save mdl-ext
 ```
 
 Optionally install [Font Roboto](https://github.com/choffmeister/roboto-fontface-bower)
@@ -36,7 +36,7 @@ $ npm install --save-dev roboto-fontface"
   <link type="text/css" rel='stylesheet' href='node_modules/material-design-icons/iconfont/material-icons.css'>
   <link type="text/css" rel='stylesheet' href='node_modules/roboto-fontface/css/roboto-fontface.css'>
   <link type="text/css" rel="stylesheet" href="node_modules/material-design-lite/material.css" />
-  <link type="text/css" rel="stylesheet" href="node_modules/mdl-ext/lib/mdl-ext.css" />
+  <link type="text/css" rel="stylesheet" href="node_modules/mdl-ext/lib/mdl-ext.min.css" />
 </head>
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
@@ -55,10 +55,10 @@ $ npm install --save-dev roboto-fontface"
 **Import SASS files** 
 ```scss
 // 1. Import Configuration and helpers
-@import 'material-design-lite/src/variables';
-@import 'material-design-lite/src/mixins';
 @import 'mdl-ext/src/variables';
 @import 'mdl-ext/src/mixins';
+@import 'material-design-lite/src/variables';
+@import 'material-design-lite/src/mixins';
 
 // 2. Import Components
 @import 'mdl-ext/src/selectfield/selectfield';
@@ -67,7 +67,7 @@ $ npm install --save-dev roboto-fontface"
 **Import material-design-lite and mdl-ext in your "main" js file**
 ```javascript
 import 'material-design-lite/material';
-import 'mdl-ext';
+import 'mdl-ext/mdl-ext';
 ```
 
 **... or require material-design-lite and mdl-ext**

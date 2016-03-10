@@ -8,7 +8,7 @@ const path = require('path');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 //const CopyWebpackPlugin = require('copy-webpack-plugin');
-const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+//const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 const env = require('yargs').argv.mode;
 
 const css_loader = [
@@ -24,15 +24,17 @@ const sass_loader = [
 ].join('!');
 
 const libraryName = 'index';
-
-var plugins = [], outputFile;
+const cssName = 'mdl-ext';
+var outputFile;
+var outputCss;
 
 if (env === 'build') {
-  plugins.push(new UglifyJsPlugin({ minimize: true }));
   outputFile = libraryName + '.min.js';
+  outputCss = cssName + '.min.css'
 }
 else {
   outputFile = libraryName + '.js';
+  outputCss = cssName + '.css'
 }
 
 var config = {
@@ -40,15 +42,11 @@ var config = {
     'mdl-ext': [
       path.join(__dirname, 'src/mdl-ext.scss'), // Styles
       path.join(__dirname, 'src/index.js')       // Add your application's scripts last
-    ],
-    mdl: [                                    // Scripts packaged into 'vendor.js'
-      //path.join(__dirname, 'src/vendor.scss')
-      // +++ other 3'rd party
     ]
   },
   devtool: 'source-map',
   output: {
-    path: __dirname + '/lib',
+    path: path.join(__dirname, 'lib'),
     filename: outputFile,
     library: libraryName,
     libraryTarget: 'umd',
@@ -120,10 +118,12 @@ var config = {
     extensions: ['', '.js', '.jsx', '.css', '.scss', 'html']
   },
   plugins: [
-    new ExtractTextPlugin('[name].css', {
+    new ExtractTextPlugin(outputCss, {
       disable: false,
       allChunks: true
-    })
+    }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin()
   ]
 };
 
