@@ -52,22 +52,24 @@ $ npm install --save-dev roboto-fontface"
 
 ### Use it in your (Webpack) build
 
-**Import SASS files** 
+**Import SASS files** (you should follow the [SASS 7-1 pattern](http://sass-guidelin.es/#the-7-1-pattern)) 
 ```scss
-// 1. Import Configuration and helpers
-@import 'mdl-ext/src/variables';
-@import 'mdl-ext/src/mixins';
-@import 'material-design-lite/src/variables';
-@import 'material-design-lite/src/mixins';
+// 1. Override variables in 3'rd party sass libs
+@import 'stylesheets/variables';
 
 // 2. Import Components
+@import 'roboto-fontface/css/roboto-fontface.css';
+@import 'material-design-lite/src/material-design-lite';
 @import 'mdl-ext/src/selectfield/selectfield';
+
+// 3. ...
+@import 'stylesheets/app/whatever';
 ```
 
 **Import material-design-lite and mdl-ext in your "main" js file**
 ```javascript
 import 'material-design-lite/material';
-import 'mdl-ext/mdl-ext';
+import 'mdl-ext';
 ```
 
 **... or require material-design-lite and mdl-ext**
