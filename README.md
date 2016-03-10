@@ -40,7 +40,7 @@ $ npm install --save-dev roboto-fontface"
 </head>
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
-  <main class="mdl-layout__content" style="padding: 0 16px">
+  <main class="mdl-layout__content">
   </main
 </div>
 <script type="text/javascript" src="node_modules/material-design-lite/material.js" charset="utf-8"></script>
