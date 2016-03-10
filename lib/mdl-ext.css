@@ -30,14 +30,6 @@
  * limitations under the License.
  */
 
-/* -----------------------------------------------
- * Override Material Design Lite variables
- * ----------------------------------------------- */
-
-/*
- * Modified from: http://blustemy.io/drawing-pure-css-arrows-with-mixins/
- */
-
 /**
  * Copyright 2015 Google Inc. All Rights Reserved.
  *
@@ -272,6 +264,30 @@
 /* Dialog */
 
 /**
+ * Copyright 2016 Leif Olsen. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* ==========     Accordion     ========== */
+
+/* ==========  Bordered fields  ========== */
+
+/*
+ * Modified from: http://blustemy.io/drawing-pure-css-arrows-with-mixins/
+ */
+
+/**
  * Copyright 2015 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -325,6 +341,12 @@
   max-width: 100%;
   margin: 0;
   padding: 20px 0;
+}
+
+.mdlext-selectfield *,
+.mdlext-selectfield *::before,
+.mdlext-selectfield *::after {
+  box-sizing: border-box;
 }
 
 .mdlext-selectfield .mdl-button {
@@ -514,6 +536,217 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 
 .mdlext-selectfield__expandable-holder .mdlext-selectfield__label:after {
   bottom: 0;
+}
+
+/**
+ * Copyright 2016 Leif Olsen. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+ * The bordered fields are based on / inspired by this CodePen: http://codepen.io/prajwal078/pen/LVJZXz?editors=010
+ */
+
+/**
+ * Copyright 2016 Leif Olsen. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* ==========     Accordion     ========== */
+
+/* ==========  Bordered fields  ========== */
+
+.mdlext-bordered-fields {
+  box-sizing: border-box;
+}
+
+.mdlext-bordered-fields *,
+.mdlext-bordered-fields *::before,
+.mdlext-bordered-fields *::after,
+.mdlext-bordered-fields input[type="search"] {
+  box-sizing: border-box;
+}
+
+.mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__input:required,
+.mdlext-bordered-fields .mdl-textfield.is-dirty .mdlext-selectfield__select:required,
+.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__input:required,
+.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:required {
+  border-color: rgba(0,0,0, 0.12);
+  background-color: rgba(249, 234, 208, 0.1);
+}
+
+.mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__input:focus,
+.mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__input:required:focus,
+.mdlext-bordered-fields .mdl-textfield.is-dirty .mdlext-selectfield__select:focus,
+.mdlext-bordered-fields .mdl-textfield.is-dirty .mdlext-selectfield__select:required:focus,
+.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__input:focus,
+.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__input:required:focus,
+.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:focus,
+.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:required:focus {
+  border-color: #458ebd;
+  background-color: rgba(217, 232, 241, 0.2);
+}
+
+.mdlext-bordered-fields .mdl-textfield .mdl-textfield__input,
+.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select,
+.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input,
+.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0,0,0, 0.12);
+  border-radius: 3px;
+  height: 48px;
+  padding-top: 20px;
+  padding-right: 8px;
+  padding-bottom: 0;
+  padding-left: 8px;
+}
+
+.mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:disabled,
+.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:disabled,
+.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:disabled,
+.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:disabled {
+  color: rgba(0,0,0, 0.26);
+  background-color: rgba(228, 236, 243, 0.25);
+  border-color: #c6ccd1;
+}
+
+.mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:required,
+.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:required,
+.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:required,
+.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:required {
+  background-color: rgba(249, 234, 208, 0.1);
+  border-color: #e59617;
+}
+
+.mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:focus,
+.mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:required:focus,
+.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:focus,
+.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:required:focus,
+.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:focus,
+.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:required:focus,
+.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:focus,
+.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:required:focus {
+  background-color: rgba(217, 232, 241, 0.2);
+  border-color: #458ebd;
+}
+
+.mdlext-bordered-fields .mdl-textfield.is-focused .mdl-textfield__label,
+.mdlext-bordered-fields .mdl-textfield.is-focused .mdlext-selectfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.is-focused .mdl-textfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.is-focused .mdlext-selectfield__label {
+  top: 20px;
+}
+
+.mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__label,
+.mdlext-bordered-fields .mdl-textfield.is-dirty .mdlext-selectfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__label {
+  top: 20px;
+  visibility: visible;
+}
+
+.mdlext-bordered-fields .mdl-textfield .mdl-textfield__label,
+.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__label,
+.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__label,
+.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__label {
+  padding-left: 8px;
+  top: 35px;
+}
+
+.mdlext-bordered-fields .mdl-textfield .mdl-textfield__label:after,
+.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__label:after,
+.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__label:after,
+.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__label:after {
+  background-color: transparent !important;
+  visibility: hidden !important;
+}
+
+.mdlext-bordered-fields .mdl-textfield.mdlext-field--icon-left > i,
+.mdlext-bordered-fields .mdl-textfield.mdlext-field--icon-left > .mdl-button,
+.mdlext-bordered-fields .mdl-textfield.mdlext-field--icon-right > i,
+.mdlext-bordered-fields .mdl-textfield.mdlext-field--icon-right > .mdl-button,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-field--icon-left > i,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-field--icon-left > .mdl-button,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-field--icon-right > i,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-field--icon-right > .mdl-button {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.mdlext-bordered-fields .mdl-textfield.mdlext-field--icon-left > i:first-child,
+.mdlext-bordered-fields .mdl-textfield.mdlext-field--icon-left > .mdl-button:first-child,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-field--icon-left > i:first-child,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-field--icon-left > .mdl-button:first-child {
+  left: 4px;
+}
+
+.mdlext-bordered-fields .mdl-textfield.mdlext-field--icon-left > i ~ .mdl-textfield__input,
+.mdlext-bordered-fields .mdl-textfield.mdlext-field--icon-left > .mdl-button ~ .mdl-textfield__input,
+.mdlext-bordered-fields .mdl-textfield.mdlext-field--icon-left > i ~ .mdlext-selectfield__select,
+.mdlext-bordered-fields .mdl-textfield.mdlext-field--icon-left > .mdl-button ~ .mdlext-selectfield__select,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-field--icon-left > i ~ .mdl-textfield__input,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-field--icon-left > .mdl-button ~ .mdl-textfield__input,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-field--icon-left > i ~ .mdlext-selectfield__select,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-field--icon-left > .mdl-button ~ .mdlext-selectfield__select {
+  padding-left: 32px;
+}
+
+.mdlext-bordered-fields .mdl-textfield.mdlext-field--icon-left > i ~ .mdl-textfield__label,
+.mdlext-bordered-fields .mdl-textfield.mdlext-field--icon-left > .mdl-button ~ .mdl-textfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-field--icon-left > i ~ .mdl-textfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-field--icon-left > .mdl-button ~ .mdl-textfield__label {
+  left: 28px;
+}
+
+.mdlext-bordered-fields .mdl-textfield.mdlext-field--icon-left > i ~ .mdlext-selectfield__label,
+.mdlext-bordered-fields .mdl-textfield.mdlext-field--icon-left > .mdl-button ~ .mdlext-selectfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-field--icon-left > i ~ .mdlext-selectfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-field--icon-left > .mdl-button ~ .mdlext-selectfield__label {
+  left: 24px;
+}
+
+.mdlext-bordered-fields .mdl-textfield.mdlext-field--icon-right > .mdl-textfield__input,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-field--icon-right > .mdl-textfield__input {
+  padding-right: 32px;
+}
+
+.mdlext-bordered-fields .mdl-textfield.mdlext-field--icon-right > i:last-child,
+.mdlext-bordered-fields .mdl-textfield.mdlext-field--icon-right > .mdl-button:last-child,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-field--icon-right > i:last-child,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-field--icon-right > .mdl-button:last-child {
+  left: auto;
+  right: 4px;
+}
+
+.mdlext-bordered-fields .mdl-textfield.is-disabled i,
+.mdlext-bordered-fields .mdl-textfield.is-disabled .mdl-button,
+.mdlext-bordered-fields .mdlext-selectfield.is-disabled i,
+.mdlext-bordered-fields .mdlext-selectfield.is-disabled .mdl-button {
+  color: rgba(0,0,0, 0.12);
 }
 
 

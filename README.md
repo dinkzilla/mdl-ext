@@ -81,6 +81,11 @@ require('mdl-ext');
  
 ## Components
 
+### Bordered fields
+![Bordered fields](./etc/bordered-fields-theme.png)
+
+Demonstrates how you can create your own theme of MDL text fields without affecting the original MDL fields.
+
 ### [Selectfield](./src/selectfield/)
 ![Selectfield](./etc/select-element.png)
 
@@ -89,7 +94,6 @@ of the standard [HTML `<select>`] (https://developer.mozilla.org/en/docs/Web/HTM
 
 #### Components under development
 * Accordion
-* Bordered input fields
 * File input
 
 ## Notes

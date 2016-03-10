@@ -1,3 +1,40 @@
-/* -----------------------------------------------
- * Override Material Design Lite variables
- * ----------------------------------------------- */
+/**
+ * Copyright 2016 Leif Olsen. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+/* ==========     Accordion     ========== */
+
+
+/* ==========  Bordered fields  ========== */
+$mdlext-bordered-field-border-width: 1px !default;
+$mdlext-bordered-field-border-radius: 3px !default;
+$mdlext-bordered-field-background-color: rgba(#ffffff, 0.1) !default;
+$mdlext-bordered-field-height: 48px !default;
+$mdlext-bordered-field-padding: $input-text-padding + 4px !default;
+$mdlext-bordered-field-padding-top: 20px !default;
+$mdlext-bordered-field-padding-bottom: 0 !default;
+$mdlext-bordered-field-focus-border-color: #458ebd !default;
+$mdlext-bordered-field-focus-background-color: rgba(#d9e8f1, 0.2) !default;
+$mdlext-bordered-field-disabled-border-color: rgba(#c6ccd1, 1) !default;
+$mdlext-bordered-field-disabled-background-color: rgba(228, 236, 243, 0.25) !default;
+$mdlext-bordered-field-required-border-color: rgba(#e59617, 1) !default;
+$mdlext-bordered-field-required-background-color: rgba(#f9ead0, 0.1) !default;
+
+$mdlext-bordered-field-label-top: 35px !default;
+$mdlext-bordered-field-label-focused-top: 20px !default;
+
+$mdlext-bordered-field-icon-font-size: 1.4em !default;
+$mdlext-bordered-field-icon-left: 4px !default;

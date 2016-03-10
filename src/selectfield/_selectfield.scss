@@ -39,12 +39,13 @@
  *   https://github.com/mebibou/mdl-selectfield
  */
 
-// Use of this library requires the user to include variables and mixins from material-design-lite
+// Use of this module requires the user to include variables and mixins from material-design-lite
 //@import "../../node_modules/material-design-lite/src/variables";
 //@import "../../node_modules/material-design-lite/src/mixins";
+
 @import "../mixins";
 
-// The container for the whole component.
+// The container for the bordered fields.
 .mdlext-selectfield {
   position: relative;
   font-size: $input-text-font-size;
@@ -54,6 +55,10 @@
   max-width: 100%;
   margin: 0;
   padding: $input-text-vertical-spacing 0;
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
 
   // Align buttons, if used.
   & .mdl-button {

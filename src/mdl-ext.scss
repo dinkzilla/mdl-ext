@@ -33,10 +33,10 @@
  */
 
 // 1. Configuration and helpers
-@import 'variables';
-@import 'mixins';
 @import 'material-design-lite/src/variables';
 @import 'material-design-lite/src/mixins';
+@import 'variables';
+@import 'mixins';
 
 // 2. Vendors
 
@@ -44,3 +44,4 @@
 
 // 4. Components
 @import 'selectfield/selectfield';
+@import 'bordered-fields/bordered-fields';

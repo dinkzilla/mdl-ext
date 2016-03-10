@@ -1,0 +1,161 @@
+/**
+ * Copyright 2016 Leif Olsen. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+ * The bordered fields are based on / inspired by this CodePen: http://codepen.io/prajwal078/pen/LVJZXz?editors=010
+ */
+
+// Use of this module requires the user to include variables and mixins from material-design-lite
+//@import "../../node_modules/material-design-lite/src/variables";
+//@import "../../node_modules/material-design-lite/src/mixins";
+
+@import "../variables";
+
+// "Theme" for this styling
+.mdlext-bordered-fields {
+
+  box-sizing: border-box;
+
+  *, *::before, *::after, input[type="search"] {
+    box-sizing: border-box;
+  }
+
+  // Styling for textfield and selectfield.
+  .mdl-textfield,
+  .mdlext-selectfield {
+
+    &.is-dirty {
+      .mdl-textfield__input,
+      .mdlext-selectfield__select {
+        &:required {
+          border-color: $input-text-bottom-border-color;
+          background-color: $mdlext-bordered-field-required-background-color;
+        }
+        &:focus,
+        &:required:focus {
+          border-color: $mdlext-bordered-field-focus-border-color;
+          background-color: $mdlext-bordered-field-focus-background-color;
+        }
+      }
+    }
+    .mdl-textfield__input,
+    .mdlext-selectfield__select {
+      background-color: $mdlext-bordered-field-background-color;
+      border: $mdlext-bordered-field-border-width solid $input-text-bottom-border-color;
+      border-radius: $mdlext-bordered-field-border-radius;
+      height: $mdlext-bordered-field-height;
+      padding-top: $mdlext-bordered-field-padding-top;
+      padding-right: $mdlext-bordered-field-padding;
+      padding-bottom: $mdlext-bordered-field-padding-bottom;
+      padding-left: $mdlext-bordered-field-padding;
+
+      &:disabled {
+        color: $input-text-disabled-text-color;
+        background-color: $mdlext-bordered-field-disabled-background-color;
+        border-color: $mdlext-bordered-field-disabled-border-color;
+      }
+      &:required {
+        background-color: $mdlext-bordered-field-required-background-color;
+        border-color: $mdlext-bordered-field-required-border-color;
+      }
+      &:focus,
+      &:required:focus {
+        background-color: $mdlext-bordered-field-focus-background-color;
+        border-color: $mdlext-bordered-field-focus-border-color;
+      }
+    }
+  }
+
+  // Styling for the label / floating label.
+  .mdl-textfield,
+  .mdlext-selectfield {
+
+    &.is-focused {
+      .mdl-textfield__label,
+      .mdlext-selectfield__label {
+        top: $mdlext-bordered-field-label-focused-top;
+      }
+    }
+    &.is-dirty {
+      .mdl-textfield__label,
+      .mdlext-selectfield__label {
+        top: $mdlext-bordered-field-label-focused-top;
+        visibility: visible;
+      }
+    }
+    .mdl-textfield__label,
+    .mdlext-selectfield__label {
+      padding-left: $mdlext-bordered-field-padding;
+      top: $mdlext-bordered-field-label-top;
+
+      // Hides the colored underline for the TextField.
+      &:after {
+        background-color: transparent !important;
+        visibility: hidden !important;
+      }
+    }
+  }
+
+  // Icon(s) and/or button(s) inside textfield
+  .mdl-textfield,
+  .mdlext-selectfield {
+    &.mdlext-field--icon-left,
+    &.mdlext-field--icon-right {
+      & > i,
+      & > .mdl-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+    &.mdlext-field--icon-left {
+      & > i:first-child,
+      & > .mdl-button:first-child {
+        left: $input-text-padding;
+      }
+      & > i ~ .mdl-textfield__input,
+      & > .mdl-button ~ .mdl-textfield__input,
+      & > i ~ .mdlext-selectfield__select,
+      & > .mdl-button ~ .mdlext-selectfield__select {
+        padding-left: $input-text-button-size;
+      }
+      & > i ~ .mdl-textfield__label,
+      & > .mdl-button ~ .mdl-textfield__label {
+        left: $input-text-button-size - $input-text-padding;
+      }
+      & > i ~ .mdlext-selectfield__label,
+      & > .mdl-button ~ .mdlext-selectfield__label {
+        left: $input-text-button-size - $mdlext-bordered-field-padding;
+      }
+
+    }
+    &.mdlext-field--icon-right {
+      & > .mdl-textfield__input {
+        padding-right: $input-text-button-size;
+      }
+      & > i:last-child,
+      & > .mdl-button:last-child {
+        left: auto;
+        right: $input-text-padding;
+      }
+    }
+    &.is-disabled i,
+    &.is-disabled .mdl-button {
+      color: $input-text-disabled-color;
+    }
+  }
+}
+
