@@ -44,7 +44,7 @@ to any HTML block element and use that as a container for the bordered fields.
 </div>
 ```
 
-&nbsp;4. Optionally embed icons and/or buttons inside a bordered field by adding the CSS classes 
+&nbsp;4. Optionally embed icons and/or buttons into a bordered field by adding the CSS classes 
 `mdlext-bordered-fields__icon-left` and `mdlext-bordered-fields__icon-right` respectively.
 ```html
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-left mdlext-bordered-fields__icon-right">
@@ -73,7 +73,7 @@ to any HTML block element and use that as a container for the bordered fields.
 >**Note:** The `mdlext-selectfield` component can only embed an icon at the left hand side.
 
 #### Examples
-See the [example code](./snippets/selectfield.html).
+See the [example code](./snippets/bordered-fields.html).
 
 ## Configuration options
 
@@ -83,8 +83,8 @@ The table below lists the available classes and their effects.
 | MDLEXT class | Effect | Remarks |
 |-----------|--------|---------|
 | `mdlext-bordered-fields` | Defines container as an MDL bordered fields component | Required on an "outer" block element|
-| `mdlext-bordered-fields__icon-left` | Apply class on `mdl-textfield` container if you want to embedd a left aligned icon or a button inside the bordered field |  |
-| `mdlext-bordered-fields__icon-right` | Apply class on `mdl-textfield` container if you want to embedd a right aligned icon or a button inside the bordered field  |  |
+| `mdlext-bordered-fields__icon-left` | Add class on `mdl-textfield` or `mdlext-selectfield` container if you want to embedd a left aligned icon or a button into the bordered field |  |
+| `mdlext-bordered-fields__icon-right` | Add class on `mdl-textfield` or `mdlext-selectfield` container if you want to embedd a right aligned icon or a button into the bordered field  |  |
 
 
 The bordered fields can be modified with the following SASS variables.
