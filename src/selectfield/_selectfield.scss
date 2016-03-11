@@ -68,7 +68,7 @@
 
   // Styling the down arrow
   &:after {
-    @include mdlext-arrow(down, .7em, .47em, inherit);
+    @include mdlext-arrow(down, .75em, .65em, inherit);
     position: absolute;
     bottom: 1.8em;
     right: 0.5em;

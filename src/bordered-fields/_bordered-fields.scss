@@ -107,13 +107,20 @@
         visibility: hidden !important;
       }
     }
+    &.has-placeholder,
+    &.has-placeholder {
+      .mdl-textfield__label,
+      .mdlext-selectfield__label {
+        top: $mdlext-bordered-field-label-focused-top;
+      }
+    }
   }
 
   // Icon(s) and/or button(s) inside textfield
   .mdl-textfield,
   .mdlext-selectfield {
-    &.mdlext-field--icon-left,
-    &.mdlext-field--icon-right {
+    &.mdlext-bordered-fields__icon-left,
+    &.mdlext-bordered-fields__icon-right {
       & > i,
       & > .mdl-button {
         position: absolute;
@@ -121,7 +128,7 @@
         transform: translateY(-50%);
       }
     }
-    &.mdlext-field--icon-left {
+    &.mdlext-bordered-fields__icon-left {
       & > i:first-child,
       & > .mdl-button:first-child {
         left: $input-text-padding;
@@ -142,7 +149,7 @@
       }
 
     }
-    &.mdlext-field--icon-right {
+    &.mdlext-bordered-fields__icon-right {
       & > .mdl-textfield__input {
         padding-right: $input-text-button-size;
       }

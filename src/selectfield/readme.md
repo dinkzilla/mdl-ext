@@ -4,7 +4,7 @@
 ## Introduction
 The [HTML select](https://developer.mozilla.org/en/docs/Web/HTML/Element/select) (`<select>`) element represents 
 a control that presents a menu of options. The options within the menu are represented by `<option>` elements, 
-which can be grouped by ```<optgroup>``` elements. Options can be pre-selected for the user.
+which can be grouped by `<optgroup>` elements. Options can be pre-selected for the user.
 
 The Material Design Lite Ext (MDLEXT) **select field** component is an enhanced version of the standard 
 [HTML `<select>`] (https://developer.mozilla.org/en/docs/Web/HTML/Element/select) element.
@@ -111,10 +111,10 @@ Select field with a standard label and error message.
 
 ## Configuration options
 
-The MDL CSS classes apply various predefined visual and behavioral enhancements to the select field. 
+The MDLEXT CSS classes apply various predefined visual and behavioral enhancements to the select field. 
 The table below lists the available classes and their effects.
 
-| MDL class | Effect | Remarks |
+| MDLEXT class | Effect | Remarks |
 |-----------|--------|---------|
 | `mdlext-selectfield` | Defines container as an MDL component | Required on "outer" div element|
 | `mdlext-js-selectfield` | Assigns basic MDL behavior to input | Required on "outer" div element |
