@@ -9,13 +9,13 @@ MDL textfields and MDLEXT selectfields without affecting the original design. Yo
 to any HTML block element and use that as a container for the bordered fields.
 
 ### To include a MDLEXT bordered **fields** component:
-&nbsp;1. Code a `<div>` element; this is the "outer" container, intended to hold all of the bordered fields.
+&nbsp;1. Code a block element, as the "outer" container, intended to hold all of the bordered fields.
 ```html
 <div>
 </div>
 ```
 
-&nbsp;2. Add the `mdlext-bordered-fields` MDLEXT class to the div using the `class` attribute.
+&nbsp;2. Add the `mdlext-bordered-fields` MDLEXT class to the block element using the `class` attribute.
 ```html
 <div class="mdlext-bordered-fields">
 </div>
@@ -70,7 +70,7 @@ to any HTML block element and use that as a container for the bordered fields.
   </div>
 ```
 
->**Note:** The `mdlext-selectfield` component can only embed icons to the left hand side.
+>**Note:** The `mdlext-selectfield` component can only embed an icon at the left hand side.
 
 #### Examples
 See the [example code](./snippets/selectfield.html).
@@ -96,14 +96,14 @@ The bordered fields can be modified with the following SASS variables.
 | `$mdlext-bordered-field-background-color` | Defines the background color of the bordered field | | 
 | `$mdlext-bordered-field-height` | Defines the height of the bordered field | | 
 | `$mdlext-bordered-field-padding` | Defines the padding of the bordered field | | 
-| `$mdlext-bordered-field-padding-top` | Defines the padding top of the bordered field | | 
-| `$mdlext-bordered-field-padding-bottom` | Defines the padding bottom of the bordered field | | 
-| `$mdlext-bordered-field-focus-border-color` | Defines the border color when the bordered field has focus | | 
-| `$mdlext-bordered-field-focus-background-color` | Defines the background color when the bordered field has focus | | 
-| `$mdlext-bordered-field-disabled-border-color` | Defines the border color when the bordered field is disabled | | 
-| `$mdlext-bordered-field-disabled-background-color` | Defines the background color when the bordered field is disabled | | 
-| `$mdlext-bordered-field-required-border-color` | Defines the border color when the bordered field is required | | 
-| `$mdlext-bordered-field-required-background-color` | Defines the background color when the bordered field is disabled | | 
+| `$mdlext-bordered-field-padding-top` | Defines the top padding of the bordered field | | 
+| `$mdlext-bordered-field-padding-bottom` | Defines the bottom padding of the bordered field | | 
+| `$mdlext-bordered-field-focus-border-color` | Defines the border color when the field has focus | | 
+| `$mdlext-bordered-field-focus-background-color` | Defines the background color when the field has focus | | 
+| `$mdlext-bordered-field-disabled-border-color` | Defines the border color when the field is disabled | | 
+| `$mdlext-bordered-field-disabled-background-color` | Defines the background color when the field is disabled | | 
+| `$mdlext-bordered-field-required-border-color` | Defines the border color when the field is required | | 
+| `$mdlext-bordered-field-required-background-color` | Defines the background color when the field is disabled | | 
 | `$mdlext-bordered-field-label-top` | Defines the top position of the bordered field's label | | 
 | `$mdlext-bordered-field-label-focused-top` | Defines the top position of a floating label when the field has focus| | 
 
