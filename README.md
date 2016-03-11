@@ -44,30 +44,48 @@ $ npm install --save-dev roboto-fontface"
   <main class="mdl-layout__content">
   </main
 </div>
-<script type="text/javascript" src="node_modules/material-design-lite/material.js" charset="utf-8"></script>
+<script type="text/javascript" src="node_modules/material-design-lite/material.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="node_modules/mdl-ext/lib/index.min.js" charset="utf-8"></script>
 </body>
 </html
 ```
-
+>**Note:** Always import `mdl-ext` css **after** `material` css.
 
 ### Use it in your (Webpack) build
 
 **Import SASS files** (you should follow the [SASS 7-1 pattern](http://sass-guidelin.es/#the-7-1-pattern)) 
 ```scss
-// 1. Override variables in 3'rd party sass libs
+// 1. Application's SASS variables and overridden variables in 3'rd party SASS modules
 @import 'stylesheets/variables';
 
-// 2. Import Components
-@import 'roboto-fontface/css/roboto-fontface.css';
-@import 'material-design-lite/src/material-design-lite';
-@import 'mdl-ext/src/selectfield/selectfield';
+// 2. Import MDL
+@import '<path-to-node_modules>/roboto-fontface/css/roboto-fontface.css';
+@import '<path-to-node_modules>/material-design-lite/src/material-design-lite';
 
-// 3. ...
+// 3. Import MDLEXT
+@import '<path-to-node_modules>/mdl-ext/src/mdl-ext';
+
+// 4. Your stuff
 @import 'stylesheets/app/whatever';
 ```
 
-**Import material-design-lite and mdl-ext in your "main" js file**
+If your main SASS file is `./src/main.scss`, then your imports would be: 
+```scss
+// 1. Application's SASS variables and overridden variables in 3'rd party sass modules
+@import 'stylesheets/variables';
+
+// 2. Import MDL
+@import '../node_modules/roboto-fontface/css/roboto-fontface.css';
+@import '../node_modules/material-design-lite/src/material-design-lite';
+
+// 3. Import MDLEXT
+@import '../node_modules/mdl-ext/src/mdl-ext';
+
+// 4. Your stuff
+@import 'stylesheets/app/whatever';
+```
+
+**Import material-design-lite and mdl-ext scripts in your "main" js file**
 ```javascript
 import 'material-design-lite/material';
 import 'mdl-ext';
@@ -78,7 +96,6 @@ import 'mdl-ext';
 require('material-design-lite/material');
 require('mdl-ext');
 ```
-
  
 ## Components
 

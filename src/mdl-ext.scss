@@ -32,16 +32,10 @@
  * limitations under the License.
  */
 
-// 1. Configuration and helpers
-@import 'material-design-lite/src/variables';
-@import 'material-design-lite/src/mixins';
+// Configuration and helpers
 @import 'variables';
 @import 'mixins';
 
-// 2. Vendors
-
-// 3. Base stuff
-
-// 4. Components
+// Components
 @import 'selectfield/selectfield';
 @import 'bordered-fields/bordered-fields';

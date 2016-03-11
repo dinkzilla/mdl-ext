@@ -40,8 +40,8 @@ else {
 var config = {
   entry: {
     'mdl-ext': [
-      path.join(__dirname, 'src/mdl-ext.scss'), // Styles
-      path.join(__dirname, 'src/index.js')       // Add your application's scripts last
+      path.join(__dirname, 'src/mdl-ext-prod.scss'), // Styles (including MDL SASS variables)
+      path.join(__dirname, 'src/index.js')           // Add your application's scripts last
     ]
   },
   devtool: 'source-map',

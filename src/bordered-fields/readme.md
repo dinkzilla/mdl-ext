@@ -16,13 +16,13 @@ to any HTML block element and use that as a container for the bordered fields.
 ```
 
 &nbsp;2. Add the `mdlext-bordered-fields` MDLEXT class to the div using the `class` attribute.
-```
+```html
 <div class="mdlext-bordered-fields">
 </div>
 ```
 
 &nbsp;3. Add the MDL and MDLEXT fields you want to decorate.
-```
+```html
 <div class="mdlext-bordered-fields">
   <div class="mdl-textfield mdl-js-textfield">
     <input class="mdl-textfield__input" type="text" id="sample1">
@@ -38,7 +38,7 @@ to any HTML block element and use that as a container for the bordered fields.
       <option value="option4">Denmark</option>
       <option value="option5">Iceland</option>
     </select>
-    <label class="mdlext-selectfield__label" for="nordic-countries">Where do yoy want to go</label>
+    <label class="mdlext-selectfield__label" for="nordic-countries">Where do you want to go</label>
   </div>
   .....
 </div>
@@ -46,7 +46,7 @@ to any HTML block element and use that as a container for the bordered fields.
 
 &nbsp;4. Optionally embed icons and/or buttons inside a bordered field by adding the CSS classes 
 `mdlext-bordered-fields__icon-left` and `mdlext-bordered-fields__icon-right` respectively.
-```
+```html
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-left mdlext-bordered-fields__icon-right">
     <i class="material-icons">radio</i>
     <input class="mdl-textfield__input" type="text" id="icon-button1">
@@ -66,7 +66,7 @@ to any HTML block element and use that as a container for the bordered fields.
       <option value="option4">Denmark</option>
       <option value="option5">Iceland</option>
     </select>
-    <label class="mdlext-selectfield__label" for="nordic-countries">Where do yoy want to go</label>
+    <label class="mdlext-selectfield__label" for="nordic-countries">Where do you want to go</label>
   </div>
 ```
 
