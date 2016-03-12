@@ -59,6 +59,7 @@ $ npm install --save-dev roboto-fontface"
 @import 'stylesheets/variables';
 
 // 2. Import MDL
+@import '<path-to-node_modules>/node_modules/material-design-icons/iconfont/material-icons.css',
 @import '<path-to-node_modules>/roboto-fontface/css/roboto-fontface.css';
 @import '<path-to-node_modules>/material-design-lite/src/material-design-lite';
 
@@ -75,6 +76,7 @@ If your main SASS file is `./src/main.scss`, then your imports would be:
 @import 'stylesheets/variables';
 
 // 2. Import MDL
+@import '../node_modules/material-design-icons/iconfont/material-icons.css',
 @import '../node_modules/roboto-fontface/css/roboto-fontface.css';
 @import '../node_modules/material-design-lite/src/material-design-lite';
 
