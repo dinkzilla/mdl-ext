@@ -12,7 +12,8 @@
     "test:coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/istanbul cover --root ./src ./node_modules/.bin/_mocha -- --opts ./mocha.opts  -r .istanbul-mocha.config.js './test/**/*.spec.js'",
     "check-coverage": "./node_modules/.bin/istanbul check-coverage --statements 85 --branches 70 --functions 100 --lines 90",
     "report-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/codecov",
-    "prebuild": "rm -rf lib && ./node_modules/.bin/webpack",
+    "clean": "rimraf lib && mkdir lib",
+    "prebuild": "npm run clean && ./node_modules/.bin/webpack",
     "build": "./node_modules/.bin/webpack -p --mode=build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
@@ -94,6 +95,7 @@
     "postcss-loader": "0.8.1",
     "require-uncached": "1.0.2",
     "resolve-url-loader": "1.4.3",
+    "rimraf": "2.5.2",
     "roboto-fontface": "^0.4.5",
     "sass-loader": "3.1.2",
     "semantic-release": "^4.3.5",
