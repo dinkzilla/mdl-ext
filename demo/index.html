@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="">
+<html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,11 +9,9 @@
   <title>Material Design Lite Extensions</title>
 
   <!-- styles -->
-  <link type="text/css" rel='stylesheet' href='../node_modules/material-design-icons/iconfont/material-icons.css'>
-  <link type="text/css" rel='stylesheet' href='../node_modules/roboto-fontface/css/roboto-fontface.css'>
+  <link type="text/css" rel='stylesheet' href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link type="text/css" rel="stylesheet" href="../node_modules/material-design-lite/material.css" />
   <link type="text/css" rel="stylesheet" href="../lib/mdl-ext.css" />
-
 </head>
 
 <body>
@@ -21,353 +19,35 @@
   <aside class="mdl-layout__drawer">
     <span class="mdl-layout-title">MDL Extensions</span>
     <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="../src/bordered-fields/snippets/bordered-fields.html">Bordered fields</a>
+      <a class="mdl-navigation__link" href="../src/selectfield/snippets/selectfield.html">Selectfield component</a>
     </nav>
   </aside>
-  <main class="mdl-layout__content" style="padding: 0 16px">
-
-    <!-- ============ -->
-
-    <h5>Bordered Fields Theme Component</h5>
-    <p>Demonstrates how you can create your own theme of MDL text fields without affecting the original MDL fields.</p>
-
-    <style>
-      .borderedfield-demo-container {
-      }
-
-      .borderedfield-demo-container .mdl-cell {
-        padding: 0 4px 8px 0;
-      }
-
-      .borderedfield-demo-container .mdl-cell p {
-        margin-bottom: 0;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
-
-      /* File input example */
-      .mdl-button--file input {
-        cursor: pointer;
-        opacity: 0;
-        width: 1px;
-        height: 1px;
-      }
-    </style>
-
-
-    <div class = "borderedfield-demo-container mdlext-bordered-fields">
-
-      <div class="mdl-grid mdl-grid--no-spacing">
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Text</p>
-          <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" id="sample1">
-            <label class="mdl-textfield__label" for="sample1">Text ...</label>
-          </div>
-        </div>
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Text numeric</p>
-          <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample2">
-            <label class="mdl-textfield__label" for="sample2">Number...</label>
-            <span class="mdl-textfield__error">Input is not a number!</span>
-          </div>
-        </div>
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Text with floating label, required field</p>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="sample3"  list="languages" placeholder="Select a language" required>
-            <label class="mdl-textfield__label" for="sample3">Programming language</label>
-          </div>
-        </div>
-        <datalist id="languages">
-          <option value="HTML">
-          <option value="CSS">
-          <option value="JavaScript">
-          <option value="Java">
-          <option value="Ruby">
-          <option value="PHP">
-          <option value="Go">
-          <option value="Erlang">
-          <option value="Python">
-          <option value="C">
-          <option value="C#">
-          <option value="C++">
-        </datalist>
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Numeric with floating label</p>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4">
-            <label class="mdl-textfield__label" for="sample4">Number...</label>
-            <span class="mdl-textfield__error">Input is not a number!</span>
-          </div>
-        </div>
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Disabled floating label</p>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample41" disabled value="123">
-            <label class="mdl-textfield__label" for="sample41">Number...</label>
-            <span class="mdl-textfield__error">Input is not a number!</span>
-          </div>
-        </div>
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>File upload</p>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-right ">
-            <input class="mdl-textfield__input" type="text" id="uploadfile2" readonly>
-            <label class="mdl-textfield__label">File (work in progress)</label>
-
-            <label class="mdl-button mdl-js-button mdl-button--primary mdl-button--icon mdl-button--file" for="uploadfile2">
-              <i class="material-icons">attach_file</i>
-              <input type="file" id="uploadBtn2">
-            </label>
-          </div>
-          <!--
-            // Need a script to work properly - something like this
-          -->
-          <script>
-            (function() {
-              'use strict';
-              document.querySelector('#uploadBtn2').addEventListener('change', function() {
-                var n = document.querySelector("#uploadfile2");
-                n.value = this.files[0].name;
-                n.parentNode.classList.add('is-dirty');
-              });
-            }());
-          </script>
-        </div>
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Select element</p>
-          <div class="mdlext-selectfield mdlext-js-selectfield">
-            <select class="mdlext-selectfield__select" id="professsion3" name="professsion3">
-              <option value=""></option>
-              <option value="option1">option 1</option>
-              <option value="option2">option 2</option>
-              <option value="option3">option 3</option>
-              <option value="option4">option 4</option>
-              <option value="option5">option 5</option>
-            </select>
-            <label class="mdlext-selectfield__label" for="professsion3">Profession</label>
-          </div>
-        </div>
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Select element with floating label</p>
-          <div class="mdlext-selectfield mdlext-js-selectfield mdlext-selectfield--floating-label">
-            <select class="mdlext-selectfield__select" id="professsion" name="professsion">
-              <option value=""></option>
-              <option value="option1">option 1</option>
-              <option value="option2">option 2</option>
-              <option value="option3">option 3</option>
-              <option value="option4">option 4</option>
-              <option value="option5">option 5</option>
-            </select>
-            <label class="mdlext-selectfield__label" for="professsion">Profession</label>
-          </div>
-        </div>
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Disabled Select element</p>
-          <div class="mdlext-selectfield mdlext-js-selectfield mdlext-selectfield--floating-label">
-            <select class="mdlext-selectfield__select" id="professsion2" name="professsion2" disabled>
-              <option value=""></option>
-              <option value="option1">option 1</option>
-              <option value="option2">option 2</option>
-              <option value="option3">option 3</option>
-              <option value="option4">option 4</option>
-              <option value="option5">option 5</option>
-            </select>
-            <label class="mdlext-selectfield__label" for="professsion2">Profession</label>
-          </div>
-        </div>
-
-
-
-
-
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Select element with icon left</p>
-          <div class="mdlext-selectfield mdlext-js-selectfield mdlext-bordered-fields__icon-left">
-            <i class="material-icons">radio</i>
-            <select class="mdlext-selectfield__select" id="professsion13" name="professsion13">
-              <option value=""></option>
-              <option value="option1">option 1</option>
-              <option value="option2">option 2</option>
-              <option value="option3">option 3</option>
-              <option value="option4">option 4</option>
-              <option value="option5">option 5</option>
-            </select>
-            <label class="mdlext-selectfield__label" for="professsion13">Profession</label>
-          </div>
-        </div>
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Select element with button left</p>
-          <div class="mdlext-selectfield mdlext-js-selectfield mdlext-selectfield--floating-label mdlext-bordered-fields__icon-left">
-            <label class="mdl-button mdl-js-button mdl-button--icon" for="professsion10">
-              <i class="material-icons">phone</i>
-            </label>
-            <select class="mdlext-selectfield__select" id="professsion10" name="professsion10">
-              <option value=""></option>
-              <option value="option1">option 1</option>
-              <option value="option2">option 2</option>
-              <option value="option3">option 3</option>
-              <option value="option4">option 4</option>
-              <option value="option5">option 5</option>
-            </select>
-            <label class="mdlext-selectfield__label" for="professsion10">Profession</label>
-          </div>
-        </div>
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Disabled Select element</p>
-          <div class="mdlext-selectfield mdlext-js-selectfield mdlext-selectfield--floating-label mdlext-bordered-fields__icon-left">
-            <label class="mdl-button mdl-js-button mdl-button--icon" for="professsion12">
-              <i class="material-icons">phone</i>
-            </label>
-            <select class="mdlext-selectfield__select" id="professsion12" name="professsion12" disabled>
-              <option value=""></option>
-              <option value="option1">option 1</option>
-              <option value="option2">option 2</option>
-              <option value="option3">option 3</option>
-              <option value="option4">option 4</option>
-              <option value="option5">option 5</option>
-            </select>
-            <label class="mdlext-selectfield__label" for="professsion12">Profession</label>
-          </div>
-        </div>
-
-
-
-
-
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Text with icon left</p>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-left">
-            <i class="material-icons">radio</i>
-            <input class="mdl-textfield__input" type="text">
-            <label class="mdl-textfield__label">Text...</label>
-          </div>
-        </div>
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Text with icon right</p>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-right">
-            <input class="mdl-textfield__input" type="text">
-            <label class="mdl-textfield__label">Text...</label>
-            <i class="material-icons">fingerprint</i>
-          </div>
-        </div>
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Text with icons left and right</p>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-left mdlext-bordered-fields__icon-right">
-            <i class="material-icons">radio</i>
-            <input class="mdl-textfield__input" type="text">
-            <label class="mdl-textfield__label">Text...</label>
-            <i class="material-icons">fingerprint</i>
-          </div>
-        </div>
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Text with icons left and right, disabled</p>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-left mdlext-bordered-fields__icon-right">
-            <i class="material-icons">radio</i>
-            <input class="mdl-textfield__input" type="text" id="sample-icon2" disabled>
-            <label class="mdl-textfield__label" for="sample-icon2">Text...</label>
-            <i class="material-icons">fingerprint</i>
-          </div>
-        </div>
-
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Text with button left</p>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-left">
-            <label class="mdl-button mdl-js-button mdl-button--icon" for="button-field1">
-              <i class="material-icons">phone</i>
-            </label>
-
-            <input class="mdl-textfield__input" type="text" id="button-field1">
-            <label class="mdl-textfield__label">Text...</label>
-          </div>
-        </div>
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Text with button right</p>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-right">
-            <input class="mdl-textfield__input" type="text" id="button-field2">
-            <label class="mdl-textfield__label">Text...</label>
-
-            <label class="mdl-button mdl-js-button mdl-button--icon" for="button-field2">
-              <i class="material-icons">settings_voice</i>
-            </label>
-          </div>
-        </div>
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Text with buttons left and right</p>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-left mdlext-bordered-fields__icon-right">
-            <label class="mdl-button mdl-js-button mdl-button--icon" for="button-field3">
-              <i class="material-icons">phone</i>
-            </label>
-
-            <input class="mdl-textfield__input" type="text" id="button-field3">
-            <label class="mdl-textfield__label">Text...</label>
-
-            <label class="mdl-button mdl-js-button mdl-button--icon" for="button-field3">
-              <i class="material-icons">settings_voice</i>
-            </label>
-          </div>
-        </div>
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Text with buttons left and right, disabled</p>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-left mdlext-bordered-fields__icon-right">
-            <label class="mdl-button mdl-js-button mdl-button--icon" for="button-field4">
-              <i class="material-icons">phone</i>
-            </label>
-
-            <input class="mdl-textfield__input" type="text" id="button-field4" disabled>
-            <label class="mdl-textfield__label">Text...</label>
-
-            <label class="mdl-button mdl-js-button mdl-button--icon" for="button-field4">
-              <i class="material-icons">settings_voice</i>
-            </label>
-          </div>
-        </div>
-
-        <div class="mdl-cell mdl-cell--4-col">
-          <p>Text with icon and button</p>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-left mdlext-bordered-fields__icon-right">
-            <i class="material-icons">radio</i>
-            <input class="mdl-textfield__input" type="text" id="icon-button1">
-            <label class="mdl-textfield__label">Text...</label>
-            <label class="mdl-button mdl-js-button mdl-button--icon" for="icon-button1">
-              <i class="material-icons">settings_voice</i>
-            </label>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-    <h5>Credits</h5>
-    <p>The Bordered Fields Theme component is based on this <a href="http://codepen.io/prajwal078/pen/LVJZXz" target="_blank">CodePen</a></p>
-
-
-    <!-- ============ -->
+  <main id="mount" class="mdl-layout__content" style="padding: 0 0 0 16px;">
+    <iframe id='demo-frame' name="demo-frame" frameborder="0"
+            style="height: height: 100%; width: 100%; border: 0;"
+            height="100%" width="100%"
+            src="../src/bordered-fields/snippets/bordered-fields.html">
+    </iframe>
   </main>
 </div>
 <script type="text/javascript" src="../node_modules/material-design-lite/material.js" charset="utf-8"></script>
 <script type="text/javascript" src="../lib/index.js" charset="utf-8"></script>
+
+<script>
+  'use strict';
+  window.addEventListener('load', function() {
+    var iframe = document.querySelector('#demo-frame');
+    var anchors = document.querySelectorAll('nav .mdl-navigation__link');
+    for (var i = 0; i < anchors.length; i++) {
+      anchors[i].addEventListener("click", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        iframe.src = this.href;
+      }.bind(anchors[i]), false);
+    }
+  });
+</script>
+
 </body>
 </html>

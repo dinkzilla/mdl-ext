@@ -118,7 +118,8 @@ of the standard [HTML `<select>`] (https://developer.mozilla.org/en/docs/Web/HTM
 * File input
 
 ## Notes
-You can download or clone a demo project from here: https://github.com/leifoolsen/mdl-webpack
+To see the MDLEXT components in action, open the [demo/index.html](./demo/index.html) in a browser.
+You can also download or clone a demo project from here: https://github.com/leifoolsen/mdl-webpack
 
 ## Licence
 © Leif Olsen, 2016. Licensed under an [Apache-2](https://github.com/leifoolsen/mdl-ext/blob/master/LICENSE) license.
