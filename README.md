@@ -9,21 +9,15 @@ Material Design Lite Ext (MDLEXT).
 Components based on the [Google Material Design Lite](https://github.com/google/material-design-lite) framework.
 
 ## Install
-If you haven't done so already, install [Material Design Lite](https://github.com/google/material-design-lite) and [Material Design Icons](https://github.com/google/material-design-icons).
+If you haven't done so already, install [Material Design Lite](https://github.com/google/material-design-lite).
 
 ```sh
-$ npm install --save-dev material-design-icons
 $ npm install --save material-design-lite
 ```
 
 Install **mdl-ext**
 ```sh
 $ npm install --save mdl-ext
-```
-
-Optionally install [Font Roboto](https://github.com/choffmeister/roboto-fontface-bower)
-```sh
-$ npm install --save-dev roboto-fontface"
 ```
 
 ## Getting started
@@ -34,10 +28,10 @@ $ npm install --save-dev roboto-fontface"
 <html>
 <head>
   <title>Material Design Lite Extensions</title>
-  <link type="text/css" rel='stylesheet' href='node_modules/material-design-icons/iconfont/material-icons.css'>
-  <link type="text/css" rel='stylesheet' href='node_modules/roboto-fontface/css/roboto-fontface.css'>
-  <link type="text/css" rel="stylesheet" href="node_modules/material-design-lite/material.css" />
-  <link type="text/css" rel="stylesheet" href="node_modules/mdl-ext/lib/mdl-ext.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="node_modules/material-design-lite/material.css" />
+  <link rel="stylesheet" href="node_modules/mdl-ext/lib/mdl-ext.min.css" />
 </head>
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
@@ -53,7 +47,7 @@ $ npm install --save-dev roboto-fontface"
 
 ### Use it in your (Webpack) build
 
-**Import SASS files** (you should follow the [SASS 7-1 pattern](http://sass-guidelin.es/#the-7-1-pattern)) 
+**Import SASS files** (e.g. following the [SASS 7-1 pattern](http://sass-guidelin.es/#the-7-1-pattern)) 
 ```scss
 // 1. Application's SASS variables and overridden variables in 3'rd party SASS modules
 @import 'stylesheets/variables';
@@ -119,7 +113,8 @@ of the standard [HTML `<select>`] (https://developer.mozilla.org/en/docs/Web/HTM
 
 ## Notes
 To see the MDLEXT components in action, open the [demo/index.html](./demo/index.html) in a browser.
-You can also download or clone a demo project from here: https://github.com/leifoolsen/mdl-webpack
+You can also download or clone a demo project from here: https://github.com/leifoolsen/mdl-webpack - 
+which also demonstrates how you can self host Font Roboto and Material Icons in your web application.
 
 ## Licence
 © Leif Olsen, 2016. Licensed under an [Apache-2](https://github.com/leifoolsen/mdl-ext/blob/master/LICENSE) license.

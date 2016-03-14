@@ -23,7 +23,7 @@
 <h5>Horizontal Flexbox Accordion</h5>
 
 <div style="height: 250px;">
-  <ul id="my-horisontal-accordion" class="mdlext-accordion" role="tablist" aria-multiselectable="false">
+  <ul id="my-horisontal-accordion" class="mdlext-accordion mdlext-js-accordion" role="tablist" aria-multiselectable="false">
     <li class="mdlext-accordion__panel" role="tabpanel">
       <header class="mdlext-accordion__panel__header">
         <a href="#"></a>
@@ -118,7 +118,7 @@
 
 <h5>Horizontal Flexbox Accordion, Colored</h5>
 <div style="height: 300px;">
-  <ul id="my-horisontal-accordion-colored" class="mdlext-accordion" role="tablist" aria-multiselectable="false">
+  <ul id="my-horisontal-accordion-colored" class="mdlext-accordion mdlext-js-accordion" role="tablist" aria-multiselectable="false">
     <li class="mdlext-accordion__panel mdlext-accordion__panel-colored" open>
       <header class="mdlext-accordion__panel__header">
         <a href="#"></a>
@@ -226,7 +226,7 @@
   </div>
 
   <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone vertical-accordion-height">
-    <ul id="my-vertical-accordion" class="mdlext-accordion mdlext-accordion--vertical" aria-multiselectable="false">
+    <ul id="my-vertical-accordion" class="mdlext-accordion mdlext-accordion--vertical mdlext-js-accordion" aria-multiselectable="false">
       <li class="mdlext-accordion__panel">
         <header class="mdlext-accordion__panel__header">
           <a href="#">You should not see this</a>
@@ -325,7 +325,7 @@
 
 
   <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone vertical-accordion-height">
-    <ul id="my-vertical-accordion-colored" class="mdlext-accordion mdlext-accordion--vertical" aria-multiselectable="false">
+    <ul id="my-vertical-accordion-colored" class="mdlext-accordion mdlext-accordion--vertical mdlext-js-accordion" aria-multiselectable="false">
       <li class="mdlext-accordion__panel mdlext-accordion__panel-colored">
         <header class="mdlext-accordion__panel__header">
           <a href="#"></a>
@@ -438,12 +438,12 @@
 <p>The Accordion component is based on this CodePen: <a href="http://codepen.io/aann/pen/dPqBML" target="_blank">Flexbox accordion</a></p>
 
 
-<script type="text/javascript" src="../../../demo/mdl-loader.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../../demo/mdl-iframe-loader.js" charset="utf-8"></script>
 <script>
   'use strict';
   window.addEventListener('load', function() {
     if(window.self !== window.top) {
-      mdlLoader.load('../../../');
+      mdlIframeLoader.load('../../../');
     }
   });
 </script>

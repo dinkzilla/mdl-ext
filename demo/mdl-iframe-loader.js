@@ -4,16 +4,17 @@
  * Inject required CSS and JS into html fragment loaded into an <iframe>
  * @type {{}}
  */
-var mdlLoader = {};
+var mdlIframeLoader = {};
 (function(self) {
 
-  // The CSS and JS needed to run MDL in an <iframe>
+  // The CSS and JS needed to run MDL snippets in an <iframe>
   var docs = [
-    {'type': 'css', 'id': 'material-icon-css', 'src': 'https://fonts.googleapis.com/icon?family=Material+Icons'},
-    {'type': 'css', 'id': 'material-css',      'src': 'node_modules/material-design-lite/material.css'},
-    {'type': 'css', 'id': 'mdlext-css',        'src': 'lib/mdl-ext.css'},
-    {'type': 'js',  'id': 'material-js',       'src': 'node_modules/material-design-lite/material.js'},
-    {'type': 'js',  'id': 'mdlext-js',         'src': 'lib/index.js'}
+    { 'type': 'css', 'id': 'font-roboto-css',   'src': 'https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en' },
+    { 'type': 'css', 'id': 'material-icon-css', 'src': 'https://fonts.googleapis.com/icon?family=Material+Icons' },
+    { 'type': 'css', 'id': 'material-css',      'src': 'node_modules/material-design-lite/material.css' },
+    { 'type': 'css', 'id': 'mdlext-css',        'src': 'lib/mdl-ext.css' },
+    { 'type': 'js',  'id': 'material-js',       'src': 'node_modules/material-design-lite/material.js' },
+    { 'type': 'js',  'id': 'mdlext-js',         'src': 'lib/index.js' }
   ];
 
   var joinOrigin = function(origin, src) {
@@ -70,4 +71,4 @@ var mdlLoader = {};
   };
 
   return self;
-})(mdlLoader);
+})(mdlIframeLoader);

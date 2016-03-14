@@ -88,7 +88,7 @@ describe('MaterialExtSelectfield', () => {
     assert.isAtLeast(dataUpgraded.indexOf('MaterialExtSelectfield'), 0);
   });
 
-  it('should upgrade successfully when a new component is appended to the DOM', () => {
+  it('upgrades successfully when a new component is appended to the DOM', () => {
     const mount = document.getElementById('mount-2');
     assert.isNotNull(mount);
 
