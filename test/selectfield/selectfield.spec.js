@@ -63,6 +63,7 @@ describe('MaterialExtSelectfield', () => {
     assert.isObject(componentHandler, 'No global MDL component handler');
 
     requireUncached( '../../src/selectfield/selectfield' );
+    assert.isNotNull(window.MaterialExtSelectfield, 'Expected MaterialExtSelectfield not to be null');
     global.MaterialExtSelectfield = window.MaterialExtSelectfield;
 
     //global.componentHandler.upgradeAllRegistered();
@@ -73,11 +74,11 @@ describe('MaterialExtSelectfield', () => {
     jsdomify.destroy()
   });
 
-  it('should be globally available', () => {
+  it('is globally available', () => {
     assert.isFunction(window['MaterialExtSelectfield'], 'No global MaterialExtSelecfield');
   });
 
-  it('should upgrade when DOM render', () => {
+  it('upgrades successfully', () => {
     const element = qs('#select-1');
     assert.isNotNull(element);
     assert.isTrue(element.parentNode.classList.contains('is-upgraded'));

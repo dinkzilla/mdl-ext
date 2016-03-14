@@ -2,7 +2,7 @@
 
 const accordionClass      = '.mdlext-accordion';
 const accordionPanelClass = '.mdlext-accordion__panel';
-const accordionTitleClass = '.mdlext-accordion__panel__title';
+const accordionTitleClass = '.mdlext-accordion__panel__header';
 
 const VK_TAB = 9;
 const VK_ENTER = 13;

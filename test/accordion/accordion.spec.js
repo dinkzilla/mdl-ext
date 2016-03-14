@@ -18,13 +18,13 @@ describe('Accordion', () => {
 <body>
 <div id='mount'>
 
-<div class="a-user-defined-accordion-container" style="height: 250px;">
+<div class="a-user-defined-accordion-container">
 
   <ul id="horisontal-accordion" class="mdlext-accordion" role="tablist" aria-multiselectable="false">
     <li class="mdlext-accordion__panel" open >
-      <header class="mdlext-accordion__panel__title">
+      <header class="mdlext-accordion__panel__header">
         <a href="#"></a>
-        <div class="mdlext-accordion__panel__title__transform">
+        <div class="mdlext-accordion__panel__header__transform">
           <h5>First section</h5>
         </div>
       </header>
@@ -34,9 +34,9 @@ describe('Accordion', () => {
       </section>
     </li>
     <li class="mdlext-accordion__panel">
-      <header class="mdlext-accordion__panel__title">
+      <header class="mdlext-accordion__panel__header">
         <a href="#"></a>
-        <div class="mdlext-accordion__panel__title__transform">
+        <div class="mdlext-accordion__panel__header__transform">
           <h5>Second</h5>
         </div>
       </header>
@@ -46,9 +46,9 @@ describe('Accordion', () => {
       </section>
     </li>
     <li class="mdlext-accordion__panel">
-      <header class="mdlext-accordion__panel__title">
+      <header class="mdlext-accordion__panel__header">
         <a href="#"></a>
-        <div class="mdlext-accordion__panel__title__transform">
+        <div class="mdlext-accordion__panel__header__transform">
           <h5>Section #3</h5>
         </div>
       </header>
@@ -57,9 +57,9 @@ describe('Accordion', () => {
       </section>
     </li>
     <li class="mdlext-accordion__panel">
-      <header class="mdlext-accordion__panel__title">
+      <header class="mdlext-accordion__panel__header">
         <a href="#"></a>
-        <div class="mdlext-accordion__panel__title__transform">
+        <div class="mdlext-accordion__panel__header__transform">
           <h5>Fourth section</h5>
         </div>
       </header>
@@ -68,9 +68,9 @@ describe('Accordion', () => {
       </section>
     </li>
     <li class="mdlext-accordion__panel">
-      <header class="mdlext-accordion__panel__title">
+      <header class="mdlext-accordion__panel__header">
         <a href="#"></a>
-        <div class="mdlext-accordion__panel__title__transform">
+        <div class="mdlext-accordion__panel__header__transform">
           <h5>Fifth</h5>
         </div>
       </header>
@@ -129,7 +129,7 @@ describe('Accordion', () => {
   });
 
   it('has headers with role="tab"', () => {
-    [...qsa('.mdlext-accordion__panel__title')].forEach( header => {
+    [...qsa('.mdlext-accordion__panel__header')].forEach( header => {
       assert.equal(header.getAttribute('role'), 'tab');
     });
   });
@@ -139,13 +139,13 @@ describe('Accordion', () => {
     assert.isNotNull(panel, 'Expected tabpanel with attribute "open"');
 
     const title = [...panel.children].find( n => {
-      n.classList.contains('mdlext-accordion__panel__title') && n.hasAttribute('aria-expanded');
+      n.classList.contains('mdlext-accordion__panel__header') && n.hasAttribute('aria-expanded');
     });
     assert.isNotNull(title, 'Expected header with attribute "aria-expanded"');
   });
 
   it('interacts with the keyboard', () => {
-    const header = qs('#horisontal-accordion .mdlext-accordion__panel:nth-child(3) .mdlext-accordion__panel__title');
+    const header = qs('#horisontal-accordion .mdlext-accordion__panel:nth-child(3) .mdlext-accordion__panel__header');
     assert.isNotNull(header, 'Expected handle to panel 3 of 5');
 
     spyOnKeyboardEvent(header, VK_ARROW_DOWN);
@@ -160,7 +160,7 @@ describe('Accordion', () => {
   });
 
   it('emits a click event', () => {
-    const header = qs('#horisontal-accordion .mdlext-accordion__panel .mdlext-accordion__panel__title');
+    const header = qs('#horisontal-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header');
     assert.isNotNull(header, 'Expected handle to panel');
 
     let spy = sinon.spy();
@@ -179,7 +179,7 @@ describe('Accordion', () => {
   });
 
   it('emits a click event when toggled via enter key', () => {
-    const header = qs('#horisontal-accordion .mdlext-accordion__panel .mdlext-accordion__panel__title');
+    const header = qs('#horisontal-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header');
     assert.isNotNull(header, 'Expected handle to panel');
 
     let spy = sinon.spy();
@@ -190,7 +190,7 @@ describe('Accordion', () => {
   });
 
   it('emits a click event when toggled via space key', () => {
-    const header = qs('#horisontal-accordion .mdlext-accordion__panel .mdlext-accordion__panel__title');
+    const header = qs('#horisontal-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header');
     assert.isNotNull(header, 'Expected handle to panel');
 
     let spy = sinon.spy();
@@ -201,7 +201,7 @@ describe('Accordion', () => {
   });
 
   it('closes other panels when a new panel opens', () => {
-    const header = qs('#horisontal-accordion .mdlext-accordion__panel:nth-child(4) .mdlext-accordion__panel__title');
+    const header = qs('#horisontal-accordion .mdlext-accordion__panel:nth-child(4) .mdlext-accordion__panel__header');
     assert.isNotNull(header, 'Expected handle to panel 4 of 5');
 
     const panel = header.parentNode;
