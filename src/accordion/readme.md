@@ -238,7 +238,7 @@ The accordion interacts with the following keyboard keys.
 
 ## Events
 The accordion emits a custom **toggle** event when a panel opens or closes. The event has a detail object with the following content:
-```json
+```
 {
   state,  // "open" or "close"
   source  // the panel instance that caused the event 

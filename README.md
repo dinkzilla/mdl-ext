@@ -98,13 +98,12 @@ require('mdl-ext');
 ### Accordion
 ![Accordion](./etc/flexbox-accordion.png)
 
-A WAI-ARIA friendly accordion component.
+A [WAI-ARIA](https://www.w3.org/TR/wai-aria-practices-1.1/#accordion) friendly [**accordion**](./src/accordion/) component.
 
 ### Bordered fields
 ![Bordered fields](./etc/bordered-fields-theme.png)
 
-The Material Design Lite Ext (MDLEXT) [**bordered fields**](./src/bordered-fields/) component 
-demonstrates how you can create your own theme of MDL text fields.
+The Material Design Lite Ext (MDLEXT) [**bordered fields**](./src/bordered-fields/) component demonstrates how you can create your own theme of MDL text fields.
 
 ### Selectfield
 ![Selectfield](./etc/select-element.png)
