@@ -1,0 +1,109 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Untitled Document.md</title><style></style></head><body id="preview">
+<h1><a id="mdlext_0"></a>mdl-ext</h1>
+<p><a href="https://travis-ci.org/leifoolsen/mdl-ext"><img src="https://img.shields.io/travis/leifoolsen/mdl-ext.svg?style=flat-square" alt="travis build"></a>
+<a href="https://codecov.io/github/leifoolsen/mdl-ext"><img src="https://img.shields.io/codecov/c/github/leifoolsen/mdl-ext.svg?style=flat-square" alt="codecov coverage"></a>
+<a href="https://github.com/semantic-release/semantic-release"><img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square" alt="semantic-release"></a>
+<a href="http://npm.im/mdl-ext"><img src="https://img.shields.io/npm/v/mdl-ext.svg?style=flat-square" alt="version"></a></p>
+<p>Material Design Lite Ext (MDLEXT).
+Components based on the <a href="https://github.com/google/material-design-lite">Google Material Design Lite</a> framework.</p>
+<h2><a id="Install_10"></a>Install</h2>
+<p>If you haven’t done so already, install <a href="https://github.com/google/material-design-lite">Material Design Lite</a>.</p>
+<pre><code class="language-sh">$ npm install --save material-design-lite
+</code></pre>
+<p>Install <strong>mdl-ext</strong></p>
+<pre><code class="language-sh">$ npm install --save mdl-ext
+</code></pre>
+<h2><a id="Getting_started_22"></a>Getting started</h2>
+<h3><a id="Use_it_in_your_page_24"></a>Use it in your page</h3>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Material Design Lite Extensions&lt;/title&gt;
+  &lt;link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;amp;lang=en"&gt;
+  &lt;link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"&gt;
+  &lt;link rel="stylesheet" href="node_modules/material-design-lite/material.css" /&gt;
+  &lt;link rel="stylesheet" href="node_modules/mdl-ext/lib/mdl-ext.min.css" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer"&gt;
+  &lt;main class="mdl-layout__content"&gt;
+  &lt;/main
+&lt;/div&gt;
+&lt;script type="text/javascript" src="node_modules/material-design-lite/material.min.js" charset="utf-8"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="node_modules/mdl-ext/lib/index.min.js" charset="utf-8"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> Always import <code>mdl-ext</code> css <strong>after</strong> <code>material</code> css.</p>
+</blockquote>
+<h3><a id="Use_it_in_your_Webpack_build_47"></a>Use it in your (Webpack) build</h3>
+<p><strong>Import SASS files</strong> (e.g. following the <a href="http://sass-guidelin.es/#the-7-1-pattern">SASS 7-1 pattern</a>)</p>
+<pre><code class="language-scss"><span class="hljs-comment">// 1. Application's SASS variables and overridden variables in 3'rd party SASS modules</span>
+<span class="hljs-at_rule">@<span class="hljs-keyword">import</span> <span class="hljs-string">'stylesheets/variables'</span>;</span>
+
+<span class="hljs-comment">// 2. Import MDL</span>
+<span class="hljs-at_rule">@<span class="hljs-keyword">import</span> <span class="hljs-string">'&lt;path-to-node_modules&gt;/node_modules/material-design-icons/iconfont/material-icons.css'</span>;</span>
+<span class="hljs-at_rule">@<span class="hljs-keyword">import</span> <span class="hljs-string">'&lt;path-to-node_modules&gt;/roboto-fontface/css/roboto-fontface.css'</span>;</span>
+<span class="hljs-at_rule">@<span class="hljs-keyword">import</span> <span class="hljs-string">'&lt;path-to-node_modules&gt;/material-design-lite/src/material-design-lite'</span>;</span>
+
+<span class="hljs-comment">// 3. Import MDLEXT</span>
+<span class="hljs-at_rule">@<span class="hljs-keyword">import</span> <span class="hljs-string">'&lt;path-to-node_modules&gt;/mdl-ext/src/mdl-ext'</span>;</span>
+
+<span class="hljs-comment">// 4. Your stuff</span>
+<span class="hljs-at_rule">@<span class="hljs-keyword">import</span> <span class="hljs-string">'stylesheets/app/whatever'</span>;</span>
+</code></pre>
+<p>If your main SASS file is <code>./src/main.scss</code>, then your imports would be:</p>
+<pre><code class="language-scss"><span class="hljs-comment">// 1. Application's SASS variables and overridden variables in 3'rd party sass modules</span>
+<span class="hljs-at_rule">@<span class="hljs-keyword">import</span> <span class="hljs-string">'stylesheets/variables'</span>;</span>
+
+<span class="hljs-comment">// 2. Import MDL</span>
+<span class="hljs-at_rule">@<span class="hljs-keyword">import</span> <span class="hljs-string">'../node_modules/material-design-icons/iconfont/material-icons.css'</span>;</span>
+<span class="hljs-at_rule">@<span class="hljs-keyword">import</span> <span class="hljs-string">'../node_modules/roboto-fontface/css/roboto-fontface.css'</span>;</span>
+<span class="hljs-at_rule">@<span class="hljs-keyword">import</span> <span class="hljs-string">'../node_modules/material-design-lite/src/material-design-lite'</span>;</span>
+
+<span class="hljs-comment">// 3. Import MDLEXT</span>
+<span class="hljs-at_rule">@<span class="hljs-keyword">import</span> <span class="hljs-string">'../node_modules/mdl-ext/src/mdl-ext'</span>;</span>
+
+<span class="hljs-comment">// 4. Your stuff</span>
+<span class="hljs-at_rule">@<span class="hljs-keyword">import</span> <span class="hljs-string">'stylesheets/app/whatever'</span>;</span>
+</code></pre>
+<p><strong>Import material-design-lite and mdl-ext scripts in your “main” js file</strong></p>
+<pre><code class="language-javascript"><span class="hljs-keyword">import</span> <span class="hljs-string">'material-design-lite/material'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'mdl-ext'</span>;
+</code></pre>
+<p><strong>… or require material-design-lite and mdl-ext</strong></p>
+<pre><code class="language-javascript"><span class="hljs-built_in">require</span>(<span class="hljs-string">'material-design-lite/material'</span>);
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'mdl-ext'</span>);
+</code></pre>
+<h2><a id="Components_95"></a>Components</h2>
+<h3><a id="Accordion_97"></a>Accordion</h3>
+<p><img src="../etc/flexbox-accordion.png" alt="Accordion"></p>
+<p>A <a href="https://www.w3.org/TR/wai-aria-practices-1.1/#accordion">WAI-ARIA</a> friendly <strong>accordion</strong> component.</p>
+<h3><a id="Bordered_fields_102"></a>Bordered fields</h3>
+<p><img src="../etc/bordered-fields-theme.png" alt="Bordered fields"></p>
+<p>The Material Design Lite Ext (MDLEXT) <strong>bordered fields</strong> component demonstrates how you can create your own theme of MDL text fields.</p>
+<h3><a id="Selectfield_107"></a>Selectfield</h3>
+<p><img src="../etc/select-element.png" alt="Selectfield"></p>
+<p>The Material Design Lite Ext (MDLEXT) <strong>select field</strong> component is an enhanced version
+of the standard [HTML <code>&lt;select&gt;</code>] (<a href="https://developer.mozilla.org/en/docs/Web/HTML/Element/select">https://developer.mozilla.org/en/docs/Web/HTML/Element/select</a>) element.</p>
+<h2><a id="Notes_113"></a>Notes</h2>
+<p>To see the MDLEXT components in action, open the <a href="../demo/index.html">demo/index.html</a> in a browser.
+You can also download or clone a demo project from here: <a href="https://github.com/leifoolsen/mdl-webpack">https://github.com/leifoolsen/mdl-webpack</a> -
+which also demonstrates how you can self host Font Roboto and Material Icons in your web application.</p>
+<h2><a id="Licence_118"></a>Licence</h2>
+<p>© Leif Olsen, 2016. Licensed under an <a href="https://github.com/leifoolsen/mdl-ext/blob/master/LICENSE">Apache-2</a> license.</p>
+<p>This software is built with the <a href="https://github.com/google/material-design-lite">Google Material Design Lite</a> framework,
+which is licenced under an Apache-2 licence.</p>
+
+<script type="text/javascript" src="./mdl-iframe-loader.js" charset="utf-8"></script>
+<script>
+  'use strict';
+  window.addEventListener('load', function() {
+    if(window.self !== window.top) {
+      mdlIframeLoader.load('../');
+    }
+  });
+</script>
+
+</body></html>
