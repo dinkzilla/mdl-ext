@@ -87,7 +87,7 @@ The table below lists the available classes and their effects.
 | `mdlext-bordered-fields__icon-right` | Add class on `mdl-textfield` or `mdlext-selectfield` container if you want to embedd a right aligned icon or a button into the bordered field  |  |
 
 
-The bordered fields can be modified with the following SASS variables.
+You can modify the bordered fields trough the following SASS variables.
 
 | SASS variable |Description | Remarks | 
 |-----------|--------|---------|

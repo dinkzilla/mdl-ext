@@ -32,7 +32,7 @@ describe('MaterialExtAccordion', () => {
     <ul id="accordion-1" class="mdlext-accordion mdlext-js-accordion" aria-multiselectable="false">
       <li class="mdlext-accordion__panel" open >
         <header class="mdlext-accordion__panel__header">
-          <div class="mdlext-accordion__panel__header__transform">
+          <div class="mdlext-accordion__header__transform">
             <h5>First section</h5>
           </div>
         </header>
@@ -44,7 +44,7 @@ describe('MaterialExtAccordion', () => {
       <li class="mdlext-accordion__panel">
         <header class="mdlext-accordion__panel__header">
           <a href="#"></a>
-          <div class="mdlext-accordion__panel__header__transform">
+          <div class="mdlext-accordion__header__transform">
             <h5>Second</h5>
           </div>
         </header>
@@ -55,7 +55,7 @@ describe('MaterialExtAccordion', () => {
       </li>
       <li class="mdlext-accordion__panel">
         <header class="mdlext-accordion__panel__header">
-          <div class="mdlext-accordion__panel__header__transform">
+          <div class="mdlext-accordion__header__transform">
             <h5>Section #3</h5>
           </div>
         </header>
@@ -65,7 +65,7 @@ describe('MaterialExtAccordion', () => {
       </li>
       <li class="mdlext-accordion__panel">
         <header class="mdlext-accordion__panel__header">
-          <div class="mdlext-accordion__panel__header__transform">
+          <div class="mdlext-accordion__header__transform">
             <h5>Fourth section</h5>
           </div>
         </header>
@@ -75,7 +75,7 @@ describe('MaterialExtAccordion', () => {
       </li>
       <li class="mdlext-accordion__panel">
         <header class="mdlext-accordion__panel__header">
-          <div class="mdlext-accordion__panel__header__transform">
+          <div class="mdlext-accordion__header__transform">
             <h5>Fifth</h5>
           </div>
         </header>
@@ -374,32 +374,7 @@ describe('MaterialExtAccordion', () => {
     assert.lengthOf(check, 1);
   });
 
-  it('emits a custom "toggle" event when a panel opens or closes', () => {
-    const accordion = qs('#accordion-1');
-    assert.isNotNull(header, 'Expected handle to accordion');
-
-    const header = qs('#accordion-1 .mdlext-accordion__panel:nth-child(3) .mdlext-accordion__panel__header');
-    assert.isNotNull(header, 'Expected handle to header in panel 3 of 5');
-
-    let spy = sinon.spy();
-    accordion.addEventListener('toggle', spy);
-
-    try {
-      // Trigger click on a header
-      const evt = new MouseEvent('click', {
-        bubbles: true,
-        cancelable: true,
-        view: window
-      });
-      header.dispatchEvent(evt);
-    }
-    finally {
-      accordion.removeEventListener('toggle', spy);
-    }
-    assert.isTrue(spy.called, 'Expected "toggle" event to fire at least once');
-  });
-
-  it('emits a custom "toggle" event with "detail.state" and "detail.source" defined', () => {
+  it('emits a custom "toggle" event with "detail.state" and "detail.source" defined when a panel opens or closes', () => {
     const accordion = qs('#accordion-1');
     assert.isNotNull(header, 'Expected handle to accordion');
 

@@ -40,11 +40,12 @@
 
   const PANEL = 'mdlext-accordion__panel';
   const HEADER = 'mdlext-accordion__panel__header';
+  const HEADER_TABSTOP = 'mdlext-accordion__panel__header__tabstop';
   const IS_UPGRADED = 'is-upgraded';
-  const RIPPLE_CONTAINER = 'mdlext-accordion__ripple-container';
   const RIPPLE = 'mdl-ripple';
-  const JS_RIPPLE_EFFECT = 'mdl-js-ripple-effect';
-  const JS_RIPPLE_EFFECT_IGNORE_EVENTS = 'mdl-js-ripple-effect--ignore-events';
+  const RIPPLE_CONTAINER = 'mdlext-accordion__panel__header__ripple-container';
+  const RIPPLE_EFFECT = 'mdl-js-ripple-effect';
+  const RIPPLE_EFFECT_IGNORE_EVENTS = 'mdl-js-ripple-effect--ignore-events';
 
 
   /**
@@ -95,8 +96,8 @@
 
     this.element_.setAttribute('role', 'tablist');
 
-    if (this.element_.classList.contains(JS_RIPPLE_EFFECT)) {
-      this.element_.classList.add(JS_RIPPLE_EFFECT_IGNORE_EVENTS);
+    if (this.element_.classList.contains(RIPPLE_EFFECT)) {
+      this.element_.classList.add(RIPPLE_EFFECT_IGNORE_EVENTS);
     }
 
     [...this.element_.querySelectorAll(`.${PANEL}`)].forEach( panel => {
@@ -133,11 +134,12 @@
 
     header.setAttribute('role', 'tab');
 
-    let a = header.querySelector('a');
+    let a = header.querySelector(`a.${HEADER_TABSTOP}`);
     if(a === null) {
       // An anchor is required for focus/tab stop
       a = document.createElement('a');
       a.href = '#';
+      a.classList.add(HEADER_TABSTOP);
       header.appendChild(a);
     }
 
@@ -147,10 +149,10 @@
       panel.setAttribute('aria-expanded', '');
     }
 
-    if (ctx.element_.classList.contains(JS_RIPPLE_EFFECT)) {
+    if (ctx.element_.classList.contains(RIPPLE_EFFECT)) {
       const rippleContainer = a; //document.createElement('span'); // Use anchor as ripple container?
       rippleContainer.classList.add(RIPPLE_CONTAINER);
-      rippleContainer.classList.add(JS_RIPPLE_EFFECT);
+      rippleContainer.classList.add(RIPPLE_EFFECT);
       const ripple = document.createElement('span');
       ripple.classList.add(RIPPLE);
       rippleContainer.appendChild(ripple);

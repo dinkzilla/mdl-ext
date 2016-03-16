@@ -95,6 +95,11 @@ require('mdl-ext');
  
 ## Components
 
+### Accordion
+![Accordion](./etc/flexbox-accordion.png)
+
+A WAI-ARIA friendly accordion component.
+
 ### Bordered fields
 ![Bordered fields](./etc/bordered-fields-theme.png)
 
@@ -106,10 +111,6 @@ demonstrates how you can create your own theme of MDL text fields.
 
 The Material Design Lite Ext (MDLEXT) [**select field**](./src/selectfield/) component is an enhanced version 
 of the standard [HTML `<select>`] (https://developer.mozilla.org/en/docs/Web/HTML/Element/select) element.
-
-#### Components under development
-* Accordion
-* File input
 
 ## Notes
 To see the MDLEXT components in action, open the [demo/index.html](./demo/index.html) in a browser.

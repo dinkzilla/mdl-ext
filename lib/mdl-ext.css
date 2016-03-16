@@ -308,6 +308,26 @@
  * The Accordion CSS are based on / inspired by this CodePen: http://codepen.io/aann/pen/dPqBML
  */
 
+/**
+ * Copyright 2016 Leif Olsen. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* ==========     Accordion     ========== */
+
+/* ==========  Bordered fields  ========== */
+
 ul.mdlext-accordion {
   list-style: none;
 }
@@ -385,8 +405,8 @@ ul.mdlext-accordion {
   background-color: rgba(192, 192, 192, 0.4);
 }
 
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header > a,
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__ripple-container {
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header a.mdlext-accordion__panel__header__tabstop,
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container {
   text-decoration: none;
   overflow: hidden;
   font-size: 0;
@@ -400,14 +420,14 @@ ul.mdlext-accordion {
   height: 100%;
 }
 
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header > a .mdl-ripple,
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__ripple-container .mdl-ripple {
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header a.mdlext-accordion__panel__header__tabstop .mdl-ripple,
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container .mdl-ripple {
   background: rgb(63,81,181);
 }
 
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header > a:focus,
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__ripple-container:focus {
-  outline: thin solid #C0C0C0;
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header a.mdlext-accordion__panel__header__tabstop:focus,
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container:focus {
+  outline: thin solid rgba(192, 192, 192, 0.3);
 }
 
 .mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform {
@@ -474,8 +494,8 @@ ul.mdlext-accordion {
 
 .mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__content {
   overflow: auto;
-  -webkit-animation: mdlext-accordion__panel-open .4s linear;
-          animation: mdlext-accordion__panel-open .4s linear;
+  -webkit-animation: mdlext-accordion__panel-open-keyframe .4s linear;
+          animation: mdlext-accordion__panel-open-keyframe .4s linear;
 }
 
 .mdlext-accordion.mdlext-accordion--vertical {
@@ -529,7 +549,7 @@ ul.mdlext-accordion {
  * If we omit this, the the overflow scrollbar will flicker during the accordion open transition
  */
 
-@-webkit-keyframes mdlext-accordion__panel-open {
+@-webkit-keyframes mdlext-accordion__panel-open-keyframe {
   0% {
     overflow: hidden;
   }
@@ -539,7 +559,7 @@ ul.mdlext-accordion {
   }
 }
 
-@keyframes mdlext-accordion__panel-open {
+@keyframes mdlext-accordion__panel-open-keyframe {
   0% {
     overflow: hidden;
   }

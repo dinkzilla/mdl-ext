@@ -16,6 +16,27 @@
 
 
 /* ==========     Accordion     ========== */
+$mdlext-accordion-header-padding               : 8px !default;
+$mdlext-accordion-header-padding-top           : $mdlext-accordion-header-padding !default;
+$mdlext-accordion-header-padding-right         : $mdlext-accordion-header-padding !default;
+$mdlext-accordion-header-padding-bottom        : $mdlext-accordion-header-padding !default;
+$mdlext-accordion-header-padding-left          : $mdlext-accordion-header-padding !default;
+$mdlext-accordion-header-icon-text-space       : 8px !default;
+$mdlext-accordion-header-height                : 48px !default;
+$mdlext-accordion-header-background-color-base : #C0C0C0 !default;
+$mdlext-accordion-header-background-color      : rgba($mdlext-accordion-header-background-color-base, 0.3) !default;
+$mdlext-accordion-header-background-color-hover: rgba($mdlext-accordion-header-background-color-base, 0.4) !default;
+$mdlext-accordion-header-background-color-open : rgba($mdlext-accordion-header-background-color-base, 0.5) !default;
+$mdlext-accordion-header-border-color          : rgba($mdlext-accordion-header-background-color-base, 0.5) !default;
+$mdlext-accordion-header-border-color-open     : rgba($mdlext-accordion-header-background-color-base, 0.6) !default;
+$mdlext-accordion-header-focus-outline-color   : #C0C0C0 !default;
+$mdlext-accordion-content-padding              : $mdlext-accordion-header-padding !default;
+$mdlext-accordion-content-padding-top          : $mdlext-accordion-content-padding !default;
+$mdlext-accordion-content-padding-right        : $mdlext-accordion-content-padding !default;
+$mdlext-accordion-content-padding-bottom       : $mdlext-accordion-content-padding !default;
+$mdlext-accordion-content-padding-left         : $mdlext-accordion-content-padding !default;
+$mdlext-accordion-content-background-color     : transparent !default;
+$mdlext-accordion-ripple-color                 : $tab-highlight-color !default;
 
 
 /* ==========  Bordered fields  ========== */
@@ -32,6 +53,5 @@ $mdlext-bordered-field-disabled-border-color: rgba(#c6ccd1, 1) !default;
 $mdlext-bordered-field-disabled-background-color: rgba(228, 236, 243, 0.25) !default;
 $mdlext-bordered-field-required-border-color: rgba(#e59617, 1) !default;
 $mdlext-bordered-field-required-background-color: rgba(#f9ead0, 0.1) !default;
-
 $mdlext-bordered-field-label-top: 35px !default;
 $mdlext-bordered-field-label-focused-top: 20px !default;
