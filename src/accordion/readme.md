@@ -20,10 +20,10 @@ This component relates to the guidelines given in [WAI-ARIA Authoring Practices 
 </div>
 ```
 
-&nbsp;2. Code a `<ul>` element with `class="mdlext-accordion"`  to hold the accordion. 
+&nbsp;2. Code a `<ul>` element with `class="mdlext-accordion mdlext-js-accordion"`  to hold the accordion. 
 ```html
 <div style="height: 300px; width: 100%;">
-  <ul class="mdlext-accordion">
+  <ul class="mdlext-accordion mdlext-js-accordion">
   <ul>
 </div>
 ```
@@ -31,7 +31,7 @@ This component relates to the guidelines given in [WAI-ARIA Authoring Practices 
 &nbsp;3. Code a `<li>` element with `class="mdlext-accordion__panel"`  to hold an individual accordion panel. 
 ```html
 <div style="height: 300px; width: 100%;">
-  <ul class="mdlext-accordion">
+  <ul class="mdlext-accordion mdlext-js-accordion">
     <li class="mdlext-accordion__panel">
     <li>
   <ul>
@@ -41,7 +41,7 @@ This component relates to the guidelines given in [WAI-ARIA Authoring Practices 
 &nbsp;4. Code a `<header>` element with `class="mdlext-accordion__panel__header"`  to hold the header. 
 ```html
 <div style="height: 300px; width: 100%;">
-  <ul class="mdlext-accordion">
+  <ul class="mdlext-accordion mdlext-js-accordion">
     <li class="mdlext-accordion__panel">
       <header class="mdlext-accordion__panel__header">
       </header>
@@ -53,7 +53,7 @@ This component relates to the guidelines given in [WAI-ARIA Authoring Practices 
 &nbsp;5. Code a `<div>` element with `class="mdlext-accordion__panel__header__transform"`  so the header content can rotate 90 deg. when the accordion has horizontal layout. 
 ```html
 <div style="height: 300px; width: 100%;">
-  <ul class="mdlext-accordion">
+  <ul class="mdlext-accordion mdlext-js-accordion">
     <li class="mdlext-accordion__panel">
       <header class="mdlext-accordion__panel__header">
         <div class="mdlext-accordion__panel__header__transform">
@@ -67,7 +67,7 @@ This component relates to the guidelines given in [WAI-ARIA Authoring Practices 
 &nbsp;6. Apply header content. 
 ```html
 <div style="height: 300px; width: 100%;">
-  <ul class="mdlext-accordion">
+  <ul class="mdlext-accordion mdlext-js-accordion">
     <li class="mdlext-accordion__panel">
       <header class="mdlext-accordion__panel__header">
         <div class="mdlext-accordion__panel__header__transform">
@@ -82,7 +82,7 @@ This component relates to the guidelines given in [WAI-ARIA Authoring Practices 
 &nbsp;7. Optionally decorate header with an icon or image. 
 ```html
 <div style="height: 300px; width: 100%;">
-  <ul class="mdlext-accordion">
+  <ul class="mdlext-accordion mdlext-js-accordion">
     <li class="mdlext-accordion__panel">
       <header class="mdlext-accordion__panel__header">
         <div class="mdlext-accordion__panel__header__transform">
@@ -98,7 +98,7 @@ This component relates to the guidelines given in [WAI-ARIA Authoring Practices 
 &nbsp;8. Optionally decorate header with a state icon. 
 ```html
 <div style="height: 300px; width: 100%;">
-  <ul class="mdlext-accordion">
+  <ul class="mdlext-accordion mdlext-js-accordion">
     <li class="mdlext-accordion__panel">
       <header class="mdlext-accordion__panel__header">
         <div class="mdlext-accordion__panel__header__transform">
@@ -115,7 +115,7 @@ This component relates to the guidelines given in [WAI-ARIA Authoring Practices 
 &nbsp;9. Code a `<section>` element with `class="mdlext-accordion__panel__content"`  to hold the content. 
 ```html
 <div style="height: 300px; width: 100%;">
-  <ul class="mdlext-accordion">
+  <ul class="mdlext-accordion mdlext-js-accordion">
     <li class="mdlext-accordion__panel">
       <header class="mdlext-accordion__panel__header">
         <div class="mdlext-accordion__panel__header__transform">
@@ -253,6 +253,7 @@ The table below lists the available classes and their effects.
 | MDLEXT class | Effect | Remarks |
 |-----------|--------|---------|
 | `mdlext-accordion` | Defines container as an MDL component | Required on "outer" `<div>` or `<ul>` element |
+| `mdlext-js-accordion` | Assigns basic MDL behavior accordion | Required on "outer" `<div>` or `<ul>` element |
 | `mdlext-accordion--vertical` | Vertical layot of an accordion | Optional; Without this class an accordion has horizontal layout |
 | `mdlext-accordion__panel` | Defines a container for each section of the accordion | Required on first inner `<div>` element or `<li>` element  |
 | `mdlext-accordion__panel__header` | Defines a header for a section | Required on `<header>` element |
