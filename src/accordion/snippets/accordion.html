@@ -17,16 +17,23 @@
   .mdlext-accordion__panel-colored:nth-child(5) {
     background: rgba(255, 224, 130, 0.4);
   }
+
+  .mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__state:after {
+    content: 'expand_more';
+  }
+  .mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__state:after {
+    content: 'expand_less';
+  }
+
 </style>
 
 
 <h5>Horizontal Flexbox Accordion</h5>
 
 <div style="height: 250px;">
-  <ul id="my-horisontal-accordion" class="mdlext-accordion mdlext-js-accordion" role="tablist" aria-multiselectable="false">
+  <ul id="my-horisontal-accordion" class="mdlext-accordion mdlext-js-accordion mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events role="tablist" aria-multiselectable="false">
     <li class="mdlext-accordion__panel" role="tabpanel">
       <header class="mdlext-accordion__panel__header">
-        <a href="#"></a>
         <div class="mdlext-accordion__panel__header__transform">
           <h5>First section</h5>
         </div>
@@ -68,7 +75,6 @@
     </li>
     <li class="mdlext-accordion__panel">
       <header class="mdlext-accordion__panel__header">
-        <a href="#"></a>
         <div class="mdlext-accordion__panel__header__transform">
           <h5>Section #3</h5>
         </div>
@@ -84,7 +90,6 @@
     </li>
     <li class="mdlext-accordion__panel">
       <header class="mdlext-accordion__panel__header">
-        <a href="#"></a>
         <div class="mdlext-accordion__panel__header__transform">
           <h5>Fourth section</h5>
         </div>
@@ -99,7 +104,6 @@
     </li>
     <li class="mdlext-accordion__panel">
       <header class="mdlext-accordion__panel__header">
-        <a href="#"></a>
         <div class="mdlext-accordion__panel__header__transform">
           <h5>Fifth</h5>
         </div>
@@ -121,7 +125,6 @@
   <ul id="my-horisontal-accordion-colored" class="mdlext-accordion mdlext-js-accordion" role="tablist" aria-multiselectable="false">
     <li class="mdlext-accordion__panel mdlext-accordion__panel-colored" open>
       <header class="mdlext-accordion__panel__header">
-        <a href="#"></a>
         <div class="mdlext-accordion__panel__header__transform">
           <i class="material-icons md-18">dns</i>
           <h5>Accordion</h5>
@@ -139,7 +142,6 @@
     </li>
     <li class="mdlext-accordion__panel mdlext-accordion__panel-colored">
       <header class="mdlext-accordion__panel__header">
-        <a href="#"></a>
         <div class="mdlext-accordion__panel__header__transform">
           <i class="material-icons md-18">all_inclusive</i><h5>Include Component</h5>
         </div>
@@ -166,7 +168,6 @@
     </li>
     <li class="mdlext-accordion__panel mdlext-accordion__panel-colored">
       <header class="mdlext-accordion__panel__header">
-        <a href="#"></a>
         <div class="mdlext-accordion__panel__header__transform">
           <i class="material-icons md-18">build</i><h5>Configuration Options</h5>
         </div>
@@ -182,7 +183,6 @@
     </li>
     <li class="mdlext-accordion__panel mdlext-accordion__panel-colored">
       <header class="mdlext-accordion__panel__header">
-        <a href="#"></a>
         <div class="mdlext-accordion__panel__header__transform">
           <i class="material-icons md-18">public</i><h5>Fourth section</h5>
         </div>
@@ -197,7 +197,6 @@
     </li>
     <li class="mdlext-accordion__panel mdlext-accordion__panel-colored">
       <header class="mdlext-accordion__panel__header">
-        <a href="#"></a>
         <div class="mdlext-accordion__panel__header__transform">
           <i class="material-icons md-18">public</i><h5>Fifth</h5>
         </div>
@@ -252,7 +251,6 @@
       </li>
       <li class="mdlext-accordion__panel">
         <header class="mdlext-accordion__panel__header">
-          <a href="#"></a>
           <div class="mdlext-accordion__panel__header__transform">
             <i class="material-icons md-18">check</i>
             <h5>Second</h5>
@@ -287,7 +285,6 @@
       </li>
       <li class="mdlext-accordion__panel">
         <header class="mdlext-accordion__panel__header">
-          <a href="#"></a>
           <div class="mdlext-accordion__panel__header__transform">
             <i class="material-icons md-18">arrow_back</i>
             <h5>Fourth section</h5>
@@ -304,7 +301,6 @@
       </li>
       <li class="mdlext-accordion__panel">
         <header class="mdlext-accordion__panel__header">
-          <a href="#"></a>
           <div class="mdlext-accordion__panel__header__transform">
             <i class="material-icons md-18">share</i>
             <h5>Fifth</h5>
@@ -325,10 +321,9 @@
 
 
   <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone vertical-accordion-height">
-    <ul id="my-vertical-accordion-colored" class="mdlext-accordion mdlext-accordion--vertical mdlext-js-accordion" aria-multiselectable="false">
+    <ul id="my-vertical-accordion-colored" class="mdlext-accordion mdlext-accordion--vertical mdlext-js-accordion mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events" aria-multiselectable="false">
       <li class="mdlext-accordion__panel mdlext-accordion__panel-colored">
         <header class="mdlext-accordion__panel__header">
-          <a href="#"></a>
           <div class="mdlext-accordion__panel__header__transform">
             <h5>First section</h5>
             <i class="mdlext-accordion__panel__state material-icons md-24"></i>
@@ -350,7 +345,6 @@
       </li>
       <li class="mdlext-accordion__panel mdlext-accordion__panel-colored" open>
         <header class="mdlext-accordion__panel__header">
-          <a href="#"></a>
           <div class="mdlext-accordion__panel__header__transform">
             <h5>Second</h5>
             <i class="mdlext-accordion__panel__state material-icons md-24"></i>
@@ -366,7 +360,6 @@
       </li>
       <li class="mdlext-accordion__panel mdlext-accordion__panel-colored">
         <header class="mdlext-accordion__panel__header">
-          <a href="#"></a>
           <div class="mdlext-accordion__panel__header__transform">
             <h5>Section #3</h5>
             <i class="mdlext-accordion__panel__state material-icons md-24"></i>
@@ -383,7 +376,6 @@
       </li>
       <li class="mdlext-accordion__panel mdlext-accordion__panel-colored">
         <header class="mdlext-accordion__panel__header">
-          <a href="#"></a>
           <div class="mdlext-accordion__panel__header__transform">
             <h5>Fourth section</h5>
             <i class="mdlext-accordion__panel__state material-icons md-24"></i>
@@ -399,7 +391,6 @@
       </li>
       <li class="mdlext-accordion__panel mdlext-accordion__panel-colored">
         <header class="mdlext-accordion__panel__header">
-          <a href="#"></a>
           <div class="mdlext-accordion__panel__header__transform">
             <h5>Fifth</h5>
             <i class="mdlext-accordion__panel__state material-icons md-24"></i>
@@ -445,5 +436,11 @@
     if(window.self !== window.top) {
       mdlIframeLoader.load('../../../');
     }
+
+    var accordion = document.querySelector('#my-vertical-accordion-colored');
+    accordion.addEventListener('toggle', function(e) {
+      console.log('Accordion toggled. State:', e.detail.state, 'Source:', e.detail.source);
+    });
+
   });
 </script>

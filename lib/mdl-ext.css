@@ -385,7 +385,8 @@ ul.mdlext-accordion {
   background-color: rgba(192, 192, 192, 0.4);
 }
 
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header > a {
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header > a,
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__ripple-container {
   text-decoration: none;
   overflow: hidden;
   font-size: 0;
@@ -395,9 +396,17 @@ ul.mdlext-accordion {
   bottom: 2px;
   left: 2px;
   z-index: 1;
+  width: 100%;
+  height: 100%;
 }
 
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header > a:focus {
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header > a .mdl-ripple,
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__ripple-container .mdl-ripple {
+  background: rgb(63,81,181);
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header > a:focus,
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__ripple-container:focus {
   outline: thin solid #C0C0C0;
 }
 

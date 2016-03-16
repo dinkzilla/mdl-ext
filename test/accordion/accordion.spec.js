@@ -32,7 +32,6 @@ describe('MaterialExtAccordion', () => {
     <ul id="accordion-1" class="mdlext-accordion mdlext-js-accordion" aria-multiselectable="false">
       <li class="mdlext-accordion__panel" open >
         <header class="mdlext-accordion__panel__header">
-          <a href="#"></a>
           <div class="mdlext-accordion__panel__header__transform">
             <h5>First section</h5>
           </div>
@@ -56,7 +55,6 @@ describe('MaterialExtAccordion', () => {
       </li>
       <li class="mdlext-accordion__panel">
         <header class="mdlext-accordion__panel__header">
-          <a href="#"></a>
           <div class="mdlext-accordion__panel__header__transform">
             <h5>Section #3</h5>
           </div>
@@ -67,7 +65,6 @@ describe('MaterialExtAccordion', () => {
       </li>
       <li class="mdlext-accordion__panel">
         <header class="mdlext-accordion__panel__header">
-          <a href="#"></a>
           <div class="mdlext-accordion__panel__header__transform">
             <h5>Fourth section</h5>
           </div>
@@ -78,7 +75,6 @@ describe('MaterialExtAccordion', () => {
       </li>
       <li class="mdlext-accordion__panel">
         <header class="mdlext-accordion__panel__header">
-          <a href="#"></a>
           <div class="mdlext-accordion__panel__header__transform">
             <h5>Fifth</h5>
           </div>
@@ -99,7 +95,6 @@ describe('MaterialExtAccordion', () => {
 <ul id="accordion-2" class="mdlext-accordion mdlext-js-accordion">
   <li class="mdlext-accordion__panel" open >
     <header class="mdlext-accordion__panel__header">
-      <a href="#"></a>
       <div class="mdlext-accordion__panel__header__transform">
         <h5>First section</h5>
       </div>
@@ -111,7 +106,6 @@ describe('MaterialExtAccordion', () => {
   </li>
   <li class="mdlext-accordion__panel">
     <header class="mdlext-accordion__panel__header">
-      <a href="#"></a>
       <div class="mdlext-accordion__panel__header__transform">
         <h5>Second</h5>
       </div>
@@ -131,6 +125,33 @@ describe('MaterialExtAccordion', () => {
     </section>
   </li>
 </ul>`;
+
+  const accordion_with_ripple_fragment = `
+<ul id="accordion-4" class="mdlext-accordion mdlext-js-accordion mdl-js-ripple-effect">
+  <li class="mdlext-accordion__panel" open >
+    <header class="mdlext-accordion__panel__header">
+      <div class="mdlext-accordion__panel__header__transform">
+        <h5>First section</h5>
+      </div>
+    </header>
+    <section class="mdlext-accordion__panel__content">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique eget augue eget gravida.</p>
+      <p>Maecenas eu vestibulum orci. Ut eget nisi a est sagittis euismod a vel.</p>
+    </section>
+  </li>
+  <li class="mdlext-accordion__panel">
+    <header class="mdlext-accordion__panel__header">
+      <div class="mdlext-accordion__panel__header__transform">
+        <h5>Second</h5>
+      </div>
+    </header>
+    <section class="mdlext-accordion__panel__content">
+      <p>Maecenas eu vestibulum orci. Ut eget nisi a est sagittis euismod a vel
+        justo. Quisque at dui urna. Duis vel velit leo.</p>
+    </section>
+  </li>
+</ul>`;
+
 
   before ( () => {
     jsdomify.create(fixture);
@@ -161,7 +182,9 @@ describe('MaterialExtAccordion', () => {
     const element = qs('#accordion-1');
     assert.isTrue(element.classList.contains('is-upgraded'), 'Expected accordion to upgrade');
 
-    // TODO: Check data-upgraded as well
+    const dataUpgraded = element.getAttribute('data-upgraded');
+    assert.isNotNull(dataUpgraded, 'Expected attribute "data-upgraded" to exist');
+    assert.isAtLeast(dataUpgraded.indexOf('MaterialExtAccordion'), 0, 'Expected "data-upgraded" attribute to contain "MaterialExtAccordion');
   });
 
   it('has role="tablist"', () => {
@@ -182,7 +205,13 @@ describe('MaterialExtAccordion', () => {
     });
   });
 
-  it('an open panel should have attribute "open" and a corresponding header with attribute "aria-expanded"', () => {
+  it('has headers with anchor', () => {
+    [...qsa('.mdlext-accordion__panel__header')].forEach( header => {
+      assert.isNotNull(qs('a', header), 'Expected header to have an anchor element');
+    });
+  });
+
+  it('should have attribute "open" and a corresponding header with attribute "aria-expanded"', () => {
     const panel = qs('#accordion-1 .mdlext-accordion__panel[open]');
     assert.isNotNull(panel, 'Expected panel with attribute "open"');
 
@@ -202,12 +231,48 @@ describe('MaterialExtAccordion', () => {
       componentHandler.upgradeElement(element, 'MaterialExtAccordion');
       assert.isTrue(element.classList.contains('is-upgraded'), 'Expected accordion to upgrade');
 
-      // TODO: Check data-upgraded as well
+      const dataUpgraded = element.getAttribute('data-upgraded');
+      assert.isNotNull(dataUpgraded, 'Expected attribute "data-upgraded" to exist');
+      assert.isAtLeast(dataUpgraded.indexOf('MaterialExtAccordion'), 0, 'Expected "data-upgraded" attribute to contain "MaterialExtAccordion');
     }
     finally {
       removeChilds(container);
     }
+  });
 
+  it('should be a widget', () => {
+    const container = qs('#accordion-container-2');
+    try {
+      container.insertAdjacentHTML('beforeend', accordion_fragment);
+      const element = qs('#accordion-2');
+      componentHandler.upgradeElement(element, 'MaterialExtAccordion');
+      expect(element.MaterialExtAccordion).to.be.a('object');
+    }
+    finally {
+      removeChilds(container);
+    }
+  });
+
+  it('has ripple effect', () => {
+    const container = qs('#accordion-container-2');
+    try {
+      container.insertAdjacentHTML('beforeend', accordion_with_ripple_fragment);
+      const element = qs('#accordion-4');
+      componentHandler.upgradeDom();
+
+      const dataUpgraded = element.getAttribute('data-upgraded');
+      assert.isNotNull(dataUpgraded, 'Expected attribute "data-upgraded" to exist');
+      assert.isAtLeast(dataUpgraded.indexOf('MaterialRipple'), 0, 'Expected "data-upgraded" attribute to contain "MaterialRipple');
+
+      [...qsa('#accordion-4 .mdlext-accordion__panel__header a')].forEach( a => {
+        const dataUpgraded = a.getAttribute('data-upgraded');
+        assert.isNotNull(dataUpgraded, 'Expected attribute "data-upgraded" to exist');
+        assert.isAtLeast(dataUpgraded.indexOf('MaterialRipple'), 0, 'Expected "data-upgraded" attribute to contain "MaterialRipple');
+      });
+    }
+    finally {
+      removeChilds(container);
+    }
   });
 
   it('throws an error if header is missing', () => {
@@ -229,7 +294,7 @@ describe('MaterialExtAccordion', () => {
     removeChilds(container);
   });
 
-  it('interacts with the keyboard', () => {
+  it('header interacts with the keyboard', () => {
     const header = qs('#accordion-1 .mdlext-accordion__panel:nth-child(3) .mdlext-accordion__panel__header');
     assert.isNotNull(header, 'Expected handle to panel 3 of 5');
 
@@ -244,9 +309,9 @@ describe('MaterialExtAccordion', () => {
     spyOnKeyboardEvent(header, VK_TAB);
   });
 
-  it('emits a click event', () => {
+  it('should emit a click event from header', () => {
     const header = qs('#accordion-1 .mdlext-accordion__panel .mdlext-accordion__panel__header');
-    assert.isNotNull(header, 'Expected handle to panel');
+    assert.isNotNull(header, 'Expected handle to header');
 
     let spy = sinon.spy();
     header.addEventListener('click', spy);
@@ -263,9 +328,9 @@ describe('MaterialExtAccordion', () => {
     header.removeEventListener('click', spy);
   });
 
-  it('emits a click event when toggled via enter key', () => {
+  it('should emit a click event from header when toggled via enter key', () => {
     const header = qs('#accordion-1 .mdlext-accordion__panel .mdlext-accordion__panel__header');
-    assert.isNotNull(header, 'Expected handle to panel');
+    assert.isNotNull(header, 'Expected handle to header');
 
     let spy = sinon.spy();
     header.addEventListener('click', spy);
@@ -274,9 +339,9 @@ describe('MaterialExtAccordion', () => {
     header.removeEventListener('click', spy);
   });
 
-  it('emits a click event when toggled via space key', () => {
+  it('should emits a click event from header when toggled via space key', () => {
     const header = qs('#accordion-1 .mdlext-accordion__panel .mdlext-accordion__panel__header');
-    assert.isNotNull(header, 'Expected handle to panel');
+    assert.isNotNull(header, 'Expected handle to header');
 
     let spy = sinon.spy();
     header.addEventListener('click', spy);
@@ -287,7 +352,7 @@ describe('MaterialExtAccordion', () => {
 
   it('closes other panels when a new panel opens', () => {
     const header = qs('#accordion-1 .mdlext-accordion__panel:nth-child(4) .mdlext-accordion__panel__header');
-    assert.isNotNull(header, 'Expected handle to panel 4 of 5');
+    assert.isNotNull(header, 'Expected handle to header in panel 4 of 5');
 
     const panel = header.parentNode;
     if(panel.hasAttribute('open')) {
@@ -309,17 +374,77 @@ describe('MaterialExtAccordion', () => {
     assert.lengthOf(check, 1);
   });
 
+  it('emits a custom "toggle" event when a panel opens or closes', () => {
+    const accordion = qs('#accordion-1');
+    assert.isNotNull(header, 'Expected handle to accordion');
+
+    const header = qs('#accordion-1 .mdlext-accordion__panel:nth-child(3) .mdlext-accordion__panel__header');
+    assert.isNotNull(header, 'Expected handle to header in panel 3 of 5');
+
+    let spy = sinon.spy();
+    accordion.addEventListener('toggle', spy);
+
+    try {
+      // Trigger click on a header
+      const evt = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      });
+      header.dispatchEvent(evt);
+    }
+    finally {
+      accordion.removeEventListener('toggle', spy);
+    }
+    assert.isTrue(spy.called, 'Expected "toggle" event to fire at least once');
+  });
+
+  it('emits a custom "toggle" event with "detail.state" and "detail.source" defined', () => {
+    const accordion = qs('#accordion-1');
+    assert.isNotNull(header, 'Expected handle to accordion');
+
+    const header = qs('#accordion-1 .mdlext-accordion__panel:nth-child(3) .mdlext-accordion__panel__header');
+    assert.isNotNull(header, 'Expected handle to header in panel 3 of 5');
+
+    let spy = sinon.spy();
+    accordion.addEventListener('toggle', spy);
+
+    accordion.addEventListener('toggle', event => {
+      assert.isDefined(event.detail, 'Expected detail to be defined in event');
+      assert.isDefined(event.detail.state, 'Expected detail.state to be defined in event');
+      assert.isDefined(event.detail.source, 'Expected detail.source to be defined in event');
+    });
+
+    try {
+      // Trigger click on a header
+      const evt = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      });
+      header.dispatchEvent(evt);
+    }
+    finally {
+      accordion.removeEventListener('toggle', spy);
+    }
+    assert.isTrue(spy.called, 'Expected "toggle" event to fire at least once');
+  });
+
   function spyOnKeyboardEvent(target, keyCode) {
     let spy = sinon.spy();
     target.addEventListener('keydown', spy);
 
-    var event = new KeyboardEvent('keydown', {
-      bubbles: true,
-      cancelable: true,
-      keyCode : keyCode
-    });
-    target.dispatchEvent(event);
-    target.removeEventListener(name, spy);
+    try {
+      const event = new KeyboardEvent('keydown', {
+        bubbles: true,
+        cancelable: true,
+        keyCode: keyCode
+      });
+      target.dispatchEvent(event);
+    }
+    finally {
+      target.removeEventListener(name, spy);
+    }
     assert.isTrue(spy.calledOnce, `Expected "keydown" event to fire once for key ${keyCode}`);
   }
 

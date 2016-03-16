@@ -32,7 +32,8 @@ $mdlext-accordion-header-background-color-hover: rgba($mdlext-accordion-header-c
 $mdlext-accordion-header-border-color          : rgba($mdlext-accordion-header-color, 0.5) !default;
 $mdlext-accordion-header-background-color-open : rgba($mdlext-accordion-header-color, 0.5) !default;
 $mdlext-accordion-header-border-color-open     : rgba($mdlext-accordion-header-color, 0.6) !default;
-$mdlext-accordion-content-padding             : $mdlext-accordion-header-padding !default;
+$mdlext-accordion-content-padding              : $mdlext-accordion-header-padding !default;
+$mdlext-accordion-ripple-color                 : $tab-highlight-color !default;
 
 ul.mdlext-accordion {
   list-style: none;
@@ -82,7 +83,9 @@ ul.mdlext-accordion {
       &:hover {
         background-color: $mdlext-accordion-header-background-color-hover;
       }
-      > a {
+
+      > a,
+      & .mdlext-accordion__ripple-container {
         text-decoration: none;
         overflow: hidden;
         font-size: 0;
@@ -93,10 +96,21 @@ ul.mdlext-accordion {
         left: 2px;
         z-index: 1;
 
+        width: 100%;  // Needed by ripple
+        height: 100%; // Needed by ripple
+
+        // Fixes clipping bug in Safari.
+        //-webkit-mask-image: -webkit-radial-gradient(circle, white, black);
+
+        & .mdl-ripple {
+          background: $mdlext-accordion-ripple-color;
+        }
+
         &:focus {
           outline: thin solid $mdlext-accordion-header-color;
         }
       }
+
       .mdlext-accordion__panel__header__transform {
         white-space: nowrap;
         margin: 0;

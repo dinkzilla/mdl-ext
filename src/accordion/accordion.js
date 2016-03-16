@@ -15,20 +15,19 @@
  * limitations under the License.
  */
 
+/**
+ * A WAI-ARIA friendly accordion component.
+ * An accordion is a collection of expandable panels associated with a common outer container. Panels consist
+ * of a header and an associated content region or panel. The primary use of an Accordion is to present multiple sections
+ * of content on a single page without scrolling, where all of the sections are peers in the application or object hierarchy.
+ * The general look is similar to a tree where each root tree node is an expandable accordion header. The user navigates
+ * and makes the contents of each panel visible (or not) by interacting with the Accordion Header
+ */
 
 (function() {
   'use strict';
 
-  const PANEL_CLASS = 'mdlext-accordion__panel';
-  const HEADER_CLASS = 'mdlext-accordion__panel__header';
-  const UPGRADED_CLASS = 'is-upgraded';
-  //const ACCORDION_CLASS = 'mdlext-accordion';
-  //const ACTIVE_CLASS = 'is-active';
-  //const MDL_JS_RIPPLE_EFFECT = 'mdl-js-ripple-effect';
-  //const MDL_RIPPLE_CONTAINER = 'mdl-accordion__ripple-container';
-  //const MDL_RIPPLE = 'mdl-ripple';
-  //const MDL_JS_RIPPLE_EFFECT_IGNORE_EVENTS = 'mdl-js-ripple-effect--ignore-events';
-
+  const RIPPLE_COMPONENT = 'MaterialRipple';
   const VK_TAB = 9;
   const VK_ENTER = 13;
   const VK_SPACE = 32;
@@ -39,17 +38,19 @@
   const VK_ARROW_RIGHT = 39;
   const VK_ARROW_DOWN = 40;
 
+  const PANEL = 'mdlext-accordion__panel';
+  const HEADER = 'mdlext-accordion__panel__header';
+  const IS_UPGRADED = 'is-upgraded';
+  const RIPPLE_CONTAINER = 'mdlext-accordion__ripple-container';
+  const RIPPLE = 'mdl-ripple';
+  const JS_RIPPLE_EFFECT = 'mdl-js-ripple-effect';
+  const JS_RIPPLE_EFFECT_IGNORE_EVENTS = 'mdl-js-ripple-effect--ignore-events';
+
 
   /**
    * Class constructor for Accordion MDLEXT component.
    * Implements MDL component design pattern defined at:
    * https://github.com/jasonmayes/mdl-component-design-pattern
-   *
-   * An accordion component is a collection of expandable panels associated with a common outer container. Panels consist
-   * of a header and an associated content region or panel. The primary use of an Accordion is to present multiple sections
-   * of content on a single page without scrolling, where all of the sections are peers in the application or object hierarchy.
-   * The general look is similar to a tree where each root tree node is an expandable accordion header. The user navigates
-   * and makes the contents of each panel visible (or not) by interacting with the Accordion Header
    *
    * @constructor
    * @param {Element} element The element that will be upgraded.
@@ -82,6 +83,7 @@
    * @private
    */
   MaterialExtAccordion.prototype.CssClasses_ = {
+    // None at the moment.
   };
 
   /**
@@ -89,15 +91,19 @@
    *
    * @private
    */
-  MaterialExtAccordion.prototype.initPanels_ = function() {
+  MaterialExtAccordion.prototype.initAccordion_ = function() {
 
     this.element_.setAttribute('role', 'tablist');
 
-    [...this.element_.querySelectorAll(`.${PANEL_CLASS}`)].forEach( panel => {
+    if (this.element_.classList.contains(JS_RIPPLE_EFFECT)) {
+      this.element_.classList.add(JS_RIPPLE_EFFECT_IGNORE_EVENTS);
+    }
+
+    [...this.element_.querySelectorAll(`.${PANEL}`)].forEach( panel => {
       new MaterialExtAccordionPanel(panel, this);
     });
 
-    this.element_.classList.add(UPGRADED_CLASS);
+    this.element_.classList.add(IS_UPGRADED);
   };
 
   /**
@@ -105,7 +111,8 @@
    */
   MaterialExtAccordion.prototype.init = function() {
     if (this.element_) {
-      this.initPanels_();
+      //console.log('***** init', this.element_.classList, this.element_.getAttribute('data-upgraded'));
+      this.initAccordion_();
     }
   };
 
@@ -117,19 +124,37 @@
    * @param {Element} panel The HTML element for the tab.
    * @param {MaterialExtAccordion} ctx The MaterialExtAccordion object that owns the panel.
    */
-  function MaterialExtAccordionPanel(panel, ctx) {   // eslint-disable-line no-unused-vars
+  function MaterialExtAccordionPanel(panel, ctx) {
 
-    const header = panel.querySelector(`.${HEADER_CLASS}`);
-
+    const header = panel.querySelector(`.${HEADER}`);
     if(header === null) {
       throw new Error('There must be a header element for each accordion panel.');
     }
 
     header.setAttribute('role', 'tab');
+
+    let a = header.querySelector('a');
+    if(a === null) {
+      // An anchor is required for focus/tab stop
+      a = document.createElement('a');
+      a.href = '#';
+      header.appendChild(a);
+    }
+
     panel.setAttribute('role', 'tabpanel');
 
     if(!panel.hasAttribute('open')) {
       panel.setAttribute('aria-expanded', '');
+    }
+
+    if (ctx.element_.classList.contains(JS_RIPPLE_EFFECT)) {
+      const rippleContainer = a; //document.createElement('span'); // Use anchor as ripple container?
+      rippleContainer.classList.add(RIPPLE_CONTAINER);
+      rippleContainer.classList.add(JS_RIPPLE_EFFECT);
+      const ripple = document.createElement('span');
+      ripple.classList.add(RIPPLE);
+      rippleContainer.appendChild(ripple);
+      componentHandler.upgradeElement(rippleContainer, RIPPLE_COMPONENT);
     }
 
     header.addEventListener('click', ( function(event) {
@@ -140,18 +165,27 @@
       if(panel.hasAttribute('open')) {
         panel.removeAttribute('open');
         this.removeAttribute('aria-expanded');
+
+        // Dispatch toggle event to accordion element
+        dispatchToggleEvent('close', panel, ctx.element_);
       }
       else {
-        const openPanel = ctx.element_.querySelector(`.${PANEL_CLASS}[open]`);
+        const openPanel = ctx.element_.querySelector(`.${PANEL}[open]`);
         if(openPanel) {
           openPanel.removeAttribute('open');
-          const h = openPanel.querySelector(`.${HEADER_CLASS}`);
+          const h = openPanel.querySelector(`.${HEADER}`);
           if(h) {
             h.removeAttribute('aria-expanded');
           }
+
+          // Dispatch toggle event to accordion element
+          dispatchToggleEvent('close', openPanel, ctx.element_);
         }
         panel.setAttribute('open', '');
         this.setAttribute('aria-expanded', '');
+
+        // Dispatch toggle event to accordion element
+        dispatchToggleEvent('open', panel, ctx.element_);
       }
       focus(panel);
 
@@ -181,7 +215,6 @@
             break;
           }
 
-          /*jshint eqeqeq:false */
           if(panels[i] == panel) {
             if(event.keyCode === VK_ARROW_UP || event.keyCode === VK_ARROW_LEFT) {
               if(i > 0) {
@@ -229,10 +262,21 @@
     }).bind(header), true);
 
     function focus(panel) {
-      const a = panel.querySelector(`.${HEADER_CLASS} a`);
+      const a = panel.querySelector(`.${HEADER} a`);
       if(a) {
         a.focus();
       }
+    }
+
+    function dispatchToggleEvent(state, source, target) {
+
+      // Dispatch toggle event to accordion element
+      const evt = new CustomEvent('toggle', {
+        bubbles: true,
+        cancelable: true,
+        detail: { state: state, source: source }
+      });
+      target.dispatchEvent(evt);
     }
 
   }
@@ -244,6 +288,12 @@
   componentHandler.register({
     constructor: MaterialExtAccordion,
     classAsString: 'MaterialExtAccordion',
-    cssClass: 'mdlext-js-accordion'
+    cssClass: 'mdlext-js-accordion',
+    widget: true
   });
 })();
+
+
+/*
+ // eslint-disable-line no-unused-vars
+ */
