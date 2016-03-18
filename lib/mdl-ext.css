@@ -1042,5 +1042,81 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   color: rgba(0,0,0, 0.12);
 }
 
+.mdlext-lightboard {
+  box-sizing: border-box;
+  margin: 4px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+}
+
+.mdlext-lightboard > .cc {
+  margin: 2px;
+  background-color: #F8F8F8;
+  padding: 8px;
+  width: 160px;
+  height: 160px;
+  border: 1px solid #D8D8D8;
+  border-radius: 5px;
+  box-shadow: 2px 2px 6px -1px rgba(219, 215, 219, 0.5);
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: none;
+      -ms-flex: none;
+          flex: none;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.mdlext-lightboard > .cc:hover,
+.mdlext-lightboard > .cc:active,
+.mdlext-lightboard > .cc:focus {
+  border-color: #C8C8C8;
+  background-color: #E8E8E8;
+  box-shadow: 2px 2px 12px -1px #d4d0d4;
+}
+
+.mdlext-lightboard > .cc:hover {
+  outline: 0;
+}
+
+.mdlext-lightboard > .cc:active,
+.mdlext-lightboard > .cc:focus {
+  outline: thin dotted #333;
+  outline: 2px auto -webkit-focus-ring-color;
+  outline-offset: -4px;
+}
+
+.mdlext-lightboard > .cc img {
+  max-width: 100%;
+  max-height: 100%;
+  /* In firefox, if height > width set height: 100%; using JS */
+  /* Opera totally messes up when putting img tag inside flexbox */
+  border-radius: 3px;
+}
+
+/* As an alternative to img tag, use background-image property */
+
+.mdlext-lightboard > .cc .img-box {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  /*background-image: url(none)*/
+}
+
 
 /*# sourceMappingURL=mdl-ext.css.map*/

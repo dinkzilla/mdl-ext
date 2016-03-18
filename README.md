@@ -105,6 +105,13 @@ A [WAI-ARIA](https://www.w3.org/TR/wai-aria-practices-1.1/#accordion) friendly [
 
 The Material Design Lite Ext (MDLEXT) [**bordered fields**](./src/bordered-fields/) component demonstrates how you can create your own theme of MDL text fields.
 
+### Lightboard
+![Lightboard](./etc/lightboard.jpg)
+A lightboard, also known as a lightbox, is a translucent surface illuminated from behind, used for 
+situations where a shape laid upon the surface needs to be seen with high contrast. In the "old days" 
+of photography photograpers used a lightboard to get a quick view of their slides. 
+
+
 ### Selectfield
 ![Selectfield](./etc/select-element.png)
 
