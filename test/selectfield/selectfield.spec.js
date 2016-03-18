@@ -4,7 +4,7 @@ import requireUncached from 'require-uncached';
 import jsdomify from 'jsdomify';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
-import { qs, qsa } from '../testutils/domHelpers';
+import { qs, qsa, removeChilds } from '../testutils/domHelpers';
 
 describe('MaterialExtSelectfield', () => {
 
@@ -94,17 +94,39 @@ describe('MaterialExtSelectfield', () => {
 
     mount.insertAdjacentHTML('beforeend', fragment);
 
-    const element = qs('#select-country').parentNode;
-    assert.isNotNull(element);
+    try {
+      const element = qs('#select-country').parentNode;
+      assert.isNotNull(element);
 
-    let dataUpgraded = element.getAttribute('data-upgraded');
-    assert.isNull(dataUpgraded);
+      let dataUpgraded = element.getAttribute('data-upgraded');
+      assert.isNull(dataUpgraded);
 
-    componentHandler.upgradeElement(element, 'MaterialExtSelectfield');
+      componentHandler.upgradeElement(element, 'MaterialExtSelectfield');
 
-    dataUpgraded = element.getAttribute('data-upgraded');
-    assert.isNotNull(dataUpgraded);
-    assert.isAtLeast(dataUpgraded.indexOf('MaterialExtSelectfield'), 0);
+      dataUpgraded = element.getAttribute('data-upgraded');
+      assert.isNotNull(dataUpgraded);
+      assert.isAtLeast(dataUpgraded.indexOf('MaterialExtSelectfield'), 0);
+    }
+    finally {
+      removeChilds(mount);
+    }
+  });
+
+  it('downgrades successfully when a component is removed from DOM', () => {
+    const mount = document.getElementById('mount-2');
+    mount.insertAdjacentHTML('beforeend', fragment);
+
+    try {
+      const element = qs('#select-country').parentNode;
+      componentHandler.upgradeElement(element, 'MaterialExtSelectfield');
+      expect(element.getAttribute('data-upgraded')).to.include('MaterialExtSelectfield');
+
+      componentHandler.downgradeElements(element);
+      expect(element.getAttribute('data-upgraded')).to.not.include('MaterialExtSelectfield');
+    }
+    finally {
+      removeChilds(mount);
+    }
   });
 
   it('should be a widget', () => {

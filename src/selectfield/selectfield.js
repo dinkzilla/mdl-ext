@@ -44,7 +44,6 @@
    * @private
    */
   MaterialExtSelectfield.prototype.Constant_ = {
-    // None at the moment.
   };
 
   /**

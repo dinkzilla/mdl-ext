@@ -227,7 +227,7 @@ describe('MaterialExtAccordion', () => {
       container.insertAdjacentHTML('beforeend', accordion_fragment);
       const element = qs('#accordion-2');
 
-      assert.isFalse(element.classList.contains('is-upgraded'));
+      assert.isFalse(element.classList.contains('is-upgraded'), 'Expected class "is-upgraded" to exist after upgrade');
       componentHandler.upgradeElement(element, 'MaterialExtAccordion');
       assert.isTrue(element.classList.contains('is-upgraded'), 'Expected accordion to upgrade');
 
@@ -235,6 +235,25 @@ describe('MaterialExtAccordion', () => {
       assert.isNotNull(dataUpgraded, 'Expected attribute "data-upgraded" to exist');
       assert.isAtLeast(dataUpgraded.indexOf('MaterialExtAccordion'), 0, 'Expected "data-upgraded" attribute to contain "MaterialExtAccordion');
     }
+    finally {
+      removeChilds(container);
+    }
+  });
+
+  it('downgrades successfully', () => {
+    const container = qs('#accordion-container-2');
+
+    try {
+      container.insertAdjacentHTML('beforeend', accordion_fragment);
+      const element = qs('#accordion-2');
+
+      componentHandler.upgradeElement(element, 'MaterialExtAccordion');
+      assert.isTrue(element.classList.contains('is-upgraded'), 'Expected accordion to upgrade before downgrade');
+      expect(element.getAttribute('data-upgraded')).to.include('MaterialExtAccordion');
+
+      componentHandler.downgradeElements(element);
+      expect(element.getAttribute('data-upgraded')).to.not.include('MaterialExtAccordion');
+      }
     finally {
       removeChilds(container);
     }

@@ -271,8 +271,6 @@
     }
 
     function dispatchToggleEvent(state, source, target) {
-
-      // Dispatch toggle event to accordion element
       const evt = new CustomEvent('toggle', {
         bubbles: true,
         cancelable: true,
