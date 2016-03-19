@@ -1,6 +1,6 @@
 # Lightboard
 
-![Lightboard](../../etc/lightboard.jpg)
+![Lightboard](../../etc/lightboard.png)
 
 A lightboard, also known as a lightbox, is a translucent surface illuminated from behind, used for 
 situations where a shape laid upon the surface needs to be seen with high contrast. In the "old days" 

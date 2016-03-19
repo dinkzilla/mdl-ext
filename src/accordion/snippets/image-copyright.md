@@ -1,4 +1,4 @@
-All images appearing in in this folder are the exclusive property of Leif Olsen and are protected under the United States and International Copyright laws.
+All images appearing in this folder are the exclusive property of Leif Olsen and are protected under the United States and International Copyright laws.
 
 The images may not be reproduced or manipulated without the written permission of Leif Olsen.
 
