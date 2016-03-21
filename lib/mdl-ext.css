@@ -1148,7 +1148,6 @@ ul.mdlext-lightboard {
 
 .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame,
 .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container {
-  border-radius: 5px;
   text-decoration: none;
   display: block;
   overflow: hidden;
@@ -1197,7 +1196,7 @@ ul.mdlext-lightboard {
 .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure figcaption,
 .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container figure figcaption {
   position: absolute;
-  bottom: -4px;
+  bottom: -2px;
   white-space: nowrap;
   overflow: hidden;
   max-width: 100%;

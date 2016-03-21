@@ -11,7 +11,7 @@ of photography photograpers used a lightboard to get a quick view of, sorting an
 
 The MDLEXT Lightbord lays out the slides in a row column fashion, with repect to the available screen size. Slides
 are distributed across the available content width, and scales proportionally to fill available horizontal space.
-Lightboard has `role='grid'` and the individual slides has `role='cell'` 
+A lightboard has `role='grid'` and the individual slides has `role='cell'` 
 
 ### To include a MDLEXT **lightboard** component:
 &nbsp;1. Code a `<ul>` element with `class="mdlext-lightboard mdlext-js-lightboard"` to hold the lightboard slides. 
@@ -28,7 +28,7 @@ Lightboard has `role='grid'` and the individual slides has `role='cell'`
 <ul>
 ```
 
-&nbsp;3. Code an `<a href="#">` element with `class="mdlext-lightboard__slide__frame"`  to hold the slide frame and a href to a large version of the image shown in the slide. 
+&nbsp;3. Code an `<a href="#">` element with `class="mdlext-lightboard__slide__frame"`  to hold the slide frame. Optionally add a href to a large version of the image shown in the slide. 
 ```html
 <ul class="mdlext-accordion mdlext-js-accordion">
   <li class="mdlext-lightboard__slide">
@@ -38,7 +38,7 @@ Lightboard has `role='grid'` and the individual slides has `role='cell'`
 <ul>
 ```
 
-&nbsp;4. Code an `<figure>` element (required to position center image in slide).  
+&nbsp;4. Code an `<figure>` element (decorates frame and center image in slide).  
 ```html
 <ul class="mdlext-accordion mdlext-js-accordion">
   <li class="mdlext-lightboard__slide">
@@ -69,6 +69,71 @@ Lightboard has `role='grid'` and the individual slides has `role='cell'`
 ### Example
 Lightboard with six slides, with ripple effect on each slide, no spacing between slides. Subscribes to lightboard `select` event.
 
+```html
+<ul id="lightboard-1" class="mdlext-lightboard mdlext-js-lightboard 
+  mdlext-lightboard--no-spacing 
+  mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events">
+  
+  <li class="mdlext-lightboard__slide">
+    <a href="#" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="_D802141.jpg" title="Northern goshawk with prey"/>
+        <figcaption>_D802141.jpg</figcaption>
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="#" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="_D802591.jpg" title="Whooper swans in flight"/>
+        <figcaption>_D802591.jpg</figcaption>
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="#" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="_D804370-3.jpg" title="European green woodpecker"/>
+        <figcaption>_D804370-3.jpg</figcaption>
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="#" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="_D808689.jpg" title="The bridge"/>
+        <figcaption>_D808689.jpg</figcaption>
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="#" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="_D802181.jpg" title="Landscape in blue pastel"/>
+        <figcaption>_D802181.jpg</figcaption>
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="#" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="_D800912.jpg" title="Hiking the mountains of Dovre"/>
+        <figcaption>_D800912.jpg</figcaption>
+      </figure>
+    </a>
+  </li>
+</ul>
+```
+
+```javascript
+<script>
+  'use strict';
+  var lightboard = document.querySelector('#lightboard-1');
+  lightboard.addEventListener('select', function(e) {
+    console.log('Slide selected. Source:', e.detail.source);
+  });
+</script>
+```
 
 ## Keyboard interaction
 The lightboard interacts with the following keyboard keys.
@@ -104,21 +169,64 @@ The table below lists the available classes and their effects.
 
 | MDLEXT class | Effect | Remarks |
 |-----------|--------|---------|
-| `mdlext-lightboard` | Defines container as an MDL component | Required on "outer" `<div>` or `<ul>` element |
+| `mdlext-lightboard` | Defines a container as an MDLEXT lightboard component | Required on `<ul>` element |
+| `mdlext-js-lightboard` | Assigns basic MDL behavior to lightboard | Required on `<ul>` element |
+| `mdlext-lightboard--no-spacing` | Modifies the slides to have no margin between them. | Optional on `<ul>` element |
+| `mdlext-lightboard__slide` | Defines a slide | Required on `<li>` element |
+| `mdlext-lightboard__slide__frame` | Defines the slide frame, makes the frame focusable and selectable | Required on `<a>` element. First inner element of `<li>`  |
+| `mdl-js-ripple-effect` | Applies ripple click effect to slides | Optional; goes on "outer" `<ul>` element |
+| `mdl-js-ripple-effect--ignore-events` |  | Should be added when the component initializes, but that does not seem to happen. For now, add this class if `mdl-js-ripple-effect` class is applied |
 
+
+A lightboard and its assosiated slides has the following roles.
 
 | Attribute | Effect | Remarks |
 |-----------|--------|---------|
-| `role=grid` |  |  |
-| `role=cell` |  |  |
+| `role=grid` | Defines the lightboard as a WAI-ARIA grid | Added when component innitializes |
+| `role=cell` | Defines the slide as a WAI-ARIA cell | Added when component innitializes |
 
 
 You can modify the accordion trough the following SASS variables.
 
-| SASS variable |Description | Remarks | 
-|-----------|--------|---------|
-| `$mdlext-lightboard-wide-desktop-breakpoint` | | | 
+| SASS variable |
+|-----------|
+| `$mdlext-lightboard-wide-desktop-breakpoint       ` | 
+| `$mdlext-lightboard-wide-tablet-breakpoint        ` |
+| `$mdlext-lightboard-wide-desktop-gutter           ` | 
+| `$mdlext-lightboard-wide-desktop-margin           ` | 
+| `$mdlext-lightboard-wide-desktop-slides           ` | 
+| `$mdlext-lightboard-wide-desktop-slide-frame-width` | 
+| `$mdlext-lightboard-desktop-gutter                ` | 
+| `$mdlext-lightboard-desktop-margin                ` | 
+| `$mdlext-lightboard-desktop-slides                ` | 
+| `$mdlext-lightboard-desktop-slide-frame-width     ` | 
+| `$mdlext-lightboard-wide-tablet-gutter            ` | 
+| `$mdlext-lightboard-wide-tablet-margin            ` | 
+| `$mdlext-lightboard-wide-tablet-slides            ` | 
+| `$mdlext-lightboard-wide-tablet-slide-frame-width ` | 
+| `$mdlext-lightboard-tablet-gutter                 ` | 
+| `$mdlext-lightboard-tablet-margin                 ` | 
+| `$mdlext-lightboard-tablet-slides                 ` | 
+| `$mdlext-lightboard-tablet-slide-frame-width      ` | 
+| `$mdlext-lightboard-phone-gutter                  ` | 
+| `$mdlext-lightboard-phone-margin                  ` | 
+| `$mdlext-lightboard-phone-slides                  ` | 
+| `$mdlext-lightboard-phone-slide-frame-width       ` | 
+| `$mdlext-lightboard-slide-max-size                ` | 
+| `$mdlext-lightboard-slide-border-color            ` | 
+| `$mdlext-lightboard-slide-background-color        ` | 
+| `$mdlext-lightboard-slide-border-radius           ` | 
+| `$mdlext-lightboard-slide-inner-border-radius     ` | 
+| `$mdlext-lightboard-slide-box-shadow              ` | 
+| `$mdlext-lightboard-slide-border-color-hover      ` | 
+| `$mdlext-lightboard-slide-background-color-hover  ` | 
+| `$mdlext-lightboard-slide-box-shadow-hover        ` | 
+| `$mdlext-lightboard-figcaption-font-size          ` | 
+| `$mdlext-lightboard-figcaption-font-size-large    ` | 
+| `$mdlext-lightboard-figcaption-text-color         ` | 
+| `$mdlext-lightboard-ripple-color                  ` | 
+| `$mdlext-lightboard-focus-outline-color           ` | 
 
 
 ## How to use the component programmatically
-The tests provides examples on how to use the component programmatically.
+The tests provides examples on how to use the component [programmatically](https://github.com/leifoolsen/mdl-ext/blob/master/test/lightboard/lightboard.spec.js).

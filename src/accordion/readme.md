@@ -253,7 +253,7 @@ The table below lists the available classes and their effects.
 | MDLEXT class | Effect | Remarks |
 |-----------|--------|---------|
 | `mdlext-accordion` | Defines container as an MDL component | Required on "outer" `<div>` or `<ul>` element |
-| `mdlext-js-accordion` | Assigns basic MDL behavior accordion | Required on "outer" `<div>` or `<ul>` element |
+| `mdlext-js-accordion` | Assigns basic MDL behavior to accordion | Required on "outer" `<div>` or `<ul>` element |
 | `mdlext-accordion--vertical` | Vertical layot of an accordion | Optional; Without this class an accordion has horizontal layout |
 | `mdlext-accordion__panel` | Defines a container for each section of the accordion | Required on first inner `<div>` element or `<li>` element  |
 | `mdlext-accordion__panel__header` | Defines a header for a section | Required on `<header>` element |

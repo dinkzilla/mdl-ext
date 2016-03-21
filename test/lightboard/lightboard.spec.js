@@ -217,7 +217,7 @@ describe('MaterialExtLightboard', () => {
 
   function spyOnKeyboardEvent(target, source, keyCode) {
     let spy = sinon.spy();
-    target.addEventListener('keydown', spy);
+    target.addEventListener('keydown', spy, true);
 
     try {
       const event = new KeyboardEvent('keydown', {
@@ -232,8 +232,7 @@ describe('MaterialExtLightboard', () => {
       target.removeEventListener('keydown', spy);
     }
 
-    // Temporarly disabled. The eventhandlers are called, but not detected by Sinon. Something I've missed in config??
-    //assert.isTrue(spy.calledOnce, `Expected "keydown" event to fire once for key code ${keyCode}`);
+    assert.isTrue(spy.calledOnce, `Expected "keydown" event to fire once for key code ${keyCode}`);
   }
 
 });

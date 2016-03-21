@@ -107,6 +107,7 @@ The Material Design Lite Ext (MDLEXT) [**bordered fields**](./src/bordered-field
 
 ### Lightboard
 ![Lightboard](./etc/lightboard.png)
+
 A lightboard is a translucent surface illuminated from behind, used for 
 situations where a shape laid upon the surface needs to be seen with high contrast. In the "old days" 
 of photography photograpers used a lightboard to get a quick view of, sorting and organizing their slides.. 
@@ -119,7 +120,7 @@ The Material Design Lite Ext (MDLEXT) [**select field**](./src/selectfield/) com
 of the standard [HTML `<select>`] (https://developer.mozilla.org/en/docs/Web/HTML/Element/select) element.
 
 ## Notes
-To see the MDLEXT components in action, open the [demo/index.html](./demo/index.html) in a browser.
+To see the MDLEXT components in action, after download/clone/install, open the [demo/index.html](./demo/index.html) in a browser.
 You can also download or clone a demo project from here: https://github.com/leifoolsen/mdl-webpack - 
 which also demonstrates how you can self host Font Roboto and Material Icons in your web application.
 

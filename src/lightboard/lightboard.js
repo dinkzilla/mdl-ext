@@ -65,7 +65,6 @@
    */
   MaterialExtLightboard.prototype.initLightboard_ = function() {
 
-    // TODO: Add more WAI-ARIA stuff
     this.element_.setAttribute('role', 'grid');
     [...this.element_.querySelectorAll(`.${SLIDE}`)].forEach(
       slide => slide.setAttribute('role', 'cell')
