@@ -321,11 +321,11 @@ describe('MaterialExtAccordion', () => {
     spyOnKeyboardEvent(header, VK_ARROW_LEFT);
     spyOnKeyboardEvent(header, VK_ARROW_RIGHT);
     spyOnKeyboardEvent(header, VK_ARROW_UP);
-    spyOnKeyboardEvent(header, VK_END);
     spyOnKeyboardEvent(header, VK_ENTER);
-    spyOnKeyboardEvent(header, VK_HOME);
     spyOnKeyboardEvent(header, VK_SPACE);
     spyOnKeyboardEvent(header, VK_TAB);
+    spyOnKeyboardEvent(header, VK_END);
+    spyOnKeyboardEvent(header, VK_HOME);
   });
 
   it('should emit a click event from header', () => {
@@ -437,7 +437,7 @@ describe('MaterialExtAccordion', () => {
       target.dispatchEvent(event);
     }
     finally {
-      target.removeEventListener(name, spy);
+      target.removeEventListener('keydown', spy);
     }
     assert.isTrue(spy.calledOnce, `Expected "keydown" event to fire once for key ${keyCode}`);
   }

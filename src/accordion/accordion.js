@@ -27,6 +27,7 @@
 (function() {
   'use strict';
 
+
   const RIPPLE_COMPONENT = 'MaterialRipple';
   const VK_TAB = 9;
   const VK_ENTER = 13;
@@ -64,28 +65,6 @@
     this.init();
   };
   window['MaterialExtAccordion'] = MaterialExtAccordion;
-
-  /**
-   * Store constants in one place so they can be updated easily.
-   *
-   * @enum {string}
-   * @private
-   */
-  MaterialExtAccordion.prototype.Constant_ = {
-    // None at the moment.
-  };
-
-  /**
-   * Store strings for class names defined by this component that are used in
-   * JavaScript. This allows us to simply change it in one place should we
-   * decide to modify at a later date.
-   *
-   * @enum {string}
-   * @private
-   */
-  MaterialExtAccordion.prototype.CssClasses_ = {
-    // None at the moment.
-  };
 
   /**
    * Initialize accordion's panels
@@ -219,18 +198,14 @@
 
           if(panels[i] == panel) {
             if(event.keyCode === VK_ARROW_UP || event.keyCode === VK_ARROW_LEFT) {
-              if(i > 0) {
-                nextPanel = panels[i-1];
-              }
+              nextPanel = i > 0 ? panels[i-1] :  panels[n];
             }
             else if (event.keyCode === VK_ARROW_DOWN || event.keyCode === VK_ARROW_RIGHT) {
-              if(i < n) {
-                nextPanel = panels[i+1];
-              }
+              nextPanel = i < n ? panels[i+1] : panels[0];
             }
             else if (event.keyCode === VK_TAB) {
-              if(event.shiftKey && i > 0) {
-                if(!panels[i-1].hasAttribute('open')) {
+              if(event.shiftKey) {
+                if(i > 0 && !panels[i-1].hasAttribute('open')) {
                   nextPanel = panels[i-1];
                 }
               }

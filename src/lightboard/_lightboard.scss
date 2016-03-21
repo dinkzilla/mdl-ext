@@ -15,46 +15,16 @@
  */
 
 /*
- * A lightboard, also known as a lightbox, is a translucent surface illuminated from behind, used for situations
+ * A lightboard is a translucent surface illuminated from behind, used for situations
  * where a shape laid upon the surface needs to be seen with high contrast. In the "old days" of photography
  * photograpers used a lightboard to get a quick view of their slides. The goal is to create a responsive lightbox
  * design, based on flex layout, similar to what is used in Adobe LightRoom to browse images.
  */
 
-$mdlext-lightboard-wide-desktop-breakpoint       : $grid-desktop-breakpoint + 360px !default;
-$mdlext-lightboard-wide-tablet-breakpoint        : $grid-tablet-breakpoint + 180px !default;
-
-$mdlext-lightboard-wide-desktop-gutter           : 8px !default;
-$mdlext-lightboard-wide-desktop-margin           : 0px !default;
-$mdlext-lightboard-wide-desktop-cards            : 7 !default;
-$mdlext-lightboard-wide-desktop-card-frame-width : 12px !default;
-
-$mdlext-lightboard-desktop-gutter                : 8px !default;
-$mdlext-lightboard-desktop-margin                : 0px !default;
-$mdlext-lightboard-desktop-cards                 : 5 !default;
-$mdlext-lightboard-desktop-card-frame-width      : 12px !default;
-
-$mdlext-lightboard-wide-tablet-gutter            : 4px !default;
-$mdlext-lightboard-wide-tablet-margin            : 0px !default;
-$mdlext-lightboard-wide-tablet-cards             : 4 !default;
-$mdlext-lightboard-wide-tablet-card-frame-width  : 8px !default;
-
-$mdlext-lightboard-tablet-gutter                 : 4px !default;
-$mdlext-lightboard-tablet-margin                 : 0px !default;
-$mdlext-lightboard-tablet-cards                  : 3 !default;
-$mdlext-lightboard-tablet-card-frame-width       : 8px !default;
-
-$mdlext-lightboard-phone-gutter                  : 2px !default;
-$mdlext-lightboard-phone-margin                  : 0px !default;
-$mdlext-lightboard-phone-cards                   : 2 !default;
-$mdlext-lightboard-phone-card-frame-width        : 8px !default;
-
-$mdlext-lightboard-card-max-size                 : 250px !default;
-
-$mdlext-lightboard-figcaption-font-size          : 11px !default;
-$mdlext-lightboard-figcaption-font-size-large    : 14px !default;
-$mdlext-lightboard-figcaption-text-color         : unquote('rgb(#{$palette-grey-400})');
-
+// Use of this module requires the user to include variables from material-design-lite
+//@import "../../node_modules/material-design-lite/src/variables";
+//@import "../../node_modules/material-design-lite/src/mixins";
+@import "../variables";
 
 ul.mdlext-lightboard {
   list-style: none;
@@ -71,16 +41,18 @@ ul.mdlext-lightboard {
   *, *::before, *::after, input[type="search"] {
     box-sizing: border-box;
   }
-  .mdlext-lightboard__card {
+  .mdlext-lightboard__slide {
     background-color: #F8F8F8;
     border: 1px solid #D8D8D8;
     border-radius: 5px;
     box-shadow: 2px 2px 6px -1px rgba(219,215,219,0.5);
     position: relative;
     display: block;
-    max-width: $mdlext-lightboard-card-max-size;
+    max-width: $mdlext-lightboard-slide-max-size;
 
     &:before {
+      // 1:1 ratio
+      // TODO: Use a class for ratio so the grid can display slides with warious ratios (16:9, 16:10, 4:3 ...)
       content: '';
       display: block;
       padding-top: 100%;
@@ -88,26 +60,30 @@ ul.mdlext-lightboard {
     &:hover,
     &:active,
     &:focus {
-      border-color: #C8C8C8;
+      border-color: #B8B8B8;
       background-color: #E8E8E8;
-      box-shadow: 2px 2px 12px -1px rgba(212,208,212,1);
+      box-shadow: 2px 2px 12px -1px rgba(219,215,219,1);
     }
-    &:hover {
-      outline: 0;
-    }
-    &:active,
-    &:focus {
-      outline: thin dotted #333;
-      outline: 2px auto -webkit-focus-ring-color;
-      outline-offset: -4px;
-    }
-    .mdlext-lightboard__card__frame {
+    .mdlext-lightboard__slide__frame,
+    .mdlext-lightboard__slide__ripple-container {
+      border-radius: 5px;
+      text-decoration: none;
       display: block;
+      overflow: hidden;
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
+      outline: none;
+
+      &:focus {
+        outline: thin dotted $mdlext-lightboard-focus-outline-color;
+        outline-offset: -4px;
+      }
+      & .mdl-ripple {
+        background: $mdlext-lightboard-ripple-color;
+      }
 
       figure {
         display: block;
@@ -152,12 +128,12 @@ ul.mdlext-lightboard {
   .mdlext-lightboard {
     padding: calc((#{$mdlext-lightboard-phone-margin} - #{$mdlext-lightboard-phone-gutter}) / 2);
 
-    .mdlext-lightboard__card {
+    .mdlext-lightboard__slide {
       margin: calc(#{$mdlext-lightboard-phone-gutter} / 2 );
-      width: calc(1 / #{$mdlext-lightboard-phone-cards} * 100% - #{$mdlext-lightboard-phone-gutter});
+      width: calc(1 / #{$mdlext-lightboard-phone-slides} * 100% - #{$mdlext-lightboard-phone-gutter});
 
-      .mdlext-lightboard__card__frame figure {
-        margin: $mdlext-lightboard-phone-card-frame-width;
+      .mdlext-lightboard__slide__frame figure {
+        margin: $mdlext-lightboard-phone-slide-frame-width;
       }
     }
   }
@@ -168,12 +144,12 @@ ul.mdlext-lightboard {
   .mdlext-lightboard {
     padding: calc((#{$mdlext-lightboard-tablet-margin} - #{$mdlext-lightboard-tablet-gutter}) / 2);
 
-    .mdlext-lightboard__card {
+    .mdlext-lightboard__slide {
       margin: calc(#{$mdlext-lightboard-tablet-gutter} / 2 );
-      width: calc(1 / #{$mdlext-lightboard-tablet-cards} * 100% - #{$mdlext-lightboard-tablet-gutter});
+      width: calc(1 / #{$mdlext-lightboard-tablet-slides} * 100% - #{$mdlext-lightboard-tablet-gutter});
 
-      .mdlext-lightboard__card__frame figure {
-        margin: $mdlext-lightboard-tablet-card-frame-width;
+      .mdlext-lightboard__slide__frame figure {
+        margin: $mdlext-lightboard-tablet-slide-frame-width;
       }
     }
   }
@@ -184,12 +160,12 @@ ul.mdlext-lightboard {
   .mdlext-lightboard {
     padding: calc((#{$mdlext-lightboard-wide-tablet-margin} - #{$mdlext-lightboard-wide-tablet-gutter}) / 2);
 
-    .mdlext-lightboard__card {
+    .mdlext-lightboard__slide {
       margin: calc(#{$mdlext-lightboard-wide-tablet-gutter} / 2 );
-      width: calc(1 / #{$mdlext-lightboard-wide-tablet-cards} * 100% - #{$mdlext-lightboard-wide-tablet-gutter});
+      width: calc(1 / #{$mdlext-lightboard-wide-tablet-slides} * 100% - #{$mdlext-lightboard-wide-tablet-gutter});
 
-      .mdlext-lightboard__card__frame figure {
-        margin: $mdlext-lightboard-wide-tablet-card-frame-width;
+      .mdlext-lightboard__slide__frame figure {
+        margin: $mdlext-lightboard-wide-tablet-slide-frame-width;
       }
     }
   }
@@ -200,12 +176,12 @@ ul.mdlext-lightboard {
   .mdlext-lightboard {
     padding: calc((#{$mdlext-lightboard-desktop-margin} - #{$mdlext-lightboard-desktop-gutter}) / 2);
 
-    .mdlext-lightboard__card {
+    .mdlext-lightboard__slide {
       margin: calc(#{$mdlext-lightboard-desktop-gutter} / 2 );
-      width: calc(1 / #{$mdlext-lightboard-desktop-cards} * 100% - #{$mdlext-lightboard-desktop-gutter});
+      width: calc(1 / #{$mdlext-lightboard-desktop-slides} * 100% - #{$mdlext-lightboard-desktop-gutter});
 
-      .mdlext-lightboard__card__frame figure {
-        margin: $mdlext-lightboard-desktop-card-frame-width;
+      .mdlext-lightboard__slide__frame figure {
+        margin: $mdlext-lightboard-desktop-slide-frame-width;
       }
     }
   }
@@ -216,12 +192,12 @@ ul.mdlext-lightboard {
   .mdlext-lightboard {
     padding: calc((#{$mdlext-lightboard-wide-desktop-margin} - #{$mdlext-lightboard-wide-desktop-gutter}) / 2);
 
-    .mdlext-lightboard__card {
+    .mdlext-lightboard__slide {
       margin: calc(#{$mdlext-lightboard-wide-desktop-gutter} / 2 );
-      width: calc(1 / #{$mdlext-lightboard-wide-desktop-cards} * 100% - #{$mdlext-lightboard-wide-desktop-gutter});
+      width: calc(1 / #{$mdlext-lightboard-wide-desktop-slides} * 100% - #{$mdlext-lightboard-wide-desktop-gutter});
 
-      .mdlext-lightboard__card__frame figure {
-        margin: $mdlext-lightboard-desktop-card-frame-width;
+      .mdlext-lightboard__slide__frame figure {
+        margin: $mdlext-lightboard-desktop-slide-frame-width;
       }
     }
   }

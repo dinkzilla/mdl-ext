@@ -79,24 +79,28 @@ ul.mdlext-accordion {
         overflow: hidden;
         font-size: 0;
         position: absolute;
-        top: 2px;
-        right: 2px;
-        bottom: 2px;
-        left: 2px;
+        top: 1px;
+        right: 0px;
+        bottom: 0px;
+        left: 1px;
         z-index: 1;
 
-        width: 100%;  // Needed by ripple
-        height: 100%; // Needed by ripple
 
         // Fixes clipping bug in Safari.
         //-webkit-mask-image: -webkit-radial-gradient(circle, white, black);
 
+        &:focus {
+          outline: thin solid $mdlext-accordion-header-focus-outline-color;
+          outline-offset: -1px;
+        }
+      }
+
+      & .mdlext-accordion__panel__header__ripple-container {
+        width: 99%;
+        height: 99%;
+
         & .mdl-ripple {
           background: $mdlext-accordion-ripple-color;
-        }
-
-        &:focus {
-          outline: thin solid $mdlext-accordion-header-background-color;
         }
       }
 

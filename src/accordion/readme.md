@@ -247,7 +247,7 @@ The accordion emits a custom **toggle** event when a panel opens or closes. The 
 
 ## Configuration options
 
-The MDLEXT CSS classes apply various predefined visual and behavioral enhancements to the select field. 
+The MDLEXT CSS classes apply various predefined visual and behavioral enhancements to the accordion. 
 The table below lists the available classes and their effects.
 
 | MDLEXT class | Effect | Remarks |

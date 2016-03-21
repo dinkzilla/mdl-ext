@@ -29,7 +29,7 @@ $mdlext-accordion-header-background-color-hover: rgba($mdlext-accordion-header-b
 $mdlext-accordion-header-background-color-open : rgba($mdlext-accordion-header-background-color-base, 0.5) !default;
 $mdlext-accordion-header-border-color          : rgba($mdlext-accordion-header-background-color-base, 0.5) !default;
 $mdlext-accordion-header-border-color-open     : rgba($mdlext-accordion-header-background-color-base, 0.6) !default;
-$mdlext-accordion-header-focus-outline-color   : #C0C0C0 !default;
+$mdlext-accordion-header-focus-outline-color   : #999999 !default;
 $mdlext-accordion-content-padding              : $mdlext-accordion-header-padding !default;
 $mdlext-accordion-content-padding-top          : $mdlext-accordion-content-padding !default;
 $mdlext-accordion-content-padding-right        : $mdlext-accordion-content-padding !default;
@@ -58,3 +58,31 @@ $mdlext-bordered-field-label-focused-top: 20px !default;
 
 
 /* ==========  Lightboard  ========== */
+$mdlext-lightboard-wide-desktop-breakpoint       : $grid-desktop-breakpoint + 360px !default;
+$mdlext-lightboard-wide-tablet-breakpoint        : $grid-tablet-breakpoint + 180px !default;
+$mdlext-lightboard-wide-desktop-gutter           : 8px !default;
+$mdlext-lightboard-wide-desktop-margin           : 0px !default;
+$mdlext-lightboard-wide-desktop-slides           : 7 !default;
+$mdlext-lightboard-wide-desktop-slide-frame-width: 12px !default;
+$mdlext-lightboard-desktop-gutter                : 8px !default;
+$mdlext-lightboard-desktop-margin                : 0px !default;
+$mdlext-lightboard-desktop-slides                : 5 !default;
+$mdlext-lightboard-desktop-slide-frame-width     : 12px !default;
+$mdlext-lightboard-wide-tablet-gutter            : 4px !default;
+$mdlext-lightboard-wide-tablet-margin            : 0px !default;
+$mdlext-lightboard-wide-tablet-slides            : 4 !default;
+$mdlext-lightboard-wide-tablet-slide-frame-width : 8px !default;
+$mdlext-lightboard-tablet-gutter                 : 4px !default;
+$mdlext-lightboard-tablet-margin                 : 0px !default;
+$mdlext-lightboard-tablet-slides                 : 3 !default;
+$mdlext-lightboard-tablet-slide-frame-width      : 8px !default;
+$mdlext-lightboard-phone-gutter                  : 2px !default;
+$mdlext-lightboard-phone-margin                  : 0px !default;
+$mdlext-lightboard-phone-slides                  : 2 !default;
+$mdlext-lightboard-phone-slide-frame-width       : 8px !default;
+$mdlext-lightboard-slide-max-size                : 250px !default;
+$mdlext-lightboard-figcaption-font-size          : 11px !default;
+$mdlext-lightboard-figcaption-font-size-large    : 14px !default;
+$mdlext-lightboard-figcaption-text-color         : unquote('rgb(#{$palette-grey-400})') !default;
+$mdlext-lightboard-ripple-color                  : $tab-highlight-color !default;
+$mdlext-lightboard-focus-outline-color           : #777777 !default;

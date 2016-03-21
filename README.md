@@ -107,7 +107,7 @@ The Material Design Lite Ext (MDLEXT) [**bordered fields**](./src/bordered-field
 
 ### Lightboard
 ![Lightboard](./etc/lightboard.png)
-A lightboard, also known as a lightbox, is a translucent surface illuminated from behind, used for 
+A lightboard is a translucent surface illuminated from behind, used for 
 situations where a shape laid upon the surface needs to be seen with high contrast. In the "old days" 
 of photography photograpers used a lightboard to get a quick view of, sorting and organizing their slides.. 
 
