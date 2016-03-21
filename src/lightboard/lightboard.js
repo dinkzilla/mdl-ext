@@ -66,14 +66,17 @@
   MaterialExtLightboard.prototype.initLightboard_ = function() {
 
     // TODO: Add more WAI-ARIA stuff
-    this.element_.setAttribute('role', 'tablist');
+    this.element_.setAttribute('role', 'grid');
+    [...this.element_.querySelectorAll(`.${SLIDE}`)].forEach(
+      slide => slide.setAttribute('role', 'cell')
+    );
 
     if (this.element_.classList.contains(RIPPLE_EFFECT)) {
       this.element_.classList.add(RIPPLE_EFFECT_IGNORE_EVENTS);
 
-      [...this.element_.querySelectorAll(`.${SLIDE}`)].forEach( slide => {
-        addRipple(slide);
-      });
+      [...this.element_.querySelectorAll(`.${SLIDE}`)].forEach(
+        slide => addRipple(slide)
+      );
     }
 
     this.element_.addEventListener('click', ( function(event) {
@@ -91,11 +94,9 @@
         });
         this.dispatchEvent(evt);
       }
-
     }).bind(this.element_), true);
 
-
-    // TODO: This function should be throttled
+    // Maybe this function should be throttled??
     this.element_.addEventListener('keydown', ( function(event) {
       if (event.keyCode === VK_TAB
         || event.keyCode === VK_ENTER || event.keyCode === VK_SPACE
@@ -104,14 +105,12 @@
         || event.keyCode === VK_ARROW_DOWN || event.keyCode === VK_ARROW_RIGHT) {
 
         if(event.target !== this) {
-
           const panel = getSlide(event.target);
           const panels = this.children;
           let nextPanel = null;
           const n = this.childElementCount - 1;
 
           for (let i = 0; i <= n; i++) {
-
             if (event.keyCode === VK_HOME) {
               nextPanel = panels[0];
               break;
@@ -153,7 +152,6 @@
               break;
             }
           }
-
           if (nextPanel) {
             event.preventDefault();
             event.stopPropagation();
@@ -164,7 +162,6 @@
     }).bind(this.element_), true);
 
     this.element_.classList.add(IS_UPGRADED);
-
   };
 
   function getSlide(element) {

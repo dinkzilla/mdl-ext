@@ -136,6 +136,14 @@ ul.mdlext-lightboard {
         margin: $mdlext-lightboard-phone-slide-frame-width;
       }
     }
+    &.mdlext-lightboard--no-spacing {
+      padding: 0;
+
+      .mdlext-lightboard__slide {
+        margin: 0;
+        width: calc(1 / #{$mdlext-lightboard-phone-slides} * 100% );
+      }
+    }
   }
 }
 
@@ -150,6 +158,14 @@ ul.mdlext-lightboard {
 
       .mdlext-lightboard__slide__frame figure {
         margin: $mdlext-lightboard-tablet-slide-frame-width;
+      }
+    }
+    &.mdlext-lightboard--no-spacing {
+      padding: 0;
+
+      .mdlext-lightboard__slide {
+        margin: 0;
+        width: calc(1 / #{$mdlext-lightboard-tablet-slides} * 100%);
       }
     }
   }
@@ -168,6 +184,14 @@ ul.mdlext-lightboard {
         margin: $mdlext-lightboard-wide-tablet-slide-frame-width;
       }
     }
+    &.mdlext-lightboard--no-spacing {
+      padding: 0;
+
+      .mdlext-lightboard__slide {
+        margin: 0;
+        width: calc(1 / #{$mdlext-lightboard-wide-tablet-slides} * 100%);
+      }
+    }
   }
 }
 
@@ -184,6 +208,14 @@ ul.mdlext-lightboard {
         margin: $mdlext-lightboard-desktop-slide-frame-width;
       }
     }
+    &.mdlext-lightboard--no-spacing {
+      padding: 0;
+
+      .mdlext-lightboard__slide {
+        margin: 0;
+        width: calc(1 / #{$mdlext-lightboard-desktop-slides} * 100%);
+      }
+    }
   }
 }
 
@@ -198,6 +230,14 @@ ul.mdlext-lightboard {
 
       .mdlext-lightboard__slide__frame figure {
         margin: $mdlext-lightboard-desktop-slide-frame-width;
+      }
+    }
+    &.mdlext-lightboard--no-spacing {
+      padding: 0;
+
+      .mdlext-lightboard__slide {
+        margin: 0;
+        width: calc(1 / #{$mdlext-lightboard-wide-desktop-slides} * 100%);
       }
     }
   }

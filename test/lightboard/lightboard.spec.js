@@ -156,10 +156,17 @@ describe('MaterialExtLightboard', () => {
     assert.isTrue(spy.called, 'Expected "select" event to fire');
   });
 
-  it('has role="tablist"', () => {
+  it('has role="grid"', () => {
     [...qsa('.mdlext-lightboard')].forEach( lightboard => {
-      assert.equal(lightboard.getAttribute('role'), 'tablist');
+      assert.equal(lightboard.getAttribute('role'), 'grid', 'Expected lightboard to have role="grid');
     });
+  });
+
+  it('lightboard slides has role="cell"', () => {
+    [...qsa('.mdlext-lightboard__slide')].forEach( slide => {
+      assert.equal(slide.getAttribute('role'), 'cell', 'Expected slide to have role="cell"');
+    });
+
   });
 
   it('has slides with anchor', () => {
@@ -224,6 +231,8 @@ describe('MaterialExtLightboard', () => {
     finally {
       target.removeEventListener('keydown', spy);
     }
+
+    // Temporarly disabled. The eventhandlers are called, but not detected by Sinon. Something I've missed in config??
     //assert.isTrue(spy.calledOnce, `Expected "keydown" event to fire once for key code ${keyCode}`);
   }
 
