@@ -318,12 +318,13 @@ describe('MaterialExtAccordion', () => {
     assert.isNotNull(header, 'Expected handle to panel 3 of 5');
 
     spyOnKeyboardEvent(header, VK_ARROW_DOWN);
+    spyOnKeyboardEvent(header, VK_ARROW_UP);
     spyOnKeyboardEvent(header, VK_ARROW_LEFT);
     spyOnKeyboardEvent(header, VK_ARROW_RIGHT);
-    spyOnKeyboardEvent(header, VK_ARROW_UP);
     spyOnKeyboardEvent(header, VK_ENTER);
     spyOnKeyboardEvent(header, VK_SPACE);
     spyOnKeyboardEvent(header, VK_TAB);
+    spyOnKeyboardEvent(header, VK_TAB, true);
     spyOnKeyboardEvent(header, VK_END);
     spyOnKeyboardEvent(header, VK_HOME);
   });
@@ -424,7 +425,7 @@ describe('MaterialExtAccordion', () => {
     assert.isTrue(spy.called, 'Expected "toggle" event to fire at least once');
   });
 
-  function spyOnKeyboardEvent(target, keyCode) {
+  function spyOnKeyboardEvent(target, keyCode, shiftKey=false) {
     let spy = sinon.spy();
     target.addEventListener('keydown', spy);
 
@@ -432,7 +433,8 @@ describe('MaterialExtAccordion', () => {
       const event = new KeyboardEvent('keydown', {
         bubbles: true,
         cancelable: true,
-        keyCode: keyCode
+        keyCode: keyCode,
+        shiftKey: shiftKey
       });
       target.dispatchEvent(event);
     }

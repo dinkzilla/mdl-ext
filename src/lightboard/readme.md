@@ -67,7 +67,7 @@ A lightboard has `role='grid'` and the individual slides has `role='cell'`
 &nbsp;6. Repeat steps 2..5 for each slide required. 
 
 ### Example
-Lightboard with six slides, with ripple effect on each slide, no spacing between slides. Subscribes to lightboard `select` event.
+Lightboard with eight slides, ripple effect on each slide, no spacing between slides, subscribes to lightboard `select` event.
 
 ```html
 <ul id="lightboard-1" class="mdlext-lightboard mdlext-js-lightboard 
@@ -122,6 +122,22 @@ Lightboard with six slides, with ripple effect on each slide, no spacing between
       </figure>
     </a>
   </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="#" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="_D809453-_D809457-4.jpg" title="Train to nowhwere. Ny Aalesund, Spitsbergen." />
+        <figcaption>_D809453-_D809457-4.jpg</figcaption>
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="#" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="_DSC8214.jpg" title="Blues"/>
+        <figcaption>_DSC8214.jpg</figcaption>
+      </figure>
+    </a>
+  </li>
 </ul>
 ```
 
@@ -168,7 +184,7 @@ The MDLEXT CSS classes apply various predefined visual and behavioral enhancemen
 The table below lists the available classes and their effects.
 
 | MDLEXT class | Effect | Remarks |
-|-----------|--------|---------|
+|--------------|--------|---------|
 | `mdlext-lightboard` | Defines a container as an MDLEXT lightboard component | Required on `<ul>` element |
 | `mdlext-js-lightboard` | Assigns basic MDL behavior to lightboard | Required on `<ul>` element |
 | `mdlext-lightboard--no-spacing` | Modifies the slides to have no margin between them. | Optional on `<ul>` element |
@@ -188,44 +204,44 @@ A lightboard and its assosiated slides has the following roles.
 
 You can modify the accordion trough the following SASS variables.
 
-| SASS variable |
-|-----------|
-| `$mdlext-lightboard-wide-desktop-breakpoint       ` | 
-| `$mdlext-lightboard-wide-tablet-breakpoint        ` |
-| `$mdlext-lightboard-wide-desktop-gutter           ` | 
-| `$mdlext-lightboard-wide-desktop-margin           ` | 
-| `$mdlext-lightboard-wide-desktop-slides           ` | 
-| `$mdlext-lightboard-wide-desktop-slide-frame-width` | 
-| `$mdlext-lightboard-desktop-gutter                ` | 
-| `$mdlext-lightboard-desktop-margin                ` | 
-| `$mdlext-lightboard-desktop-slides                ` | 
-| `$mdlext-lightboard-desktop-slide-frame-width     ` | 
-| `$mdlext-lightboard-wide-tablet-gutter            ` | 
-| `$mdlext-lightboard-wide-tablet-margin            ` | 
-| `$mdlext-lightboard-wide-tablet-slides            ` | 
-| `$mdlext-lightboard-wide-tablet-slide-frame-width ` | 
-| `$mdlext-lightboard-tablet-gutter                 ` | 
-| `$mdlext-lightboard-tablet-margin                 ` | 
-| `$mdlext-lightboard-tablet-slides                 ` | 
-| `$mdlext-lightboard-tablet-slide-frame-width      ` | 
-| `$mdlext-lightboard-phone-gutter                  ` | 
-| `$mdlext-lightboard-phone-margin                  ` | 
-| `$mdlext-lightboard-phone-slides                  ` | 
-| `$mdlext-lightboard-phone-slide-frame-width       ` | 
-| `$mdlext-lightboard-slide-max-size                ` | 
-| `$mdlext-lightboard-slide-border-color            ` | 
-| `$mdlext-lightboard-slide-background-color        ` | 
-| `$mdlext-lightboard-slide-border-radius           ` | 
-| `$mdlext-lightboard-slide-inner-border-radius     ` | 
-| `$mdlext-lightboard-slide-box-shadow              ` | 
-| `$mdlext-lightboard-slide-border-color-hover      ` | 
-| `$mdlext-lightboard-slide-background-color-hover  ` | 
-| `$mdlext-lightboard-slide-box-shadow-hover        ` | 
-| `$mdlext-lightboard-figcaption-font-size          ` | 
-| `$mdlext-lightboard-figcaption-font-size-large    ` | 
-| `$mdlext-lightboard-figcaption-text-color         ` | 
-| `$mdlext-lightboard-ripple-color                  ` | 
-| `$mdlext-lightboard-focus-outline-color           ` | 
+| SASS variables |
+|----------------|
+| `$mdlext-lightboard-small-breakpoint            ` | 
+| `$mdlext-lightboard-medium-small-breakpoint     ` |
+| `$mdlext-lightboard-medium-breakpoint           ` | 
+| `$mdlext-lightboard-medium-large-breakpoint     ` | 
+| `$mdlext-lightboard-large-breakpoint            ` | 
+| `$mdlext-lightboard-small-gutter                ` | 
+| `$mdlext-lightboard-small-margin                ` | 
+| `$mdlext-lightboard-small-columns               ` | 
+| `$mdlext-lightboard-small-frame-width           ` | 
+| `$mdlext-lightboard-medium-small-gutter         ` | 
+| `$mdlext-lightboard-medium-small-margin         ` | 
+| `$mdlext-lightboard-medium-small-columns        ` | 
+| `$mdlext-lightboard-medium-small-frame-width    ` | 
+| `$mdlext-lightboard-medium-gutter               ` | 
+| `$mdlext-lightboard-medium-margin               ` | 
+| `$mdlext-lightboard-medium-columns              ` | 
+| `$mdlext-lightboard-medium-frame-width          ` | 
+| `$mdlext-lightboard-medium-large-gutter         ` | 
+| `$mdlext-lightboard-medium-large-margin         ` | 
+| `$mdlext-lightboard-medium-large-columns        ` | 
+| `$mdlext-lightboard-medium-large-frame-width    ` | 
+| `$mdlext-lightboard-large-gutter                ` | 
+| `$mdlext-lightboard-large-margin                ` | 
+| `$mdlext-lightboard-large-columns               ` | 
+| `$mdlext-lightboard-large-frame-width           ` | 
+| `$mdlext-lightboard-slide-max-size              ` | 
+| `$mdlext-lightboard-slide-border-color          ` | 
+| `$mdlext-lightboard-slide-background-color      ` | 
+| `$mdlext-lightboard-slide-border-radius         ` | 
+| `$mdlext-lightboard-slide-inner-border-radius   ` | 
+| `$mdlext-lightboard-slide-box-shadow            ` | 
+| `$mdlext-lightboard-slide-border-color-hover    ` | 
+| `$mdlext-lightboard-slide-background-color-hover` | 
+| `$mdlext-lightboard-slide-box-shadow-hover      ` | 
+| `$mdlext-lightboard-figcaption-font-size        ` | 
+| `$mdlext-lightboard-figcaption-font-size-large  ` | 
 
 
 ## How to use the component programmatically

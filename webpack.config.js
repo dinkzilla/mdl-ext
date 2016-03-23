@@ -40,8 +40,8 @@ else {
 var config = {
   entry: {
     'mdl-ext': [
-      path.join(__dirname, 'src/mdl-ext-prod.scss'), // Styles (including MDL SASS variables)
-      path.join(__dirname, 'src/index.js')           // Add your application's scripts last
+      path.join(__dirname, 'src/mdl-ext-build.scss'), // MDLEXT Styles (including MDL SASS variables)
+      path.join(__dirname, 'src/index.js')            // MDLEXT scripts
     ]
   },
   devtool: 'source-map',
@@ -124,7 +124,19 @@ var config = {
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin()
-  ]
+  ],
+  devServer: {
+    contentBase: './src',
+    port: 8080,
+    progress: true,
+    colors: true,
+    hot: true,                  // adds the HotModuleReplacementPlugin.
+    historyApiFallback: false,  // when false, dev server make directory listing, good feature to navigate in project
+    quiet: false,
+    noInfo: false,
+    lazy: false,
+    aggregateTimeout: 300,
+  }
 };
 
 module.exports = config;

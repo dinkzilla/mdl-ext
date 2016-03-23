@@ -52,7 +52,7 @@ ul.mdlext-lightboard {
 
     &:before {
       // 1:1 ratio
-      // TODO: Use a class for ratio so the grid can display slides with warious ratios (16:9, 16:10, 4:3 ...)
+      // TODO: Use a class for ratio so the grid can display slides with different ratios (16:9, 16:10, 4:3 ...)
       content: '';
       display: block;
       padding-top: 100%;
@@ -121,122 +121,26 @@ ul.mdlext-lightboard {
   }
 }
 
-////////// Phone //////////
-@media (max-width: $grid-tablet-breakpoint - 1) {
-  .mdlext-lightboard {
-    padding: calc((#{$mdlext-lightboard-phone-margin} - #{$mdlext-lightboard-phone-gutter}) / 2);
+////// Media / Element queries default //////
+.mdlext-lightboard {
+  padding: calc((#{$mdlext-lightboard-small-margin} - #{$mdlext-lightboard-small-gutter}) / 2);
+
+  .mdlext-lightboard__slide {
+    margin: calc(#{$mdlext-lightboard-small-gutter} / 2 );
+    width: calc(1 / #{$mdlext-lightboard-small-columns} * 100% - #{$mdlext-lightboard-small-gutter});
+
+    .mdlext-lightboard__slide__frame figure {
+      margin: $mdlext-lightboard-small-frame-width;
+    }
+  }
+  &.mdlext-lightboard--no-spacing {
+    padding: 0;
 
     .mdlext-lightboard__slide {
-      margin: calc(#{$mdlext-lightboard-phone-gutter} / 2 );
-      width: calc(1 / #{$mdlext-lightboard-phone-slides} * 100% - #{$mdlext-lightboard-phone-gutter});
-
-      .mdlext-lightboard__slide__frame figure {
-        margin: $mdlext-lightboard-phone-slide-frame-width;
-      }
-    }
-    &.mdlext-lightboard--no-spacing {
-      padding: 0;
-
-      .mdlext-lightboard__slide {
-        margin: 0;
-        width: calc(1 / #{$mdlext-lightboard-phone-slides} * 100% );
-      }
+      margin: 0;
+      width: calc(1 / #{$mdlext-lightboard-small-columns} * 100% );
     }
   }
 }
 
-////////// Tablet //////////
-@media (min-width: $grid-tablet-breakpoint) and (max-width: $mdlext-lightboard-wide-tablet-breakpoint - 1) {
-  .mdlext-lightboard {
-    padding: calc((#{$mdlext-lightboard-tablet-margin} - #{$mdlext-lightboard-tablet-gutter}) / 2);
-
-    .mdlext-lightboard__slide {
-      margin: calc(#{$mdlext-lightboard-tablet-gutter} / 2 );
-      width: calc(1 / #{$mdlext-lightboard-tablet-slides} * 100% - #{$mdlext-lightboard-tablet-gutter});
-
-      .mdlext-lightboard__slide__frame figure {
-        margin: $mdlext-lightboard-tablet-slide-frame-width;
-      }
-    }
-    &.mdlext-lightboard--no-spacing {
-      padding: 0;
-
-      .mdlext-lightboard__slide {
-        margin: 0;
-        width: calc(1 / #{$mdlext-lightboard-tablet-slides} * 100%);
-      }
-    }
-  }
-}
-
-////////// Wide Tablet //////////
-@media (min-width: $mdlext-lightboard-wide-tablet-breakpoint) and (max-width: $grid-desktop-breakpoint - 1) {
-  .mdlext-lightboard {
-    padding: calc((#{$mdlext-lightboard-wide-tablet-margin} - #{$mdlext-lightboard-wide-tablet-gutter}) / 2);
-
-    .mdlext-lightboard__slide {
-      margin: calc(#{$mdlext-lightboard-wide-tablet-gutter} / 2 );
-      width: calc(1 / #{$mdlext-lightboard-wide-tablet-slides} * 100% - #{$mdlext-lightboard-wide-tablet-gutter});
-
-      .mdlext-lightboard__slide__frame figure {
-        margin: $mdlext-lightboard-wide-tablet-slide-frame-width;
-      }
-    }
-    &.mdlext-lightboard--no-spacing {
-      padding: 0;
-
-      .mdlext-lightboard__slide {
-        margin: 0;
-        width: calc(1 / #{$mdlext-lightboard-wide-tablet-slides} * 100%);
-      }
-    }
-  }
-}
-
-////////// Desktop //////////
-@media (min-width: $grid-desktop-breakpoint)  and (max-width: $mdlext-lightboard-wide-desktop-breakpoint - 1) {
-  .mdlext-lightboard {
-    padding: calc((#{$mdlext-lightboard-desktop-margin} - #{$mdlext-lightboard-desktop-gutter}) / 2);
-
-    .mdlext-lightboard__slide {
-      margin: calc(#{$mdlext-lightboard-desktop-gutter} / 2 );
-      width: calc(1 / #{$mdlext-lightboard-desktop-slides} * 100% - #{$mdlext-lightboard-desktop-gutter});
-
-      .mdlext-lightboard__slide__frame figure {
-        margin: $mdlext-lightboard-desktop-slide-frame-width;
-      }
-    }
-    &.mdlext-lightboard--no-spacing {
-      padding: 0;
-
-      .mdlext-lightboard__slide {
-        margin: 0;
-        width: calc(1 / #{$mdlext-lightboard-desktop-slides} * 100%);
-      }
-    }
-  }
-}
-
-////////// Wide Desktop //////////
-@media (min-width: $mdlext-lightboard-wide-desktop-breakpoint) {
-  .mdlext-lightboard {
-    padding: calc((#{$mdlext-lightboard-wide-desktop-margin} - #{$mdlext-lightboard-wide-desktop-gutter}) / 2);
-
-    .mdlext-lightboard__slide {
-      margin: calc(#{$mdlext-lightboard-wide-desktop-gutter} / 2 );
-      width: calc(1 / #{$mdlext-lightboard-wide-desktop-slides} * 100% - #{$mdlext-lightboard-wide-desktop-gutter});
-
-      .mdlext-lightboard__slide__frame figure {
-        margin: $mdlext-lightboard-desktop-slide-frame-width;
-      }
-    }
-    &.mdlext-lightboard--no-spacing {
-      padding: 0;
-
-      .mdlext-lightboard__slide {
-        margin: 0;
-        width: calc(1 / #{$mdlext-lightboard-wide-desktop-slides} * 100%);
-      }
-    }
-  }
-}
+// Import one of _lightboard-media-queries.scss or _lightboard-eq-js.scss to complete SASS

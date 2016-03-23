@@ -64,7 +64,7 @@
   <li class="mdlext-lightboard__slide">
     <a href="#" class="mdlext-lightboard__slide__frame">
       <figure>
-        <img src="_DSC8214.jpg" />
+        <img src="_DSC8214.jpg" title="Blues"/>
         <figcaption>_DSC8214.jpg</figcaption>
       </figure>
     </a>
@@ -171,15 +171,14 @@
 <script type="text/javascript" src="../../../demo/mdl-iframe-loader.js" charset="utf-8"></script>
 <script>
   'use strict';
-  window.addEventListener('load', function() {
-    if(window.self !== window.top) {
-      mdlIframeLoader.load('../../../');
-    }
+  if(window.self !== window.top) {
+    mdlIframeLoader.load('../../../');
+  }
 
+  window.addEventListener('load', function() {
     var lightboard = document.querySelector('#lightboard-1');
     lightboard.addEventListener('select', function(e) {
       console.log('Slide selected. Source:', e.detail.source);
     });
-
   });
 </script>

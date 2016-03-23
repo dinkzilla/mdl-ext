@@ -77,9 +77,10 @@
 <script type="text/javascript" src="../../../demo/mdl-iframe-loader.js" charset="utf-8"></script>
 <script>
   'use strict';
+  if(window.self !== window.top) {
+    mdlIframeLoader.load('../../../');
+  }
+
   window.addEventListener('load', function() {
-    if(window.self !== window.top) {
-      mdlIframeLoader.load('../../../');
-    }
   });
 </script>

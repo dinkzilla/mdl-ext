@@ -156,6 +156,32 @@ describe('MaterialExtLightboard', () => {
     assert.isTrue(spy.called, 'Expected "select" event to fire');
   });
 
+  it('should not emit a "select" custom event when lightboard is clicked', () => {
+    const lightboard = qs('#mdlext-lightboard-1');
+
+    let spy = sinon.spy();
+    lightboard.addEventListener('select', spy);
+
+    lightboard.addEventListener('select', event => {
+      assert.fail('select', null, 'Did not expect "select" event to fire');
+    });
+
+    try {
+      // Trigger click on a slide
+      const evt = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      });
+      lightboard.dispatchEvent(evt);
+    }
+    finally {
+      lightboard.removeEventListener('toggle', spy);
+    }
+
+    assert.isFalse(spy.called, 'Did not expect "select" event to fire');
+  });
+
   it('has role="grid"', () => {
     [...qsa('.mdlext-lightboard')].forEach( lightboard => {
       assert.equal(lightboard.getAttribute('role'), 'grid', 'Expected lightboard to have role="grid');
@@ -173,6 +199,58 @@ describe('MaterialExtLightboard', () => {
     [...qsa('.mdlext-lightboard__slide')].forEach( slide => {
       assert.isNotNull(qs('a', slide), 'Expected slide to have an anchor element');
     });
+  });
+
+  it('upgrades successfully when a new component is appended to the DOM', () => {
+    const container = qs('#mount-2');
+
+    try {
+      container.insertAdjacentHTML('beforeend', lightboard_with_ripple);
+      const element = qs('#lightboard_with_ripple');
+
+      assert.isFalse(element.classList.contains('is-upgraded'), 'Expected class "is-upgraded" to exist after upgrade');
+      componentHandler.upgradeElement(element, 'MaterialExtLightboard');
+      assert.isTrue(element.classList.contains('is-upgraded'), 'Expected lightboard to upgrade');
+
+      const dataUpgraded = element.getAttribute('data-upgraded');
+      assert.isNotNull(dataUpgraded, 'Expected attribute "data-upgraded" to exist');
+      assert.isAtLeast(dataUpgraded.indexOf('MaterialExtLightboard'), 0, 'Expected "data-upgraded" attribute to contain "MaterialExtLightboard');
+    }
+    finally {
+      removeChilds(container);
+    }
+  });
+
+  it('downgrades successfully', () => {
+    const container = qs('#mount-2');
+
+    try {
+      container.insertAdjacentHTML('beforeend', lightboard_with_ripple);
+      const element = qs('#lightboard_with_ripple');
+
+      componentHandler.upgradeElement(element, 'MaterialExtLightboard');
+      assert.isTrue(element.classList.contains('is-upgraded'), 'Expected lightboard to upgrade before downgrade');
+      expect(element.getAttribute('data-upgraded')).to.include('MaterialExtLightboard');
+
+      componentHandler.downgradeElements(element);
+      expect(element.getAttribute('data-upgraded')).to.not.include('MaterialExtLightboard');
+    }
+    finally {
+      removeChilds(container);
+    }
+  });
+
+  it('should be a widget', () => {
+    const container = qs('#mount-2');
+    try {
+      container.insertAdjacentHTML('beforeend', lightboard_with_ripple);
+      const element = qs('#lightboard_with_ripple');
+      componentHandler.upgradeElement(element, 'MaterialExtLightboard');
+      expect(element.MaterialExtLightboard).to.be.a('object');
+    }
+    finally {
+      removeChilds(container);
+    }
   });
 
   it('has ripple effect', () => {
@@ -205,17 +283,18 @@ describe('MaterialExtLightboard', () => {
     assert.isNotNull(slide, 'Expected handle to slide #3');
 
     spyOnKeyboardEvent(lightboard, slide, VK_ARROW_DOWN);
+    spyOnKeyboardEvent(lightboard, slide, VK_ARROW_UP);
     spyOnKeyboardEvent(lightboard, slide, VK_ARROW_LEFT);
     spyOnKeyboardEvent(lightboard, slide, VK_ARROW_RIGHT);
-    spyOnKeyboardEvent(lightboard, slide, VK_ARROW_UP);
     spyOnKeyboardEvent(lightboard, slide, VK_ENTER);
     spyOnKeyboardEvent(lightboard, slide, VK_SPACE);
     spyOnKeyboardEvent(lightboard, slide, VK_TAB);
+    spyOnKeyboardEvent(lightboard, slide, VK_TAB, true);
     spyOnKeyboardEvent(lightboard, slide, VK_END);
     spyOnKeyboardEvent(lightboard, slide, VK_HOME);
   });
 
-  function spyOnKeyboardEvent(target, source, keyCode) {
+  function spyOnKeyboardEvent(target, source, keyCode, shiftKey=false) {
     let spy = sinon.spy();
     target.addEventListener('keydown', spy, true);
 
@@ -224,6 +303,7 @@ describe('MaterialExtLightboard', () => {
         bubbles: true,
         cancelable: true,
         keyCode: keyCode,
+        shiftKey: shiftKey,
         view: window
       });
       source.dispatchEvent(event);

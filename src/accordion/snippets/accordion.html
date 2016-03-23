@@ -508,11 +508,11 @@ All images are copyrighted &copy; Leif Olsen, 2016.
 <script type="text/javascript" src="../../../demo/mdl-iframe-loader.js" charset="utf-8"></script>
 <script>
   'use strict';
-  window.addEventListener('load', function() {
-    if(window.self !== window.top) {
-      mdlIframeLoader.load('../../../');
-    }
+  if(window.self !== window.top) {
+    mdlIframeLoader.load('../../../');
+  }
 
+  window.addEventListener('load', function() {
     var accordion = document.querySelector('#my-vertical-accordion-colored');
     accordion.addEventListener('toggle', function(e) {
       console.log('Accordion toggled. State:', e.detail.state, 'Source:', e.detail.source);
