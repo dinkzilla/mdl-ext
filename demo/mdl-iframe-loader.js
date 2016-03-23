@@ -14,7 +14,7 @@ var mdlIframeLoader = {};
     { 'type': 'css', 'id': 'material-css',      'src': 'node_modules/material-design-lite/material.css' },
     { 'type': 'css', 'id': 'mdlext-css',        'src': 'lib/mdl-ext.css' },
     { 'type': 'css', 'id': 'demo-css',          'src': 'demo/demo.css' },
-    { 'type': 'js',  'id': 'eq-js',             'src': 'node_modules/eq.js/dist/eq.min.js' },
+    //{ 'type': 'js',  'id': 'eq-js',             'src': 'node_modules/eq.js/dist/eq.min.js' },
     { 'type': 'js',  'id': 'material-js',       'src': 'node_modules/material-design-lite/material.js' },
     { 'type': 'js',  'id': 'mdlext-js',         'src': 'lib/index.js' }
   ];

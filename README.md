@@ -59,11 +59,6 @@ $ npm install --save mdl-ext
 
 // 2. Import MDLEXT
 @import '../node_modules/mdl-ext/src/mdl-ext';
-@import '../node_modules/mdl-ext/accordion/accordion';
-@import '../node_modules/mdl-ext/selectfield/selectfield';
-@import '../node_modules/mdl-ext/bordered-fields/bordered-fields';
-@import '../node_modules/mdl-ext/lightboard/lightboard';
-@import '../node_modules/mdl-ext/lightboard/lightboard-media-queries';
 
 // 3. Your stuff
 @import 'stylesheets/variables';

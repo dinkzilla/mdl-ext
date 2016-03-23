@@ -4,20 +4,5 @@
 @import 'material-design-lite/src/variables';
 @import 'material-design-lite/src/mixins';
 
-//////////////////
-//    MDLEXT    //
-//////////////////
-
-// Variables and mixins
-@import 'mdl-ext';
-
-// Components
-@import 'accordion/accordion';
-@import 'selectfield/selectfield';
-@import 'bordered-fields/bordered-fields';
-@import 'lightboard/lightboard';
-// Import the media query version
-@import 'lightboard/lightboard-media-queries';
-// ... or the element query version
-//@import 'lightboard/lightboard-eq-js';
-// ... but do NOT import both simultaniously!
+// mdl-ext
+@import 'mdl-ext-eqjs';

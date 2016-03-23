@@ -232,6 +232,19 @@
 /* Dialog */
 
 /**
+ * Element Queries are a new way of writing CSS styles so the rules apply to individual elements
+ * on the page, instead of to the whole page as one document like in regular CSS Media Queries.
+ * This SASS file includes the eq.js, https://github.com/Snugug/eq.js, prolyfill which is an easy to use
+ * drop-in solution to JavaScript powered element queries. It works well with SASS,
+ * and element queries work without requireing a server to run.
+ *
+ * Feel fre to write your own element query stylesheet using one of the other libraries, e,g:
+ *   [EQCSS]               - (https://github.com/eqcss/eqcss)
+ *   [CSS Element Queries] - (https://github.com/marcj/css-element-queries)
+ *   [BoomQueries]         - (https://github.com/BoomTownROI/boomqueries)
+ */
+
+/**
  * Copyright 2016 Leif Olsen. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -256,293 +269,6 @@
 /*
  * Modified from: http://blustemy.io/drawing-pure-css-arrows-with-mixins/
  */
-
-/**
- * Copyright 2016 Leif Olsen. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
- * Accordion
- * The Accordion CSS are based on / inspired by this CodePen: http://codepen.io/aann/pen/dPqBML
- */
-
-/**
- * Copyright 2016 Leif Olsen. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/* ==========     Accordion     ========== */
-
-/* ==========  Bordered fields  ========== */
-
-/* ==========  Lightboard  ========== */
-
-ul.mdlext-accordion {
-  list-style: none;
-}
-
-.mdlext-accordion {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: row nowrap;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
-  box-sizing: border-box;
-}
-
-.mdlext-accordion *,
-.mdlext-accordion *::before,
-.mdlext-accordion *::after,
-.mdlext-accordion input[type="search"] {
-  box-sizing: border-box;
-}
-
-.mdlext-accordion .mdlext-accordion__panel {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  width: 48px;
-  overflow: hidden;
-  transition: -webkit-flex .15s ease-in;
-  transition: flex .15s ease-in;
-  transition: flex .15s ease-in, -webkit-flex .15s ease-in, -ms-flex .15s ease-in;
-  -webkit-flex: 0 0 auto;
-      -ms-flex: 0 0 auto;
-          flex: 0 0 auto;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: row nowrap;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
-}
-
-.mdlext-accordion .mdlext-accordion__panel[open] {
-  -webkit-flex: 1 1 auto;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: row nowrap;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  position: relative;
-  min-width: 48px;
-  margin: 0;
-  padding: 0;
-  background-color: rgba(192, 192, 192, 0.3);
-  border-right: 1px solid rgba(192, 192, 192, 0.5);
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header:hover {
-  background-color: rgba(192, 192, 192, 0.4);
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header a.mdlext-accordion__panel__header__tabstop,
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container {
-  text-decoration: none;
-  overflow: hidden;
-  font-size: 0;
-  position: absolute;
-  top: 1px;
-  right: 0px;
-  bottom: 0px;
-  left: 1px;
-  z-index: 1;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header a.mdlext-accordion__panel__header__tabstop:focus,
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container:focus {
-  outline: thin solid #999999;
-  outline-offset: -1px;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container {
-  width: 99%;
-  height: 99%;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container .mdl-ripple {
-  background: rgb(63,81,181);
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform {
-  white-space: nowrap;
-  margin: 0;
-  padding: 0 8px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 48px;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: row nowrap;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-transform: rotate(-90deg) translateY(100%);
-          transform: rotate(-90deg) translateY(100%);
-  -webkit-transform-origin: bottom left;
-          transform-origin: bottom left;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > * {
-  margin: 0;
-  padding: 0;
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > i,
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > img {
-  -webkit-flex: none;
-      -ms-flex: none;
-          flex: none;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > i + *,
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > img + * {
-  margin-left: 8px;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__state:after {
-  content: '+';
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__content {
-  width: 100%;
-  padding: 8px;
-  overflow: hidden;
-}
-
-.mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__state:after {
-  content: '-';
-}
-
-.mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__header {
-  background-color: rgba(192, 192, 192, 0.5);
-  border-right: 1px solid rgba(192, 192, 192, 0.6);
-}
-
-.mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__content {
-  overflow: auto;
-  -webkit-animation: mdlext-accordion__panel-open-keyframe .4s linear;
-          animation: mdlext-accordion__panel-open-keyframe .4s linear;
-}
-
-.mdlext-accordion.mdlext-accordion--vertical {
-  -webkit-flex-flow: column nowrap;
-      -ms-flex-flow: column nowrap;
-          flex-flow: column nowrap;
-}
-
-.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel {
-  width: 100%;
-  height: 48px;
-  -webkit-flex: none;
-      -ms-flex: none;
-          flex: none;
-  -webkit-flex-flow: column nowrap;
-      -ms-flex-flow: column nowrap;
-          flex-flow: column nowrap;
-}
-
-.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel .mdlext-accordion__panel__header {
-  height: 48px;
-  min-height: 48px;
-  border-right: 0;
-  border-bottom: 1px solid rgba(192, 192, 192, 0.5);
-}
-
-.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform {
-  white-space: normal;
-  position: relative;
-  width: 100%;
-  bottom: auto;
-  left: auto;
-  -webkit-transform: rotate(0deg);
-          transform: rotate(0deg);
-}
-
-.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel[open] {
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-}
-
-.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel[open] .mdlext-accordion__panel__header {
-  border-right: 0;
-  border-bottom: 1px solid rgba(192, 192, 192, 0.6);
-}
-
-/*
- * Animating overflow:hidden -> overflow:auto, see: https://jdsteinbach.com/css/snippet-animate-display-transform/
- * Why do we need to animate this? The text overflow auto should be set after the accordion animation has completed!
- * If we omit this, the the overflow scrollbar will flicker during the accordion open transition
- */
-
-@-webkit-keyframes mdlext-accordion__panel-open-keyframe {
-  0% {
-    overflow: hidden;
-  }
-
-  100% {
-    overflow: auto;
-  }
-}
-
-@keyframes mdlext-accordion__panel-open-keyframe {
-  0% {
-    overflow: hidden;
-  }
-
-  100% {
-    overflow: auto;
-  }
-}
 
 /**
  * Copyright 2015 Google Inc. All Rights Reserved.
@@ -1036,6 +762,293 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
  */
 
 /*
+ * Accordion
+ * The Accordion CSS are based on / inspired by this CodePen: http://codepen.io/aann/pen/dPqBML
+ */
+
+/**
+ * Copyright 2016 Leif Olsen. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* ==========     Accordion     ========== */
+
+/* ==========  Bordered fields  ========== */
+
+/* ==========  Lightboard  ========== */
+
+ul.mdlext-accordion {
+  list-style: none;
+}
+
+.mdlext-accordion {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  box-sizing: border-box;
+}
+
+.mdlext-accordion *,
+.mdlext-accordion *::before,
+.mdlext-accordion *::after,
+.mdlext-accordion input[type="search"] {
+  box-sizing: border-box;
+}
+
+.mdlext-accordion .mdlext-accordion__panel {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 48px;
+  overflow: hidden;
+  transition: -webkit-flex .15s ease-in;
+  transition: flex .15s ease-in;
+  transition: flex .15s ease-in, -webkit-flex .15s ease-in, -ms-flex .15s ease-in;
+  -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+}
+
+.mdlext-accordion .mdlext-accordion__panel[open] {
+  -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  min-width: 48px;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(192, 192, 192, 0.3);
+  border-right: 1px solid rgba(192, 192, 192, 0.5);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header:hover {
+  background-color: rgba(192, 192, 192, 0.4);
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header a.mdlext-accordion__panel__header__tabstop,
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container {
+  text-decoration: none;
+  overflow: hidden;
+  font-size: 0;
+  position: absolute;
+  top: 1px;
+  right: 0px;
+  bottom: 0px;
+  left: 1px;
+  z-index: 1;
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header a.mdlext-accordion__panel__header__tabstop:focus,
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container:focus {
+  outline: thin solid #999999;
+  outline-offset: -1px;
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container {
+  width: 99%;
+  height: 99%;
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container .mdl-ripple {
+  background: rgb(63,81,181);
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform {
+  white-space: nowrap;
+  margin: 0;
+  padding: 0 8px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 48px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transform: rotate(-90deg) translateY(100%);
+          transform: rotate(-90deg) translateY(100%);
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > * {
+  margin: 0;
+  padding: 0;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > i,
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > img {
+  -webkit-flex: none;
+      -ms-flex: none;
+          flex: none;
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > i + *,
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > img + * {
+  margin-left: 8px;
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__state:after {
+  content: '+';
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__content {
+  width: 100%;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__state:after {
+  content: '-';
+}
+
+.mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__header {
+  background-color: rgba(192, 192, 192, 0.5);
+  border-right: 1px solid rgba(192, 192, 192, 0.6);
+}
+
+.mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__content {
+  overflow: auto;
+  -webkit-animation: mdlext-accordion__panel-open-keyframe .4s linear;
+          animation: mdlext-accordion__panel-open-keyframe .4s linear;
+}
+
+.mdlext-accordion.mdlext-accordion--vertical {
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}
+
+.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel {
+  width: 100%;
+  height: 48px;
+  -webkit-flex: none;
+      -ms-flex: none;
+          flex: none;
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}
+
+.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel .mdlext-accordion__panel__header {
+  height: 48px;
+  min-height: 48px;
+  border-right: 0;
+  border-bottom: 1px solid rgba(192, 192, 192, 0.5);
+}
+
+.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform {
+  white-space: normal;
+  position: relative;
+  width: 100%;
+  bottom: auto;
+  left: auto;
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+}
+
+.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel[open] {
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel[open] .mdlext-accordion__panel__header {
+  border-right: 0;
+  border-bottom: 1px solid rgba(192, 192, 192, 0.6);
+}
+
+/*
+ * Animating overflow:hidden -> overflow:auto, see: https://jdsteinbach.com/css/snippet-animate-display-transform/
+ * Why do we need to animate this? The text overflow auto should be set after the accordion animation has completed!
+ * If we omit this, the the overflow scrollbar will flicker during the accordion open transition
+ */
+
+@-webkit-keyframes mdlext-accordion__panel-open-keyframe {
+  0% {
+    overflow: hidden;
+  }
+
+  100% {
+    overflow: auto;
+  }
+}
+
+@keyframes mdlext-accordion__panel-open-keyframe {
+  0% {
+    overflow: hidden;
+  }
+
+  100% {
+    overflow: auto;
+  }
+}
+
+/**
+ * Copyright 2016 Leif Olsen. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
  * A lightboard is a translucent surface illuminated from behind, used for situations
  * where a shape laid upon the surface needs to be seen with high contrast. In the "old days" of photography
  * photograpers used a lightboard to get a quick view of their slides. The goal is to create a responsive lightbox
@@ -1199,100 +1212,107 @@ ul.mdlext-lightboard {
   width: calc(1 / 2 * 100%);
 }
 
-@media (min-width: 480px) and (max-width: 659px) {
-  .mdlext-lightboard {
-    padding: calc((0px - 4px) / 2);
-  }
-
-  .mdlext-lightboard .mdlext-lightboard__slide {
-    margin: calc(4px / 2);
-    width: calc(1 / 4 * 100% - 4px);
-  }
-
-  .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
-    margin: 8px;
-  }
-
-  .mdlext-lightboard.mdlext-lightboard--no-spacing {
-    padding: 0;
-  }
-
-  .mdlext-lightboard.mdlext-lightboard--no-spacing .mdlext-lightboard__slide {
-    margin: 0;
-    width: calc(1 / 4 * 100%);
-  }
+.mdlext-lightboard:before {
+  display: none;
+  content: "small: 480px, medium_small: 660px, medium: 840px, medium_large: 1020px, large: 1200px";
 }
 
-@media (min-width: 660px) and (max-width: 839px) {
-  .mdlext-lightboard {
-    padding: calc((0px - 4px) / 2);
-  }
-
-  .mdlext-lightboard .mdlext-lightboard__slide {
-    margin: calc(4px / 2);
-    width: calc(1 / 5 * 100% - 4px);
-  }
-
-  .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
-    margin: 8px;
-  }
-
-  .mdlext-lightboard.mdlext-lightboard--no-spacing {
-    padding: 0;
-  }
-
-  .mdlext-lightboard.mdlext-lightboard--no-spacing .mdlext-lightboard__slide {
-    margin: 0;
-    width: calc(1 / 5 * 100%);
-  }
+.mdlext-lightboard[data-eq-state$="small"] {
+  padding: calc((0px - 4px) / 2);
 }
 
-@media (min-width: 840px) and (max-width: 1019px) {
-  .mdlext-lightboard {
-    padding: calc((0px - 8px) / 2);
-  }
-
-  .mdlext-lightboard .mdlext-lightboard__slide {
-    margin: calc(8px / 2);
-    width: calc(1 / 6 * 100% - 8px);
-  }
-
-  .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
-    margin: 12px;
-  }
-
-  .mdlext-lightboard.mdlext-lightboard--no-spacing {
-    padding: 0;
-  }
-
-  .mdlext-lightboard.mdlext-lightboard--no-spacing .mdlext-lightboard__slide {
-    margin: 0;
-    width: calc(1 / 6 * 100%);
-  }
+.mdlext-lightboard[data-eq-state$="small"] .mdlext-lightboard__slide {
+  margin: calc(4px / 2);
+  width: calc(1 / 4 * 100% - 4px);
 }
 
-@media (min-width: 1020px) {
-  .mdlext-lightboard {
-    padding: calc((0px - 8px) / 2);
-  }
+.mdlext-lightboard[data-eq-state$="small"] .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
+  margin: 8px;
+}
 
-  .mdlext-lightboard .mdlext-lightboard__slide {
-    margin: calc(8px / 2);
-    width: calc(1 / 7 * 100% - 8px);
-  }
+.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="small"] {
+  padding: 0;
+}
 
-  .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
-    margin: 12px;
-  }
+.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="small"] .mdlext-lightboard__slide {
+  margin: 0;
+  width: calc(1 / 4 * 100%);
+}
 
-  .mdlext-lightboard.mdlext-lightboard--no-spacing {
-    padding: 0;
-  }
+.mdlext-lightboard[data-eq-state$="medium_small"] {
+  padding: calc((0px - 4px) / 2);
+}
 
-  .mdlext-lightboard.mdlext-lightboard--no-spacing .mdlext-lightboard__slide {
-    margin: 0;
-    width: calc(1 / 7 * 100%);
-  }
+.mdlext-lightboard[data-eq-state$="medium_small"] .mdlext-lightboard__slide {
+  margin: calc(4px / 2);
+  width: calc(1 / 5 * 100% - 4px);
+}
+
+.mdlext-lightboard[data-eq-state$="medium_small"] .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
+  margin: 8px;
+}
+
+.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="medium_small"] {
+  padding: 0;
+}
+
+.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="medium_small"] .mdlext-lightboard__slide {
+  margin: 0;
+  width: calc(1 / 5 * 100%);
+}
+
+.mdlext-lightboard[data-eq-state$="medium"] {
+  padding: calc((0px - 8px) / 2);
+}
+
+.mdlext-lightboard[data-eq-state$="medium"] .mdlext-lightboard__slide {
+  margin: calc(8px / 2);
+  width: calc(1 / 6 * 100% - 8px);
+}
+
+.mdlext-lightboard[data-eq-state$="medium"] .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
+  margin: 12px;
+}
+
+.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="medium"] {
+  padding: 0;
+}
+
+.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="medium"] .mdlext-lightboard__slide {
+  margin: 0;
+  width: calc(1 / 6 * 100%);
+}
+
+.mdlext-lightboard[data-eq-state$="medium_large"],
+.mdlext-lightboard[data-eq-state$="large"] {
+  padding: calc((0px - 8px) / 2);
+}
+
+.mdlext-lightboard[data-eq-state$="medium_large"] .mdlext-lightboard__slide,
+.mdlext-lightboard[data-eq-state$="large"] .mdlext-lightboard__slide {
+  margin: calc(8px / 2);
+  width: calc(1 / 7 * 100% - 8px);
+}
+
+.mdlext-lightboard[data-eq-state$="medium_large"] .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure,
+.mdlext-lightboard[data-eq-state$="large"] .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
+  margin: 12px;
+}
+
+.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="medium_large"],
+.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="large"] {
+  padding: 0;
+}
+
+.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="medium_large"] .mdlext-lightboard__slide,
+.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="large"] .mdlext-lightboard__slide {
+  margin: 0;
+  width: calc(1 / 7 * 100%);
+}
+
+html:before {
+  display: none;
+  content: ".mdlext-lightboard";
 }
 
 
