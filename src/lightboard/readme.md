@@ -88,13 +88,13 @@ An example of how to use `eq.js` in a SPA can be found [here](https://github.com
 ## To include a MDLEXT **lightboard** component:
 &nbsp;1. Code a `<ul>` element with `class="mdlext-lightboard mdlext-js-lightboard"` to hold the lightboard slides.
 ```html
-<ul class="mdlext-accordion mdlext-js-accordion">
+<ul class="mdlext-lightboard mdlext-js-lightboard">
 <ul>
 ```
 
 &nbsp;2. Code a `<li>` element with `class="mdlext-lightboard__slide"`  to hold an individual slide.
 ```html
-<ul class="mdlext-accordion mdlext-js-accordion">
+<ul class="mdlext-lightboard mdlext-js-lightboard">
   <li class="mdlext-lightboard__slide">
   <li>
 <ul>
@@ -102,7 +102,7 @@ An example of how to use `eq.js` in a SPA can be found [here](https://github.com
 
 &nbsp;3. Code an `<a href="#">` element with `class="mdlext-lightboard__slide__frame"`  to hold the slide frame. Optionally add a href to a large version of the image shown in the slide.
 ```html
-<ul class="mdlext-accordion mdlext-js-accordion">
+<ul class="mdlext-lightboard mdlext-js-lightboard">
   <li class="mdlext-lightboard__slide">
     <a href="#" class="mdlext-lightboard__slide__frame">
     </a>  
@@ -112,7 +112,7 @@ An example of how to use `eq.js` in a SPA can be found [here](https://github.com
 
 &nbsp;4. Code an `<figure>` element (decorates frame and center image in slide).  
 ```html
-<ul class="mdlext-accordion mdlext-js-accordion">
+<ul class="mdlext-lightboard mdlext-js-lightboard">
   <li class="mdlext-lightboard__slide">
     <a href="#" class="mdlext-lightboard__slide__frame">
       <figure>
@@ -124,7 +124,7 @@ An example of how to use `eq.js` in a SPA can be found [here](https://github.com
 
 &nbsp;5. Inside the `<figure>` element add an `<img>` element with reference to the thumbnail image to be shown in slide. Optionally add a `<figcaption>` element to hold the title.    
 ```html
-<ul class="mdlext-accordion mdlext-js-accordion">
+<ul class="mdlext-lightboard mdlext-js-lightboard">
   <li class="mdlext-lightboard__slide">
     <a href="#" class="mdlext-lightboard__slide__frame">
       <figure>
@@ -274,7 +274,7 @@ A lightboard and its assosiated slides has the following roles.
 | `role=cell` | Defines the slide as a WAI-ARIA cell | Added to `mdlext-lightboard__slide` when component innitializes |
 
 
-You can modify the accordion trough the following SASS variables.
+You can modify the lightboard trough the following SASS variables.
 
 | SASS variables |
 |----------------|
