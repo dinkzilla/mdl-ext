@@ -232,19 +232,6 @@
 /* Dialog */
 
 /**
- * Element Queries are a new way of writing CSS styles so the rules apply to individual elements
- * on the page, instead of to the whole page as one document like in regular CSS Media Queries.
- * This SASS file includes the eq.js, https://github.com/Snugug/eq.js, prolyfill which is an easy to use
- * drop-in solution to JavaScript powered element queries. It works well with SASS,
- * and element queries work without requireing a server to run.
- *
- * Feel fre to write your own element query stylesheet using one of the other libraries, e,g:
- *   [EQCSS]               - (https://github.com/eqcss/eqcss)
- *   [CSS Element Queries] - (https://github.com/marcj/css-element-queries)
- *   [BoomQueries]         - (https://github.com/BoomTownROI/boomqueries)
- */
-
-/**
  * Copyright 2016 Leif Olsen. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -1212,107 +1199,100 @@ ul.mdlext-lightboard {
   width: calc(1 / 2 * 100%);
 }
 
-.mdlext-lightboard:before {
-  display: none;
-  content: "small: 480px, medium_small: 660px, medium: 840px, medium_large: 1020px, large: 1200px";
+@media (min-width: 480px) and (max-width: 659px) {
+  .mdlext-lightboard {
+    padding: calc((0px - 4px) / 2);
+  }
+
+  .mdlext-lightboard .mdlext-lightboard__slide {
+    margin: calc(4px / 2);
+    width: calc(1 / 4 * 100% - 4px);
+  }
+
+  .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
+    margin: 8px;
+  }
+
+  .mdlext-lightboard.mdlext-lightboard--no-spacing {
+    padding: 0;
+  }
+
+  .mdlext-lightboard.mdlext-lightboard--no-spacing .mdlext-lightboard__slide {
+    margin: 0;
+    width: calc(1 / 4 * 100%);
+  }
 }
 
-.mdlext-lightboard[data-eq-state$="small"] {
-  padding: calc((0px - 4px) / 2);
+@media (min-width: 660px) and (max-width: 839px) {
+  .mdlext-lightboard {
+    padding: calc((0px - 4px) / 2);
+  }
+
+  .mdlext-lightboard .mdlext-lightboard__slide {
+    margin: calc(4px / 2);
+    width: calc(1 / 5 * 100% - 4px);
+  }
+
+  .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
+    margin: 8px;
+  }
+
+  .mdlext-lightboard.mdlext-lightboard--no-spacing {
+    padding: 0;
+  }
+
+  .mdlext-lightboard.mdlext-lightboard--no-spacing .mdlext-lightboard__slide {
+    margin: 0;
+    width: calc(1 / 5 * 100%);
+  }
 }
 
-.mdlext-lightboard[data-eq-state$="small"] .mdlext-lightboard__slide {
-  margin: calc(4px / 2);
-  width: calc(1 / 4 * 100% - 4px);
+@media (min-width: 840px) and (max-width: 1019px) {
+  .mdlext-lightboard {
+    padding: calc((0px - 8px) / 2);
+  }
+
+  .mdlext-lightboard .mdlext-lightboard__slide {
+    margin: calc(8px / 2);
+    width: calc(1 / 6 * 100% - 8px);
+  }
+
+  .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
+    margin: 12px;
+  }
+
+  .mdlext-lightboard.mdlext-lightboard--no-spacing {
+    padding: 0;
+  }
+
+  .mdlext-lightboard.mdlext-lightboard--no-spacing .mdlext-lightboard__slide {
+    margin: 0;
+    width: calc(1 / 6 * 100%);
+  }
 }
 
-.mdlext-lightboard[data-eq-state$="small"] .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
-  margin: 8px;
-}
+@media (min-width: 1020px) {
+  .mdlext-lightboard {
+    padding: calc((0px - 8px) / 2);
+  }
 
-.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="small"] {
-  padding: 0;
-}
+  .mdlext-lightboard .mdlext-lightboard__slide {
+    margin: calc(8px / 2);
+    width: calc(1 / 7 * 100% - 8px);
+  }
 
-.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="small"] .mdlext-lightboard__slide {
-  margin: 0;
-  width: calc(1 / 4 * 100%);
-}
+  .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
+    margin: 12px;
+  }
 
-.mdlext-lightboard[data-eq-state$="medium_small"] {
-  padding: calc((0px - 4px) / 2);
-}
+  .mdlext-lightboard.mdlext-lightboard--no-spacing {
+    padding: 0;
+  }
 
-.mdlext-lightboard[data-eq-state$="medium_small"] .mdlext-lightboard__slide {
-  margin: calc(4px / 2);
-  width: calc(1 / 5 * 100% - 4px);
-}
-
-.mdlext-lightboard[data-eq-state$="medium_small"] .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
-  margin: 8px;
-}
-
-.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="medium_small"] {
-  padding: 0;
-}
-
-.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="medium_small"] .mdlext-lightboard__slide {
-  margin: 0;
-  width: calc(1 / 5 * 100%);
-}
-
-.mdlext-lightboard[data-eq-state$="medium"] {
-  padding: calc((0px - 8px) / 2);
-}
-
-.mdlext-lightboard[data-eq-state$="medium"] .mdlext-lightboard__slide {
-  margin: calc(8px / 2);
-  width: calc(1 / 6 * 100% - 8px);
-}
-
-.mdlext-lightboard[data-eq-state$="medium"] .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
-  margin: 12px;
-}
-
-.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="medium"] {
-  padding: 0;
-}
-
-.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="medium"] .mdlext-lightboard__slide {
-  margin: 0;
-  width: calc(1 / 6 * 100%);
-}
-
-.mdlext-lightboard[data-eq-state$="medium_large"],
-.mdlext-lightboard[data-eq-state$="large"] {
-  padding: calc((0px - 8px) / 2);
-}
-
-.mdlext-lightboard[data-eq-state$="medium_large"] .mdlext-lightboard__slide,
-.mdlext-lightboard[data-eq-state$="large"] .mdlext-lightboard__slide {
-  margin: calc(8px / 2);
-  width: calc(1 / 7 * 100% - 8px);
-}
-
-.mdlext-lightboard[data-eq-state$="medium_large"] .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure,
-.mdlext-lightboard[data-eq-state$="large"] .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
-  margin: 12px;
-}
-
-.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="medium_large"],
-.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="large"] {
-  padding: 0;
-}
-
-.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="medium_large"] .mdlext-lightboard__slide,
-.mdlext-lightboard--no-spacing.mdlext-lightboard[data-eq-state$="large"] .mdlext-lightboard__slide {
-  margin: 0;
-  width: calc(1 / 7 * 100%);
-}
-
-html:before {
-  display: none;
-  content: ".mdlext-lightboard";
+  .mdlext-lightboard.mdlext-lightboard--no-spacing .mdlext-lightboard__slide {
+    margin: 0;
+    width: calc(1 / 7 * 100%);
+  }
 }
 
 
