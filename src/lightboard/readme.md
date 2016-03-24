@@ -9,8 +9,8 @@ A lightboard is a translucent surface illuminated from behind, used for
 situations where a shape laid upon the surface needs to be seen with high contrast. In the "old days"
 of photography photograpers used a lightboard to get a quick view of, sorting and organizing their slides.
 
-The MDLEXT Lightbord lays out the slides in a row column fashion, with repect to the available screen size -
-or the available content size depending on the type of queries you choose to apply for responsive breakpoints.
+The MDLEXT lightboard lays out the slides in a row column fashion, with repect to the available screen size -
+or the available content size, depending on the type of queries you choose to apply for responsive breakpoints.
 Slides are distributed across the available content width, and scales proportionally to fill available
 horizontal space. The component adds `role='grid'` to the lightboard and `role='cell'` to the individual slides.
 
@@ -52,17 +52,22 @@ It works well in a Webpack workflow.
 
 ### How to use the `eq.js` version of MDLEXT lightboard
 
-&nbsp;1. Import `mdl-ext-eqjs.scss` in your main SASS file. Remove `mdl-ext.scss`.
+&nbsp;1. Install `eq,js`.
+```sh
+$ npm install --save eq,js
+```
+
+&nbsp;2. Import `mdl-ext-eqjs.scss` in your main SASS file. Remove `mdl-ext.scss`.
 ```css
 @import '../node_modules/mdl-ext/src/mdl-ext-eqjs';
 ```
 
-&nbsp;2. Require `eq.js` in your main.js file  
+&nbsp;3. Require `eq.js` in your main.js file  
 ```javascript
 const eqjs = require('eq.js');
 ```
 
-&nbsp;3. Optionally trigger `eq.js`<br/>
+&nbsp;4. Optionally trigger `eq.js`<br/>
 If you're loading html fragments using e.g. Ajax, then trigger `eq.js` after page load.
 
 ```javascript
