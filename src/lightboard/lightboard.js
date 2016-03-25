@@ -13,6 +13,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * This code is built with Google Material Design Lite,
+ * which is Licensed under the Apache License, Version 2.0
  */
 
 /**

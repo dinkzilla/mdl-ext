@@ -9,10 +9,10 @@ A lightboard is a translucent surface illuminated from behind, used for
 situations where a shape laid upon the surface needs to be seen with high contrast. In the "old days"
 of photography photograpers used a lightboard to get a quick view of, sorting and organizing their slides.
 
-The MDLEXT lightboard lays out the slides in a row column fashion, with repect to the available screen size -
-or the available content size, depending on the type of queries you choose to apply for responsive breakpoints.
-Slides are distributed across the available content width, and scales proportionally to fill available
-horizontal space. The component adds `role='grid'` to the lightboard and `role='cell'` to the individual slides.
+The MDLEXT lightboard is defined and enclosed by a container element. 
+The slides are distributed in a row column fashion, with repect to the available screen size. It scales proportionally to fill available horizontal space,
+or the available content size, depending on the type of queries you choose to apply for your responsive breakpoints.
+The number of slides per row depends on available screen size. The component adds `role='grid'` to the lightboard and `role='cell'` to the individual slides.
 
 ### Responsive breakpoints
 Grids provide users with a way to view content in an organized manner that might otherwise be difficult to 
@@ -23,6 +23,7 @@ characteristics. The problem with media queries is that they relates to the view
 write a media query for max-width or min-width, you’re connecting the appearance of your module to the
 width of the entire canvas not the part of the canvas the component occupies.
 
+#### Media queries are a hack
 Some developers claim that [media queries are a hack](http://ianstormtaylor.com/media-queries-are-a-hack/),
 and I totally agree! Imagine a design with a sidebar and a content area. In a responsive,
 fluent design both the sidebar and the content has "unknown" widths. Trying to add a responsive grid into the content
@@ -46,11 +47,11 @@ Some of the polyfills available are:
 * [BoomQueries](https://github.com/BoomTownROI/boomqueries)
 
 These are all good libraries, and they serve the purpose. After some evaluation I decided to go for
-**eq.js**. It is a small library which only supports width breakpoints. It works without requiring a
+[**eq.js**](https://github.com/Snugug/eq.js). It is a small library with support for width based breakpoints. It works without requiring a
 server to run (no Ajax stuff). It does not break the existing CSS standard. I can use SASS for styling.
-It works well in a Webpack workflow.
+AND it works well in a Webpack workflow.
 
-### How to use the `eq.js` version of MDLEXT lightboard
+### How to use the eq.js version of MDLEXT lightboard
 
 &nbsp;1. Install `eq,js`.
 ```sh
@@ -278,7 +279,6 @@ You can modify the lightboard trough the following SASS variables.
 
 | SASS variables |
 |----------------|
-| `$mdlext-lightboard-small-breakpoint            ` |
 | `$mdlext-lightboard-medium-small-breakpoint     ` |
 | `$mdlext-lightboard-medium-breakpoint           ` |
 | `$mdlext-lightboard-medium-large-breakpoint     ` |

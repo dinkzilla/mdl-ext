@@ -1,20 +1,23 @@
+@charset "UTF-8";
 //////////////////////////////////////////////////////////////////////////////////
 //
 // Element queries for _lightbox.scss, based on: https://github.com/Snugug/eq.js
+//
 //////////////////////////////////////////////////////////////////////////////////
+
+@import "../variables";
 
 .mdlext-lightboard {
 
   @include eq-pts((
-    small: $mdlext-lightboard-small-breakpoint,
-    medium_small: $mdlext-lightboard-medium-small-breakpoint,
-    medium: $mdlext-lightboard-medium-breakpoint,
-    medium_large: $mdlext-lightboard-medium-large-breakpoint,
-    large: $mdlext-lightboard-large-breakpoint
+    lightboard_medium_small: $mdlext-lightboard-medium-small-breakpoint,
+    lightboard_medium: $mdlext-lightboard-medium-breakpoint,
+    lightboard_medium_large: $mdlext-lightboard-medium-large-breakpoint,
+    lightboard_large: $mdlext-lightboard-large-breakpoint
   ));
 
   ////// small - meduim-small //////
-  @include eq('small') {
+  @include eq('lightboard_medium_small') {
     padding: calc((#{$mdlext-lightboard-medium-small-margin} - #{$mdlext-lightboard-medium-small-gutter}) / 2);
 
     .mdlext-lightboard__slide {
@@ -36,7 +39,7 @@
   }
 
   ////// meduim-small - medium //////
-  @include eq('medium_small') {
+  @include eq('lightboard_medium') {
     padding: calc((#{$mdlext-lightboard-medium-margin} - #{$mdlext-lightboard-medium-gutter}) / 2);
 
     .mdlext-lightboard__slide {
@@ -58,7 +61,7 @@
   }
 
   ////// meduim - medium-large //////
-  @include eq('medium') {
+  @include eq('lightboard_medium_large') {
     padding: calc((#{$mdlext-lightboard-medium-large-margin} - #{$mdlext-lightboard-medium-large-gutter}) / 2);
 
     .mdlext-lightboard__slide {
@@ -80,7 +83,7 @@
   }
 
   ////// meduim-large - large //////
-  @include eq('medium_large', 'large') {
+  @include eq('lightboard_large') {
     padding: calc((#{$mdlext-lightboard-large-margin} - #{$mdlext-lightboard-large-gutter}) / 2);
 
     .mdlext-lightboard__slide {
@@ -88,7 +91,7 @@
       width: calc(1 / #{$mdlext-lightboard-large-columns} * 100% - #{$mdlext-lightboard-large-gutter});
 
       .mdlext-lightboard__slide__frame figure {
-        margin: $mdlext-lightboard-medium-large-frame-width;
+        margin: $mdlext-lightboard-large-frame-width;
       }
     }
     &.mdlext-lightboard--no-spacing {

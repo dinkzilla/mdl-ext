@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 /**
  * Copyright 2016 Leif Olsen. All Rights Reserved.
  *
@@ -121,7 +123,7 @@ ul.mdlext-lightboard {
   }
 }
 
-////// Media / Element queries default //////
+////// Media / Element queries default, Small //////
 .mdlext-lightboard {
   padding: calc((#{$mdlext-lightboard-small-margin} - #{$mdlext-lightboard-small-gutter}) / 2);
 

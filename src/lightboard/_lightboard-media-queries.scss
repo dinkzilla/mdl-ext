@@ -1,15 +1,19 @@
+@charset "UTF-8";
+
 //////////////////////////////
 //
 // Lightboard media queries
+//
 //////////////////////////////
+@import "../variables";
 
 ////////// Small /////////////
-@media (max-width: $mdlext-lightboard-small-breakpoint - 1) {
+@media (max-width: $mdlext-lightboard-medium-small-breakpoint - 1) {
   // This is the default, see: _lightboard.scss
 }
 
 ////////// Medium small //////////
-@media (min-width: $mdlext-lightboard-small-breakpoint) and (max-width: $mdlext-lightboard-medium-small-breakpoint - 1) {
+@media (min-width: $mdlext-lightboard-medium-small-breakpoint) and (max-width: $mdlext-lightboard-medium-breakpoint - 1) {
   .mdlext-lightboard {
     padding: calc((#{$mdlext-lightboard-medium-small-margin} - #{$mdlext-lightboard-medium-small-gutter}) / 2);
 
@@ -33,7 +37,7 @@
 }
 
 ////////// Medium //////////
-@media (min-width: $mdlext-lightboard-medium-small-breakpoint) and (max-width: $mdlext-lightboard-medium-breakpoint - 1) {
+@media (min-width: $mdlext-lightboard-medium-breakpoint) and (max-width: $mdlext-lightboard-medium-large-breakpoint - 1) {
   .mdlext-lightboard {
     padding: calc((#{$mdlext-lightboard-medium-margin} - #{$mdlext-lightboard-medium-gutter}) / 2);
 
@@ -57,7 +61,7 @@
 }
 
 ////////// Medium large //////////
-@media (min-width: $mdlext-lightboard-medium-breakpoint)  and (max-width: $mdlext-lightboard-medium-large-breakpoint - 1) {
+@media (min-width: $mdlext-lightboard-medium-large-breakpoint)  and (max-width: $mdlext-lightboard-large-breakpoint - 1) {
   .mdlext-lightboard {
     padding: calc((#{$mdlext-lightboard-medium-large-margin} - #{$mdlext-lightboard-medium-large-gutter}) / 2);
 
@@ -81,7 +85,7 @@
 }
 
 ////////// Large //////////
-@media (min-width: $mdlext-lightboard-medium-large-breakpoint) {
+@media (min-width: $mdlext-lightboard-large-breakpoint) {
   .mdlext-lightboard {
     padding: calc((#{$mdlext-lightboard-large-margin} - #{$mdlext-lightboard-large-gutter}) / 2);
 

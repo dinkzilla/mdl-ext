@@ -60,10 +60,9 @@ $mdlext-bordered-field-label-focused-top: 20px !default;
 
 
 /* ==========  Lightboard  ========== */
-$mdlext-lightboard-small-breakpoint            : $grid-tablet-breakpoint !default;          // 480
-$mdlext-lightboard-medium-small-breakpoint     : $grid-tablet-breakpoint + 180px !default;  // 480+180
-$mdlext-lightboard-medium-breakpoint           : $grid-desktop-breakpoint !default;         // 840
-$mdlext-lightboard-medium-large-breakpoint     : $grid-desktop-breakpoint + 180px !default; // 840+180
+$mdlext-lightboard-medium-small-breakpoint     : $grid-tablet-breakpoint !default;          // 480
+$mdlext-lightboard-medium-breakpoint           : $grid-tablet-breakpoint + 180px !default;  // 480 + 180
+$mdlext-lightboard-medium-large-breakpoint     : $grid-desktop-breakpoint !default;         // 840
 $mdlext-lightboard-large-breakpoint            : $grid-desktop-breakpoint + 360px !default; // 840+360
 
 $mdlext-lightboard-small-gutter                : 2px !default;
