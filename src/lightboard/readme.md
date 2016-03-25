@@ -22,7 +22,7 @@ based on **element queries**.
 
 &nbsp;1. Install [eq.js](https://github.com/Snugug/eq.js).
 ```sh
-$ npm install --save eq,js
+$ npm install --save eq.js
 ```
 
 &nbsp;2. Import `mdl-ext-eqjs.scss` in your main SASS file. Remove `mdl-ext.scss`.

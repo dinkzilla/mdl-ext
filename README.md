@@ -33,10 +33,10 @@ instead of the browser viewport. Unfortunately, CSS doesn’t yet support elemen
 couple of JavaScript-based polyfrills involving various syntaxes. **They are not standard - but that
 should not stop us from using them.** Element-first design is the spirit of the Atomic design principle, but
 looks very different in practice than how most people implement Atomic design using their mobile-first mindset.
-Instead of writing styles on advance for every conceivable situation a widget my find itself in, we are able
+Instead of writing styles on advance for every conceivable situation a widget may find itself in, we are able
 to allow individual parts of the layout to adapt responsively when those elements require it.
 
-Some of the polyfills available are:
+Some of the polyfrills available are:
 * [eq.js](https://github.com/Snugug/eq.js)
 * [EQCSS](https://github.com/eqcss/eqcss)
 * [CSS Element Queries](https://github.com/marcj/css-element-queries)
@@ -59,7 +59,7 @@ Install **mdl-ext**
 $ npm install --save mdl-ext
 ```
 
-Install **eq.js** if you choose to use the element query CSS/SASS version 
+Install **eq.js** if you choose to use the element query CSS/SASS version. 
 ```sh
 $ npm install --save eq.js
 ```

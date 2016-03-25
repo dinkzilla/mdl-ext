@@ -31,23 +31,24 @@ var outputCssEqJs;
 
 if (env === 'build') {
   outputFile = libraryName + '.min.js';
-  outputCss = cssName + '.min.css'
-  outputCssEqJs = cssName + '-eqjs.min.css'
+  outputCss = cssName + '.min.css';
+  outputCssEqJs = cssName + '-eqjs.min.css';
 }
 else {
   outputFile = libraryName + '.js';
-  outputCss = cssName + '.css'
-  outputCssEqJs = cssName + '-eqjs.css'
+  outputCss = cssName + '.css';
+  outputCssEqJs = cssName + '-eqjs.css';
 }
 
 var config = {
   entry: {
     'mdl-ext': [
-      path.join(__dirname, 'src/mdl-ext-build.scss'),     // MDLEXT Styles
-      path.join(__dirname, 'src/index.js')                // MDLEXT scripts
+      path.join(__dirname, 'src/mdl-ext-build.scss'),      // MDLEXT Styles
+      path.join(__dirname, 'src/index.js')                 // MDLEXT scripts
     ],
     'mdl-ext-eqjs': [
-      path.join(__dirname, 'src/mdl-ext-eqjs-build.scss')  // MDLEXT Styles based on eq.js
+      path.join(__dirname, 'src/mdl-ext-eqjs-build.scss'), // MDLEXT Styles based on eq.js
+      path.join(__dirname, 'src/index.js')                 // MDLEXT scripts
     ]
   },
   devtool: 'source-map',
