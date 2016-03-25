@@ -5,55 +5,22 @@
 Thumbnails in a responsive, fluent grid.
 
 ## Introduction
-A lightboard is a translucent surface illuminated from behind, used for
-situations where a shape laid upon the surface needs to be seen with high contrast. In the "old days"
-of photography photograpers used a lightboard to get a quick view of, sorting and organizing their slides.
+A lightboard is a translucent surface illuminated from behind, used for situations where a shape laid 
+upon the surface needs to be seen with high contrast. In the "old days" of photography photograpers 
+used a lightboard to get a quick view of, sorting and organizing their slides.
 
-The MDLEXT lightboard is defined and enclosed by a container element. 
-The slides are distributed in a row column fashion, with repect to the available screen size. It scales proportionally to fill available horizontal space,
-or the available content size, depending on the type of queries you choose to apply for your responsive breakpoints.
-The number of slides per row depends on available screen size. The component adds `role='grid'` to the lightboard and `role='cell'` to the individual slides.
+The Material Design Lite Ext (MDLEXT) lightboard is defined and enclosed by a container element. The slides are 
+distributed in a row column fashion, with repect to the available screen size. The slides scales proportionally to fill 
+available horizontal space, or the available content size, depending on the type of queries you choose to apply 
+for your responsive breakpoints. The number of slides per row depends on available space. The component 
+adds `role='grid'` to the lightboard and `role='cell'` to the individual slides.
 
-### Responsive breakpoints
-Grids provide users with a way to view content in an organized manner that might otherwise be difficult to 
-understand or retain. Their design and use is an important factor in the overall user experience.
-
-A common metod used to design a responsive grid is to use media queries to apply styles based on device
-characteristics. The problem with media queries is that they relates to the viewport - so every time you
-write a media query for max-width or min-width, you’re connecting the appearance of your module to the
-width of the entire canvas not the part of the canvas the component occupies.
-
-#### Media queries are a hack
-Some developers claim that [media queries are a hack](http://ianstormtaylor.com/media-queries-are-a-hack/),
-and I totally agree! Imagine a design with a sidebar and a content area. In a responsive,
-fluent design both the sidebar and the content has "unknown" widths. Trying to add a responsive grid into the content
-area which relies on media queries, where you have no knowledge of how much space the sidebar occupies, is
-in my opinion almost an impossible task.
-
-#### Element queries to the rescue
-An element query is similar to a media query in that, if a condition is met, some CSS will be applied.
-Element query conditions (such as min-width, max-width, min-height and max-height) are based on elements,
-instead of the browser viewport. Unfortunately, CSS doesn’t yet support element queries, but there are a
-couple of JavaScript-based polyfills involving various syntaxes. **They are not standard - but that
-should not stop us from using them.** Element-first design is the spirit of the Atomic design principle, but
-looks very different in practice than how most people implement Atomic design using their mobile-first mindset.
-Instead of writing styles on advance for every conceivable situation a widget my find itself in, we are able
-to allow individual parts of the layout to adapt responsively when those elements require it.
-
-Some of the polyfills available are:
-* [eq.js](https://github.com/Snugug/eq.js)
-* [EQCSS](https://github.com/eqcss/eqcss)
-* [CSS Element Queries](https://github.com/marcj/css-element-queries)
-* [BoomQueries](https://github.com/BoomTownROI/boomqueries)
-
-These are all good libraries, and they serve the purpose. After some evaluation I decided to go for
-[**eq.js**](https://github.com/Snugug/eq.js). It is a small library with support for width based breakpoints. It works without requiring a
-server to run (no Ajax stuff). It does not break the existing CSS standard. I can use SASS for styling.
-AND it works well in a Webpack workflow.
+The Material Design Lite Ext (MDLEXT) lightboard has two versions; one version based on media queries and one version 
+based on **element queries**.
 
 ### How to use the eq.js version of MDLEXT lightboard
 
-&nbsp;1. Install `eq,js`.
+&nbsp;1. Install [eq.js](https://github.com/Snugug/eq.js).
 ```sh
 $ npm install --save eq,js
 ```

@@ -41,9 +41,16 @@
     "css",
     "sass",
     "webpack",
+    "element queries",
+    "responsive design",
     "mdl",
+    "material design",
     "material-design-lite",
-    "select"
+    "mdl components",
+    "accordion",
+    "grid",
+    "lightboard",
+    "selectfield"
   ],
   "author": "Leif Olsen (https://github.com/leifoolsen)",
   "license": "Apache-2.0",

@@ -12,7 +12,7 @@ var mdlIframeLoader = {};
     { 'type': 'css', 'id': 'font-roboto-css',   'src': 'https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en' },
     { 'type': 'css', 'id': 'material-icon-css', 'src': 'https://fonts.googleapis.com/icon?family=Material+Icons' },
     { 'type': 'css', 'id': 'material-css',      'src': 'node_modules/material-design-lite/material.css' },
-    { 'type': 'css', 'id': 'mdlext-css',        'src': 'lib/mdl-ext.css' },
+    { 'type': 'css', 'id': 'mdlext-css',        'src': 'lib/mdl-ext-eqjs.css' },
     { 'type': 'css', 'id': 'demo-css',          'src': 'demo/demo.css' },
     { 'type': 'js',  'id': 'eq-js',             'src': 'node_modules/eq.js/dist/eq.min.js' },
     { 'type': 'js',  'id': 'material-js',       'src': 'node_modules/material-design-lite/material.js' },

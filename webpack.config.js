@@ -27,21 +27,27 @@ const libraryName = 'index';
 const cssName = 'mdl-ext';
 var outputFile;
 var outputCss;
+var outputCssEqJs;
 
 if (env === 'build') {
   outputFile = libraryName + '.min.js';
   outputCss = cssName + '.min.css'
+  outputCssEqJs = cssName + '-eqjs.min.css'
 }
 else {
   outputFile = libraryName + '.js';
   outputCss = cssName + '.css'
+  outputCssEqJs = cssName + '-eqjs.css'
 }
 
 var config = {
   entry: {
     'mdl-ext': [
-      path.join(__dirname, 'src/mdl-ext-build.scss'), // MDLEXT Styles (including MDL SASS variables)
-      path.join(__dirname, 'src/index.js')            // MDLEXT scripts
+      path.join(__dirname, 'src/mdl-ext-build.scss'),     // MDLEXT Styles
+      path.join(__dirname, 'src/index.js')                // MDLEXT scripts
+    ],
+    'mdl-ext-eqjs': [
+      path.join(__dirname, 'src/mdl-ext-eqjs-build.scss')  // MDLEXT Styles based on eq.js
     ]
   },
   devtool: 'source-map',
@@ -119,6 +125,10 @@ var config = {
   },
   plugins: [
     new ExtractTextPlugin(outputCss, {
+      disable: false,
+      allChunks: true
+    }),
+    new ExtractTextPlugin(outputCssEqJs, {
       disable: false,
       allChunks: true
     }),

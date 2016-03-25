@@ -8,6 +8,45 @@
 Material Design Lite Ext (MDLEXT).
 Components built with the [Google Material Design Lite](https://github.com/google/material-design-lite) framework.
 
+## Introduction
+The MDLEXT component library is built with responsiveness in mind. The pre built CSS provided in the lib directory therefore comes
+in two versions; one based on media queries and one based on **element queries**, using [eq.js](https://github.com/Snugug/eq.js). 
+If you build the CSS from SASS, just import the correct sass file, `mdl-ext.scss` or `mdl-ext-eqjs.scss`.
+
+### Responsive breakpoints
+A common metod in responsive design is to use media queries to apply styles based on device
+characteristics. The problem with media queries is that they relates to the viewport - so every time you
+write a media query for max-width or min-width, you’re connecting the appearance of your module to the
+width of the entire canvas not the part of the canvas the component occupies.
+
+#### Media queries are a hack
+Some developers claim that [media queries are a hack](http://ianstormtaylor.com/media-queries-are-a-hack/),
+and I totally agree! Imagine a design with a sidebar and a content area. In a responsive,
+fluent design both the sidebar and the content has "unknown" widths. Trying to add e.g. a responsive grid into the content
+area which relies on media queries, where you have no knowledge of how much space your content occupies, is
+in my opinion almost an impossible task.
+
+#### Element queries to the rescue
+An element query is similar to a media query in that, if a condition is met, some CSS will be applied.
+Element query conditions (such as min-width, max-width, min-height and max-height) are based on elements,
+instead of the browser viewport. Unfortunately, CSS doesn’t yet support element queries, but there are a
+couple of JavaScript-based polyfills involving various syntaxes. **They are not standard - but that
+should not stop us from using them.** Element-first design is the spirit of the Atomic design principle, but
+looks very different in practice than how most people implement Atomic design using their mobile-first mindset.
+Instead of writing styles on advance for every conceivable situation a widget my find itself in, we are able
+to allow individual parts of the layout to adapt responsively when those elements require it.
+
+Some of the polyfills available are:
+* [eq.js](https://github.com/Snugug/eq.js)
+* [EQCSS](https://github.com/eqcss/eqcss)
+* [CSS Element Queries](https://github.com/marcj/css-element-queries)
+* [BoomQueries](https://github.com/BoomTownROI/boomqueries)
+
+These are all good libraries, and they serve the purpose. After some evaluation I decided to go for
+[**eq.js**](https://github.com/Snugug/eq.js). It is a small library with support for width based breakpoints. 
+It works without requiring a server to run (no Ajax stuff). It does not break the existing CSS standard. 
+I can use SASS for styling, and it works well in a Webpack workflow.
+
 ## Install
 If you haven't done so already, install [Material Design Lite](https://github.com/google/material-design-lite).
 
@@ -18,6 +57,11 @@ $ npm install --save material-design-lite
 Install **mdl-ext**
 ```sh
 $ npm install --save mdl-ext
+```
+
+Install **eq.js** if you choose to use the element query CSS/SASS version 
+```sh
+$ npm install --save eq.js
 ```
 
 ## Getting started
@@ -43,7 +87,31 @@ $ npm install --save mdl-ext
 </body>
 </html>
 ```
->**Note:** Always import `mdl-ext` css **after** `material` css. Adjust path to `node_modules` according to where your HTML file is located. 
+
+### Use it with element queries in your (static) page
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Material Design Lite Extensions</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="node_modules/material-design-lite/material.css" />
+  <link rel="stylesheet" href="node_modules/mdl-ext/lib/mdl-ext-eqjs.min.css" />
+</head>
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
+  <main class="mdl-layout__content">
+  </main
+</div>
+<script type="text/javascript" src="node_modules/material-design-lite/material.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="node_modules/mdl-ext/lib/index.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="node_modules/eq.js/dist/eq.min.js" charset="utf-8"></script>
+</body>
+</html>
+```
+
+>**Note:** Always import `mdl-ext` css **after** `material` css. Adjust path to `node_modules` (libraries) according to where your HTML file is located. 
 
 ### Use it in your (Webpack) build
 
@@ -57,8 +125,11 @@ $ npm install --save mdl-ext
 @import '../node_modules/roboto-fontface/css/roboto-fontface.css';
 @import '../node_modules/material-design-lite/src/material-design-lite';
 
-// 2. Import MDLEXT
+// 2. Import MDLEXT 
 @import '../node_modules/mdl-ext/src/mdl-ext';
+
+// 2. ... or import mdl-ext-eqjs
+//@import '../node_modules/mdl-ext/src/mdl-ext-eqjs';
 
 // 3. Your stuff
 @import 'stylesheets/variables';
@@ -76,6 +147,11 @@ import 'mdl-ext';
 ```javascript
 require('material-design-lite/material');
 require('mdl-ext');
+```
+
+**If you choose to use element queries, require `eq.js` in your "main" js file**  
+```javascript
+const eqjs = require('eq.js');
 ```
  
 ## Components

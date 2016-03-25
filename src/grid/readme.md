@@ -8,51 +8,19 @@ A responsive **grid** based on **element queries** in favour of media queries.
 Grids provide users with a way to view content in an organized manner that might otherwise be difficult to 
 understand or retain. Their design and use is an important factor in the overall user experience.
 
-The Material Design Lite Ext (MDLEXT) grid is based on **element queries** in favour of media queries.
-It is a copy of the [Material Design Lite grid](https://github.com/google/material-design-lite/tree/master/src/grid) - which uses media queries to distribute grid cells.
-
-### Responsive breakpoints
-A common metod used to design a responsive grid is to use media queries to apply styles based on device
-characteristics. The problem with media queries is that they relates to the viewport - so every time you
-write a media query for max-width or min-width, you’re connecting the appearance of your module to the
-width of the entire canvas not the part of the canvas the component occupies.
-
-#### Media queries are a hack
-Some developers claim that [media queries are a hack](http://ianstormtaylor.com/media-queries-are-a-hack/),
-and I totally agree! Imagine a design with a sidebar and a content area. In a responsive,
-fluent design both the sidebar and the content has "unknown" widths. Trying to add a responsive grid into the content
-area which relies on media queries, where you have no knowledge of how much space the sidebar occupies, is
-in my opinion almost an impossible task.
-
-#### Element queries to the rescue
-An element query is similar to a media query in that, if a condition is met, some CSS will be applied.
-Element query conditions (such as min-width, max-width, min-height and max-height) are based on elements,
-instead of the browser viewport. Unfortunately, CSS doesn’t yet support element queries, but there are a
-couple of JavaScript-based polyfills involving various syntaxes. **They are not standard - but that
-should not stop us from using them.** Element-first design is the spirit of the Atomic design principle, but
-looks very different in practice than how most people implement Atomic design using their mobile-first mindset.
-Instead of writing styles on advance for every conceivable situation a widget my find itself in, we are able
-to allow individual parts of the layout to adapt responsively when those elements require it.
-
-Some of the polyfills available are:
-* [eq.js](https://github.com/Snugug/eq.js)
-* [EQCSS](https://github.com/eqcss/eqcss)
-* [CSS Element Queries](https://github.com/marcj/css-element-queries)
-* [BoomQueries](https://github.com/BoomTownROI/boomqueries)
-
-These are all good libraries, and they serve the purpose. After some evaluation I decided to go for
-[**eq.js**](https://github.com/Snugug/eq.js). It is a small library with support for width based breakpoints. 
-It works without requiring a server to run (no Ajax stuff). It does not break the existing CSS standard. 
-I can use SASS for styling. AND it works well in a Webpack workflow.
+The Material Design Lite Ext (MDLEXT) grid has two versions; one version based on media queries and one version 
+based on **element queries**. The MDLEXT grid is a copy of the 
+[Material Design Lite grid](https://github.com/google/material-design-lite/tree/master/src/grid) - with additional 
+element queries support to distribute grid cells in a more responsive fashion.
 
 ### How to use the eq.js version of MDLEXT grid
 
-&nbsp;1. Install `eq,js`.
+&nbsp;1. Install [eq.js](https://github.com/Snugug/eq.js).
 ```sh
 $ npm install --save eq,js
 ```
 
-&nbsp;2. Import `mdl-ext-eqjs.scss` in your main SASS file. Remove `mdl-ext.scss`.
+&nbsp;2. Import `mdl-ext-eqjs.scss` in your main SASS file. Remove `mdl-ext.scss` - they can not co exist.
 ```css
 @import '../node_modules/mdl-ext/src/mdl-ext-eqjs';
 ```
