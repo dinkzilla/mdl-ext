@@ -16,8 +16,8 @@ If you build the CSS from SASS, just import the correct sass file, `mdl-ext.scss
 ### Responsive breakpoints
 A common metod in responsive design is to use media queries to apply styles based on device
 characteristics. The problem with media queries is that they relates to the viewport - so every time you
-write a media query for max-width or min-width, you’re connecting the appearance of your module to the
-width of the entire canvas not the part of the canvas the component occupies.
+write a media query for `max-width` or `min-width`, you’re connecting the appearance of your module to the
+width of the entire canvas, not the part of the canvas the component occupies.
 
 #### Media queries are a hack
 Some developers claim that [media queries are a hack](http://ianstormtaylor.com/media-queries-are-a-hack/),
@@ -28,9 +28,9 @@ in my opinion almost an impossible task.
 
 #### Element queries to the rescue
 An element query is similar to a media query in that, if a condition is met, some CSS will be applied.
-Element query conditions (such as min-width, max-width, min-height and max-height) are based on elements,
+Element query conditions (such as `min-width`, `max-width`, `min-height` and `max-height`) are based on elements,
 instead of the browser viewport. Unfortunately, CSS doesn’t yet support element queries, but there are a
-couple of JavaScript-based polyfills involving various syntaxes. **They are not standard - but that
+couple of JavaScript-based polyfrills involving various syntaxes. **They are not standard - but that
 should not stop us from using them.** Element-first design is the spirit of the Atomic design principle, but
 looks very different in practice than how most people implement Atomic design using their mobile-first mindset.
 Instead of writing styles on advance for every conceivable situation a widget my find itself in, we are able
