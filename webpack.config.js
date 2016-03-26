@@ -31,12 +31,12 @@ var outputCssEqJs;
 
 if (env === 'build') {
   outputFile = libraryName + '.min.js';
-  outputCss = cssName + '.min.css';
+  outputCss = '[name].min.css';
   outputCssEqJs = cssName + '-eqjs.min.css';
 }
 else {
   outputFile = libraryName + '.js';
-  outputCss = cssName + '.css';
+  outputCss = '[name].css';
   outputCssEqJs = cssName + '-eqjs.css';
 }
 
@@ -126,10 +126,6 @@ var config = {
   },
   plugins: [
     new ExtractTextPlugin(outputCss, {
-      disable: false,
-      allChunks: true
-    }),
-    new ExtractTextPlugin(outputCssEqJs, {
       disable: false,
       allChunks: true
     }),
