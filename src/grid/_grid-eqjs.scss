@@ -79,11 +79,11 @@
   margin-left: calc(#{(($size / $columns) * 100)+"%"} + #{$gutter / 2});
 }
 
-@mixin partial-size-no-spacing($size, $columns) {
+@mixin _partial-size-no-spacing($size, $columns) {
   width: #{(($size / $columns) * 100)+"%"};
 }
 @mixin _full-size-no-spacing() {
-  @include partial-size-no-spacing(1, 1);
+  @include _partial-size-no-spacing(1, 1);
 }
 @mixin _offset-size-no-spacing($size, $columns) {
   margin-left: #{(($size / $columns) * 100)+"%"};
@@ -94,8 +94,8 @@
 
   @include eq-pts((
     grid_phone: 0,
-    grid_tablet: 480,
-    grid_desktop: 840
+    grid_tablet: strip-unit($grid-tablet-breakpoint),
+    grid_desktop: strip-unit($grid-desktop-breakpoint)
   ));
 
   ////////// Phone //////////
@@ -147,14 +147,14 @@
 
       & > .mdlext-cell {
         margin: 0;
-        @include partial-size-no-spacing($grid-cell-default-columns, $grid-phone-columns);
+        @include _partial-size-no-spacing($grid-cell-default-columns, $grid-phone-columns);
       }
 
       // Define partial sizes for columnNumber < totalColumns.
       @for $i from 1 through ($grid-phone-columns - 1) {
         & > .mdlext-cell--#{$i}-col,
         & > .mdlext-cell--#{$i}-col-phone.mdlext-cell--#{$i}-col-phone {
-          @include partial-size-no-spacing($i, $grid-phone-columns);
+          @include _partial-size-no-spacing($i, $grid-phone-columns);
         }
       }
 
@@ -225,14 +225,14 @@
 
       & > .mdlext-cell {
         margin: 0;
-        @include partial-size-no-spacing($grid-cell-default-columns, $grid-tablet-columns);
+        @include _partial-size-no-spacing($grid-cell-default-columns, $grid-tablet-columns);
       }
 
       // Define partial sizes for columnNumber < totalColumns.
       @for $i from 1 through ($grid-tablet-columns - 1) {
         & > .mdlext-cell--#{$i}-col,
         & > .mdlext-cell--#{$i}-col-tablet.mdlext-cell--#{$i}-col-tablet {
-          @include partial-size-no-spacing($i, $grid-tablet-columns);
+          @include _partial-size-no-spacing($i, $grid-tablet-columns);
         }
       }
 
@@ -295,14 +295,14 @@
 
       & > .mdlext-cell {
         margin: 0;
-        @include partial-size-no-spacing($grid-cell-default-columns, $grid-desktop-columns);
+        @include _partial-size-no-spacing($grid-cell-default-columns, $grid-desktop-columns);
       }
 
       // Define partial sizes for all numbers of columns.
       @for $i from 1 through $grid-desktop-columns {
         & > .mdlext-cell--#{$i}-col,
         & > .mdlext-cell--#{$i}-col-desktop.mdlext-cell--#{$i}-col-desktop {
-          @include partial-size-no-spacing($i, $grid-desktop-columns);
+          @include _partial-size-no-spacing($i, $grid-desktop-columns);
         }
       }
 

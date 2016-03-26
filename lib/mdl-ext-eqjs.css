@@ -1220,7 +1220,7 @@ ul.mdlext-lightboard {
 
 .mdlext-lightboard:before {
   display: none;
-  content: "lightboard_medium_small: 480px, lightboard_medium: 660px, lightboard_medium_large: 840px, lightboard_large: 1200px";
+  content: "lightboard_medium_small: 480, lightboard_medium: 660, lightboard_medium_large: 840, lightboard_large: 1200";
 }
 
 .mdlext-lightboard[data-eq-state$="lightboard_medium_small"] {

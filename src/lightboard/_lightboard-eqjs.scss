@@ -6,14 +6,15 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 @import "../variables";
+@import "../functions";
 
 .mdlext-lightboard {
 
   @include eq-pts((
-    lightboard_medium_small: $mdlext-lightboard-medium-small-breakpoint,
-    lightboard_medium: $mdlext-lightboard-medium-breakpoint,
-    lightboard_medium_large: $mdlext-lightboard-medium-large-breakpoint,
-    lightboard_large: $mdlext-lightboard-large-breakpoint
+    lightboard_medium_small: strip-unit($mdlext-lightboard-medium-small-breakpoint),
+    lightboard_medium: strip-unit($mdlext-lightboard-medium-breakpoint),
+    lightboard_medium_large: strip-unit($mdlext-lightboard-medium-large-breakpoint),
+    lightboard_large: strip-unit($mdlext-lightboard-large-breakpoint)
   ));
 
   ////// small - meduim-small //////
