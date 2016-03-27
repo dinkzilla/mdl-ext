@@ -1,0 +1,34 @@
+dialog {
+  border: 0;
+  padding: 0;
+}
+
+dialog[open] {
+  animation: goBig .4s .2s forwards;
+}
+dialog[open]::backdrop {
+  animation: fadeToNearBlack .4s forwards;
+}
+
+.backdrop {
+  animation: fadeToNearBlack .4s forwards;
+}
+
+dialog img {
+  width: 100%; height: auto;
+}
+
+dialog button {
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+}
+
+@keyframes fadeToNearBlack {
+  to { background: rgba(0,0,0,0.86); }
+}
+@keyframes goBig {
+  to { opacity: 1; }
+}
+
+

@@ -1301,6 +1301,66 @@ ul.mdlext-lightboard {
   }
 }
 
+dialog {
+  border: 0;
+  padding: 0;
+}
+
+dialog[open] {
+  -webkit-animation: goBig .4s .2s forwards;
+          animation: goBig .4s .2s forwards;
+}
+
+dialog[open]::-webkit-backdrop {
+  -webkit-animation: fadeToNearBlack .4s forwards;
+          animation: fadeToNearBlack .4s forwards;
+}
+
+dialog[open]::backdrop {
+  -webkit-animation: fadeToNearBlack .4s forwards;
+          animation: fadeToNearBlack .4s forwards;
+}
+
+.backdrop {
+  -webkit-animation: fadeToNearBlack .4s forwards;
+          animation: fadeToNearBlack .4s forwards;
+}
+
+dialog img {
+  width: 100%;
+  height: auto;
+}
+
+dialog button {
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+}
+
+@-webkit-keyframes fadeToNearBlack {
+  to {
+    background: rgba(0, 0, 0, 0.86);
+  }
+}
+
+@keyframes fadeToNearBlack {
+  to {
+    background: rgba(0, 0, 0, 0.86);
+  }
+}
+
+@-webkit-keyframes goBig {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes goBig {
+  to {
+    opacity: 1;
+  }
+}
+
 /**
  * This code is modified from Material Design Lite _grid.sass,
  * which is Licensed under the Apache License, Version 2.0
