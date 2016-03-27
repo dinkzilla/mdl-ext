@@ -1,0 +1,182 @@
+<h5>Lightbox Component</h5>
+
+
+<ul id="lightboard-for-lightbox" class="mdlext-lightboard mdlext-js-lightboard mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events">
+  <li class="mdlext-lightboard__slide">
+    <a href="../../lightboard/snippets/_D802141.jpg" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_D802141.jpg" title="Northern goshawk with prey"/>
+        <figcaption>_D802141.jpg</figcaption>
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="../../lightboard/snippets/_D802591.jpg" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_D802591.jpg" title="Whooper swans in flight"/>
+        <figcaption>_D802591.jpg</figcaption>
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="../../lightboard/snippets/_D804370-3.jpg" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_D804370-3.jpg" title="European green woodpecker"/>
+        <figcaption>_D804370-3.jpg</figcaption>
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="../../lightboard/snippets/_D808689.jpg" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_D808689.jpg" title="The bridge"/>
+        <figcaption>_D808689.jpg</figcaption>
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="../../accordion/snippets/_D802181.jpg" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_D802181.jpg" title="Landscape in blue pastel"/>
+        <figcaption>_D802181.jpg</figcaption>
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="../../lightboard/snippets/_D800912.jpg" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_D800912.jpg" title="Hiking the mountains of Dovre"/>
+        <figcaption>_D800912.jpg</figcaption>
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="../../accordion/snippets/_D809453-_D809457-3.jpg" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_D809453-_D809457-4.jpg" title="Train to nowhwere. Ny Aalesund, Spitsbergen." />
+        <figcaption>_D809453-_D809457-4.jpg</figcaption>
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="../../lightboard/snippets/_DSC8214.jpg" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_DSC8214.jpg" title="Blues"/>
+        <figcaption>_DSC8214.jpg</figcaption>
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="../../lightboard/snippets/_D800017.jpg" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_D800017.jpg" />
+        <figcaption>_D800017.jpg</figcaption>
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="../../lightboard/snippets/_D800023.jpg" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_D800023.jpg" />
+        <figcaption>_D800023.jpg</figcaption>
+      </figure>
+    </a>
+  </li>
+</ul>
+
+<p class="mdl-typography--caption" style="margin-top: 64px;">
+  All images appearing in this page are the exclusive property of Leif Olsen and are protected under the United States and International Copyright laws.
+  The images may not be reproduced or manipulated without the written permission of Leif Olsen.
+  Use of any image as the basis for another photographic concept or illustration (digital, artist rendering or alike) is a violation of the United States and International Copyright laws.
+  All images are copyrighted &copy; Leif Olsen, 2016.
+</p>
+
+
+<style>
+  dialog {
+  }
+
+  .dialog-card {
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .dialog-card > .mdl-card__menu {
+    color: #fff;
+  }
+</style>
+
+<dialog id="dialog-cover">
+  <div class="dialog-card mdl-card mdl-shadow--2dp">
+
+    <img src="" alt>
+
+    <div class="mdl-card__menu">
+      <button id="cancel-card" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+
+    <div class="mdl-card__actions mdl-card--border">
+      <a id="close-card" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+        Close dialog
+      </a>
+    </div>
+  </div>
+</dialog>
+
+
+<script type="text/javascript" src="../../../demo/mdl-iframe-loader.js" charset="utf-8"></script>
+<script>
+  'use strict';
+  if(window.self !== window.top) {
+    mdlIframeLoader.load('../../../');
+  }
+
+  window.addEventListener('load', function() {
+    var lightboard = document.querySelector('#lightboard-for-lightbox');
+
+    var dialog = document.querySelector('#dialog-cover');
+    if (!('showModal' in dialog)) {
+      dialogPolyfill.registerDialog(dialog);
+    }
+
+    document.querySelector('#cancel-card').addEventListener('click', function() {
+      var ev = new CustomEvent('cancel', {
+        bubbles: false,
+        cancelable: true
+      });
+      if (dialog.dispatchEvent(ev)) {
+        if(dialog.open) dialog.close();
+      }
+    });
+    dialog.addEventListener('close', function(ev) {
+      console.log('dialog closed');
+    });
+    dialog.addEventListener('cancel', function(ev) {
+      console.log('dialog canceled');
+    });
+    document.querySelector('#close-card').onclick = function() {
+      dialog.close();
+    };
+
+
+
+    lightboard.addEventListener('select', function(e) {
+      //console.log('Slide selected. Source:', e.detail.source);
+      showImage(e.detail.source);
+    });
+
+    function showImage(slide) {
+
+      var slideAnchor = slide.querySelector('a');
+      var slideImg = slide.querySelector('img');
+      var img = dialog.querySelector('img');
+      img.setAttribute("src", slideAnchor.getAttribute('href'));
+      img.setAttribute("alt", slideImg.getAttribute('title'));
+
+      dialog.showModal();
+    }
+
+  });
+</script>
