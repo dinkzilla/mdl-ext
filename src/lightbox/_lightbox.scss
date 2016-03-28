@@ -1,34 +1,50 @@
-dialog {
+.mdlext-lightbox {
+  margin: 0 auto;
+  border-radius: 0;
   border: 0;
-  padding: 0;
-}
+  width: auto;
+  max-width: 100%;
+  position: relative;
 
-dialog[open] {
-  animation: goBig .4s .2s forwards;
-}
-dialog[open]::backdrop {
-  animation: fadeToNearBlack .4s forwards;
-}
+  figure {
+    margin: 0;
+    padding: 0;
 
-.backdrop {
-  animation: fadeToNearBlack .4s forwards;
-}
+    img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+    }
+    figcaption {
+      position: absolute;
+      bottom: 0;
+      max-width: 100%;
+      width: 100%;
+      height: 0;
+      max-height: 50%;
+      overflow: hidden;
+    }
+  }
+  .mdl-card__menu {
+    color: #fff;
+    z-index: 1;
+  }
+  footer.mdl-card__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-dialog img {
-  width: 100%; height: auto;
-}
+    .mdl-card__supporting-text {
+      flex: 1;
+      overflow: hidden;
+      padding: 0;
+      height: $card-supporting-text-line-height;
+      width: 100%
+      //max-width: calc(100% - 192px);
+    }
+    nav {
+      display: flex;
+    }
+  }
 
-dialog button {
-  border: none;
-  background: none;
-  font-size: 1.2rem;
 }
-
-@keyframes fadeToNearBlack {
-  to { background: rgba(0,0,0,0.86); }
-}
-@keyframes goBig {
-  to { opacity: 1; }
-}
-
-

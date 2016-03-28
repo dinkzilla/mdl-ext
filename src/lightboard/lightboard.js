@@ -89,6 +89,14 @@
       if(event.target !== this) {
         focus(slide);
 
+        // Remove 'aria-selected' attribute
+        [...this.children]
+          .filter( panel => panel.hasAttribute('aria-selected'))
+          .forEach( selected => selected.removeAttribute('aria-selected'));
+
+        // Set 'aria-selected' on current slide
+        slide.setAttribute('aria-selected', '');
+
         const evt = new CustomEvent('select', {
           bubbles: true,
           cancelable: true,

@@ -6,6 +6,7 @@ import jsdomify from 'jsdomify';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
 import { qs, qsa, removeChilds } from '../testutils/domHelpers';
+import MaterialExtLightbox from '../../src/lightbox/lightbox';
 
 describe('MaterialExtLightbox', () => {
 
@@ -36,6 +37,8 @@ describe('MaterialExtLightbox', () => {
     //requireUncached('../../src/lightboard/lightboard');
     //assert.isNotNull(window.MaterialExtLightboard, 'Expected MaterialExtAccordion not to be null');
     //global.MaterialExtLightboard = window.MaterialExtLightboard;
+
+    new MaterialExtLightbox();
   });
 
   after ( () => {

@@ -257,1105 +257,53 @@
  * Modified from: http://blustemy.io/drawing-pure-css-arrows-with-mixins/
  */
 
-/**
- * Copyright 2016 Leif Olsen. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+/* Extension to dialog-polyfill.css */
 
-/*
- * Copied/Modified/Inspired from/by:
- *   https://github.com/google/material-design-lite/tree/master/src/textfield
- *   http://codepen.io/etcpe9/pen/PqyOye,
- *   http://codepen.io/pudgereyem/pen/PqBxQx
- *   https://github.com/MEYVN-digital/mdl-selectfield
- *   https://github.com/mebibou/mdl-selectfield
- */
-
-/*
- * Modified from: http://blustemy.io/drawing-pure-css-arrows-with-mixins/
- */
-
-.mdlext-selectfield {
-  position: relative;
-  font-size: 16px;
-  display: inline-block;
-  box-sizing: border-box;
-  width: 300px;
-  max-width: 100%;
-  margin: 0;
-  padding: 20px 0;
-}
-
-.mdlext-selectfield *,
-.mdlext-selectfield *::before,
-.mdlext-selectfield *::after {
-  box-sizing: border-box;
-}
-
-.mdlext-selectfield .mdl-button {
-  position: absolute;
-  bottom: 20px;
-}
-
-.mdlext-selectfield:after {
-  content: '';
-  width: 0;
-  height: 0;
-  border: 0.375em solid transparent;
-  border-top-width: 0.65em;
-  border-bottom: none;
-  border-top-color: inherit;
-  position: absolute;
-  bottom: 1.8em;
-  right: 0.5em;
-  padding: 0;
-  pointer-events: none;
-}
-
-.mdlext-selectfield.is-disabled:after {
-  color: rgba(0,0,0, 0.12);
-}
-
-.mdlext-selectfield--align-right {
-  text-align: right;
-}
-
-.mdlext-selectfield--full-width {
-  width: 100%;
-}
-
-.mdlext-selectfield--expandable {
-  min-width: 32px;
-  width: auto;
-  min-height: 32px;
-}
-
-.mdlext-selectfield__select {
-  border: none;
-  border-bottom: 1px solid rgba(0,0,0, 0.12);
-  display: block;
-  font-size: 16px;
-  font-family: "Helvetica", "Arial", sans-serif;
-  margin: 0;
-  padding: 4px 0;
-  width: 100%;
-  background: none;
-  text-align: left;
-  color: inherit;
-  border-radius: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  text-indent: 0.01px;
-  text-overflow: "";
-}
-
-.mdlext-selectfield__select:-moz-focusring {
-  color: transparent;
-  text-shadow: 0 0 0 #000;
-}
-
-.mdlext-selectfield.is-focused .mdlext-selectfield__select {
-  outline: none;
-}
-
-.mdlext-selectfield.is-invalid .mdlext-selectfield__select {
-  border-color: rgb(213,0,0);
-  box-shadow: none;
-}
-
-fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__select,
-.mdlext-selectfield.is-disabled .mdlext-selectfield__select {
-  background-color: transparent;
-  border-bottom: 1px dotted rgba(0,0,0, 0.12);
-  color: rgba(0,0,0, 0.26);
-}
-
-.mdlext-selectfield__label {
-  bottom: 0;
-  color: rgba(0,0,0, 0.26);
-  font-size: 16px;
-  left: 0;
-  right: 0;
-  pointer-events: none;
-  position: absolute;
-  display: block;
-  top: 24px;
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-align: left;
-}
-
-.mdlext-selectfield.is-dirty .mdlext-selectfield__label,
-.mdlext-selectfield.has-placeholder .mdlext-selectfield__label {
-  visibility: hidden;
-}
-
-.mdlext-selectfield--floating-label .mdlext-selectfield__label {
-  transition-duration: 0.2s;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.mdlext-selectfield--floating-label.has-placeholder .mdlext-selectfield__label {
-  transition: none;
-}
-
-fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
-.mdlext-selectfield.is-disabled.is-disabled .mdlext-selectfield__label {
-  color: rgba(0,0,0, 0.26);
-}
-
-.mdlext-selectfield--floating-label.is-focused .mdlext-selectfield__label,
-.mdlext-selectfield--floating-label.is-dirty .mdlext-selectfield__label,
-.mdlext-selectfield--floating-label.is-dirty.is-dirty .mdlext-selectfield__label,
-.mdlext-selectfield--floating-label.has-placeholder .mdlext-selectfield__label {
-  color: rgb(63,81,181);
-  font-size: 12px;
-  top: 4px;
-  visibility: visible;
-}
-
-.mdlext-selectfield--floating-label.is-focused .mdlext-selectfield__expandable-holder .mdlext-selectfield__label,
-.mdlext-selectfield--floating-label.is-dirty .mdlext-selectfield__expandable-holder .mdlext-selectfield__label,
-.mdlext-selectfield--floating-label.has-placeholder .mdlext-selectfield__expandable-holder .mdlext-selectfield__label {
-  top: -16px;
-}
-
-.mdlext-selectfield--floating-label.is-invalid .mdlext-selectfield__label {
-  color: rgb(213,0,0);
-  font-size: 12px;
-}
-
-.mdlext-selectfield__label:after {
-  background-color: rgb(63,81,181);
-  bottom: 20px;
-  content: '';
-  height: 2px;
-  left: 45%;
-  position: absolute;
-  transition-duration: 0.2s;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  visibility: hidden;
-  width: 10px;
-}
-
-.mdlext-selectfield.is-focused .mdlext-selectfield__label:after {
-  left: 0;
-  visibility: visible;
-  width: 100%;
-}
-
-.mdlext-selectfield.is-invalid .mdlext-selectfield__label:after {
-  background-color: rgb(213,0,0);
-}
-
-.mdlext-selectfield__error {
-  color: rgb(213,0,0);
-  position: absolute;
-  font-size: 12px;
-  margin-top: 3px;
-  visibility: hidden;
-  display: block;
-}
-
-.mdlext-selectfield.is-invalid .mdlext-selectfield__error {
-  visibility: visible;
-}
-
-.mdlext-selectfield__expandable-holder {
-  display: inline-block;
-  position: relative;
-  margin-left: 32px;
-  transition-duration: 0.2s;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  max-width: 0.1px;
-}
-
-.mdlext-selectfield.is-focused .mdlext-selectfield__expandable-holder,
-.mdlext-selectfield.is-dirty .mdlext-selectfield__expandable-holder {
-  max-width: 600px;
-}
-
-.mdlext-selectfield__expandable-holder .mdlext-selectfield__label:after {
-  bottom: 0;
-}
-
-/**
- * Copyright 2016 Leif Olsen. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
- * The bordered fields are based on / inspired by this CodePen: http://codepen.io/prajwal078/pen/LVJZXz?editors=010
- */
-
-/**
- * Copyright 2016 Leif Olsen. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/* ==========     Accordion     ========== */
-
-/* ==========  Bordered fields  ========== */
-
-/* ==========  Lightboard  ========== */
-
-.mdlext-bordered-fields {
-  box-sizing: border-box;
-}
-
-.mdlext-bordered-fields *,
-.mdlext-bordered-fields *::before,
-.mdlext-bordered-fields *::after,
-.mdlext-bordered-fields input[type="search"] {
-  box-sizing: border-box;
-}
-
-.mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__input:required,
-.mdlext-bordered-fields .mdl-textfield.is-dirty .mdlext-selectfield__select:required,
-.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__input:required,
-.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:required {
-  border-color: rgba(0,0,0, 0.12);
-  background-color: rgba(249, 234, 208, 0.1);
-}
-
-.mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__input:focus,
-.mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__input:required:focus,
-.mdlext-bordered-fields .mdl-textfield.is-dirty .mdlext-selectfield__select:focus,
-.mdlext-bordered-fields .mdl-textfield.is-dirty .mdlext-selectfield__select:required:focus,
-.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__input:focus,
-.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__input:required:focus,
-.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:focus,
-.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:required:focus {
-  border-color: #458ebd;
-  background-color: rgba(217, 232, 241, 0.2);
-}
-
-.mdlext-bordered-fields .mdl-textfield .mdl-textfield__input,
-.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select,
-.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input,
-.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(0,0,0, 0.12);
-  border-radius: 3px;
-  height: 48px;
-  padding-top: 20px;
-  padding-right: 8px;
-  padding-bottom: 0;
-  padding-left: 8px;
-}
-
-.mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:disabled,
-.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:disabled,
-.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:disabled,
-.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:disabled {
-  color: rgba(0,0,0, 0.26);
-  background-color: rgba(228, 236, 243, 0.25);
-  border-color: #c6ccd1;
-}
-
-.mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:required,
-.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:required,
-.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:required,
-.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:required {
-  background-color: rgba(249, 234, 208, 0.1);
-  border-color: #e59617;
-}
-
-.mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:focus,
-.mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:required:focus,
-.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:focus,
-.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:required:focus,
-.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:focus,
-.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:required:focus,
-.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:focus,
-.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:required:focus {
-  background-color: rgba(217, 232, 241, 0.2);
-  border-color: #458ebd;
-}
-
-.mdlext-bordered-fields .mdl-textfield.is-focused .mdl-textfield__label,
-.mdlext-bordered-fields .mdl-textfield.is-focused .mdlext-selectfield__label,
-.mdlext-bordered-fields .mdlext-selectfield.is-focused .mdl-textfield__label,
-.mdlext-bordered-fields .mdlext-selectfield.is-focused .mdlext-selectfield__label {
-  top: 20px;
-}
-
-.mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__label,
-.mdlext-bordered-fields .mdl-textfield.is-dirty .mdlext-selectfield__label,
-.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__label,
-.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__label {
-  top: 20px;
-  visibility: visible;
-}
-
-.mdlext-bordered-fields .mdl-textfield .mdl-textfield__label,
-.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__label,
-.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__label,
-.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__label {
-  padding-left: 8px;
-  top: 35px;
-}
-
-.mdlext-bordered-fields .mdl-textfield .mdl-textfield__label:after,
-.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__label:after,
-.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__label:after,
-.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__label:after {
-  background-color: transparent !important;
-  visibility: hidden !important;
-}
-
-.mdlext-bordered-fields .mdl-textfield.has-placeholder .mdl-textfield__label,
-.mdlext-bordered-fields .mdl-textfield.has-placeholder .mdlext-selectfield__label,
-.mdlext-bordered-fields .mdl-textfield.has-placeholder .mdl-textfield__label,
-.mdlext-bordered-fields .mdl-textfield.has-placeholder .mdlext-selectfield__label,
-.mdlext-bordered-fields .mdlext-selectfield.has-placeholder .mdl-textfield__label,
-.mdlext-bordered-fields .mdlext-selectfield.has-placeholder .mdlext-selectfield__label,
-.mdlext-bordered-fields .mdlext-selectfield.has-placeholder .mdl-textfield__label,
-.mdlext-bordered-fields .mdlext-selectfield.has-placeholder .mdlext-selectfield__label {
-  top: 20px;
-}
-
-.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > i,
-.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > .mdl-button,
-.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-right > i,
-.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-right > .mdl-button,
-.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > i,
-.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > .mdl-button,
-.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-right > i,
-.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-right > .mdl-button {
-  position: absolute;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-}
-
-.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > i:first-child,
-.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > .mdl-button:first-child,
-.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > i:first-child,
-.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > .mdl-button:first-child {
-  left: 4px;
-}
-
-.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > i ~ .mdl-textfield__input,
-.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > .mdl-button ~ .mdl-textfield__input,
-.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > i ~ .mdlext-selectfield__select,
-.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > .mdl-button ~ .mdlext-selectfield__select,
-.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > i ~ .mdl-textfield__input,
-.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > .mdl-button ~ .mdl-textfield__input,
-.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > i ~ .mdlext-selectfield__select,
-.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > .mdl-button ~ .mdlext-selectfield__select {
-  padding-left: 32px;
-}
-
-.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > i ~ .mdl-textfield__label,
-.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > .mdl-button ~ .mdl-textfield__label,
-.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > i ~ .mdl-textfield__label,
-.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > .mdl-button ~ .mdl-textfield__label {
-  left: 28px;
-}
-
-.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > i ~ .mdlext-selectfield__label,
-.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > .mdl-button ~ .mdlext-selectfield__label,
-.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > i ~ .mdlext-selectfield__label,
-.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > .mdl-button ~ .mdlext-selectfield__label {
-  left: 24px;
-}
-
-.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-right > .mdl-textfield__input,
-.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-right > .mdl-textfield__input {
-  padding-right: 32px;
-}
-
-.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-right > i:last-child,
-.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-right > .mdl-button:last-child,
-.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-right > i:last-child,
-.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-right > .mdl-button:last-child {
-  left: auto;
-  right: 4px;
-}
-
-.mdlext-bordered-fields .mdl-textfield.is-disabled i,
-.mdlext-bordered-fields .mdl-textfield.is-disabled .mdl-button,
-.mdlext-bordered-fields .mdlext-selectfield.is-disabled i,
-.mdlext-bordered-fields .mdlext-selectfield.is-disabled .mdl-button {
-  color: rgba(0,0,0, 0.12);
-}
-
-/**
- * Copyright 2016 Leif Olsen. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
- * Accordion
- * The Accordion CSS are based on / inspired by this CodePen: http://codepen.io/aann/pen/dPqBML
- */
-
-/**
- * Copyright 2016 Leif Olsen. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/* ==========     Accordion     ========== */
-
-/* ==========  Bordered fields  ========== */
-
-/* ==========  Lightboard  ========== */
-
-ul.mdlext-accordion {
-  list-style: none;
-}
-
-.mdlext-accordion {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: row nowrap;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
-  box-sizing: border-box;
-}
-
-.mdlext-accordion *,
-.mdlext-accordion *::before,
-.mdlext-accordion *::after,
-.mdlext-accordion input[type="search"] {
-  box-sizing: border-box;
-}
-
-.mdlext-accordion .mdlext-accordion__panel {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  width: 48px;
-  overflow: hidden;
-  transition: -webkit-flex .15s ease-in;
-  transition: flex .15s ease-in;
-  transition: flex .15s ease-in, -webkit-flex .15s ease-in, -ms-flex .15s ease-in;
-  -webkit-flex: 0 0 auto;
-      -ms-flex: 0 0 auto;
-          flex: 0 0 auto;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: row nowrap;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
-}
-
-.mdlext-accordion .mdlext-accordion__panel[open] {
-  -webkit-flex: 1 1 auto;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: row nowrap;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  position: relative;
-  min-width: 48px;
-  margin: 0;
-  padding: 0;
-  background-color: rgba(192, 192, 192, 0.3);
-  border-right: 1px solid rgba(192, 192, 192, 0.5);
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header:hover {
-  background-color: rgba(192, 192, 192, 0.4);
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header a.mdlext-accordion__panel__header__tabstop,
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container {
-  text-decoration: none;
-  overflow: hidden;
-  font-size: 0;
-  position: absolute;
-  top: 1px;
-  right: 0px;
-  bottom: 0px;
-  left: 1px;
-  z-index: 1;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header a.mdlext-accordion__panel__header__tabstop:focus,
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container:focus {
-  outline: thin solid #999999;
-  outline-offset: -1px;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container {
-  width: 99%;
-  height: 99%;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container .mdl-ripple {
-  background: rgb(63,81,181);
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform {
-  white-space: nowrap;
-  margin: 0;
-  padding: 0 8px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 48px;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: row nowrap;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-transform: rotate(-90deg) translateY(100%);
-          transform: rotate(-90deg) translateY(100%);
-  -webkit-transform-origin: bottom left;
-          transform-origin: bottom left;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > * {
-  margin: 0;
-  padding: 0;
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > i,
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > img {
-  -webkit-flex: none;
-      -ms-flex: none;
-          flex: none;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > i + *,
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > img + * {
-  margin-left: 8px;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__state:after {
-  content: '+';
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__content {
-  width: 100%;
-  padding: 8px;
-  overflow: hidden;
-}
-
-.mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__state:after {
-  content: '-';
-}
-
-.mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__header {
-  background-color: rgba(192, 192, 192, 0.5);
-  border-right: 1px solid rgba(192, 192, 192, 0.6);
-}
-
-.mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__content {
-  overflow: auto;
-  -webkit-animation: mdlext-accordion__panel-open-keyframe .4s linear;
-          animation: mdlext-accordion__panel-open-keyframe .4s linear;
-}
-
-.mdlext-accordion.mdlext-accordion--vertical {
-  -webkit-flex-flow: column nowrap;
-      -ms-flex-flow: column nowrap;
-          flex-flow: column nowrap;
-}
-
-.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel {
-  width: 100%;
-  height: 48px;
-  -webkit-flex: none;
-      -ms-flex: none;
-          flex: none;
-  -webkit-flex-flow: column nowrap;
-      -ms-flex-flow: column nowrap;
-          flex-flow: column nowrap;
-}
-
-.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel .mdlext-accordion__panel__header {
-  height: 48px;
-  min-height: 48px;
-  border-right: 0;
-  border-bottom: 1px solid rgba(192, 192, 192, 0.5);
-}
-
-.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform {
-  white-space: normal;
-  position: relative;
-  width: 100%;
-  bottom: auto;
-  left: auto;
-  -webkit-transform: rotate(0deg);
-          transform: rotate(0deg);
-}
-
-.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel[open] {
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-}
-
-.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel[open] .mdlext-accordion__panel__header {
-  border-right: 0;
-  border-bottom: 1px solid rgba(192, 192, 192, 0.6);
-}
-
-/*
- * Animating overflow:hidden -> overflow:auto, see: https://jdsteinbach.com/css/snippet-animate-display-transform/
- * Why do we need to animate this? The text overflow auto should be set after the accordion animation has completed!
- * If we omit this, the the overflow scrollbar will flicker during the accordion open transition
- */
-
-@-webkit-keyframes mdlext-accordion__panel-open-keyframe {
-  0% {
-    overflow: hidden;
-  }
-
-  100% {
-    overflow: auto;
-  }
-}
-
-@keyframes mdlext-accordion__panel-open-keyframe {
-  0% {
-    overflow: hidden;
-  }
-
-  100% {
-    overflow: auto;
-  }
-}
-
-/**
- * Copyright 2016 Leif Olsen. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
- * A lightboard is a translucent surface illuminated from behind, used for situations
- * where a shape laid upon the surface needs to be seen with high contrast. In the "old days" of photography
- * photograpers used a lightboard to get a quick view of their slides. The goal is to create a responsive lightbox
- * design, based on flex layout, similar to what is used in Adobe LightRoom to browse images.
- */
-
-/**
- * Copyright 2016 Leif Olsen. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/* ==========     Accordion     ========== */
-
-/* ==========  Bordered fields  ========== */
-
-/* ==========  Lightboard  ========== */
-
-ul.mdlext-lightboard {
-  list-style: none;
-}
-
-.mdlext-lightboard {
-  box-sizing: border-box;
-  margin: 0 auto 0 auto;
-  padding: 0;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: row wrap;
-      -ms-flex-flow: row wrap;
-          flex-flow: row wrap;
-  -webkit-align-items: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
-}
-
-.mdlext-lightboard *,
-.mdlext-lightboard *::before,
-.mdlext-lightboard *::after,
-.mdlext-lightboard input[type="search"] {
-  box-sizing: border-box;
-}
-
-.mdlext-lightboard .mdlext-lightboard__slide {
-  background-color: #F8F8F8;
-  border: 1px solid #D8D8D8;
-  border-radius: 5px;
-  box-shadow: 2px 2px 6px -1px rgba(219, 215, 219, 0.5);
-  position: relative;
-  display: block;
-  max-width: 250px;
-}
-
-.mdlext-lightboard .mdlext-lightboard__slide:before {
-  content: '';
-  display: block;
-  padding-top: 100%;
-}
-
-.mdlext-lightboard .mdlext-lightboard__slide:hover,
-.mdlext-lightboard .mdlext-lightboard__slide:active,
-.mdlext-lightboard .mdlext-lightboard__slide:focus {
-  border-color: #B8B8B8;
-  background-color: #E8E8E8;
-  box-shadow: 2px 2px 12px -1px #dbd7db;
-}
-
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame,
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container {
-  text-decoration: none;
-  display: block;
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  outline: none;
-}
-
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame:focus,
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container:focus {
-  outline: thin dotted #777777;
-  outline-offset: -4px;
-}
-
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame .mdl-ripple,
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container .mdl-ripple {
-  background: rgb(63,81,181);
-}
-
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure,
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container figure {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure img,
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container figure img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 3px;
-}
-
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure figcaption,
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container figure figcaption {
-  position: absolute;
-  bottom: -2px;
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 100%;
-  width: 100%;
-  text-align: center;
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 14px;
-  color: rgb(189,189,189);
-  text-overflow: ellipsis;
-}
-
-.mdlext-lightboard {
-  padding: calc((0px - 2px) / 2);
-}
-
-.mdlext-lightboard .mdlext-lightboard__slide {
-  margin: calc(2px / 2);
-  width: calc(1 / 2 * 100% - 2px);
-}
-
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
-  margin: 8px;
-}
-
-.mdlext-lightboard.mdlext-lightboard--no-spacing {
-  padding: 0;
-}
-
-.mdlext-lightboard.mdlext-lightboard--no-spacing .mdlext-lightboard__slide {
-  margin: 0;
-  width: calc(1 / 2 * 100%);
-}
-
-/**
- * Copyright 2016 Leif Olsen. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/* ==========     Accordion     ========== */
-
-/* ==========  Bordered fields  ========== */
-
-/* ==========  Lightboard  ========== */
-
-@media (min-width: 480px) and (max-width: 659px) {
-  .mdlext-lightboard {
-    padding: calc((0px - 4px) / 2);
-  }
-
-  .mdlext-lightboard .mdlext-lightboard__slide {
-    margin: calc(4px / 2);
-    width: calc(1 / 4 * 100% - 4px);
-  }
-
-  .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
-    margin: 8px;
-  }
-
-  .mdlext-lightboard.mdlext-lightboard--no-spacing {
-    padding: 0;
-  }
-
-  .mdlext-lightboard.mdlext-lightboard--no-spacing .mdlext-lightboard__slide {
-    margin: 0;
-    width: calc(1 / 4 * 100%);
-  }
-}
-
-@media (min-width: 660px) and (max-width: 839px) {
-  .mdlext-lightboard {
-    padding: calc((0px - 4px) / 2);
-  }
-
-  .mdlext-lightboard .mdlext-lightboard__slide {
-    margin: calc(4px / 2);
-    width: calc(1 / 5 * 100% - 4px);
-  }
-
-  .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
-    margin: 8px;
-  }
-
-  .mdlext-lightboard.mdlext-lightboard--no-spacing {
-    padding: 0;
-  }
-
-  .mdlext-lightboard.mdlext-lightboard--no-spacing .mdlext-lightboard__slide {
-    margin: 0;
-    width: calc(1 / 5 * 100%);
-  }
-}
-
-@media (min-width: 840px) and (max-width: 1199px) {
-  .mdlext-lightboard {
-    padding: calc((0px - 8px) / 2);
-  }
-
-  .mdlext-lightboard .mdlext-lightboard__slide {
-    margin: calc(8px / 2);
-    width: calc(1 / 6 * 100% - 8px);
-  }
-
-  .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
-    margin: 12px;
-  }
-
-  .mdlext-lightboard.mdlext-lightboard--no-spacing {
-    padding: 0;
-  }
-
-  .mdlext-lightboard.mdlext-lightboard--no-spacing .mdlext-lightboard__slide {
-    margin: 0;
-    width: calc(1 / 6 * 100%);
-  }
-}
-
-@media (min-width: 1200px) {
-  .mdlext-lightboard {
-    padding: calc((0px - 8px) / 2);
-  }
-
-  .mdlext-lightboard .mdlext-lightboard__slide {
-    margin: calc(8px / 2);
-    width: calc(1 / 7 * 100% - 8px);
-  }
-
-  .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
-    margin: 12px;
-  }
-
-  .mdlext-lightboard.mdlext-lightboard--no-spacing {
-    padding: 0;
-  }
-
-  .mdlext-lightboard.mdlext-lightboard--no-spacing .mdlext-lightboard__slide {
-    margin: 0;
-    width: calc(1 / 7 * 100%);
-  }
-}
-
-dialog {
+dialog.mdlext-dialog {
   border: 0;
   padding: 0;
+  opacity: 0;
 }
 
-dialog[open] {
-  -webkit-animation: goBig .4s .2s forwards;
-          animation: goBig .4s .2s forwards;
+dialog.mdlext-dialog[open] {
+  -webkit-animation: mdlext-open-dialog .5s .2s forwards;
+          animation: mdlext-open-dialog .5s .2s forwards;
 }
 
-dialog[open]::-webkit-backdrop {
-  -webkit-animation: fadeToNearBlack .4s forwards;
-          animation: fadeToNearBlack .4s forwards;
+dialog.mdlext-dialog[open]::-webkit-backdrop {
+  -webkit-animation: mdlext-darken-backdrop .2s forwards;
+          animation: mdlext-darken-backdrop .2s forwards;
 }
 
-dialog[open]::backdrop {
-  -webkit-animation: fadeToNearBlack .4s forwards;
-          animation: fadeToNearBlack .4s forwards;
+dialog.mdlext-dialog[open]::backdrop {
+  -webkit-animation: mdlext-darken-backdrop .2s forwards;
+          animation: mdlext-darken-backdrop .2s forwards;
 }
 
-.backdrop {
-  -webkit-animation: fadeToNearBlack .4s forwards;
-          animation: fadeToNearBlack .4s forwards;
+dialog.mdlext-dialog[open] + .backdrop {
+  -webkit-animation: mdlext-darken-backdrop .2s forwards;
+          animation: mdlext-darken-backdrop .2s forwards;
 }
 
-dialog img {
-  width: 100%;
-  height: auto;
-}
-
-dialog button {
-  border: none;
-  background: none;
-  font-size: 1.2rem;
-}
-
-@-webkit-keyframes fadeToNearBlack {
+@-webkit-keyframes mdlext-darken-backdrop {
   to {
-    background: rgba(0, 0, 0, 0.86);
+    background: rgba(0, 0, 0, 0.8);
   }
 }
 
-@keyframes fadeToNearBlack {
+@keyframes mdlext-darken-backdrop {
   to {
-    background: rgba(0, 0, 0, 0.86);
+    background: rgba(0, 0, 0, 0.8);
   }
 }
 
-@-webkit-keyframes goBig {
+@-webkit-keyframes mdlext-open-dialog {
   to {
     opacity: 1;
   }
 }
 
-@keyframes goBig {
+@keyframes mdlext-open-dialog {
   to {
     opacity: 1;
   }
@@ -2398,6 +1346,1113 @@ dialog button {
   .mdlext-grid.mdlext-grid--no-spacing >
     .mdlext-cell--11-offset-desktop.mdlext-cell--11-offset-desktop {
     margin-left: 91.66667%;
+  }
+}
+
+/**
+ * Copyright 2016 Leif Olsen. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+ * A lightboard is a translucent surface illuminated from behind, used for situations
+ * where a shape laid upon the surface needs to be seen with high contrast. In the "old days" of photography
+ * photograpers used a lightboard to get a quick view of their slides. The goal is to create a responsive lightbox
+ * design, based on flex layout, similar to what is used in Adobe LightRoom to browse images.
+ */
+
+/**
+ * Copyright 2016 Leif Olsen. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* ==========     Accordion     ========== */
+
+/* ==========  Bordered fields  ========== */
+
+/* ==========  Lightboard  ========== */
+
+ul.mdlext-lightboard {
+  list-style: none;
+}
+
+.mdlext-lightboard {
+  box-sizing: border-box;
+  margin: 0 auto 0 auto;
+  padding: 0;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-align-items: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+.mdlext-lightboard *,
+.mdlext-lightboard *::before,
+.mdlext-lightboard *::after,
+.mdlext-lightboard input[type="search"] {
+  box-sizing: border-box;
+}
+
+.mdlext-lightboard .mdlext-lightboard__slide {
+  background-color: #F8F8F8;
+  border: 1px solid #D8D8D8;
+  border-radius: 5px;
+  box-shadow: 2px 2px 6px -1px rgba(219, 215, 219, 0.5);
+  position: relative;
+  display: block;
+  max-width: 250px;
+}
+
+.mdlext-lightboard .mdlext-lightboard__slide:before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+.mdlext-lightboard .mdlext-lightboard__slide:hover,
+.mdlext-lightboard .mdlext-lightboard__slide:active,
+.mdlext-lightboard .mdlext-lightboard__slide:focus {
+  border-color: #B8B8B8;
+  background-color: #E8E8E8;
+  box-shadow: 2px 2px 12px -1px #dbd7db;
+}
+
+.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame,
+.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container {
+  text-decoration: none;
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  outline: none;
+}
+
+.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame:focus,
+.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container:focus {
+  outline: thin dotted #777777;
+  outline-offset: -4px;
+}
+
+.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame .mdl-ripple,
+.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container .mdl-ripple {
+  background: rgb(63,81,181);
+}
+
+.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure,
+.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container figure {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure img,
+.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container figure img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 3px;
+}
+
+.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure figcaption,
+.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container figure figcaption {
+  position: absolute;
+  bottom: -2px;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+  width: 100%;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 14px;
+  color: rgb(189,189,189);
+  text-overflow: ellipsis;
+}
+
+.mdlext-lightboard {
+  padding: calc((0px - 2px) / 2);
+}
+
+.mdlext-lightboard .mdlext-lightboard__slide {
+  margin: calc(2px / 2);
+  width: calc(1 / 2 * 100% - 2px);
+}
+
+.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
+  margin: 8px;
+}
+
+.mdlext-lightboard.mdlext-lightboard--no-spacing {
+  padding: 0;
+}
+
+.mdlext-lightboard.mdlext-lightboard--no-spacing .mdlext-lightboard__slide {
+  margin: 0;
+  width: calc(1 / 2 * 100%);
+}
+
+/**
+ * Copyright 2016 Leif Olsen. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* ==========     Accordion     ========== */
+
+/* ==========  Bordered fields  ========== */
+
+/* ==========  Lightboard  ========== */
+
+@media (min-width: 480px) and (max-width: 659px) {
+  .mdlext-lightboard {
+    padding: calc((0px - 4px) / 2);
+  }
+
+  .mdlext-lightboard .mdlext-lightboard__slide {
+    margin: calc(4px / 2);
+    width: calc(1 / 4 * 100% - 4px);
+  }
+
+  .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
+    margin: 8px;
+  }
+
+  .mdlext-lightboard.mdlext-lightboard--no-spacing {
+    padding: 0;
+  }
+
+  .mdlext-lightboard.mdlext-lightboard--no-spacing .mdlext-lightboard__slide {
+    margin: 0;
+    width: calc(1 / 4 * 100%);
+  }
+}
+
+@media (min-width: 660px) and (max-width: 839px) {
+  .mdlext-lightboard {
+    padding: calc((0px - 4px) / 2);
+  }
+
+  .mdlext-lightboard .mdlext-lightboard__slide {
+    margin: calc(4px / 2);
+    width: calc(1 / 5 * 100% - 4px);
+  }
+
+  .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
+    margin: 8px;
+  }
+
+  .mdlext-lightboard.mdlext-lightboard--no-spacing {
+    padding: 0;
+  }
+
+  .mdlext-lightboard.mdlext-lightboard--no-spacing .mdlext-lightboard__slide {
+    margin: 0;
+    width: calc(1 / 5 * 100%);
+  }
+}
+
+@media (min-width: 840px) and (max-width: 1199px) {
+  .mdlext-lightboard {
+    padding: calc((0px - 8px) / 2);
+  }
+
+  .mdlext-lightboard .mdlext-lightboard__slide {
+    margin: calc(8px / 2);
+    width: calc(1 / 6 * 100% - 8px);
+  }
+
+  .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
+    margin: 12px;
+  }
+
+  .mdlext-lightboard.mdlext-lightboard--no-spacing {
+    padding: 0;
+  }
+
+  .mdlext-lightboard.mdlext-lightboard--no-spacing .mdlext-lightboard__slide {
+    margin: 0;
+    width: calc(1 / 6 * 100%);
+  }
+}
+
+@media (min-width: 1200px) {
+  .mdlext-lightboard {
+    padding: calc((0px - 8px) / 2);
+  }
+
+  .mdlext-lightboard .mdlext-lightboard__slide {
+    margin: calc(8px / 2);
+    width: calc(1 / 7 * 100% - 8px);
+  }
+
+  .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure {
+    margin: 12px;
+  }
+
+  .mdlext-lightboard.mdlext-lightboard--no-spacing {
+    padding: 0;
+  }
+
+  .mdlext-lightboard.mdlext-lightboard--no-spacing .mdlext-lightboard__slide {
+    margin: 0;
+    width: calc(1 / 7 * 100%);
+  }
+}
+
+.mdlext-lightbox {
+  margin: 0 auto;
+  border-radius: 0;
+  border: 0;
+  width: auto;
+  max-width: 100%;
+  position: relative;
+}
+
+.mdlext-lightbox figure {
+  margin: 0;
+  padding: 0;
+}
+
+.mdlext-lightbox figure img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.mdlext-lightbox figure figcaption {
+  position: absolute;
+  bottom: 0;
+  max-width: 100%;
+  width: 100%;
+  height: 0;
+  max-height: 50%;
+  overflow: hidden;
+}
+
+.mdlext-lightbox .mdl-card__menu {
+  color: #fff;
+  z-index: 1;
+}
+
+.mdlext-lightbox footer.mdl-card__actions {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.mdlext-lightbox footer.mdl-card__actions .mdl-card__supporting-text {
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  overflow: hidden;
+  padding: 0;
+  height: 18px;
+  width: 100%;
+}
+
+.mdlext-lightbox footer.mdl-card__actions nav {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+/**
+ * Copyright 2016 Leif Olsen. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+ * Copied/Modified/Inspired from/by:
+ *   https://github.com/google/material-design-lite/tree/master/src/textfield
+ *   http://codepen.io/etcpe9/pen/PqyOye,
+ *   http://codepen.io/pudgereyem/pen/PqBxQx
+ *   https://github.com/MEYVN-digital/mdl-selectfield
+ *   https://github.com/mebibou/mdl-selectfield
+ */
+
+/*
+ * Modified from: http://blustemy.io/drawing-pure-css-arrows-with-mixins/
+ */
+
+.mdlext-selectfield {
+  position: relative;
+  font-size: 16px;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 300px;
+  max-width: 100%;
+  margin: 0;
+  padding: 20px 0;
+}
+
+.mdlext-selectfield *,
+.mdlext-selectfield *::before,
+.mdlext-selectfield *::after {
+  box-sizing: border-box;
+}
+
+.mdlext-selectfield .mdl-button {
+  position: absolute;
+  bottom: 20px;
+}
+
+.mdlext-selectfield:after {
+  content: '';
+  width: 0;
+  height: 0;
+  border: 0.375em solid transparent;
+  border-top-width: 0.65em;
+  border-bottom: none;
+  border-top-color: inherit;
+  position: absolute;
+  bottom: 1.8em;
+  right: 0.5em;
+  padding: 0;
+  pointer-events: none;
+}
+
+.mdlext-selectfield.is-disabled:after {
+  color: rgba(0,0,0, 0.12);
+}
+
+.mdlext-selectfield--align-right {
+  text-align: right;
+}
+
+.mdlext-selectfield--full-width {
+  width: 100%;
+}
+
+.mdlext-selectfield--expandable {
+  min-width: 32px;
+  width: auto;
+  min-height: 32px;
+}
+
+.mdlext-selectfield__select {
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0, 0.12);
+  display: block;
+  font-size: 16px;
+  font-family: "Helvetica", "Arial", sans-serif;
+  margin: 0;
+  padding: 4px 0;
+  width: 100%;
+  background: none;
+  text-align: left;
+  color: inherit;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-indent: 0.01px;
+  text-overflow: "";
+}
+
+.mdlext-selectfield__select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
+}
+
+.mdlext-selectfield.is-focused .mdlext-selectfield__select {
+  outline: none;
+}
+
+.mdlext-selectfield.is-invalid .mdlext-selectfield__select {
+  border-color: rgb(213,0,0);
+  box-shadow: none;
+}
+
+fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__select,
+.mdlext-selectfield.is-disabled .mdlext-selectfield__select {
+  background-color: transparent;
+  border-bottom: 1px dotted rgba(0,0,0, 0.12);
+  color: rgba(0,0,0, 0.26);
+}
+
+.mdlext-selectfield__label {
+  bottom: 0;
+  color: rgba(0,0,0, 0.26);
+  font-size: 16px;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  position: absolute;
+  display: block;
+  top: 24px;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.mdlext-selectfield.is-dirty .mdlext-selectfield__label,
+.mdlext-selectfield.has-placeholder .mdlext-selectfield__label {
+  visibility: hidden;
+}
+
+.mdlext-selectfield--floating-label .mdlext-selectfield__label {
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mdlext-selectfield--floating-label.has-placeholder .mdlext-selectfield__label {
+  transition: none;
+}
+
+fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
+.mdlext-selectfield.is-disabled.is-disabled .mdlext-selectfield__label {
+  color: rgba(0,0,0, 0.26);
+}
+
+.mdlext-selectfield--floating-label.is-focused .mdlext-selectfield__label,
+.mdlext-selectfield--floating-label.is-dirty .mdlext-selectfield__label,
+.mdlext-selectfield--floating-label.is-dirty.is-dirty .mdlext-selectfield__label,
+.mdlext-selectfield--floating-label.has-placeholder .mdlext-selectfield__label {
+  color: rgb(63,81,181);
+  font-size: 12px;
+  top: 4px;
+  visibility: visible;
+}
+
+.mdlext-selectfield--floating-label.is-focused .mdlext-selectfield__expandable-holder .mdlext-selectfield__label,
+.mdlext-selectfield--floating-label.is-dirty .mdlext-selectfield__expandable-holder .mdlext-selectfield__label,
+.mdlext-selectfield--floating-label.has-placeholder .mdlext-selectfield__expandable-holder .mdlext-selectfield__label {
+  top: -16px;
+}
+
+.mdlext-selectfield--floating-label.is-invalid .mdlext-selectfield__label {
+  color: rgb(213,0,0);
+  font-size: 12px;
+}
+
+.mdlext-selectfield__label:after {
+  background-color: rgb(63,81,181);
+  bottom: 20px;
+  content: '';
+  height: 2px;
+  left: 45%;
+  position: absolute;
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  visibility: hidden;
+  width: 10px;
+}
+
+.mdlext-selectfield.is-focused .mdlext-selectfield__label:after {
+  left: 0;
+  visibility: visible;
+  width: 100%;
+}
+
+.mdlext-selectfield.is-invalid .mdlext-selectfield__label:after {
+  background-color: rgb(213,0,0);
+}
+
+.mdlext-selectfield__error {
+  color: rgb(213,0,0);
+  position: absolute;
+  font-size: 12px;
+  margin-top: 3px;
+  visibility: hidden;
+  display: block;
+}
+
+.mdlext-selectfield.is-invalid .mdlext-selectfield__error {
+  visibility: visible;
+}
+
+.mdlext-selectfield__expandable-holder {
+  display: inline-block;
+  position: relative;
+  margin-left: 32px;
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 0.1px;
+}
+
+.mdlext-selectfield.is-focused .mdlext-selectfield__expandable-holder,
+.mdlext-selectfield.is-dirty .mdlext-selectfield__expandable-holder {
+  max-width: 600px;
+}
+
+.mdlext-selectfield__expandable-holder .mdlext-selectfield__label:after {
+  bottom: 0;
+}
+
+/**
+ * Copyright 2016 Leif Olsen. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+ * The bordered fields are based on / inspired by this CodePen: http://codepen.io/prajwal078/pen/LVJZXz?editors=010
+ */
+
+/**
+ * Copyright 2016 Leif Olsen. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* ==========     Accordion     ========== */
+
+/* ==========  Bordered fields  ========== */
+
+/* ==========  Lightboard  ========== */
+
+.mdlext-bordered-fields {
+  box-sizing: border-box;
+}
+
+.mdlext-bordered-fields *,
+.mdlext-bordered-fields *::before,
+.mdlext-bordered-fields *::after,
+.mdlext-bordered-fields input[type="search"] {
+  box-sizing: border-box;
+}
+
+.mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__input:required,
+.mdlext-bordered-fields .mdl-textfield.is-dirty .mdlext-selectfield__select:required,
+.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__input:required,
+.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:required {
+  border-color: rgba(0,0,0, 0.12);
+  background-color: rgba(249, 234, 208, 0.1);
+}
+
+.mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__input:focus,
+.mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__input:required:focus,
+.mdlext-bordered-fields .mdl-textfield.is-dirty .mdlext-selectfield__select:focus,
+.mdlext-bordered-fields .mdl-textfield.is-dirty .mdlext-selectfield__select:required:focus,
+.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__input:focus,
+.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__input:required:focus,
+.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:focus,
+.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:required:focus {
+  border-color: #458ebd;
+  background-color: rgba(217, 232, 241, 0.2);
+}
+
+.mdlext-bordered-fields .mdl-textfield .mdl-textfield__input,
+.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select,
+.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input,
+.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0,0,0, 0.12);
+  border-radius: 3px;
+  height: 48px;
+  padding-top: 20px;
+  padding-right: 8px;
+  padding-bottom: 0;
+  padding-left: 8px;
+}
+
+.mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:disabled,
+.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:disabled,
+.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:disabled,
+.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:disabled {
+  color: rgba(0,0,0, 0.26);
+  background-color: rgba(228, 236, 243, 0.25);
+  border-color: #c6ccd1;
+}
+
+.mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:required,
+.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:required,
+.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:required,
+.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:required {
+  background-color: rgba(249, 234, 208, 0.1);
+  border-color: #e59617;
+}
+
+.mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:focus,
+.mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:required:focus,
+.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:focus,
+.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:required:focus,
+.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:focus,
+.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:required:focus,
+.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:focus,
+.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:required:focus {
+  background-color: rgba(217, 232, 241, 0.2);
+  border-color: #458ebd;
+}
+
+.mdlext-bordered-fields .mdl-textfield.is-focused .mdl-textfield__label,
+.mdlext-bordered-fields .mdl-textfield.is-focused .mdlext-selectfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.is-focused .mdl-textfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.is-focused .mdlext-selectfield__label {
+  top: 20px;
+}
+
+.mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__label,
+.mdlext-bordered-fields .mdl-textfield.is-dirty .mdlext-selectfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__label {
+  top: 20px;
+  visibility: visible;
+}
+
+.mdlext-bordered-fields .mdl-textfield .mdl-textfield__label,
+.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__label,
+.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__label,
+.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__label {
+  padding-left: 8px;
+  top: 35px;
+}
+
+.mdlext-bordered-fields .mdl-textfield .mdl-textfield__label:after,
+.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__label:after,
+.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__label:after,
+.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__label:after {
+  background-color: transparent !important;
+  visibility: hidden !important;
+}
+
+.mdlext-bordered-fields .mdl-textfield.has-placeholder .mdl-textfield__label,
+.mdlext-bordered-fields .mdl-textfield.has-placeholder .mdlext-selectfield__label,
+.mdlext-bordered-fields .mdl-textfield.has-placeholder .mdl-textfield__label,
+.mdlext-bordered-fields .mdl-textfield.has-placeholder .mdlext-selectfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.has-placeholder .mdl-textfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.has-placeholder .mdlext-selectfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.has-placeholder .mdl-textfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.has-placeholder .mdlext-selectfield__label {
+  top: 20px;
+}
+
+.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > i,
+.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > .mdl-button,
+.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-right > i,
+.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-right > .mdl-button,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > i,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > .mdl-button,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-right > i,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-right > .mdl-button {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > i:first-child,
+.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > .mdl-button:first-child,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > i:first-child,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > .mdl-button:first-child {
+  left: 4px;
+}
+
+.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > i ~ .mdl-textfield__input,
+.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > .mdl-button ~ .mdl-textfield__input,
+.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > i ~ .mdlext-selectfield__select,
+.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > .mdl-button ~ .mdlext-selectfield__select,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > i ~ .mdl-textfield__input,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > .mdl-button ~ .mdl-textfield__input,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > i ~ .mdlext-selectfield__select,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > .mdl-button ~ .mdlext-selectfield__select {
+  padding-left: 32px;
+}
+
+.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > i ~ .mdl-textfield__label,
+.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > .mdl-button ~ .mdl-textfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > i ~ .mdl-textfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > .mdl-button ~ .mdl-textfield__label {
+  left: 28px;
+}
+
+.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > i ~ .mdlext-selectfield__label,
+.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > .mdl-button ~ .mdlext-selectfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > i ~ .mdlext-selectfield__label,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-left > .mdl-button ~ .mdlext-selectfield__label {
+  left: 24px;
+}
+
+.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-right > .mdl-textfield__input,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-right > .mdl-textfield__input {
+  padding-right: 32px;
+}
+
+.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-right > i:last-child,
+.mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-right > .mdl-button:last-child,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-right > i:last-child,
+.mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-right > .mdl-button:last-child {
+  left: auto;
+  right: 4px;
+}
+
+.mdlext-bordered-fields .mdl-textfield.is-disabled i,
+.mdlext-bordered-fields .mdl-textfield.is-disabled .mdl-button,
+.mdlext-bordered-fields .mdlext-selectfield.is-disabled i,
+.mdlext-bordered-fields .mdlext-selectfield.is-disabled .mdl-button {
+  color: rgba(0,0,0, 0.12);
+}
+
+/**
+ * Copyright 2016 Leif Olsen. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+ * Accordion
+ * The Accordion CSS are based on / inspired by this CodePen: http://codepen.io/aann/pen/dPqBML
+ */
+
+/**
+ * Copyright 2016 Leif Olsen. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* ==========     Accordion     ========== */
+
+/* ==========  Bordered fields  ========== */
+
+/* ==========  Lightboard  ========== */
+
+ul.mdlext-accordion {
+  list-style: none;
+}
+
+.mdlext-accordion {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  box-sizing: border-box;
+}
+
+.mdlext-accordion *,
+.mdlext-accordion *::before,
+.mdlext-accordion *::after,
+.mdlext-accordion input[type="search"] {
+  box-sizing: border-box;
+}
+
+.mdlext-accordion .mdlext-accordion__panel {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 48px;
+  overflow: hidden;
+  transition: -webkit-flex .15s ease-in;
+  transition: flex .15s ease-in;
+  transition: flex .15s ease-in, -webkit-flex .15s ease-in, -ms-flex .15s ease-in;
+  -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+}
+
+.mdlext-accordion .mdlext-accordion__panel[open] {
+  -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  min-width: 48px;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(192, 192, 192, 0.3);
+  border-right: 1px solid rgba(192, 192, 192, 0.5);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header:hover {
+  background-color: rgba(192, 192, 192, 0.4);
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header a.mdlext-accordion__panel__header__tabstop,
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container {
+  text-decoration: none;
+  overflow: hidden;
+  font-size: 0;
+  position: absolute;
+  top: 1px;
+  right: 0px;
+  bottom: 0px;
+  left: 1px;
+  z-index: 1;
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header a.mdlext-accordion__panel__header__tabstop:focus,
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container:focus {
+  outline: thin solid #999999;
+  outline-offset: -1px;
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container {
+  width: 99%;
+  height: 99%;
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container .mdl-ripple {
+  background: rgb(63,81,181);
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform {
+  white-space: nowrap;
+  margin: 0;
+  padding: 0 8px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 48px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transform: rotate(-90deg) translateY(100%);
+          transform: rotate(-90deg) translateY(100%);
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > * {
+  margin: 0;
+  padding: 0;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > i,
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > img {
+  -webkit-flex: none;
+      -ms-flex: none;
+          flex: none;
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > i + *,
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > img + * {
+  margin-left: 8px;
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__state:after {
+  content: '+';
+}
+
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__content {
+  width: 100%;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__state:after {
+  content: '-';
+}
+
+.mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__header {
+  background-color: rgba(192, 192, 192, 0.5);
+  border-right: 1px solid rgba(192, 192, 192, 0.6);
+}
+
+.mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__content {
+  overflow: auto;
+  -webkit-animation: mdlext-accordion__panel-open-keyframe .4s linear;
+          animation: mdlext-accordion__panel-open-keyframe .4s linear;
+}
+
+.mdlext-accordion.mdlext-accordion--vertical {
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}
+
+.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel {
+  width: 100%;
+  height: 48px;
+  -webkit-flex: none;
+      -ms-flex: none;
+          flex: none;
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}
+
+.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel .mdlext-accordion__panel__header {
+  height: 48px;
+  min-height: 48px;
+  border-right: 0;
+  border-bottom: 1px solid rgba(192, 192, 192, 0.5);
+}
+
+.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform {
+  white-space: normal;
+  position: relative;
+  width: 100%;
+  bottom: auto;
+  left: auto;
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+}
+
+.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel[open] {
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel[open] .mdlext-accordion__panel__header {
+  border-right: 0;
+  border-bottom: 1px solid rgba(192, 192, 192, 0.6);
+}
+
+/*
+ * Animating overflow:hidden -> overflow:auto, see: https://jdsteinbach.com/css/snippet-animate-display-transform/
+ * Why do we need to animate this? The text overflow auto should be set after the accordion animation has completed!
+ * If we omit this, the the overflow scrollbar will flicker during the accordion open transition
+ */
+
+@-webkit-keyframes mdlext-accordion__panel-open-keyframe {
+  0% {
+    overflow: hidden;
+  }
+
+  100% {
+    overflow: auto;
+  }
+}
+
+@keyframes mdlext-accordion__panel-open-keyframe {
+  0% {
+    overflow: hidden;
+  }
+
+  100% {
+    overflow: auto;
   }
 }
 

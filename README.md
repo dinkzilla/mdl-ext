@@ -178,6 +178,9 @@ A [**lightboard**](./src/lightboard/) is a translucent surface illuminated from 
 situations where a shape laid upon the surface needs to be seen with high contrast. In the "old days" 
 of photography photograpers used a lightboard to get a quick view of, sorting and organizing their slides. 
 
+### Lightbox
+![Lightbox](./etc/lightbox.png)
+A responsive lightbox to be used in conjunction with a lightboard.
 
 ### Selectfield
 ![Selectfield](./etc/select-element.png)

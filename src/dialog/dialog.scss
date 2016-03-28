@@ -1,0 +1,24 @@
+/* Extension to dialog-polyfill.css */
+
+dialog.mdlext-dialog {
+  border: 0;
+  padding: 0;
+  opacity: 0;
+
+  &[open] {
+    animation: mdlext-open-dialog .5s .2s forwards;
+  }
+  &[open]::backdrop {
+    animation: mdlext-darken-backdrop .2s forwards;
+  }
+  &[open] + .backdrop {
+    animation: mdlext-darken-backdrop .2s forwards;
+  }
+}
+
+@keyframes mdlext-darken-backdrop {
+  to { background: rgba(0,0,0,0.8); }
+}
+@keyframes mdlext-open-dialog {
+  to { opacity: 1; }
+}

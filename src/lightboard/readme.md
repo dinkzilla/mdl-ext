@@ -240,6 +240,8 @@ A lightboard and its assosiated slides has the following roles.
 |-----------|--------|---------|
 | `role=grid` | Defines the lightboard as a WAI-ARIA grid | Added to `mdlext-lightboard` when component innitializes |
 | `role=cell` | Defines the slide as a WAI-ARIA cell | Added to `mdlext-lightboard__slide` when component innitializes |
+| `aria-selected` | Defines a slide as selected | Added to `mdlext-lightboard__slide` when a slide is clicked |
+
 
 
 You can modify the lightboard trough the following SASS variables.

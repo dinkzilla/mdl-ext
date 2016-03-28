@@ -10,3 +10,5 @@ class MaterialExtLightbox {
   }
 
 }
+
+export default MaterialExtLightbox;

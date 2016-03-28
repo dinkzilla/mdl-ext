@@ -22,10 +22,11 @@
 @import 'functions';
 
 // Components
-@import 'selectfield/selectfield';
-@import 'bordered-fields/bordered-fields';
-@import 'accordion/accordion';
+@import 'dialog/dialog';
+@import 'grid/grid-eqjs';
 @import 'lightboard/lightboard';
 @import 'lightboard/lightboard-eqjs';
 @import 'lightbox/lightbox';
-@import 'grid/grid-eqjs';
+@import 'selectfield/selectfield';
+@import 'bordered-fields/bordered-fields';
+@import 'accordion/accordion';

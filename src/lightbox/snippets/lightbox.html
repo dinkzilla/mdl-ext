@@ -61,7 +61,7 @@
   <li class="mdlext-lightboard__slide">
     <a href="../../lightboard/snippets/_DSC8214.jpg" class="mdlext-lightboard__slide__frame">
       <figure>
-        <img src="../../lightboard/snippets/_DSC8214.jpg" title="Blues"/>
+        <img src="../../lightboard/snippets/_DSC8214.jpg" title="Still got the blues"/>
         <figcaption>_DSC8214.jpg</figcaption>
       </figure>
     </a>
@@ -82,6 +82,21 @@
       </figure>
     </a>
   </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="#" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_D800851.jpg" />
+        <figcaption>_D800851.jpg</figcaption>
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="#" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_D800166.jpg" />
+      </figure>
+    </a>
+  </li>
 </ul>
 
 <p class="mdl-typography--caption" style="margin-top: 64px;">
@@ -92,24 +107,9 @@
 </p>
 
 
-<style>
-  dialog {
-  }
+<dialog id="dialog-cover" class="mdlext-dialog">
 
-  .dialog-card {
-    width: 100%;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-  .dialog-card > .mdl-card__menu {
-    color: #fff;
-  }
-</style>
-
-<dialog id="dialog-cover">
-  <div class="dialog-card mdl-card mdl-shadow--2dp">
-
-    <img src="" alt>
+  <section id="lightbox" class="mdlext-lightbox mdl-card mdl-shadow--2dp">
 
     <div class="mdl-card__menu">
       <button id="cancel-card" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
@@ -117,12 +117,41 @@
       </button>
     </div>
 
-    <div class="mdl-card__actions mdl-card--border">
-      <a id="close-card" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-        Close dialog
-      </a>
-    </div>
-  </div>
+    <figure class="mdl-card__title">
+      <img src="" alt>
+      <figcaption></figcaption>
+    </figure>
+
+    <footer class="mdl-card__actions mdl-card--border">
+
+      <div class="mdl-card__supporting-text">
+        <span>Image title</span>
+      </div>
+
+      <nav>
+        <button id="first-slide" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="First">
+          <i class="material-icons">first_page</i>
+        </button>
+        <button id="prev-slide" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Previous">
+          <i class="material-icons">chevron_left</i>
+        </button>
+        <button id="next-slide" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Next">
+          <i class="material-icons">chevron_right</i>
+        </button>
+        <button id="last-slide" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Last">
+          <i class="material-icons">last_page</i>
+        </button>
+        <button id="slideshow" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Slideshow">
+          <i class="material-icons">play_circle_outline</i>
+        </button>
+        <button id="slide-info" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Details">
+          <i class="material-icons">info_outline</i>
+        </button>
+      </nav>
+
+    </footer>
+
+  </section>
 </dialog>
 
 
@@ -147,7 +176,9 @@
         cancelable: true
       });
       if (dialog.dispatchEvent(ev)) {
-        if(dialog.open) dialog.close();
+        if(dialog.open) {
+          dialog.close();
+        }
       }
     });
     dialog.addEventListener('close', function(ev) {
@@ -156,24 +187,55 @@
     dialog.addEventListener('cancel', function(ev) {
       console.log('dialog canceled');
     });
-    document.querySelector('#close-card').onclick = function() {
-      dialog.close();
-    };
+
+    var lightbox = dialog.querySelector('.mdlext-lightbox');
+
+    var nav = lightbox.querySelector('nav');
+
+    var buttons = nav.querySelectorAll('button');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener('click', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        if(event.target !== this) {
+          console.log(this);
+        }
+      }.bind(buttons[i]), true);
+    }
+
+
+    function nextSlide(button) {
+
+    }
+
+
+
+    var dialogImg = lightbox.querySelector('img');
+    dialogImg.addEventListener('load', function(e) {
+      //document.querySelector('#lightbox').style.width = this.naturalWidth + 'px';
+    }.bind(dialogImg), true);
+
+
 
 
 
     lightboard.addEventListener('select', function(e) {
-      //console.log('Slide selected. Source:', e.detail.source);
+      console.log('Slide selected. Source:', e.detail.source);
       showImage(e.detail.source);
     });
 
-    function showImage(slide) {
 
+
+    function showImage(slide) {
       var slideAnchor = slide.querySelector('a');
       var slideImg = slide.querySelector('img');
       var img = dialog.querySelector('img');
+      var supportingText = dialog.querySelector('.mdl-card__supporting-text');
+
       img.setAttribute("src", slideAnchor.getAttribute('href'));
       img.setAttribute("alt", slideImg.getAttribute('title'));
+      img.setAttribute("title", slideImg.getAttribute('title'));
+      supportingText.innerHTML = slideImg.getAttribute('title');
 
       dialog.showModal();
     }

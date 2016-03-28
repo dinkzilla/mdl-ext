@@ -134,11 +134,12 @@ describe('MaterialExtLightboard', () => {
     let spy = sinon.spy();
     lightboard.addEventListener('select', spy);
 
-    lightboard.addEventListener('select', event => {
+    const selectListener = ( event ) => {
       assert.isDefined(event.detail, 'Expected detail to be defined in event');
       assert.isDefined(event.detail.source, 'Expected detail.source to be defined in event');
       assert.isTrue(event.detail.source.classList.contains('mdlext-lightboard__slide'), 'Expected accordion to have class "mdlext-lightboard__slide"');
-    });
+    };
+    lightboard.addEventListener('select', selectListener);
 
     try {
       // Trigger click on a slide
@@ -150,7 +151,8 @@ describe('MaterialExtLightboard', () => {
       slide.dispatchEvent(evt);
     }
     finally {
-      lightboard.removeEventListener('toggle', spy);
+      lightboard.removeEventListener('select', spy);
+      lightboard.removeEventListener('select', selectListener);
     }
 
     assert.isTrue(spy.called, 'Expected "select" event to fire');
@@ -161,10 +163,10 @@ describe('MaterialExtLightboard', () => {
 
     let spy = sinon.spy();
     lightboard.addEventListener('select', spy);
-
-    lightboard.addEventListener('select', event => {
+    const selectListener = ( event ) => {
       assert.fail('select', null, 'Did not expect "select" event to fire');
-    });
+    }
+    lightboard.addEventListener('select', selectListener);
 
     try {
       // Trigger click on a slide
@@ -176,10 +178,45 @@ describe('MaterialExtLightboard', () => {
       lightboard.dispatchEvent(evt);
     }
     finally {
-      lightboard.removeEventListener('toggle', spy);
+      lightboard.removeEventListener('select', spy);
+      lightboard.removeEventListener('select', selectListener);
     }
 
     assert.isFalse(spy.called, 'Did not expect "select" event to fire');
+  });
+
+  it('has attribute "aria-selected" when selected', () => {
+    const lightboard = qs('#mdlext-lightboard-1');
+    assert.isNotNull(lightboard, 'Expected handle to lightboard');
+
+    const slide = qs('.mdlext-lightboard__slide:nth-child(3)', lightboard);
+    assert.isNotNull(slide, 'Expected handle to slide');
+
+    let spy = sinon.spy();
+    lightboard.addEventListener('select', spy);
+
+
+    const selectListener = ( event ) => {
+      assert.isNotNull(event.detail.source.getAttribute('aria-selected'), 'Expected slide to have attribute "aria-selected"');
+      const selectList = [...qsa('.mdlext-lightboard__slide', lightboard)].filter( slide => slide.hasAttribute('aria-selected'));
+      assert.equal(selectList.length, 1, 'Expected only one slide to have attribute "aria-selected"');
+    };
+    lightboard.addEventListener('select', selectListener);
+
+    try {
+      // Trigger click on a slide
+      const evt = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      });
+      slide.dispatchEvent(evt);
+    }
+    finally {
+      lightboard.removeEventListener('select', selectListener);
+      lightboard.removeEventListener('select', spy);
+    }
+    assert.isTrue(spy.called, 'Expected "select" event to fire');
   });
 
   it('has role="grid"', () => {
@@ -278,6 +315,7 @@ describe('MaterialExtLightboard', () => {
   it('interacts with the keyboard', () => {
     const lightboard = qs('#mdlext-lightboard-1');
     assert.isNotNull(lightboard, 'Expected handle to lightboard');
+    lightboard.removeEventListener('select', lightboard);
 
     const slide = qs('.mdlext-lightboard__slide:nth-child(3)', lightboard);
     assert.isNotNull(slide, 'Expected handle to slide #3');

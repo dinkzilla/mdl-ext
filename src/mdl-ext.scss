@@ -6,10 +6,11 @@
 @import 'functions';
 
 // Components
-@import 'selectfield/selectfield';
-@import 'bordered-fields/bordered-fields';
-@import 'accordion/accordion';
+@import 'dialog/dialog';
+@import 'grid/grid-media-queries';
 @import 'lightboard/lightboard';
 @import 'lightboard/lightboard-media-queries';
 @import 'lightbox/lightbox';
-@import 'grid/grid-media-queries';
+@import 'selectfield/selectfield';
+@import 'bordered-fields/bordered-fields';
+@import 'accordion/accordion';
