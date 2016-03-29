@@ -15,12 +15,6 @@
  */
 
 
-/* ==========     Dialog     ========== */
-$mdlext-dialog-backdrop-color    : rgba(0, 0, 0, 0.8) !default;
-$mdlext-dialog-open-animation    : .5s .2s forwards !default;
-$mdlext-dialog-backdrop-animation: .2s forwards !default;
-
-
 /* ==========     Accordion     ========== */
 $mdlext-accordion-header-padding               : 8px !default;
 $mdlext-accordion-header-padding-top           : $mdlext-accordion-header-padding !default;
@@ -63,6 +57,29 @@ $mdlext-bordered-field-required-border-color: rgba(#e59617, 1) !default;
 $mdlext-bordered-field-required-background-color: rgba(#f9ead0, 0.1) !default;
 $mdlext-bordered-field-label-top: 35px !default;
 $mdlext-bordered-field-label-focused-top: 20px !default;
+
+
+/* ==========     Dialog     ========== */
+$mdlext-dialog-padding           : 0;
+$mdlext-dialog-background-color  : transparent !default;
+$mdlext-dialog-backdrop-color    : rgba(0, 0, 0, 0.8) !default;
+$mdlext-dialog-open-animation    : .5s .2s forwards !default;
+$mdlext-dialog-backdrop-animation: .2s forwards !default;
+
+
+/* ==========     Lightbox     ========== */
+$mdlext-lightbox-background-color       : $card-background-color !default;
+$mdlext-lightbox-margin-right           : 0 !default;
+$mdlext-lightbox-margin-left            : 0 !default;
+$mdlext-lightbox-border                 : 0 !default;
+$mdlext-lightbox-border-radius          : 0 !default;
+$mdlext-lightbox-figure-margin          : 0 !default;
+$mdlext-lightbox-figure-padding         : 0 !default;
+$mdlext-lightbox-footer-background-color: rgba(255, 255, 255, 0.9) !default;
+$mdlext-lightbox-footer-padding-top     : 8px !default;
+$mdlext-lightbox-footer-padding-right   : 8px !default;
+$mdlext-lightbox-footer-padding-bottom  : 8px !default;
+$mdlext-lightbox-footer-padding-left    : 8px !default;
 
 
 /* ==========  Lightboard  ========== */

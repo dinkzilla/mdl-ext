@@ -129,6 +129,7 @@
       );
 
       // TODO: Attach event to document - but need a strategy for that; must attach/detach on open/close
+      //document.addEventListener('keydown', this.keyDownHandler_.bind(this.element_), true);
       this.element_.addEventListener('keydown', this.keyDownHandler_.bind(this.element_), true);
 
       /*
@@ -137,6 +138,10 @@
         img.addEventListener('load', this.imgLoadHandler_.bind(img), false);
       }
       */
+
+      if(!Number.isInteger(this.element_.getAttribute('tabindex'))) {
+        this.element_.setAttribute('tabindex', 1);
+      }
 
       // Set upgraded flag
       this.element_.classList.add(IS_UPGRADED);

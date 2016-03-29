@@ -109,7 +109,7 @@
 
 <dialog id="lightbox-dialog" class="mdlext-dialog">
 
-  <div id="lightbox" class="mdlext-lightbox mdlext-js-lightbox mdl-card mdl-shadow--2dp">
+  <div id="lightbox" class="mdlext-lightbox mdlext-js-lightbox mdlext-lightbox--sticky-footer mdl-card mdl-shadow--4dp">
 
     <div class="mdl-card__menu">
       <button action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
@@ -122,7 +122,7 @@
       <figcaption></figcaption>
     </figure>
 
-    <footer class="mdl-card__actions mdl-card--border">
+    <footer class="mdl-card--border">
 
       <div class="mdl-card__supporting-text">
         Image title
@@ -166,62 +166,48 @@
   }
 
   window.addEventListener('load', function() {
-    var VK_END = 35;
-    var VK_HOME = 36;
-    var VK_ARROW_LEFT = 37;
-    var VK_ARROW_RIGHT = 39;
-
-    var currentSlide = null;
-
-    var lightboard = document.querySelector('#lightboard-for-lightbox');
-    lightboard.addEventListener('select', function(e) {
-      console.log('Slide selected. Source:', e.detail.source);
-      currentSlide = e.detail.source;
-      showImage(e.detail.source);
-    });
-
-
     var dialog = document.querySelector('#lightbox-dialog');
     if (!('showModal' in dialog)) {
       dialogPolyfill.registerDialog(dialog);
     }
 
-    var lightbox = dialog.querySelector('.mdlext-lightbox');
-    lightbox.addEventListener('action', function(e) {
+    var currentSlide = null;
+    var lightboard = document.querySelector('#lightboard-for-lightbox');
+    var slides = lightboard.querySelectorAll('.mdlext-lightboard__slide');
 
+    lightboard.addEventListener('select', function(e) {
+      currentSlide = e.detail.source;
+      showImage(e.detail.source);
+    });
+
+    var lightbox = dialog.querySelector('.mdlext-lightbox');
+
+    lightbox.addEventListener('action', function(e) {
       if(e.detail.action === 'close') {
         dialog.close();
       }
       else {
-        var keyCode = undefined;
         if(e.detail.action === 'first') {
-          keyCode = VK_HOME;
+          currentSlide = slides[0];
         }
-        else if(e.detail.action === 'prev') {
-          keyCode = VK_ARROW_LEFT;
-        }
-        else if(e.detail.action === 'next') {
-          keyCode = VK_ARROW_RIGHT;
+        else if(e.detail.action === 'prev' || e.detail.action === 'next') {
+
+          for (var i = 0, n = slides.length; i < n; i++) {
+            if(currentSlide ===  slides[i]) {
+              if(e.detail.action === 'prev' && i > 0) {
+                currentSlide = slides[i-1]
+              }
+              else if(e.detail.action === 'next' && i < n-1) {
+                currentSlide = slides[i+1]
+              }
+              break;
+            }
+          }
         }
         else if(e.detail.action === 'last') {
-          keyCode = VK_END;
+          currentSlide = slides[slides.length-1];
         }
-
-        console.log('***** action:', e.detail.action, 'currentSlide', currentSlide, 'keyCode', keyCode);
-
-        if(keyCode !== undefined) {
-          dispatchEvent_(lightboard, keyCode);
-        }
-      }
-
-      function dispatchEvent_(target, keyCode) {
-
-        const event = new CustomEvent('nextslide', {
-          bubbles: true,
-          cancelable: true,
-          detail: { keyCode: keyCode }
-        });
-        target.dispatchEvent(event);
+        showImage(currentSlide);
       }
 
     });
@@ -233,7 +219,6 @@
       var img = dialog.querySelector('img');
       var supportingText = dialog.querySelector('.mdl-card__supporting-text');
       var imageDetails = dialog.querySelector('figcaption');
-
 
       img.setAttribute("src", slideAnchor.getAttribute('href'));
       img.setAttribute("alt", slideImg.getAttribute('title'));

@@ -82,13 +82,6 @@
     }
 
     /**
-     * Trigger when client asks for slide
-     */
-    this.element_.addEventListener('nextslide', function(customEvent) {
-      console.log('*****', customEvent.type, customEvent.detail);
-    });
-
-    /**
      * Trigger when user cliks on a slide
      */
     this.element_.addEventListener('click', ( function(event) {

@@ -105,6 +105,11 @@ describe('MaterialExtLightbox', () => {
     expect(element.getAttribute('data-upgraded')).to.include('MaterialExtLightbox');
   });
 
+  it('has tabindex', () => {
+    const element = qs('#lightbox');
+    expect(element.getAttribute('tabindex')).not.to.be.NaN;
+  });
+
   it('upgrades successfully when a new component is appended to the DOM', () => {
     const container = qs('#mount-2');
 

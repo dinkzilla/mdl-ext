@@ -22,8 +22,9 @@
 
 dialog.mdlext-dialog {
   border: 0;
-  padding: 0;
   opacity: 0;
+  padding: $mdlext-dialog-padding;
+  background-color: $mdlext-dialog-background-color;
 
   &[open] {
     animation: mdlext-open-dialog $mdlext-dialog-open-animation;

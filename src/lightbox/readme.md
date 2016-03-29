@@ -84,7 +84,7 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 </dialog>
 ```
 
-&nbsp;4. Code a `<button>` element with `action="close"` and `class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"`. Add an `<i>` tag inside the `<button>` tag to hold the close icon.
+&nbsp;4. Code a `<button>` element with `action="close"` and `class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"` to display the close button. Add an `<i>` tag inside the `<button>` tag to hold the close icon.
 ```html
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
@@ -112,7 +112,7 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 </dialog>
 ```
 
-&nbsp;5. Inside the `<figure>` element code an emppty `<img>` element and an empty `<figcaption>` element for the image and the image description.
+&nbsp;5. Inside the `<figure>` element code an empty `<img>` element and an empty `<figcaption>` element to hold the image and the image description.
 ```html
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
@@ -130,7 +130,7 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 ```
 
 
-&nbsp;6. Code a `<footer>` element to hold the image title and navigation buttons.
+&nbsp;6. Code a `<footer>` element with `class="mdl-card__actions"` to hold the image title and navigation buttons.
 ```html
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
@@ -143,7 +143,7 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
       <img src="" alt>
       <figcaption></figcaption>
     </figure>
-    <footer class="mdl-card__actions mdl-card--border">
+    <footer class="mdl-card__actions">
     </footer>    
   </div>
 </dialog>
@@ -274,7 +274,7 @@ The lightbox emits a custom **action** event when a button contained in the ligh
 ```
 {
   action, // one of: 'first', 'prev', 'next', 'last', 'play', 'pause', 'info', 'close', '' (empty string if no action assigned) 
-  source  // the button instance that caused the event
+  source  // the button instance that caused the event, or the lightbox element if the a key triggered the event
 }
 ```
 
@@ -286,13 +286,26 @@ The table below lists the available classes and their effects.
 | MDLEXT class | Effect | Remarks |
 |--------------|--------|---------|
 | `mdlext-lightbox` | Defines a container as an MDLEXT lightbox component | Required on `<div>` element |
+| `mdlext-js-lightbox` | Assigns basic MDL behavior to lightbox | Required on `<div>` element |
+| `mdlext-lightbox--sticky-footer` | Positions footer at bottom of screen | Optional on `mdlext-lightbox` element |
 
 
 You can modify the lightbox trough the following SASS variables.
 
 | SASS variables |
 |----------------|
-| None for the moment |
+| `$mdlext-lightbox-background-color` |
+| `$mdlext-lightbox-margin-left` |
+| `$mdlext-lightbox-margin-right` |
+| `$mdlext-lightbox-border` |
+| `$mdlext-lightbox-border-radius` |
+| `$mdlext-lightbox-figure-margin` |
+| `$mdlext-lightbox-figure-padding` |
+| `$mdlext-lightbox-footer-background-color` |
+| `$mdlext-lightbox-footer-padding-top` |
+| `$mdlext-lightbox-footer-padding-right` |
+| `$mdlext-lightbox-footer-padding-bottom` |
+| `$mdlext-lightbox-footer-padding-left` |
 
 
 ## How to use the component programmatically
