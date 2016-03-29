@@ -180,7 +180,7 @@ of photography photograpers used a lightboard to get a quick view of, sorting an
 
 ### Lightbox
 ![Lightbox](./etc/lightbox.png)
-A responsive lightbox to be used in conjunction with a lightboard.
+A responsive [**lightbox**](./src/lightbox/) to be used in conjunction with e.g. a MDLEXT lightboard component.
 
 ### Selectfield
 ![Selectfield](./etc/select-element.png)

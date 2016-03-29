@@ -1,7 +1,300 @@
 # Lightbox
 
 ![Lightbox](../../etc/lightbox.png)
-A responsive lightbox to be used in conjunction with a lightboard.
+A responsive lightbox to be used in conjunction with e.g. a MDLEXT lightboard component.
 
 ## Introduction
+The Material Design Lite Ext (MDLEXT) Lightbox displays images filling the screen, and dimming out the rest of the web page.
+It acts as a modal dialog, using the `<dialog>` element as a container for the lightbox. The component uses 
+the [Material Design Lite Card component](http://www.getmdl.io/components/index.html#cards-section) to provide a layout for the lightbox.
+
+## How to use the Google Chrome Dialog polyfill 
+
+&nbsp;1. Install [Google Chrome Dialog polyfill](https://github.com/GoogleChrome/dialog-polyfill).
+```sh
+$ npm install --save dialog-polyfill
+```
+
+&nbsp;2. Use the polyfill in a static page.
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Material Design Lite Extensions</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="node_modules/dialog-polyfill/dialog-polyfill.css" />
+  <link rel="stylesheet" href="node_modules/material-design-lite/material.css" />
+  <link rel="stylesheet" href="node_modules/mdl-ext/lib/mdl-ext.min.css" />
+</head>
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
+  <main class="mdl-layout__content">
+  </main
+</div>
+<script type="text/javascript" src="node_modules/dialog-polyfill/dialog-polyfill.js" charset="utf-8"></script>
+<script type="text/javascript" src="node_modules/material-design-lite/material.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="node_modules/mdl-ext/lib/index.min.js" charset="utf-8"></script>
+</body>
+</html>
+```
+
+&nbsp;3. Use it in your (Webpack) build.
+
+&nbsp;3.1. Import `dialog-polyfill.css` in your main SASS file..
+```css
+@import '../node_modules/dialog-polyfill/dialog-polyfill.css';
+```
+
+&nbsp;3.2. Require `dialog-polyfill` in your main.js file.  
+```javascript
+const dialogPolyfill = require('dialog-polyfill/dialog-polyfill');
+```
+
+&nbsp;... or import the `dialog-polyfill`.  
+```javascript
+import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
+```
+
+>Adjust path to `node_modules` (libraries) according to where your files are located. 
+>For more information about the dialog polyfill, refer to the [Google Chrome Dialog polyfill](https://github.com/GoogleChrome/dialog-polyfill) documentaion and the Material Design Lite [Dialog](http://www.getmdl.io/components/index.html#dialog-section) section.
+
+## To include a MDLEXT lightbox component
+&nbsp;1. Code a `<dialog>` element with `class="mdlext-dialog"` to display the lightbox as a modal dialog.
+```html
+<dialog class="mdlext-dialog">
+</dialog>
+```
+
+&nbsp;2. Code a `<div>` element with `class="mdlext-lightbox mdlext-js-lightbox mdl-card"` to hold the lightbox.
+```html
+<dialog class="mdlext-dialog">
+  <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
+  </div>
+</dialog>
+```
+
+&nbsp;3. Code a `<div>` element with `class="mdl-card__menu"` to hold the close dialog button.
+```html
+<dialog class="mdlext-dialog">
+  <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
+    <div class="mdl-card__menu">
+    </div>
+  </div>
+</dialog>
+```
+
+&nbsp;4. Code a `<button>` element with `action="close"` and `class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"`. Add an `<i>` tag inside the `<button>` tag to hold the close icon.
+```html
+<dialog class="mdlext-dialog">
+  <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
+    <div class="mdl-card__menu">
+      <button action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+  </div>
+</dialog>
+```
+
+&nbsp;5. Code a `<figure>` element with `class="mdl-card__title"` to hold the image and the image description.
+```html
+<dialog class="mdlext-dialog">
+  <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
+    <div class="mdl-card__menu">
+      <button action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+    <figure class="mdl-card__title">
+    </figure>
+  </div>
+</dialog>
+```
+
+&nbsp;5. Inside the `<figure>` element code an emppty `<img>` element and an empty `<figcaption>` element for the image and the image description.
+```html
+<dialog class="mdlext-dialog">
+  <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
+    <div class="mdl-card__menu">
+      <button action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+    <figure class="mdl-card__title">
+      <img src="" alt>
+      <figcaption></figcaption>
+    </figure>
+  </div>
+</dialog>
+```
+
+
+&nbsp;6. Code a `<footer>` element to hold the image title and navigation buttons.
+```html
+<dialog class="mdlext-dialog">
+  <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
+    <div class="mdl-card__menu">
+      <button action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+    <figure class="mdl-card__title">
+      <img src="" alt>
+      <figcaption></figcaption>
+    </figure>
+    <footer class="mdl-card__actions mdl-card--border">
+    </footer>    
+  </div>
+</dialog>
+```
+
+&nbsp;7. Code a `<div>` element with `class="mdl-card__supporting-text"` to hold the image title.
+```html
+<dialog class="mdlext-dialog">
+  <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
+    <div class="mdl-card__menu">
+      <button action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+    <figure class="mdl-card__title">
+      <img src="" alt>
+      <figcaption></figcaption>
+    </figure>
+    <footer class="mdl-card__actions mdl-card--border">
+      <div class="mdl-card__supporting-text">
+      </div>
+    </footer>    
+  </div>
+</dialog>
+```
+
+&nbsp;8. Code a `<nav>` element to hold the navigation buttons.
+```html
+<dialog class="mdlext-dialog">
+  <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
+    <div class="mdl-card__menu">
+      <button action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+    <figure class="mdl-card__title">
+      <img src="" alt>
+      <figcaption></figcaption>
+    </figure>
+    <footer class="mdl-card__actions mdl-card--border">
+      <div class="mdl-card__supporting-text">
+      </div>
+      <nav>
+      </nav>      
+    </footer>    
+  </div>
+</dialog>
+```
+
+
+&nbsp;9. Add your navigation buttons with `class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"` inside the `<nav>` element.
+```html
+<dialog class="mdlext-dialog">
+  <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
+    <div class="mdl-card__menu">
+      <button action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+    <figure class="mdl-card__title">
+      <img src="" alt>
+      <figcaption></figcaption>
+    </figure>
+    <footer class="mdl-card__actions mdl-card--border">
+      <div class="mdl-card__supporting-text">
+      </div>
+      <nav>
+        <button action="first" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="First">
+          <i class="material-icons">first_page</i>
+        </button>
+        <button action="prev" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Previous">
+          <i class="material-icons">chevron_left</i>
+        </button>
+        <button action="next" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Next">
+          <i class="material-icons">chevron_right</i>
+        </button>
+        <button action="last" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Last">
+          <i class="material-icons">last_page</i>
+        </button>
+      </nav>      
+    </footer>    
+  </div>
+</dialog>
+```
+Add as many buttons as you like. To identify the button that trigger an custom event, you should assign each button an unique action attribute value. 
+The action attribute will be emitted as a part of the custom event triggered when a button is clicked.
+
+&nbsp;10. Add an image and open the dialog.
+
+```javascript
+var dialog = document.querySelector('dialog');
+if (!('showModal' in dialog)) {
+  dialogPolyfill.registerDialog(dialog);
+}
+var lightbox = dialog.querySelector('.mdlext-lightbox');
+var img = lightbox.querySelector('img'); 
+var supportingText = lightbox.querySelector('.mdl-card__supporting-text');
+var imageDetails = lightbox.querySelector('figcaption'); 
+
+img.setAttribute("src", 'wiew-from-my-window.jpg');
+img.setAttribute("alt", 'View from my window');
+img.setAttribute("title", 'View from my window');
+supportingText.innerHTML = 'View from my window';
+imageDetails.innerHTNL = 'Photo taken from my window yesterday morning'; 
+
+if(!dialog.open) {
+  dialog.showModal();
+}
+```
+
+### Example
+See code in [snippets/lightbox.html](./snippets/lightbox.html)
+
+## Keyboard interaction
+The lightbox interacts with the following keyboard keys.
+
+*   `Left arrow` - Emits a custom event with action='prev'
+*   `Right arrow` - Emits a custom event with action='next'
+*   `Up arrow` - behaves the same as left arrow.
+*   `Down arrow` - behaves the same as right arrow.
+*   `End` - Emits a custom event with action='last'
+*   `Home` - Emits a custom event with action='first'
+*   `Esc` - Emits a custom event with action='close'
+
+## Events
+The lightbox emits a custom **action** event when a button contained in the lightbox is clicked, or if one of the keys 
+`Arrow Left`, `Arrow Up`, `Arrow Right`, `Arrow Down`, `Home`, `End` or `Esc` is pressed. The event has a detail object with the following content:
+```
+{
+  action, // one of: 'first', 'prev', 'next', 'last', 'play', 'pause', 'info', 'close', '' (empty string if no action assigned) 
+  source  // the button instance that caused the event
+}
+```
+
+## Configuration options
+
+The MDLEXT CSS classes apply various predefined visual and behavioral enhancements to the lightbox.
+The table below lists the available classes and their effects.
+
+| MDLEXT class | Effect | Remarks |
+|--------------|--------|---------|
+| `mdlext-lightbox` | Defines a container as an MDLEXT lightbox component | Required on `<div>` element |
+
+
+You can modify the lightbox trough the following SASS variables.
+
+| SASS variables |
+|----------------|
+| None for the moment |
+
+
+## How to use the component programmatically
+The [tests](../../test/lightbox/lightbox.spec.js) and the [snippets/lightbox.html](./snippets/lightbox.html) code provides examples on how to use the component programmatically.
 

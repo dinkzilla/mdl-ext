@@ -59,6 +59,14 @@
     }
   };
 
+  /**
+   * Downgrade component
+   * E.g remove listeners and clean up resources
+   */
+  MaterialBasic.prototype.mdlDowngrade_ = function() {
+    'use strict';
+  };
+
   // The component registers itself. It can assume componentHandler is available
   // in the global scope.
   /* eslint no-undef: 0 */

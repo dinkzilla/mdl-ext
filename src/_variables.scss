@@ -15,6 +15,12 @@
  */
 
 
+/* ==========     Dialog     ========== */
+$mdlext-dialog-backdrop-color    : rgba(0, 0, 0, 0.8) !default;
+$mdlext-dialog-open-animation    : .5s .2s forwards !default;
+$mdlext-dialog-backdrop-animation: .2s forwards !default;
+
+
 /* ==========     Accordion     ========== */
 $mdlext-accordion-header-padding               : 8px !default;
 $mdlext-accordion-header-padding-top           : $mdlext-accordion-header-padding !default;

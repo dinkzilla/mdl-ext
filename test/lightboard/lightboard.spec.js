@@ -245,7 +245,7 @@ describe('MaterialExtLightboard', () => {
       container.insertAdjacentHTML('beforeend', lightboard_with_ripple);
       const element = qs('#lightboard_with_ripple');
 
-      assert.isFalse(element.classList.contains('is-upgraded'), 'Expected class "is-upgraded" to exist after upgrade');
+      assert.isFalse(element.classList.contains('is-upgraded'), 'Did not expect "is-upgraded" to exist before upgrade');
       componentHandler.upgradeElement(element, 'MaterialExtLightboard');
       assert.isTrue(element.classList.contains('is-upgraded'), 'Expected lightboard to upgrade');
 

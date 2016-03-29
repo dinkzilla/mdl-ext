@@ -81,6 +81,16 @@
       );
     }
 
+    /**
+     * Trigger when client asks for slide
+     */
+    this.element_.addEventListener('nextslide', function(customEvent) {
+      console.log('*****', customEvent.type, customEvent.detail);
+    });
+
+    /**
+     * Trigger when user cliks on a slide
+     */
     this.element_.addEventListener('click', ( function(event) {
       event.preventDefault();
       event.stopPropagation();
@@ -90,7 +100,7 @@
         focus(slide);
 
         // Remove 'aria-selected' attribute
-        [...this.children]
+        [...this.children]   // Should I use querySelectorAll ???
           .filter( panel => panel.hasAttribute('aria-selected'))
           .forEach( selected => selected.removeAttribute('aria-selected'));
 
@@ -106,8 +116,11 @@
       }
     }).bind(this.element_), true);
 
-    // Maybe this function should be throttled??
+    /**
+     * Trigger when user presses a keboard key
+     */
     this.element_.addEventListener('keydown', ( function(event) {
+      // Maybe this function should be throttled??
       if (event.keyCode === VK_TAB
         || event.keyCode === VK_ENTER || event.keyCode === VK_SPACE
         || event.keyCode === VK_END || event.keyCode === VK_HOME

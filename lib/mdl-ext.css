@@ -247,6 +247,8 @@
  * limitations under the License.
  */
 
+/* ==========     Dialog     ========== */
+
 /* ==========     Accordion     ========== */
 
 /* ==========  Bordered fields  ========== */
@@ -257,7 +259,49 @@
  * Modified from: http://blustemy.io/drawing-pure-css-arrows-with-mixins/
  */
 
-/* Extension to dialog-polyfill.css */
+/**
+ * Copyright 2015 Google Inc. All Rights Reserved.
+ * Copyright 2016 Leif Olsen. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SASS based on css from Google Chrome Dialog polyfill, https://github.com/GoogleChrome/dialog-polyfill
+ * @include 'node_modules/dialog-polyfill/dialog-polyfill.css' before using this
+ */
+
+/**
+ * Copyright 2016 Leif Olsen. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* ==========     Dialog     ========== */
+
+/* ==========     Accordion     ========== */
+
+/* ==========  Bordered fields  ========== */
+
+/* ==========  Lightboard  ========== */
 
 dialog.mdlext-dialog {
   border: 0;
@@ -266,23 +310,23 @@ dialog.mdlext-dialog {
 }
 
 dialog.mdlext-dialog[open] {
-  -webkit-animation: mdlext-open-dialog .5s .2s forwards;
-          animation: mdlext-open-dialog .5s .2s forwards;
+  -webkit-animation: mdlext-open-dialog 0.5s 0.2s forwards;
+          animation: mdlext-open-dialog 0.5s 0.2s forwards;
 }
 
 dialog.mdlext-dialog[open]::-webkit-backdrop {
-  -webkit-animation: mdlext-darken-backdrop .2s forwards;
-          animation: mdlext-darken-backdrop .2s forwards;
+  -webkit-animation: mdlext-darken-backdrop 0.2s forwards;
+          animation: mdlext-darken-backdrop 0.2s forwards;
 }
 
 dialog.mdlext-dialog[open]::backdrop {
-  -webkit-animation: mdlext-darken-backdrop .2s forwards;
-          animation: mdlext-darken-backdrop .2s forwards;
+  -webkit-animation: mdlext-darken-backdrop 0.2s forwards;
+          animation: mdlext-darken-backdrop 0.2s forwards;
 }
 
 dialog.mdlext-dialog[open] + .backdrop {
-  -webkit-animation: mdlext-darken-backdrop .2s forwards;
-          animation: mdlext-darken-backdrop .2s forwards;
+  -webkit-animation: mdlext-darken-backdrop 0.2s forwards;
+          animation: mdlext-darken-backdrop 0.2s forwards;
 }
 
 @-webkit-keyframes mdlext-darken-backdrop {
@@ -1388,6 +1432,8 @@ dialog.mdlext-dialog[open] + .backdrop {
  * limitations under the License.
  */
 
+/* ==========     Dialog     ========== */
+
 /* ==========     Accordion     ========== */
 
 /* ==========  Bordered fields  ========== */
@@ -1544,6 +1590,8 @@ ul.mdlext-lightboard {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/* ==========     Dialog     ========== */
 
 /* ==========     Accordion     ========== */
 
@@ -1981,6 +2029,8 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
  * limitations under the License.
  */
 
+/* ==========     Dialog     ========== */
+
 /* ==========     Accordion     ========== */
 
 /* ==========  Bordered fields  ========== */
@@ -2205,6 +2255,8 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/* ==========     Dialog     ========== */
 
 /* ==========     Accordion     ========== */
 

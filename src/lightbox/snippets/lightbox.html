@@ -83,7 +83,7 @@
     </a>
   </li>
   <li class="mdlext-lightboard__slide">
-    <a href="#" class="mdlext-lightboard__slide__frame">
+    <a href="../../lightboard/snippets/_D800851.jpg" class="mdlext-lightboard__slide__frame">
       <figure>
         <img src="../../lightboard/snippets/_D800851.jpg" />
         <figcaption>_D800851.jpg</figcaption>
@@ -91,7 +91,7 @@
     </a>
   </li>
   <li class="mdlext-lightboard__slide">
-    <a href="#" class="mdlext-lightboard__slide__frame">
+    <a href="../../lightboard/snippets/_D800166.jpg" class="mdlext-lightboard__slide__frame">
       <figure>
         <img src="../../lightboard/snippets/_D800166.jpg" />
       </figure>
@@ -100,19 +100,19 @@
 </ul>
 
 <p class="mdl-typography--caption" style="margin-top: 64px;">
-  All images appearing in this page are the exclusive property of Leif Olsen and are protected under the United States and International Copyright laws.
-  The images may not be reproduced or manipulated without the written permission of Leif Olsen.
-  Use of any image as the basis for another photographic concept or illustration (digital, artist rendering or alike) is a violation of the United States and International Copyright laws.
-  All images are copyrighted &copy; Leif Olsen, 2016.
+  All images appearing in this page are the exclusive property of Leif Olsen and are protected under the United States
+  and International Copyright laws. The images may not be reproduced or manipulated without the written permission of
+  Leif Olsen. Use of any image as the basis for another photographic concept or illustration (digital, artist rendering
+  or alike) is a violation of the United States and International Copyright laws. All images are copyrighted &copy; Leif Olsen, 2016.
 </p>
 
 
-<dialog id="dialog-cover" class="mdlext-dialog">
+<dialog id="lightbox-dialog" class="mdlext-dialog">
 
-  <section id="lightbox" class="mdlext-lightbox mdl-card mdl-shadow--2dp">
+  <div id="lightbox" class="mdlext-lightbox mdlext-js-lightbox mdl-card mdl-shadow--2dp">
 
     <div class="mdl-card__menu">
-      <button id="cancel-card" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+      <button action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
         <i class="material-icons">close</i>
       </button>
     </div>
@@ -125,33 +125,36 @@
     <footer class="mdl-card__actions mdl-card--border">
 
       <div class="mdl-card__supporting-text">
-        <span>Image title</span>
+        Image title
       </div>
 
       <nav>
-        <button id="first-slide" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="First">
+        <button action="first" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="First">
           <i class="material-icons">first_page</i>
         </button>
-        <button id="prev-slide" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Previous">
+        <button action="prev" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Previous">
           <i class="material-icons">chevron_left</i>
         </button>
-        <button id="next-slide" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Next">
+        <button action="next" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Next">
           <i class="material-icons">chevron_right</i>
         </button>
-        <button id="last-slide" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Last">
+        <button action="last" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Last">
           <i class="material-icons">last_page</i>
         </button>
-        <button id="slideshow" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Slideshow">
+        <!--
+        <button action="play" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Play">
           <i class="material-icons">play_circle_outline</i>
         </button>
-        <button id="slide-info" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Details">
+        <button id="slide-pause" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Pause">
+          <i class="material-icons">pause_circle_outline</i>
+        </button>
+        <button action="info" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Details">
           <i class="material-icons">info_outline</i>
         </button>
+        -->
       </nav>
-
     </footer>
-
-  </section>
+  </div>
 </dialog>
 
 
@@ -163,67 +166,65 @@
   }
 
   window.addEventListener('load', function() {
-    var lightboard = document.querySelector('#lightboard-for-lightbox');
+    var VK_END = 35;
+    var VK_HOME = 36;
+    var VK_ARROW_LEFT = 37;
+    var VK_ARROW_RIGHT = 39;
 
-    var dialog = document.querySelector('#dialog-cover');
+    var currentSlide = null;
+
+    var lightboard = document.querySelector('#lightboard-for-lightbox');
+    lightboard.addEventListener('select', function(e) {
+      console.log('Slide selected. Source:', e.detail.source);
+      currentSlide = e.detail.source;
+      showImage(e.detail.source);
+    });
+
+
+    var dialog = document.querySelector('#lightbox-dialog');
     if (!('showModal' in dialog)) {
       dialogPolyfill.registerDialog(dialog);
     }
 
-    document.querySelector('#cancel-card').addEventListener('click', function() {
-      var ev = new CustomEvent('cancel', {
-        bubbles: false,
-        cancelable: true
-      });
-      if (dialog.dispatchEvent(ev)) {
-        if(dialog.open) {
-          dialog.close();
+    var lightbox = dialog.querySelector('.mdlext-lightbox');
+    lightbox.addEventListener('action', function(e) {
+
+      if(e.detail.action === 'close') {
+        dialog.close();
+      }
+      else {
+        var keyCode = undefined;
+        if(e.detail.action === 'first') {
+          keyCode = VK_HOME;
+        }
+        else if(e.detail.action === 'prev') {
+          keyCode = VK_ARROW_LEFT;
+        }
+        else if(e.detail.action === 'next') {
+          keyCode = VK_ARROW_RIGHT;
+        }
+        else if(e.detail.action === 'last') {
+          keyCode = VK_END;
+        }
+
+        console.log('***** action:', e.detail.action, 'currentSlide', currentSlide, 'keyCode', keyCode);
+
+        if(keyCode !== undefined) {
+          dispatchEvent_(lightboard, keyCode);
         }
       }
+
+      function dispatchEvent_(target, keyCode) {
+
+        const event = new CustomEvent('nextslide', {
+          bubbles: true,
+          cancelable: true,
+          detail: { keyCode: keyCode }
+        });
+        target.dispatchEvent(event);
+      }
+
     });
-    dialog.addEventListener('close', function(ev) {
-      console.log('dialog closed');
-    });
-    dialog.addEventListener('cancel', function(ev) {
-      console.log('dialog canceled');
-    });
-
-    var lightbox = dialog.querySelector('.mdlext-lightbox');
-
-    var nav = lightbox.querySelector('nav');
-
-    var buttons = nav.querySelectorAll('button');
-    for (var i = 0; i < buttons.length; i++) {
-      buttons[i].addEventListener('click', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        if(event.target !== this) {
-          console.log(this);
-        }
-      }.bind(buttons[i]), true);
-    }
-
-
-    function nextSlide(button) {
-
-    }
-
-
-
-    var dialogImg = lightbox.querySelector('img');
-    dialogImg.addEventListener('load', function(e) {
-      //document.querySelector('#lightbox').style.width = this.naturalWidth + 'px';
-    }.bind(dialogImg), true);
-
-
-
-
-
-    lightboard.addEventListener('select', function(e) {
-      console.log('Slide selected. Source:', e.detail.source);
-      showImage(e.detail.source);
-    });
-
 
 
     function showImage(slide) {
@@ -231,13 +232,18 @@
       var slideImg = slide.querySelector('img');
       var img = dialog.querySelector('img');
       var supportingText = dialog.querySelector('.mdl-card__supporting-text');
+      var imageDetails = dialog.querySelector('figcaption');
+
 
       img.setAttribute("src", slideAnchor.getAttribute('href'));
       img.setAttribute("alt", slideImg.getAttribute('title'));
       img.setAttribute("title", slideImg.getAttribute('title'));
       supportingText.innerHTML = slideImg.getAttribute('title');
+      imageDetails.innerHTML = slideImg.getAttribute('title');
 
-      dialog.showModal();
+      if(!dialog.open) {
+        dialog.showModal();
+      }
     }
 
   });
