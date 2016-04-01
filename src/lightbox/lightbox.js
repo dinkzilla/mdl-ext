@@ -109,25 +109,31 @@
    */
 
   MaterialExtLightbox.prototype.imgLoadHandler_ = function( /*event*/ ) {
-    // Do  nothing for now
 
     const footerHeight = (footer, isSticky) => isSticky && footer ? footer.clientHeight : 0;
 
-    const dialog  = this.parentNode;
+    const delta = (viewportHeight, rect) => {
+      if(rect.height > viewportHeight) {
+        return -rect.top;
+      }
+      return (viewportHeight - rect.height) / 2 - rect.top;
+    };
 
+
+    const dialog = this.parentNode;
     const fh = footerHeight(this.querySelector('footer'), this.classList.contains(STICKY_FOOTER_CLASS) );
-    const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - fh;
+    const r = dialog.getBoundingClientRect();
+    const d = delta(vh, r);
 
-    // Adjust height of dialog and lightbox
-    if(this.offsetHeight > vh) {
-      this.style.height = `${vh}px`;
+    console.log(dialog.nodeName, this.offsetHeight, 'fh', fh, 'vh', vh, 'r.height', r.height, 'r.top', r.top, 'd', d, 'dialog.offsetTop', dialog.offsetTop, 'dialog.style.top', dialog.style.top);
+
+    // Center dialog vertically in viewport
+    /*
+    if(d != 0) {
+      this.style.marginTop = `${d}px`;
     }
-
-    // Center vertically in viewport
-
-
-    console.log(dialog.nodeName, dialog.style.height, 'fh', fh, 'vw', vw, 'vh', vh, this.getBoundingClientRect());
+    */
   };
 
 

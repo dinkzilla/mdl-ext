@@ -110,35 +110,30 @@
 <dialog id="lightbox-dialog" class="mdlext-dialog">
 
   <div id="lightbox" class="mdlext-lightbox mdlext-js-lightbox mdlext-lightbox--sticky-footer mdl-card mdl-shadow--4dp">
-
     <div class="mdl-card__menu">
-      <button action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
+      <button action="close" class="mdl-button mdl-button--icon mdl-js-button" title="Close">
         <i class="material-icons">close</i>
       </button>
     </div>
-
     <figure class="mdl-card__title">
       <img src="" alt>
       <figcaption></figcaption>
     </figure>
-
     <footer class="mdl-card--border">
-
       <div class="mdl-card__supporting-text">
         Image title
       </div>
-
       <nav>
-        <button action="first" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="First">
+        <button action="first" class="mdl-button mdl-button--icon mdl-js-button" title="First">
           <i class="material-icons">first_page</i>
         </button>
-        <button action="prev" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Previous">
+        <button action="prev" class="mdl-button mdl-button--icon mdl-js-button" title="Previous">
           <i class="material-icons">chevron_left</i>
         </button>
-        <button action="next" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Next">
+        <button action="next" class="mdl-button mdl-button--icon mdl-js-button" title="Next">
           <i class="material-icons">chevron_right</i>
         </button>
-        <button action="last" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Last">
+        <button action="last" class="mdl-button mdl-button--icon mdl-js-button" title="Last">
           <i class="material-icons">last_page</i>
         </button>
         <!--
@@ -194,11 +189,11 @@
 
           for (var i = 0, n = slides.length; i < n; i++) {
             if(currentSlide ===  slides[i]) {
-              if(e.detail.action === 'prev' && i > 0) {
-                currentSlide = slides[i-1]
+              if(e.detail.action === 'prev') {
+                currentSlide = i > 0 ? slides[i-1] : slides[n-1];
               }
-              else if(e.detail.action === 'next' && i < n-1) {
-                currentSlide = slides[i+1]
+              else if(e.detail.action === 'next') {
+                currentSlide = i < n-1 ? slides[i+1] : slides[0];
               }
               break;
             }
@@ -209,7 +204,6 @@
         }
         showImage(currentSlide);
       }
-
     });
 
 
