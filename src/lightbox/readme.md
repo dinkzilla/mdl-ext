@@ -46,7 +46,7 @@ $ npm install --save dialog-polyfill
 @import '../node_modules/dialog-polyfill/dialog-polyfill.css';
 ```
 
-&nbsp;3.2. Require `dialog-polyfill` in your main.js file.  
+&nbsp;3.2. Require `dialog-polyfill`.  
 ```javascript
 const dialogPolyfill = require('dialog-polyfill/dialog-polyfill');
 ```
@@ -84,7 +84,7 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 </dialog>
 ```
 
-&nbsp;4. Code a `<button>` element with `action="close"` and `class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"` to display the close button. Add an `<i>` tag inside the `<button>` tag to hold the close icon.
+&nbsp;4. Code a `<button>` element with `action="close"` and `class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"` to display the close button. Add an `<i>` element inside the `<button>` element to hold the close icon.
 ```html
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
@@ -162,7 +162,7 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
       <img src="" alt>
       <figcaption></figcaption>
     </figure>
-    <footer class="mdl-card__actions mdl-card--border">
+    <footer class="mdl-card__actions">
       <div class="mdl-card__supporting-text">
       </div>
     </footer>    
@@ -228,7 +228,7 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
   </div>
 </dialog>
 ```
-Add as many buttons as you like. To identify the button that trigger an custom event, you should assign each button an unique action attribute value. 
+Add as many buttons as you like. To identify the button that trigger an custom event, you should assign each button a unique action attribute value. 
 The action attribute will be emitted as a part of the custom event triggered when a button is clicked.
 
 &nbsp;10. Add an image and open the dialog.
@@ -295,8 +295,6 @@ You can modify the lightbox trough the following SASS variables.
 | SASS variables |
 |----------------|
 | `$mdlext-lightbox-background-color` |
-| `$mdlext-lightbox-margin-left` |
-| `$mdlext-lightbox-margin-right` |
 | `$mdlext-lightbox-border` |
 | `$mdlext-lightbox-border-radius` |
 | `$mdlext-lightbox-figure-margin` |

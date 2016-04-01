@@ -1727,9 +1727,9 @@ html:before {
   position: relative;
   width: auto;
   max-width: 100%;
-  border-radius: 0;
+  margin: 0 auto;
   border: 0;
-  margin: 0 0 0 0;
+  border-radius: 0;
   background-color: rgb(255,255,255);
   box-sizing: border-box;
   outline: 0;
@@ -1745,6 +1745,7 @@ html:before {
 .mdlext-lightbox figure {
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
 .mdlext-lightbox figure img {

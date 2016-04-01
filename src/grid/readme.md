@@ -25,9 +25,9 @@ $ npm install --save eq.js
 @import '../node_modules/mdl-ext/src/mdl-ext-eqjs';
 ```
 
-&nbsp;3. Require `eq.js` in your main.js file  
+&nbsp;3. Import or Require `eq.js`.  
 ```javascript
-const eqjs = require('eq.js');
+const eqjs = require('eq.js'); // ... or:  import eqjs from 'eq.js';
 ```
 
 &nbsp;4. Optionally trigger `eq.js`<br/>

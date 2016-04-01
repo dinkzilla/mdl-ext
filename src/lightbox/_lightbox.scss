@@ -25,9 +25,9 @@
   position: relative;
   width: auto;
   max-width: 100%;
+  margin: 0 auto;
+  border: $mdlext-lightbox-border;
   border-radius: $mdlext-lightbox-border-radius;
-  border: $mdlext-lightbox-border-radius;
-  margin: 0 $mdlext-lightbox-margin-right 0 $mdlext-lightbox-margin-left;
   background-color: $mdlext-lightbox-background-color;
   box-sizing: border-box;
   outline: 0;
@@ -39,6 +39,7 @@
   figure {
     margin: $mdlext-lightbox-figure-margin;
     padding: $mdlext-lightbox-figure-padding;
+    position: relative;
 
     img {
       width: 100%;

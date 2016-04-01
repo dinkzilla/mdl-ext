@@ -14,6 +14,7 @@
   const VK_ARROW_DOWN = 40;
 
   const IS_UPGRADED = 'is-upgraded';
+  const STICKY_FOOTER_CLASS = 'mdlext-lightbox--sticky-footer';
   const BUTTON_CLASS = 'mdl-button';
 
   /**
@@ -107,13 +108,27 @@
    * @private
    */
 
-  /*
-  MaterialExtLightbox.prototype.imgLoadHandler_ = function( event ) {
+  MaterialExtLightbox.prototype.imgLoadHandler_ = function( /*event*/ ) {
     // Do  nothing for now
-    console.log('***** Image loaded', this.src);
-  };
-  */
 
+    const footerHeight = (footer, isSticky) => isSticky && footer ? footer.clientHeight : 0;
+
+    const dialog  = this.parentNode;
+
+    const fh = footerHeight(this.querySelector('footer'), this.classList.contains(STICKY_FOOTER_CLASS) );
+    const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - fh;
+
+    // Adjust height of dialog and lightbox
+    if(this.offsetHeight > vh) {
+      this.style.height = `${vh}px`;
+    }
+
+    // Center vertically in viewport
+
+
+    console.log(dialog.nodeName, dialog.style.height, 'fh', fh, 'vw', vw, 'vh', vh, this.getBoundingClientRect());
+  };
 
 
   /**
@@ -132,12 +147,10 @@
       //document.addEventListener('keydown', this.keyDownHandler_.bind(this.element_), true);
       this.element_.addEventListener('keydown', this.keyDownHandler_.bind(this.element_), true);
 
-      /*
       const img = this.element_.querySelector('img');
       if(img !==null) {
-        img.addEventListener('load', this.imgLoadHandler_.bind(img), false);
+        img.addEventListener('load', this.imgLoadHandler_.bind(this.element_), false);
       }
-      */
 
       if(!Number.isInteger(this.element_.getAttribute('tabindex'))) {
         this.element_.setAttribute('tabindex', 1);

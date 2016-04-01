@@ -137,7 +137,7 @@ $ npm install --save eq.js
 ```
 >Imports above assumes that your main SASS file is located in the `./src` folder. Adjust path to `node_modules` according to where your SASS file is located. 
 
-**Import material-design-lite and mdl-ext scripts in your "main" js file**
+**Import material-design-lite and mdl-ext scripts in your js file**
 ```javascript
 import 'material-design-lite/material';
 import 'mdl-ext';
@@ -149,11 +149,11 @@ require('material-design-lite/material');
 require('mdl-ext');
 ```
 
-**If you choose to use element queries, require `eq.js` in your "main" js file**  
+**If you choose to use element queries, import or require `eq.js`**  
 ```javascript
-const eqjs = require('eq.js');
+import eqjs from 'eq.js';  // ... or:  const eqjs = require('eq.js');
 ```
- 
+
 ## Components
 
 ### Accordion
