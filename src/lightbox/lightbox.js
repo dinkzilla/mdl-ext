@@ -63,8 +63,6 @@
           action = 'close';
         }
 
-        //console.log('***** Key pressed, keyCode: ', event.keyCode, 'action: ', action);
-
         const evt = new CustomEvent('action', {
           bubbles: true,
           cancelable: true,
@@ -112,30 +110,26 @@
 
     const footerHeight = (footer, isSticky) => isSticky && footer ? footer.clientHeight : 0;
 
-    const delta = (viewportHeight, rect) => {
-      if(rect.height > viewportHeight) {
-        return -rect.top;
+    const reposition = (dialog, fh) => {
+      if (dialog && window.getComputedStyle(dialog).position === 'absolute') {
+        const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        const topValue = scrollTop + (window.innerHeight - dialog.offsetHeight - fh) / 2;
+        dialog.style.top = `${Math.max(scrollTop, topValue)}px`;
       }
-      return (viewportHeight - rect.height) / 2 - rect.top;
     };
 
+    const dialog = this.parentNode.nodeName === 'DIALOG' ? this.parentNode : null;
+    if(dialog) {
+      this.style.width = '';
+      const fh = footerHeight(this.querySelector('footer'), this.classList.contains(STICKY_FOOTER_CLASS));
+      const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - fh;
 
-    const dialog = this.parentNode;
-    const fh = footerHeight(this.querySelector('footer'), this.classList.contains(STICKY_FOOTER_CLASS) );
-    const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - fh;
-    const r = dialog.getBoundingClientRect();
-    const d = delta(vh, r);
-
-    console.log(dialog.nodeName, this.offsetHeight, 'fh', fh, 'vh', vh, 'r.height', r.height, 'r.top', r.top, 'd', d, 'dialog.offsetTop', dialog.offsetTop, 'dialog.style.top', dialog.style.top);
-
-    // Center dialog vertically in viewport
-    /*
-    if(d != 0) {
-      this.style.marginTop = `${d}px`;
+      if (this.offsetHeight > vh) {
+        this.style.width = `${this.offsetWidth * vh / this.offsetHeight}px`;
+      }
+      reposition(dialog, fh);
     }
-    */
   };
-
 
   /**
    * Initialize component
@@ -143,23 +137,21 @@
   MaterialExtLightbox.prototype.init = function() {
 
     if (this.element_) {
-
       // Do the init required for this component to work
+
       [...this.element_.querySelectorAll(`.${BUTTON_CLASS}`)].forEach(
         button => button.addEventListener('click', this.buttonClickHandler_.bind(button), false)
       );
 
-      // TODO: Attach event to document - but need a strategy for that; must attach/detach on open/close
-      //document.addEventListener('keydown', this.keyDownHandler_.bind(this.element_), true);
       this.element_.addEventListener('keydown', this.keyDownHandler_.bind(this.element_), true);
-
-      const img = this.element_.querySelector('img');
-      if(img !==null) {
-        img.addEventListener('load', this.imgLoadHandler_.bind(this.element_), false);
-      }
 
       if(!Number.isInteger(this.element_.getAttribute('tabindex'))) {
         this.element_.setAttribute('tabindex', 1);
+      }
+
+      const img = this.element_.querySelector('img');
+      if(img) {
+        img.addEventListener('load', this.imgLoadHandler_.bind(this.element_), false);
       }
 
       // Set upgraded flag
@@ -167,14 +159,13 @@
     }
   };
 
-  /**
+  /*
    * Downgrade component
-   * E.g remove listeners and clen up resources
+   * E.g remove listeners and clean up resources
    * Note: There is a bug i material component container; downgrade is never called!
    * Disables method temporarly to keep code coverage at 100% for functions.
-   */
+   *
 
-  /*
   MaterialExtLightbox.prototype.mdlDowngrade_ = function() {
 
     if (this.element_) {
@@ -187,7 +178,9 @@
   };
   */
 
-  // The component registers itself. It can assume componentHandler is available in the global scope.
+  /**
+   * The component registers itself. It can assume componentHandler is available in the global scope.
+   */
   /* eslint no-undef: 0 */
   /* jshint undef:false */
   componentHandler.register({

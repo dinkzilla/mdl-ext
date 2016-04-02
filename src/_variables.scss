@@ -68,16 +68,13 @@ $mdlext-dialog-backdrop-animation: .2s forwards !default;
 
 
 /* ==========     Lightbox     ========== */
-$mdlext-lightbox-background-color       : $card-background-color !default;
-$mdlext-lightbox-border                 : 0 !default;
-$mdlext-lightbox-border-radius          : 0 !default;
-$mdlext-lightbox-figure-margin          : 0 !default;
-$mdlext-lightbox-figure-padding         : 0 !default;
-$mdlext-lightbox-footer-background-color: rgba(255, 255, 255, 0.9) !default;
-$mdlext-lightbox-footer-padding-top     : 8px !default;
-$mdlext-lightbox-footer-padding-right   : 8px !default;
-$mdlext-lightbox-footer-padding-bottom  : 8px !default;
-$mdlext-lightbox-footer-padding-left    : 8px !default;
+$mdlext-lightbox-background-color           : $card-background-color !default;
+$mdlext-lightbox-border                     : 0 !default;
+$mdlext-lightbox-border-radius              : 0 !default;
+$mdlext-lightbox-figure-margin              : 0 !default;
+$mdlext-lightbox-figure-padding             : 0 !default;
+$mdlext-lightbox-figcaption-background-color: rgba(255, 255, 255, 0.76) !default;
+$mdlext-lightbox-footer-background-color    : rgba(255, 255, 255, 0.86) !default;
 
 
 /* ==========  Lightboard  ========== */
@@ -122,7 +119,6 @@ $mdlext-lightboard-slide-background-color-hover: #E8E8E8 !default;
 $mdlext-lightboard-slide-box-shadow-hover      : 2px 2px 12px -1px rgba(219,215,219,1)  !default;
 
 $mdlext-lightboard-figcaption-font-size        : 11px !default;
-$mdlext-lightboard-figcaption-font-size-large  : 14px !default;
 $mdlext-lightboard-figcaption-text-color       : unquote('rgb(#{$palette-grey-400})') !default;
 $mdlext-lightboard-ripple-color                : $tab-highlight-color !default;
 $mdlext-lightboard-focus-outline-color         : #777777 !default;

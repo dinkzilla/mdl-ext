@@ -1,5 +1,14 @@
-<h5>Lightbox Component</h5>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+</head>
+<body>
 
+<h5>Lightbox Component</h5>
 
 <ul id="lightboard-for-lightbox" class="mdlext-lightboard mdlext-js-lightboard mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events">
   <li class="mdlext-lightboard__slide">
@@ -97,6 +106,64 @@
       </figure>
     </a>
   </li>
+
+  <li class="mdlext-lightboard__slide">
+    <a href="#" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_D800951.jpg" />
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="#" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_D801188.jpg" />
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="#" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_D801205-2.jpg" />
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="#" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_D801274.jpg" />
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="#" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_D801392.jpg" />
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="#" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_D801952-4.jpg" />
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="#" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_D807603.jpg" />
+      </figure>
+    </a>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <a href="#" class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="../../lightboard/snippets/_D807689.jpg" />
+      </figure>
+    </a>
+  </li>
+
 </ul>
 
 <p class="mdl-typography--caption" style="margin-top: 64px;">
@@ -117,9 +184,9 @@
     </div>
     <figure class="mdl-card__title">
       <img src="" alt>
-      <figcaption></figcaption>
+      <figcaption>Details</figcaption>
     </figure>
-    <footer class="mdl-card--border">
+    <footer class="mdl-card__actions mdl-card--border">
       <div class="mdl-card__supporting-text">
         Image title
       </div>
@@ -137,16 +204,16 @@
           <i class="material-icons">last_page</i>
         </button>
         <!--
-        <button action="play" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Play">
+        <button action="play" class="mdl-button mdl-button--icon mdl-js-button" title="Play">
           <i class="material-icons">play_circle_outline</i>
         </button>
-        <button id="slide-pause" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Pause">
+        <button id="slide-pause" class="mdl-button mdl-button--icon mdl-js-button" title="Pause">
           <i class="material-icons">pause_circle_outline</i>
         </button>
-        <button action="info" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Details">
+        -->
+        <button action="info" class="mdl-button mdl-button--icon mdl-js-button" title="Details">
           <i class="material-icons">info_outline</i>
         </button>
-        -->
       </nav>
     </footer>
   </div>
@@ -181,6 +248,16 @@
       if(e.detail.action === 'close') {
         dialog.close();
       }
+      else if(e.detail.action === 'info') {
+        var figcaption = lightbox.querySelector('figure figcaption');
+        if(figcaption.classList.contains('mdlext-lightbox__show-figcaption')) {
+          figcaption.classList.remove('mdlext-lightbox__show-figcaption');
+        }
+        else {
+          figcaption.classList.add('mdlext-lightbox__show-figcaption');
+        }
+
+      }
       else {
         if(e.detail.action === 'first') {
           currentSlide = slides[0];
@@ -213,12 +290,55 @@
       var img = dialog.querySelector('img');
       var supportingText = dialog.querySelector('.mdl-card__supporting-text');
       var imageDetails = dialog.querySelector('figcaption');
-
-      img.setAttribute("src", slideAnchor.getAttribute('href'));
+      var href = slideAnchor.getAttribute('href');
+      href = href && !href.startsWith('#') ? href : slideImg.getAttribute('src');
+      img.setAttribute("src", href);
       img.setAttribute("alt", slideImg.getAttribute('title'));
       img.setAttribute("title", slideImg.getAttribute('title'));
       supportingText.innerHTML = slideImg.getAttribute('title');
-      imageDetails.innerHTML = slideImg.getAttribute('title');
+
+      imageDetails.innerHTML =
+      `<table>
+        <tbody>
+          <tr>
+            <th>Title</th>
+            <td>Image title</td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td>Image description</td>
+          </tr>
+          <tr>
+            <th>Copright &copy;</th>
+            <td>Leif Olsen</td>
+          </tr>
+          <tr>
+            <th>Camera</th>
+            <td>Nikon D800E</td>
+          </tr>
+          <tr>
+            <th>Lens</th>
+            <td>Nikkor 70-200mm/2.8GEDVR</td>
+          </tr>
+          <tr>
+            <th>Focal length</th>
+            <td>200mm</td>
+          </tr>
+          <tr>
+            <th>Aperture</th>
+            <td>2.8</td>
+          </tr>
+          <tr>
+            <th>Shutter speed</th>
+            <td>1/200s</td>
+          </tr>
+          <tr>
+            <th>Keywords</th>
+            <td>Norway, Svalbard, Ny Ålesund, landscape</td>
+          </tr>
+        </tbody>
+      </table>`;
+
 
       if(!dialog.open) {
         dialog.showModal();
@@ -227,3 +347,5 @@
 
   });
 </script>
+</body>
+</html>

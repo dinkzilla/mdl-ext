@@ -150,6 +150,18 @@ describe('MaterialExtLightbox', () => {
   });
 
 
+  it('can load image', () => {
+    const lightbox = qs('#lightbox');
+    const img = qs('img', lightbox);
+
+    let spy = sinon.spy();
+    img.addEventListener('load', spy);
+
+    img.src = './smiley.jpg';
+    assert.isTrue(spy.called, 'Expected "action" event to fire');
+  });
+
+
   it('interacts with the keyboard', () => {
     const lightbox = qs('#lightbox');
 

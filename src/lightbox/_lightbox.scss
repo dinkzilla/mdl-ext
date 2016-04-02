@@ -47,24 +47,33 @@
       height: auto;
     }
     figcaption {
+      @include typo-caption($colorContrast: false, $usePreferred: true);
+
       position: absolute;
       bottom: 0;
+      left: 0;
       max-width: 100%;
       width: 100%;
-      height: 0;
+      height: auto;
       max-height: 50%;
+      padding: 8px;
+      display: none;
+      overflow: auto;
+      background-color: $mdlext-lightbox-figcaption-background-color;
+
+      &.mdlext-lightbox__show-figcaption {
+        display: block;
+      }
     }
   }
   .mdl-card__menu {
-    color: #fff;
+    color: #ffffff;
     z-index: 1;
   }
   footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    padding: $mdlext-lightbox-footer-padding-top $mdlext-lightbox-footer-padding-right $mdlext-lightbox-footer-padding-bottom $mdlext-lightbox-footer-padding-left;
     background-color: $mdlext-lightbox-footer-background-color;
 
     .mdl-card__supporting-text {

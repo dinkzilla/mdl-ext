@@ -199,7 +199,7 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
     <div class="mdl-card__menu">
-      <button action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
+      <button action="close" class="mdl-button mdl-button--icon mdl-js-button" title="Close">
         <i class="material-icons">close</i>
       </button>
     </div>
@@ -211,16 +211,16 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
       <div class="mdl-card__supporting-text">
       </div>
       <nav>
-        <button action="first" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="First">
+        <button action="first" class="mdl-button mdl-button--icon mdl-js-button" title="First">
           <i class="material-icons">first_page</i>
         </button>
-        <button action="prev" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Previous">
+        <button action="prev" class="mdl-button mdl-button--icon mdl-js-button" title="Previous">
           <i class="material-icons">chevron_left</i>
         </button>
-        <button action="next" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Next">
+        <button action="next" class="mdl-button mdl-button--icon mdl-js-button" title="Next">
           <i class="material-icons">chevron_right</i>
         </button>
-        <button action="last" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Last">
+        <button action="last" class="mdl-button mdl-button--icon mdl-js-button" title="Last">
           <i class="material-icons">last_page</i>
         </button>
       </nav>      
@@ -273,8 +273,8 @@ The lightbox emits a custom **action** event when a button contained in the ligh
 `Arrow Left`, `Arrow Up`, `Arrow Right`, `Arrow Down`, `Home`, `End` or `Esc` is pressed. The event has a detail object with the following content:
 ```
 {
-  action, // one of: 'first', 'prev', 'next', 'last', 'play', 'pause', 'info', 'close', '' (empty string if no action assigned) 
-  source  // the button instance that caused the event, or the lightbox element if the a key triggered the event
+  action, // one of: 'first', 'prev', 'next', 'last', 'close' - or any value assigned to a button action attribute (empty string if no action assigned) 
+  source  // the button instance that caused the event, or the lightbox element if a key triggered the event
 }
 ```
 
@@ -300,10 +300,6 @@ You can modify the lightbox trough the following SASS variables.
 | `$mdlext-lightbox-figure-margin` |
 | `$mdlext-lightbox-figure-padding` |
 | `$mdlext-lightbox-footer-background-color` |
-| `$mdlext-lightbox-footer-padding-top` |
-| `$mdlext-lightbox-footer-padding-right` |
-| `$mdlext-lightbox-footer-padding-bottom` |
-| `$mdlext-lightbox-footer-padding-left` |
 
 
 ## How to use the component programmatically
