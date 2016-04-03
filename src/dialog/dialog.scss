@@ -21,6 +21,7 @@
 @import "../variables";
 
 dialog.mdlext-dialog {
+  position: absolute;
   border: 0;
   opacity: 0;
   padding: $mdlext-dialog-padding;

@@ -63,7 +63,7 @@
           action = 'next';
         }
         else if (event.keyCode === VK_SPACE) {
-          action = 'info';
+          action = 'select';
         }
         else if (event.keyCode === VK_ESC) {
           action = 'cancel';
@@ -89,7 +89,7 @@
    */
   MaterialExtLightbox.prototype.buttonClickHandler_ = function(event) {
     if (event) {
-      //console.log('***** Button clicked, action:', this.getAttribute('action'),  this);
+
       event.preventDefault();
       event.stopPropagation();
 
@@ -121,7 +121,7 @@
 
   MaterialExtLightbox.prototype.imgLoadHandler_ = function( /*event*/ ) {
 
-    const footerHeight = (footer, isSticky) => isSticky && footer ? footer.clientHeight : 0;
+    const footerHeight = (footer, isSticky) => isSticky && footer ? footer.offsetHeight : 0;
 
     const reposition = (dialog, fh) => {
       if (dialog && window.getComputedStyle(dialog).position === 'absolute') {
@@ -137,8 +137,8 @@
       const fh = footerHeight(this.querySelector('footer'), this.classList.contains(STICKY_FOOTER_CLASS));
       const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - fh;
 
-      if (this.offsetHeight > vh) {
-        this.style.width = `${this.offsetWidth * vh / this.offsetHeight}px`;
+      if (dialog.offsetHeight > vh) {
+        this.style.width = `${(this.offsetWidth * vh / this.offsetHeight) - 8}px`;
       }
       reposition(dialog, fh);
     }
@@ -161,6 +161,16 @@
       [...this.element_.querySelectorAll(`.${BUTTON_CLASS}`)].forEach( button =>
         button.addEventListener('click', this.buttonClickHandler_.bind(button), false)
       );
+
+      const figcaption = this.element_.querySelector('figcaption');
+      if(figcaption) {
+        figcaption.addEventListener('click', this.buttonClickHandler_.bind(figcaption), false);
+      }
+
+      const footer = this.element_.querySelector('footer');
+      if(footer) {
+        footer.addEventListener('click', this.buttonClickHandler_.bind(footer), false);
+      }
 
       const img = this.element_.querySelector('img');
       if(img) {
