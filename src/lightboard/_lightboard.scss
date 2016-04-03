@@ -106,6 +106,8 @@ ul.mdlext-lightboard {
           border-radius: $mdlext-lightboard-slide-inner-border-radius;
         }
         figcaption {
+          @include typo-caption($colorContrast: false, $usePreferred: true);
+          color: $mdlext-lightboard-figcaption-text-color;
           position: absolute;
           bottom: -2px;
           white-space: nowrap;
@@ -113,11 +115,17 @@ ul.mdlext-lightboard {
           max-width: 100%;
           width: 100%;
           text-align: center;
-          font-size: $mdlext-lightboard-figcaption-font-size;
-          font-weight: 500;
-          line-height: 14px;
-          color: $mdlext-lightboard-figcaption-text-color;
           text-overflow: ellipsis;
+          padding: 4px 0;
+        }
+      }
+      &:hover {
+        figcaption {
+          // As far as I can see there is no way to darken/lighten a text color
+          // defined by MDL, due to the "unqote" functions.
+          // So this is a hack
+          color: rgba(0,0,0, 1) !important;
+          background-color: rgba(255,255,255, 0.2);
         }
       }
     }

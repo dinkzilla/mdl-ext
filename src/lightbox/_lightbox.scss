@@ -57,12 +57,23 @@
       height: auto;
       max-height: 50%;
       padding: 8px;
-      display: none;
-      overflow: auto;
       background-color: $mdlext-lightbox-figcaption-background-color;
+      display: block;
+      overflow: hidden;
+      transform-origin: top;
+      transform: scaleY(0);
 
       &.mdlext-lightbox__show-figcaption {
-        display: block;
+        transform: scaleY(1);
+        overflow: auto;
+      }
+      tbody {
+        th {
+          text-align: left;
+        }
+        th, td {
+          vertical-align: text-top;
+        }
       }
     }
   }

@@ -6,6 +6,7 @@
   'use strict';
 
   const VK_ESC = 27;
+  const VK_SPACE = 32;
   const VK_END = 35;
   const VK_HOME = 36;
   const VK_ARROW_LEFT = 37;
@@ -14,6 +15,7 @@
   const VK_ARROW_DOWN = 40;
 
   const IS_UPGRADED = 'is-upgraded';
+  const LIGHTBOX_CLASS = 'mdlext-lightbox';
   const STICKY_FOOTER_CLASS = 'mdlext-lightbox--sticky-footer';
   const BUTTON_CLASS = 'mdl-button';
 
@@ -40,7 +42,8 @@
   MaterialExtLightbox.prototype.keyDownHandler_ = function(event) {
 
     if (event) {
-      if ( event.keyCode === VK_ESC || event.keyCode === VK_END || event.keyCode === VK_HOME
+      if ( event.keyCode === VK_ESC || event.keyCode === VK_SPACE
+        || event.keyCode === VK_END || event.keyCode === VK_HOME
         || event.keyCode === VK_ARROW_UP || event.keyCode === VK_ARROW_LEFT
         || event.keyCode === VK_ARROW_DOWN || event.keyCode === VK_ARROW_RIGHT) {
 
@@ -59,8 +62,11 @@
         else if (event.keyCode === VK_ARROW_DOWN || event.keyCode === VK_ARROW_RIGHT) {
           action = 'next';
         }
+        else if (event.keyCode === VK_SPACE) {
+          action = 'info';
+        }
         else if (event.keyCode === VK_ESC) {
-          action = 'close';
+          action = 'cancel';
         }
 
         const evt = new CustomEvent('action', {
@@ -82,7 +88,6 @@
    * @private
    */
   MaterialExtLightbox.prototype.buttonClickHandler_ = function(event) {
-
     if (event) {
       //console.log('***** Button clicked, action:', this.getAttribute('action'),  this);
       event.preventDefault();
@@ -97,6 +102,14 @@
         }
       });
       this.dispatchEvent(evt);
+
+      let n = this;
+      while((n = n.parentNode) != null) {
+        if(n.classList.contains(LIGHTBOX_CLASS)) {
+          n.focus();
+          break;
+        }
+      }
     }
   };
 
@@ -139,15 +152,15 @@
     if (this.element_) {
       // Do the init required for this component to work
 
-      [...this.element_.querySelectorAll(`.${BUTTON_CLASS}`)].forEach(
-        button => button.addEventListener('click', this.buttonClickHandler_.bind(button), false)
-      );
-
       this.element_.addEventListener('keydown', this.keyDownHandler_.bind(this.element_), true);
 
       if(!Number.isInteger(this.element_.getAttribute('tabindex'))) {
         this.element_.setAttribute('tabindex', 1);
       }
+
+      [...this.element_.querySelectorAll(`.${BUTTON_CLASS}`)].forEach( button =>
+        button.addEventListener('click', this.buttonClickHandler_.bind(button), false)
+      );
 
       const img = this.element_.querySelector('img');
       if(img) {

@@ -279,11 +279,9 @@ You can modify the lightboard trough the following SASS variables.
 | `$mdlext-lightboard-slide-border-color-hover    ` |
 | `$mdlext-lightboard-slide-background-color-hover` |
 | `$mdlext-lightboard-slide-box-shadow-hover      ` |
-| `$mdlext-lightboard-figcaption-font-size        ` |
-| `$mdlext-lightboard-figcaption-text-color`        |
 | `$mdlext-lightboard-ripple-color`                 |
 | `$mdlext-lightboard-focus-outline-color`          |
-| `` |
+| `$mdlext-lightboard-figcaption-text-color`        |
 
 
 ## How to use the component programmatically

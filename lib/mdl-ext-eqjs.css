@@ -349,13 +349,13 @@ dialog.mdlext-dialog[open] + .backdrop {
 
 @-webkit-keyframes mdlext-darken-backdrop {
   to {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.86);
   }
 }
 
 @keyframes mdlext-darken-backdrop {
   to {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.86);
   }
 }
 
@@ -1522,6 +1522,12 @@ ul.mdlext-lightboard {
 
 .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure figcaption,
 .mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container figure figcaption {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+  color: rgb(189,189,189);
   position: absolute;
   bottom: -2px;
   white-space: nowrap;
@@ -1529,11 +1535,14 @@ ul.mdlext-lightboard {
   max-width: 100%;
   width: 100%;
   text-align: center;
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 14px;
-  color: rgb(189,189,189);
   text-overflow: ellipsis;
+  padding: 4px 0;
+}
+
+.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame:hover figcaption,
+.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container:hover figcaption {
+  color: black !important;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .mdlext-lightboard {
@@ -1769,13 +1778,28 @@ html:before {
   height: auto;
   max-height: 50%;
   padding: 8px;
-  display: none;
-  overflow: auto;
   background-color: rgba(255, 255, 255, 0.76);
+  display: block;
+  overflow: hidden;
+  -webkit-transform-origin: top;
+          transform-origin: top;
+  -webkit-transform: scaleY(0);
+          transform: scaleY(0);
 }
 
 .mdlext-lightbox figure figcaption.mdlext-lightbox__show-figcaption {
-  display: block;
+  -webkit-transform: scaleY(1);
+          transform: scaleY(1);
+  overflow: auto;
+}
+
+.mdlext-lightbox figure figcaption tbody th {
+  text-align: left;
+}
+
+.mdlext-lightbox figure figcaption tbody th,
+.mdlext-lightbox figure figcaption tbody td {
+  vertical-align: text-top;
 }
 
 .mdlext-lightbox .mdl-card__menu {

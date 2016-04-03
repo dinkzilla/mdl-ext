@@ -8,17 +8,39 @@ var mdlIframeLoader = {};
 (function(self) {
 
   // The CSS and JS needed to run MDL snippets in an <iframe>
+
+  // https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
+  try {
+    new window.CustomEvent("test");
+  } catch(e) {
+    var CustomEvent = function(event, params) {
+      var evt;
+      params = params || {
+          bubbles: false,
+          cancelable: false,
+          detail: undefined
+        };
+
+      evt = document.createEvent("CustomEvent");
+      evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+      return evt;
+    };
+
+    CustomEvent.prototype = window.Event.prototype;
+    window.CustomEvent = CustomEvent; // expose definition to window
+  }
+
   var docs = [
-    { 'type': 'css', 'id': 'font-roboto-css',     'src': 'https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en' },
-    { 'type': 'css', 'id': 'material-icon-css',   'src': 'https://fonts.googleapis.com/icon?family=Material+Icons' },
-    { 'type': 'css', 'id': 'dialog-polyfill-css', 'src': 'node_modules/dialog-polyfill/dialog-polyfill.css' },
-    { 'type': 'css', 'id': 'material-css',        'src': 'node_modules/material-design-lite/material.css' },
-    { 'type': 'css', 'id': 'mdlext-css',          'src': 'lib/mdl-ext-eqjs.css' },
-    { 'type': 'css', 'id': 'demo-css',            'src': 'demo/demo.css' },
-    { 'type': 'js',  'id': 'dialog-polyfill-js',  'src': 'node_modules/dialog-polyfill/dialog-polyfill.js' },
-    { 'type': 'js',  'id': 'material-js',         'src': 'node_modules/material-design-lite/material.js' },
-    { 'type': 'js',  'id': 'mdlext-js',           'src': 'lib/index.js' },
-    { 'type': 'js',  'id': 'eq-js',               'src': 'node_modules/eq.js/dist/eq.min.js' }
+    { 'type': 'css', 'id': 'font-roboto-css',          'src': 'https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en' },
+    { 'type': 'css', 'id': 'material-icon-css',        'src': 'https://fonts.googleapis.com/icon?family=Material+Icons' },
+    { 'type': 'css', 'id': 'dialog-polyfill-css',      'src': 'node_modules/dialog-polyfill/dialog-polyfill.css' },
+    { 'type': 'css', 'id': 'material-css',             'src': 'node_modules/material-design-lite/material.css' },
+    { 'type': 'css', 'id': 'mdlext-css',               'src': 'lib/mdl-ext-eqjs.css' },
+    { 'type': 'css', 'id': 'demo-css',                 'src': 'demo/demo.css' },
+    { 'type': 'js',  'id': 'dialog-polyfill-js',       'src': 'node_modules/dialog-polyfill/dialog-polyfill.js' },
+    { 'type': 'js',  'id': 'material-js',              'src': 'node_modules/material-design-lite/material.js' },
+    { 'type': 'js',  'id': 'eq-js',                    'src': 'node_modules/eq.js/dist/eq.min.js' },
+    { 'type': 'js',  'id': 'mdlext-js',                'src': 'lib/index.js' }
   ];
 
   var joinOrigin = function(origin, src) {

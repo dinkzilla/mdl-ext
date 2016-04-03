@@ -266,14 +266,15 @@ The lightbox interacts with the following keyboard keys.
 *   `Down arrow` - behaves the same as right arrow.
 *   `End` - Emits a custom event with action='last'
 *   `Home` - Emits a custom event with action='first'
-*   `Esc` - Emits a custom event with action='close'
+*   `Space` - Emits a custom event with action='info'
+*   `Esc` - Emits a custom event with action='cancel'
 
 ## Events
 The lightbox emits a custom **action** event when a button contained in the lightbox is clicked, or if one of the keys 
-`Arrow Left`, `Arrow Up`, `Arrow Right`, `Arrow Down`, `Home`, `End` or `Esc` is pressed. The event has a detail object with the following content:
+`Arrow Left`, `Arrow Up`, `Arrow Right`, `Arrow Down`, `Home`, `End`, `Space` or `Esc` is pressed. The event has a detail object with the following content:
 ```
 {
-  action, // one of: 'first', 'prev', 'next', 'last', 'close' - or any value assigned to a button action attribute (empty string if no action assigned) 
+  action, // one of: 'first', 'prev', 'next', 'last', 'info' 'cancel' - or any value assigned to a button action attribute (empty string if no action assigned) 
   source  // the button instance that caused the event, or the lightbox element if a key triggered the event
 }
 ```
