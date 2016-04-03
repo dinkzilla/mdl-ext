@@ -124,7 +124,7 @@
     const footerHeight = (footer, isSticky) => isSticky && footer ? footer.offsetHeight : 0;
 
     const reposition = (dialog, fh) => {
-      if (dialog && window.getComputedStyle(dialog).position === 'absolute') {
+      if (window.getComputedStyle(dialog).position === 'absolute') {
         const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
         const topValue = scrollTop + (window.innerHeight - dialog.offsetHeight - fh) / 2;
         dialog.style.top = `${Math.max(scrollTop, topValue)}px`;
@@ -138,7 +138,10 @@
       const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - fh;
 
       if (dialog.offsetHeight > vh) {
-        this.style.width = `${(this.offsetWidth * vh / this.offsetHeight) - 8}px`;
+        let n = 0;
+        while(dialog.offsetHeight > vh && ++n < 4) {
+          this.style.width = `${this.offsetWidth * vh / this.offsetHeight}px`;
+        }
       }
       reposition(dialog, fh);
     }
