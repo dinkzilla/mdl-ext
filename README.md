@@ -6,7 +6,15 @@
 [![version](https://img.shields.io/npm/v/mdl-ext.svg?style=flat-square)](http://npm.im/mdl-ext)
 
 Material Design Lite Ext (MDLEXT).
-Components built with the [Google Material Design Lite](https://github.com/google/material-design-lite) framework.
+Components built with the [Google Material Design Lite](https://github.com/google/material-design-lite) framewor and provides the following components.
+
+* **Accordion**<br/>A WAI-ARIA friendly accordion component with vertcial or horizontal layout.
+* **Bordered fields**<br/> The Material Design Lite Ext (MDLEXT) bordered fieldscomponent demonstrates how you can create your own theme of MDL text fields.
+* **Grid**<br/> A responsive grid based on element queries in favour of media queries.
+* **Lightboard**<br/>A lightboard is a translucent surface illuminated from behind, used for situations where a shape laid upon the surface needs to be seen with high contrast. In the "old days" of photography photograpers used a lightboard to get a quick view of, sorting and organizing their slides.
+* **Lightbox**<br/>A lightbox displays an image filling the screen, and dimming out the rest of the web page. It acts as a modal dialog using the `<dialog>` element as a container for the lightbox.
+* **Selectfield**<br/>The Material Design Lite Ext (MDLEXT) select field component is an enhanced version of the standard HTML `<select>` element.
+
 
 ## Introduction
 The MDLEXT component library is built with responsiveness in mind. The pre built CSS provided in the lib directory therefore comes
@@ -80,7 +88,7 @@ $ npm install --save eq.js
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
   <main class="mdl-layout__content">
-  </main
+  </main>
 </div>
 <script type="text/javascript" src="node_modules/material-design-lite/material.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="node_modules/mdl-ext/lib/index.min.js" charset="utf-8"></script>
@@ -102,7 +110,7 @@ $ npm install --save eq.js
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
   <main class="mdl-layout__content">
-  </main
+  </main>
 </div>
 <script type="text/javascript" src="node_modules/material-design-lite/material.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="node_modules/mdl-ext/lib/index.min.js" charset="utf-8"></script>
@@ -180,7 +188,8 @@ of photography photograpers used a lightboard to get a quick view of, sorting an
 
 ### Lightbox
 ![Lightbox](./etc/lightbox.png)
-A responsive [**lightbox**](./src/lightbox/) to be used in conjunction with e.g. a MDLEXT lightboard component.
+A [**lightbox**](./src/lightbox/) displays an image filling the screen, and dimming out the rest of the web page. It acts as a modal dialog using the `<dialog>` element as a container for the lightbox.
+
 
 ### Selectfield
 ![Selectfield](./etc/select-element.png)
