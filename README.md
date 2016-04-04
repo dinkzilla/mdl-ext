@@ -6,7 +6,7 @@
 [![version](https://img.shields.io/npm/v/mdl-ext.svg?style=flat-square)](http://npm.im/mdl-ext)
 
 Material Design Lite Ext (MDLEXT).
-Components built with the [Google Material Design Lite](https://github.com/google/material-design-lite) framewor and provides the following components.
+Components built with the [Google Material Design Lite](https://github.com/google/material-design-lite) framework. MDLEXT provides the following components.
 
 * **Accordion**<br/>A WAI-ARIA friendly accordion component with vertcial or horizontal layout.
 * **Bordered fields**<br/> The Material Design Lite Ext (MDLEXT) bordered fieldscomponent demonstrates how you can create your own theme of MDL text fields.
