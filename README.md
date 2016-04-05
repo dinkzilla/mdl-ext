@@ -15,6 +15,8 @@ Components built with the [Google Material Design Lite](https://github.com/googl
 * **Lightbox**<br/>A lightbox displays an image filling the screen, and dimming out the rest of the web page. It acts as a modal dialog using the `<dialog>` element as a container for the lightbox.
 * **Selectfield**<br/>The Material Design Lite Ext (MDLEXT) select field component is an enhanced version of the standard HTML `<select>` element.
 
+#### Live demo 
+A Live demo of MDLEXT is [here](http://leifoolsen.github.io/mdl-ext/index.html)
 
 ## Introduction
 The MDLEXT component library is built with responsiveness in mind. The pre built CSS provided in the lib directory therefore comes
