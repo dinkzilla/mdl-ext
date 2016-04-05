@@ -2,6 +2,23 @@
   box-sizing: border-box;
 }
 
+
+#mount {
+  padding: 0 0 0 8px;
+  height:100%;
+}
+
+.is-small-screen #mount {
+  padding-left: 16px;
+}
+
+.mdl-layout__drawer-button {
+  line-height: 65px;
+}
+.mdlext-demo-header {
+  margin-left: 32px;
+}
+
 /* Rules for sizing the icon */
 /* Not provided in "material-design-icons/iconfont/material-icon.css" */
 

@@ -247,7 +247,7 @@ img.setAttribute("src", 'wiew-from-my-window.jpg');
 img.setAttribute("alt", 'View from my window');
 img.setAttribute("title", 'View from my window');
 supportingText.innerHTML = 'View from my window';
-imageDetails.innerHTNL = 'Photo taken from my window yesterday morning'; 
+imageDetails.innerHTML = 'Photo taken from my window yesterday morning'; 
 
 if(!dialog.open) {
   dialog.showModal();

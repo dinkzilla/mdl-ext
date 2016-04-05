@@ -8,11 +8,14 @@
 </head>
 <body>
 
-<h5>Lightbox Component</h5>
+<h5 class="mdlext-demo-header">Lightbox Component</h5>
+<p>A lightbox displays an image filling the screen, and dimming out the rest of the web page. It acts as a modal dialog
+  using the <code>&lt;dialog&gt;</code> element as a container for the lightbox.
+</p>
 
 <!--
-  details attribute feeds data to the lightbox
-  a tag holds reference to lghtbox image
+  details attribute feeds data to the lightbox. use any data structure that suits you to feed the lightbox
+  the a element holds reference to lightbox image
  -->
 <ul id="lightboard-for-lightbox" class="mdlext-lightboard mdlext-js-lightboard mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events">
   <li class="mdlext-lightboard__slide" details='[
@@ -349,7 +352,13 @@
   </li>
   <li class="mdlext-lightboard__slide" details='[
     { "name": "Title",            "value": "Lista Lighthouse, Norway" },
-    { "name": "Copyright &copy;", "value": "Leif Olsen" } ]' >
+    { "name": "Copyright &copy;", "value": "Leif Olsen" },
+    { "name": "Camera",           "value": "Nikon D800E" },
+    { "name": "Lens",             "value": "Nikkor 16mm/2.8D Fisheye" },
+    { "name": "Focal length",     "value": "16mm" },
+    { "name": "Aperture",         "value": "f/8" },
+    { "name": "Shutter speed",    "value": "1/20s" },
+    { "name": "ISO",              "value": "100" } ]' >
     <a href="#" class="mdlext-lightboard__slide__frame">
       <figure>
         <img src="../../.img/_D806374.jpg" />
@@ -375,7 +384,7 @@
   </li>
 </ul>
 
-<p class="mdl-typography--caption" style="margin-top: 64px;">
+<p class="mdl-typography--caption" style="margin-top: 32px;">
   All images appearing in this page are the exclusive property of Leif Olsen and are protected under the United States
   and International Copyright laws. The images may not be reproduced or manipulated without the written permission of
   Leif Olsen. Use of any image as the basis for another photographic concept or illustration (digital, artist rendering

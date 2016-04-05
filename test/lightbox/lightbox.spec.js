@@ -10,6 +10,7 @@ import { qs, qsa, removeChilds } from '../testutils/domHelpers';
 describe('MaterialExtLightbox', () => {
 
   const VK_ESC = 27;
+  const VK_SPACE = 32;
   const VK_END = 35;
   const VK_HOME = 36;
   const VK_ARROW_LEFT = 37;
@@ -172,6 +173,7 @@ describe('MaterialExtLightbox', () => {
     spyOnKeyboardEvent(lightbox, VK_END);
     spyOnKeyboardEvent(lightbox, VK_HOME);
     spyOnKeyboardEvent(lightbox, VK_ESC);
+    spyOnKeyboardEvent(lightbox, VK_SPACE);
   });
 
 
