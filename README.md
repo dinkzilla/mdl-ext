@@ -16,7 +16,7 @@ Components built with the [Google Material Design Lite](https://github.com/googl
 * **Selectfield**<br/>The Material Design Lite Ext (MDLEXT) select field component is an enhanced version of the standard HTML `<select>` element.
 
 #### Live demo 
-A Live demo of MDLEXT is [here](http://leifoolsen.github.io/mdl-ext/index.html)
+A Live demo of MDLEXT is available [here](http://leifoolsen.github.io/mdl-ext/index.html)
 
 ## Introduction
 The MDLEXT component library is built with responsiveness in mind. The pre built CSS provided in the lib directory therefore comes
@@ -200,10 +200,15 @@ The Material Design Lite Ext (MDLEXT) [**select field**](./src/selectfield/) com
 of the standard [HTML `<select>`] (https://developer.mozilla.org/en/docs/Web/HTML/Element/select) element.
 
 ## Notes
->To see the MDLEXT components in action, after download/clone/install, open the [demo/index.html](./demo/index.html) in a browser.
-
+>A Live demo of MDLEXT is available [here](http://leifoolsen.github.io/mdl-ext/index.html).<br/>
 >You can also download or clone a demo project from here: https://github.com/leifoolsen/mdl-webpack. The demo project demonstrates
 how you can set up MDL with Babel(6) and Webpack, and how to self host Font Roboto and Material Icons in your web application.
+
+>Polyfills you might need:
+>* [dialog-polyfill](https://github.com/GoogleChrome/dialog-polyfill)
+>* [eqjs](https://github.com/Snugug/eq.js)
+>* [custom-event polyfill](https://github.com/webmodules/custom-event) or similar
+
 
 ## Licence
 © Leif Olsen, 2016. Licensed under an [Apache-2](https://github.com/leifoolsen/mdl-ext/blob/master/LICENSE) license.
