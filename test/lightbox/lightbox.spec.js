@@ -5,7 +5,7 @@ import requireUncached from 'require-uncached';
 import jsdomify from 'jsdomify';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
-import { qs, qsa, removeChilds } from '../testutils/domHelpers';
+import { qs, removeChilds } from '../testutils/domHelpers';
 
 describe('MaterialExtLightbox', () => {
 
@@ -94,7 +94,7 @@ describe('MaterialExtLightbox', () => {
   });
 
   after ( () => {
-    jsdomify.destroy()
+    jsdomify.destroy();
   });
 
   it('is globally available', () => {
@@ -155,7 +155,7 @@ describe('MaterialExtLightbox', () => {
     const lightbox = qs('#lightbox');
     const img = qs('img', lightbox);
 
-    let spy = sinon.spy();
+    const spy = sinon.spy();
     img.addEventListener('load', spy);
 
     img.src = './smiley.jpg';
@@ -182,7 +182,7 @@ describe('MaterialExtLightbox', () => {
     const button = qs('.mdl-button', lightbox);
     assert.isNotNull(button, 'Expected handle to button');
 
-    let spy = sinon.spy();
+    const spy = sinon.spy();
     lightbox.addEventListener('action', spy);
 
     const actionListener = ( event ) => {
@@ -209,7 +209,7 @@ describe('MaterialExtLightbox', () => {
   });
 
   function spyOnKeyboardEvent(target, keyCode) {
-    let spy = sinon.spy();
+    const spy = sinon.spy();
     target.addEventListener('keydown', spy, true);
 
     try {

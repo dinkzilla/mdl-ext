@@ -171,7 +171,7 @@ describe('MaterialExtAccordion', () => {
   });
 
   after ( () => {
-    jsdomify.destroy()
+    jsdomify.destroy();
   });
 
   it('is globally available', () => {
@@ -253,7 +253,7 @@ describe('MaterialExtAccordion', () => {
 
       componentHandler.downgradeElements(element);
       expect(element.getAttribute('data-upgraded')).to.not.include('MaterialExtAccordion');
-      }
+    }
     finally {
       removeChilds(container);
     }
@@ -333,7 +333,7 @@ describe('MaterialExtAccordion', () => {
     const header = qs('#accordion-1 .mdlext-accordion__panel .mdlext-accordion__panel__header');
     assert.isNotNull(header, 'Expected handle to header');
 
-    let spy = sinon.spy();
+    const spy = sinon.spy();
     header.addEventListener('click', spy);
 
     // Trigger mouse click
@@ -344,7 +344,7 @@ describe('MaterialExtAccordion', () => {
     });
     header.dispatchEvent(evt);
 
-    assert.isTrue(spy.calledOnce, `Expected "click" to fire once`);
+    assert.isTrue(spy.calledOnce, 'Expected "click" to fire once');
     header.removeEventListener('click', spy);
   });
 
@@ -352,10 +352,10 @@ describe('MaterialExtAccordion', () => {
     const header = qs('#accordion-1 .mdlext-accordion__panel .mdlext-accordion__panel__header');
     assert.isNotNull(header, 'Expected handle to header');
 
-    let spy = sinon.spy();
+    const spy = sinon.spy();
     header.addEventListener('click', spy);
     spyOnKeyboardEvent(header, VK_ENTER);
-    assert.isTrue(spy.calledOnce, `Expected "click" to fire once`);
+    assert.isTrue(spy.calledOnce, 'Expected "click" to fire once');
     header.removeEventListener('click', spy);
   });
 
@@ -363,10 +363,10 @@ describe('MaterialExtAccordion', () => {
     const header = qs('#accordion-1 .mdlext-accordion__panel .mdlext-accordion__panel__header');
     assert.isNotNull(header, 'Expected handle to header');
 
-    let spy = sinon.spy();
+    const spy = sinon.spy();
     header.addEventListener('click', spy);
     spyOnKeyboardEvent(header, VK_SPACE);
-    assert.isTrue(spy.calledOnce, `Expected "click" to fire once`);
+    assert.isTrue(spy.calledOnce, 'Expected "click" to fire once');
     header.removeEventListener('click', spy);
   });
 
@@ -401,7 +401,7 @@ describe('MaterialExtAccordion', () => {
     const header = qs('#accordion-1 .mdlext-accordion__panel:nth-child(3) .mdlext-accordion__panel__header');
     assert.isNotNull(header, 'Expected handle to header in panel 3 of 5');
 
-    let spy = sinon.spy();
+    const spy = sinon.spy();
     accordion.addEventListener('toggle', spy);
 
     accordion.addEventListener('toggle', event => {
@@ -426,7 +426,7 @@ describe('MaterialExtAccordion', () => {
   });
 
   function spyOnKeyboardEvent(target, keyCode, shiftKey=false) {
-    let spy = sinon.spy();
+    const spy = sinon.spy();
     target.addEventListener('keydown', spy);
 
     try {

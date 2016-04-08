@@ -37,7 +37,7 @@ describe('domHelpers', () => {
   });
 
   after ( () => {
-    jsdomify.destroy()
+    jsdomify.destroy();
   });
 
   describe('#qs', () => {
@@ -122,12 +122,12 @@ describe('domHelpers', () => {
     });
 
     it('should remove child elements', () => {
-      let element = removeChilds(qs('#mount'));
+      const element = removeChilds(qs('#mount'));
       expect(element.childNodes).to.have.lengthOf(0);
     });
 
     it('should remove child elements with reflow = false', () => {
-      let element = removeChilds(qs('#mount'), false);
+      const element = removeChilds(qs('#mount'), false);
       expect(element.childNodes).to.have.lengthOf(0);
     });
 

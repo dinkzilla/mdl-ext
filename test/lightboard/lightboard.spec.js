@@ -112,7 +112,7 @@ describe('MaterialExtLightboard', () => {
   });
 
   after ( () => {
-    jsdomify.destroy()
+    jsdomify.destroy();
   });
 
   it('is globally available', () => {
@@ -131,7 +131,7 @@ describe('MaterialExtLightboard', () => {
     const slide = qs('.mdlext-lightboard__slide:nth-child(2)', lightboard);
     assert.isNotNull(slide, 'Expected handle to slide');
 
-    let spy = sinon.spy();
+    const spy = sinon.spy();
     lightboard.addEventListener('select', spy);
 
     const selectListener = ( event ) => {
@@ -161,11 +161,11 @@ describe('MaterialExtLightboard', () => {
   it('should not emit a "select" custom event when lightboard is clicked', () => {
     const lightboard = qs('#mdlext-lightboard-1');
 
-    let spy = sinon.spy();
+    const spy = sinon.spy();
     lightboard.addEventListener('select', spy);
-    const selectListener = ( event ) => {
+    const selectListener = ( /* event */ ) => {
       assert.fail('select', null, 'Did not expect "select" event to fire');
-    }
+    };
     lightboard.addEventListener('select', selectListener);
 
     try {
@@ -192,7 +192,7 @@ describe('MaterialExtLightboard', () => {
     const slide = qs('.mdlext-lightboard__slide:nth-child(3)', lightboard);
     assert.isNotNull(slide, 'Expected handle to slide');
 
-    let spy = sinon.spy();
+    const spy = sinon.spy();
     lightboard.addEventListener('select', spy);
 
 
@@ -333,7 +333,7 @@ describe('MaterialExtLightboard', () => {
   });
 
   function spyOnKeyboardEvent(target, source, keyCode, shiftKey=false) {
-    let spy = sinon.spy();
+    const spy = sinon.spy();
     target.addEventListener('keydown', spy, true);
 
     try {

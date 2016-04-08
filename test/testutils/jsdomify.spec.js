@@ -15,7 +15,7 @@ describe('mocha-jsdom-jsdomify verification tests', () => {
   });
 
   after ( () => {
-    jsdomify.destroy()
+    jsdomify.destroy();
   }) ;
 
   it('has document', () => {
@@ -30,14 +30,14 @@ describe('mocha-jsdom-jsdomify verification tests', () => {
 
   it('can render html', () => {
     const greeting = 'Hello, Hola, Hei';
-    const p = document.createElement("P");
+    const p = document.createElement('P');
     const text = document.createTextNode(greeting);
     p.appendChild(text);
 
     const mount = document.querySelector('#mount');
     mount.appendChild(p);
 
-    const paragraphs = document.querySelectorAll("P");
+    const paragraphs = document.querySelectorAll('P');
     expect(document.body.innerHTML).not.to.be.empty;
     expect(paragraphs.length).equal(1);
     expect(paragraphs[0].innerHTML).equal(greeting);

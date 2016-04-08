@@ -4,7 +4,7 @@ import requireUncached from 'require-uncached';
 import jsdomify from 'jsdomify';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
-import { qs, qsa, removeChilds } from '../testutils/domHelpers';
+import { qs, removeChilds } from '../testutils/domHelpers';
 
 describe('MaterialExtSelectfield', () => {
 
@@ -71,7 +71,7 @@ describe('MaterialExtSelectfield', () => {
   });
 
   after ( () => {
-    jsdomify.destroy()
+    jsdomify.destroy();
   });
 
   it('is globally available', () => {
@@ -180,6 +180,7 @@ describe('MaterialExtSelectfield', () => {
     el.MaterialExtSelectfield.checkFocus();
     el.MaterialExtSelectfield.change('option2');
 
+/*eslint-disable */
     new MaterialExtSelectfield(null);
 
     const el2 = createSingleLineSelectfield();
@@ -191,13 +192,13 @@ describe('MaterialExtSelectfield', () => {
 
     const el3 = createSingleLineSelectfield();
     new MaterialExtSelectfield(el3).init();
-
+/*eslint-enable */
     assert(true);
   });
 
 
   function spyOnEvent(name, target) {
-    let spy = sinon.spy();
+    const spy = sinon.spy();
     target.addEventListener(name, spy);
 
     const evt = new Event(name, {
@@ -226,7 +227,7 @@ describe('MaterialExtSelectfield', () => {
 
     let opt;
     for (let i = 0; i < 5; i++) {
-      opt = document.createElement("option");
+      opt = document.createElement('option');
       opt.value = `Option #${i}`;
       opt.innerHTML = opt.value;
       select.appendChild(opt);
