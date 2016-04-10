@@ -2,55 +2,77 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+<!-- styles -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="styles/dialog-polyfill.css">
+<link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.grey-orange.min.css">
+<link rel="stylesheet" href="../lib/mdl-ext-eqjs.css">
+<link rel="stylesheet" href="./styles/demo.css">
 
   <title>Material Design Lite Extensions</title>
-
-  <!-- styles -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.grey-orange.min.css">
-  <link rel="stylesheet" href="./styles/demo.css">
 </head>
 
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
   <aside class="mdl-layout__drawer">
-    <span class="mdl-layout-title">MDL Extensions</span>
-    <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="../src/accordion/snippets/accordion.html">Accordion</a>
-      <a class="mdl-navigation__link" href="../src/bordered-fields/snippets/bordered-fields.html">Bordered fields</a>
-      <a class="mdl-navigation__link" href="../src/grid/snippets/grid.html">Grid</a>
-      <a class="mdl-navigation__link" href="../src/lightboard/snippets/lightboard.html">Lightboard</a>
-      <a class="mdl-navigation__link" href="../src/lightbox/snippets/lightbox.html">Lightbox</a>
-      <a class="mdl-navigation__link" href="../src/selectfield/snippets/selectfield.html">Selectfield component</a>
-    </nav>
-  </aside>
+  <span class="mdl-layout-title">MDL Extensions</span>
+  <nav class="mdl-navigation">
+    <a class="mdl-navigation__link" href="accordion.html">Accordion</a>
+    <a class="mdl-navigation__link" href="bordered-fields.html">Bordered fields</a>
+    <a class="mdl-navigation__link" href="grid.html">Grid</a>
+    <a class="mdl-navigation__link" href="lightboard.html">Lightboard</a>
+    <a class="mdl-navigation__link" href="lightbox.html">Lightbox</a>
+    <a class="mdl-navigation__link" href="selectfield.html">Selectfield component</a>
+  </nav>
+</aside>
+
   <main id="mount" class="mdl-layout__content">
-    <iframe id='demo-frame' name="demo-frame" frameborder="0"
-            style="height: height: 100%; width: 100%; border: 0; margin: 0; padding: 0; box-sizing: border-box;"
-            height="100%" width="100%"
-            src="./readme.md.html">
-    </iframe>
+    <h5 class="mdlext-demo-header">mdl-ext</h5>
+<p>Material Design Lite Ext (MDLEXT).
+  Components built with the
+  <a href="https://github.com/google/material-design-lite">Google Material Design Lite</a> 
+  framework.
+</p>
+
+<h3>Components provided</h3>
+
+<h4>Accordion</h4>
+<p>A WAI-ARIA friendly accordion component with vertcial or horizontal layout.</p>
+
+<h4>Bordered fields</h4>
+<p>The Material Design Lite Ext (MDLEXT) bordered fieldscomponent demonstrates
+  how you can create your own theme of MDL text fields.
+</p>
+
+<h4>Grid</h4>
+<p>A responsive grid based on element queries in favour of media queries.</p>
+
+<h4>Lightboard</h4>
+<p>A lightboard is a translucent surface illuminated from behind, used for
+  situations where a shape laid upon the surface needs to be seen with high contrast.
+  In the "old days" of photography photograpers used a lightboard to get a quick
+  view of, sorting and organizing their slides.
+</p>
+
+<h4>Lightbox</h4>
+<p>A lightbox displays an image filling the screen, and dimming out the rest of
+  the web page. It acts as a modal dialog using the <code>&lt;dialog&gt;</code>
+  element as a container for the lightbox.
+</p>
+
+<h4>Selectfield</h4>
+<p>The Material Design Lite Ext (MDLEXT) select field component is an enhanced version
+  of the standard [HTML <code>&lt;select&gt;</code> element.
+</p>
+
   </main>
 </div>
 <script src="https://code.getmdl.io/1.1.3/material.min.js" type="text/javascript" charset="utf-8"></script>
-<script>
-  'use strict';
-  window.addEventListener('load', function() {
-    var iframe = document.querySelector('#demo-frame');
-    var anchors = document.querySelectorAll('nav .mdl-navigation__link');
-    for (var i = 0; i < anchors.length; i++) {
-      anchors[i].addEventListener("click", function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        iframe.src = this.href;
-      }.bind(anchors[i]), false);
-    }
-  });
-</script>
-
 </body>
 </html>
+

@@ -2,21 +2,24 @@
   box-sizing: border-box;
 }
 
+body {
+  overflow: hidden;
+}
 
 #mount {
-  padding: 0 0 0 8px;
+  padding: 0 8px;
   height:100%;
 }
 
 .is-small-screen #mount {
-  padding-left: 16px;
+  padding: 0 4px;
 }
 
 .mdl-layout__drawer-button {
   line-height: 65px;
 }
-.mdlext-demo-header {
-  margin-left: 32px;
+.is-small-screen #mount .mdlext-demo-header {
+  margin-left: 40px;
 }
 
 /* Rules for sizing the icon */

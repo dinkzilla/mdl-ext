@@ -11,17 +11,17 @@ var mdlIframeLoader = {};
 
   // https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
   try {
-    new window.CustomEvent("test");
+    new window.CustomEvent('test');
   } catch(e) {
     var CustomEvent = function(event, params) {
       var evt;
       params = params || {
-          bubbles: false,
-          cancelable: false,
-          detail: undefined
-        };
+        bubbles: false,
+        cancelable: false,
+        detail: undefined
+      };
 
-      evt = document.createEvent("CustomEvent");
+      evt = document.createEvent('CustomEvent');
       evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
       return evt;
     };

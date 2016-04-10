@@ -1,4 +1,37 @@
-<h5 class="mdlext-demo-header">Bordered Fields Theme Component</h5>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+<!-- styles -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="styles/dialog-polyfill.css">
+<link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.grey-orange.min.css">
+<link rel="stylesheet" href="../lib/mdl-ext-eqjs.css">
+<link rel="stylesheet" href="./styles/demo.css">
+
+  <title>Material Design Lite Extensions - Bordered Fields</title>
+</head>
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
+  <aside class="mdl-layout__drawer">
+  <span class="mdl-layout-title">MDL Extensions</span>
+  <nav class="mdl-navigation">
+    <a class="mdl-navigation__link" href="accordion.html">Accordion</a>
+    <a class="mdl-navigation__link" href="bordered-fields.html">Bordered fields</a>
+    <a class="mdl-navigation__link" href="grid.html">Grid</a>
+    <a class="mdl-navigation__link" href="lightboard.html">Lightboard</a>
+    <a class="mdl-navigation__link" href="lightbox.html">Lightbox</a>
+    <a class="mdl-navigation__link" href="selectfield.html">Selectfield component</a>
+  </nav>
+</aside>
+
+  <main id="mount" class="mdl-layout__content">
+    <h5 class="mdlext-demo-header">Bordered Fields Theme Component</h5>
 <p>Demonstrates how you can create your own theme of MDL text fields without affecting the original MDL fields.</p>
 
 <style>
@@ -26,7 +59,7 @@
 </style>
 
 
-<div class = "borderedfield-demo-container mdlext-bordered-fields">
+<div class="borderedfield-demo-container mdlext-bordered-fields">
 
   <div class="mdl-grid mdl-grid--no-spacing">
 
@@ -50,24 +83,24 @@
     <div class="mdl-cell mdl-cell--4-col">
       <p>Text with floating label, required field</p>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" id="sample3"  list="languages" placeholder="Select a language" required>
+        <input class="mdl-textfield__input" type="text" id="sample3" list="languages" placeholder="Select a language" required="">
         <label class="mdl-textfield__label" for="sample3">Programming language</label>
       </div>
     </div>
     <datalist id="languages">
       <option value="HTML">
-      <option value="CSS">
-      <option value="JavaScript">
-      <option value="Java">
-      <option value="Ruby">
-      <option value="PHP">
-      <option value="Go">
-      <option value="Erlang">
-      <option value="Python">
-      <option value="C">
-      <option value="C#">
-      <option value="C++">
-    </datalist>
+      </option><option value="CSS">
+      </option><option value="JavaScript">
+      </option><option value="Java">
+      </option><option value="Ruby">
+      </option><option value="PHP">
+      </option><option value="Go">
+      </option><option value="Erlang">
+      </option><option value="Python">
+      </option><option value="C">
+      </option><option value="C#">
+      </option><option value="C++">
+    </option></datalist>
 
     <div class="mdl-cell mdl-cell--4-col">
       <p>Numeric with floating label</p>
@@ -81,7 +114,7 @@
     <div class="mdl-cell mdl-cell--4-col">
       <p>Disabled floating label</p>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample41" disabled value="123">
+        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample41" disabled="" value="123">
         <label class="mdl-textfield__label" for="sample41">Number...</label>
         <span class="mdl-textfield__error">Input is not a number!</span>
       </div>
@@ -90,7 +123,7 @@
     <div class="mdl-cell mdl-cell--4-col">
       <p>File upload</p>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-right ">
-        <input class="mdl-textfield__input" type="text" id="uploadfile2" readonly>
+        <input class="mdl-textfield__input" type="text" id="uploadfile2" readonly="">
         <label class="mdl-textfield__label">File (work in progress)</label>
 
         <label class="mdl-button mdl-js-button mdl-button--primary mdl-button--icon mdl-button--file" for="uploadfile2">
@@ -117,7 +150,7 @@
       <p>Text with icons left and right, disabled</p>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-left mdlext-bordered-fields__icon-right">
         <i class="material-icons">radio</i>
-        <input class="mdl-textfield__input" type="text" id="sample-icon2" disabled>
+        <input class="mdl-textfield__input" type="text" id="sample-icon2" disabled="">
         <label class="mdl-textfield__label" for="sample-icon2">Text...</label>
         <i class="material-icons">fingerprint</i>
       </div>
@@ -182,7 +215,7 @@
     <div class="mdl-cell mdl-cell--4-col">
       <p>Disabled Select element</p>
       <div class="mdlext-selectfield mdlext-js-selectfield mdlext-selectfield--floating-label">
-        <select class="mdlext-selectfield__select" id="professsion2" name="professsion2" disabled>
+        <select class="mdlext-selectfield__select" id="professsion2" name="professsion2" disabled="">
           <option value=""></option>
           <option value="option1">option 1</option>
           <option value="option2">option 2</option>
@@ -234,7 +267,7 @@
         <label class="mdl-button mdl-js-button mdl-button--icon" for="professsion12">
           <i class="material-icons">phone</i>
         </label>
-        <select class="mdlext-selectfield__select" id="professsion12" name="professsion12" disabled>
+        <select class="mdlext-selectfield__select" id="professsion12" name="professsion12" disabled="">
           <option value=""></option>
           <option value="option1">option 1</option>
           <option value="option2">option 2</option>
@@ -299,7 +332,7 @@
           <i class="material-icons">phone</i>
         </label>
 
-        <input class="mdl-textfield__input" type="text" id="button-field4" disabled>
+        <input class="mdl-textfield__input" type="text" id="button-field4" disabled="">
         <label class="mdl-textfield__label">Text...</label>
 
         <label class="mdl-button mdl-js-button mdl-button--icon" for="button-field4">
@@ -326,3 +359,15 @@
 
 <h5>Credits</h5>
 <p>The Bordered Fields Theme component is based on this <a href="http://codepen.io/prajwal078/pen/LVJZXz" target="_blank">CodePen</a></p>
+
+  </main>
+</div>
+<script src="scripts/custom-event-polyfill.js" type="text/javascript" charset="utf-8"></script>
+<script src="scripts/dialog-polyfill.js" type="text/javascript" charset="utf-8"></script>
+<script src="scripts/eq.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://code.getmdl.io/1.1.3/material.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../lib/index.js" type="text/javascript" charset="utf-8"></script>
+
+</body>
+</html>
+
