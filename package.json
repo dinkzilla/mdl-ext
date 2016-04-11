@@ -1,6 +1,6 @@
 {
   "name": "mdl-ext",
-  "version": "0.0.0-semantically-released",
+  "version": "0.6.1-beta.0",
   "description": "Components based on the Google Material Design Lite framework",
   "main": "lib/index.js",
   "scripts": {
@@ -15,7 +15,8 @@
     "clean": "rimraf lib && mkdir lib",
     "prebuild": "npm run clean && ./node_modules/.bin/webpack",
     "build": "./node_modules/.bin/webpack -p --mode=build",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "build-demo": "./node_modules/.bin/gulp build"
   },
   "config": {
     "ghooks": {
@@ -93,6 +94,7 @@
     "ghooks": "1.1.1",
     "gulp": "3.9.1",
     "gulp-git": "1.7.0",
+    "gulp-posthtml": "1.5.2",
     "ignore-styles": "1.2.0",
     "istanbul": "1.0.0-alpha.2",
     "jsdom": "8.2.0",
@@ -104,9 +106,7 @@
     "null-loader": "0.1.1",
     "object-assign": "4.0.1",
     "postcss-loader": "0.8.2",
-    "posthtml-cli": "0.1.0",
     "posthtml-include": "1.0.2",
-    "posthtml-load-plugins": "0.9.5",
     "require-uncached": "1.0.2",
     "resolve-url-loader": "1.4.3",
     "rimraf": "2.5.2",

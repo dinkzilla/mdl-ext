@@ -426,6 +426,8 @@
   window.addEventListener('load', function() {
     var dialog = document.querySelector('#lightbox-dialog');
 
+    // A dialog element MUST be a child of document.body!!
+    // In a SPA you should choose a more robust strategy than the simple if provided here
     if(dialog.parentNode.tagName !== 'BODY') {
       document.body.appendChild(dialog);
     }

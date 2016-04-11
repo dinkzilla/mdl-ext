@@ -34,11 +34,11 @@
   position: relative;
   font-size: $input-text-font-size;
   display: inline-block;
-  box-sizing: border-box;
   width: 300px;
   max-width: 100%;
   margin: 0;
   padding: $input-text-vertical-spacing 0;
+  box-sizing: border-box;
 
   *, *::before, *::after {
     box-sizing: border-box;
@@ -110,6 +110,10 @@
   &:-moz-focusring {
     color: transparent;
     text-shadow: 0 0 0 #000;
+  }
+
+  &::-ms-expand {
+    display: none;
   }
 
   .mdlext-selectfield.is-focused & {

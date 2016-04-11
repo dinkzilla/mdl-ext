@@ -235,6 +235,12 @@ The action attribute will be emitted as a part of the custom event triggered whe
 
 ```javascript
 var dialog = document.querySelector('dialog');
+
+// A dialog element MUST be a child of document.body!!
+if(dialog.parentNode.tagName !== 'BODY') {
+  document.body.appendChild(dialog);
+}
+
 if (!('showModal' in dialog)) {
   dialogPolyfill.registerDialog(dialog);
 }

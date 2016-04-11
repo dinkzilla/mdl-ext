@@ -1,12 +1,12 @@
 'use strict';
 
-// TODO: Automate this
+// TODO: Automate this. Use Gulp
 const posthtml = require('posthtml');
-const html = require('fs').readFileSync('partials/selectfield.html').toString();
+const html = require('fs').readFileSync('partials/lightbox.html').toString();
 
 posthtml()
   .use(require('posthtml-include')({ encoding: 'utf-8', root: 'partials/' }))
-  .process(html/*, options */)
+  .process(html /*, options */)
   .then(function(result) {
     console.log(result.html);
   })
