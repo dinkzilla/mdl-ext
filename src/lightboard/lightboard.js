@@ -25,6 +25,8 @@
  * design, based on flex layout, similar to what is used in Adobe LightRoom to browse images.
  */
 
+import { createCustomEvent } from '../utils/custom-event';
+
 (function() {
   'use strict';
 
@@ -100,7 +102,7 @@
         // Set 'aria-selected' on current slide
         slide.setAttribute('aria-selected', '');
 
-        const evt = new CustomEvent('select', {
+        const evt = createCustomEvent('select', {
           bubbles: true,
           cancelable: true,
           detail: { source: slide }

@@ -27,6 +27,8 @@
  * and makes the contents of each panel visible (or not) by interacting with the Accordion Header
  */
 
+import { createCustomEvent } from '../utils/custom-event';
+
 (function() {
   'use strict';
 
@@ -249,7 +251,7 @@
     }
 
     function dispatchToggleEvent(state, source, target) {
-      const evt = new CustomEvent('toggle', {
+      const evt = createCustomEvent('toggle', {
         bubbles: true,
         cancelable: true,
         detail: { state: state, source: source }

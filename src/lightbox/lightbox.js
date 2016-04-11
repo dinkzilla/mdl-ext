@@ -2,6 +2,8 @@
  * Responsive Lightbox
  */
 
+import { createCustomEvent } from '../utils/custom-event';
+
 (function() {
   'use strict';
 
@@ -69,7 +71,7 @@
           action = 'cancel';
         }
 
-        const evt = new CustomEvent('action', {
+        const evt = createCustomEvent('action', {
           bubbles: true,
           cancelable: true,
           detail: {
@@ -93,7 +95,7 @@
       event.preventDefault();
       event.stopPropagation();
 
-      const evt = new CustomEvent('action', {
+      const evt = createCustomEvent('action', {
         bubbles: true,
         cancelable: true,
         detail: {
