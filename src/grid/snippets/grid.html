@@ -108,9 +108,10 @@
       var widthLabel = document.querySelector('#grid-container-width strong');
       var slider = document.querySelector('#grid-container-width input');
 
-      slider.oninput = function() {
+      slider.addEventListener('input', function(e) {
         setWidth(this.value);
-      };
+      }.bind(slider));
+
       function setWidth(value) {
         widthLabel.innerText = value;
         document.querySelector('#grid-container').style.width = value + '%';

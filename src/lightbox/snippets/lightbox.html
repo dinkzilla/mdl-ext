@@ -492,7 +492,7 @@
       var supportingText = dialog.querySelector('.mdl-card__supporting-text');
       var imageDetails = dialog.querySelector('figcaption');
       var href = slideAnchor.getAttribute('href');
-      href = href && !href.startsWith('#') ? href : slideImg.getAttribute('src');
+      href = href && href.indexOf('#') === 0 ? href : slideImg.getAttribute('src');
       img.setAttribute('src', href);
       img.setAttribute('alt', slideImg.getAttribute('title') || '');
       img.setAttribute('title', slideImg.getAttribute('title') || '');

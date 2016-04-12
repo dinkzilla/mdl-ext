@@ -141,9 +141,10 @@
       var widthLabel = document.querySelector('#grid-container-width strong');
       var slider = document.querySelector('#grid-container-width input');
 
-      slider.oninput = function() {
+      slider.addEventListener('input', function(e) {
         setWidth(this.value);
-      };
+      }.bind(slider));
+
       function setWidth(value) {
         widthLabel.innerText = value;
         document.querySelector('#grid-container').style.width = value + '%';
@@ -156,8 +157,12 @@
 
   </main>
 </div>
+<!--
+<script src="scripts/custom-event-polyfill.js" type="text/javascript" charset="utf-8"></script>
+-->
+
 <script src="scripts/dialog-polyfill.js" type="text/javascript" charset="utf-8"></script>
-<script src="scripts/eq.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="scripts/eq-customevent-patch.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://code.getmdl.io/1.1.3/material.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../lib/index.js" type="text/javascript" charset="utf-8"></script>
 

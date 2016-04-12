@@ -1,7 +1,7 @@
 const posthtml = require('gulp-posthtml');
 const gulp = require('gulp');
 
-gulp.task('build', function() {
+gulp.task('build-demo', function() {
   const plugins = [
     require('posthtml-include')({
       encoding: 'utf-8',

@@ -16,7 +16,7 @@
     "prebuild": "npm run clean && ./node_modules/.bin/webpack",
     "build": "./node_modules/.bin/webpack -p --mode=build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "build-demo": "./node_modules/.bin/gulp build"
+    "build-demo": "./node_modules/.bin/gulp build-demo"
   },
   "config": {
     "ghooks": {

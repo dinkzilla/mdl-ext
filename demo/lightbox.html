@@ -525,7 +525,7 @@
       var supportingText = dialog.querySelector('.mdl-card__supporting-text');
       var imageDetails = dialog.querySelector('figcaption');
       var href = slideAnchor.getAttribute('href');
-      href = href && !href.startsWith('#') ? href : slideImg.getAttribute('src');
+      href = href && href.indexOf('#') === 0 ? href : slideImg.getAttribute('src');
       img.setAttribute('src', href);
       img.setAttribute('alt', slideImg.getAttribute('title') || '');
       img.setAttribute('title', slideImg.getAttribute('title') || '');
@@ -556,8 +556,12 @@
 
   </main>
 </div>
+<!--
+<script src="scripts/custom-event-polyfill.js" type="text/javascript" charset="utf-8"></script>
+-->
+
 <script src="scripts/dialog-polyfill.js" type="text/javascript" charset="utf-8"></script>
-<script src="scripts/eq.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="scripts/eq-customevent-patch.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://code.getmdl.io/1.1.3/material.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../lib/index.js" type="text/javascript" charset="utf-8"></script>
 
