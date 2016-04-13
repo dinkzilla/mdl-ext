@@ -34,7 +34,7 @@ $ npm install --save dialog-polyfill
 </div>
 <script type="text/javascript" src="node_modules/dialog-polyfill/dialog-polyfill.js" charset="utf-8"></script>
 <script type="text/javascript" src="node_modules/material-design-lite/material.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="node_modules/mdl-ext/lib/index.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="node_modules/mdl-ext/lib/mdl-ext.min.js" charset="utf-8"></script>
 </body>
 </html>
 ```

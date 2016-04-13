@@ -23,7 +23,7 @@ const sass_loader = [
   'sass-loader?sourceMap&expanded'
 ].join('!');
 
-const libraryName = 'index';
+const libraryName = 'mdl-ext';
 const cssName = 'mdl-ext';
 var outputFile;
 var outputCss;
