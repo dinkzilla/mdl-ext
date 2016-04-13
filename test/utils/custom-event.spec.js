@@ -6,7 +6,7 @@ import sinon from 'sinon';
 
 import { createCustomEvent } from '../../src/utils/custom-event';
 
-describe('CustomEvent', () => {
+describe('createCustomEvent', () => {
 
   before ( () => {
     jsdomify.create('<!doctype html><html><body><div id="mount"></div></body></html>');

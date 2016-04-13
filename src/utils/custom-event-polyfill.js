@@ -1,3 +1,4 @@
+'use strict';
 // Polyfill for creating CustomEvents on IE11
 
 // code pulled from:
