@@ -30,7 +30,7 @@ describe('MaterialExtLightbox', () => {
     <p>Some text filler</p>
   </div>
 
-  <dialog class="mdlext-dialog">
+  <dialog class="mdlext-dialog>
     <div id="lightbox" class="mdlext-lightbox mdlext-js-lightbox mdl-card">
 
       <div class="mdl-card__menu">
@@ -78,7 +78,6 @@ describe('MaterialExtLightbox', () => {
     <div id="lightbox-2" class="mdlext-lightbox mdlext-js-lightbox mdl-card">
     </div>`;
 
-
   before ( () => {
     jsdomify.create(fixture);
 
@@ -90,6 +89,10 @@ describe('MaterialExtLightbox', () => {
     requireUncached('../../src/lightbox/lightbox');
     assert.isNotNull(window.MaterialExtLightbox, 'Expected MaterialExtAccordion not to be null');
     global.MaterialExtLightbox = window.MaterialExtLightbox;
+
+    // Simulate open dialog
+    const dialog = qs('dialog');
+    dialog.setAttribute('open', '');
 
   });
 

@@ -31,6 +31,7 @@
   background-color: $mdlext-lightbox-background-color;
   box-sizing: border-box;
   outline: 0;
+  display: block; // display: flex an ie11 problem with reposition. Set display:block for now.
 
   *, *::before, *::after, input[type="search"] {
     box-sizing: border-box;
@@ -45,27 +46,28 @@
       width: 100%;
       max-width: 100%;
       height: auto;
+      border: 0;
+      outline: 0;
     }
     figcaption {
       @include typo-caption($colorContrast: false, $usePreferred: true);
 
+      display: block;
       position: absolute;
       bottom: 0;
       left: 0;
+      right: 0;
       max-width: 100%;
-      width: 100%;
       height: auto;
       max-height: 50%;
       padding: 8px;
       background-color: $mdlext-lightbox-figcaption-background-color;
-      display: block;
-      overflow: hidden;
-      transform-origin: top;
+      transform-origin: bottom;
       transform: scaleY(0);
+      transition: .2s ease-in-out;
 
       &.mdlext-lightbox__show-figcaption {
         transform: scaleY(1);
-        overflow: auto;
       }
       tbody {
         th {

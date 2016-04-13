@@ -18,6 +18,7 @@
 
 /**
  * Due to a bug in mdl-1.1.3 it is not possible to use a globally polyfilled CustomEvent constructor
+ * Since I do not care too much about IE11, a brute force approach is sufficient :)
  *
  * @param {string} typeArg Is a String representing the name of the event.
  * @param {Object} customEventInit Is an EventInit dictionary, having the following fields:

@@ -1543,6 +1543,7 @@ ul.mdlext-lightboard {
   margin: auto;
   max-width: 100%;
   max-height: 100%;
+  border-width: 0;
   border-radius: 3px;
 }
 
@@ -1767,6 +1768,7 @@ ul.mdlext-lightboard {
   background-color: rgb(255,255,255);
   box-sizing: border-box;
   outline: 0;
+  display: block;
 }
 
 .mdlext-lightbox *,
@@ -1786,6 +1788,8 @@ ul.mdlext-lightboard {
   width: 100%;
   max-width: 100%;
   height: auto;
+  border: 0;
+  outline: 0;
 }
 
 .mdlext-lightbox figure figcaption {
@@ -1794,27 +1798,26 @@ ul.mdlext-lightboard {
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0;
+  display: block;
   position: absolute;
   bottom: 0;
   left: 0;
+  right: 0;
   max-width: 100%;
-  width: 100%;
   height: auto;
   max-height: 50%;
   padding: 8px;
   background-color: rgba(255, 255, 255, 0.76);
-  display: block;
-  overflow: hidden;
-  -webkit-transform-origin: top;
-          transform-origin: top;
+  -webkit-transform-origin: bottom;
+          transform-origin: bottom;
   -webkit-transform: scaleY(0);
           transform: scaleY(0);
+  transition: .2s ease-in-out;
 }
 
 .mdlext-lightbox figure figcaption.mdlext-lightbox__show-figcaption {
   -webkit-transform: scaleY(1);
           transform: scaleY(1);
-  overflow: auto;
 }
 
 .mdlext-lightbox figure figcaption tbody th {

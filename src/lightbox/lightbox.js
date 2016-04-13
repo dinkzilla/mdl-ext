@@ -116,13 +116,10 @@ import { createCustomEvent } from '../utils/custom-event';
   };
 
   /**
-   * Handle image load
-   * @param event
+   * Reposition dialog if component parent element is "DIALOG"
    * @private
    */
-
-  MaterialExtLightbox.prototype.imgLoadHandler_ = function( /*event*/ ) {
-
+  function repositionDialog_(lightboxElement) {
     const footerHeight = (footer, isSticky) => isSticky && footer ? footer.offsetHeight : 0;
 
     const reposition = (dialog, fh) => {
@@ -133,20 +130,35 @@ import { createCustomEvent } from '../utils/custom-event';
       }
     };
 
-    const dialog = this.parentNode.nodeName === 'DIALOG' ? this.parentNode : null;
-    if(dialog) {
-      this.style.width = '';
-      const fh = footerHeight(this.querySelector('footer'), this.classList.contains(STICKY_FOOTER_CLASS));
-      const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - fh;
+    const dialog = lightboxElement.parentNode.nodeName === 'DIALOG' ? lightboxElement.parentNode : null;
+    if(dialog && dialog.hasAttribute('open')) {
+      lightboxElement.style.width = 'auto';
+      lightboxElement.style.maxWidth = '100%';
+      const img = lightboxElement.querySelector('img');
+      if(img) {
+        lightboxElement.style.maxWidth = img.naturalWidth !== 'undefined' ? `${img.naturalWidth}px` : `${img.width}px` || '100%';
+      }
 
+      const fh = footerHeight(lightboxElement.querySelector('footer'), lightboxElement.classList.contains(STICKY_FOOTER_CLASS));
+      const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - fh;
       if (dialog.offsetHeight > vh) {
         let n = 0;
         while(dialog.offsetHeight > vh && ++n < 4) {
-          this.style.width = `${this.offsetWidth * vh / this.offsetHeight}px`;
+          lightboxElement.style.width = `${lightboxElement.offsetWidth * vh / lightboxElement.offsetHeight}px`;
         }
       }
       reposition(dialog, fh);
     }
+  }
+
+  /**
+   * Handle image load
+   * @param event
+   * @private
+   */
+
+  MaterialExtLightbox.prototype.imgLoadHandler_ = function( /*event*/ ) {
+    repositionDialog_(this);
   };
 
   /**
@@ -156,7 +168,6 @@ import { createCustomEvent } from '../utils/custom-event';
 
     if (this.element_) {
       // Do the init required for this component to work
-
       this.element_.addEventListener('keydown', this.keyDownHandler_.bind(this.element_), true);
 
       if(!Number.isInteger(this.element_.getAttribute('tabindex'))) {
@@ -181,6 +192,15 @@ import { createCustomEvent } from '../utils/custom-event';
       if(img) {
         img.addEventListener('load', this.imgLoadHandler_.bind(this.element_), false);
       }
+
+      // Assumes MDL has polyfilled RAF
+      window.addEventListener('resize', () => {
+        window.requestAnimationFrame( () => {
+          repositionDialog_(this.element_);
+        });
+      });
+
+      window.addEventListener('orientationchange', () => repositionDialog_(this.element_));
 
       // Set upgraded flag
       this.element_.classList.add(IS_UPGRADED);

@@ -5,18 +5,20 @@ import jsdomify from 'jsdomify';
 import { assert } from 'chai';
 import sinon from 'sinon';
 
-describe('CustomEvent for IE11', () => {
+describe('CustomEvent polyfill for IE11', () => {
+  let x;
   before ( () => {
     jsdomify.create('<!doctype html><html><body><div id="mount"></div></body></html>');
 
     // Simulate IExploder11
+    x = window.CustomEvent;
     global.CustomEvent = window.CustomEvent = undefined;
     let x = requireUncached('../../src/utils/custom-event-polyfill');
-    //x.polyfillCustomEvent_();
     global.CustomEvent = window.CustomEvent;
   });
 
   after ( () => {
+    window.CustomEvent = x;
     jsdomify.destroy();
   });
 

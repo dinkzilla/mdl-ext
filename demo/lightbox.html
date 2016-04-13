@@ -525,17 +525,17 @@
       var supportingText = dialog.querySelector('.mdl-card__supporting-text');
       var imageDetails = dialog.querySelector('figcaption');
       var href = slideAnchor.getAttribute('href');
-      href = href && href.indexOf('#') === 0 ? href : slideImg.getAttribute('src');
+      href = href && href.indexOf('#') === 0 ? slideImg.getAttribute('src') : href;
       img.setAttribute('src', href);
       img.setAttribute('alt', slideImg.getAttribute('title') || '');
       img.setAttribute('title', slideImg.getAttribute('title') || '');
-      supportingText.innerHTML = slideImg.getAttribute('title');
+      supportingText.innerHTML = slideImg.getAttribute('title') || '';
 
       var detailsHtml  = '';
       var detailsArray = JSON.parse(slide.getAttribute('data-details').replace(/'/g, '"'));
 
       if(detailsArray != null) {
-        detailsHtml = '<table><tbody';
+        detailsHtml = '<table><tbody>';
         for (var i = 0, n = detailsArray.length; i < n; i++) {
           detailsHtml += '<tr><th>' + detailsArray[i].name + '</th><td>' + detailsArray[i].value + '</td></tr>';
 
@@ -545,7 +545,9 @@
         }
         detailsHtml += '</tbody></table>';
       }
-      imageDetails.innerHTML = detailsHtml;
+
+      imageDetails.innerHTML = '';
+      imageDetails.insertAdjacentHTML('afterbegin', detailsHtml);
 
       if(!dialog.open) {
         dialog.showModal();
