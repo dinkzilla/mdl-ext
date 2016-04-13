@@ -30,7 +30,7 @@ describe('MaterialExtLightbox', () => {
     <p>Some text filler</p>
   </div>
 
-  <dialog class="mdlext-dialog>
+  <dialog class="mdlext-dialog">
     <div id="lightbox" class="mdlext-lightbox mdlext-js-lightbox mdl-card">
 
       <div class="mdl-card__menu">
@@ -93,7 +93,6 @@ describe('MaterialExtLightbox', () => {
     // Simulate open dialog
     const dialog = qs('dialog');
     dialog.setAttribute('open', '');
-
   });
 
   after ( () => {
@@ -179,6 +178,35 @@ describe('MaterialExtLightbox', () => {
     spyOnKeyboardEvent(lightbox, VK_SPACE);
   });
 
+  it('listens to resize', () => {
+    const lightbox = qs('#lightbox');
+    const spy = sinon.spy();
+    window.addEventListener('resize', spy, true);
+
+    try {
+      const event = new Event('resize');
+      window.dispatchEvent(event);
+    }
+    finally {
+      window.removeEventListener('keydown', spy);
+    }
+    assert.isTrue(spy.called, 'Expected "resize" event to fire');
+  });
+
+  it('listens to orientationchange', () => {
+    const lightbox = qs('#lightbox');
+    const spy = sinon.spy();
+    window.addEventListener('orientationchange', spy, true);
+
+    try {
+      const event = new Event('orientationchange');
+      window.dispatchEvent(event);
+    }
+    finally {
+      window.removeEventListener('keydown', spy);
+    }
+    assert.isTrue(spy.called, 'Expected "resize" event to fire');
+  });
 
   it('emits an "action" custom event when a button is clicked', () => {
     const lightbox = qs('#lightbox');

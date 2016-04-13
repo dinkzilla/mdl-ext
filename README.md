@@ -18,7 +18,7 @@ Components built with the [Google Material Design Lite](https://github.com/googl
 #### Live demo
 A Live demo of MDLEXT is available [here](http://leifoolsen.github.io/mdl-ext/index.html)
 >Works with modern browsers.
->Tested on IE Edgde. Firefox: OSX, Ubuntu. Opera: OSX. Safari: OSX, IOS. Chrome: Win, Ubuntu, OSX, IOS. 
+>Tested on Edgde, IE11. Firefox: OSX, Ubuntu. Opera: OSX. Safari: OSX, IOS. Chrome: Win, Ubuntu, OSX, IOS. 
 
 ## Introduction
 The MDLEXT component library is built with responsiveness in mind. The pre built CSS provided in the lib directory therefore comes
