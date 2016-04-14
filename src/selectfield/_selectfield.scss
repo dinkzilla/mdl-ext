@@ -52,7 +52,7 @@
 
   // Styling the down arrow
   &:after {
-    @include mdlext-arrow(down, .75em, .65em, inherit);
+    @include mdlext-arrow(down, .70em, .50em, inherit);
     position: absolute;
     bottom: 1.8em;
     right: 0.5em;
@@ -64,6 +64,7 @@
 .mdlext-selectfield.is-disabled {
   &:after {
     color: $input-text-disabled-color;
+    @include mdlext-arrow(down, .70em, .50em, $input-text-disabled-color);
   }
 }
 

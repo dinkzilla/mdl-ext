@@ -1925,8 +1925,8 @@ ul.mdlext-lightboard {
   content: '';
   width: 0;
   height: 0;
-  border: 0.375em solid transparent;
-  border-top-width: 0.65em;
+  border: 0.35em solid transparent;
+  border-top-width: 0.5em;
   border-bottom: none;
   border-top-color: inherit;
   position: absolute;
@@ -1938,6 +1938,13 @@ ul.mdlext-lightboard {
 
 .mdlext-selectfield.is-disabled:after {
   color: rgba(0,0,0, 0.12);
+  content: '';
+  width: 0;
+  height: 0;
+  border: 0.35em solid transparent;
+  border-top-width: 0.5em;
+  border-bottom: none;
+  border-top-color: rgba(0,0,0, 0.12);
 }
 
 .mdlext-selectfield--align-right {
