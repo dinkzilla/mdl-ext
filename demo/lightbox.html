@@ -34,7 +34,7 @@
     <h5 class="mdlext-demo-header">Lightbox Component</h5>
 <p>A lightbox displays an image filling the screen, and dimming out the rest of the web page. It acts as a modal dialog
   using the <code>&lt;dialog&gt;</code> element as a container for the lightbox.
-  <strong>Click on one of the images to open the lightbox.</strong>
+  <strong>Click on one of the images to open the lightbox. Browse images by dragging, swiping or using arrow keys.</strong>
 </p>
 
 <!--
@@ -427,7 +427,7 @@
       </button>
     </div>
     <figure class="mdl-card__title">
-      <img src="" alt="">
+      <img src="" draggable="true" alt="">
       <figcaption action="select">Details</figcaption>
     </figure>
     <footer action="select" class="mdl-card__actions mdl-card--border">
@@ -475,7 +475,14 @@
 
     lightboard.addEventListener('select', function(e) {
       currentSlide = e.detail.source;
-      showImage(e.detail.source);
+      for (var i = 0, n = slides.length; i < n; i++) {
+        if(currentSlide ===  slides[i]) {
+          break;
+        }
+      }
+      var prevSlide = slides[ i > 0   ? i-1 : n-1 ];
+      var nextSlide = slides[ i < n-1 ? i+1 : 0];
+      showImage(currentSlide, prevSlide, nextSlide);
     });
 
     var lightbox = dialog.querySelector('.mdlext-lightbox');
@@ -494,31 +501,39 @@
         }
       }
       else {
+        var i = 0;
+        var n = slides.length
+
         if(e.detail.action === 'first') {
           currentSlide = slides[0];
         }
         else if(e.detail.action === 'prev' || e.detail.action === 'next') {
-
-          for (var i = 0, n = slides.length; i < n; i++) {
-            if(currentSlide ===  slides[i]) {
+          for (var j = 0; j < n; j++) {
+            if(currentSlide ===  slides[j]) {
               if(e.detail.action === 'prev') {
-                currentSlide = i > 0 ? slides[i-1] : slides[n-1];
+                i = j > 0 ? j-1 : n-1;
+                currentSlide = slides[i];
               }
               else if(e.detail.action === 'next') {
-                currentSlide = i < n-1 ? slides[i+1] : slides[0];
+                i = j < n-1 ? j+1 : 0;
+                currentSlide = slides[i];
               }
               break;
             }
           }
         }
         else if(e.detail.action === 'last') {
-          currentSlide = slides[slides.length-1];
+          i = slides.length-1;
+          currentSlide = slides[i];
         }
-        showImage(currentSlide);
+        var prevSlide = slides[ i > 0   ? i-1 : n-1 ];
+        var nextSlide = slides[ i < n-1 ? i+1 : 0];
+        showImage(currentSlide, prevSlide, nextSlide);
       }
     });
 
-    function showImage(slide) {
+    function showImage(slide, prevSlide, nextSlide) {
+
       var slideAnchor = slide.querySelector('a');
       var slideImg = slide.querySelector('img');
       var img = dialog.querySelector('img');
@@ -530,6 +545,20 @@
       img.setAttribute('alt', slideImg.getAttribute('title') || '');
       img.setAttribute('title', slideImg.getAttribute('title') || '');
       supportingText.innerHTML = slideImg.getAttribute('title') || '';
+
+      // Lazy coder :)
+      slideAnchor = prevSlide.querySelector('a');
+      slideImg = prevSlide.querySelector('img');
+      href = slideAnchor.getAttribute('href');
+      href = href && href.indexOf('#') === 0 ? slideImg.getAttribute('src') : href;
+      img.setAttribute('data-img-url-prev', href);
+
+      slideAnchor = nextSlide.querySelector('a');
+      slideImg = nextSlide.querySelector('img');
+      href = slideAnchor.getAttribute('href');
+      href = href && href.indexOf('#') === 0 ? slideImg.getAttribute('src') : href;
+      img.setAttribute('data-img-url-next', href);
+
 
       var detailsHtml  = '';
       var detailsArray = JSON.parse(slide.getAttribute('data-details').replace(/'/g, '"'));

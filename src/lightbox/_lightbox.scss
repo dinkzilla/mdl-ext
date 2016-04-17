@@ -22,6 +22,8 @@
 @import "../variables";
 
 .mdlext-lightbox {
+  user-select: none;
+  cursor: default;
   position: relative;
   width: auto;
   max-width: 100%;
@@ -31,10 +33,35 @@
   background-color: $mdlext-lightbox-background-color;
   box-sizing: border-box;
   outline: 0;
-  display: block; // display: flex an ie11 problem with reposition. Set display:block for now.
+  display: block; // display: flex and IE11 has issues with reposition. Set display:block for now.
 
   *, *::before, *::after, input[type="search"] {
     box-sizing: border-box;
+  }
+
+  .mdlext-lightbox__slider {
+    // Displays prevvious, current and next image while dragging
+    // Elements are created by lightbox component when dragging starts
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+
+    .mdlext-lightbox__slider__slide {
+      flex-shrink: 0;
+      display: block;
+      text-align: left;
+      color: #7f7f7f;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      //&:nth-child(1),
+      //&:nth-child(3) {
+      //  filter: blur(1px);
+      //}
+    }
   }
 
   figure {

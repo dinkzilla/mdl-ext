@@ -1736,6 +1736,11 @@ html:before {
 /* ==========  Lightboard  ========== */
 
 .mdlext-lightbox {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: default;
   position: relative;
   width: auto;
   max-width: 100%;
@@ -1753,6 +1758,30 @@ html:before {
 .mdlext-lightbox *::after,
 .mdlext-lightbox input[type="search"] {
   box-sizing: border-box;
+}
+
+.mdlext-lightbox .mdlext-lightbox__slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.mdlext-lightbox .mdlext-lightbox__slider .mdlext-lightbox__slider__slide {
+  -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+          flex-shrink: 0;
+  display: block;
+  text-align: left;
+  color: #7f7f7f;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .mdlext-lightbox figure {

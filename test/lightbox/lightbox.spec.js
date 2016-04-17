@@ -152,7 +152,6 @@ describe('MaterialExtLightbox', () => {
     }
   });
 
-
   it('can load image', () => {
     const lightbox = qs('#lightbox');
     const img = qs('img', lightbox);
@@ -162,6 +161,81 @@ describe('MaterialExtLightbox', () => {
 
     img.src = './smiley.jpg';
     assert.isTrue(spy.called, 'Expected "action" event to fire');
+  });
+
+  it('can not click image', () => {
+    const lightbox = qs('#lightbox');
+    const img = qs('img', lightbox);
+
+    const spy = sinon.spy();
+    img.addEventListener('click', spy);
+
+    const event = new MouseEvent('click', {
+      'view': window,
+      'bubbles': true,
+      'cancelable': true
+    });
+
+    try {
+      img.dispatchEvent(event);
+    }
+    finally {
+      img.removeEventListener('click', spy);
+    }
+    assert.isTrue(spy.called, 'Expected "click" event to fire when image is clicked');
+    assert.isTrue(event.defaultPrevented, 'Expected "event.preventDefault" to be called when image is clicked');
+  });
+
+  it('can drag image', () => {
+    const lightbox = qs('#lightbox');
+    const img = qs('img', lightbox);
+    img.src = './smiley.jpg';
+
+    const mouseDownSpy = sinon.spy();
+    img.addEventListener('mousedown', mouseDownSpy, true);
+
+    const mouseMoveSpy = sinon.spy();
+    window.addEventListener('mousemove', mouseMoveSpy, true);
+
+    const mouseUpSpy = sinon.spy();
+    window.addEventListener('mouseup', mouseUpSpy, true);
+
+    try {
+      let event = new MouseEvent('mousedown', {
+        'view': window,
+        'bubbles': true,
+        'cancelable': true,
+        'clientX': 10, // clientX/clientY is readonly...
+        'clientY': 0   // ... not shure if I can test mouse movement
+      });
+      img.dispatchEvent(event);
+
+      event = new MouseEvent('mousemove', {
+        'view': window,
+        'bubbles': true,
+        'cancelable': true,
+        'clientX': 20,
+        'clientY': 0
+      });
+      window.dispatchEvent(event);
+
+      event = new MouseEvent('mouseup', {
+        'view': window,
+        'bubbles': true,
+        'cancelable': true,
+        'clientX': 40,
+        'clientY': 0
+      });
+      window.dispatchEvent(event);
+    }
+    finally {
+      img.removeEventListener('mousedown', mouseDownSpy);
+      window.removeEventListener('mousemove', mouseMoveSpy);
+      window.removeEventListener('mouseup', mouseUpSpy);
+    }
+    assert.isTrue(mouseDownSpy.called, 'Expected "mousedown" event to fire');
+    assert.isTrue(mouseMoveSpy.called, 'Expected "mousemove" event to fire');
+    assert.isTrue(mouseUpSpy.called, 'Expected "mouseup" event to fire');
   });
 
 

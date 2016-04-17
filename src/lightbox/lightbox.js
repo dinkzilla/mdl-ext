@@ -71,15 +71,7 @@ import { createCustomEvent } from '../utils/custom-event';
           action = 'cancel';
         }
 
-        const evt = createCustomEvent('action', {
-          bubbles: true,
-          cancelable: true,
-          detail: {
-            action: action,
-            source: this
-          }
-        });
-        this.dispatchEvent(evt);
+        dispatchAction_(action, this);
       }
     }
   };
@@ -90,20 +82,12 @@ import { createCustomEvent } from '../utils/custom-event';
    * @private
    */
   MaterialExtLightbox.prototype.buttonClickHandler_ = function(event) {
-    if (event) {
 
+    if (event) {
       event.preventDefault();
       event.stopPropagation();
 
-      const evt = createCustomEvent('action', {
-        bubbles: true,
-        cancelable: true,
-        detail: {
-          action: this.getAttribute('action') || '',
-          source: this
-        }
-      });
-      this.dispatchEvent(evt);
+      dispatchAction_(this.getAttribute('action') || '', this);
 
       let n = this;
       while((n = n.parentNode) != null) {
@@ -116,7 +100,27 @@ import { createCustomEvent } from '../utils/custom-event';
   };
 
   /**
+   * Dispatches an action custom event
+   * @param action
+   * @param source
+   * @param target
+   * @private
+   */
+  function dispatchAction_(action, source, target = source) {
+
+    target.dispatchEvent(createCustomEvent('action', {
+      bubbles: true,
+      cancelable: true,
+      detail: {
+        action: action || '',
+        source: source
+      }
+    }));
+  }
+
+  /**
    * Reposition dialog if component parent element is "DIALOG"
+   * @param lightboxElement
    * @private
    */
   function repositionDialog_(lightboxElement) {
@@ -161,6 +165,110 @@ import { createCustomEvent } from '../utils/custom-event';
     repositionDialog_(this);
   };
 
+
+  /**
+   * Handle image drag
+   * @param event
+   * @private
+     */
+  MaterialExtLightbox.prototype.imgDragHandler_ = function(event ) {
+
+    const setStyles = ( element, properties ) => {
+      for(const [key, value] of Object.entries(properties)) {
+        element.style[key] = value;
+      }
+      // ... or:
+      //for (const key in properties) {
+      //  element.style[key] = properties[key];
+      //}
+    };
+
+    event.preventDefault();
+    //event.stopPropagation();
+
+    const x = event.clientX || (event.touches !== undefined ? event.touches[0].clientX : 0);
+
+    const img = this;
+    img.style.opacity = '0.2';
+
+    const slider = document.createElement('div');
+    slider.classList.add('mdlext-lightbox__slider');
+    setStyles(slider, {'width': `${img.offsetWidth}px`, 'height': `${img.offsetHeight}px`} );
+
+    let slide  = document.createElement('div');
+    slide.classList.add('mdlext-lightbox__slider__slide');
+    slide.textContent = '>';
+    setStyles(slide, {
+      'width'           : `${img.offsetWidth}px`,
+      'height'          : `${img.offsetHeight}px`,
+      'line-height'     : `${img.offsetHeight}px`,
+      'font-size'       : `${img.offsetHeight/4}px`,
+      'text-align'      : 'right',
+      'background-image': `url("${img.getAttribute('data-img-url-prev') || ''}")`
+    });
+    slider.appendChild(slide);
+
+    slide  = document.createElement('div');
+    slide.classList.add('mdlext-lightbox__slider__slide');
+    setStyles(slide, {
+      'width'           : `${img.offsetWidth}px`,
+      'height'          : `${img.offsetHeight}px`,
+      'background-image': `url("${img.src}")`
+    });
+    slider.appendChild(slide);
+
+    slide  = document.createElement('div');
+    slide.classList.add('mdlext-lightbox__slider__slide');
+    slide.textContent = '<';
+    setStyles(slide, {
+      'width'           : `${img.offsetWidth}px`,
+      'height'          : `${img.offsetHeight}px`,
+      'line-height'     : `${img.offsetHeight}px`,
+      'font-size'       : `${img.offsetHeight/4}px`,
+      'text-align'      : 'left',
+      'background-image': `url("${img.getAttribute('data-img-url-next') || ''}")`
+    });
+    slider.appendChild(slide);
+
+    img.parentNode.appendChild(slider);
+
+
+    // drag handler
+    const drag = e => {
+      e.preventDefault();
+      const dx = (e.clientX || (e.touches !== undefined ? e.touches[0].clientX : 0)) - x; // TODO: maybe rewrite to improve performance
+
+      if(slider.offsetWidth - Math.abs(dx) > 19) {
+        slider.style.left = `${dx}px`;
+      }
+    };
+
+    // end drag handler
+    const endDrag = e => {
+      e.preventDefault();
+      //e.stopPropagation();
+
+      window.removeEventListener('mousemove', drag);
+      window.removeEventListener('touchmove', drag);
+      window.removeEventListener('mouseup', endDrag);
+      window.removeEventListener('touchend', endDrag);
+
+      const dx = slider.offsetLeft;
+      img.parentNode.removeChild(slider);
+      img.style.opacity = '1.0';
+
+      if(Math.abs(dx) > 19) {
+        dispatchAction_( (dx > 0 ? 'prev' : 'next') , img);
+      }
+    };
+
+    window.addEventListener('mousemove', drag);
+    window.addEventListener('touchmove', drag);
+    window.addEventListener('mouseup', endDrag); // .bind(this) does not work here
+    window.addEventListener('touchend',endDrag);
+  };
+
+
   /**
    * Initialize component
    */
@@ -191,6 +299,9 @@ import { createCustomEvent } from '../utils/custom-event';
       const img = this.element_.querySelector('img');
       if(img) {
         img.addEventListener('load', this.imgLoadHandler_.bind(this.element_), false);
+        img.addEventListener('click', e => e.preventDefault(), true);
+        img.addEventListener('mousedown', this.imgDragHandler_.bind(img), true);
+        img.addEventListener('touchstart', this.imgDragHandler_.bind(img), true);
       }
 
       // Assumes MDL has polyfilled RAF

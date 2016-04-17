@@ -252,6 +252,8 @@ var imageDetails = lightbox.querySelector('figcaption');
 img.setAttribute("src", 'wiew-from-my-window.jpg');
 img.setAttribute("alt", 'View from my window');
 img.setAttribute("title", 'View from my window');
+img.setAttribute('data-img-url-prev', 'some-image.jpg');
+img.setAttribute('data-img-url-next', 'some-other-image.jpg');
 supportingText.innerHTML = 'View from my window';
 imageDetails.innerHTML = 'Photo taken from my window yesterday morning'; 
 
@@ -275,6 +277,10 @@ The lightbox interacts with the following keyboard keys.
 *   `Space` - Emits a custom event with action='select'
 *   `Esc` - Emits a custom event with action='cancel'
 
+## Mouse / Touch interaction
+*   `Drag left` - Emits a custom event with action='next'
+*   `Drag Right` - Emits a custom event with action='prev'
+
 ## Events
 The lightbox emits a custom **action** event when a button contained in the lightbox is clicked, or if one of the keys 
 `Arrow Left`, `Arrow Up`, `Arrow Right`, `Arrow Down`, `Home`, `End`, `Space` or `Esc` is pressed. The event has a detail object with the following content:
@@ -294,9 +300,17 @@ The table below lists the available classes and their effects.
 |--------------|--------|---------|
 | `mdlext-lightbox` | Defines a container as an MDLEXT lightbox component | Required on `<div>` element |
 | `mdlext-js-lightbox` | Assigns basic MDL behavior to lightbox | Required on `<div>` element |
+| `mdlext-lightbox__slider` | Displays previous, current and next image when dragging | Element added by component |
+| `mdlext-lightbox__slider__slide` | Holds an image that displays when dragging | Element added by component |
+
 <!--
 | `mdlext-lightbox--sticky-footer` | Positions footer at bottom of screen | Optional on `mdlext-lightbox` element |
 -->
+
+| Attribute | Effect | Remarks |
+|-----------|--------|---------|
+| `data-img-url-prev` | Displays previous image when dragging | URL to previous image in a collection |
+| `data-img-url-next` | Displays next image when dragging | URL to next imagein a collection |
 
 You can modify the lightbox trough the following SASS variables.
 
