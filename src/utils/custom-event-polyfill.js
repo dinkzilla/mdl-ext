@@ -7,20 +7,20 @@
 // https://github.com/webcomponents/webcomponentsjs/blob/v0.7.12/CustomElements.js#L950
 
 try {
-  new window.CustomEvent("test");
+  new window.CustomEvent('test');
 }
 catch(e) {
   window.CustomEvent = function(inType, params) {
     params = params || {
-        bubbles: false,
-        cancelable: false,
-        detail: null
-      };
+      bubbles: false,
+      cancelable: false,
+      detail: null
+    };
 
-    var e = document.createEvent("CustomEvent");
+    var e = document.createEvent('CustomEvent');
     e.initCustomEvent(inType, Boolean(params.bubbles), Boolean(params.cancelable), params.detail);
     e.preventDefault = function() {
-      Object.defineProperty(this, "defaultPrevented", {
+      Object.defineProperty(this, 'defaultPrevented', {
         get: function() {
           return true;
         }

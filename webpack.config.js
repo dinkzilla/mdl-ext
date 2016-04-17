@@ -7,7 +7,6 @@ const webpack = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-//const CopyWebpackPlugin = require('copy-webpack-plugin');
 //const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 const env = require('yargs').argv.mode;
 
