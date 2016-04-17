@@ -278,15 +278,17 @@ The lightbox interacts with the following keyboard keys.
 *   `Esc` - Emits a custom event with action='cancel'
 
 ## Mouse / Touch interaction
-*   `Drag left` - Emits a custom event with action='next'
-*   `Drag Right` - Emits a custom event with action='prev'
+*   `Drag/Swipe left` - Emits a custom event with action='next'
+*   `Drag/Swipe right` - Emits a custom event with action='prev'
 
 ## Events
-The lightbox emits a custom **action** event when a button contained in the lightbox is clicked, or if one of the keys 
-`Arrow Left`, `Arrow Up`, `Arrow Right`, `Arrow Down`, `Home`, `End`, `Space` or `Esc` is pressed. The event has a detail object with the following content:
+The lightbox emits a custom **action** event when a button contained in the lightbox is clicked, an images is dragged or swiped, 
+or if one of the keys `Arrow Left`, `Arrow Up`, `Arrow Right`, `Arrow Down`, `Home`, `End`, `Space` or `Esc` is pressed. 
+The event has a detail object with the following content:
 ```
 {
-  action, // one of: 'first', 'prev', 'next', 'last', 'select', 'close', 'cancel' - or any value assigned to a button action attribute (empty string if no action assigned) 
+  action, // one of: 'first', 'prev', 'next', 'last', 'select', 'close', 'cancel' - 
+          // or any value assigned to a button action attribute (empty string if no action assigned) 
   source  // the button instance that caused the event, or the lightbox element if a key triggered the event
 }
 ```
@@ -301,7 +303,7 @@ The table below lists the available classes and their effects.
 | `mdlext-lightbox` | Defines a container as an MDLEXT lightbox component | Required on `<div>` element |
 | `mdlext-js-lightbox` | Assigns basic MDL behavior to lightbox | Required on `<div>` element |
 | `mdlext-lightbox__slider` | Displays previous, current and next image when dragging | Element added by component |
-| `mdlext-lightbox__slider__slide` | Holds an image that displays when dragging | Element added by component |
+| `mdlext-lightbox__slider__slide` | Holds an image to display when dragging | Element added by component |
 
 <!--
 | `mdlext-lightbox--sticky-footer` | Positions footer at bottom of screen | Optional on `mdlext-lightbox` element |

@@ -186,7 +186,7 @@ describe('MaterialExtLightbox', () => {
     assert.isTrue(event.defaultPrevented, 'Expected "event.preventDefault" to be called when image is clicked');
   });
 
-  it('can drag image', () => {
+  it('can drag an image', () => {
     const lightbox = qs('#lightbox');
     const img = qs('img', lightbox);
     img.src = './smiley.jpg';
