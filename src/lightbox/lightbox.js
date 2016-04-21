@@ -87,7 +87,7 @@ import { createCustomEvent } from '../utils/custom-event';
       event.preventDefault();
       event.stopPropagation();
 
-      dispatchAction_(this.getAttribute('action') || '', this);
+      dispatchAction_(this.getAttribute('data-action') || '', this);
 
       let n = this;
       while((n = n.parentNode) != null) {

@@ -5,7 +5,7 @@ import requireUncached from 'require-uncached';
 import jsdomify from 'jsdomify';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
-import { qs, removeChilds } from '../testutils/domHelpers';
+import { qs, qsa, removeChilds } from '../testutils/domHelpers';
 
 describe('MaterialExtLightbox', () => {
 
@@ -34,12 +34,12 @@ describe('MaterialExtLightbox', () => {
     <div id="lightbox" class="mdlext-lightbox mdlext-js-lightbox mdl-card">
 
       <div class="mdl-card__menu">
-        <button action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+        <button data-action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
           <i class="material-icons">close</i>
         </button>
       </div>
 
-      <figure class="mdl-card__title">
+      <figure class="mdl-card__media">
         <img src="" alt>
         <figcaption></figcaption>
       </figure>
@@ -49,19 +49,19 @@ describe('MaterialExtLightbox', () => {
           <span>Image title</span>
         </div>
         <nav>
-          <button action="first" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="First">
+          <button data-action="first" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="First">
             <i class="material-icons">first_page</i>
           </button>
-          <button action="prev" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Previous">
+          <button data-action="prev" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Previous">
             <i class="material-icons">chevron_left</i>
           </button>
-          <button action="next" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Next">
+          <button data-action="next" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Next">
             <i class="material-icons">chevron_right</i>
           </button>
-          <button action="last" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Last">
+          <button data-action="last" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Last">
             <i class="material-icons">last_page</i>
           </button>
-          <button action="play" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Play">
+          <button data-action="play" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Play">
             <i class="material-icons">play_circle_outline</i>
           </button>
         </nav>
@@ -111,6 +111,11 @@ describe('MaterialExtLightbox', () => {
   it('has tabindex', () => {
     const element = qs('#lightbox');
     expect(element.getAttribute('tabindex')).not.to.be.NaN;
+  });
+
+  it('has "data-action" attributes', () => {
+    const elements = qsa('#lightbox [data-action]');
+    expect(elements).to.have.length.of.at.least(1);
   });
 
   it('upgrades successfully when a new component is appended to the DOM', () => {

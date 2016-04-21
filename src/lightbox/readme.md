@@ -84,12 +84,12 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 </dialog>
 ```
 
-&nbsp;4. Code a `<button>` element with `action="close"` and `class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"` to display the close button. Add an `<i>` element inside the `<button>` element to hold the close icon.
+&nbsp;4. Code a `<button>` element with `data-action="close"` and `class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"` to display the close button. Add an `<i>` element inside the `<button>` element to hold the close icon.
 ```html
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
     <div class="mdl-card__menu">
-      <button action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
+      <button data-action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
         <i class="material-icons">close</i>
       </button>
     </div>
@@ -97,16 +97,16 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 </dialog>
 ```
 
-&nbsp;5. Code a `<figure>` element with `class="mdl-card__title"` to hold the image and the image description.
+&nbsp;5. Code a `<figure>` element with `class="mdl-card__media"` to hold the image and the image description.
 ```html
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
     <div class="mdl-card__menu">
-      <button action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
+      <button data-action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
         <i class="material-icons">close</i>
       </button>
     </div>
-    <figure class="mdl-card__title">
+    <figure class="mdl-card__media">
     </figure>
   </div>
 </dialog>
@@ -117,11 +117,11 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
     <div class="mdl-card__menu">
-      <button action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
+      <button data-action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
         <i class="material-icons">close</i>
       </button>
     </div>
-    <figure class="mdl-card__title">
+    <figure class="mdl-card__media">
       <img src="" alt>
       <figcaption></figcaption>
     </figure>
@@ -135,11 +135,11 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
     <div class="mdl-card__menu">
-      <button action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
+      <button data-action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
         <i class="material-icons">close</i>
       </button>
     </div>
-    <figure class="mdl-card__title">
+    <figure class="mdl-card__media">
       <img src="" alt>
       <figcaption></figcaption>
     </figure>
@@ -154,11 +154,11 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
     <div class="mdl-card__menu">
-      <button action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
+      <button data-action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
         <i class="material-icons">close</i>
       </button>
     </div>
-    <figure class="mdl-card__title">
+    <figure class="mdl-card__media">
       <img src="" alt>
       <figcaption></figcaption>
     </figure>
@@ -175,11 +175,11 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
     <div class="mdl-card__menu">
-      <button action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
+      <button data-action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
         <i class="material-icons">close</i>
       </button>
     </div>
-    <figure class="mdl-card__title">
+    <figure class="mdl-card__media">
       <img src="" alt>
       <figcaption></figcaption>
     </figure>
@@ -199,11 +199,11 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
     <div class="mdl-card__menu">
-      <button action="close" class="mdl-button mdl-button--icon mdl-js-button" title="Close">
+      <button data-action="close" class="mdl-button mdl-button--icon mdl-js-button" title="Close">
         <i class="material-icons">close</i>
       </button>
     </div>
-    <figure class="mdl-card__title">
+    <figure class="mdl-card__media">
       <img src="" alt>
       <figcaption></figcaption>
     </figure>
@@ -211,16 +211,16 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
       <div class="mdl-card__supporting-text">
       </div>
       <nav>
-        <button action="first" class="mdl-button mdl-button--icon mdl-js-button" title="First">
+        <button data-action="first" class="mdl-button mdl-button--icon mdl-js-button" title="First">
           <i class="material-icons">first_page</i>
         </button>
-        <button action="prev" class="mdl-button mdl-button--icon mdl-js-button" title="Previous">
+        <button data-action="prev" class="mdl-button mdl-button--icon mdl-js-button" title="Previous">
           <i class="material-icons">chevron_left</i>
         </button>
-        <button action="next" class="mdl-button mdl-button--icon mdl-js-button" title="Next">
+        <button data-action="next" class="mdl-button mdl-button--icon mdl-js-button" title="Next">
           <i class="material-icons">chevron_right</i>
         </button>
-        <button action="last" class="mdl-button mdl-button--icon mdl-js-button" title="Last">
+        <button data-action="last" class="mdl-button mdl-button--icon mdl-js-button" title="Last">
           <i class="material-icons">last_page</i>
         </button>
       </nav>      
@@ -228,8 +228,8 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
   </div>
 </dialog>
 ```
-Add as many buttons as you like. To identify the button that trigger an custom event, you should assign each button a unique action attribute value. 
-The action attribute will be emitted as a part of the custom event triggered when a button is clicked.
+Add as many buttons as you like. To identify the button that trigger an custom event, you should assign each button a unique data-action attribute value. 
+The data-action attribute will be emitted as a part of the custom event triggered when a button is clicked.
 
 &nbsp;10. Add an image and open the dialog.
 
