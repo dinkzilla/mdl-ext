@@ -68,7 +68,7 @@ var config = {
           path.join(__dirname, 'test')
         ]
       }
-      /*, Temporarly disabled
+      /* Temporarly disabled due to conflict in stylelint packages
       {
         loader: 'stylelint',
         test: /\.s(a|c)ss$/,
@@ -107,6 +107,7 @@ var config = {
       browsers: ['last 2 versions']
     })
   ],
+  /* Temporarly disabled due to conflict in stylelint packages
   stylelint: {
     configFile: path.join(__dirname, './.stylelint.config.js'),
     configOverrides: {
@@ -115,8 +116,9 @@ var config = {
       }
     }
   },
+  */
   eslint: {
-    // .eslintrc
+    // config in '.eslintrc'
   },
   resolve: {
     root: path.resolve('./src'),

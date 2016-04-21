@@ -74,11 +74,11 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 </dialog>
 ```
 
-&nbsp;3. Code a `<div>` element with `class="mdl-card__menu"` to hold the close dialog button.
+&nbsp;3. Code a `<div>` element with `class="mdl-card__menu mdl-color-text--white mdl-typography--body-2-color-contrast"` to hold the close dialog button.
 ```html
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
-    <div class="mdl-card__menu">
+    <div class="mdl-card__menu mdl-color-text--white mdl-typography--body-2-color-contrast">
     </div>
   </div>
 </dialog>
@@ -88,7 +88,7 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 ```html
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
-    <div class="mdl-card__menu">
+    <div class="mdl-card__menu mdl-color-text--white mdl-typography--body-2-color-contrast">
       <button data-action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
         <i class="material-icons">close</i>
       </button>
@@ -101,7 +101,7 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 ```html
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
-    <div class="mdl-card__menu">
+    <div class="mdl-card__menu mdl-color-text--white mdl-typography--body-2-color-contrast">
       <button data-action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
         <i class="material-icons">close</i>
       </button>
@@ -116,7 +116,7 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 ```html
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
-    <div class="mdl-card__menu">
+    <div class="mdl-card__menu mdl-color-text--white mdl-typography--body-2-color-contrast">
       <button data-action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
         <i class="material-icons">close</i>
       </button>
@@ -134,7 +134,7 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 ```html
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
-    <div class="mdl-card__menu">
+    <div class="mdl-card__menu mdl-color-text--white mdl-typography--body-2-color-contrast">
       <button data-action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
         <i class="material-icons">close</i>
       </button>
@@ -153,7 +153,7 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 ```html
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
-    <div class="mdl-card__menu">
+    <div class="mdl-card__menu mdl-color-text--white mdl-typography--body-2-color-contrast">
       <button data-action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
         <i class="material-icons">close</i>
       </button>
@@ -174,7 +174,7 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 ```html
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
-    <div class="mdl-card__menu">
+    <div class="mdl-card__menu mdl-color-text--white mdl-typography--body-2-color-contrast">
       <button data-action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" title="Close">
         <i class="material-icons">close</i>
       </button>
@@ -198,7 +198,7 @@ import { dialogPolyfill }  from 'dialog-polyfill/dialog-polyfill';
 ```html
 <dialog class="mdlext-dialog">
   <div class="mdlext-lightbox mdlext-js-lightbox mdl-card">
-    <div class="mdl-card__menu">
+    <div class="mdl-card__menu mdl-color-text--white mdl-typography--body-2-color-contrast">
       <button data-action="close" class="mdl-button mdl-button--icon mdl-js-button" title="Close">
         <i class="material-icons">close</i>
       </button>
@@ -263,7 +263,7 @@ if(!dialog.open) {
 ```
 
 ### Example
-See code in [snippets/lightbox.html](./snippets/lightbox.html)
+See [the live demo](http://leifoolsen.github.io/mdl-ext/demo/lightbox.html)
 
 ## Keyboard interaction
 The lightbox interacts with the following keyboard keys.
@@ -327,5 +327,6 @@ You can modify the lightbox trough the following SASS variables.
 
 
 ## How to use the component programmatically
-The [tests](../../test/lightbox/lightbox.spec.js) and the [snippets/lightbox.html](./snippets/lightbox.html) code provides examples on how to use the component programmatically.
+The [tests](../../test/lightbox/lightbox.spec.js) and the [snippets/lightbox.html](./snippets/lightbox.html) 
+code provides examples on how to use the component programmatically.
 

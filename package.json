@@ -1,6 +1,6 @@
 {
   "name": "mdl-ext",
-  "version": "0.0.0-semantically-released",
+  "version": "0.6.6-beta.0",
   "description": "Components based on the Google Material Design Lite framework",
   "main": "lib/mdl-ext.js",
   "scripts": {
@@ -113,9 +113,6 @@
     "semantic-release": "^4.3.5",
     "sinon": "1.17.3",
     "style-loader": "0.13.1",
-    "stylelint": "6.0.3",
-    "stylelint-config-suitcss": "5.0.0",
-    "stylelint-loader": "5.0.1",
     "url-loader": "0.5.7",
     "webpack": "1.13.0",
     "webpack-dev-server": "1.14.1",
