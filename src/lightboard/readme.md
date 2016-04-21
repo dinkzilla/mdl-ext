@@ -35,14 +35,17 @@ $ npm install --save eq.js
 const eqjs = require('eq.js'); // ... or:  import eqjs from 'eq.js';
 ```
 
-&nbsp;4. Optionally trigger `eq.js`<br/>
-If you're loading html fragments using e.g. Ajax, then trigger `eq.js` after page load.
+&nbsp;4. Upgrade DOM and trigger `eq.js`<br/>
+If you're loading html fragments, using e.g. Ajax, then upgrade DOM and trigger `eq.js` after page load.
 
 ```javascript
 window.fetch(href, {method: 'get'})
  .then(response => response.text())
  .then(text => {
    contentPanelEl.insertAdjacentHTML('afterbegin', text);
+
+    // Upgrade DOM
+    componentHandler.upgradeDom();
 
    // Trigger eq.js
    eqjs.refreshNodes();
