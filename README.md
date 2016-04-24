@@ -11,8 +11,9 @@ Material Design Lite Ext (MDLEXT).
 Components built with the [Google Material Design Lite](https://github.com/google/material-design-lite) framework. MDLEXT provides the following components.
 
 * **Accordion**<br/>A WAI-ARIA friendly accordion component with vertcial or horizontal layout.
-* **Bordered fields**<br/> The Material Design Lite Ext (MDLEXT) bordered fields component demonstrates how you can create your own theme of MDL text fields.
-* **Grid**<br/> A responsive grid based on element queries in favour of media queries.
+* **Bordered fields**<br/>The Material Design Lite Ext (MDLEXT) bordered fields component demonstrates how you can create your own theme of MDL text fields.
+* **Color themes**<br/>Material design color themes.
+* **Grid**<br/>A responsive grid based on element queries in favour of media queries.
 * **Lightboard**<br/>A lightboard is a translucent surface illuminated from behind, used for situations where a shape laid upon the surface needs to be seen with high contrast. In the "old days" of photography photograpers used a lightboard to get a quick view of, sorting and organizing their slides.
 * **Lightbox**<br/>A lightbox displays an image filling the screen, and dimming out the rest of the web page. It acts as a modal dialog using the `<dialog>` element as a container for the lightbox.
 * **Selectfield**<br/>The Material Design Lite Ext (MDLEXT) select field component is an enhanced version of the standard HTML `<select>` element.
@@ -20,7 +21,7 @@ Components built with the [Google Material Design Lite](https://github.com/googl
 #### Live demo
 A Live demo of MDLEXT is available [here](http://leifoolsen.github.io/mdl-ext/index.html)
 >Works with modern browsers.
->Tested on Edgde, IE11. Firefox: OSX, Ubuntu. Opera: OSX. Safari: OSX, IOS. Chrome: Win, Ubuntu, OSX, IOS. 
+>Tested on Edgde, IE11. Firefox: OSX, Ubuntu. Opera: OSX. Safari: OSX, IOS. Chrome: Win, Ubuntu, OSX, IOS, Android. 
 
 ## Introduction
 The MDLEXT component library is built with responsiveness in mind. The pre built CSS provided in the lib directory therefore comes
@@ -180,6 +181,11 @@ A [WAI-ARIA](https://www.w3.org/TR/wai-aria-practices-1.1/#accordion) friendly [
 
 The Material Design Lite Ext (MDLEXT) [**bordered fields**](./src/bordered-fields/) component demonstrates how you can create your own theme of MDL text fields.
 
+### Color themes
+![Palette](./etc/palette.png)
+
+The [**color-themes**](./src/color-themes/) component demonstrates how you can create your own themes of [material design colors](https://www.google.com/design/spec/style/color.html).
+
 ### Grid
 ![Grid](./etc/grid.png)
 
@@ -195,7 +201,6 @@ of photography photograpers used a lightboard to get a quick view of, sorting an
 ### Lightbox
 ![Lightbox](./etc/lightbox.png)
 A [**lightbox**](./src/lightbox/) displays an image filling the screen, and dimming out the rest of the web page. It acts as a modal dialog using the `<dialog>` element as a container for the lightbox.
-
 
 ### Selectfield
 ![Selectfield](./etc/select-element.png)

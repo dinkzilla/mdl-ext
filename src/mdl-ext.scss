@@ -2,6 +2,7 @@
 
 // Configuration and helpers
 @import 'variables';
+@import 'color-themes/color-themes';
 @import 'mixins';
 @import 'functions';
 
@@ -14,3 +15,5 @@
 @import 'selectfield/selectfield';
 @import 'bordered-fields/bordered-fields';
 @import 'accordion/accordion';
+@import 'color-themes/light-color-theme';
+@import 'color-themes/dark-color-theme';
