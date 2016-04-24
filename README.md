@@ -174,17 +174,20 @@ import eqjs from 'eq.js';  // ... or:  const eqjs = require('eq.js');
 ### Accordion
 ![Accordion](./etc/flexbox-accordion.png)
 
-A [WAI-ARIA](https://www.w3.org/TR/wai-aria-practices-1.1/#accordion) friendly [**accordion**](./src/accordion/) component with vertcial or horizontal layout.
+A [WAI-ARIA](https://www.w3.org/TR/wai-aria-practices-1.1/#accordion) friendly [**accordion**](./src/accordion/) 
+component with vertcial or horizontal layout.
 
 ### Bordered fields
 ![Bordered fields](./etc/bordered-fields-theme.png)
 
-The Material Design Lite Ext (MDLEXT) [**bordered fields**](./src/bordered-fields/) component demonstrates how you can create your own theme of MDL text fields.
+The Material Design Lite Ext (MDLEXT) [**bordered fields**](./src/bordered-fields/) component demonstrates how you 
+can create your own theme of MDL text fields.
 
 ### Color themes
 ![Palette](./etc/palette.png)
 
-The [**color-themes**](./src/color-themes/) component demonstrates how you can create your own themes of [material design colors](https://www.google.com/design/spec/style/color.html).
+The [**color-themes**](./src/color-themes/) component demonstrates how you can create your own themes of 
+[material design colors](https://www.google.com/design/spec/style/color.html).
 
 ### Grid
 ![Grid](./etc/grid.png)
@@ -200,7 +203,8 @@ of photography photograpers used a lightboard to get a quick view of, sorting an
 
 ### Lightbox
 ![Lightbox](./etc/lightbox.png)
-A [**lightbox**](./src/lightbox/) displays an image filling the screen, and dimming out the rest of the web page. It acts as a modal dialog using the `<dialog>` element as a container for the lightbox.
+A [**lightbox**](./src/lightbox/) displays an image filling the screen, and dimming out the rest of the web page. 
+It acts as a modal dialog using the `<dialog>` element as a container for the lightbox.
 
 ### Selectfield
 ![Selectfield](./etc/select-element.png)

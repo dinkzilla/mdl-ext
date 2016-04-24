@@ -8,7 +8,7 @@ The Material Design Lite Ext (MDLEXT) bordered fields component is a method for 
 MDL textfields and MDLEXT selectfields without affecting the original design. You can apply the `mdlext-bordered-fields` class
 to any HTML block element and use that as a container for the bordered fields.
 
-### To include a MDLEXT bordered **fields** component:
+### To include a MDLEXT **bordered fields** component:
 &nbsp;1. Code a block element, as the "outer" container, intended to hold all of the bordered fields.
 ```html
 <div>

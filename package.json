@@ -51,7 +51,8 @@
     "grid",
     "lightboard",
     "lightbox",
-    "selectfield"
+    "selectfield",
+    "material-color-themes"
   ],
   "author": "Leif Olsen (https://github.com/leifoolsen)",
   "license": "Apache-2.0",
