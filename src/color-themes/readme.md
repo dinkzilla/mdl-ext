@@ -8,7 +8,7 @@ The **color-themes** component demonstrates how you can create your own themes o
 Material Design Lite provides only one color theme, but in many web designs more than one theme is required, e.g. a 
 dark theme and a light theme. This component provides the necessary SASS files to use two additional color themes in MDL.
 
-### To include a MDLEXT color themes component:
+### To include a MDLEXT color theme component:
 &nbsp;1. Code a block element, as the "outer" container, intended to hold all of the color theme.
 ```html
 <section>
