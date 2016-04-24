@@ -79,8 +79,8 @@ $mdlext-light-color-primary:          #9E9E9E;
 $mdlext-light-color-primary-dark:     #616161;
 $mdlext-light-color-primary-light:    #9E9E9E; // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast: #F5F5F5;  
-$mdlext-light-color-accent:           #727272; 
-$mdlext-light-color-accent-contrast:  #FFFFFF;  
+$mdlext-light-color-accent:           #FFEB3B; 
+$mdlext-light-color-accent-contrast:  #FFFFFF;
 ```
 
 Save the modified variables to your own SASS project, recompile and try out your new theme.
