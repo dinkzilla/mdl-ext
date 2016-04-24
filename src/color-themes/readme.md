@@ -83,7 +83,7 @@ $mdlext-light-color-accent:           #727272;
 $mdlext-light-color-accent-contrast:  #FFFFFF;  
 ```
 
-Recompile your SASS project and try out your new theme.
+Save the modified variables to your own SASS project, recompile and try out your new theme.
 
 There are a few more SASS variables you can modify - and they should be relativeley self explanatory. By default these 
 values are set in accordance with the guidance given in the 
