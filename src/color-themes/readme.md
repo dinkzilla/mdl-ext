@@ -75,16 +75,12 @@ $divider-color:        #B6B6B6
 
 Open the MDLEXT [color-themes](./_color-themes.scss) SASS file and translate material palette variables to MDLEXT color theme:
 ```sass
-$mdlext-light-color-primary:                   #9E9E9E !default;
-$mdlext-light-color-primary-dark:              #616161 !default;
-
-// Fallback color. Set to color-primary if fallback is not needed
-$mdlext-light-color-primary-light:             #9E9E9E !default; 
-
-// text color on primary/primary dark background 
-$mdlext-light-color-primary-contrast:          #F5F5F5 !default;  
-$mdlext-light-color-accent:                    #727272 !default; 
-$mdlext-light-color-accent-contrast:           #FFFFFF !default;  
+$mdlext-light-color-primary:          #9E9E9E;
+$mdlext-light-color-primary-dark:     #616161;
+$mdlext-light-color-primary-light:    #9E9E9E; // Fallback color. Set to color-primary if fallback is not needed
+$mdlext-light-color-primary-contrast: #F5F5F5;  
+$mdlext-light-color-accent:           #727272; 
+$mdlext-light-color-accent-contrast:  #FFFFFF;  
 ```
 
 Recompile your SASS project and try out your new theme.
