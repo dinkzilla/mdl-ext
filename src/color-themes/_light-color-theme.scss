@@ -664,13 +664,11 @@
         &.is-selected {
           background-color: $mdlext-light-data-table-selection-color;
         }
-
         &:hover {
           background-color: $mdlext-light-data-table-hover-color;
         }
       }
     }
-
     th {
       color: $data-table-header-color;
 
