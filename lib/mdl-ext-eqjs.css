@@ -2073,6 +2073,11 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__select,
   color: rgba(0,0,0, 0.26);
 }
 
+.mdlext-selectfield__select option {
+  background-color: inherit;
+  color: rgba(0,0,0, 0.87);
+}
+
 .mdlext-selectfield__label {
   bottom: 0;
   color: rgba(0,0,0, 0.26);
@@ -3418,6 +3423,11 @@ $mdlext-dark-color-accent-contrast:            #FFFFFF !default;
   color: inherit;
 }
 
+.mdlext-light-color-theme .mdlext-selectfield__select option {
+  background-color: #FAFAFA;
+  color: rgba(0, 0, 0, 0.87);
+}
+
 .mdlext-light-color-theme .mdlext-selectfield.is-invalid .mdlext-selectfield__select {
   border-color: #D32F2F;
 }
@@ -4175,6 +4185,11 @@ $mdlext-dark-color-accent-contrast:            #FFFFFF !default;
 .mdlext-dark-color-theme .mdlext-selectfield__select {
   border-bottom-color: rgba(255, 255, 255, 0.26);
   color: inherit;
+}
+
+.mdlext-dark-color-theme .mdlext-selectfield__select option {
+  background-color: #303030;
+  color: white;
 }
 
 .mdlext-dark-color-theme .mdlext-selectfield.is-invalid .mdlext-selectfield__select {

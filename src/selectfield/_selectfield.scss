@@ -132,6 +132,11 @@
     border-bottom: 1px dotted $input-text-disabled-color;
     color: $input-text-disabled-text-color;
   }
+
+  option {
+    background-color: inherit;
+    color: $text-color-primary;
+  }
 }
 
 // Styling for the label / floating label.
