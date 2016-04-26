@@ -3626,13 +3626,13 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-badge[data-badge]:after {
-  background: #E040FB;
-  color: #FAFAFA;
+  background: #536DFE;
+  color: #FFFFFF;
 }
 
 .mdlext-dark-color-theme .mdl-badge.mdl-badge--no-background[data-badge]:after {
-  color: #E040FB;
-  background: #FAFAFA;
+  color: #536DFE;
+  background: #FFFFFF;
 }
 
 .mdlext-dark-color-theme .mdl-button {

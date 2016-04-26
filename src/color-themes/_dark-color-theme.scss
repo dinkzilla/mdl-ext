@@ -63,14 +63,14 @@
   .mdl-badge {
 
     &[data-badge]:after {
-      background: $mdlext-light-badge-background;
-      color: $mdlext-light-badge-color;
+      background: $mdlext-dark-badge-background;
+      color: $mdlext-dark-badge-color;
     }
 
     &.mdl-badge--no-background {
       &[data-badge]:after {
-        color: $mdlext-light-badge-color-inverse;
-        background: $mdlext-light-badge-background-inverse;
+        color: $mdlext-dark-badge-color-inverse;
+        background: $mdlext-dark-badge-background-inverse;
       }
     }
   }
