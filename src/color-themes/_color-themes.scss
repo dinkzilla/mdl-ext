@@ -46,9 +46,11 @@ $mdlext-palette-light-green-500:                  #8BC34A !default;
 $mdlext-palette-pink-500:                         #E91E63 !default;
 $mdlext-palette-pink-700:                         #C2185B !default;
 $mdlext-palette-pink-A400:                        #F50057 !default;
+$mdlext-palette-purple-A200:                      #E040FB !default;
 $mdlext-palette-red-700:                          #D32F2F !default;
 $mdlext-palette-red-A200:                         #FF5252 !default;
 $mdlext-palette-red-A400:                         #FF1744 !default;
+$mdlext-palette-yellow-500:                       #FFEB3B !default;
 $mdlext-color-black:                              #000000 !default;
 $mdlext-color-white:                              #FFFFFF !default;
 
@@ -58,9 +60,9 @@ $mdlext-color-white:                              #FFFFFF !default;
 $mdlext-light-color-primary:                      #4CAF50 !default;
 $mdlext-light-color-primary-dark:                 #388E3C !default;
 $mdlext-light-color-primary-light:                #4CAF50 !default;  // Fallback color. Set to color-primary if fallback is not needed
-$mdlext-light-color-primary-contrast:             #E8F5E9 !default;  // text color on primary/primary dark background
-$mdlext-light-color-accent:                       #607D8B !default;
-$mdlext-light-color-accent-contrast:              #FFFFFF !default;
+$mdlext-light-color-primary-contrast:             #C8E6C9 !default;  // text color on primary/primary dark background
+$mdlext-light-color-accent:                       #E040FB !default;
+$mdlext-light-color-accent-contrast:              #FAFAFA !default;
 
 $mdlext-light-content-background-color:           #FAFAFA !default;                         // background color on content (paper/card) background
 $mdlext-light-text-color-primary:                 rgba($mdlext-color-black, 0.87) !default; // text color on content (paper/card) background
@@ -319,43 +321,50 @@ $mdlext-dark-data-table-dividers:                       1px solid $mdlext-dark-d
  * Palette samples
  * -------------------------------------------------------------
 
-$mdlext-light-color-primary:                   #F5F5F5 !default;
-$mdlext-light-color-primary-dark:              #E0E0E0 !default;
-$mdlext-light-color-primary-light:             #8BC34A !default;  // Fallback color. Set to color-primary if fallback is not needed
-$mdlext-light-color-primary-contrast:          #000000 !default;  // text color on primary/primary dark background
-$mdlext-light-color-accent:                    #FFC107 !default;
-$mdlext-light-color-accent-contrast:           #FFFFFF !default;
+$mdlext-light-color-primary:                      #9E9E9E !default;
+$mdlext-light-color-primary-dark:                 #616161 !default;
+$mdlext-light-color-primary-light:                #9E9E9E !default;  // Fallback color. Set to color-primary if fallback is not needed
+$mdlext-light-color-primary-contrast:             #212121 !default;  // text color on primary/primary dark background
+$mdlext-light-color-accent:                       #E040FB !default;
+$mdlext-light-color-accent-contrast:              #FAFAFA !default;
+
+$mdlext-light-color-primary:                      #F5F5F5 !default;
+$mdlext-light-color-primary-dark:                 #E0E0E0 !default;
+$mdlext-light-color-primary-light:                #8BC34A !default;  // Fallback color. Set to color-primary if fallback is not needed
+$mdlext-light-color-primary-contrast:             #000000 !default;  // text color on primary/primary dark background
+$mdlext-light-color-accent:                       #FFC107 !default;
+$mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
-$mdlext-light-color-primary:                   #673AB7 !default;
-$mdlext-light-color-primary-dark:              #512DA8 !default;
-$mdlext-light-color-primary-light:             #673AB7 !default;   // Fallback color. Set to color-primary if fallback is not needed
-$mdlext-light-color-primary-contrast:          #D1C4E9 !default;   // text color on primary/primary dark background
-$mdlext-light-color-accent:                    #4CAF50 !default;
-$mdlext-light-color-accent-contrast:           #FFFFFF !default;
+$mdlext-light-color-primary:                      #673AB7 !default;
+$mdlext-light-color-primary-dark:                 #512DA8 !default;
+$mdlext-light-color-primary-light:                #673AB7 !default;   // Fallback color. Set to color-primary if fallback is not needed
+$mdlext-light-color-primary-contrast:             #D1C4E9 !default;   // text color on primary/primary dark background
+$mdlext-light-color-accent:                       #4CAF50 !default;
+$mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
-$mdlext-light-color-primary:                   #4CAF50 !default;
-$mdlext-light-color-primary-dark:              #388E3C !default;
-$mdlext-light-color-primary-light:             #4CAF50 !default;  // Fallback color. Set to color-primary if fallback is not needed
-$mdlext-light-color-primary-contrast:          #C8E6C9 !default;  // text color on primary/primary dark background
-$mdlext-light-color-accent:                    #FF5252 !default;
-$mdlext-light-color-accent-contrast:           #FFFFFF !default;
+$mdlext-light-color-primary:                      #4CAF50 !default;
+$mdlext-light-color-primary-dark:                 #388E3C !default;
+$mdlext-light-color-primary-light:                #4CAF50 !default;  // Fallback color. Set to color-primary if fallback is not needed
+$mdlext-light-color-primary-contrast:             #C8E6C9 !default;  // text color on primary/primary dark background
+$mdlext-light-color-accent:                       #FF5252 !default;
+$mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
-$mdlext-light-color-primary:                   #4CAF50 !default;
-$mdlext-light-color-primary-dark:              #388E3C !default;
-$mdlext-light-color-primary-light:             #4CAF50 !default;  // Fallback color. Set to color-primary if fallback is not needed
-$mdlext-light-color-primary-contrast:          #C8E6C9 !default;  // text color on primary/primary dark background
-$mdlext-light-color-accent:                    #03A9F4 !default;
-$mdlext-light-color-accent-contrast:           #FFFFFF !default;
+$mdlext-light-color-primary:                      #4CAF50 !default;
+$mdlext-light-color-primary-dark:                 #388E3C !default;
+$mdlext-light-color-primary-light:                #4CAF50 !default;  // Fallback color. Set to color-primary if fallback is not needed
+$mdlext-light-color-primary-contrast:             #C8E6C9 !default;  // text color on primary/primary dark background
+$mdlext-light-color-accent:                       #03A9F4 !default;
+$mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
-$mdlext-dark-color-primary:                    #212121 !default;
-$mdlext-dark-color-primary-dark:               #000000 !default;
-$mdlext-dark-color-primary-light:              #607D8B !default;  // Fallback color. Set to color-primary if fallback is not needed
-$mdlext-dark-color-primary-contrast:           #FFFFFF !default;  // text color on primary/primary dark background
-$mdlext-dark-color-accent:                     #FF5722 !default;
-$mdlext-dark-color-accent-contrast:            #FFFFFF !default;
+$mdlext-dark-color-primary:                       #212121 !default;
+$mdlext-dark-color-primary-dark:                  #000000 !default;
+$mdlext-dark-color-primary-light:                 #607D8B !default;  // Fallback color. Set to color-primary if fallback is not needed
+$mdlext-dark-color-primary-contrast:              #FFFFFF !default;  // text color on primary/primary dark background
+$mdlext-dark-color-accent:                        #FF5722 !default;
+$mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 
 */
