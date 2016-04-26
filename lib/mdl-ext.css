@@ -2280,7 +2280,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__input:required,
 .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:required {
   border-color: rgba(0,0,0, 0.12);
-  background-color: rgba(249, 234, 208, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__input:focus,
@@ -2291,8 +2291,8 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__input:required:focus,
 .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:focus,
 .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:required:focus {
-  border-color: #458ebd;
-  background-color: rgba(217, 232, 241, 0.2);
+  border-color: rgb(63,81,181);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .mdlext-bordered-fields .mdl-textfield .mdl-textfield__input,
@@ -2314,16 +2314,16 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:disabled,
 .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:disabled {
   color: rgba(0,0,0, 0.26);
-  background-color: rgba(228, 236, 243, 0.25);
-  border-color: #c6ccd1;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(0,0,0, 0.12);
 }
 
 .mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:required,
 .mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:required,
 .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:required,
 .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:required {
-  background-color: rgba(249, 234, 208, 0.1);
-  border-color: #e59617;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255,64,129, 0.8);
 }
 
 .mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:focus,
@@ -2334,8 +2334,8 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:required:focus,
 .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:focus,
 .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:required:focus {
-  background-color: rgba(217, 232, 241, 0.2);
-  border-color: #458ebd;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgb(63,81,181);
 }
 
 .mdlext-bordered-fields .mdl-textfield.is-focused .mdl-textfield__label,
@@ -3508,6 +3508,70 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
   color: #D32F2F;
 }
 
+.mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__input:required,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield.is-dirty .mdlext-selectfield__select:required,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__input:required,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:required {
+  border-color: rgba(0, 0, 0, 0.12);
+  background-color: rgba(250, 250, 250, 0.1);
+}
+
+.mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__input:focus,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__input:required:focus,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield.is-dirty .mdlext-selectfield__select:focus,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield.is-dirty .mdlext-selectfield__select:required:focus,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__input:focus,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__input:required:focus,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:focus,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:required:focus {
+  border-color: #4CAF50;
+  background-color: rgba(250, 250, 250, 0.1);
+}
+
+.mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield .mdl-textfield__input,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select {
+  background-color: rgba(250, 250, 250, 0.1);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+.mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:disabled,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:disabled,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:disabled,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:disabled {
+  color: rgba(0, 0, 0, 0.26);
+  background-color: rgba(250, 250, 250, 0.1);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+.mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:required,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:required,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:required,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:required {
+  background-color: rgba(250, 250, 250, 0.1);
+  border-color: rgba(224, 64, 251, 0.8);
+}
+
+.mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:focus,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:required:focus,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:focus,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:required:focus,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:focus,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:required:focus,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:focus,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:required:focus {
+  background-color: rgba(250, 250, 250, 0.1);
+  border-color: #4CAF50;
+}
+
+.mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield.is-disabled i,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield.is-disabled .mdl-button,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-disabled i,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-disabled .mdl-button {
+  color: rgba(0, 0, 0, 0.12);
+}
+
 /**
  * Copyright 2016 Leif Olsen. All Rights Reserved.
  *
@@ -4277,6 +4341,70 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 
 .mdlext-dark-color-theme .mdlext-selectfield__error {
   color: #FF1744;
+}
+
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__input:required,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield.is-dirty .mdlext-selectfield__select:required,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__input:required,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:required {
+  border-color: rgba(255, 255, 255, 0.26);
+  background-color: rgba(48, 48, 48, 0.1);
+}
+
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__input:focus,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__input:required:focus,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield.is-dirty .mdlext-selectfield__select:focus,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield.is-dirty .mdlext-selectfield__select:required:focus,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__input:focus,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__input:required:focus,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:focus,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:required:focus {
+  border-color: #FFC107;
+  background-color: rgba(48, 48, 48, 0.1);
+}
+
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield .mdl-textfield__input,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select {
+  background-color: rgba(48, 48, 48, 0.1);
+  border-color: rgba(255, 255, 255, 0.26);
+}
+
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:disabled,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:disabled,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:disabled,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:disabled {
+  color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(48, 48, 48, 0.1);
+  border-color: rgba(255, 255, 255, 0.26);
+}
+
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:required,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:required,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:required,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:required {
+  background-color: rgba(48, 48, 48, 0.1);
+  border-color: rgba(83, 109, 254, 0.8);
+}
+
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:focus,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:required:focus,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:focus,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:required:focus,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:focus,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:required:focus,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:focus,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:required:focus {
+  background-color: rgba(48, 48, 48, 0.1);
+  border-color: #FFC107;
+}
+
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield.is-disabled i,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield.is-disabled .mdl-button,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-disabled i,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-disabled .mdl-button {
+  color: rgba(255, 255, 255, 0.26);
 }
 
 

@@ -42,21 +42,21 @@ $mdlext-accordion-ripple-color                 : $tab-highlight-color !default;
 
 
 /* ==========  Bordered fields  ========== */
-$mdlext-bordered-field-border-width: 1px !default;
-$mdlext-bordered-field-border-radius: 3px !default;
-$mdlext-bordered-field-background-color: rgba(#ffffff, 0.1) !default;
-$mdlext-bordered-field-height: 48px !default;
-$mdlext-bordered-field-padding: $input-text-padding + 4px !default;
-$mdlext-bordered-field-padding-top: 20px !default;
-$mdlext-bordered-field-padding-bottom: 0 !default;
-$mdlext-bordered-field-focus-border-color: #458ebd !default;
-$mdlext-bordered-field-focus-background-color: rgba(#d9e8f1, 0.2) !default;
-$mdlext-bordered-field-disabled-border-color: rgba(#c6ccd1, 1) !default;
-$mdlext-bordered-field-disabled-background-color: rgba(228, 236, 243, 0.25) !default;
-$mdlext-bordered-field-required-border-color: rgba(#e59617, 1) !default;
-$mdlext-bordered-field-required-background-color: rgba(#f9ead0, 0.1) !default;
-$mdlext-bordered-field-label-top: 35px !default;
-$mdlext-bordered-field-label-focused-top: 20px !default;
+$mdlext-bordered-field-border-width             : 1px !default;
+$mdlext-bordered-field-border-radius            : 3px !default;
+$mdlext-bordered-field-background-color         : rgba(#FFFFFF, 0.1) !default;
+$mdlext-bordered-field-height                   : 48px !default;
+$mdlext-bordered-field-padding                  : $input-text-padding + 4px !default;
+$mdlext-bordered-field-padding-top              : 20px !default;
+$mdlext-bordered-field-padding-bottom           : 0 !default;
+$mdlext-bordered-field-focus-border-color       : unquote("rgb(#{$color-primary})") !default;
+$mdlext-bordered-field-focus-background-color   : $mdlext-bordered-field-background-color !default;
+$mdlext-bordered-field-disabled-border-color    : $input-text-disabled-color !default;
+$mdlext-bordered-field-disabled-background-color: $mdlext-bordered-field-background-color !default;
+$mdlext-bordered-field-required-border-color    : unquote("rgba(#{$color-accent}, 0.8)") !default;
+$mdlext-bordered-field-required-background-color: $mdlext-bordered-field-background-color !default;
+$mdlext-bordered-field-label-top                : 35px !default;
+$mdlext-bordered-field-label-focused-top        : 20px !default;
 
 
 /* ==========     Dialog     ========== */

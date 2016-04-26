@@ -63,6 +63,7 @@ $mdlext-light-color-primary-light:                #4CAF50 !default;  // Fallback
 $mdlext-light-color-primary-contrast:             #C8E6C9 !default;  // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #E040FB !default;
 $mdlext-light-color-accent-contrast:              #FAFAFA !default;
+$mdlext-light-color-accent-contrast:              #FAFAFA !default;
 
 $mdlext-light-content-background-color:           #FAFAFA !default;                         // background color on content (paper/card) background
 $mdlext-light-text-color-primary:                 rgba($mdlext-color-black, 0.87) !default; // text color on content (paper/card) background
@@ -183,6 +184,17 @@ $mdlext-light-data-table-dividers:                       1px solid $mdlext-light
 
 // Selectfield
 // Uses variables from textfield
+
+
+// Bordered fields
+$mdlext-light-bordered-field-background-color:          rgba($mdlext-light-content-background-color, 0.1) !default;
+$mdlext-light-bordered-field-focus-border-color:        $mdlext-light-color-primary !default;
+$mdlext-light-bordered-field-focus-background-color:    $mdlext-light-bordered-field-background-color !default;
+$mdlext-light-bordered-field-disabled-border-color:     $mdlext-light-input-text-disabled-color !default;
+$mdlext-light-bordered-field-disabled-background-color: $mdlext-light-bordered-field-background-color !default;
+$mdlext-light-bordered-field-required-border-color:     rgba($mdlext-light-color-accent, 0.8) !default;
+$mdlext-light-bordered-field-required-background-color: $mdlext-light-bordered-field-background-color !default;
+
 
 
 // ----------------------------------------------------------------
@@ -315,6 +327,15 @@ $mdlext-dark-data-table-dividers:                       1px solid $mdlext-dark-d
 // Selectfield
 // Uses variables from textfield
 
+
+// Bordered fields
+$mdlext-dark-bordered-field-background-color:          rgba($mdlext-dark-content-background-color, 0.1) !default;
+$mdlext-dark-bordered-field-focus-border-color:        $mdlext-dark-color-primary !default;
+$mdlext-dark-bordered-field-focus-background-color:    $mdlext-dark-bordered-field-background-color !default;
+$mdlext-dark-bordered-field-disabled-border-color:     $mdlext-dark-input-text-disabled-color !default;
+$mdlext-dark-bordered-field-disabled-background-color: $mdlext-dark-bordered-field-background-color !default;
+$mdlext-dark-bordered-field-required-border-color:     rgba($mdlext-dark-color-accent, 0.8) !default;
+$mdlext-dark-bordered-field-required-background-color: $mdlext-dark-bordered-field-background-color !default;
 
 
 /* -------------------------------------------------------------

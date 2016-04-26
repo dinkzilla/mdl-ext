@@ -800,3 +800,58 @@
   }
 }
 
+
+// mdlext/src/bordered-fields/_bordered-fields.scss
+// -------------------------------------------------
+.mdlext-light-color-theme {
+
+  .mdlext-bordered-fields {
+
+    .mdl-textfield,
+    .mdlext-selectfield {
+
+      &.is-dirty {
+        .mdl-textfield__input,
+        .mdlext-selectfield__select {
+          &:required {
+            border-color: $mdlext-light-input-text-bottom-border-color;
+            background-color: $mdlext-light-bordered-field-required-background-color;
+          }
+          &:focus,
+          &:required:focus {
+            border-color: $mdlext-light-bordered-field-focus-border-color;
+            background-color: $mdlext-light-bordered-field-focus-background-color;
+          }
+        }
+      }
+      .mdl-textfield__input,
+      .mdlext-selectfield__select {
+        background-color: $mdlext-light-bordered-field-background-color;
+        border-color: $mdlext-light-input-text-bottom-border-color;
+
+        &:disabled {
+          color: $mdlext-light-input-text-disabled-text-color;
+          background-color: $mdlext-light-bordered-field-disabled-background-color;
+          border-color: $mdlext-light-bordered-field-disabled-border-color;
+        }
+        &:required {
+          background-color: $mdlext-light-bordered-field-required-background-color;
+          border-color: $mdlext-light-bordered-field-required-border-color;
+        }
+        &:focus,
+        &:required:focus {
+          background-color: $mdlext-light-bordered-field-focus-background-color;
+          border-color: $mdlext-light-bordered-field-focus-border-color;
+        }
+      }
+    }
+
+    .mdl-textfield,
+    .mdlext-selectfield {
+      &.is-disabled i,
+      &.is-disabled .mdl-button {
+        color: $mdlext-light-input-text-disabled-color;
+      }
+    }
+  }
+}
