@@ -73,7 +73,7 @@ $mdlext-light-divider-color:                      rgba($mdlext-color-black, 0.12
 $mdlext-light-error-color:                        #D32F2F !default;
 
 // Anchor
-$mdlext-light-text-link-color:                    rgba($mdlext-light-color-accent, 0.87);
+$mdlext-light-text-link-color:                    rgba($mdlext-light-color-accent, 0.87) !default;
 
 // Card
 $mdlext-light-card-supporting-text-color:         rgba($mdlext-color-black, 0.54) !default;
@@ -214,7 +214,7 @@ $mdlext-dark-divider-color:                       rgba(#FFFFFF, 0.12) !default; 
 $mdlext-dark-error-color:                         #FF1744 !default;
 
 // Anchor
-$mdlext-dark-text-link-color:                     $mdlext-dark-color-accent;
+$mdlext-dark-text-link-color:                     $mdlext-dark-color-accent !default;
 
 // Card
 $mdlext-dark-card-supporting-text-color:          rgba($mdlext-color-white, 0.70) !default;

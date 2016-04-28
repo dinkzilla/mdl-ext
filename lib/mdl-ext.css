@@ -3374,7 +3374,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-data-table {
-  border-color: 1px solid rgba(0, 0, 0, 0.12);
+  border-color: rgba(255, 255, 255, 0.12);
   background-color: #FAFAFA;
 }
 
@@ -4209,7 +4209,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-data-table {
-  border-color: 1px solid rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.12);
   background-color: #303030;
 }
 
