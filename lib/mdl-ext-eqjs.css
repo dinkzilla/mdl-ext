@@ -295,6 +295,7 @@ $mdlext-light-color-primary-dark:                 #616161 !default;
 $mdlext-light-color-primary-light:                #9E9E9E !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #212121 !default;  // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #E040FB !default;
+$mdlext-light-color-accent-light:                 #E040FB !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FAFAFA !default;
 
 $mdlext-light-color-primary:                      #F5F5F5 !default;
@@ -302,6 +303,7 @@ $mdlext-light-color-primary-dark:                 #E0E0E0 !default;
 $mdlext-light-color-primary-light:                #8BC34A !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #000000 !default;  // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #FFC107 !default;
+$mdlext-light-color-accent-light:                 #FFC107 !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
@@ -310,6 +312,7 @@ $mdlext-light-color-primary-dark:                 #512DA8 !default;
 $mdlext-light-color-primary-light:                #673AB7 !default;   // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #D1C4E9 !default;   // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #4CAF50 !default;
+$mdlext-light-color-accent-light:                 #4CAF50 !default;   // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
@@ -318,6 +321,7 @@ $mdlext-light-color-primary-dark:                 #388E3C !default;
 $mdlext-light-color-primary-light:                #4CAF50 !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #C8E6C9 !default;  // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #FF5252 !default;
+$mdlext-light-color-accent-light:                 #FF5252 !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
@@ -326,6 +330,7 @@ $mdlext-light-color-primary-dark:                 #388E3C !default;
 $mdlext-light-color-primary-light:                #4CAF50 !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #C8E6C9 !default;  // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #03A9F4 !default;
+$mdlext-light-color-accent-light:                 #03A9F4 !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
@@ -334,6 +339,7 @@ $mdlext-dark-color-primary-dark:                  #000000 !default;
 $mdlext-dark-color-primary-light:                 #607D8B !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-dark-color-primary-contrast:              #FFFFFF !default;  // text color on primary/primary dark background
 $mdlext-dark-color-accent:                        #FF5722 !default;
+$mdlext-dark-color-accent-light:                  #FF5722 !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 
 */
@@ -2739,6 +2745,7 @@ $mdlext-light-color-primary-dark:                 #616161 !default;
 $mdlext-light-color-primary-light:                #9E9E9E !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #212121 !default;  // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #E040FB !default;
+$mdlext-light-color-accent-light:                 #E040FB !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FAFAFA !default;
 
 $mdlext-light-color-primary:                      #F5F5F5 !default;
@@ -2746,6 +2753,7 @@ $mdlext-light-color-primary-dark:                 #E0E0E0 !default;
 $mdlext-light-color-primary-light:                #8BC34A !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #000000 !default;  // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #FFC107 !default;
+$mdlext-light-color-accent-light:                 #FFC107 !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
@@ -2754,6 +2762,7 @@ $mdlext-light-color-primary-dark:                 #512DA8 !default;
 $mdlext-light-color-primary-light:                #673AB7 !default;   // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #D1C4E9 !default;   // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #4CAF50 !default;
+$mdlext-light-color-accent-light:                 #4CAF50 !default;   // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
@@ -2762,6 +2771,7 @@ $mdlext-light-color-primary-dark:                 #388E3C !default;
 $mdlext-light-color-primary-light:                #4CAF50 !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #C8E6C9 !default;  // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #FF5252 !default;
+$mdlext-light-color-accent-light:                 #FF5252 !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
@@ -2770,6 +2780,7 @@ $mdlext-light-color-primary-dark:                 #388E3C !default;
 $mdlext-light-color-primary-light:                #4CAF50 !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #C8E6C9 !default;  // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #03A9F4 !default;
+$mdlext-light-color-accent-light:                 #03A9F4 !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
@@ -2778,6 +2789,7 @@ $mdlext-dark-color-primary-dark:                  #000000 !default;
 $mdlext-dark-color-primary-light:                 #607D8B !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-dark-color-primary-contrast:              #FFFFFF !default;  // text color on primary/primary dark background
 $mdlext-dark-color-accent:                        #FF5722 !default;
+$mdlext-dark-color-accent-light:                  #FF5722 !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 
 */
@@ -2828,7 +2840,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme a {
-  color: rgba(224, 64, 251, 0.87);
+  color: #E040FB;
 }
 
 .mdlext-light-color-theme .mdl-badge[data-badge]:after {
@@ -2989,7 +3001,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded {
   background: transparent;
-  color: #4CAF50;
+  color: #E040FB;
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded::-webkit-slider-runnable-track {
@@ -3006,7 +3018,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded::-ms-fill-lower {
-  background: linear-gradient(to right, transparent, transparent 16px, #4CAF50 16px, #4CAF50 0);
+  background: linear-gradient(to right, transparent, transparent 16px, #E040FB 16px, #E040FB 0);
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded::-ms-fill-upper {
@@ -3014,39 +3026,39 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded::-webkit-slider-thumb {
-  background: #4CAF50;
+  background: #E040FB;
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded::-moz-range-thumb {
-  background: #4CAF50;
+  background: #E040FB;
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded:focus:not(:active)::-webkit-slider-thumb {
-  box-shadow: 0 0 0 10px rgba(76, 175, 80, 0.26);
+  box-shadow: 0 0 0 10px rgba(224, 64, 251, 0.26);
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded:focus:not(:active)::-moz-range-thumb {
-  box-shadow: 0 0 0 10px rgba(76, 175, 80, 0.26);
+  box-shadow: 0 0 0 10px rgba(224, 64, 251, 0.26);
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded:active::-webkit-slider-thumb {
-  background: #4CAF50;
+  background: #E040FB;
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded:active::-moz-range-thumb {
-  background: #4CAF50;
+  background: #E040FB;
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded::-ms-thumb {
-  background: #4CAF50;
+  background: #E040FB;
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded:focus:not(:active)::-ms-thumb {
-  background: radial-gradient(circle closest-side, #4CAF50 0%, #4CAF50 37.5%, rgba(76, 175, 80, 0.26) 37.5%, rgba(76, 175, 80, 0.26) 100%);
+  background: radial-gradient(circle closest-side, #E040FB 0%, #E040FB 37.5%, rgba(224, 64, 251, 0.26) 37.5%, rgba(224, 64, 251, 0.26) 100%);
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded:active::-ms-thumb {
-  background: #4CAF50;
+  background: #E040FB;
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded.is-lowest-value::-webkit-slider-thumb {
@@ -3131,7 +3143,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-slider__background-lower {
-  background: #4CAF50;
+  background: #E040FB;
 }
 
 .mdlext-light-color-theme .mdl-slider__background-upper {
@@ -3158,7 +3170,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-textfield__label:after {
-  background-color: #4CAF50;
+  background-color: #E040FB;
 }
 
 .mdlext-light-color-theme fieldset[disabled] .mdl-textfield .mdl-textfield__label,
@@ -3169,7 +3181,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 .mdlext-light-color-theme .mdl-textfield--floating-label.is-focused .mdl-textfield__label,
 .mdlext-light-color-theme .mdl-textfield--floating-label.is-dirty .mdl-textfield__label,
 .mdlext-light-color-theme .mdl-textfield--floating-label.has-placeholder .mdl-textfield__label {
-  color: #4CAF50;
+  color: #E040FB;
 }
 
 .mdlext-light-color-theme .mdl-textfield--floating-label.is-invalid .mdl-textfield__label {
@@ -3189,7 +3201,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-checkbox.is-checked .mdl-checkbox__box-outline {
-  border-color: #4CAF50;
+  border-color: #E040FB;
 }
 
 .mdlext-light-color-theme fieldset[disabled] .mdl-checkbox .mdl-checkbox__box-outline,
@@ -3202,8 +3214,8 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-checkbox.is-focused.is-checked .mdl-checkbox__focus-helper {
-  box-shadow: 0 0 0px 8px rgba(76, 175, 80, 0.26);
-  background-color: rgba(76, 175, 80, 0.26);
+  box-shadow: 0 0 0px 8px rgba(224, 64, 251, 0.26);
+  background-color: rgba(224, 64, 251, 0.26);
 }
 
 .mdlext-light-color-theme .mdl-checkbox__tick-outline {
@@ -3211,7 +3223,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-checkbox.is-checked .mdl-checkbox__tick-outline {
-  background-color: #4CAF50;
+  background-color: #E040FB;
 }
 
 .mdlext-light-color-theme fieldset[disabled] .mdl-checkbox.is-checked .mdl-checkbox__tick-outline,
@@ -3225,7 +3237,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-checkbox__ripple-container .mdl-ripple {
-  background: #4CAF50;
+  background: #E040FB;
 }
 
 .mdlext-light-color-theme fieldset[disabled] .mdl-checkbox .mdl-checkbox__ripple-container .mdl-ripple,
@@ -3238,7 +3250,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-radio.is-checked .mdl-radio__outer-circle {
-  border-color: #4CAF50;
+  border-color: #E040FB;
 }
 
 .mdlext-light-color-theme .mdl-radio__outer-circle fieldset[disabled] .mdl-radio,
@@ -3247,7 +3259,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-radio__inner-circle {
-  background: #4CAF50;
+  background: #E040FB;
 }
 
 .mdlext-light-color-theme fieldset[disabled] .mdl-radio .mdl-radio__inner-circle,
@@ -3261,7 +3273,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-radio__ripple-container .mdl-ripple {
-  background: #4CAF50;
+  background: #E040FB;
 }
 
 .mdlext-light-color-theme fieldset[disabled] .mdl-radio .mdl-radio__ripple-container .mdl-ripple,
@@ -3274,7 +3286,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-icon-toggle.is-checked .mdl-icon-toggle__label {
-  color: #4CAF50;
+  color: #E040FB;
 }
 
 .mdlext-light-color-theme .mdl-icon-toggle.is-disabled .mdl-icon-toggle__label {
@@ -3286,7 +3298,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-icon-toggle.is-focused.is-checked .mdl-icon-toggle__label {
-  background-color: rgba(76, 175, 80, 0.26);
+  background-color: rgba(224, 64, 251, 0.26);
 }
 
 .mdlext-light-color-theme .mdl-icon-toggle__ripple-container .mdl-ripple {
@@ -3302,7 +3314,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-switch.is-checked .mdl-switch__track {
-  background: rgba(76, 175, 80, 0.54);
+  background: rgba(224, 64, 251, 0.54);
 }
 
 .mdlext-light-color-theme .mdl-switch__track fieldset[disabled] .mdl-switch,
@@ -3315,7 +3327,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-switch.is-checked .mdl-switch__thumb {
-  background: #4CAF50;
+  background: #E040FB;
 }
 
 .mdlext-light-color-theme .mdl-switch__thumb fieldset[disabled] .mdl-switch,
@@ -3332,8 +3344,8 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-switch.is-focused.is-checked .mdl-switch__focus-helper {
-  box-shadow: 0 0 0px 20px rgba(76, 175, 80, 0.26);
-  background-color: rgba(76, 175, 80, 0.26);
+  box-shadow: 0 0 0px 20px rgba(224, 64, 251, 0.26);
+  background-color: rgba(224, 64, 251, 0.26);
 }
 
 .mdlext-light-color-theme .mdl-switch__label fieldset[disabled] .mdl-switch,
@@ -3342,7 +3354,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-switch__ripple-container .mdl-ripple {
-  background: #4CAF50;
+  background: #E040FB;
 }
 
 .mdlext-light-color-theme fieldset[disabled] .mdl-switch .mdl-switch__ripple-container .mdl-ripple,
@@ -3430,6 +3442,13 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 
 .mdlext-light-color-theme .mdlext-selectfield.is-disabled:after {
   color: rgba(0, 0, 0, 0.12);
+  content: '';
+  width: 0;
+  height: 0;
+  border: 0.35em solid transparent;
+  border-top-width: 0.5em;
+  border-bottom: none;
+  border-top-color: rgba(0, 0, 0, 0.12);
 }
 
 .mdlext-light-color-theme .mdlext-selectfield__select {
@@ -3466,7 +3485,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 .mdlext-light-color-theme .mdlext-selectfield--floating-label.is-dirty .mdlext-selectfield__label,
 .mdlext-light-color-theme .mdlext-selectfield--floating-label.is-dirty.is-dirty .mdlext-selectfield__label,
 .mdlext-light-color-theme .mdlext-selectfield--floating-label.has-placeholder .mdlext-selectfield__label {
-  color: #4CAF50;
+  color: #E040FB;
 }
 
 .mdlext-light-color-theme .mdlext-selectfield--floating-label.is-invalid .mdlext-selectfield__label {
@@ -3474,7 +3493,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdlext-selectfield__label:after {
-  background-color: #4CAF50;
+  background-color: #E040FB;
 }
 
 .mdlext-light-color-theme .mdlext-selectfield.is-invalid .mdlext-selectfield__label:after {
@@ -3501,7 +3520,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 .mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__input:required:focus,
 .mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:focus,
 .mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:required:focus {
-  border-color: #4CAF50;
+  border-color: #E040FB;
   background-color: rgba(250, 250, 250, 0.1);
 }
 
@@ -3527,7 +3546,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 .mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:required,
 .mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:required {
   background-color: rgba(250, 250, 250, 0.1);
-  border-color: rgba(224, 64, 251, 0.8);
+  border-color: rgba(76, 175, 80, 0.8);
 }
 
 .mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:focus,
@@ -3539,7 +3558,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 .mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:focus,
 .mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:required:focus {
   background-color: rgba(250, 250, 250, 0.1);
-  border-color: #4CAF50;
+  border-color: #E040FB;
 }
 
 .mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield.is-disabled i,
@@ -3574,6 +3593,7 @@ $mdlext-light-color-primary-dark:                 #616161 !default;
 $mdlext-light-color-primary-light:                #9E9E9E !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #212121 !default;  // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #E040FB !default;
+$mdlext-light-color-accent-light:                 #E040FB !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FAFAFA !default;
 
 $mdlext-light-color-primary:                      #F5F5F5 !default;
@@ -3581,6 +3601,7 @@ $mdlext-light-color-primary-dark:                 #E0E0E0 !default;
 $mdlext-light-color-primary-light:                #8BC34A !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #000000 !default;  // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #FFC107 !default;
+$mdlext-light-color-accent-light:                 #FFC107 !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
@@ -3589,6 +3610,7 @@ $mdlext-light-color-primary-dark:                 #512DA8 !default;
 $mdlext-light-color-primary-light:                #673AB7 !default;   // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #D1C4E9 !default;   // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #4CAF50 !default;
+$mdlext-light-color-accent-light:                 #4CAF50 !default;   // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
@@ -3597,6 +3619,7 @@ $mdlext-light-color-primary-dark:                 #388E3C !default;
 $mdlext-light-color-primary-light:                #4CAF50 !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #C8E6C9 !default;  // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #FF5252 !default;
+$mdlext-light-color-accent-light:                 #FF5252 !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
@@ -3605,6 +3628,7 @@ $mdlext-light-color-primary-dark:                 #388E3C !default;
 $mdlext-light-color-primary-light:                #4CAF50 !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #C8E6C9 !default;  // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #03A9F4 !default;
+$mdlext-light-color-accent-light:                 #03A9F4 !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
@@ -3613,6 +3637,7 @@ $mdlext-dark-color-primary-dark:                  #000000 !default;
 $mdlext-dark-color-primary-light:                 #607D8B !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-dark-color-primary-contrast:              #FFFFFF !default;  // text color on primary/primary dark background
 $mdlext-dark-color-accent:                        #FF5722 !default;
+$mdlext-dark-color-accent-light:                  #FF5722 !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 
 */
@@ -3824,7 +3849,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded {
   background: transparent;
-  color: #FFC107;
+  color: #536DFE;
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded::-webkit-slider-runnable-track {
@@ -3841,7 +3866,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded::-ms-fill-lower {
-  background: linear-gradient(to right, transparent, transparent 16px, #FFC107 16px, #FFC107 0);
+  background: linear-gradient(to right, transparent, transparent 16px, #536DFE 16px, #536DFE 0);
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded::-ms-fill-upper {
@@ -3849,39 +3874,39 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded::-webkit-slider-thumb {
-  background: #FFC107;
+  background: #536DFE;
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded::-moz-range-thumb {
-  background: #FFC107;
+  background: #536DFE;
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded:focus:not(:active)::-webkit-slider-thumb {
-  box-shadow: 0 0 0 10px rgba(255, 193, 7, 0.5);
+  box-shadow: 0 0 0 10px rgba(83, 109, 254, 0.5);
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded:focus:not(:active)::-moz-range-thumb {
-  box-shadow: 0 0 0 10px rgba(255, 193, 7, 0.5);
+  box-shadow: 0 0 0 10px rgba(83, 109, 254, 0.5);
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded:active::-webkit-slider-thumb {
-  background: #FFC107;
+  background: #536DFE;
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded:active::-moz-range-thumb {
-  background: #FFC107;
+  background: #536DFE;
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded::-ms-thumb {
-  background: #FFC107;
+  background: #536DFE;
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded:focus:not(:active)::-ms-thumb {
-  background: radial-gradient(circle closest-side, #FFC107 0%, #FFC107 37.5%, rgba(255, 193, 7, 0.5) 37.5%, rgba(255, 193, 7, 0.5) 100%);
+  background: radial-gradient(circle closest-side, #536DFE 0%, #536DFE 37.5%, rgba(83, 109, 254, 0.5) 37.5%, rgba(83, 109, 254, 0.5) 100%);
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded:active::-ms-thumb {
-  background: #FFC107;
+  background: #536DFE;
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded.is-lowest-value::-webkit-slider-thumb {
@@ -3966,7 +3991,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-slider__background-lower {
-  background: #FFC107;
+  background: #536DFE;
 }
 
 .mdlext-dark-color-theme .mdl-slider__background-upper {
@@ -3993,7 +4018,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-textfield__label:after {
-  background-color: #FFC107;
+  background-color: #536DFE;
 }
 
 .mdlext-dark-color-theme fieldset[disabled] .mdl-textfield .mdl-textfield__label,
@@ -4004,7 +4029,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 .mdlext-dark-color-theme .mdl-textfield--floating-label.is-focused .mdl-textfield__label,
 .mdlext-dark-color-theme .mdl-textfield--floating-label.is-dirty .mdl-textfield__label,
 .mdlext-dark-color-theme .mdl-textfield--floating-label.has-placeholder .mdl-textfield__label {
-  color: #FFC107;
+  color: #536DFE;
 }
 
 .mdlext-dark-color-theme .mdl-textfield--floating-label.is-invalid .mdl-textfield__label {
@@ -4024,7 +4049,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-checkbox.is-checked .mdl-checkbox__box-outline {
-  border-color: #FFC107;
+  border-color: #536DFE;
 }
 
 .mdlext-dark-color-theme fieldset[disabled] .mdl-checkbox .mdl-checkbox__box-outline,
@@ -4037,8 +4062,8 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-checkbox.is-focused.is-checked .mdl-checkbox__focus-helper {
-  box-shadow: 0 0 0px 8px rgba(255, 193, 7, 0.26);
-  background-color: rgba(255, 193, 7, 0.26);
+  box-shadow: 0 0 0px 8px rgba(83, 109, 254, 0.26);
+  background-color: rgba(83, 109, 254, 0.26);
 }
 
 .mdlext-dark-color-theme .mdl-checkbox__tick-outline {
@@ -4046,7 +4071,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-checkbox.is-checked .mdl-checkbox__tick-outline {
-  background-color: #FFC107;
+  background-color: #536DFE;
 }
 
 .mdlext-dark-color-theme fieldset[disabled] .mdl-checkbox.is-checked .mdl-checkbox__tick-outline,
@@ -4060,7 +4085,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-checkbox__ripple-container .mdl-ripple {
-  background: #FFC107;
+  background: #536DFE;
 }
 
 .mdlext-dark-color-theme fieldset[disabled] .mdl-checkbox .mdl-checkbox__ripple-container .mdl-ripple,
@@ -4073,7 +4098,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-radio.is-checked .mdl-radio__outer-circle {
-  border-color: #FFC107;
+  border-color: #536DFE;
 }
 
 .mdlext-dark-color-theme .mdl-radio__outer-circle fieldset[disabled] .mdl-radio,
@@ -4082,7 +4107,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-radio__inner-circle {
-  background: #FFC107;
+  background: #536DFE;
 }
 
 .mdlext-dark-color-theme fieldset[disabled] .mdl-radio .mdl-radio__inner-circle,
@@ -4096,7 +4121,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-radio__ripple-container .mdl-ripple {
-  background: #FFC107;
+  background: #536DFE;
 }
 
 .mdlext-dark-color-theme fieldset[disabled] .mdl-radio .mdl-radio__ripple-container .mdl-ripple,
@@ -4109,7 +4134,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-icon-toggle.is-checked .mdl-icon-toggle__label {
-  color: #FFC107;
+  color: #536DFE;
 }
 
 .mdlext-dark-color-theme .mdl-icon-toggle.is-disabled .mdl-icon-toggle__label {
@@ -4121,7 +4146,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-icon-toggle.is-focused.is-checked .mdl-icon-toggle__label {
-  background-color: rgba(255, 193, 7, 0.26);
+  background-color: rgba(83, 109, 254, 0.26);
 }
 
 .mdlext-dark-color-theme .mdl-icon-toggle__ripple-container .mdl-ripple {
@@ -4137,7 +4162,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-switch.is-checked .mdl-switch__track {
-  background: rgba(255, 193, 7, 0.5);
+  background: rgba(83, 109, 254, 0.5);
 }
 
 .mdlext-dark-color-theme .mdl-switch__track fieldset[disabled] .mdl-switch,
@@ -4150,7 +4175,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-switch.is-checked .mdl-switch__thumb {
-  background: #FFC107;
+  background: #536DFE;
 }
 
 .mdlext-dark-color-theme .mdl-switch__thumb fieldset[disabled] .mdl-switch,
@@ -4167,8 +4192,8 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-switch.is-focused.is-checked .mdl-switch__focus-helper {
-  box-shadow: 0 0 0px 20px rgba(255, 193, 7, 0.26);
-  background-color: rgba(255, 193, 7, 0.26);
+  box-shadow: 0 0 0px 20px rgba(83, 109, 254, 0.26);
+  background-color: rgba(83, 109, 254, 0.26);
 }
 
 .mdlext-dark-color-theme .mdl-switch__label fieldset[disabled] .mdl-switch,
@@ -4177,7 +4202,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-switch__ripple-container .mdl-ripple {
-  background: #FFC107;
+  background: #536DFE;
 }
 
 .mdlext-dark-color-theme fieldset[disabled] .mdl-switch .mdl-switch__ripple-container .mdl-ripple,
@@ -4265,6 +4290,13 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 
 .mdlext-dark-color-theme .mdlext-selectfield.is-disabled:after {
   color: rgba(255, 255, 255, 0.26);
+  content: '';
+  width: 0;
+  height: 0;
+  border: 0.35em solid transparent;
+  border-top-width: 0.5em;
+  border-bottom: none;
+  border-top-color: rgba(255, 255, 255, 0.26);
 }
 
 .mdlext-dark-color-theme .mdlext-selectfield__select {
@@ -4301,7 +4333,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 .mdlext-dark-color-theme .mdlext-selectfield--floating-label.is-dirty .mdlext-selectfield__label,
 .mdlext-dark-color-theme .mdlext-selectfield--floating-label.is-dirty.is-dirty .mdlext-selectfield__label,
 .mdlext-dark-color-theme .mdlext-selectfield--floating-label.has-placeholder .mdlext-selectfield__label {
-  color: #FFC107;
+  color: #536DFE;
 }
 
 .mdlext-dark-color-theme .mdlext-selectfield--floating-label.is-invalid .mdlext-selectfield__label {
@@ -4309,7 +4341,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdlext-selectfield__label:after {
-  background-color: #FFC107;
+  background-color: #536DFE;
 }
 
 .mdlext-dark-color-theme .mdlext-selectfield.is-invalid .mdlext-selectfield__label:after {
@@ -4336,7 +4368,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 .mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdl-textfield__input:required:focus,
 .mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:focus,
 .mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-dirty .mdlext-selectfield__select:required:focus {
-  border-color: #FFC107;
+  border-color: #536DFE;
   background-color: rgba(48, 48, 48, 0.1);
 }
 
@@ -4362,7 +4394,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 .mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:required,
 .mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:required {
   background-color: rgba(48, 48, 48, 0.1);
-  border-color: rgba(83, 109, 254, 0.8);
+  border-color: rgba(255, 193, 7, 0.8);
 }
 
 .mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:focus,
@@ -4374,7 +4406,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 .mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:focus,
 .mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:required:focus {
   background-color: rgba(48, 48, 48, 0.1);
-  border-color: #FFC107;
+  border-color: #536DFE;
 }
 
 .mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield.is-disabled i,

@@ -750,6 +750,7 @@
 
   .mdlext-selectfield.is-disabled:after {
     color: $mdlext-dark-input-text-disabled-color;
+    @include mdlext-arrow(down, .70em, .50em, $mdlext-dark-input-text-disabled-color);
   }
 
   .mdlext-selectfield__select {

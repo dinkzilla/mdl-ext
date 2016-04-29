@@ -80,6 +80,7 @@ $mdlext-light-color-primary-dark:     #616161;
 $mdlext-light-color-primary-light:    #9E9E9E; // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast: #F5F5F5;  
 $mdlext-light-color-accent:           #FFEB3B; 
+$mdlext-light-color-accent-light:     #FFEB3B; // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-accent-contrast:  #FFFFFF;
 ```
 

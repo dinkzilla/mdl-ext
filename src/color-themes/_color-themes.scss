@@ -62,7 +62,7 @@ $mdlext-light-color-primary-dark:                 #388E3C !default;
 $mdlext-light-color-primary-light:                #4CAF50 !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #C8E6C9 !default;  // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #E040FB !default;
-$mdlext-light-color-accent-contrast:              #FAFAFA !default;
+$mdlext-light-color-accent-light:                 #E040FB !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FAFAFA !default;
 
 $mdlext-light-content-background-color:           #FAFAFA !default;                         // background color on content (paper/card) background
@@ -73,7 +73,7 @@ $mdlext-light-divider-color:                      rgba($mdlext-color-black, 0.12
 $mdlext-light-error-color:                        #D32F2F !default;
 
 // Anchor
-$mdlext-light-text-link-color:                    rgba($mdlext-light-color-accent, 0.87) !default;
+$mdlext-light-text-link-color:                    $mdlext-light-color-accent !default;
 
 // Card
 $mdlext-light-card-supporting-text-color:         rgba($mdlext-color-black, 0.54) !default;
@@ -130,42 +130,42 @@ $mdlext-light-button-fab-ripple-color-alt:        $mdlext-light-color-accent-con
 
 // Slider
 $mdlext-light-range-bg-color:                     rgba($mdlext-color-black, 0.26) !default;
-$mdlext-light-range-color:                        $mdlext-light-color-primary-light !default;
-$mdlext-light-range-faded-color:                  rgba($mdlext-light-color-primary-light, 0.26) !default;
+$mdlext-light-range-color:                        $mdlext-light-color-accent-light !default;
+$mdlext-light-range-faded-color:                  rgba($mdlext-light-color-accent-light, 0.26) !default;
 $mdlext-light-range-bg-focus-color:               rgba($mdlext-color-black, 0.12) !default;
 
 // Textfields
 $mdlext-light-input-text-background-color:        transparent !default;
 $mdlext-light-input-text-label-color:             rgba($mdlext-color-black, 0.26) !default;
 $mdlext-light-input-text-bottom-border-color:     rgba($mdlext-color-black, 0.12) !default;
-$mdlext-light-input-text-highlight-color:         $mdlext-light-color-primary-light !default;
+$mdlext-light-input-text-highlight-color:         $mdlext-light-color-accent-light !default;
 $mdlext-light-input-text-disabled-color:          $mdlext-light-input-text-bottom-border-color !default;
 $mdlext-light-input-text-disabled-text-color:     $mdlext-light-input-text-label-color !default;
 $mdlext-light-input-text-error-color:             $mdlext-light-error-color !default;
 
 // Checkboxes
-$mdlext-light-checkbox-color:                     $mdlext-light-color-primary-light !default;
+$mdlext-light-checkbox-color:                     $mdlext-light-color-accent-light !default;
 $mdlext-light-checkbox-off-color:                 rgba($mdlext-color-black, 0.54) !default;
 $mdlext-light-checkbox-disabled-color:            rgba($mdlext-color-black, 0.26) !default;
-$mdlext-light-checkbox-focus-color:               rgba($mdlext-light-color-primary-light, 0.26) !default;
+$mdlext-light-checkbox-focus-color:               rgba($mdlext-light-color-accent-light, 0.26) !default;
 
 // Icon Toggles
 $mdlext-light-icon-toggle-color:                  $mdlext-palette-grey-700 !default;
 $mdlext-light-icon-toggle-focus-color:            $mdlext-light-button-focus-color !default;
-$mdlext-light-icon-toggle-checked-color:          $mdlext-light-color-primary-light !default;
-$mdlext-light-icon-toggle-checked-focus-color:    rgba($mdlext-light-color-primary-light, 0.26) !default;
+$mdlext-light-icon-toggle-checked-color:          $mdlext-light-color-accent-light !default;
+$mdlext-light-icon-toggle-checked-focus-color:    rgba($mdlext-light-color-accent-light, 0.26) !default;
 $mdlext-light-icon-toggle-disabled-color:         rgba($mdlext-color-black, 0.26) !default;
 
 // Radio Buttons
-$mdlext-light-radio-color:                        $mdlext-light-color-primary-light !default;
+$mdlext-light-radio-color:                        $mdlext-light-color-accent-light !default;
 $mdlext-light-radio-off-color:                    rgba($mdlext-color-black, 0.54) !default;
 $mdlext-light-radio-disabled-color:               rgba($mdlext-color-black, 0.26) !default;
 
 // Switches
-$mdlext-light-switch-color:                       $mdlext-light-color-primary-light !default;
-$mdlext-light-switch-faded-color:                 rgba($mdlext-light-color-primary-light, 0.26) !default;
+$mdlext-light-switch-color:                       $mdlext-light-color-accent-light !default;
+$mdlext-light-switch-faded-color:                 rgba($mdlext-light-color-accent-light, 0.26) !default;
 $mdlext-light-switch-thumb-color:                 $mdlext-light-switch-color !default;
-$mdlext-light-switch-track-color:                 rgba($mdlext-light-color-primary-light, 0.54) !default;
+$mdlext-light-switch-track-color:                 rgba($mdlext-light-color-accent-light, 0.54) !default;
 $mdlext-light-switch-off-thumb-color:             $mdlext-palette-grey-50 !default;
 $mdlext-light-switch-off-track-color:             rgba($mdlext-color-black, 0.26) !default;
 $mdlext-light-switch-disabled-thumb-color:        $mdlext-palette-grey-400 !default;
@@ -187,11 +187,11 @@ $mdlext-light-data-table-dividers:                       1px solid $mdlext-light
 
 // Bordered fields
 $mdlext-light-bordered-field-background-color:          rgba($mdlext-light-content-background-color, 0.1) !default;
-$mdlext-light-bordered-field-focus-border-color:        $mdlext-light-color-primary !default;
+$mdlext-light-bordered-field-focus-border-color:        $mdlext-light-color-accent-light !default;
 $mdlext-light-bordered-field-focus-background-color:    $mdlext-light-bordered-field-background-color !default;
 $mdlext-light-bordered-field-disabled-border-color:     $mdlext-light-input-text-disabled-color !default;
 $mdlext-light-bordered-field-disabled-background-color: $mdlext-light-bordered-field-background-color !default;
-$mdlext-light-bordered-field-required-border-color:     rgba($mdlext-light-color-accent, 0.8) !default;
+$mdlext-light-bordered-field-required-border-color:     rgba($mdlext-light-color-primary-light, 0.8) !default;
 $mdlext-light-bordered-field-required-background-color: $mdlext-light-bordered-field-background-color !default;
 
 
@@ -204,6 +204,7 @@ $mdlext-dark-color-primary-dark:                  #FFA000 !default;
 $mdlext-dark-color-primary-light:                 #FFC107 !default;             // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-dark-color-primary-contrast:              #FFF8E1 !default;             // text color on primary/primary dark background
 $mdlext-dark-color-accent:                        #536DFE !default;
+$mdlext-dark-color-accent-light:                  #536DFE !default;             // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 
 $mdlext-dark-content-background-color:            #303030 !default;             // #424242 or #303030, background color on content (paper/card) background
@@ -271,42 +272,42 @@ $mdlext-dark-button-fab-ripple-color-alt:         $mdlext-dark-color-accent-cont
 
 // Slider
 $mdlext-dark-range-bg-color:                      rgba($mdlext-color-white, 0.87) !default;
-$mdlext-dark-range-color:                         $mdlext-dark-color-primary-light !default;
-$mdlext-dark-range-faded-color:                   rgba($mdlext-dark-color-primary-light, 0.50) !default;
+$mdlext-dark-range-color:                         $mdlext-dark-color-accent-light !default;
+$mdlext-dark-range-faded-color:                   rgba($mdlext-dark-color-accent-light, 0.50) !default;
 $mdlext-dark-range-bg-focus-color:                rgba($mdlext-color-white, 0.50) !default;
 
 // Textfields
 $mdlext-dark-input-text-background-color:         transparent !default;
 $mdlext-dark-input-text-label-color:              rgba($mdlext-color-white, 0.50) !default;
 $mdlext-dark-input-text-bottom-border-color:      rgba($mdlext-color-white, 0.26) !default;
-$mdlext-dark-input-text-highlight-color:          $mdlext-dark-color-primary-light !default;
+$mdlext-dark-input-text-highlight-color:          $mdlext-dark-color-accent-light !default;
 $mdlext-dark-input-text-disabled-color:           $mdlext-dark-input-text-bottom-border-color !default;
 $mdlext-dark-input-text-disabled-text-color:      $mdlext-dark-input-text-label-color !default;
 $mdlext-dark-input-text-error-color:              $mdlext-dark-error-color !default;
 
 // Checkboxes
-$mdlext-dark-checkbox-color:                      $mdlext-dark-color-primary-light !default;
+$mdlext-dark-checkbox-color:                      $mdlext-dark-color-accent-light !default;
 $mdlext-dark-checkbox-off-color:                  rgba($mdlext-color-white, 0.50) !default;
 $mdlext-dark-checkbox-disabled-color:             rgba($mdlext-color-white, 0.26) !default;
-$mdlext-dark-checkbox-focus-color:                rgba($mdlext-dark-color-primary-light, 0.26) !default;
+$mdlext-dark-checkbox-focus-color:                rgba($mdlext-dark-color-accent-light, 0.26) !default;
 
 // Icon Toggles
 $mdlext-dark-icon-toggle-color:                   $mdlext-palette-grey-700 !default;
 $mdlext-dark-icon-toggle-focus-color:             $mdlext-dark-button-focus-color !default;
-$mdlext-dark-icon-toggle-checked-color:           $mdlext-dark-color-primary-light !default;
-$mdlext-dark-icon-toggle-checked-focus-color:     rgba($mdlext-dark-color-primary-light, 0.26) !default;
+$mdlext-dark-icon-toggle-checked-color:           $mdlext-dark-color-accent-light !default;
+$mdlext-dark-icon-toggle-checked-focus-color:     rgba($mdlext-dark-color-accent-light, 0.26) !default;
 $mdlext-dark-icon-toggle-disabled-color:          rgba($mdlext-color-white, 0.50) !default;
 
 // Radio Buttons
-$mdlext-dark-radio-color:                         $mdlext-dark-color-primary-light !default;
+$mdlext-dark-radio-color:                         $mdlext-dark-color-accent-light !default;
 $mdlext-dark-radio-off-color:                     rgba($mdlext-color-white, 0.50) !default;
 $mdlext-dark-radio-disabled-color:                rgba($mdlext-color-white, 0.26) !default;
 
 // Switches
-$mdlext-dark-switch-color:                        $mdlext-dark-color-primary-light !default;
-$mdlext-dark-switch-faded-color:                  rgba($mdlext-dark-color-primary-light, 0.26) !default;
+$mdlext-dark-switch-color:                        $mdlext-dark-color-accent-light !default;
+$mdlext-dark-switch-faded-color:                  rgba($mdlext-dark-color-accent-light, 0.26) !default;
 $mdlext-dark-switch-thumb-color:                  $mdlext-dark-switch-color !default;
-$mdlext-dark-switch-track-color:                  rgba($mdlext-dark-color-primary-light, 0.5) !default;
+$mdlext-dark-switch-track-color:                  rgba($mdlext-dark-color-accent-light, 0.5) !default;
 $mdlext-dark-switch-off-thumb-color:              $mdlext-palette-grey-50 !default;
 $mdlext-dark-switch-off-track-color:              rgba($mdlext-color-white, 0.26) !default;
 $mdlext-dark-switch-disabled-thumb-color:         $mdlext-palette-grey-50 !default;
@@ -329,11 +330,11 @@ $mdlext-dark-data-table-dividers:                       1px solid $mdlext-dark-d
 
 // Bordered fields
 $mdlext-dark-bordered-field-background-color:          rgba($mdlext-dark-content-background-color, 0.1) !default;
-$mdlext-dark-bordered-field-focus-border-color:        $mdlext-dark-color-primary !default;
+$mdlext-dark-bordered-field-focus-border-color:        $mdlext-dark-color-accent-light !default;
 $mdlext-dark-bordered-field-focus-background-color:    $mdlext-dark-bordered-field-background-color !default;
 $mdlext-dark-bordered-field-disabled-border-color:     $mdlext-dark-input-text-disabled-color !default;
 $mdlext-dark-bordered-field-disabled-background-color: $mdlext-dark-bordered-field-background-color !default;
-$mdlext-dark-bordered-field-required-border-color:     rgba($mdlext-dark-color-accent, 0.8) !default;
+$mdlext-dark-bordered-field-required-border-color:     rgba($mdlext-dark-color-primary-light, 0.8) !default;
 $mdlext-dark-bordered-field-required-background-color: $mdlext-dark-bordered-field-background-color !default;
 
 
@@ -346,6 +347,7 @@ $mdlext-light-color-primary-dark:                 #616161 !default;
 $mdlext-light-color-primary-light:                #9E9E9E !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #212121 !default;  // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #E040FB !default;
+$mdlext-light-color-accent-light:                 #E040FB !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FAFAFA !default;
 
 $mdlext-light-color-primary:                      #F5F5F5 !default;
@@ -353,6 +355,7 @@ $mdlext-light-color-primary-dark:                 #E0E0E0 !default;
 $mdlext-light-color-primary-light:                #8BC34A !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #000000 !default;  // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #FFC107 !default;
+$mdlext-light-color-accent-light:                 #FFC107 !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
@@ -361,6 +364,7 @@ $mdlext-light-color-primary-dark:                 #512DA8 !default;
 $mdlext-light-color-primary-light:                #673AB7 !default;   // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #D1C4E9 !default;   // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #4CAF50 !default;
+$mdlext-light-color-accent-light:                 #4CAF50 !default;   // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
@@ -369,6 +373,7 @@ $mdlext-light-color-primary-dark:                 #388E3C !default;
 $mdlext-light-color-primary-light:                #4CAF50 !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #C8E6C9 !default;  // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #FF5252 !default;
+$mdlext-light-color-accent-light:                 #FF5252 !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
@@ -377,6 +382,7 @@ $mdlext-light-color-primary-dark:                 #388E3C !default;
 $mdlext-light-color-primary-light:                #4CAF50 !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-light-color-primary-contrast:             #C8E6C9 !default;  // text color on primary/primary dark background
 $mdlext-light-color-accent:                       #03A9F4 !default;
+$mdlext-light-color-accent-light:                 #03A9F4 !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-light-color-accent-contrast:              #FFFFFF !default;
 
 
@@ -385,6 +391,7 @@ $mdlext-dark-color-primary-dark:                  #000000 !default;
 $mdlext-dark-color-primary-light:                 #607D8B !default;  // Fallback color. Set to color-primary if fallback is not needed
 $mdlext-dark-color-primary-contrast:              #FFFFFF !default;  // text color on primary/primary dark background
 $mdlext-dark-color-accent:                        #FF5722 !default;
+$mdlext-dark-color-accent-light:                  #FF5722 !default;  // Fallback color. Set to color-accent if fallback is not needed
 $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 
 */
