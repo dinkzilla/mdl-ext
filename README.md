@@ -216,7 +216,7 @@ of the standard [HTML `<select>`] (https://developer.mozilla.org/en/docs/Web/HTM
 ### Sticky Header
 ![StickyHeader](./etc/sticky-header.png)
 
-A sticky header makes site navigation easily accessible anywhere on the page and saves content space at the same.
+A [sticky header](./src/sticky-header/) makes site navigation easily accessible anywhere on the page and saves content space at the same.
 
 The header should auto-hide, i.e. hiding the header automatically when a user starts scrolling down the page and 
 bringing the header back when a user might need it: they reach the bottom of the page or start scrolling up.
