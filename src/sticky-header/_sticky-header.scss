@@ -21,6 +21,7 @@
 
 .mdlext-layout__sticky-header {
   position: absolute;
+  overflow: visible;
   background: $mdlext-sticky-header-background;
 
   &.mdlext-is-scroll {

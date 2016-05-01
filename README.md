@@ -17,6 +17,7 @@ Components built with the [Google Material Design Lite](https://github.com/googl
 * **Lightboard**<br/>A lightboard is a translucent surface illuminated from behind, used for situations where a shape laid upon the surface needs to be seen with high contrast. In the "old days" of photography photograpers used a lightboard to get a quick view of, sorting and organizing their slides.
 * **Lightbox**<br/>A lightbox displays an image filling the screen, and dimming out the rest of the web page. It acts as a modal dialog using the `<dialog>` element as a container for the lightbox.
 * **Selectfield**<br/>The Material Design Lite Ext (MDLEXT) select field component is an enhanced version of the standard HTML `<select>` element.
+* **Sticky Header**<br/>A sticky header makes site navigation easily accessible anywhere on the page and saves content space at the same.
 
 #### Live demo
 A Live demo of MDLEXT is available [here](http://leifoolsen.github.io/mdl-ext/index.html)
@@ -211,6 +212,15 @@ It acts as a modal dialog using the `<dialog>` element as a container for the li
 
 The Material Design Lite Ext (MDLEXT) [**select field**](./src/selectfield/) component is an enhanced version
 of the standard [HTML `<select>`] (https://developer.mozilla.org/en/docs/Web/HTML/Element/select) element.
+
+### Sticky Header
+![StickyHeader](./etc/sticky-header.png)
+
+A sticky header makes site navigation easily accessible anywhere on the page and saves content space at the same.
+
+The header should auto-hide, i.e. hiding the header automatically when a user starts scrolling down the page and 
+bringing the header back when a user might need it: they reach the bottom of the page or start scrolling up.
+
 
 ## Notes
 >A Live demo of MDLEXT is available [here](http://leifoolsen.github.io/mdl-ext/index.html).<br/>

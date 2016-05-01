@@ -24,7 +24,6 @@ bringing the header back when a user might need it: they reach the bottom of the
 &nbsp;2. Add MDL classes as indicated, separated by spaces, to the `div` using the class attribute.
 ```html
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-
 </div>
 ```
 
@@ -169,7 +168,8 @@ You can modify the sticky-header trough the following SASS variables.
 | // Background shorthand when content is scrolling   | |
 | `$mdlext-sticky-header-background-scroll`           | `$mdlext-sticky-header-background-color-scroll linear-gradient(to bottom, $mdlext-sticky-header-gradient-color-scroll-start 100%, $mdlext-sticky-header-gradient-color-scroll-end 100%)`|
 
->**Note:** Only the shorthand variables, `$mdlext-sticky-header-background` and `$mdlext-sticky-header-background-scroll`, are used in the SASS file. The other variables are only helpers.
+>**Note:** Only the shorthand variables, `$mdlext-sticky-header-background` and `$mdlext-sticky-header-background-scroll`, 
+are used in the [SASS file](./_sticky-header.scss). The other variables are only helpers.
 
 ## How to use the component programmatically
 The [tests](../../test/sticky-header/sticky-header.spec.js) provides example code on how to use the component programmatically.

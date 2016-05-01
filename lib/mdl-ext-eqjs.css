@@ -396,6 +396,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 
 .mdlext-layout__sticky-header {
   position: absolute;
+  overflow: visible;
   background: transparent linear-gradient(to bottom, rgb(63,81,181) 0, rgb(63,81,181) 100%);
 }
 
