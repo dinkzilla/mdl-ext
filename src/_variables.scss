@@ -14,6 +14,26 @@
  * limitations under the License.
  */
 
+/* ==========   Sticky Header   ========== */
+$mdlext-sticky-header-background-color           : transparent !default;
+$mdlext-sticky-header-background-color-scroll    : transparent !default;
+$mdlext-sticky-header-gradient-color             : $color-primary !default;
+$mdlext-sticky-header-gradient-color-start       : unquote("rgb(#{$mdlext-sticky-header-gradient-color})") !default;
+$mdlext-sticky-header-gradient-color-end         : $mdlext-sticky-header-gradient-color-start !default;
+$mdlext-sticky-header-gradient-color-scroll-start: unquote("rgba(#{$mdlext-sticky-header-gradient-color}, 0.98)") !default;
+$mdlext-sticky-header-gradient-color-scroll-end  : unquote("rgba(#{$mdlext-sticky-header-gradient-color}, 0.95)") !default;
+
+// Background shorthand
+$mdlext-sticky-header-background                 : $mdlext-sticky-header-background-color
+                                                   linear-gradient(to bottom,
+                                                      $mdlext-sticky-header-gradient-color-start 0,
+                                                      $mdlext-sticky-header-gradient-color-end 100%) !default;
+
+// Background shorthand when content is scrolling
+$mdlext-sticky-header-background-scroll          : $mdlext-sticky-header-background-color-scroll
+                                                   linear-gradient(to bottom,
+                                                      $mdlext-sticky-header-gradient-color-scroll-start 100%,
+                                                      $mdlext-sticky-header-gradient-color-scroll-end 100%) !default;
 
 /* ==========     Accordion     ========== */
 $mdlext-accordion-header-padding               : 8px !default;
@@ -119,6 +139,6 @@ $mdlext-lightboard-slide-background-color-hover: #E8E8E8 !default;
 $mdlext-lightboard-slide-box-shadow-hover      : 2px 2px 12px -1px rgba(219,215,219,1)  !default;
 $mdlext-lightboard-ripple-color                : $tab-highlight-color !default;
 $mdlext-lightboard-focus-outline-color         : #777777 !default;
-$mdlext-lightboard-figcaption-text-color       : unquote('rgb(#{$palette-grey-400})') !default; //$card-supporting-text-text-color !default;
+$mdlext-lightboard-figcaption-text-color       : unquote('rgb(#{$palette-grey-400})') !default;
 
 

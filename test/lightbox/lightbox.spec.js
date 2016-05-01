@@ -267,7 +267,7 @@ describe('MaterialExtLightbox', () => {
       window.dispatchEvent(event);
     }
     finally {
-      window.removeEventListener('keydown', spy);
+      window.removeEventListener('resize', spy);
     }
     assert.isTrue(spy.called, 'Expected "resize" event to fire');
   });
@@ -282,9 +282,9 @@ describe('MaterialExtLightbox', () => {
       window.dispatchEvent(event);
     }
     finally {
-      window.removeEventListener('keydown', spy);
+      window.removeEventListener('orientationchange', spy);
     }
-    assert.isTrue(spy.called, 'Expected "resize" event to fire');
+    assert.isTrue(spy.called, 'Expected "orientationchange" event to fire');
   });
 
   it('emits an "action" custom event when a button is clicked', () => {
