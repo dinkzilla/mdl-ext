@@ -3092,6 +3092,8 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 .mdlext-light-color-theme .mdl-slider.is-upgraded {
   background: transparent;
   color: #E040FB;
+  /**************************** 0-value ****************************/
+  /**************************** Disabled ****************************/
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded::-webkit-slider-runnable-track {
@@ -3152,19 +3154,31 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded.is-lowest-value::-webkit-slider-thumb {
+  border-color: #E040FB;
   background: transparent;
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded.is-lowest-value::-moz-range-thumb {
+  border-color: rgba(0, 0, 0, 0.26);
   background: transparent;
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded.is-lowest-value:focus:not(:active)::-webkit-slider-thumb {
+  box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.12);
   background: rgba(0, 0, 0, 0.12);
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded.is-lowest-value:focus:not(:active)::-moz-range-thumb {
+  box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.12);
   background: rgba(0, 0, 0, 0.12);
+}
+
+.mdlext-light-color-theme .mdl-slider.is-upgraded.is-lowest-value:active::-webkit-slider-thumb {
+  border-color: rgba(0, 0, 0, 0.26);
+}
+
+.mdlext-light-color-theme .mdl-slider.is-upgraded.is-lowest-value:active::-moz-range-thumb {
+  border-color: rgba(0, 0, 0, 0.26);
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded.is-lowest-value::-ms-thumb {
@@ -3202,13 +3216,14 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 .mdlext-light-color-theme .mdl-slider.is-upgraded.is-lowest-value:disabled:focus::-webkit-slider-thumb,
 .mdlext-light-color-theme .mdl-slider.is-upgraded.is-lowest-value:disabled:active::-webkit-slider-thumb,
 .mdlext-light-color-theme .mdl-slider.is-upgraded.is-lowest-value:disabled::-webkit-slider-thumb {
+  border-color: rgba(0, 0, 0, 0.26);
   background: transparent;
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded.is-lowest-value:disabled:focus::-moz-range-thumb,
 .mdlext-light-color-theme .mdl-slider.is-upgraded.is-lowest-value:disabled:active::-moz-range-thumb,
 .mdlext-light-color-theme .mdl-slider.is-upgraded.is-lowest-value:disabled::-moz-range-thumb {
-  border: 3px solid rgba(0, 0, 0, 0.26);
+  border-color: rgba(0, 0, 0, 0.26);
   background: transparent;
 }
 
@@ -3453,7 +3468,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-data-table {
-  border-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(0, 0, 0, 0.12);
   background-color: #FAFAFA;
 }
 
@@ -3940,6 +3955,8 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 .mdlext-dark-color-theme .mdl-slider.is-upgraded {
   background: transparent;
   color: #536DFE;
+  /**************************** 0-value ****************************/
+  /**************************** Disabled ****************************/
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded::-webkit-slider-runnable-track {
@@ -4000,19 +4017,31 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded.is-lowest-value::-webkit-slider-thumb {
+  border-color: #536DFE;
   background: transparent;
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded.is-lowest-value::-moz-range-thumb {
+  border-color: rgba(255, 255, 255, 0.87);
   background: transparent;
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded.is-lowest-value:focus:not(:active)::-webkit-slider-thumb {
+  box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.5);
   background: rgba(255, 255, 255, 0.5);
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded.is-lowest-value:focus:not(:active)::-moz-range-thumb {
+  box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.5);
   background: rgba(255, 255, 255, 0.5);
+}
+
+.mdlext-dark-color-theme .mdl-slider.is-upgraded.is-lowest-value:active::-webkit-slider-thumb {
+  border-color: rgba(255, 255, 255, 0.87);
+}
+
+.mdlext-dark-color-theme .mdl-slider.is-upgraded.is-lowest-value:active::-moz-range-thumb {
+  border-color: rgba(255, 255, 255, 0.87);
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded.is-lowest-value::-ms-thumb {
@@ -4050,13 +4079,14 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 .mdlext-dark-color-theme .mdl-slider.is-upgraded.is-lowest-value:disabled:focus::-webkit-slider-thumb,
 .mdlext-dark-color-theme .mdl-slider.is-upgraded.is-lowest-value:disabled:active::-webkit-slider-thumb,
 .mdlext-dark-color-theme .mdl-slider.is-upgraded.is-lowest-value:disabled::-webkit-slider-thumb {
+  border-color: rgba(255, 255, 255, 0.87);
   background: transparent;
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded.is-lowest-value:disabled:focus::-moz-range-thumb,
 .mdlext-dark-color-theme .mdl-slider.is-upgraded.is-lowest-value:disabled:active::-moz-range-thumb,
 .mdlext-dark-color-theme .mdl-slider.is-upgraded.is-lowest-value:disabled::-moz-range-thumb {
-  border: 3px solid rgba(255, 255, 255, 0.87);
+  border-color: rgba(255, 255, 255, 0.87);
   background: transparent;
 }
 

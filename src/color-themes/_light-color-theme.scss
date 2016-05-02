@@ -327,20 +327,34 @@
       }
 
 
+      /**************************** 0-value ****************************/
+
       &.is-lowest-value::-webkit-slider-thumb {
+        border-color: $mdlext-light-range-color;
         background: transparent;
       }
 
       &.is-lowest-value::-moz-range-thumb {
+        border-color: $mdlext-light-range-bg-color;
         background: transparent;
       }
 
       &.is-lowest-value:focus:not(:active)::-webkit-slider-thumb {
+        box-shadow: 0 0 0 10px $mdlext-light-range-bg-focus-color;
         background: $mdlext-light-range-bg-focus-color;
       }
 
       &.is-lowest-value:focus:not(:active)::-moz-range-thumb {
+        box-shadow: 0 0 0 10px $mdlext-light-range-bg-focus-color;
         background: $mdlext-light-range-bg-focus-color;
+      }
+
+      &.is-lowest-value:active::-webkit-slider-thumb {
+        border-color: $mdlext-light-range-bg-color;
+      }
+
+      &.is-lowest-value:active::-moz-range-thumb {
+        border-color: $mdlext-light-range-bg-color;
       }
 
       &.is-lowest-value::-ms-thumb {
@@ -373,6 +387,8 @@
         background: transparent;
       }
 
+      /**************************** Disabled ****************************/
+
       &:disabled:focus::-webkit-slider-thumb,
       &:disabled:active::-webkit-slider-thumb,
       &:disabled::-webkit-slider-thumb {
@@ -385,21 +401,21 @@
         background: $mdlext-light-range-bg-color;
       }
 
-      &:disabled +
-      .mdl-slider__background-flex > .mdl-slider__background-lower {
+      &:disabled + .mdl-slider__background-flex > .mdl-slider__background-lower {
         background-color: $mdlext-light-range-bg-color;
       }
 
       &.is-lowest-value:disabled:focus::-webkit-slider-thumb,
       &.is-lowest-value:disabled:active::-webkit-slider-thumb,
       &.is-lowest-value:disabled::-webkit-slider-thumb {
+        border-color: $mdlext-light-range-bg-color;
         background: transparent;
       }
 
       &.is-lowest-value:disabled:focus::-moz-range-thumb,
       &.is-lowest-value:disabled:active::-moz-range-thumb,
       &.is-lowest-value:disabled::-moz-range-thumb {
-        border: 3px solid $mdlext-light-range-bg-color;
+        border-color: $mdlext-light-range-bg-color;
         background: transparent;
       }
 
@@ -656,7 +672,7 @@
 .mdlext-light-color-theme {
 
   .mdl-data-table {
-    border-color: $mdlext-dark-data-table-divider-color;
+    border-color: $mdlext-light-data-table-divider-color;
     background-color: $mdlext-light-data-table-background-color;
 
     tbody {
