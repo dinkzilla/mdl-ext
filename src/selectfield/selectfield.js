@@ -151,6 +151,10 @@
    * @public
    */
   MaterialExtSelectfield.prototype.checkValidity = function() {
+
+    /* Don't think it makes any sense to check validity.
+       Tests I've done, so far, indicates that setting an illegal value via JS returns selectedIndex=0
+
     if (this.select_.validity) {
       if (this.select_.validity.valid) {
         this.element_.classList.remove(this.CssClasses_.IS_INVALID);
@@ -158,6 +162,7 @@
         this.element_.classList.add(this.CssClasses_.IS_INVALID);
       }
     }
+    */
   };
 
   MaterialExtSelectfield.prototype['checkValidity'] = MaterialExtSelectfield.prototype.checkValidity;

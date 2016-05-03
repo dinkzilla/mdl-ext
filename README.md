@@ -231,6 +231,7 @@ how you can set up MDL with Babel(6) and Webpack, and how to self host Font Robo
 >* [dialog-polyfill](https://github.com/GoogleChrome/dialog-polyfill)
 >* [eqjs](https://github.com/Snugug/eq.js)
 >* [custom-event polyfill](https://github.com/webmodules/custom-event) or [similar](https://github.com/leifoolsen/mdl-ext/blob/master/src/utils/custom-event-polyfill.js)
+>* [mutation-observer polyfill](https://github.com/webmodules/mutation-observer)
 
 
 ## Licence

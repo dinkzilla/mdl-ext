@@ -117,29 +117,6 @@ bringing the header back when a user might need it: they reach the bottom of the
 ### Example
 See [the live demo](http://leifoolsen.github.io/mdl-ext/demo/sticky-header.html)
 
-## Events
-If content is added dynamically, e.g. in a single page application, then dispatch a `updateposition` custom event 
-from client to the header component after content has loaded.
-
-```javascript
-var content = document.querySelector('.mdl-layout__content');
-content.insertAdjacentHTML('beforeend',
-  '<p>Donec accumsan risus in lectus sollicitudin ' +
-  'vulputate. Praesent condimentum a leo at interdum. Donec ' +
-  'pharetra congue erat a accumsan. Aliquam gravida ' +
-  'lobortis mi, id elementum sapien ultrices vel. ' +
-  'Pellentesque habitant morbi tristique senectus et ' +
-  'netus et malesuada fames ac turpis egestas. Proin ' +
-  'consequat enim orci, nec blandit lorem luctus ut. ' +
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
-  'Etiam pretium nunc non metus gravida, nec tincidunt ' +
-  'tortor volutpat. Aliquam erat volutpat. Curabitur ' +
-  'varius purus ac auctor pharetra.</p>');
-
-var header = document.querySelector('header');
-var event = new CustomEvent('updateposition');
-header.dispatchEvent(event);
-```
 
 ## Configuration options
 

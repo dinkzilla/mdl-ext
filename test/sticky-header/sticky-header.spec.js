@@ -6,6 +6,7 @@ import { expect, assert } from 'chai';
 import sinon from 'sinon';
 import { qs } from '../testutils/domHelpers';
 
+
 describe('MaterialExtStickyHeader', () => {
 
   // TODO: Need more (sanity) tests
@@ -65,7 +66,7 @@ describe('MaterialExtStickyHeader', () => {
     global.MaterialExtSelectfield = window.MaterialExtSelectfield;
 
 
-    // Stub 'window.matchMedia'. Used in mdl/src/layout/layout.js
+    // Stub unsupported jsdom 'window.matchMedia'. Used in mdl/src/layout/layout.js
     window.matchMedia = window.matchMedia || function() {
         return {
           matches : false,
@@ -73,6 +74,33 @@ describe('MaterialExtStickyHeader', () => {
           removeListener: function() {}
         };
       };
+
+    // Stub unsupported jsdom window.MutationObserver
+    window.MutationObserver = window.MutationObserver || (function(undefined) {
+        "use strict";
+
+        function MutationObserver(listener) {
+          this._watched = [];
+          this._listener = listener;
+        }
+
+        MutationObserver.prototype = {
+
+          observe: function($target, config) {
+          },
+
+          takeRecords: function() {
+            var mutations = [];
+            return mutations;
+          },
+          disconnect: function() {
+            this._watched = [];
+          }
+        };
+
+        return MutationObserver;
+      })(void 0);
+
 
     //componentHandler.upgradeAllRegistered();
     //componentHandler.upgradeDom();
@@ -106,12 +134,6 @@ describe('MaterialExtStickyHeader', () => {
       window.dispatchEvent(event);
       window.dispatchEvent(event);
       window.dispatchEvent(event);
-      window.dispatchEvent(event);
-      window.dispatchEvent(event);
-      window.dispatchEvent(event);
-      window.dispatchEvent(event);
-      window.dispatchEvent(event);
-      window.dispatchEvent(event);
     }
     finally {
       window.removeEventListener('resize', spy);
@@ -134,52 +156,55 @@ describe('MaterialExtStickyHeader', () => {
     assert.isTrue(spy.called, 'Expected "orientationchange" event to fire');
   });
 
-  it('listens to content scroll', () => {
+  it('repositions when content scroll', () => {
+    const header = qs('header');
     const content = qs('.mdl-layout__content');
     const spy = sinon.spy();
     content.addEventListener('scroll', spy, true);
+
+    content.scrollTop = 0;
+    content.style.height = '200px';
+    const startY = header.style.top;
+
     content.insertAdjacentHTML('beforeend', fragment);
+    content.insertAdjacentHTML('beforeend', fragment);
+    content.style.height = '1000px';
+
+    header.MaterialExtStickyHeader.updatePosition_();
 
     try {
       const event = new Event('scroll');
       content.dispatchEvent(event);
+
+      // Fake scroll
+      content.scrollTop = 100;
       content.dispatchEvent(event);
+      header.MaterialExtStickyHeader.updatePosition_();
+
+      content.scrollTop = 1000;
       content.dispatchEvent(event);
+      header.MaterialExtStickyHeader.updatePosition_();
+
+      content.scrollTop = 400;
       content.dispatchEvent(event);
+      header.MaterialExtStickyHeader.updatePosition_();
+
+      content.scrollTop = 100;
       content.dispatchEvent(event);
+      header.MaterialExtStickyHeader.updatePosition_();
+
+      content.scrollTop = 0;
       content.dispatchEvent(event);
+      header.MaterialExtStickyHeader.updatePosition_();
+
+      content.scrollTop = 1000;
       content.dispatchEvent(event);
-      content.dispatchEvent(event);
-      content.dispatchEvent(event);
-      content.dispatchEvent(event);
+      header.MaterialExtStickyHeader.updatePosition_();
     }
     finally {
       content.removeEventListener('scroll', spy);
     }
     assert.isTrue(spy.called, 'Expected "resize" event to fire');
+    assert.notStrictEqual(header.style.top, startY, 'Expected header position to change')
   });
-
-  it('listens to "updateposition" custom event', () => {
-    const header = qs('header');
-    const spy = sinon.spy();
-    header.addEventListener('updateposition', spy, true);
-
-    var content = qs('.mdl-layout__content');
-    content.insertAdjacentHTML('beforeend', fragment);
-
-    let current = '10px';
-    header.style.top = current;
-    content.scrollTop = -10;
-
-    try {
-      const event = new CustomEvent('updateposition');
-      header.dispatchEvent(event);
-    }
-    finally {
-      header.removeEventListener('updateposition', spy);
-    }
-    assert.isTrue(spy.called, 'Expected "updateposition" custom event to fire');
-    assert.notStrictEqual(header.style.top, current, 'Expected header position to change')
-  });
-
 });

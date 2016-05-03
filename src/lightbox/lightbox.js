@@ -51,6 +51,9 @@ import { createCustomEvent } from '../utils/custom-event';
     // Stores the element.
     this.element_ = element;
 
+    // false: allow rAF to be called, true: blocks rAF
+    this.drawing_ = false;
+
     // Initialize instance.
     this.init();
   };
@@ -326,12 +329,16 @@ import { createCustomEvent } from '../utils/custom-event';
         img.addEventListener('touchstart', this.imgDragHandler_.bind(img), true);
       }
 
-      // Assumes MDL has polyfilled RAF
+      // See: https://developer.mozilla.org/ru/docs/Web/Events/resize
       window.addEventListener('resize', () => {
-        window.requestAnimationFrame( () => {
-          // TODO: Correct this. See: sticky-header.js
-          repositionDialog_(this.element_);
-        });
+        if(!this.drawing_) {
+          // Assumes MDL has polyfilled rAF
+          window.requestAnimationFrame( () => {
+            repositionDialog_(this.element_);
+            this.drawing_ = false;
+          });
+        }
+        this.drawing_ = true;
       });
 
       window.addEventListener('orientationchange', () => repositionDialog_(this.element_));

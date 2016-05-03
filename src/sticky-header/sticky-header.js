@@ -30,7 +30,6 @@
   const IS_UPGRADED = 'is-upgraded';
   const CONTENT_CLASS  = 'mdl-layout__content';
   const IS_SCROLL_CLASS  = 'mdlext-is-scroll';
-  const UPDATE_POSITION_EVENT_NAME  = 'updateposition';
   //const STICKY_HEADER_CLASS  = 'mdlext-layout__sticky-header';
 
 
@@ -73,10 +72,11 @@
 
     // See: https://developer.mozilla.org/ru/docs/Web/Events/resize
     if(!this.drawing_) {
-      window.requestAnimationFrame(function() {
+      // Assumes MDL has polyfilled rAF
+      window.requestAnimationFrame( () => {
         this.recalcWidth_();
         this.drawing_ = false;
-      }.bind(this));
+      });
     }
     this.drawing_ = true;
   };
@@ -127,10 +127,10 @@
   MaterialExtStickyHeader.prototype.scrollHandler_ = function( /* event */ ) {
     // See: https://developer.mozilla.org/ru/docs/Web/Events/resize
     if(!this.drawing_) {
-      window.requestAnimationFrame(function() {
+      window.requestAnimationFrame( () => {
         this.reposition_();
         this.drawing_ = false;
-      }.bind(this));
+      });
     }
     this.drawing_ = true;
   };
@@ -160,9 +160,26 @@
         window.addEventListener('resize', this.resizeHandler_.bind(this));
         window.addEventListener('orientationchange', this.resizeHandler_.bind(this));
 
-        // If content is added dynamically, e.g. in a SPA,
-        // then trigger 'updateposition' from client after content has loaded
-        this.header_.addEventListener(UPDATE_POSITION_EVENT_NAME, this.updatePosition_.bind(this));
+        // Adjust header width if content changes (e.g. in a SPA)
+        const MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+
+
+        /*istanbul ignore next*/ // jsdom does not support MutationObserver
+        new MutationObserver( ( /*mutations*/ ) => {
+
+          if(!this.drawing_) {
+            window.requestAnimationFrame( () => {
+              this.updatePosition_();
+              this.drawing_ = false;
+            });
+          }
+          this.drawing_ = true;
+
+        }).observe( this.content_, {
+          attributes: false,
+          childList: true,
+          characterData: false
+        });
 
         // Set initial position
         this.updatePosition_();

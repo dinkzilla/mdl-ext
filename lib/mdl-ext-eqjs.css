@@ -3092,6 +3092,7 @@ $mdlext-dark-color-accent-contrast:               #FFFFFF !default;
 .mdlext-light-color-theme .mdl-slider.is-upgraded {
   background: transparent;
   color: #E040FB;
+  /**************************** Thumbs ****************************/
   /**************************** 0-value ****************************/
   /**************************** Disabled ****************************/
 }

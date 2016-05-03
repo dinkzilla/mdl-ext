@@ -17,7 +17,7 @@
     <p class="mdl-typography--subhead">To see how the sticky header works, click the button a few
       times to add content. Next scroll the page up and down.</p>
     <button id="a-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-      Click to add content
+      Click to add more content
     </button>
   </main>
 </div>
@@ -70,10 +70,6 @@
         'Etiam pretium nunc non metus gravida, nec tincidunt ' +
         'tortor volutpat. Aliquam erat volutpat. Curabitur ' +
         'varius purus ac auctor pharetra.</p>');
-
-      var header = document.querySelector('header');
-      var event = new CustomEvent('updateposition');
-      header.dispatchEvent(event);
     });
 
   }());

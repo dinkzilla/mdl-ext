@@ -42,7 +42,7 @@ describe('MaterialExtSelectfield', () => {
 </html>`;
 
   const fragment = `
-<div class="mdlext-selectfield mdlext-js-selectfield">
+<div class="mdlext-selectfield mdlext-js-selectfield" id="country">
   <select class="mdlext-selectfield__select" id="select-country" name="select-country" autofocus >
     <option value=""></option>
     <option value="option1">Norway</option>
