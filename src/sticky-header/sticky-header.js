@@ -164,7 +164,8 @@
         const MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
 
 
-        /*istanbul ignore next*/ // jsdom does not support MutationObserver
+        // jsdom does not support MutationObserver
+        /* istanbul ignore next */
         new MutationObserver( ( /*mutations*/ ) => {
 
           if(!this.drawing_) {

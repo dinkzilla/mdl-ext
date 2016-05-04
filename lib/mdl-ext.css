@@ -2452,7 +2452,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__label,
 .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__label {
   padding-left: 8px;
-  top: 35px;
+  top: 45px;
 }
 
 .mdlext-bordered-fields .mdl-textfield .mdl-textfield__label:after,
@@ -2484,8 +2484,8 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-bordered-fields .mdlext-selectfield.mdlext-bordered-fields__icon-right > .mdl-button {
   position: absolute;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  -webkit-transform: translateY(-25%);
+          transform: translateY(-25%);
 }
 
 .mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > i:first-child,
