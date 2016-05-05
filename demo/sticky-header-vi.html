@@ -18,9 +18,10 @@
 </head>
 
 <body>
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-  <header class="mdl-layout__header mdlext-layout__sticky-header mdlext-js-sticky-header">
-  <div class="mdl-layout__header-row">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+  <header class="mdl-layout__header mdl-layout__header--waterfall mdlext-layout__sticky-header mdlext-js-sticky-header">
+    <div class="mdl-layout__header-row">
 
   <!-- Title -->
   <span id="header-title" class="mdl-layout-title">Title goes here</span>
@@ -45,30 +46,21 @@
   </ul>
 </div>
 
-</header>
 
-  <aside class="mdl-layout__drawer">
-  <span class="mdl-layout-title">MDL Extensions</span>
-  <nav class="mdl-navigation">
-    <a class="mdl-navigation__link" href="accordion.html">Accordion</a>
-    <a class="mdl-navigation__link" href="bordered-fields.html">Bordered Fields</a>
-    <a class="mdl-navigation__link" href="color-themes.html">Color Themes</a>
-    <a class="mdl-navigation__link" href="grid.html">Grid</a>
-    <a class="mdl-navigation__link" href="lightboard.html">Lightboard</a>
-    <a class="mdl-navigation__link" href="lightbox.html">Lightbox</a>
-    <a class="mdl-navigation__link" href="selectfield.html">Selectfield</a>
-    <a class="mdl-navigation__link" href="sticky-header.html">Sticky Header</a>
-    <a class="mdl-navigation__link" href="sticky-header-ii.html">Sticky Header II</a>
-    <a class="mdl-navigation__link" href="sticky-header-iii.html">Sticky Header III</a>
-    <a class="mdl-navigation__link" href="sticky-header-iv.html">Sticky Header IV</a>
-    <a class="mdl-navigation__link" href="sticky-header-v.html">Sticky Header V</a>
-    <a class="mdl-navigation__link" href="sticky-header-vi.html">Sticky Header VI</a>
-  </nav>
-</aside>
+    <div class="mdl-layout__header-row">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="">Link</a>
+        <a class="mdl-navigation__link" href="">Link</a>
+        <a class="mdl-navigation__link" href="">Link</a>
+        <a class="mdl-navigation__link" href="">Link</a>
+      </nav>
+    </div>
+  </header>
 
   <main id="mount" class="mdl-layout__content">
 
-    <h5>Sticky Header, Fixed Drawer</h5>
+    <h5>Sticky Header, Waterfall, No Drawer</h5>
 
     <p>A sticky header makes site navigation easily accessible anywhere on the page and saves content space at the same.</p>
     <p>The header should auto-hide, i.e. hiding the header automatically when a user starts scrolling down the page

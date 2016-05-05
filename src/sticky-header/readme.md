@@ -31,7 +31,7 @@ bringing the header back when a user might need it: they reach the bottom of the
 [Component Guide](https://getmdl.io/components/index.html#layout-section/layout). Add MDL classes as indicated.
 ```html
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-  <header class="mdl-layout__header mdl-layout__header--waterfall mdlext-layout__sticky-header mdlext-js-sticky-header">
+  <header class="mdl-layout__header mdlext-layout__sticky-header mdlext-js-sticky-header">
     <div class="mdl-layout__header-row">
   
       <!-- Title -->
@@ -53,7 +53,7 @@ bringing the header back when a user might need it: they reach the bottom of the
 &nbsp;4. Code a drawer, and include the MDL class as indicated
 ```html
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-  <header class="mdl-layout__header mdl-layout__header--waterfall mdlext-layout__sticky-header mdlext-js-sticky-header">
+  <header class="mdl-layout__header mdlext-layout__sticky-header mdlext-js-sticky-header">
     <div class="mdl-layout__header-row">
   
       <!-- Title -->
@@ -82,7 +82,7 @@ bringing the header back when a user might need it: they reach the bottom of the
 &nbsp;4. Add a `<main>` element to hold the layout's primary content, and include the MDL class as indicated
 ```html
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-  <header class="mdl-layout__header mdl-layout__header--waterfall mdlext-layout__sticky-header mdlext-js-sticky-header">
+  <header class="mdl-layout__header mdlext-layout__sticky-header mdlext-js-sticky-header">
     <div class="mdl-layout__header-row">
   
       <!-- Title -->

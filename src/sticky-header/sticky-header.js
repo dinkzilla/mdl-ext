@@ -164,7 +164,7 @@
         const MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
 
 
-        // jsdom does not support MutationObserver
+        // jsdom does not support MutationObserver - so this is not testable
         /* istanbul ignore next */
         new MutationObserver( ( /*mutations*/ ) => {
 
