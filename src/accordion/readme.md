@@ -264,37 +264,21 @@ The table below lists the available classes and their effects.
 | `mdl-js-ripple-effect` | Applies ripple click effect to accordion header | Optional; goes on "outer" `<ul>` or `<div>` element |
 | `mdl-js-ripple-effect--ignore-events` |  | Should be added by the component, but that does not seem to happen. For now, add this class if `mdl-js-ripple-effect` class is applied |
 
+
+The table below lists available attributes and their effects.
+
 | Attribute | Effect | Remarks |
 |-----------|--------|---------|
+| `aria-multiselectable` | If true, multiple panels may be open simultaneously | Add this attribute to the `mdlext-accordion` element to keep multiple panels open at the same time|
+| `role=tablist` | The accordion component must have a role of tablist | Added by component to `mdlext-accordion` element |
 | `open` | Indicates an open panel | The panel content is visible. If this attribue is removed only the panel header i visible |
-| `aria-multiselectable` | Multiple panels may be open simultaneously | This feature is not yet implemented |
+| `disabled` | Indicates a disabled panel | The panel will not open or close |
+| `role=tabpanel` | The accordion panel has the role tabpanel | Added by component to `mdlext-accordion__panel` element |
+| `role=tab` | Each header tab in the tablist has a role of tab | Added by component to `mdlext-accordion__panel__header` element |
+| `aria-expanded` | An accordion should manage the expanded/collapsed state of each tab by maintain its aria-expanded state | Added by component to `mdlext-accordion__panel_header` element |
+| `aria-selected` | An accordion should manage the selected state of each tab by maintaining its aria-selected state | Added by component to `mdlext-accordion__panel_header` element |
+| `aria-hidden` | An accordion should convey the visibility of each tabpanel by maintaining its aria-hidden state | Added by component to `mdlext-accordion__panel_header` element. Note: Can't see any practical use for this attribute, but implemented as a state on the header tab. |
  
-
-You can modify the accordion trough the following SASS variables.
-
-| SASS variable |Description | Remarks | 
-|-----------|--------|---------|
-| `$mdlext-accordion-header-padding` | Header padding | | 
-| `$mdlext-accordion-header-padding-top` | Header top padding | Defaults to `$mdlext-accordion-header-padding` | 
-| `$mdlext-accordion-header-padding-right` | Header right padding | Defaults to `$mdlext-accordion-header-padding` | 
-| `$mdlext-accordion-header-padding-bottom` | Header bottom padding | Defaults to `$mdlext-accordion-header-padding` | 
-| `$mdlext-accordion-header-padding-left` | Header left padding | Defaults to `$mdlext-accordion-header-padding` | 
-| `$mdlext-accordion-header-icon-text-space` | Space between icon and header text | | 
-| `$mdlext-accordion-header-height` | Height of header | | 
-| `$mdlext-accordion-header-background-color-base` | Header base background color color | | 
-| `$mdlext-accordion-header-background-color` | Hedaer background color | | 
-| `$mdlext-accordion-header-background-color-hover` | Header hover color | | 
-| `$mdlext-accordion-header-background-color-open` | Header background color when open | | 
-| `$mdlext-accordion-header-border-color` | Header border color | | 
-| `$mdlext-accordion-header-border-color-open` | Header border color when open | | 
-| `$mdlext-accordion-content-padding` | Content padding | | 
-| `$mdlext-accordion-content-padding-top` | Content top padding | Defaults to `$mdlext-accordion-content-padding` | 
-| `$mdlext-accordion-content-padding-right` | Content right padding | Defaults to `$mdlext-accordion-content-padding` | 
-| `$mdlext-accordion-content-padding-bottom` | Content bottom padding | Defaults to `$mdlext-accordion-content-padding` | 
-| `$mdlext-accordion-content-padding-left` | Content left padding | Defaults to `$mdlext-accordion-content-padding` | 
-| `$mdlext-accordion-content-background-color` | Background color of accordion panel | | 
-| `$mdlext-accordion-ripple-color` | Header ripple color if ripple effect is added to accordion | | 
-
 
 ## How to use the component programmatically
 The tests provides examples on how to use the component [programmatically](https://github.com/leifoolsen/mdl-ext/blob/master/test/accordion/accordion.spec.js)

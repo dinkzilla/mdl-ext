@@ -359,7 +359,7 @@ describe('MaterialExtAccordion', () => {
     header.removeEventListener('click', spy);
   });
 
-  it('should emits a click event from header when toggled via space key', () => {
+  it('should emit a click event from header when toggled via space key', () => {
     const header = qs('#accordion-1 .mdlext-accordion__panel .mdlext-accordion__panel__header');
     assert.isNotNull(header, 'Expected handle to header');
 
@@ -378,6 +378,12 @@ describe('MaterialExtAccordion', () => {
     if(panel.hasAttribute('open')) {
       panel.removeAttribute('open');
       header.removeAttribute('aria-expanded');
+      header.removeAttribute('aria-selected');
+
+      // Let another header have 'aria-selected' attribute
+      const header2 = qs('#accordion-1 .mdlext-accordion__panel:nth-child(1) .mdlext-accordion__panel__header');
+      header.setAttribute('aria-selected');
+
     }
     // Trigger click
     const evt = new MouseEvent('click', {
@@ -389,14 +395,22 @@ describe('MaterialExtAccordion', () => {
 
     assert.isTrue(panel.hasAttribute('open'));
     assert.isTrue(header.hasAttribute('aria-expanded'));
+    assert.isTrue(header.hasAttribute('aria-selected'));
 
-    const check = qsa('#accordion-1 .mdlext-accordion__panel[open]');
-    assert.lengthOf(check, 1);
+    let check = qsa('#accordion-1 .mdlext-accordion__panel[open]');
+    assert.lengthOf(check, 1, 'Expected only one panel with state "open"');
+
+    check = qsa('#accordion-1 .mdlext-accordion__panel__header[aria-selected]');
+    assert.lengthOf(check, 1, 'Expected only one header with state "aria-selected"');
+
+    const n = qsa('#accordion-1 .mdlext-accordion__panel__header');
+    check = qsa('#accordion-1 .mdlext-accordion__panel__header[aria-hidden]');
+    assert.equal(n.length-check.length, 1, `Expected ${check.length} of ${n.length} headers  to have attribute "aria-hidden"`);
   });
 
   it('emits a custom "toggle" event with "detail.state" and "detail.source" defined when a panel opens or closes', () => {
     const accordion = qs('#accordion-1');
-    assert.isNotNull(header, 'Expected handle to accordion');
+    assert.isNotNull(accordion, 'Expected handle to accordion');
 
     const header = qs('#accordion-1 .mdlext-accordion__panel:nth-child(3) .mdlext-accordion__panel__header');
     assert.isNotNull(header, 'Expected handle to header in panel 3 of 5');

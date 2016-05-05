@@ -129,12 +129,15 @@ import { createCustomEvent } from '../utils/custom-event';
 
     panel.setAttribute('role', 'tabpanel');
 
-    if(!panel.hasAttribute('open')) {
-      panel.setAttribute('aria-expanded', '');
+    if(panel.hasAttribute('open')) {
+      header.setAttribute('aria-expanded', '');
+    }
+    else {
+      header.setAttribute('aria-hidden', '');
     }
 
     if (ctx.element_.classList.contains(RIPPLE_EFFECT)) {
-      const rippleContainer = a; //document.createElement('span'); // Use anchor as ripple container?
+      const rippleContainer = a;
       rippleContainer.classList.add(RIPPLE_CONTAINER);
       rippleContainer.classList.add(RIPPLE_EFFECT);
       const ripple = document.createElement('span');
@@ -143,49 +146,53 @@ import { createCustomEvent } from '../utils/custom-event';
       componentHandler.upgradeElement(rippleContainer, RIPPLE_COMPONENT);
     }
 
-    header.addEventListener('click', ( function(event) {
+    header.addEventListener('click', ( event => {
       event.preventDefault();
       event.stopPropagation();
 
-      const panel = this.parentNode;
-      if(panel.hasAttribute('open')) {
-        panel.removeAttribute('open');
-        this.removeAttribute('aria-expanded');
-
-        // Dispatch toggle event to accordion element
-        dispatchToggleEvent('close', panel, ctx.element_);
-      }
-      else {
-        const openPanel = ctx.element_.querySelector(`.${PANEL}[open]`);
-        if(openPanel) {
-          openPanel.removeAttribute('open');
-          const h = openPanel.querySelector(`.${HEADER}`);
-          if(h) {
-            h.removeAttribute('aria-expanded');
-          }
+      if(!panel.hasAttribute('disabled')) {
+        if(panel.hasAttribute('open')) {
+          panel.removeAttribute('open');
+          header.removeAttribute('aria-expanded');
+          header.setAttribute('aria-hidden', '');
 
           // Dispatch toggle event to accordion element
-          dispatchToggleEvent('close', openPanel, ctx.element_);
+          dispatchToggleEvent('close', panel, ctx.element_);
         }
-        panel.setAttribute('open', '');
-        this.setAttribute('aria-expanded', '');
+        else {
+          const openPanel = ctx.element_.querySelector(`.${PANEL}[open]`);
+          if(openPanel) {
+            openPanel.removeAttribute('open');
+            const h = openPanel.querySelector(`.${HEADER}`);
+            h.removeAttribute('aria-expanded');
+            h.setAttribute('aria-hidden', '');
 
-        // Dispatch toggle event to accordion element
-        dispatchToggleEvent('open', panel, ctx.element_);
+            // Dispatch toggle event to accordion element
+            dispatchToggleEvent('close', openPanel, ctx.element_);
+          }
+
+          removeAriaSelectedAttribute();
+
+          panel.setAttribute('open', '');
+          header.setAttribute('aria-expanded', '');
+          header.setAttribute('aria-selected', '');
+          header.removeAttribute('aria-hidden', '');
+
+          // Dispatch toggle event to accordion element
+          dispatchToggleEvent('open', panel, ctx.element_);
+        }
+        focus(panel);
       }
-      focus(panel);
-
-    }).bind(header), true);
+    }), true);
 
 
-    header.addEventListener('keydown', ( function(event) {
+    header.addEventListener('keydown', ( event => {
       if (event.keyCode === VK_TAB
         || event.keyCode === VK_ENTER || event.keyCode === VK_SPACE
         || event.keyCode === VK_END || event.keyCode === VK_HOME
         || event.keyCode === VK_ARROW_UP || event.keyCode === VK_ARROW_LEFT
         || event.keyCode === VK_ARROW_DOWN || event.keyCode === VK_ARROW_RIGHT) {
 
-        const panel = this.parentNode;
         const panels = panel.parentNode.children;
         let nextPanel = null;
         const n = panel.parentNode.childElementCount - 1;
@@ -230,7 +237,7 @@ import { createCustomEvent } from '../utils/custom-event';
                 cancelable: true,
                 view: window
               });
-              this.dispatchEvent(evt);
+              header.dispatchEvent(evt);
             }
             break;
           }
@@ -241,12 +248,21 @@ import { createCustomEvent } from '../utils/custom-event';
           focus(nextPanel);
         }
       }
-    }).bind(header), true);
+    }), true);
 
-    function focus(panel) {
-      const a = panel.querySelector(`.${HEADER} a`);
+    function removeAriaSelectedAttribute() {
+      const selectedHeader = ctx.element_.querySelector(`.${HEADER}[aria-selected]`);
+      if(selectedHeader) {
+        selectedHeader.removeAttribute('aria-selected');
+      }
+    }
+
+    function focus(nextPanel) {
+      const a = nextPanel.querySelector(`.${HEADER} a`);
       if(a) {
+        removeAriaSelectedAttribute();
         a.focus();
+        nextPanel.querySelector(`.${HEADER}`).setAttribute('aria-selected', '');
       }
     }
 
@@ -258,7 +274,6 @@ import { createCustomEvent } from '../utils/custom-event';
       });
       target.dispatchEvent(evt);
     }
-
   }
 
   // The component registers itself. It can assume componentHandler is available

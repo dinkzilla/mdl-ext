@@ -14,6 +14,48 @@
  * limitations under the License.
  */
 
+
+// ----------------------------------------------------------------
+// Sample colors
+// ----------------------------------------------------------------
+$mdlext-palette-amber-50:                         #FFF8E1;
+$mdlext-palette-amber-100:                        #FFECB3;
+$mdlext-palette-amber-500:                        #FFC107;
+$mdlext-palette-amber-700:                        #FFA000;
+$mdlext-palette-blue-grey-500:                    #607D8B;
+$mdlext-palette-deep-orange-500:                  #FF5722;
+$mdlext-palette-deep-purple-100:                  #D1C4E9;
+$mdlext-palette-deep-purple-500:                  #512DA8;
+$mdlext-palette-deep-purple-700:                  #673AB7;
+$mdlext-palette-green-50:                         #E8F5E9;
+$mdlext-palette-green-100:                        #C8E6C9;
+$mdlext-palette-green-500:                        #4CAF50;
+$mdlext-palette-green-700:                        #388E3C;
+$mdlext-palette-grey-50:                          #FAFAFA;
+$mdlext-palette-grey-100:                         #F5F5F5;
+$mdlext-palette-grey-200:                         #EEEEEE;
+$mdlext-palette-grey-300:                         #E0E0E0;
+$mdlext-palette-grey-400:                         #BDBDBD;
+$mdlext-palette-grey-500:                         #9E9E9E;
+$mdlext-palette-grey-600:                         #757575;
+$mdlext-palette-grey-700:                         #616161;
+$mdlext-palette-grey-800:                         #424242;
+$mdlext-palette-grey-900:                         #212121;
+$mdlext-palette-indigo-A200:                      #536DFE;
+$mdlext-palette-light-blue-500:                   #03A9F4;
+$mdlext-palette-light-green-500:                  #8BC34A;
+$mdlext-palette-pink-500:                         #E91E63;
+$mdlext-palette-pink-700:                         #C2185B;
+$mdlext-palette-pink-A400:                        #F50057;
+$mdlext-palette-purple-A200:                      #E040FB;
+$mdlext-palette-red-700:                          #D32F2F;
+$mdlext-palette-red-A200:                         #FF5252;
+$mdlext-palette-red-A400:                         #FF1744;
+$mdlext-palette-yellow-500:                       #FFEB3B;
+$mdlext-color-black:                              #000000;
+$mdlext-color-white:                              #FFFFFF;
+
+
 /* ==========   Sticky Header   ========== */
 $mdlext-sticky-header-background-color           : transparent !default;
 $mdlext-sticky-header-background-color-scroll    : transparent !default;
@@ -36,29 +78,33 @@ $mdlext-sticky-header-background-scroll          : $mdlext-sticky-header-backgro
                                                       $mdlext-sticky-header-gradient-color-scroll-end 100%) !default;
 
 /* ==========     Accordion     ========== */
-$mdlext-accordion-header-padding               : 8px !default;
-$mdlext-accordion-header-padding-top           : $mdlext-accordion-header-padding !default;
-$mdlext-accordion-header-padding-right         : $mdlext-accordion-header-padding !default;
-$mdlext-accordion-header-padding-bottom        : $mdlext-accordion-header-padding !default;
-$mdlext-accordion-header-padding-left          : $mdlext-accordion-header-padding !default;
-$mdlext-accordion-header-icon-text-space       : 8px !default;
-$mdlext-accordion-header-height                : 48px !default;
-$mdlext-accordion-header-background-color-base : #C0C0C0 !default;
-$mdlext-accordion-header-background-color      : rgba($mdlext-accordion-header-background-color-base, 0.3) !default;
-$mdlext-accordion-header-background-color-hover: rgba($mdlext-accordion-header-background-color-base, 0.4) !default;
-$mdlext-accordion-header-background-color-open : rgba($mdlext-accordion-header-background-color-base, 0.5) !default;
-$mdlext-accordion-header-border-color          : rgba($mdlext-accordion-header-background-color-base, 0.5) !default;
-$mdlext-accordion-header-border-color-open     : rgba($mdlext-accordion-header-background-color-base, 0.6) !default;
-$mdlext-accordion-header-focus-outline-color   : #999999 !default;
+$mdlext-accordion-header-background-color-base   : $mdlext-palette-grey-500 !default;
+$mdlext-accordion-header-background-color        : rgba($mdlext-accordion-header-background-color-base, 0.20) !default;
+$mdlext-accordion-header-background-open-color   : rgba($mdlext-accordion-header-background-color-base, 0.30) !default;
+$mdlext-accordion-header-background-active-color : rgba($mdlext-accordion-header-background-color-base, 0.40) !default;
+$mdlext-accordion-header-border-color            : rgba($mdlext-accordion-header-background-color-base, 0.50) !default;
+$mdlext-accordion-header-background-hover-color  : rgba($mdlext-accordion-header-background-color-base, 0.60) !default;
+$mdlext-accordion-header-border-open-color       : rgba($mdlext-accordion-header-background-color-base, 0.60) !default;
+$mdlext-accordion-header-focus-outline-color     : $mdlext-palette-grey-400 !default;
+$mdlext-accordion-header-disabled-color          : rgba($mdlext-color-black, 0.12) !default;
+$mdlext-accordion-header-secondary-color         : $mdlext-color-black !default;
+$mdlext-accordion-header-secondary-color-disabled: rgba($mdlext-color-black, 0.26) !default;
+$mdlext-accordion-ripple-color                   : unquote("rgb(#{$color-accent-contrast})") !default; //unquote("rgb(#{$color-primary-contrast})") !default;
 
-$mdlext-accordion-content-padding              : $mdlext-accordion-header-padding !default;
-$mdlext-accordion-content-padding-top          : $mdlext-accordion-content-padding !default;
-$mdlext-accordion-content-padding-right        : $mdlext-accordion-content-padding !default;
-$mdlext-accordion-content-padding-bottom       : $mdlext-accordion-content-padding !default;
-$mdlext-accordion-content-padding-left         : $mdlext-accordion-content-padding !default;
-$mdlext-accordion-content-background-color     : transparent !default;
+$mdlext-accordion-header-padding                 : 8px !default;
+$mdlext-accordion-header-padding-top             : $mdlext-accordion-header-padding !default;
+$mdlext-accordion-header-padding-right           : $mdlext-accordion-header-padding !default;
+$mdlext-accordion-header-padding-bottom          : $mdlext-accordion-header-padding !default;
+$mdlext-accordion-header-padding-left            : $mdlext-accordion-header-padding !default;
+$mdlext-accordion-header-icon-text-space         : 8px !default;
+$mdlext-accordion-header-height                  : 48px !default;
 
-$mdlext-accordion-ripple-color                 : $tab-highlight-color !default;
+$mdlext-accordion-content-padding                : $mdlext-accordion-header-padding !default;
+$mdlext-accordion-content-padding-top            : $mdlext-accordion-content-padding !default;
+$mdlext-accordion-content-padding-right          : $mdlext-accordion-content-padding !default;
+$mdlext-accordion-content-padding-bottom         : $mdlext-accordion-content-padding !default;
+$mdlext-accordion-content-padding-left           : $mdlext-accordion-content-padding !default;
+$mdlext-accordion-content-background-color       : transparent !default;
 
 
 /* ==========  Bordered fields  ========== */
@@ -144,47 +190,6 @@ $mdlext-lightboard-figcaption-text-color       : unquote('rgb(#{$palette-grey-40
 
 
 /* ==========  Color Themes  ========== */
-
-
-// ----------------------------------------------------------------
-// Sample colors for themes
-// ----------------------------------------------------------------
-$mdlext-palette-amber-50:                         #FFF8E1 !default;
-$mdlext-palette-amber-100:                        #FFECB3 !default;
-$mdlext-palette-amber-500:                        #FFC107 !default;
-$mdlext-palette-amber-700:                        #FFA000 !default;
-$mdlext-palette-blue-grey-500:                    #607D8B !default;
-$mdlext-palette-deep-orange-500:                  #FF5722 !default;
-$mdlext-palette-deep-purple-100:                  #D1C4E9 !default;
-$mdlext-palette-deep-purple-500:                  #512DA8 !default;
-$mdlext-palette-deep-purple-700:                  #673AB7 !default;
-$mdlext-palette-green-50:                         #E8F5E9 !default;
-$mdlext-palette-green-100:                        #C8E6C9 !default;
-$mdlext-palette-green-500:                        #4CAF50 !default;
-$mdlext-palette-green-700:                        #388E3C !default;
-$mdlext-palette-grey-50:                          #FAFAFA !default;
-$mdlext-palette-grey-100:                         #F5F5F5 !default;
-$mdlext-palette-grey-200:                         #EEEEEE !default;
-$mdlext-palette-grey-300:                         #E0E0E0 !default;
-$mdlext-palette-grey-400:                         #BDBDBD !default;
-$mdlext-palette-grey-500:                         #9E9E9E !default;
-$mdlext-palette-grey-600:                         #757575 !default;
-$mdlext-palette-grey-700:                         #616161 !default;
-$mdlext-palette-grey-800:                         #424242 !default;
-$mdlext-palette-grey-900:                         #212121 !default;
-$mdlext-palette-indigo-A200:                      #536DFE !default;
-$mdlext-palette-light-blue-500:                   #03A9F4 !default;
-$mdlext-palette-light-green-500:                  #8BC34A !default;
-$mdlext-palette-pink-500:                         #E91E63 !default;
-$mdlext-palette-pink-700:                         #C2185B !default;
-$mdlext-palette-pink-A400:                        #F50057 !default;
-$mdlext-palette-purple-A200:                      #E040FB !default;
-$mdlext-palette-red-700:                          #D32F2F !default;
-$mdlext-palette-red-A200:                         #FF5252 !default;
-$mdlext-palette-red-A400:                         #FF1744 !default;
-$mdlext-palette-yellow-500:                       #FFEB3B !default;
-$mdlext-color-black:                              #000000 !default;
-$mdlext-color-white:                              #FFFFFF !default;
 
 // ----------------------------------------------------------------
 // Light Color Theme.
