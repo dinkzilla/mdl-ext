@@ -114,8 +114,14 @@ bringing the header back when a user might need it: they reach the bottom of the
 </div>
 ```
 
-### Example
-See [the live demo](http://leifoolsen.github.io/mdl-ext/demo/sticky-header.html)
+### Examples
+
+* [Sticky header, Fixed drawer](http://leifoolsen.github.io/mdl-ext/demo/sticky-header.html)
+* [Sticky header, Drawer](http://leifoolsen.github.io/mdl-ext/demo/sticky-header-ii.html)
+* [Sticky header, No Drawer](http://leifoolsen.github.io/mdl-ext/demo/sticky-header-iii.html)
+* [Sticky header, Waterfall, Fiexed Drawer](http://leifoolsen.github.io/mdl-ext/demo/sticky-header-iv.html)
+* [Sticky header, Waterfall, Drawer](http://leifoolsen.github.io/mdl-ext/demo/sticky-header-v.html)
+* [Sticky header, Waterfall, No Drawer](http://leifoolsen.github.io/mdl-ext/demo/sticky-header-vi.html)
 
 
 ## Configuration options
