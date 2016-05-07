@@ -211,6 +211,9 @@ Vertical accordion with three panels, with ripple effect on each panel header, d
 
 ```
 
+More examles can be found in [here](./snippets/accordion.html)
+
+
 ## Keyboard interaction
 The accordion interacts with the following keyboard keys.
 
@@ -237,12 +240,57 @@ The accordion interacts with the following keyboard keys.
 
 
 ## Events
-The accordion emits a custom **toggle** event when a panel opens or closes. The event has a detail object with the following content:
+The accordion emits a custom **toggle** event when a panel opens or closes via mouse click or keyboard interaction. 
+The event has a detail object with the following content:
 ```
-{
+detail: {
   state,  // "open" or "close"
-  source  // the panel instance that caused the event 
+  source  // the panel element instance that caused the event 
 }
+```
+
+Set up an event listener to receive the toggle event.
+```javascript
+document.querySelector('#my-accordion').addEventListener('toggle', function(e) {
+  console.log('Accordion toggled. State:', e.detail.state, 'Source:', e.detail.source);
+});
+```
+
+A client can send a `command` custom event to open or close panel(s) in an accordion. The triggered event should send a `detail`
+object holding the action to execute and the target panel of the action.
+
+```
+detail: { 
+  action, // "open", "close" or "toggle" 
+  target  // Target of action, "undefined" if all panels should be targeted.
+          // Note: If you send a null target, the action is cancelled
+}
+```
+
+Example. Expand all panels:
+```javascript
+var ce = new CustomEvent( 'command', { 
+  detail: { 
+    action: 'open' 
+  } 
+});
+document.querySelector('#my-accordion').dispatchEvent(ce);
+```
+
+**Note**: Open all panels and Close all panels only makes sense if the accordion has aria attribute 
+`aria-multiselectable="true`, and will be cancelled otherwise. 
+
+
+Example. Toggle a spesific panel:
+```javascript
+var panel3 = document.querySelector('#my-accordion .mdlext-accordion__panel:nth-child(3)');
+var ce = new CustomEvent('command', { 
+  detail: { 
+    action: 'toggle', 
+    target: panel3 
+  } 
+});
+document.querySelector('#multiselectable-accordion').dispatchEvent(ce);
 ```
 
 ## Configuration options
@@ -276,7 +324,7 @@ The table below lists available attributes and their effects.
 | `role=tabpanel` | The accordion panel has the role tabpanel | Added by component to `mdlext-accordion__panel` element |
 | `role=tab` | Each header tab in the tablist has a role of tab | Added by component to `mdlext-accordion__panel__header` element |
 | `aria-expanded` | An accordion should manage the expanded/collapsed state of each tab by maintain its aria-expanded state | Added by component to `mdlext-accordion__panel_header` element |
-| `aria-selected` | An accordion should manage the selected state of each tab by maintaining its aria-selected state | Added by component to `mdlext-accordion__panel_header` element |
+| `aria-selected` | An accordion should manage the selected state of each tab by maintaining its aria-selected state | Added by component to `mdlext-accordion__panel_header` element. |
 | `aria-hidden` | An accordion should convey the visibility of each tabpanel by maintaining its aria-hidden state | Added by component to `mdlext-accordion__panel_header` element. Note: Can't see any practical use for this attribute, but implemented as a state on the header tab. |
  
 

@@ -69,7 +69,50 @@ import { createCustomEvent } from '../utils/custom-event';
     // Initialize instance.
     this.init();
   };
+
   window['MaterialExtAccordion'] = MaterialExtAccordion;
+
+
+  /**
+   * Handles custom command event, 'open', 'close', or 'toggle'
+   * @param event. A custom event
+   * @private
+   */
+  MaterialExtAccordion.prototype.commandHandler_ = function( event ) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if(event.detail && event.detail.action) {
+      const action = event.detail.action.toLowerCase();
+
+      if('open' === action || 'close' === action || 'toggle' === action) {
+
+        if(event.detail.target === undefined) {
+
+          if(this.element_.hasAttribute('aria-multiselectable') &&
+            'false' !== this.element_.getAttribute('aria-multiselectable').toLowerCase()) {
+
+            [...this.element_.querySelectorAll(`.${PANEL}`)].forEach(panel => {
+              panel.dispatchEvent(
+                createCustomEvent('command_', {
+                  detail: {action: action}
+                })
+              );
+            });
+          }
+        }
+        else if (event.detail.target !== null) {
+
+          event.detail.target.dispatchEvent(
+            // Let the even bubble, in case the evnt is dispatched to a child element of the panel
+            createCustomEvent('command_', {
+              bubbles: true, detail: { action: action }
+            })
+          );
+        }
+      }
+    }
+  };
 
   /**
    * Initialize accordion's panels
@@ -88,6 +131,8 @@ import { createCustomEvent } from '../utils/custom-event';
       new MaterialExtAccordionPanel(panel, this);
     });
 
+    this.element_.addEventListener('command', this.commandHandler_.bind(this), false);
+
     this.element_.classList.add(IS_UPGRADED);
   };
 
@@ -96,7 +141,6 @@ import { createCustomEvent } from '../utils/custom-event';
    */
   MaterialExtAccordion.prototype.init = function() {
     if (this.element_) {
-      //console.log('***** init', this.element_.classList, this.element_.getAttribute('data-upgraded'));
       this.initAccordion_();
     }
   };
@@ -147,14 +191,15 @@ import { createCustomEvent } from '../utils/custom-event';
     }
 
     header.addEventListener('click', ( event => {
+
       event.preventDefault();
       event.stopPropagation();
 
       if(!panel.hasAttribute('disabled')) {
+
         if(panel.hasAttribute('open')) {
-          panel.removeAttribute('open');
-          header.removeAttribute('aria-expanded');
-          header.setAttribute('aria-hidden', '');
+
+          closePanel(panel, header);
 
           // Dispatch toggle event to accordion element
           dispatchToggleEvent('close', panel, ctx.element_);
@@ -165,10 +210,7 @@ import { createCustomEvent } from '../utils/custom-event';
 
             const openPanel = ctx.element_.querySelector(`.${PANEL}[open]`);
             if (openPanel) {
-              openPanel.removeAttribute('open');
-              const h = openPanel.querySelector(`.${HEADER}`);
-              h.removeAttribute('aria-expanded');
-              h.setAttribute('aria-hidden', '');
+              closePanel(openPanel, openPanel.querySelector(`.${HEADER}`));
 
               // Dispatch toggle event to accordion element
               dispatchToggleEvent('close', openPanel, ctx.element_);
@@ -176,10 +218,7 @@ import { createCustomEvent } from '../utils/custom-event';
             removeAriaSelectedAttribute();
           }
 
-          panel.setAttribute('open', '');
-          header.setAttribute('aria-expanded', '');
-          header.setAttribute('aria-selected', '');
-          header.removeAttribute('aria-hidden', '');
+          openPanel(panel, header);
 
           // Dispatch toggle event to accordion element
           dispatchToggleEvent('open', panel, ctx.element_);
@@ -252,6 +291,53 @@ import { createCustomEvent } from '../utils/custom-event';
         }
       }
     }), true);
+
+    panel.addEventListener('command_', ( event => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if(event.detail && event.detail.action) {
+        const action = event.detail.action.toLowerCase();
+        switch (action) {
+          case 'open':
+            openPanel(panel, header);
+            break;
+          case 'close':
+            closePanel(panel, header);
+            break;
+          case 'toggle':
+            togglePanel(panel, header);
+            break;
+        }
+      }
+    }));
+
+
+    function togglePanel(panel, header) {
+      if(panel.hasAttribute('open')) {
+        closePanel(panel, header);
+      }
+      else {
+        openPanel(panel, header);
+      }
+    }
+
+    function openPanel(panel, header) {
+      if(!panel.hasAttribute('disabled')) {
+        panel.setAttribute('open', '');
+        header.setAttribute('aria-expanded', '');
+        header.setAttribute('aria-selected', '');
+        header.removeAttribute('aria-hidden', '');
+      }
+    }
+
+    function closePanel(panel, header) {
+      if(!panel.hasAttribute('disabled')) {
+        panel.removeAttribute('open');
+        header.removeAttribute('aria-expanded');
+        header.setAttribute('aria-hidden', '');
+      }
+    }
 
     function removeAriaSelectedAttribute() {
       const selectedHeader = ctx.element_.querySelector(`.${HEADER}[aria-selected]`);

@@ -130,7 +130,7 @@ describe('MaterialExtAccordion', () => {
         <p>Maecenas eu vestibulum orci. Ut eget nisi a est sagittis euismod a vel.</p>
       </section>
     </li>
-    <li class="mdlext-accordion__panel">
+    <li id="disabled-panel" class="mdlext-accordion__panel" disabled>
       <header class="mdlext-accordion__panel__header">
         <div class="mdlext-accordion__header__transform">
           <h5>Fifth</h5>
@@ -539,6 +539,57 @@ describe('MaterialExtAccordion', () => {
     expect(check).to.have.length.of.at.least(2);
   });
 
+  it('should toggle using command custom event', () => {
+    const accordion = qs('#multi-accordion');
+    assert.isNotNull(accordion, 'Expected handle to accordion');
+
+    const panel = qs('#multi-accordion .mdlext-accordion__panel:nth-child(2)');
+    assert.isNotNull(panel, 'Expected handle to accordion panel');
+
+    const isOpen = panel.hasAttribute('open');
+    let ev = new CustomEvent('command', { detail: { action : 'toggle', target: panel } } );
+    accordion.dispatchEvent(ev);
+
+    assert.notEqual(panel.hasAttribute('open'), isOpen, 'Expected panel to toggle');
+
+    ev = new CustomEvent('command', { detail: { action : 'toggle', target: panel } } );
+    accordion.dispatchEvent(ev);
+    assert.equal(panel.hasAttribute('open'), isOpen, 'Expected panel to toggle');
+  });
+
+  it('should not open a panel having attribute "disabled"', () => {
+    const accordion = qs('#multi-accordion');
+    assert.isNotNull(accordion, 'Expected handle to accordion');
+
+    const panel = qs('#disabled-panel');
+    assert.isNotNull(panel, 'Expected handle to accordion panel');
+    panel.setAttribute('disabled', '');
+
+    const ev = new CustomEvent('command', { detail: { action : 'open', target: panel } } );
+    accordion.dispatchEvent(ev);
+
+    assert.isFalse(panel.hasAttribute('open'), 'Did not expect disabled panel to open');
+  });
+
+  it('should expand all panels not having attribute "disabled"', () => {
+    const accordion = qs('#multi-accordion');
+    assert.isNotNull(accordion, 'Expected handle to accordion');
+
+    // First close all panels
+    let ev = new CustomEvent('command', { detail: { action : 'close' } } );
+    accordion.dispatchEvent(ev);
+
+    let openPanels = qsa('#multi-accordion .mdlext-accordion__panel[open]');
+    assert.equal(openPanels.length, 0, 'Expected all panels to be closed');
+
+    // Open all panels not having attribute "disabled"
+    ev = new CustomEvent('command', { detail: { action : 'open' } } );
+    accordion.dispatchEvent(ev);
+
+    const allPanels = qsa('#multi-accordion .mdlext-accordion__panel');
+    openPanels = qsa('#multi-accordion .mdlext-accordion__panel[open]');
+    assert.equal(allPanels.length - openPanels.length, 1, `Expected ${openPanels.length} to have attribute "open"`);
+  });
 
 
   function spyOnKeyboardEvent(target, keyCode, shiftKey=false) {
