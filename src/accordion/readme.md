@@ -269,7 +269,7 @@ The table below lists available attributes and their effects.
 
 | Attribute | Effect | Remarks |
 |-----------|--------|---------|
-| `aria-multiselectable` | If true, multiple panels may be open simultaneously | Add this attribute to the `mdlext-accordion` element to keep multiple panels open at the same time|
+| `aria-multiselectable` | If true, multiple panels may be open simultaneously | Add this attribute to the `mdlext-accordion` element to keep multiple panels open at the same time. **Note**: Only implemented for vertical accordion (a multiselectable horizontal accordion does not make sense) |
 | `role=tablist` | The accordion component must have a role of tablist | Added by component to `mdlext-accordion` element |
 | `open` | Indicates an open panel | The panel content is visible. If this attribue is removed only the panel header i visible |
 | `disabled` | Indicates a disabled panel | The panel will not open or close |

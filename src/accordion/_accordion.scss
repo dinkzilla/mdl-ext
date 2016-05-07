@@ -93,8 +93,8 @@ ul.mdlext-accordion {
       }
 
       & .mdlext-accordion__panel__header__ripple-container {
-        width: 99%;
-        height: 99%;
+        width: 99.9%;
+        height: 99.9%;
 
         & .mdl-ripple {
           background: $mdlext-accordion-ripple-color;
@@ -151,7 +151,7 @@ ul.mdlext-accordion {
       }
       .mdlext-accordion__panel__content {
         overflow: auto;
-        animation: mdlext-accordion__panel-open-keyframe .4s linear;
+        animation: mdlext-accordion__panel-open-keyframe .4s linear; // Should be greater than transition animation
       }
     }
 
@@ -201,6 +201,28 @@ ul.mdlext-accordion {
         .mdlext-accordion__panel__header {
           border-right: 0;
           border-bottom: 1px solid $mdlext-accordion-header-border-open-color;
+        }
+      }
+    }
+
+    &[aria-multiselectable]:not([aria-multiselectable="false"]) {
+    //&[aria-multiselectable="true"] {
+      height: auto;
+
+      .mdlext-accordion__panel {
+        height: auto;
+        max-height: $mdlext-accordion-header-height; // For animating open / close
+        transition: max-height .1s ease-out;
+
+        &[open] {
+          max-height: 20000px;
+          transition: max-height 2s ease-in;
+
+          .mdlext-accordion__panel__content {
+            overflow: hidden;
+            animation: mdlext-accordion__panel-open-keyframe 0.1s linear;
+            animation-delay: 2.2s;  // Should be greater than transition animation
+          }
         }
       }
     }

@@ -160,18 +160,21 @@ import { createCustomEvent } from '../utils/custom-event';
           dispatchToggleEvent('close', panel, ctx.element_);
         }
         else {
-          const openPanel = ctx.element_.querySelector(`.${PANEL}[open]`);
-          if(openPanel) {
-            openPanel.removeAttribute('open');
-            const h = openPanel.querySelector(`.${HEADER}`);
-            h.removeAttribute('aria-expanded');
-            h.setAttribute('aria-hidden', '');
+          if(ctx.element_.hasAttribute('aria-multiselectable') &&
+            'false' === ctx.element_.getAttribute('aria-multiselectable').toLowerCase()) {
 
-            // Dispatch toggle event to accordion element
-            dispatchToggleEvent('close', openPanel, ctx.element_);
+            const openPanel = ctx.element_.querySelector(`.${PANEL}[open]`);
+            if (openPanel) {
+              openPanel.removeAttribute('open');
+              const h = openPanel.querySelector(`.${HEADER}`);
+              h.removeAttribute('aria-expanded');
+              h.setAttribute('aria-hidden', '');
+
+              // Dispatch toggle event to accordion element
+              dispatchToggleEvent('close', openPanel, ctx.element_);
+            }
+            removeAriaSelectedAttribute();
           }
-
-          removeAriaSelectedAttribute();
 
           panel.setAttribute('open', '');
           header.setAttribute('aria-expanded', '');
@@ -279,7 +282,6 @@ import { createCustomEvent } from '../utils/custom-event';
   // The component registers itself. It can assume componentHandler is available
   // in the global scope.
   /* eslint no-undef: 0 */
-  /* jshint undef:false */
   componentHandler.register({
     constructor: MaterialExtAccordion,
     classAsString: 'MaterialExtAccordion',
@@ -287,8 +289,3 @@ import { createCustomEvent } from '../utils/custom-event';
     widget: true
   });
 })();
-
-
-/*
- // eslint-disable-line no-unused-vars
- */

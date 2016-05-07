@@ -46,23 +46,89 @@
 
 </header>
 
-  <aside class="mdl-layout__drawer">
-  <span class="mdl-layout-title">MDL Extensions</span>
-  <nav class="mdl-navigation">
-    <a class="mdl-navigation__link" href="accordion.html">Accordion</a>
-    <a class="mdl-navigation__link" href="bordered-fields.html">Bordered Fields</a>
-    <a class="mdl-navigation__link" href="color-themes.html">Color Themes</a>
-    <a class="mdl-navigation__link" href="grid.html">Grid</a>
-    <a class="mdl-navigation__link" href="lightboard.html">Lightboard</a>
-    <a class="mdl-navigation__link" href="lightbox.html">Lightbox</a>
-    <a class="mdl-navigation__link" href="selectfield.html">Selectfield</a>
-    <a class="mdl-navigation__link" href="sticky-header.html">Sticky Header</a>
-    <a class="mdl-navigation__link" href="sticky-header-ii.html">Sticky Header II</a>
-    <a class="mdl-navigation__link" href="sticky-header-iii.html">Sticky Header III</a>
-    <a class="mdl-navigation__link" href="sticky-header-iv.html">Sticky Header IV</a>
-    <a class="mdl-navigation__link" href="sticky-header-v.html">Sticky Header V</a>
-    <a class="mdl-navigation__link" href="sticky-header-vi.html">Sticky Header VI</a>
-  </nav>
+  <style>
+  /* Ugly CSS! Only for demo. */
+
+  .mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__state:after {
+    content: 'expand_more';
+  }
+  .mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__state:after {
+    content: 'expand_less';
+  }
+
+  #demo-drawer-accordion li {
+    max-height: 64px;
+  }
+  #demo-drawer-accordion li[open] {
+    max-height: 20000px;
+  }
+  #demo-drawer-accordion li header {
+    height: 64px;
+    min-height: 64px;
+  }
+  .is-small-screen #demo-drawer-accordion li {
+    max-height: 56px;
+  }
+  .is-small-screen #demo-drawer-accordion li[open] {
+    max-height: 20000px;
+  }
+  .is-small-screen #demo-drawer-accordion li header {
+    height: 56px;
+    min-height: 56px;
+  }
+  #demo-drawer-accordion li header h5,
+  #demo-drawer-accordion li header h6 {
+    padding-left: 16px;
+  }
+  #demo-drawer-accordion li section,
+  #demo-drawer-accordion li section nav {
+    padding: 0;
+  }
+</style>
+
+
+<aside class="mdl-layout__drawer">
+
+  <ul id="demo-drawer-accordion" class="mdlext-accordion mdlext-accordion--vertical mdlext-js-accordion mdlext-js-accordion mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events" aria-multiselectable="">
+    <li class="mdlext-accordion__panel" open="">
+      <header class="mdlext-accordion__panel__header">
+        <a href="#" class="mdlext-accordion__panel__header__tabstop"></a>
+        <div class="mdlext-accordion__panel__header__transform">
+          <h5>MDL Extensions</h5>
+          <i class="mdlext-accordion__panel__state material-icons md-24"></i>
+        </div>
+      </header>
+      <section class="mdlext-accordion__panel__content">
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="accordion.html">Accordion</a>
+          <a class="mdl-navigation__link" href="bordered-fields.html">Bordered Fields</a>
+          <a class="mdl-navigation__link" href="color-themes.html">Color Themes</a>
+          <a class="mdl-navigation__link" href="grid.html">Grid</a>
+          <a class="mdl-navigation__link" href="lightboard.html">Lightboard</a>
+          <a class="mdl-navigation__link" href="lightbox.html">Lightbox</a>
+          <a class="mdl-navigation__link" href="selectfield.html">Selectfield</a>
+        </nav>
+      </section>
+    </li>
+    <li class="mdlext-accordion__panel" open="">
+      <header class="mdlext-accordion__panel__header">
+        <div class="mdlext-accordion__panel__header__transform">
+          <h6>Sticky headers</h6>
+          <i class="mdlext-accordion__panel__state material-icons md-24"></i>
+        </div>
+      </header>
+      <section class="mdlext-accordion__panel__content">
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="sticky-header.html">Sticky Header I</a>
+          <a class="mdl-navigation__link" href="sticky-header-ii.html">Sticky Header II</a>
+          <a class="mdl-navigation__link" href="sticky-header-iii.html">Sticky Header III</a>
+          <a class="mdl-navigation__link" href="sticky-header-iv.html">Sticky Header IV</a>
+          <a class="mdl-navigation__link" href="sticky-header-v.html">Sticky Header V</a>
+          <a class="mdl-navigation__link" href="sticky-header-vi.html">Sticky Header VI</a>
+        </nav>
+      </section>
+    </li>
+  </ul>
 </aside>
 
   <main id="mount" class="mdl-layout__content">
@@ -368,6 +434,7 @@
 </div>
 
 
+
 <style>
   .vertical-accordion-height {
     height: 600px;
@@ -375,10 +442,10 @@
 </style>
 <h5>Vertical Flexbox Accordion</h5>
 <div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone">
+  <div class="mdl-cell mdl-cell--1-col mdl-cell--hide-tablet mdl-cell--hide-phone">
   </div>
 
-  <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone vertical-accordion-height">
+  <div class="mdl-cell mdl-cell--5-col mdl-cell--4-col-tablet mdl-cell--4-col-phone vertical-accordion-height">
     <ul id="my-vertical-accordion" class="mdlext-accordion mdlext-accordion--vertical mdlext-js-accordion" aria-multiselectable="false">
       <li class="mdlext-accordion__panel">
         <header class="mdlext-accordion__panel__header">
@@ -407,7 +474,7 @@
         <header class="mdlext-accordion__panel__header">
           <div class="mdlext-accordion__panel__header__transform">
             <i class="material-icons md-18">check</i>
-            <h5>Second (disabled(</h5>
+            <h5>Second (disabled)</h5>
             <i class="mdlext-accordion__panel__state material-icons md-24"></i>
           </div>
         </header>
@@ -474,7 +541,7 @@
   </div>
 
 
-  <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone vertical-accordion-height">
+  <div class="mdl-cell mdl-cell--5-col mdl-cell--4-col-tablet mdl-cell--4-col-phone vertical-accordion-height">
     <ul id="my-vertical-accordion-colored" class="mdlext-accordion mdlext-accordion--vertical mdlext-js-accordion mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events" aria-multiselectable="false">
       <li class="mdlext-accordion__panel img-box img-box--18" open="">
         <header class="mdlext-accordion__panel__header">
@@ -562,9 +629,107 @@
     </ul>
   </div>
 
-  <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone">
+  <div class="mdl-cell mdl-cell--1-col mdl-cell--hide-tablet mdl-cell--hide-phone">
   </div>
 </div>
+
+
+<h5>Vertical Accordion, aria-multiselectable="true"</h5>
+
+<ul class="mdlext-accordion mdlext-accordion--vertical mdlext-js-accordion mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events" aria-multiselectable="">
+  <li class="mdlext-accordion__panel">
+    <header class="mdlext-accordion__panel__header">
+      <a href="#" class="mdlext-accordion__panel__header__tabstop">You should not see this</a>
+      <div class="mdlext-accordion__panel__header__transform">
+        <i class="material-icons md-18">close</i>
+        <h5>First section</h5>
+        <i class="mdlext-accordion__panel__state material-icons md-24"></i>
+      </div>
+    </header>
+    <section class="mdlext-accordion__panel__content">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique eget augue eget gravida.
+        Etiam eget imperdiet massa. Aliquam nisi eros, molestie a vulputate quis, tempor nec quam. Ut at libero
+        in sem pellentesque imperdiet. Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
+        ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
+        maximus massa felis quis quam. Curabitur malesuada placerat nunc, id dapibus justo tempor in. Ut molestie
+        arcu justo, id volutpat eros vestibulum eget. Fusce tincidunt leo in est venenatis porta.</p>
+      <p>Maecenas eu vestibulum orci. Ut eget nisi a est sagittis euismod a vel
+        justo. Quisque at dui urna. Duis vel velit leo. Nulla nunc sem, rutrum at aliquet in, aliquet id velit. Duis
+        mattis placerat erat, a aliquam leo rhoncus vel. Sed nec diam ex. Praesent convallis purus lorem, vel porttitor
+        neque gravida quis. Etiam et malesuada dui. Nunc vitae viverra dui. Suspendisse feugiat efficitur augue, quis
+        blandit leo ullamcorper vel.</p>
+    </section>
+  </li>
+  <li class="mdlext-accordion__panel img-box" disabled="">
+    <header class="mdlext-accordion__panel__header">
+      <div class="mdlext-accordion__panel__header__transform">
+        <i class="material-icons md-18">check</i>
+        <h5>Second (disabled)</h5>
+        <i class="mdlext-accordion__panel__state material-icons md-24"></i>
+      </div>
+    </header>
+    <section class="mdlext-accordion__panel__content">
+      <p>Maecenas eu vestibulum orci. Ut eget nisi a est sagittis euismod a vel
+        justo. Quisque at dui urna. Duis vel velit leo. Nulla nunc sem, rutrum at aliquet in, aliquet id velit. Duis
+        mattis placerat erat, a aliquam leo rhoncus vel. Sed nec diam ex. Praesent convallis purus lorem, vel porttitor
+        neque gravida quis. Etiam et malesuada dui. Nunc vitae viverra dui. Suspendisse feugiat efficitur augue, quis
+        blandit leo ullamcorper vel.</p>
+    </section>
+  </li>
+  <li class="mdlext-accordion__panel img-box">
+    <header class="mdlext-accordion__panel__header">
+      <a class="mdlext-accordion__panel__header__tabstop" href="#"></a>
+      <div class="mdlext-accordion__panel__header__transform">
+        <i class="material-icons md-18">arrow_forward</i>
+        <h5>Section #3</h5>
+        <i class="mdlext-accordion__panel__state material-icons md-24"></i>
+      </div>
+    </header>
+    <section class="mdlext-accordion__panel__content">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique eget augue eget gravida.
+        Etiam eget imperdiet massa. Aliquam nisi eros, molestie a vulputate quis, tempor nec quam. Ut at libero
+        in sem pellentesque imperdiet. Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
+        ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
+        maximus massa felis quis quam. Curabitur malesuada placerat nunc, id dapibus justo tempor in. Ut molestie
+        arcu justo, id volutpat eros vestibulum eget. Fusce tincidunt leo in est venenatis porta.</p>
+    </section>
+  </li>
+  <li class="mdlext-accordion__panel img-box">
+    <header class="mdlext-accordion__panel__header">
+      <div class="mdlext-accordion__panel__header__transform">
+        <i class="material-icons md-18">arrow_back</i>
+        <h5>Fourth section</h5>
+        <i class="mdlext-accordion__panel__state material-icons md-24"></i>
+      </div>
+    </header>
+    <section class="mdlext-accordion__panel__content">
+      <p>Maecenas eu vestibulum orci. Ut eget nisi a est sagittis euismod a vel
+        justo. Quisque at dui urna. Duis vel velit leo. Nulla nunc sem, rutrum at aliquet in, aliquet id velit. Duis
+        mattis placerat erat, a aliquam leo rhoncus vel. Sed nec diam ex. Praesent convallis purus lorem, vel porttitor
+        neque gravida quis. Etiam et malesuada dui. Nunc vitae viverra dui. Suspendisse feugiat efficitur augue, quis
+        blandit leo ullamcorper vel.</p>
+    </section>
+  </li>
+  <li class="mdlext-accordion__panel img-box">
+    <header class="mdlext-accordion__panel__header">
+      <div class="mdlext-accordion__panel__header__transform">
+        <i class="material-icons md-18">share</i>
+        <h5>Fifth</h5>
+        <i class="mdlext-accordion__panel__state material-icons md-24"></i>
+      </div>
+    </header>
+    <section class="mdlext-accordion__panel__content">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique eget augue eget gravida.
+        Etiam eget imperdiet massa. Aliquam nisi eros, molestie a vulputate quis, tempor nec quam. Ut at libero
+        in sem pellentesque imperdiet. Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
+        ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
+        maximus massa felis quis quam. Curabitur malesuada placerat nunc, id dapibus justo tempor in. Ut molestie
+        arcu justo, id volutpat eros vestibulum eget. Fusce tincidunt leo in est venenatis porta.</p>
+    </section>
+  </li>
+</ul>
+
+
 
 <p class="mdl-typography--caption" style="margin-top: 64px;">
 All images appearing in this page are the exclusive property of Leif Olsen and are protected under the United States and International Copyright laws.

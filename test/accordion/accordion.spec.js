@@ -85,6 +85,63 @@ describe('MaterialExtAccordion', () => {
       </li>
     </ul>
   </div>
+
+  <ul id="multi-accordion" class="mdlext-accordion mdlext-js-accordion" aria-multiselectable="true">
+    <li class="mdlext-accordion__panel">
+      <header class="mdlext-accordion__panel__header">
+        <div class="mdlext-accordion__header__transform">
+          <h5>First section</h5>
+        </div>
+      </header>
+      <section class="mdlext-accordion__panel__content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique eget augue eget gravida.</p>
+        <p>Maecenas eu vestibulum orci. Ut eget nisi a est sagittis euismod a vel.</p>
+      </section>
+    </li>
+    <li class="mdlext-accordion__panel">
+      <header class="mdlext-accordion__panel__header">
+        <a href="#"></a>
+        <div class="mdlext-accordion__header__transform">
+          <h5>Second</h5>
+        </div>
+      </header>
+      <section class="mdlext-accordion__panel__content">
+        <p>Maecenas eu vestibulum orci. Ut eget nisi a est sagittis euismod a vel
+          justo. Quisque at dui urna. Duis vel velit leo.</p>
+      </section>
+    </li>
+    <li class="mdlext-accordion__panel">
+      <header class="mdlext-accordion__panel__header">
+        <div class="mdlext-accordion__header__transform">
+          <h5>Section #3</h5>
+        </div>
+      </header>
+      <section class="mdlext-accordion__panel__content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </section>
+    </li>
+    <li class="mdlext-accordion__panel">
+      <header class="mdlext-accordion__panel__header">
+        <div class="mdlext-accordion__header__transform">
+          <h5>Fourth section</h5>
+        </div>
+      </header>
+      <section class="mdlext-accordion__panel__content">
+        <p>Maecenas eu vestibulum orci. Ut eget nisi a est sagittis euismod a vel.</p>
+      </section>
+    </li>
+    <li class="mdlext-accordion__panel">
+      <header class="mdlext-accordion__panel__header">
+        <div class="mdlext-accordion__header__transform">
+          <h5>Fifth</h5>
+        </div>
+      </header>
+      <section class="mdlext-accordion__panel__content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique eget augue eget gravida.</p>
+      </section>
+    </li>
+  </ul>  
+  
   <div id="accordion-container-2">
   </div>
 </div>
@@ -438,6 +495,51 @@ describe('MaterialExtAccordion', () => {
     }
     assert.isTrue(spy.called, 'Expected "toggle" event to fire at least once');
   });
+
+
+  it('can have multiple panels open simultaneously when aria-multiselectable="true"', () => {
+    const accordion = qs('#multi-accordion');
+    assert.isNotNull(accordion, 'Expected handle to accordion');
+
+    const header1 = qs('#multi-accordion .mdlext-accordion__panel:nth-child(1) .mdlext-accordion__panel__header');
+    assert.isNotNull(header1, 'Expected handle to header in panel 1');
+
+    // Trigger click
+    header1.dispatchEvent(
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      })
+    );
+
+    const header2 = qs('#multi-accordion .mdlext-accordion__panel:nth-child(2) .mdlext-accordion__panel__header');
+    assert.isNotNull(header2, 'Expected handle to header in panel 3');
+
+    header2.dispatchEvent(
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      })
+    );
+
+    const header3 = qs('#multi-accordion .mdlext-accordion__panel:nth-child(3) .mdlext-accordion__panel__header');
+    assert.isNotNull(header3, 'Expected handle to header in panel 3');
+
+    header3.dispatchEvent(
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      })
+    );
+
+    const check = qsa('#multi-accordion .mdlext-accordion__panel[open]');
+    expect(check).to.have.length.of.at.least(2);
+  });
+
+
 
   function spyOnKeyboardEvent(target, keyCode, shiftKey=false) {
     const spy = sinon.spy();
