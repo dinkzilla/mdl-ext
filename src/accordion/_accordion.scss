@@ -82,7 +82,6 @@ ul.mdlext-accordion {
         left: 1px;
         z-index: 1;
 
-
         // Fixes clipping bug in Safari.
         //-webkit-mask-image: -webkit-radial-gradient(circle, white, black);
 
@@ -206,7 +205,7 @@ ul.mdlext-accordion {
     }
 
     &[aria-multiselectable]:not([aria-multiselectable="false"]) {
-    //&[aria-multiselectable="true"] {
+
       height: auto;
 
       .mdlext-accordion__panel {
