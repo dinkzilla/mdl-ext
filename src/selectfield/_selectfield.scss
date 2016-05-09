@@ -107,6 +107,10 @@
   text-indent: 0.01px; // Removes default arrow from firefox
   text-overflow: "";   // Removes default arrow from firefox
 
+  &:focus {
+    outline: none !important;
+  }
+
   // Mozilla, remove focusring
   &:-moz-focusring {
     color: transparent;
