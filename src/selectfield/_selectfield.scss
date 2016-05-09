@@ -29,7 +29,7 @@
 
 @import "../mixins";
 
-// The container for the bordered fields.
+// The container for the selectfield.
 .mdlext-selectfield {
   position: relative;
   font-size: $input-text-font-size;
@@ -93,7 +93,7 @@
   font-size: $input-text-font-size;
   font-family: $performance_font;
   margin: 0;
-  padding: $input-text-padding 0;
+  padding: $input-text-padding calc(1em + 4px) ($input-text-padding - 2) 0;  // calc(1em + 4px): apce for down arrow, -2 is to align with textfields
   width: $input-text-width;
   background: none;
   text-align: left;
