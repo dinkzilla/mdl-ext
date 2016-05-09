@@ -220,7 +220,7 @@ ul.mdlext-accordion {
           .mdlext-accordion__panel__content {
             overflow: hidden;
             animation: mdlext-accordion__panel-open-keyframe 0.1s linear;
-            animation-delay: 2.2s;  // Should be greater than transition animation
+            animation-delay: 2.2s;  // Should be greater than the "max-height" transition animation
           }
         }
       }

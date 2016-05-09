@@ -2088,10 +2088,6 @@ html:before {
   text-overflow: "";
 }
 
-.mdlext-selectfield__select:focus {
-  outline: none !important;
-}
-
 .mdlext-selectfield__select:-moz-focusring {
   color: transparent;
   text-shadow: 0 0 0 #000;

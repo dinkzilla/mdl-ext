@@ -63,7 +63,7 @@ describe('MaterialExtStickyHeader', () => {
 
     requireUncached( '../../src/sticky-header/sticky-header' );
     assert.isNotNull(window.MaterialExtStickyHeader, 'Expected MaterialExtStickyHeader not to be null');
-    global.MaterialExtSelectfield = window.MaterialExtSelectfield;
+    global.MaterialExtStickyHeader = window.MaterialExtStickyHeader;
 
 
     // Stub unsupported jsdom 'window.matchMedia'. Used in mdl/src/layout/layout.js
