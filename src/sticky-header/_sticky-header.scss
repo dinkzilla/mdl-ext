@@ -23,6 +23,7 @@
   position: absolute;
   overflow: visible;
   background: $mdlext-sticky-header-background;
+  transition: .12s ease-in-out;
 
   &.mdlext-is-scroll {
     background: $mdlext-sticky-header-background-scroll;

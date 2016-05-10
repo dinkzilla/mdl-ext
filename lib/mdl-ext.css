@@ -315,6 +315,7 @@
   position: absolute;
   overflow: visible;
   background: transparent linear-gradient(to bottom, rgb(63,81,181) 0, rgb(63,81,181) 100%);
+  transition: .12s ease-in-out;
 }
 
 .mdlext-layout__sticky-header.mdlext-is-scroll {

@@ -197,6 +197,14 @@ describe('MaterialExtStickyHeader', () => {
       content.dispatchEvent(event);
       header.MaterialExtStickyHeader.updatePosition_();
 
+      content.scrollTop = -200;
+      content.dispatchEvent(event);
+      header.MaterialExtStickyHeader.updatePosition_();
+
+      content.scrollTop = 200;
+      content.dispatchEvent(event);
+      header.MaterialExtStickyHeader.updatePosition_();
+
       content.scrollTop = 1000;
       content.dispatchEvent(event);
       header.MaterialExtStickyHeader.updatePosition_();

@@ -90,7 +90,6 @@
 
     const currentContentScrollTop = this.content_.scrollTop;
     const scrollDiff = this.lastScrollTop_ - currentContentScrollTop;
-    const headerTop = (parseInt( window.getComputedStyle( this.header_ ).getPropertyValue( 'top' ) ) || 0) + scrollDiff;
 
     if(currentContentScrollTop <= 0) {
       // Scrolled to the top. Header sticks to the top
@@ -98,19 +97,32 @@
       this.header_.classList.remove(IS_SCROLL_CLASS);
     }
     else if(scrollDiff > 0) {
-      // Scrolled up. Header slides in
-      this.header_.style.top = `${( headerTop > 0 ? 0 : headerTop )}px`;
-      this.header_.classList.add(IS_SCROLL_CLASS);
+
+      if(scrollDiff >= this.header_.offsetHeight) {
+
+        // Scrolled up. Header slides in
+        const headerTop = (parseInt( window.getComputedStyle( this.header_ ).getPropertyValue( 'top' ) ) || 0);
+        if(headerTop != 0) {
+          this.header_.style.top = '0';
+          this.header_.classList.add(IS_SCROLL_CLASS);
+        }
+        this.lastScrollTop_ = currentContentScrollTop;
+      }
+      return;
     }
     else if(scrollDiff < 0) {
       // Scrolled down
       this.header_.classList.add(IS_SCROLL_CLASS);
+      let headerTop = (parseInt( window.getComputedStyle( this.header_ ).getPropertyValue( 'top' ) ) || 0);
 
       if (this.content_.scrollHeight - this.content_.scrollTop <= this.content_.offsetHeight) {
         // Bottom of content
-        this.header_.style.top = '0';
+        if(headerTop != 0) {
+          this.header_.style.top = '0';
+        }
       }
       else {
+        headerTop += scrollDiff;
         const offsetHeight = this.header_.offsetHeight;
         this.header_.style.top = `${( Math.abs( headerTop ) > offsetHeight ? -offsetHeight : headerTop )}px`;
       }
