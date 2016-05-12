@@ -77,6 +77,10 @@
         border-color: $mdlext-bordered-field-focus-border-color;
       }
     }
+    .mdlext-selectfield__select {
+      padding-right: calc(1em + #{$input-text-padding});  // space for down arrow
+    }
+
   }
 
   // Styling for the label / floating label.

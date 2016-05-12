@@ -93,7 +93,7 @@
   font-size: $input-text-font-size;
   font-family: $performance_font;
   margin: 0;
-  padding: $input-text-padding calc(1em + 4px) ($input-text-padding - 2) 0;  // calc(1em + 4px): apce for down arrow, -2 is to align with textfields
+  padding: $input-text-padding calc(1.2em + #{$input-text-padding}) $input-text-padding 0;  // calc(1.2em + #{$input-text-padding}): space for down arrow
   width: $input-text-width;
   background: none;
   text-align: left;
@@ -142,6 +142,13 @@
   option {
     background-color: inherit;
     color: $text-color-primary;
+  }
+}
+
+@supports (-moz-appearance:none) and (display:contents) {
+  // Firefox 37+
+  .mdlext-selectfield__select {
+    padding-bottom: $input-text-padding - 2;  // FF is 2px off :(
   }
 }
 

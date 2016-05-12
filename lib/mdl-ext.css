@@ -315,7 +315,7 @@
   position: absolute;
   overflow: visible;
   background: transparent linear-gradient(to bottom, rgb(63,81,181) 0, rgb(63,81,181) 100%);
-  transition: .12s ease-in-out;
+  transition: .1s ease-in-out;
 }
 
 .mdlext-layout__sticky-header.mdlext-is-scroll {
@@ -2099,7 +2099,7 @@ ul.mdlext-lightboard {
   font-size: 16px;
   font-family: "Helvetica", "Arial", sans-serif;
   margin: 0;
-  padding: 4px calc(1em + 4px) 2px 0;
+  padding: 4px calc(1.2em + 4px) 4px 0;
   width: 100%;
   background: none;
   text-align: left;
@@ -2140,6 +2140,12 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__select,
 .mdlext-selectfield__select option {
   background-color: inherit;
   color: rgba(0,0,0, 0.87);
+}
+
+@supports (-moz-appearance: none) and (display: contents) {
+  .mdlext-selectfield__select {
+    padding-bottom: 2px;
+  }
 }
 
 .mdlext-selectfield__label {
@@ -2374,6 +2380,11 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:required:focus {
   background-color: rgba(255, 255, 255, 0.1);
   border-color: rgb(63,81,181);
+}
+
+.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select,
+.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select {
+  padding-right: calc(1em + 4px);
 }
 
 .mdlext-bordered-fields .mdl-textfield.is-focused .mdl-textfield__label,
