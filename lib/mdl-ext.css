@@ -2142,12 +2142,6 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__select,
   color: rgba(0,0,0, 0.87);
 }
 
-@supports (-moz-appearance: none) and (display: contents) {
-  .mdlext-selectfield__select {
-    padding-bottom: 2px;
-  }
-}
-
 .mdlext-selectfield__label {
   bottom: 0;
   color: rgba(0,0,0, 0.26);

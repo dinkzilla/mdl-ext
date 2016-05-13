@@ -107,12 +107,6 @@
   text-indent: 0.01px; // Removes default arrow from firefox
   text-overflow: "";   // Removes default arrow from firefox
 
-  //&:focus {
-    // We should not remove the focus outline here, the .mdlext-selectfield.is-focused class should be responsible for that.
-    // If a focus outline shows, it indicates that componentHandler.upgradeElement(elemet, 'MaterialExtSelectfield') was not called;
-    // outline: 0 !important;
-  //}
-
   // Mozilla, remove focusring
   &:-moz-focusring {
     color: transparent;
@@ -142,13 +136,6 @@
   option {
     background-color: inherit;
     color: $text-color-primary;
-  }
-}
-
-@supports (-moz-appearance:none) and (display:contents) {
-  // Firefox 37+
-  .mdlext-selectfield__select {
-    padding-bottom: $input-text-padding - 2;  // FF is 2px off :(
   }
 }
 

@@ -131,9 +131,15 @@ The table below lists the available classes and their effects.
 | `mdl-input__expandable-holder` | Defines a container as an MDL component | For expandable select fields, required on "inner" div element |
 -->
 
->**Note:** Disabled versions of each select field type are provided, and are invoked with the standard HTML boolean attribute `disabled`. `<select class="mdlext-selectfield__select" id="select-id" name="select-id" disabled>`
+>**Note I:** Disabled versions of each select field type are provided, and are invoked with the standard HTML boolean attribute `disabled`. `<select class="mdlext-selectfield__select" id="select-id" name="select-id" disabled>`
 >This attribute may be added or removed programmatically via scripting.
 
+>**Note II:** The select field can for some browser and OS combinations, e.g. 
+>FireFox and OSX, be off by 2 pixels compared to the input field. There is no 
+>way to fix this, as far as I know, without setting an explicit height on both field types. 
+>Since MDL does not set a specific height of the text field, it can not be done for the select 
+>field either. If alignment is required, the user must in his/hers design set a specific height 
+>both for textfields and selectfields.
 
 ## How to use the component programmatically
 The tests provides examples on how to use the component [programmatically](https://github.com/leifoolsen/mdl-ext/blob/master/test/selectfield/selectfield.spec.js)

@@ -143,6 +143,13 @@
   can occur and, typically, text that clearly communicates the intended contents of the select field.
   An icon (at the right hand side) indicates that the select field has user selectable options.</p>
 
+<p><strong>Note: </strong>
+  The select field can for some browser and OS combinations, e.g. FireFox and OSX, be off by 2 pixels compared to the
+  input field. There is no way to fix this, as far as I know, without setting an explicit height on both field types.
+  Since MDL does not set a specific height of the text field, it can not be done for the select field either.
+  If alignment is required, the user must in his/hers design set a specific height both for textfields and selectfields.
+</p>
+
 <style scoped="">
   .selectelement-demo-container {
   }
@@ -162,7 +169,7 @@
   <div class="mdl-grid mdl-grid--no-spacing">
 
     <div class="mdl-cell mdl-cell--3-col">
-      <p>Select element</p>
+      <p>Selectfield component</p>
       <div class="mdlext-selectfield mdlext-js-selectfield">
         <select class="mdlext-selectfield__select">
           <option value=""></option>
@@ -178,7 +185,7 @@
     </div>
 
     <div class="mdl-cell mdl-cell--3-col">
-      <p>Text Field</p>
+      <p>Textfield component</p>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input class="mdl-textfield__input" type="text">
         <label class="mdl-textfield__label">... to check alignment</label>
@@ -186,7 +193,7 @@
     </div>
 
     <div class="mdl-cell mdl-cell--3-col">
-      <p>Select element with floating label</p>
+      <p>Selectfield component with floating label</p>
       <div class="mdlext-selectfield mdlext-js-selectfield mdlext-selectfield--floating-label">
         <select class="mdlext-selectfield__select">
           <option value=""></option>
@@ -202,7 +209,7 @@
     </div>
 
     <div class="mdl-cell mdl-cell--3-col">
-      <p>Disabled Select element</p>
+      <p>Disabled selectfield component</p>
       <div class="mdlext-selectfield mdlext-js-selectfield mdlext-selectfield--floating-label">
         <select class="mdlext-selectfield__select" disabled="">
           <option value=""></option>
@@ -216,6 +223,27 @@
         <label class="mdlext-selectfield__label">Profession</label>
       </div>
     </div>
+
+    <div class="mdl-cell mdl-cell--3-col">
+      <p>Unstyled select element</p>
+      <select style="width: 100%;">
+        <option value=""></option>
+        <option value="option1">option 1</option>
+        <option value="option2">option 2</option>
+        <option value="option3">option 3</option>
+        <option value="option4">option 4</option>
+        <option value="option5">option 5</option>
+        <option value="option6">option 5 abcdefghijklmnopqrstuvw0123456789</option>
+      </select>
+      <label>Profession</label>
+    </div>
+
+    <div class="mdl-cell mdl-cell--3-col">
+      <p>Unstyled input element</p>
+      <input type="text" style="width: 100%;">
+      <label>... to check alignment</label>
+    </div>
+
   </div>
 </div>
 
