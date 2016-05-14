@@ -69,7 +69,7 @@ describe('MaterialExtLightboard', () => {
       </figure>
     </a>
   </li>
- /ul>
+ </ul>
 </div>
 <div id="mount-2">
 </div>
