@@ -191,7 +191,8 @@
         }).observe( this.content_, {
           attributes: false,
           childList: true,
-          characterData: false
+          characterData: false,
+          subtree: true
         });
 
         // Set initial position
