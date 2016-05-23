@@ -168,7 +168,7 @@ describe('MaterialExtLightbox', () => {
     assert.isTrue(spy.called, 'Expected "action" event to fire');
   });
 
-  it('can not click image', () => {
+  it('can not click an image', () => {
     const lightbox = qs('#lightbox');
     const img = qs('img', lightbox);
 

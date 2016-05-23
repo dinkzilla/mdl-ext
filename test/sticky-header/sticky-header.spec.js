@@ -68,38 +68,38 @@ describe('MaterialExtStickyHeader', () => {
 
     // Stub unsupported jsdom 'window.matchMedia'. Used in mdl/src/layout/layout.js
     window.matchMedia = window.matchMedia || function() {
-        return {
-          matches : false,
-          addListener : function() {},
-          removeListener: function() {}
-        };
+      return {
+        matches : false,
+        addListener : function() {},
+        removeListener: function() {}
       };
+    };
 
     // Stub unsupported jsdom window.MutationObserver
     window.MutationObserver = window.MutationObserver || (function(undefined) {
-        "use strict";
+      "use strict";
 
-        function MutationObserver(listener) {
+      function MutationObserver(listener) {
+        this._watched = [];
+        this._listener = listener;
+      }
+
+      MutationObserver.prototype = {
+
+        observe: function($target, config) {
+        },
+
+        takeRecords: function() {
+          var mutations = [];
+          return mutations;
+        },
+        disconnect: function() {
           this._watched = [];
-          this._listener = listener;
         }
+      };
 
-        MutationObserver.prototype = {
-
-          observe: function($target, config) {
-          },
-
-          takeRecords: function() {
-            var mutations = [];
-            return mutations;
-          },
-          disconnect: function() {
-            this._watched = [];
-          }
-        };
-
-        return MutationObserver;
-      })(void 0);
+      return MutationObserver;
+    })(void 0);
 
 
     //componentHandler.upgradeAllRegistered();
