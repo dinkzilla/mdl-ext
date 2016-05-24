@@ -348,6 +348,7 @@ import { inOutQuintic } from '../utils/easing';
     let rAFDragId = 0;
     const startX = event.clientX || (event.touches !== undefined ? event.touches[0].clientX : 0);
     let prevX = startX;
+    const targetElement = event.target;
 
     const update = e => {
       const currentX = (e.clientX || (e.touches !== undefined ? e.touches[0].clientX : 0));
@@ -368,7 +369,7 @@ import { inOutQuintic } from '../utils/easing';
     const drag = e => {
       e.preventDefault();
       if(!updating) {
-        rAFDragId = requestAnimationFrame( () => update(e));
+        rAFDragId = window.requestAnimationFrame( () => update(e));
         updating = true;
       }
     };
@@ -384,11 +385,11 @@ import { inOutQuintic } from '../utils/easing';
       window.removeEventListener('touchend', endDrag);
 
       // cancel any existing drag rAF, see: http://www.html5rocks.com/en/tutorials/speed/animations/
-      cancelAnimationFrame(rAFDragId);
+      window.cancelAnimationFrame(rAFDragId);
 
       // If mouse did not move, trigger custom select event
       if(Math.abs(startX-x) < 2) {
-        const slide = getSlide_(e.target);
+        const slide = getSlide_(targetElement);
         setFocus_(slide);
         this.emitSelectEvent_('click', null,  slide);
       }
@@ -437,6 +438,7 @@ import { inOutQuintic } from '../utils/easing';
    * @private
    */
   MaterialExtCarousel.prototype.emitSelectEvent_ = function(command, keyCode, slide) {
+
     if(slide) {
       this.moveSlideIntoViewport_(slide);
 

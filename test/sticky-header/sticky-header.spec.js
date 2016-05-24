@@ -6,7 +6,6 @@ import { expect, assert } from 'chai';
 import sinon from 'sinon';
 import { qs } from '../testutils/domHelpers';
 
-
 describe('MaterialExtStickyHeader', () => {
 
   // TODO: Need more (sanity) tests
@@ -53,6 +52,7 @@ describe('MaterialExtStickyHeader', () => {
   luctus sem sollicitudin in. Etiam libero tellus, porttitor sit amet velit a, commodo sodales neque.
 </p>`;
 
+
   before ( () => {
     jsdomify.create(fixture);
 
@@ -74,6 +74,7 @@ describe('MaterialExtStickyHeader', () => {
         removeListener: function() {}
       };
     };
+
 
     // Stub unsupported jsdom window.MutationObserver
     window.MutationObserver = window.MutationObserver || (function(undefined) {
@@ -100,7 +101,6 @@ describe('MaterialExtStickyHeader', () => {
 
       return MutationObserver;
     })(void 0);
-
 
     //componentHandler.upgradeAllRegistered();
     //componentHandler.upgradeDom();

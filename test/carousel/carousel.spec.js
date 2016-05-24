@@ -22,8 +22,6 @@ describe('MaterialExtCarousel', () => {
   const VK_ARROW_RIGHT = 39;
   const VK_ARROW_DOWN  = 40;
 
-
-
   const fixture = `
 <!DOCTYPE html>
 <html>
@@ -109,6 +107,12 @@ describe('MaterialExtCarousel', () => {
   </li>
 </ul>`;
 
+
+  let realRaf;
+  let realCaf;
+  let mockRaf;
+  let rAFStub;
+
   before ( () => {
     jsdomify.create(fixture);
 
@@ -120,9 +124,19 @@ describe('MaterialExtCarousel', () => {
     requireUncached('../../src/carousel/carousel');
     assert.isNotNull(window.MaterialExtCarousel, 'Expected MaterialExtCarousel not to be null');
     global.MaterialExtCarousel = window.MaterialExtCarousel;
+
+    realRaf = window.requestAnimationFrame;
+    realCaf = window.cancelAnimationFrame;
+    mockRaf = createMockRaf();
+    window.requestAnimationFrame = mockRaf.raf;
+    window.cancelAnimationFrame = mockRaf.raf.cancel;
+    rAFStub = sinon.stub(window, 'requestAnimationFrame', mockRaf.raf);
   });
 
   after ( () => {
+    rAFStub.restore();
+    window.requestAnimationFrame = realRaf;
+    window.cancelAnimationFrame = realCaf;
     jsdomify.destroy();
   });
 
@@ -136,13 +150,11 @@ describe('MaterialExtCarousel', () => {
     assert.isTrue(element.classList.contains('is-upgraded'), 'Expected class "is-upgraded" to exist');
   });
 
-
   it('should have attribute "data-upgraded"', () => {
     const dataUpgraded = document.querySelector('#carousel-1').getAttribute('data-upgraded');
     assert.isNotNull(dataUpgraded, 'Expected MaterialExtCarousel to have "data-upgraded" attribute');
     assert.isAtLeast(dataUpgraded.indexOf('MaterialExtCarousel'), 0, 'Expected "data-upgraded" attribute to contain "MaterialExtCarousel"');
   });
-
 
   it('upgrades successfully when a new component is appended to the DOM', () => {
     const container = document.querySelector('#mount-2');
@@ -196,7 +208,6 @@ describe('MaterialExtCarousel', () => {
     }
   });
 
-
   // role=list, A section containing listitem elements.
   it('has role="list"', () => {
     [...document.querySelectorAll('.mdlext-carousel')].forEach( carousel => {
@@ -204,15 +215,12 @@ describe('MaterialExtCarousel', () => {
     });
   });
 
-
   // role=listitem, A single item in a list or directory.
   it('has slides with role="listitem"', () => {
     [...document.querySelectorAll('.mdlext-carousel__slide')].forEach( slide => {
       assert.equal(slide.getAttribute('role'), 'listitem', 'Expected slide to have role="listitem"');
     });
-
   });
-
 
   it('should have public methods available via widget', () => {
     const el = document.querySelector('.mdlext-carousel');
@@ -290,30 +298,24 @@ describe('MaterialExtCarousel', () => {
     );
     carousel.querySelector('.mdlext-carousel__slide:nth-child(1)').setAttribute('aria-selected', '');
 
-    let ev = new CustomEvent('command', { detail: { action : 'first' } });
-    carousel.dispatchEvent(ev);
-
-    ev = new CustomEvent('command', { detail: { action : 'scroll-prev' } });
-    carousel.dispatchEvent(ev);
-
-    ev = new CustomEvent('command', { detail: { action : 'prev' } });
-    carousel.dispatchEvent(ev);
-
-    ev = new CustomEvent('command', { detail: { action : 'next' } });
-    carousel.dispatchEvent(ev);
-
-    ev = new CustomEvent('command', { detail: { action : 'scroll-next' } });
-    carousel.dispatchEvent(ev);
-
-    ev = new CustomEvent('command', { detail: { action : 'last' } });
-    carousel.dispatchEvent(ev);
+    spyOnCommandEvent(carousel, 'first');
+    spyOnCommandEvent(carousel, 'scroll-prev');
+    spyOnCommandEvent(carousel, 'prev');
+    spyOnCommandEvent(carousel, 'next');
+    spyOnCommandEvent(carousel, 'scroll-next');
+    spyOnCommandEvent(carousel, 'last');
+    spyOnCommandEvent(carousel, 'pause');
 
     // Play has it's own test
     //ev = new CustomEvent('command', { detail: { action : 'play', interval: 1000 } });
     //carousel.dispatchEvent(ev);
+  });
 
-    ev = new CustomEvent('command', { detail: { action : 'pause' } });
-    carousel.dispatchEvent(ev);
+  it('listens to focus and blur events', () => {
+    const carousel = document.querySelector('#carousel-1');
+    const slide = carousel.querySelector('.mdlext-carousel__slide:nth-child(1)');
+    spyOnEvent('focus', slide);
+    spyOnEvent('blur', slide);
   });
 
 
@@ -339,7 +341,6 @@ describe('MaterialExtCarousel', () => {
     assert.isTrue(spy.called, 'Expected "click" event to fire when image is clicked');
     assert.isTrue(event.defaultPrevented, 'Expected "event.preventDefault" to be called when image is clicked');
   });
-
 
   it('can drag an image', () => {
     const carousel = document.querySelector('.mdlext-carousel');
@@ -373,12 +374,31 @@ describe('MaterialExtCarousel', () => {
         'clientY': 0
       });
       window.dispatchEvent(event);
+      mockRaf.step(100);
+
+      window.dispatchEvent(new MouseEvent('mousemove', {
+        'view': window,
+        'bubbles': true,
+        'cancelable': true,
+        'clientX': 200,
+        'clientY': 0
+      }));
+      mockRaf.step(100);
+
+      window.dispatchEvent(new MouseEvent('mousemove', {
+        'view': window,
+        'bubbles': true,
+        'cancelable': true,
+        'clientX': 400,
+        'clientY': 0
+      }));
+      mockRaf.step(100);
 
       event = new MouseEvent('mouseup', {
         'view': window,
         'bubbles': true,
         'cancelable': true,
-        'clientX': 40,
+        'clientX': 400,
         'clientY': 0
       });
       window.dispatchEvent(event);
@@ -391,6 +411,40 @@ describe('MaterialExtCarousel', () => {
     assert.isTrue(mouseDownSpy.called, 'Expected "mousedown" event to fire');
     assert.isTrue(mouseMoveSpy.called, 'Expected "mousemove" event to fire');
     assert.isTrue(mouseUpSpy.called, 'Expected "mouseup" event to fire');
+  });
+
+
+  it('emits a "select" event if drag distance is less than 2px', () => {
+    const carousel = document.querySelector('.mdlext-carousel');
+    const img = carousel.querySelector('img');
+    img.src = './smiley.jpg';
+
+    const spy = sinon.spy();
+    carousel.addEventListener('select', spy);
+
+    try {
+      let event = new MouseEvent('mousedown', {
+        view: window,
+        bubbles: true,
+        cancelable: true,
+        clientX: 10, // clientX/clientY is readonly...
+        clientY: 0  // ... not shure if I can test mouse movement
+      });
+      img.dispatchEvent(event);
+
+      event = new MouseEvent('mouseup', {
+        view: window,
+        bubbles: true,
+        cancelable: true,
+        clientX: 11,
+        clientY: 0
+      });
+      window.dispatchEvent(event);
+    }
+    finally {
+      carousel.removeEventListener('select', spy);
+    }
+    assert.isTrue(spy.called, 'Expected "select" event to fire');
   });
 
 
@@ -498,13 +552,6 @@ describe('MaterialExtCarousel', () => {
 
   it('can play slides', () => {
     const carousel = document.querySelector('#carousel-1');
-    const realRaf = window.requestAnimationFrame;
-    const realCaf = window.cancelAnimationFrame;
-    const mockRaf = createMockRaf();
-    window.requestAnimationFrame = mockRaf.raf;
-    window.cancelAnimationFrame = mockRaf.raf.cancel;
-    const stub = sinon.stub(window, 'requestAnimationFrame', mockRaf.raf);
-
     const spy = sinon.spy();
     carousel.addEventListener('select', spy);
 
@@ -515,21 +562,33 @@ describe('MaterialExtCarousel', () => {
     carousel.addEventListener('select', selectListener);
     */
 
-    try {
-      const ev = new CustomEvent('command', { detail: { action : 'play', interval: 100 } } );
-      carousel.dispatchEvent(ev);
-      mockRaf.step(100);
-    }
-    finally {
-      stub.restore();
-      window.requestAnimationFrame = realRaf;
-      window.cancelAnimationFrame = realCaf;
-    }
+    let ev = new CustomEvent('command', { detail: { action : 'play', type: 'slide', interval: 100 } } );
+    carousel.dispatchEvent(ev);
+    mockRaf.step(100);
+
     assert.isAtLeast(spy.callCount, 2, 'Expected "select" event to fire more than once');
     const c = carousel.MaterialExtCarousel.getConfig();
     expect(c.interval).to.equal(100);
+
+    ev = new CustomEvent('command', { detail: { action : 'play', type: 'scroll', interval: 100 } } );
+    carousel.dispatchEvent(ev);
+    mockRaf.step(100);
   });
 
+
+  function spyOnEvent(name, target) {
+    const spy = sinon.spy();
+    target.addEventListener(name, spy);
+
+    const evt = new Event(name, {
+      bubbles: true,
+      cancelable: true,
+      view: window
+    });
+    target.dispatchEvent(evt);
+    target.removeEventListener(name, spy);
+    assert.isTrue(spy.calledOnce, `Expected event ${name} to fire once`);
+  }
 
   function spyOnKeyboardEvent(target, keyCode, shiftKey=false) {
     const spy = sinon.spy();
@@ -551,5 +610,19 @@ describe('MaterialExtCarousel', () => {
 
     assert.isTrue(spy.calledOnce, `Expected "keydown" event to fire once for key code ${keyCode}`);
   }
+
+  function spyOnCommandEvent(target, action) {
+    const spy = sinon.spy();
+    target.addEventListener('command', spy);
+    try {
+      const event = new CustomEvent('command', { detail: { action : action } });
+      target.dispatchEvent(event);
+    }
+    finally {
+      target.removeEventListener('select', spy);
+    }
+    assert.isTrue(spy.calledOnce, `Expected "command" event to fire once for action ${action}`);
+  }
+
 
 });
