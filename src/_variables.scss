@@ -188,6 +188,12 @@ $mdlext-lightboard-focus-outline-color         : #777777 !default;
 $mdlext-lightboard-figcaption-text-color       : unquote('rgb(#{$palette-grey-400})') !default;
 
 
+/* ==========  Carousel  ========== */
+$mdlext-carousel-slide-border-top-width        : 3px;
+$mdlext-carousel-slide-border-top-color        : unquote("rgb(#{$color-primary-dark})");
+$mdlext-carousel-slide-figcaption-color        : $mdlext-lightboard-figcaption-text-color;
+$mdlext-carousel-slide-ripple-color            : $mdlext-lightboard-ripple-color;
+
 
 /* ==========  Color Themes  ========== */
 

@@ -4,7 +4,7 @@
 A responsive lightbox to be used in conjunction with e.g. a MDLEXT lightboard component.
 
 ## Introduction
-The Material Design Lite Ext (MDLEXT) a Lightbox displays an image filling the screen, and dimming out the rest of the web page.
+The Material Design Lite Ext (MDLEXT) Lightbox displays an image filling the screen, and dimming out the rest of the web page.
 It acts as a modal dialog, using the `<dialog>` element as a container for the lightbox. The component uses 
 the [Material Design Lite Card component](http://www.getmdl.io/components/index.html#cards-section) to provide a layout for the lightbox.
 

@@ -81,19 +81,19 @@ An example of how to use `eq.js` in a SPA can be found [here](https://github.com
 </ul>
 ```
 
-&nbsp;4. Code an `<figure>` element (decorates frame and center image in slide).  
+&nbsp;4. Code a `<figure>` element (decorates frame and center image in slide).  
 ```html
 <ul class="mdlext-lightboard mdlext-js-lightboard">
   <li class="mdlext-lightboard__slide">
     <a href="#" class="mdlext-lightboard__slide__frame">
       <figure>
-      </figure
+      </figure>
     </a>  
   <li>
 </ul>
 ```
 
-&nbsp;5. Inside the `<figure>` element add an `<img>` element with reference to the thumbnail image to be shown in slide. Optionally add a `<figcaption>` element to hold the title.    
+&nbsp;5. Inside the `<figure>` element add an `<img>` element with reference to the thumbnail image to be shown in slide. Optionally add a `<figcaption>` element to hold the image title.    
 ```html
 <ul class="mdlext-lightboard mdlext-js-lightboard">
   <li class="mdlext-lightboard__slide">
@@ -101,7 +101,7 @@ An example of how to use `eq.js` in a SPA can be found [here](https://github.com
       <figure>
         <img src="_D802591.jpg" title="Whooper swans in flight"/>
         <figcaption>_D802591.jpg</figcaption>
-      </figure
+      </figure>
     </a>  
   <li>
 </ul>

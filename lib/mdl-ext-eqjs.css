@@ -272,6 +272,8 @@
 
 /* ==========  Lightboard  ========== */
 
+/* ==========  Carousel  ========== */
+
 /* ==========  Color Themes  ========== */
 
 /**
@@ -317,6 +319,8 @@
 /* ==========     Lightbox     ========== */
 
 /* ==========  Lightboard  ========== */
+
+/* ==========  Carousel  ========== */
 
 /* ==========  Color Themes  ========== */
 
@@ -403,6 +407,8 @@
 /* ==========     Lightbox     ========== */
 
 /* ==========  Lightboard  ========== */
+
+/* ==========  Carousel  ========== */
 
 /* ==========  Color Themes  ========== */
 
@@ -1511,6 +1517,8 @@ html:before {
 
 /* ==========  Lightboard  ========== */
 
+/* ==========  Carousel  ========== */
+
 /* ==========  Color Themes  ========== */
 
 ul.mdlext-lightboard {
@@ -1687,6 +1695,8 @@ ul.mdlext-lightboard {
 
 /* ==========  Lightboard  ========== */
 
+/* ==========  Carousel  ========== */
+
 /* ==========  Color Themes  ========== */
 
 .mdlext-lightboard:before {
@@ -1830,6 +1840,8 @@ html:before {
 /* ==========     Lightbox     ========== */
 
 /* ==========  Lightboard  ========== */
+
+/* ==========  Carousel  ========== */
 
 /* ==========  Color Themes  ========== */
 
@@ -2012,8 +2024,8 @@ ul.mdlext-carousel {
 }
 
 .mdlext-carousel__slide {
-  display: inline-block;
   box-sizing: border-box;
+  display: inline-block;
   position: relative;
   outline: 0;
   margin: 0;
@@ -2045,10 +2057,12 @@ ul.mdlext-carousel {
 }
 
 .mdlext-carousel__slide figure img {
+  box-sizing: border-box;
   max-height: 100%;
 }
 
 .mdlext-carousel__slide figure figcaption {
+  box-sizing: border-box;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-size: 12px;
   font-weight: 400;
@@ -2139,28 +2153,6 @@ ul.mdlext-carousel {
   border-top-color: inherit;
   border-left: 0.35em solid transparent;
   border-right: 0.35em solid transparent;
-  /*
-  @if $direction == up {
-    border-top: none;
-    border-bottom-width: $length;
-    border-bottom-color: $color;
-  }
-  @else if $direction == right {
-    border-right: none;
-    border-left-width: $length;
-    border-left-color: $color;
-  }
-  @else if $direction == down {
-    border-top-width: $length;
-    border-bottom: none;
-    border-top-color: $color;
-  }
-  @else if $direction == left {
-    border-right-width: $length;
-    border-left: none;
-    border-right-color: $color;
-  }
-  */
   position: absolute;
   bottom: 1.8em;
   right: 0.5em;
@@ -2179,28 +2171,6 @@ ul.mdlext-carousel {
   border-top-color: rgba(0,0,0, 0.12);
   border-left: 0.35em solid transparent;
   border-right: 0.35em solid transparent;
-  /*
-  @if $direction == up {
-    border-top: none;
-    border-bottom-width: $length;
-    border-bottom-color: $color;
-  }
-  @else if $direction == right {
-    border-right: none;
-    border-left-width: $length;
-    border-left-color: $color;
-  }
-  @else if $direction == down {
-    border-top-width: $length;
-    border-bottom: none;
-    border-top-color: $color;
-  }
-  @else if $direction == left {
-    border-right-width: $length;
-    border-left: none;
-    border-right-color: $color;
-  }
-  */
 }
 
 .mdlext-selectfield--align-right {
@@ -2424,6 +2394,8 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 /* ==========     Lightbox     ========== */
 
 /* ==========  Lightboard  ========== */
+
+/* ==========  Carousel  ========== */
 
 /* ==========  Color Themes  ========== */
 
@@ -2662,6 +2634,8 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 /* ==========     Lightbox     ========== */
 
 /* ==========  Lightboard  ========== */
+
+/* ==========  Carousel  ========== */
 
 /* ==========  Color Themes  ========== */
 
@@ -3677,28 +3651,6 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   border-top-color: rgba(0, 0, 0, 0.12);
   border-left: 0.35em solid transparent;
   border-right: 0.35em solid transparent;
-  /*
-  @if $direction == up {
-    border-top: none;
-    border-bottom-width: $length;
-    border-bottom-color: $color;
-  }
-  @else if $direction == right {
-    border-right: none;
-    border-left-width: $length;
-    border-left-color: $color;
-  }
-  @else if $direction == down {
-    border-top-width: $length;
-    border-bottom: none;
-    border-top-color: $color;
-  }
-  @else if $direction == left {
-    border-right-width: $length;
-    border-left: none;
-    border-right-color: $color;
-  }
-  */
 }
 
 .mdlext-light-color-theme .mdlext-selectfield__select {
@@ -4548,28 +4500,6 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   border-top-color: rgba(255, 255, 255, 0.26);
   border-left: 0.35em solid transparent;
   border-right: 0.35em solid transparent;
-  /*
-  @if $direction == up {
-    border-top: none;
-    border-bottom-width: $length;
-    border-bottom-color: $color;
-  }
-  @else if $direction == right {
-    border-right: none;
-    border-left-width: $length;
-    border-left-color: $color;
-  }
-  @else if $direction == down {
-    border-top-width: $length;
-    border-bottom: none;
-    border-top-color: $color;
-  }
-  @else if $direction == left {
-    border-right-width: $length;
-    border-left: none;
-    border-right-color: $color;
-  }
-  */
 }
 
 .mdlext-dark-color-theme .mdlext-selectfield__select {

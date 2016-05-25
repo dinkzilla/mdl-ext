@@ -43,18 +43,18 @@ ul.mdlext-carousel {
 }
 
 .mdlext-carousel__slide {
-  display: inline-block;
   box-sizing: border-box;
+  display: inline-block;
   position: relative;
   outline: 0;
   margin: 0;
   padding: 0;
   height: 100%;
-  border-top: 3px solid transparent;
+  border-top: $mdlext-carousel-slide-border-top-width solid transparent;
 
   //&:focus,
   &[aria-selected] {
-    border-top-color: unquote("rgb(#{$color-primary-dark})");
+    border-top-color: $mdlext-carousel-slide-border-top-color;
 
     figure {
     }
@@ -80,12 +80,14 @@ ul.mdlext-carousel {
     cursor: pointer;
 
     img {
+      box-sizing: border-box;
       max-height: 100%;
     }
 
     figcaption {
+      box-sizing: border-box;
       @include typo-caption($colorContrast: false, $usePreferred: true);
-      color: $mdlext-lightboard-figcaption-text-color;
+      color: $mdlext-carousel-slide-figcaption-color;
       position: absolute;
       bottom: 0;
       left: 0;
@@ -120,7 +122,7 @@ ul.mdlext-carousel {
     outline: 0;
 
     & .mdl-ripple {
-      background: $mdlext-lightboard-ripple-color;
+      background: $mdlext-carousel-slide-ripple-color;
     }
   }
 }
