@@ -274,10 +274,6 @@
 
 /* ==========  Color Themes  ========== */
 
-/*
- * Modified from: http://blustemy.io/drawing-pure-css-arrows-with-mixins/
- */
-
 /**
  * Copyright 2016 Leif Olsen. All Rights Reserved.
  *
@@ -2117,10 +2113,6 @@ ul.mdlext-carousel {
  *   https://github.com/mebibou/mdl-selectfield
  */
 
-/*
- * Modified from: http://blustemy.io/drawing-pure-css-arrows-with-mixins/
- */
-
 .mdlext-selectfield {
   position: relative;
   font-size: 16px;
@@ -2129,12 +2121,6 @@ ul.mdlext-carousel {
   max-width: 100%;
   margin: 0;
   padding: 20px 0;
-  box-sizing: border-box;
-}
-
-.mdlext-selectfield *,
-.mdlext-selectfield *::before,
-.mdlext-selectfield *::after {
   box-sizing: border-box;
 }
 
@@ -2147,10 +2133,34 @@ ul.mdlext-carousel {
   content: '';
   width: 0;
   height: 0;
-  border: 0.35em solid transparent;
+  border-top: 0.5em solid inherit;
   border-top-width: 0.5em;
-  border-bottom: none;
+  border-top-style: solid;
   border-top-color: inherit;
+  border-left: 0.35em solid transparent;
+  border-right: 0.35em solid transparent;
+  /*
+  @if $direction == up {
+    border-top: none;
+    border-bottom-width: $length;
+    border-bottom-color: $color;
+  }
+  @else if $direction == right {
+    border-right: none;
+    border-left-width: $length;
+    border-left-color: $color;
+  }
+  @else if $direction == down {
+    border-top-width: $length;
+    border-bottom: none;
+    border-top-color: $color;
+  }
+  @else if $direction == left {
+    border-right-width: $length;
+    border-left: none;
+    border-right-color: $color;
+  }
+  */
   position: absolute;
   bottom: 1.8em;
   right: 0.5em;
@@ -2163,10 +2173,34 @@ ul.mdlext-carousel {
   content: '';
   width: 0;
   height: 0;
-  border: 0.35em solid transparent;
+  border-top: 0.5em solid rgba(0,0,0, 0.12);
   border-top-width: 0.5em;
-  border-bottom: none;
+  border-top-style: solid;
   border-top-color: rgba(0,0,0, 0.12);
+  border-left: 0.35em solid transparent;
+  border-right: 0.35em solid transparent;
+  /*
+  @if $direction == up {
+    border-top: none;
+    border-bottom-width: $length;
+    border-bottom-color: $color;
+  }
+  @else if $direction == right {
+    border-right: none;
+    border-left-width: $length;
+    border-left-color: $color;
+  }
+  @else if $direction == down {
+    border-top-width: $length;
+    border-bottom: none;
+    border-top-color: $color;
+  }
+  @else if $direction == left {
+    border-right-width: $length;
+    border-left: none;
+    border-right-color: $color;
+  }
+  */
 }
 
 .mdlext-selectfield--align-right {
@@ -3637,10 +3671,34 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   content: '';
   width: 0;
   height: 0;
-  border: 0.35em solid transparent;
+  border-top: 0.5em solid rgba(0, 0, 0, 0.12);
   border-top-width: 0.5em;
-  border-bottom: none;
+  border-top-style: solid;
   border-top-color: rgba(0, 0, 0, 0.12);
+  border-left: 0.35em solid transparent;
+  border-right: 0.35em solid transparent;
+  /*
+  @if $direction == up {
+    border-top: none;
+    border-bottom-width: $length;
+    border-bottom-color: $color;
+  }
+  @else if $direction == right {
+    border-right: none;
+    border-left-width: $length;
+    border-left-color: $color;
+  }
+  @else if $direction == down {
+    border-top-width: $length;
+    border-bottom: none;
+    border-top-color: $color;
+  }
+  @else if $direction == left {
+    border-right-width: $length;
+    border-left: none;
+    border-right-color: $color;
+  }
+  */
 }
 
 .mdlext-light-color-theme .mdlext-selectfield__select {
@@ -4484,10 +4542,34 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   content: '';
   width: 0;
   height: 0;
-  border: 0.35em solid transparent;
+  border-top: 0.5em solid rgba(255, 255, 255, 0.26);
   border-top-width: 0.5em;
-  border-bottom: none;
+  border-top-style: solid;
   border-top-color: rgba(255, 255, 255, 0.26);
+  border-left: 0.35em solid transparent;
+  border-right: 0.35em solid transparent;
+  /*
+  @if $direction == up {
+    border-top: none;
+    border-bottom-width: $length;
+    border-bottom-color: $color;
+  }
+  @else if $direction == right {
+    border-right: none;
+    border-left-width: $length;
+    border-left-color: $color;
+  }
+  @else if $direction == down {
+    border-top-width: $length;
+    border-bottom: none;
+    border-top-color: $color;
+  }
+  @else if $direction == left {
+    border-right-width: $length;
+    border-left: none;
+    border-right-color: $color;
+  }
+  */
 }
 
 .mdlext-dark-color-theme .mdlext-selectfield__select {

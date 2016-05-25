@@ -1,12 +1,36 @@
-/*
- * Modified from: http://blustemy.io/drawing-pure-css-arrows-with-mixins/
- */
-@mixin mdlext-arrow($direction: down, $base-width: 15px, $length: 10px, $color: inherit) {
+@import "functions";
+
+/// Triangle helper mixin
+/// Modified from: http://blustemy.io/drawing-pure-css-arrows-with-mixins/
+///                https://css-tricks.com/snippets/sass/css-triangle-mixin/
+/// @param {Direction} $direction - Triangle direction, either `top`, `right`, `bottom` or `left`
+/// @param {Color} $color [currentcolor] - Triangle color
+/// @param {Length} $size [1em] - Triangle size
+@mixin mdlext-arrow($direction: bottom, $base-width: 15px, $length: 10px, $color: inherit) {
   content: '';
   width: 0;
   height: 0;
-  border: ($base-width / 2) solid transparent;
+  //border: ($base-width / 2) solid transparent;
 
+  border-#{mdlext-opposite-direction($direction)}: $length solid $color;
+
+  border-#{mdlext-opposite-direction($direction)}-width: $length;
+  border-#{mdlext-opposite-direction($direction)}-style: solid;
+  border-#{mdlext-opposite-direction($direction)}-color: $color;
+
+  $perpendicular-borders: ($base-width / 2) solid transparent;
+
+  @if $direction == top or $direction == bottom {
+    border-left:   $perpendicular-borders;
+    border-right:  $perpendicular-borders;
+  }
+  @else if $direction == right or $direction == left {
+    border-bottom: $perpendicular-borders;
+    border-top:    $perpendicular-borders;
+  }
+
+
+  /*
   @if $direction == up {
     border-top: none;
     border-bottom-width: $length;
@@ -27,4 +51,7 @@
     border-left: none;
     border-right-color: $color;
   }
+  */
 }
+
+

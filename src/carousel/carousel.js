@@ -525,6 +525,7 @@ import { inOutQuintic } from '../utils/easing';
   /**
    * Upgrade slides
    * Use if more list elements are added later (dynamically)
+   * @TODO Use mutation observer
    *
    * @public
    */

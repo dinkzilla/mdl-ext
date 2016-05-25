@@ -321,6 +321,9 @@ $mdlext-light-data-table-dividers:                       1px solid $mdlext-light
 
 // Selectfield
 // Uses variables from textfield
+$mdlext-selectfield-arrow-width: 0.7em;
+$mdlext-selectfield-arrow-length: 0.5em;
+
 
 // Bordered fields
 $mdlext-light-bordered-field-background-color:          rgba($mdlext-light-content-background-color, 0.1) !default;
