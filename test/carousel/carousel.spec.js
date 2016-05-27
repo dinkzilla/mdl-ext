@@ -667,7 +667,7 @@ describe('MaterialExtCarousel', () => {
 
     let ev = new CustomEvent('command', { detail: { action : 'play', type: 'slide', interval: 100 } } );
     carousel.dispatchEvent(ev);
-    mockRaf.step(100);
+    mockRaf.step(200);
 
     assert.isAtLeast(spy.callCount, 2, 'Expected "select" event to fire more than once');
     const c = carousel.MaterialExtCarousel.getConfig();
