@@ -77,7 +77,7 @@ describe('MaterialExtStickyHeader', () => {
 
 
     // Stub unsupported jsdom window.MutationObserver
-    window.MutationObserver = window.MutationObserver || (function(undefined) {
+    window.MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver ||  (function(undefined) {
       "use strict";
 
       function MutationObserver(listener) {
@@ -101,6 +101,8 @@ describe('MaterialExtStickyHeader', () => {
 
       return MutationObserver;
     })(void 0);
+
+    global.MutationObserver = window.MutationObserver;
 
     //componentHandler.upgradeAllRegistered();
     //componentHandler.upgradeDom();

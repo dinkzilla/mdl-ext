@@ -77,9 +77,24 @@ describe('MaterialExtCarousel', () => {
   </li>
 </ul>`;
 
-  const data_config_fragment = `
+  const data_config_fragment_single_quotes = `
 <ul id="carousel-3" class="mdlext-carousel mdlext-js-carousel mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events" 
   data-config="{ 'interactive': true, 'autostart': false, 'type': 'scroll', 'interval': 5000 }">
+  <li class="mdlext-carousel__slide">
+    <figure>
+      <img src="./smiley.jpg" alt="smiley" title="Smile :-)"/>
+    </figure>
+  </li>
+  <li class="mdlext-carousel__slide">
+    <figure>
+      <img src="./smiley.jpg" alt="smiley" title="Smile :-)"/>
+    </figure>
+  </li>
+</ul>`;
+
+  const data_config_fragment_double_quotes = `
+<ul id="carousel-5" class="mdlext-carousel mdlext-js-carousel mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events" 
+  data-config='{ "interactive": false, "autostart": false, "type": "slide", "interval": 2000 }'>
   <li class="mdlext-carousel__slide">
     <figure>
       <img src="./smiley.jpg" alt="smiley" title="Smile :-)"/>
@@ -107,6 +122,13 @@ describe('MaterialExtCarousel', () => {
   </li>
 </ul>`;
 
+  const carousel_slide_fragment = `
+<li class="mdlext-carousel__slide">
+  <figure>
+    <img src="./smiley.jpg" alt="smiley" title="Smile :-)"/>
+  </figure>
+</li>`;
+
 
   let realRaf;
   let realCaf;
@@ -131,6 +153,35 @@ describe('MaterialExtCarousel', () => {
     window.requestAnimationFrame = mockRaf.raf;
     window.cancelAnimationFrame = mockRaf.raf.cancel;
     rAFStub = sinon.stub(window, 'requestAnimationFrame', mockRaf.raf);
+
+    // Stub unsupported jsdom window.MutationObserver
+    window.MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver ||  (function(undefined) {
+        "use strict";
+
+        function MutationObserver(listener) {
+          this._watched = [];
+          this._listener = listener;
+        }
+
+        MutationObserver.prototype = {
+
+          observe: function($target, config) {
+          },
+
+          takeRecords: function() {
+            var mutations = [];
+            return mutations;
+          },
+          disconnect: function() {
+            this._watched = [];
+          }
+        };
+
+        return MutationObserver;
+      })(void 0);
+
+    global.MutationObserver = window.MutationObserver;
+
   });
 
   after ( () => {
@@ -260,6 +311,36 @@ describe('MaterialExtCarousel', () => {
         const dataUpgraded = ripple.getAttribute('data-upgraded');
         assert.isNotNull(dataUpgraded, 'Expected attribute "data-upgraded" to exist');
         assert.isAtLeast(dataUpgraded.indexOf('MaterialRipple'), 0, 'Expected "data-upgraded" attribute to contain "MaterialRipple');
+      });
+    }
+    finally {
+      removeChilds(container);
+    }
+  });
+
+
+  it('upgrades dynamically inserted slides', () => {
+    const container = document.querySelector('#mount-2');
+    try {
+      container.insertAdjacentHTML('beforeend', fragment);
+      const element = document.querySelector('#carousel-2');
+
+      componentHandler.upgradeDom();
+
+      // Insert a new slide after component has been upgraded
+      element.insertAdjacentHTML('beforeend', carousel_slide_fragment);
+
+      [...document.querySelectorAll('#mount-2 mdlext-carousel__slide')].forEach( slide => {
+
+        const ripple = slide.querySelector('.mdlext-carousel__slide__ripple-container');
+        assert.isNotNull(ripple, 'Expected ripple to exist');
+
+        const dataUpgraded = ripple.getAttribute('data-upgraded');
+        assert.isNotNull(dataUpgraded, 'Expected attribute "data-upgraded" to exist');
+        assert.isAtLeast(dataUpgraded.indexOf('MaterialRipple'), 0, 'Expected "data-upgraded" attribute to contain "MaterialRipple');
+
+        assert.equal(slide.getAttribute('role'), 'listitem', 'Expected slide to have role="listitem"');
+        assert.equal(slide.getAttribute('tabindex'), '0', 'Expected slide to have tabindex="0"');
       });
     }
     finally {
@@ -515,7 +596,7 @@ describe('MaterialExtCarousel', () => {
 
   it('reads "data-config" attribute and stores config data', () => {
     const container = document.querySelector('#mount-2');
-    container.insertAdjacentHTML('beforeend', data_config_fragment);
+    container.insertAdjacentHTML('beforeend', data_config_fragment_single_quotes);
 
     try {
       const element = document.querySelector('#carousel-3');
@@ -528,6 +609,28 @@ describe('MaterialExtCarousel', () => {
       expect(c.autostart).to.be.false;
       expect(c.type).to.equal('scroll');
       expect(c.interval).to.equal(5000);
+      expect(c.animationLoop).to.not.be.null;
+    }
+    finally {
+      removeChilds(container);
+    }
+  });
+
+  it('accepts "data-config" attribute with double quotes', () => {
+    const container = document.querySelector('#mount-2');
+    container.insertAdjacentHTML('beforeend', data_config_fragment_double_quotes);
+
+    try {
+      const element = document.querySelector('#carousel-5');
+      expect(() => {
+        componentHandler.upgradeElement(element, 'MaterialExtCarousel');
+      }).to.not.throw(Error);
+
+      const c = element.MaterialExtCarousel.getConfig();
+      expect(c.interactive).to.be.false;
+      expect(c.autostart).to.be.false;
+      expect(c.type).to.equal('slide');
+      expect(c.interval).to.equal(2000);
       expect(c.animationLoop).to.not.be.null;
     }
     finally {
@@ -623,6 +726,5 @@ describe('MaterialExtCarousel', () => {
     }
     assert.isTrue(spy.calledOnce, `Expected "command" event to fire once for action ${action}`);
   }
-
 
 });

@@ -72,6 +72,8 @@ import { inOutQuintic } from '../utils/easing';
       animationLoop: new MdlExtAnimationLoop(1000)
     };
 
+    this.drawing_ = false; // Used by MutationObserver
+
     // Initialize instance.
     this.init();
   };
@@ -611,10 +613,31 @@ import { inOutQuintic } from '../utils/easing';
 
         // Click is handled by drag
         this.element_.addEventListener('click', e => e.preventDefault(), true);
-
-        // Listen to custom event
-        this.element_.addEventListener('command', this.commandHandler_.bind(this), false);
       }
+
+      // Listen to custom 'command' event
+      this.element_.addEventListener('command', this.commandHandler_.bind(this), false);
+
+      // Detect insertions in components DOM
+      const MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+
+      // jsdom does not support MutationObserver - so this is not testable
+      /* istanbul ignore next */
+      new MutationObserver( mutations => {
+
+        mutations.forEach( mutation => {
+          if (mutation.addedNodes.length > 0) {
+            window.requestAnimationFrame(() => this.upgradeSlides() );
+          }
+        });
+
+      }).observe( this.element_, {
+        attributes: false,
+        childList: true,
+        characterData: false,
+        subtree: false
+      });
+
 
       // Set upgraded flag
       this.element_.classList.add(IS_UPGRADED);

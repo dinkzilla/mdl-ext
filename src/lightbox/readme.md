@@ -262,8 +262,9 @@ if(!dialog.open) {
 }
 ```
 
-### Example
-See [the live demo](http://leifoolsen.github.io/mdl-ext/demo/lightbox.html)
+### Examples
+* See: [snippets/carousel.html](./snippets/lightbox.html)
+* TRy out [the live demo](http://leifoolsen.github.io/mdl-ext/demo/lightbox.html)
 
 ## Keyboard interaction
 The lightbox interacts with the following keyboard keys.

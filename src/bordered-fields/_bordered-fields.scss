@@ -83,6 +83,12 @@
 
   }
 
+  .mdlext-selectfield:after {
+    // 'magic' numbers
+    top: 60%;
+    transform: translateY(-25%);
+  }
+
   // Styling for the label / floating label.
   .mdl-textfield,
   .mdlext-selectfield {

@@ -2058,7 +2058,7 @@ ul.mdlext-carousel {
 }
 
 .mdlext-carousel__slide[aria-selected] {
-  border-top-color: rgb(48,63,159);
+  border-top-color: rgb(255,64,129);
 }
 
 .mdlext-carousel__slide[aria-selected] figcaption {
@@ -2177,7 +2177,9 @@ ul.mdlext-carousel {
   border-left: 0.35em solid transparent;
   border-right: 0.35em solid transparent;
   position: absolute;
-  bottom: 1.8em;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   right: 0.5em;
   padding: 0;
   pointer-events: none;
@@ -2499,6 +2501,12 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select,
 .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select {
   padding-right: calc(1em + 4px);
+}
+
+.mdlext-bordered-fields .mdlext-selectfield:after {
+  top: 60%;
+  -webkit-transform: translateY(-25%);
+          transform: translateY(-25%);
 }
 
 .mdlext-bordered-fields .mdl-textfield.is-focused .mdl-textfield__label,

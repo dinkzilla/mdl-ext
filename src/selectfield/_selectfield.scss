@@ -54,7 +54,8 @@
   &:after {
     @include mdlext-arrow(bottom, $mdlext-selectfield-arrow-width, $mdlext-selectfield-arrow-length, inherit);
     position: absolute;
-    bottom: 1.8em;
+    top: 50%;
+    transform: translateY(-50%);
     right: 0.5em;
     padding: 0;
     pointer-events: none;

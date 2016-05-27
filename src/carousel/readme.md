@@ -1,6 +1,7 @@
 # Carousel
 
 ![Lightbox](../../etc/carousel.png)
+
 A responsive image carousel.
 
 ## Introduction
@@ -16,16 +17,17 @@ interchangeably.
 ### Features:
 * Navigate carousel using keyboard (arrow keys, tab, pgup, pgdown, home, end), mouse drag, touch events, or by sending custom events to the carousel (first, scroll-prev, prev, next, scroll-next, last, play, pause)
 * Select a particular image  using enter or space key, or by clicking an image 
-* Cycle images from left to right at a given interval, a slideshow
+* Cycle images at a given interval - a slideshow
 * Set slideshow interval via a data attribute or as a part of the play custom event
 * Stop slideshow via custom event (pause) or by a user interaction, e.g clicking an image
 * User interactions via keyboard or mouse may be blocked, if configured 
 * Start slideshow at page load using a data attribute
 * The carousel emits custom events reflecting a user action. E.g. clicking an image will emit a 'select' event with a detail object holding a reference to the selected image.
-* The carousel pauses any running animation on window.bur or tab.blur
 
 ### Limitations:
-* The carousel should pause any running animation when the carousel is not in window viewport - mot implemented
+* The carousel pauses any running animation on window.bur or tab.blur - not implemented
+* The carousel should pause any running animation when the carousel is not in window viewport - not implemented
+* Listen to mutation events - not implemented (uses a public method for now)
 * Only horizontal layout in first release
 
 
@@ -84,7 +86,8 @@ interchangeably.
 &nbsp;6. Repeat steps 3..5 for each slide required.
 
 ### Examples
-See: [snippets/carousel.html](./snippets/carousel.html)
+* See: [snippets/carousel.html](./snippets/carousel.html)
+* Or try out the [live demo](http://leifoolsen.github.io/mdl-ext/demo/carousel.html)
 
 ## Interactions
 
@@ -101,27 +104,94 @@ The carousel interacts with the following keyboard keys.
 *   `Down arrow` - behaves the same as right arrow.
 *   `End` - When focus is on a slide, an `End` key press moves focus to the last slide.
 *   `Home` - When focus is on a slide, a `Home` key press moves focus to the first slide.
-*   `Enter/Space` - When focus is on a slide, pressing `Enter` or `Space` selects the focused slide. The carousel emits a **select** event.
+*   `Enter/Space` - When focus is on a slide, pressing `Enter` or `Space` selects the focused slide.
 
 ### Mouse / Touch interaction
-*   `Drag or Swipe left` - Moves slides outside container viewport into view.
-*   `Drag or Swipe right` - Moves slides outside container viewport into view
+*   `Drag or Swipe left` - Move slides outside container viewport into view.
+*   `Drag or Swipe right` - Move slides outside container viewport into view
+
+
+## Configuration
+The component can be configured using a `data-config` attribute. The attribute value is a JSON string with the following properties.
+
+| Property        |    |    |
+|-----------------|----|----|
+| `interactive`   | if `true`, the user can use keyboard or mouse to navigate the slides | default: `true` |
+| `autostart`     | if `true`, the slideshow starts immediately after component initialization | default: `false` |
+| `type`          | animation type, `'slide'`, advances one slide,  `'scroll'`, moves next sequence of slides into view | default `'slide'` |
+| `interval`      | animation interval, in milliseconds | default `1000` |
+
+
+The `data-config` attribute must be a valid JSON string. You can use single or double quotes for the JSON properties. 
+
+Example 1, single quotes in JSON config string:
+```html
+<ul class="mdlext-carousel mdlext-js-carousel mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events" 
+  data-config="{ 'interactive': true, 'autostart': false, 'type': 'slide', 'interval': 2000 }">
+  ......
+</ul>
+```
+
+Example 2, double quotes in JSON config string:
+```html
+<ul class="mdlext-carousel mdlext-js-carousel" 
+  data-config='{ "interactive": false, "autostart": true, "type": "scroll", "interval": 5000 }'>
+  ......
+</ul>
+```
 
 ## Events
 Interaction with the component programmatically is performed by sending events to the component, and receive responses 
 from the component.  
 
 ### Events listened to
+A client can send a `command` custom event to the carousel. The command event holds an action detial object defining 
+the action to perform.
+
+```javascript
+new CustomEvent('command', { detail: { action : 'first' } });
+new CustomEvent('command', { detail: { action : 'scroll-prev' } });
+new CustomEvent('command', { detail: { action : 'prev' } });
+new CustomEvent('command', { detail: { action : 'next' } });
+new CustomEvent('command', { detail: { action : 'scroll-next' } });
+new CustomEvent('command', { detail: { action : 'last' } });
+new CustomEvent('command', { detail: 
+  { 
+    action : 'play', 
+    interval: 3000   // Interval is optional, overrides value set by 'data-config'
+  } 
+}); 
+new CustomEvent('command', { detail: { action : 'pause' } });
+```
+
+Refer to the [snippets/lightbox.html](./snippets/carousel.html) for usage.
 
 ### Events emitted
+When a user interacts with the component, or the component receives a `command` custom event, the component responds
+with a `select` custom event reflecting the action performed and the selected slide element.
 
-## Configuration options
+The `select` event has the following format:
+
+```javascript
+const ev = createCustomEvent('select', {
+  bubbles: true,
+  cancelable: true,
+  detail: {
+    command: command,
+    keyCode: keyCode,
+    source: slide
+  }
+});
+```
+
+Refer to the [snippets/lightbox.html](./snippets/carousel.html) for usage.
+
 
 ## Public methods
 
 ### `stopAnimation()`
 
-Due to a bug in Material Design Lite, a client is required to stop any running animation before the component is removed 
+Due to a bug in Material Design Lite (v1.1.3), a client is required to stop any running animation before the component is removed 
 from the MDL component handler. If you are building e.g. a single page application, any running animation must be stopped
 before a page frament containing the carousel is removed from DOM. In a static page web application there is no need to 
 stop any running animation.
@@ -140,9 +210,17 @@ componentHandler.downgradeElements([...content]);
   }
 });
 
-// Proper method to remove elements from DOM
-// See: http://jsperf.com/empty-an-element/16 
+// Remove elements from DOM.
+// Proper method to remove elements from DOM, see: http://jsperf.com/empty-an-element/16 
 ```
+
+### `upgradeSlides()`
+The component uses a mutation observer to detect insertions of slides into the components DOM tree after component 
+initialization. If the observer, for some reason, does not work, call `upgradeSlides()` to upgrade newly inserted slides.
+
+### `getConfig()`
+Returns the `config` object.
+
 
 ## CSS classes, attributes and SASS variables
 The MDLEXT CSS classes apply various predefined visual and behavioral enhancements to the carousel.
@@ -158,7 +236,7 @@ Attributes.
 
 | Attribute | Effect | Remarks |
 |-----------|--------|---------|
-| `data-config` | A JSON object defining startup configurations | The JSON object has the following structure:<br>`{ 'interactive': false, 'autostart': false, 'type': 'slide', 'interval': 2000 }` |
+| `data-config` | A JSON object defining startup configurations |  |
 | `aria-selected` | The selected `mdlext-carousel__slide` element | Only one element can be selected at the same time |
 | `list` | The component add the role `list` to self |  |
 | `listitem` | The component add the role `listitem` to `mdlext-carousel__slide` items |  |
