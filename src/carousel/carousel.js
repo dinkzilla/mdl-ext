@@ -335,7 +335,7 @@ import { inOutQuintic } from '../utils/easing';
    * @param event
    * @private
    */
-  MaterialExtCarousel.prototype.dragHandler_ = function(event ) {
+  MaterialExtCarousel.prototype.dragHandler_ = function(event) {
     event.preventDefault();
 
     // Cancel slideshow if running
@@ -532,6 +532,7 @@ import { inOutQuintic } from '../utils/easing';
    * @public
    */
   MaterialExtCarousel.prototype.upgradeSlides = function() {
+
     const hasRippleEffect = this.element_.classList.contains(RIPPLE_EFFECT);
 
     [...this.element_.querySelectorAll(`.${SLIDE}`)].forEach( slide => {
@@ -545,6 +546,14 @@ import { inOutQuintic } from '../utils/easing';
         if (hasRippleEffect) {
           addRipple_(slide);
         }
+
+        // Listen to drag events
+        //const img = slide.querySelector('img');
+        //if(img) {
+        slide.addEventListener('click', e => e.preventDefault(), true); // Click is handled by drag
+        slide.addEventListener('mousedown', this.dragHandler_.bind(this), true);
+        slide.addEventListener('touchstart', this.dragHandler_.bind(this), true);
+        //}
       }
       else {
         slide.setAttribute('tabindex', -1);
@@ -590,16 +599,14 @@ import { inOutQuintic } from '../utils/easing';
         this.element_.setAttribute('tabindex', -1);
       }
 
-      // Ripple
-      const hasRippleEffect = this.element_.classList.contains(RIPPLE_EFFECT);
-      if (hasRippleEffect) {
-        this.element_.classList.add(RIPPLE_EFFECT_IGNORE_EVENTS);
-      }
-
-      // Slides collection
-      this.upgradeSlides();
-
       if(this.config_.interactive) {
+
+        // Ripple
+        const hasRippleEffect = this.element_.classList.contains(RIPPLE_EFFECT);
+        if (hasRippleEffect) {
+          this.element_.classList.add(RIPPLE_EFFECT_IGNORE_EVENTS);
+        }
+
         // Listen to focus/blur events
         this.element_.addEventListener('focus', this.focusHandler_.bind(this), true);
         this.element_.addEventListener('blur', this.blurHandler_.bind(this), true);
@@ -608,12 +615,15 @@ import { inOutQuintic } from '../utils/easing';
         this.element_.addEventListener('keydown', this.keyDownHandler_.bind(this), true);
 
         // Listen to drag events
-        this.element_.addEventListener('mousedown', this.dragHandler_.bind(this), true);
-        this.element_.addEventListener('touchstart', this.dragHandler_.bind(this), true);
+        //this.element_.addEventListener('mousedown', this.dragHandler_.bind(this), true);
+        //this.element_.addEventListener('touchstart', this.dragHandler_.bind(this), true);
 
         // Click is handled by drag
-        this.element_.addEventListener('click', e => e.preventDefault(), true);
+        //this.element_.addEventListener('click', e => e.preventDefault(), true);
       }
+
+      // Slides collection
+      this.upgradeSlides();
 
       // Listen to custom 'command' event
       this.element_.addEventListener('command', this.commandHandler_.bind(this), false);
