@@ -20,10 +20,10 @@ interchangeably.
 * Cycle images at a given interval - a slideshow
 * Set slideshow interval via a data attribute or as a part of the play custom event
 * Stop slideshow via custom event (pause) or by a user interaction, e.g clicking an image
-* User interactions via keyboard or mouse may be blocked, if configured 
-* Start slideshow at page load using a data attribute
+* User interactions via keyboard, mouse or touch events may be blocked, if configured 
+* Start slideshow at component initialization using a data attribute
 * The carousel emits custom events reflecting a user action. E.g. clicking an image will emit a 'select' event with a detail object holding a reference to the selected image.
-* Listen to mutation events, to detect insertions in components DOM tree 
+* Listen to mutation events, to detect insertions of elements into components DOM tree 
 
 ### Limitations:
 * The carousel should pause any running animation on window.bur or tab.blur - not implemented
