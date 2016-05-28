@@ -341,8 +341,8 @@ import { inOutQuintic } from '../utils/easing';
     // Cancel slideshow if running
     this.cancelSlideShow_();
 
-    //let updating = false;
-    //let rAFDragId = 0;
+    let updating = false;
+    let rAFDragId = 0;
 
     const startX = event.clientX || (event.touches !== undefined ? event.touches[0].clientX : 0);
     let prevX = startX;
@@ -360,24 +360,22 @@ import { inOutQuintic } from '../utils/easing';
       }
 
       prevX = currentX;
-      //updating = false;
+      updating = false;
     };
 
     // drag handler
     const drag = e => {
       e.preventDefault();
-      update(e);
 
-      //if(!updating) {
-      //  rAFDragId = window.requestAnimationFrame( () => update(e));
-      //  updating = true;
-      //}
+      if(!updating) {
+        rAFDragId = window.requestAnimationFrame( () => update(e));
+        updating = true;
+      }
     };
 
     // end drag handler
     const endDrag = e => {
       e.preventDefault();
-      //const x = e.clientX || (e.touches !== undefined ? e.touches[0].clientX : 0);
 
       this.element_.removeEventListener('mousemove', drag);
       this.element_.removeEventListener('touchmove', drag);
@@ -385,14 +383,11 @@ import { inOutQuintic } from '../utils/easing';
       window.removeEventListener('touchend', endDrag);
 
       // cancel any existing drag rAF, see: http://www.html5rocks.com/en/tutorials/speed/animations/
-      //window.cancelAnimationFrame(rAFDragId);
+      window.cancelAnimationFrame(rAFDragId);
 
-      // If mouse did not move, trigger custom select event
-      //if(Math.abs(startX-x) < 2) {
       const slide = getSlide_(targetElement);
       setFocus_(slide);
       this.emitSelectEvent_('click', null,  slide);
-      //}
     };
 
     this.element_.addEventListener('mousemove', drag);
