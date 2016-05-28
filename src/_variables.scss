@@ -190,6 +190,7 @@ $mdlext-lightboard-figcaption-text-color       : unquote('rgb(#{$palette-grey-40
 
 /* ==========  Carousel  ========== */
 $mdlext-carousel-slide-border-top-width        : 3px;
+$mdlext-carousel-slide-margin-horizontal       : 0;
 $mdlext-carousel-slide-border-top-color        : unquote("rgb(#{$color-accent})");
 $mdlext-carousel-slide-figcaption-color        : $mdlext-lightboard-figcaption-text-color;
 $mdlext-carousel-slide-ripple-color            : $mdlext-lightboard-ripple-color;

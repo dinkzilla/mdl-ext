@@ -2014,7 +2014,7 @@ ul.mdlext-carousel {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow: hidden;
   height: 100%;
   width: 100%;
   display: block;
@@ -2028,7 +2028,7 @@ ul.mdlext-carousel {
   display: inline-block;
   position: relative;
   outline: 0;
-  margin: 0;
+  margin: 0 0;
   padding: 0;
   height: 100%;
   border-top: 3px solid transparent;
@@ -2053,7 +2053,6 @@ ul.mdlext-carousel {
   height: 100%;
   margin: 0;
   padding: 0;
-  cursor: pointer;
 }
 
 .mdlext-carousel__slide figure img {

@@ -154,8 +154,9 @@ describe('MaterialExtCarousel', () => {
     window.cancelAnimationFrame = mockRaf.raf.cancel;
     rAFStub = sinon.stub(window, 'requestAnimationFrame', mockRaf.raf);
 
+
     // Stub unsupported jsdom window.MutationObserver
-    window.MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver ||  (function(undefined) {
+    window.MutationObserver = window.MutationObserver ||  (function(undefined) {
         "use strict";
 
         function MutationObserver(listener) {
@@ -180,9 +181,12 @@ describe('MaterialExtCarousel', () => {
         return MutationObserver;
       })(void 0);
 
+    // TODO: Use mutationobserver-polyfill.js
+    //requireUncached('../testutils/mutationobserver-polyfill');
     global.MutationObserver = window.MutationObserver;
 
   });
+
 
   after ( () => {
     rAFStub.restore();
@@ -677,7 +681,6 @@ describe('MaterialExtCarousel', () => {
     carousel.dispatchEvent(ev);
     mockRaf.step(100);
   });
-
 
   function spyOnEvent(name, target) {
     const spy = sinon.spy();

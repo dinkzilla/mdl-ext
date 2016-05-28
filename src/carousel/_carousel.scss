@@ -33,7 +33,7 @@ ul.mdlext-carousel {
 
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow: hidden;
   height: 100%;  // Use a container to constrain height and width
   width: 100% ;
   display: block;
@@ -47,8 +47,8 @@ ul.mdlext-carousel {
   display: inline-block;
   position: relative;
   outline: 0;
-  margin: 0;
-  padding: 0;
+  margin: 0 $mdlext-carousel-slide-margin-horizontal;
+  padding:0;
   height: 100%;
   border-top: $mdlext-carousel-slide-border-top-width solid transparent;
 
@@ -77,7 +77,6 @@ ul.mdlext-carousel {
     height: 100%;
     margin: 0;
     padding: 0;
-    cursor: pointer;
 
     img {
       box-sizing: border-box;

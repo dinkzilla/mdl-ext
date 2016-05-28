@@ -77,7 +77,7 @@ describe('MaterialExtStickyHeader', () => {
 
 
     // Stub unsupported jsdom window.MutationObserver
-    window.MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver ||  (function(undefined) {
+    window.MutationObserver = window.MutationObserver || (function(undefined) {
       "use strict";
 
       function MutationObserver(listener) {
@@ -102,6 +102,8 @@ describe('MaterialExtStickyHeader', () => {
       return MutationObserver;
     })(void 0);
 
+    // TODO: Use mutationobserver-polyfill.js
+    //requireUncached('../testutils/mutationobserver-polyfill');
     global.MutationObserver = window.MutationObserver;
 
     //componentHandler.upgradeAllRegistered();

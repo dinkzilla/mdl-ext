@@ -23,11 +23,11 @@ interchangeably.
 * User interactions via keyboard or mouse may be blocked, if configured 
 * Start slideshow at page load using a data attribute
 * The carousel emits custom events reflecting a user action. E.g. clicking an image will emit a 'select' event with a detail object holding a reference to the selected image.
+* Listen to mutation events, to detect insertions in components DOM tree 
 
 ### Limitations:
-* The carousel pauses any running animation on window.bur or tab.blur - not implemented
+* The carousel should pause any running animation on window.bur or tab.blur - not implemented
 * The carousel should pause any running animation when the carousel is not in window viewport - not implemented
-* Listen to mutation events - not implemented (uses a public method for now)
 * Only horizontal layout in first release
 
 
@@ -162,9 +162,12 @@ new CustomEvent('command', { detail:
   } 
 }); 
 new CustomEvent('command', { detail: { action : 'pause' } });
+
+// Trigger the event
+myCarousel.dispatchEvent(ev);
 ```
 
-Refer to the [snippets/lightbox.html](./snippets/carousel.html) for usage.
+Refer to [snippets/lightbox.html](./snippets/carousel.html) for usage.
 
 ### Events emitted
 When a user interacts with the component, or the component receives a `command` custom event, the component responds
@@ -184,7 +187,16 @@ const ev = createCustomEvent('select', {
 });
 ```
 
-Refer to the [snippets/lightbox.html](./snippets/carousel.html) for usage.
+Set up a `select` listener.
+```javascript
+document.querySelector('#my-carousel').addEventListener('select', function(e) {
+  var selectedElement = e.detail.source;
+  console.log('Selected element', selectedElement);
+  var selectImage = selectedElement.querySelector('img');
+});
+
+```
+Refer to [snippets/lightbox.html](./snippets/carousel.html) for usage.
 
 
 ## Public methods
@@ -215,7 +227,7 @@ componentHandler.downgradeElements([...content]);
 ```
 
 ### `upgradeSlides()`
-The component uses a mutation observer to detect insertions of slides into the components DOM tree after component 
+The component uses a mutation observer oo upgrade slides inserted into the components DOM tree after component 
 initialization. If the observer, for some reason, does not work, call `upgradeSlides()` to upgrade newly inserted slides.
 
 ### `getConfig()`
@@ -248,6 +260,7 @@ SASS variables.
 |----------------|
 | `$mdlext-carousel-slide-border-top-width` | 
 | `$mdlext-carousel-slide-border-top-color` | 
+| `$mdlext-carousel-slide-margin-horizontal` |
 | `$mdlext-carousel-slide-figcaption-color` | 
 | `$mdlext-carousel-slide-ripple-color` |     
 

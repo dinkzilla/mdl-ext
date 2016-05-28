@@ -284,53 +284,48 @@ import { inOutQuintic } from '../utils/easing';
 
         let slide = getSlide_(event.target);
 
+        if(!slide) {
+          return;
+        }
+
         // Cancel slideshow if running
         this.cancelSlideShow_();
 
         switch (event.keyCode) {
           case VK_ARROW_UP:
           case VK_ARROW_LEFT:
-            event.preventDefault();
             action = 'prev';
-            if(slide) {
-              slide = slide.previousElementSibling;
-              setFocus_(slide);
-            }
+            slide = slide.previousElementSibling;
             break;
 
           case VK_ARROW_DOWN:
           case VK_ARROW_RIGHT:
-            event.preventDefault();
             action = 'next';
-            if(slide) {
-              slide = slide.nextElementSibling;
-              setFocus_(slide);
-            }
+            slide = slide.nextElementSibling;
             break;
 
           case VK_TAB:
             if (event.shiftKey) {
               action = 'prev';
-              if(slide) {
-                slide = slide.previousElementSibling;
-              }
+              slide = slide.previousElementSibling;
             }
             else {
               action = 'next';
-              if(slide) {
-                slide = slide.nextElementSibling;
-              }
+              slide = slide.nextElementSibling;
             }
             break;
 
           case VK_SPACE:
           case VK_ENTER:
-            event.preventDefault();
             action = 'select';
             break;
         }
 
-        this.emitSelectEvent_(action, event.keyCode,  slide);
+        if(slide) {
+          event.preventDefault();
+          setFocus_(slide);
+          this.emitSelectEvent_(action, event.keyCode, slide);
+        }
       }
     }
   };
@@ -492,21 +487,23 @@ import { inOutQuintic } from '../utils/easing';
   };
 
   const addRipple_ = slide => {
-    const rippleContainer = document.createElement('span');
-    rippleContainer.classList.add(RIPPLE_CONTAINER);
-    rippleContainer.classList.add(RIPPLE_EFFECT);
-    const ripple = document.createElement('span');
-    ripple.classList.add(RIPPLE);
-    rippleContainer.appendChild(ripple);
+    if(!slide.querySelector(`.${RIPPLE_CONTAINER}`)) {
+      const rippleContainer = document.createElement('span');
+      rippleContainer.classList.add(RIPPLE_CONTAINER);
+      rippleContainer.classList.add(RIPPLE_EFFECT);
+      const ripple = document.createElement('span');
+      ripple.classList.add(RIPPLE);
+      rippleContainer.appendChild(ripple);
 
-    const img = slide.querySelector('img');
-    if(img) {
-      // rippleContainer blocks image title
-      rippleContainer.title = img.title;
+      const img = slide.querySelector('img');
+      if (img) {
+        // rippleContainer blocks image title
+        rippleContainer.title = img.title;
+      }
+
+      slide.appendChild(rippleContainer);
+      componentHandler.upgradeElement(rippleContainer, RIPPLE_COMPONENT);
     }
-
-    slide.appendChild(rippleContainer);
-    componentHandler.upgradeElement(rippleContainer, RIPPLE_COMPONENT);
   };
   // End helpers
 
@@ -624,13 +621,11 @@ import { inOutQuintic } from '../utils/easing';
       // jsdom does not support MutationObserver - so this is not testable
       /* istanbul ignore next */
       new MutationObserver( mutations => {
-
         mutations.forEach( mutation => {
           if (mutation.addedNodes.length > 0) {
             window.requestAnimationFrame(() => this.upgradeSlides() );
           }
         });
-
       }).observe( this.element_, {
         attributes: false,
         childList: true,
