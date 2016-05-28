@@ -379,10 +379,10 @@ import { inOutQuintic } from '../utils/easing';
       e.preventDefault();
       const x = e.clientX || (e.touches !== undefined ? e.touches[0].clientX : 0);
 
-      window.removeEventListener('mousemove', drag);
-      window.removeEventListener('touchmove', drag);
+      this.element_.removeEventListener('mousemove', drag);
+      this.element_.removeEventListener('touchmove', drag);
       window.removeEventListener('mouseup', endDrag);
-      window.removeEventListener('touchend', endDrag);
+      this.element_.removeEventListener('touchend', endDrag);
 
       // cancel any existing drag rAF, see: http://www.html5rocks.com/en/tutorials/speed/animations/
       //window.cancelAnimationFrame(rAFDragId);
@@ -395,10 +395,10 @@ import { inOutQuintic } from '../utils/easing';
       }
     };
 
-    window.addEventListener('mousemove', drag);
-    window.addEventListener('touchmove', drag);
-    window.addEventListener('mouseup', endDrag); // .bind(this) does not work here
-    window.addEventListener('touchend',endDrag);
+    this.element_.addEventListener('mousemove', drag);
+    this.element_.addEventListener('touchmove', drag);
+    window.addEventListener('mouseup', endDrag);
+    this.element_.addEventListener('touchend',endDrag);
   };
 
   /**
@@ -550,9 +550,9 @@ import { inOutQuintic } from '../utils/easing';
         // Listen to drag events
         //const img = slide.querySelector('img');
         //if(img) {
-        slide.addEventListener('click', e => e.preventDefault(), true); // Click is handled by drag
-        slide.addEventListener('mousedown', this.dragHandler_.bind(this), true);
-        slide.addEventListener('touchstart', this.dragHandler_.bind(this), true);
+        //slide.addEventListener('click', e => e.preventDefault(), true); // Click is handled by drag
+        //slide.addEventListener('mousedown', this.dragHandler_.bind(this), true);
+        //slide.addEventListener('touchstart', this.dragHandler_.bind(this), true);
         //}
       }
       else {
@@ -608,22 +608,19 @@ import { inOutQuintic } from '../utils/easing';
         }
 
         // Listen to focus/blur events
-        this.element_.addEventListener('focus', this.focusHandler_.bind(this), true);
-        this.element_.addEventListener('blur', this.blurHandler_.bind(this), true);
+        this.element_.addEventListener('focus', this.focusHandler_.bind(this), false);
+        this.element_.addEventListener('blur', this.blurHandler_.bind(this), false);
 
         // Listen to keyboard events
-        this.element_.addEventListener('keydown', this.keyDownHandler_.bind(this), true);
+        this.element_.addEventListener('keydown', this.keyDownHandler_.bind(this), false);
 
         // Listen to drag events
-        //this.element_.addEventListener('mousedown', this.dragHandler_.bind(this), true);
-        //this.element_.addEventListener('touchstart', this.dragHandler_.bind(this), true);
+        this.element_.addEventListener('mousedown', this.dragHandler_.bind(this), false);
+        this.element_.addEventListener('touchstart', this.dragHandler_.bind(this), false);
 
         // Click is handled by drag
-        //this.element_.addEventListener('click', e => e.preventDefault(), true);
+        this.element_.addEventListener('click', e => e.preventDefault(), false);
       }
-
-      // Slides collection
-      this.upgradeSlides();
 
       // Listen to custom 'command' event
       this.element_.addEventListener('command', this.commandHandler_.bind(this), false);
@@ -646,6 +643,8 @@ import { inOutQuintic } from '../utils/easing';
         subtree: false
       });
 
+      // Slides collection
+      this.upgradeSlides();
 
       // Set upgraded flag
       this.element_.classList.add(IS_UPGRADED);
