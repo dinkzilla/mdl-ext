@@ -377,28 +377,28 @@ import { inOutQuintic } from '../utils/easing';
     // end drag handler
     const endDrag = e => {
       e.preventDefault();
-      const x = e.clientX || (e.touches !== undefined ? e.touches[0].clientX : 0);
+      //const x = e.clientX || (e.touches !== undefined ? e.touches[0].clientX : 0);
 
       this.element_.removeEventListener('mousemove', drag);
       this.element_.removeEventListener('touchmove', drag);
       window.removeEventListener('mouseup', endDrag);
-      this.element_.removeEventListener('touchend', endDrag);
+      window.removeEventListener('touchend', endDrag);
 
       // cancel any existing drag rAF, see: http://www.html5rocks.com/en/tutorials/speed/animations/
       //window.cancelAnimationFrame(rAFDragId);
 
       // If mouse did not move, trigger custom select event
-      if(Math.abs(startX-x) < 2) {
-        const slide = getSlide_(targetElement);
-        setFocus_(slide);
-        this.emitSelectEvent_('click', null,  slide);
-      }
+      //if(Math.abs(startX-x) < 2) {
+      const slide = getSlide_(targetElement);
+      setFocus_(slide);
+      this.emitSelectEvent_('click', null,  slide);
+      //}
     };
 
     this.element_.addEventListener('mousemove', drag);
     this.element_.addEventListener('touchmove', drag);
     window.addEventListener('mouseup', endDrag);
-    this.element_.addEventListener('touchend',endDrag);
+    window.addEventListener('touchend',endDrag);
   };
 
   /**
@@ -503,7 +503,6 @@ import { inOutQuintic } from '../utils/easing';
         // rippleContainer blocks image title
         rippleContainer.title = img.title;
       }
-
       slide.appendChild(rippleContainer);
       componentHandler.upgradeElement(rippleContainer, RIPPLE_COMPONENT);
     }
@@ -546,14 +545,6 @@ import { inOutQuintic } from '../utils/easing';
         if (hasRippleEffect) {
           addRipple_(slide);
         }
-
-        // Listen to drag events
-        //const img = slide.querySelector('img');
-        //if(img) {
-        //slide.addEventListener('click', e => e.preventDefault(), true); // Click is handled by drag
-        //slide.addEventListener('mousedown', this.dragHandler_.bind(this), true);
-        //slide.addEventListener('touchstart', this.dragHandler_.bind(this), true);
-        //}
       }
       else {
         slide.setAttribute('tabindex', -1);
@@ -608,8 +599,8 @@ import { inOutQuintic } from '../utils/easing';
         }
 
         // Listen to focus/blur events
-        this.element_.addEventListener('focus', this.focusHandler_.bind(this), false);
-        this.element_.addEventListener('blur', this.blurHandler_.bind(this), false);
+        this.element_.addEventListener('focus', this.focusHandler_.bind(this), true);
+        this.element_.addEventListener('blur', this.blurHandler_.bind(this), true);
 
         // Listen to keyboard events
         this.element_.addEventListener('keydown', this.keyDownHandler_.bind(this), false);
