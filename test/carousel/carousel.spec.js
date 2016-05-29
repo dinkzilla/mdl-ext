@@ -427,7 +427,7 @@ describe('MaterialExtCarousel', () => {
     assert.isTrue(event.defaultPrevented, 'Expected "event.preventDefault" to be called when image is clicked');
   });
 
-  it('can drag an image', () => {
+  it('can drag the carousel', () => {
     const carousel = document.querySelector('.mdlext-carousel');
     const img = carousel.querySelector('img');
     img.src = './smiley.jpg';
@@ -458,32 +458,68 @@ describe('MaterialExtCarousel', () => {
         'clientX': 20,
         'clientY': 0
       });
-      window.dispatchEvent(event);
-      mockRaf.step(100);
+      carousel.dispatchEvent(event);
+      mockRaf.step(1);
 
-      window.dispatchEvent(new MouseEvent('mousemove', {
+      carousel.dispatchEvent(new MouseEvent('mousemove', {
+        'view': window,
+        'bubbles': true,
+        'cancelable': true,
+        'clientX': 100,
+        'clientY': 0
+      }));
+      mockRaf.step(1);
+
+      carousel.dispatchEvent(new MouseEvent('mousemove', {
         'view': window,
         'bubbles': true,
         'cancelable': true,
         'clientX': 200,
         'clientY': 0
       }));
-      mockRaf.step(100);
+      mockRaf.step(1);
 
-      window.dispatchEvent(new MouseEvent('mousemove', {
+      carousel.dispatchEvent(new MouseEvent('mousemove', {
+        'view': window,
+        'bubbles': true,
+        'cancelable': true,
+        'clientX': 300,
+        'clientY': 0
+      }));
+      mockRaf.step(1);
+
+      carousel.dispatchEvent(new MouseEvent('mousemove', {
         'view': window,
         'bubbles': true,
         'cancelable': true,
         'clientX': 400,
         'clientY': 0
       }));
-      mockRaf.step(100);
+      mockRaf.step(1);
+
+      carousel.dispatchEvent(new MouseEvent('mousemove', {
+        'view': window,
+        'bubbles': true,
+        'cancelable': true,
+        'clientX': 500,
+        'clientY': 0
+      }));
+      mockRaf.step(1);
+
+      carousel.dispatchEvent(new MouseEvent('mousemove', {
+        'view': window,
+        'bubbles': true,
+        'cancelable': true,
+        'clientX': 501,
+        'clientY': 0
+      }));
+      mockRaf.step(1);
 
       event = new MouseEvent('mouseup', {
         'view': window,
         'bubbles': true,
         'cancelable': true,
-        'clientX': 400,
+        'clientX': 501,
         'clientY': 0
       });
       window.dispatchEvent(event);
@@ -659,6 +695,9 @@ describe('MaterialExtCarousel', () => {
 
   it('can play slides', () => {
     const carousel = document.querySelector('#carousel-1');
+    carousel.scrollLeft = 0;
+    carousel.style.width = '100px';
+
     const spy = sinon.spy();
     carousel.addEventListener('select', spy);
 
@@ -671,7 +710,7 @@ describe('MaterialExtCarousel', () => {
 
     let ev = new CustomEvent('command', { detail: { action : 'play', type: 'slide', interval: 100 } } );
     carousel.dispatchEvent(ev);
-    mockRaf.step(200);
+    mockRaf.step(300);
 
     assert.isAtLeast(spy.callCount, 2, 'Expected "select" event to fire more than once');
     const c = carousel.MaterialExtCarousel.getConfig();
@@ -681,6 +720,20 @@ describe('MaterialExtCarousel', () => {
     carousel.dispatchEvent(ev);
     mockRaf.step(100);
   });
+
+  it('can scroll slides', () => {
+    const carousel = document.querySelector('#carousel-1');
+    carousel.scrollLeft = 0;
+    carousel.style.width = '100px';
+
+    const event = new CustomEvent('command', { detail: { action : 'scroll-prev' } });
+    carousel.dispatchEvent(event);
+    mockRaf.step(100);
+
+    assert.notEqual(carousel.scrollLeft, 0);
+  });
+
+
 
   function spyOnEvent(name, target) {
     const spy = sinon.spy();

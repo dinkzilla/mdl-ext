@@ -5,6 +5,7 @@ import jsdomify from 'jsdomify';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
 import { qs } from '../testutils/domHelpers';
+import createMockRaf from '../testutils/mock-raf';
 
 describe('MaterialExtStickyHeader', () => {
 
@@ -52,6 +53,10 @@ describe('MaterialExtStickyHeader', () => {
   luctus sem sollicitudin in. Etiam libero tellus, porttitor sit amet velit a, commodo sodales neque.
 </p>`;
 
+  let realRaf;
+  let realCaf;
+  let mockRaf;
+  let rAFStub;
 
   before ( () => {
     jsdomify.create(fixture);
@@ -64,6 +69,14 @@ describe('MaterialExtStickyHeader', () => {
     requireUncached( '../../src/sticky-header/sticky-header' );
     assert.isNotNull(window.MaterialExtStickyHeader, 'Expected MaterialExtStickyHeader not to be null');
     global.MaterialExtStickyHeader = window.MaterialExtStickyHeader;
+
+
+    realRaf = window.requestAnimationFrame;
+    realCaf = window.cancelAnimationFrame;
+    mockRaf = createMockRaf();
+    window.requestAnimationFrame = mockRaf.raf;
+    window.cancelAnimationFrame = mockRaf.raf.cancel;
+    rAFStub = sinon.stub(window, 'requestAnimationFrame', mockRaf.raf);
 
 
     // Stub unsupported jsdom 'window.matchMedia'. Used in mdl/src/layout/layout.js
@@ -111,6 +124,9 @@ describe('MaterialExtStickyHeader', () => {
   });
 
   after ( () => {
+    rAFStub.restore();
+    window.requestAnimationFrame = realRaf;
+    window.cancelAnimationFrame = realCaf;
     jsdomify.destroy();
   });
 
@@ -183,34 +199,42 @@ describe('MaterialExtStickyHeader', () => {
       // Fake scroll
       content.scrollTop = 100;
       content.dispatchEvent(event);
+      mockRaf.step(1);
       header.MaterialExtStickyHeader.updatePosition_();
 
       content.scrollTop = 1000;
       content.dispatchEvent(event);
+      mockRaf.step(1);
       header.MaterialExtStickyHeader.updatePosition_();
 
       content.scrollTop = 400;
       content.dispatchEvent(event);
+      mockRaf.step(1);
       header.MaterialExtStickyHeader.updatePosition_();
 
       content.scrollTop = 100;
       content.dispatchEvent(event);
+      mockRaf.step(1);
       header.MaterialExtStickyHeader.updatePosition_();
 
       content.scrollTop = 0;
       content.dispatchEvent(event);
+      mockRaf.step(1);
       header.MaterialExtStickyHeader.updatePosition_();
 
       content.scrollTop = -200;
       content.dispatchEvent(event);
+      mockRaf.step(1);
       header.MaterialExtStickyHeader.updatePosition_();
 
       content.scrollTop = 200;
       content.dispatchEvent(event);
+      mockRaf.step(1);
       header.MaterialExtStickyHeader.updatePosition_();
 
       content.scrollTop = 1000;
       content.dispatchEvent(event);
+      mockRaf.step(1);
       header.MaterialExtStickyHeader.updatePosition_();
     }
     finally {

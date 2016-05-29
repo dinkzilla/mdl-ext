@@ -72,6 +72,8 @@ import { inOutQuintic } from '../utils/easing';
       animationLoop: new MdlExtAnimationLoop(1000)
     };
 
+    this.scrollAnimation_ = new MdlExtAnimationLoop(33);
+
     this.drawing_ = false; // Used by MutationObserver
 
     // Initialize instance.
@@ -160,9 +162,10 @@ import { inOutQuintic } from '../utils/easing';
    * Animate scroll
    * @param newPosition
    * @param newDuration
+   * @param completedCallback
    * @private
    */
-  MaterialExtCarousel.prototype.animateScroll_ = function( newPosition, newDuration ) {
+  MaterialExtCarousel.prototype.animateScroll_ = function( newPosition, newDuration, completedCallback ) {
 
     const start = this.element_.scrollLeft;
     const distance = newPosition - start;
@@ -170,7 +173,7 @@ import { inOutQuintic } from '../utils/easing';
     if(distance !== 0) {
       const duration = Math.max(Math.min(Math.abs(distance), newDuration||400), 100); // duration is between 100 and newDuration||400ms||distance
       let t = 0;
-      new MdlExtAnimationLoop(33).start( timeElapsed => {
+      this.scrollAnimation_.stop().start( timeElapsed => {
         t += timeElapsed;
         if(t < duration) {
           this.element_.scrollLeft = inOutQuintic(t, start, distance, duration);
@@ -178,9 +181,17 @@ import { inOutQuintic } from '../utils/easing';
         }
         else {
           this.element_.scrollLeft = newPosition;
+          if(completedCallback) {
+            completedCallback();
+          }
           return false;
         }
       });
+    }
+    else {
+      if(completedCallback) {
+        completedCallback();
+      }
     }
   };
 
@@ -199,10 +210,12 @@ import { inOutQuintic } from '../utils/easing';
 
     switch (a) {
       case 'first':
+        slide = this.element_.querySelector(`.${SLIDE}:first-child`);
         break;
 
       case 'last':
         x = this.element_.scrollWidth - this.element_.clientWidth;
+        slide = this.element_.querySelector(`.${SLIDE}:last-child`);
         break;
 
       case 'scroll-prev':
@@ -235,7 +248,16 @@ import { inOutQuintic } from '../utils/easing';
         return;
     }
 
-    this.animateScroll_(x);
+    this.animateScroll_(x, undefined, () => {
+      if ('scroll-next' === a || 'scroll-prev' === a) {
+        const slides = this.getSlidesInViewport_();
+        if (slides.length > 0) {
+          slide = 'scroll-next' === a ? slides[0] : slides[slides.length - 1];
+        }
+      }
+      setFocus_(slide);
+      this.emitSelectEvent_(a, null, slide);
+    });
   };
 
   /**
@@ -451,6 +473,20 @@ import { inOutQuintic } from '../utils/easing';
   };
 
   /**
+   * Get the first visible slide in component viewport
+   * @private
+   */
+  MaterialExtCarousel.prototype.getSlidesInViewport_ = function() {
+    const carouselRect = this.element_.getBoundingClientRect();
+
+    const slidesInViewport = [...this.element_.querySelectorAll(`.${SLIDE}`)].filter( slide => {
+      const slideRect = slide.getBoundingClientRect();
+      return slideRect.left >= carouselRect.left && slideRect.right <= carouselRect.right;
+    });
+    return slidesInViewport;
+  };
+
+  /**
    * Move slide into component viewport - if needed
    * @param slide
    * @private
@@ -611,7 +647,7 @@ import { inOutQuintic } from '../utils/easing';
       // Listen to custom 'command' event
       this.element_.addEventListener('command', this.commandHandler_.bind(this), false);
 
-      // Detect insertions in components DOM
+      // Detect insertions into components DOM
       const MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
 
       // jsdom does not support MutationObserver - so this is not testable

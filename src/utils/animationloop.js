@@ -96,6 +96,7 @@ class MdlExtAnimationLoop {
    */
   stop() {
     this.cancelRAF();
+    return this;
   }
 }
 
