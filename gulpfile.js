@@ -17,11 +17,18 @@ gulp.task('posthtml-build-demo', function() {
 });
 
 gulp.task('copy-css', function() {
-  return gulp.src(['./src/demo/styles/*.css', './node_modules/dialog-polyfill/dialog-polyfill.css'])
-    .pipe(gulp.dest('./demo/styles'));
+  return gulp.src([
+    './src/demo/styles/*.css',
+    './node_modules/dialog-polyfill/dialog-polyfill.css'
+  ])
+  .pipe(gulp.dest('./demo/styles'));
 });
 
 gulp.task('copy-scripts', function() {
-  return gulp.src(['./src/demo/scripts/*.js', './node_modules/dialog-polyfill/dialog-polyfill.js'])
-    .pipe(gulp.dest('./demo/scripts'));
+  return gulp.src([
+    './src/demo/scripts/*.js',
+    './src/utils/custom-event-polyfill.js',
+    './node_modules/dialog-polyfill/dialog-polyfill.js'
+  ])
+  .pipe(gulp.dest('./demo/scripts'));
 });
