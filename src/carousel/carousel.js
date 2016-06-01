@@ -231,7 +231,7 @@ import { inOutQuintic } from '../utils/easing';
         slide = this.element_.querySelector(`.${SLIDE}[aria-selected]`);
         if(slide) {
           slide = a === 'next' ? slide.nextElementSibling : slide.previousElementSibling;
-          setFocus_(slide);
+          this.setAriaSelected_(slide);
           this.emitSelectEvent_(a, null,  slide);
         }
         return;
@@ -255,7 +255,7 @@ import { inOutQuintic } from '../utils/easing';
           slide = 'scroll-next' === a ? slides[0] : slides[slides.length - 1];
         }
       }
-      setFocus_(slide);
+      this.setAriaSelected_(slide);
       this.emitSelectEvent_(a, null, slide);
     });
   };
@@ -426,11 +426,8 @@ import { inOutQuintic } from '../utils/easing';
   MaterialExtCarousel.prototype.focusHandler_ = function(event) {
     const slide = getSlide_(event.target);
     if(slide) {
-      // The last focused slide has 'aria-selected', even if focus is lost
-      [...this.element_.querySelectorAll(`.${SLIDE}[aria-selected]`)].forEach(
-        slide => slide.removeAttribute('aria-selected')
-      );
-      slide.setAttribute('aria-selected', '');
+      // The last focused/selected slide has 'aria-selected', even if focus is lost
+      this.setAriaSelected_(slide);
       slide.classList.add(IS_FOCUSED);
     }
   };
@@ -502,6 +499,20 @@ import { inOutQuintic } from '../utils/easing';
     else if(slideRect.right > carouselRect.right) {
       const x = this.element_.scrollLeft - (carouselRect.right - slideRect.right);
       this.animateScroll_(x);
+    }
+  };
+
+
+  /**
+   * Removes 'aria-selected' from all slides in carousel
+   * @private
+   */
+  MaterialExtCarousel.prototype.setAriaSelected_ = function(slide) {
+    if(slide) {
+      [...this.element_.querySelectorAll(`.${SLIDE}[aria-selected]`)].forEach(
+        slide => slide.removeAttribute('aria-selected')
+      );
+      slide.setAttribute('aria-selected', '');
     }
   };
 
