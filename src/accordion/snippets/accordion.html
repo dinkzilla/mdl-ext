@@ -634,30 +634,30 @@ All images are copyrighted &copy; Leif Olsen, 2016.
     window.addEventListener('load', function() {
 
       document.querySelector('#btn-expand-all').addEventListener('click', function(e) {
-        var ev = new CustomEvent('command', { detail: { action : 'open' } });
+        var ev = createCustomEvent('command', { detail: { action : 'open' } });
         document.querySelector('#multiselectable-accordion').dispatchEvent(ev);
       });
 
       document.querySelector('#btn-collapse-all').addEventListener('click', function(e) {
-        var ev = new CustomEvent('command', { detail: { action : 'close' } });
+        var ev = createCustomEvent('command', { detail: { action : 'close' } });
         document.querySelector('#multiselectable-accordion').dispatchEvent(ev);
       });
 
       document.querySelector('#btn-open-3').addEventListener('click', function(e) {
         var panel3 = document.querySelector('#multiselectable-accordion .mdlext-accordion__panel:nth-child(3)');
-        var ev = new CustomEvent('command', { detail: { action : 'open', target: panel3 } });
+        var ev = createCustomEvent('command', { detail: { action : 'open', target: panel3 } });
         document.querySelector('#multiselectable-accordion').dispatchEvent(ev);
       });
 
       document.querySelector('#btn-close-3').addEventListener('click', function(e) {
         var panel3 = document.querySelector('#multiselectable-accordion .mdlext-accordion__panel:nth-child(3) section');
-        var ev = new CustomEvent('command', { detail: { action : 'close', target: panel3 } });
+        var ev = createCustomEvent('command', { detail: { action : 'close', target: panel3 } });
         document.querySelector('#multiselectable-accordion').dispatchEvent(ev);
       });
 
       document.querySelector('#btn-toggle-3').addEventListener('click', function(e) {
         var panel3 = document.querySelector('#multiselectable-accordion .mdlext-accordion__panel:nth-child(3) .mdlext-accordion__panel__header');
-        var ev = new CustomEvent('command', { detail: { action : 'toggle', target: panel3 } });
+        var ev = createCustomEvent('command', { detail: { action : 'toggle', target: panel3 } });
         document.querySelector('#multiselectable-accordion').dispatchEvent(ev);
       });
 

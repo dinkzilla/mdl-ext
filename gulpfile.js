@@ -27,7 +27,6 @@ gulp.task('copy-css', function() {
 gulp.task('copy-scripts', function() {
   return gulp.src([
     './src/demo/scripts/*.js',
-    './src/utils/custom-event-polyfill.js',
     './node_modules/dialog-polyfill/dialog-polyfill.js'
   ])
   .pipe(gulp.dest('./demo/scripts'));
