@@ -41,7 +41,7 @@ describe('closest', () => {
   let msmatches_;
   let mozmatches_;
   let webkitmatches_;
-  let closest_
+  let closest_;
 
   before ( () => {
     jsdomify.create(fixture);

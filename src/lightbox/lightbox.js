@@ -39,9 +39,11 @@ import { createCustomEvent } from '../utils/custom-event';
   const VK_ARROW_DOWN = 40;
 
   const IS_UPGRADED = 'is-upgraded';
-  const LIGHTBOX_CLASS = 'mdlext-lightbox';
-  const STICKY_FOOTER_CLASS = 'mdlext-lightbox--sticky-footer';
-  const BUTTON_CLASS = 'mdl-button';
+  const LIGHTBOX = 'mdlext-lightbox';
+  const LIGHTBOX_SLIDER = 'mdlext-lightbox__slider';
+  const LIGHTBOX_SLIDER_SLIDE = 'mdlext-lightbox__slider__slide';
+  const STICKY_FOOTER = 'mdlext-lightbox--sticky-footer';
+  const BUTTON = 'mdl-button';
 
   /**
    * https://github.com/google/material-design-lite/issues/4205
@@ -114,17 +116,7 @@ import { createCustomEvent } from '../utils/custom-event';
 
       dispatchAction_(this.getAttribute('data-action') || '', this);
 
-      /*
-      let n = this;
-      while((n = n.parentNode) != null) {
-        if(n.classList.contains(LIGHTBOX_CLASS)) {
-          n.focus();
-          break;
-        }
-      }
-      */
-
-      const n = this.closest(`.${LIGHTBOX_CLASS}`);
+      const n = this.closest(`.${LIGHTBOX}`);
       if(n) {
         n.focus();
       }
@@ -138,7 +130,7 @@ import { createCustomEvent } from '../utils/custom-event';
    * @param target
    * @private
    */
-  function dispatchAction_(action, source, target = source) {
+  const dispatchAction_ = (action, source, target = source) => {
 
     target.dispatchEvent(createCustomEvent('action', {
       bubbles: true,
@@ -148,14 +140,14 @@ import { createCustomEvent } from '../utils/custom-event';
         source: source
       }
     }));
-  }
+  };
 
   /**
    * Reposition dialog if component parent element is "DIALOG"
    * @param lightboxElement
    * @private
    */
-  function repositionDialog_(lightboxElement) {
+  const repositionDialog_ = lightboxElement => {
     const footerHeight = (footer, isSticky) => isSticky && footer ? footer.offsetHeight : 0;
 
     const reposition = (dialog, fh) => {
@@ -175,7 +167,7 @@ import { createCustomEvent } from '../utils/custom-event';
         lightboxElement.style.maxWidth = img.naturalWidth !== 'undefined' ? `${img.naturalWidth}px` : `${img.width}px` || '100%';
       }
 
-      const fh = footerHeight(lightboxElement.querySelector('footer'), lightboxElement.classList.contains(STICKY_FOOTER_CLASS));
+      const fh = footerHeight(lightboxElement.querySelector('footer'), lightboxElement.classList.contains(STICKY_FOOTER));
       const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - fh;
       if (dialog.offsetHeight > vh) {
         let n = 0;
@@ -185,7 +177,7 @@ import { createCustomEvent } from '../utils/custom-event';
       }
       reposition(dialog, fh);
     }
-  }
+  };
 
   /**
    * Handle image load
@@ -225,11 +217,11 @@ import { createCustomEvent } from '../utils/custom-event';
     img.style.opacity = '0.2';
 
     const slider = document.createElement('div');
-    slider.classList.add('mdlext-lightbox__slider');
+    slider.classList.add(LIGHTBOX_SLIDER);
     setStyles(slider, {'width': `${img.offsetWidth}px`, 'height': `${img.offsetHeight}px`} );
 
     let slide  = document.createElement('div');
-    slide.classList.add('mdlext-lightbox__slider__slide');
+    slide.classList.add(LIGHTBOX_SLIDER_SLIDE);
     slide.textContent = '>';
     setStyles(slide, {
       'width'           : `${img.offsetWidth}px`,
@@ -242,7 +234,7 @@ import { createCustomEvent } from '../utils/custom-event';
     slider.appendChild(slide);
 
     slide  = document.createElement('div');
-    slide.classList.add('mdlext-lightbox__slider__slide');
+    slide.classList.add(LIGHTBOX_SLIDER_SLIDE);
     setStyles(slide, {
       'width'           : `${img.offsetWidth}px`,
       'height'          : `${img.offsetHeight}px`,
@@ -251,7 +243,7 @@ import { createCustomEvent } from '../utils/custom-event';
     slider.appendChild(slide);
 
     slide  = document.createElement('div');
-    slide.classList.add('mdlext-lightbox__slider__slide');
+    slide.classList.add(LIGHTBOX_SLIDER_SLIDE);
     slide.textContent = '<';
     setStyles(slide, {
       'width'           : `${img.offsetWidth}px`,
@@ -315,7 +307,7 @@ import { createCustomEvent } from '../utils/custom-event';
         this.element_.setAttribute('tabindex', 1);
       }
 
-      [...this.element_.querySelectorAll(`.${BUTTON_CLASS}`)].forEach( button =>
+      [...this.element_.querySelectorAll(`.${BUTTON}`)].forEach( button =>
         button.addEventListener('click', this.buttonClickHandler_.bind(button), false)
       );
 
@@ -366,7 +358,7 @@ import { createCustomEvent } from '../utils/custom-event';
   MaterialExtLightbox.prototype.mdlDowngrade_ = function() {
 
     if (this.element_) {
-      [...this.element_.querySelectorAll(`.${BUTTON_CLASS}`)].forEach(
+      [...this.element_.querySelectorAll(`.${BUTTON}`)].forEach(
         button => button.removeEventListener('click', this.buttonClickHandler_)
       );
 
