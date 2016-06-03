@@ -43,24 +43,6 @@ export function qsa(selector, element = document) {
 }
 
 /**
- * Find the element's parent with the given tag name:
- * parent(qs('a'), 'div');
- *
- * @param element
- * @param tagName
- * @returns {null|Node}
- */
-export function parent(element, tagName) {
-  if (!element.parentNode || element.parentNode.tagName === undefined) {
-    return null;
-  }
-  if (element.parentNode.tagName.toLowerCase() === tagName.toLowerCase()) {
-    return element.parentNode;
-  }
-  return parent(element.parentNode, tagName);
-}
-
-/**
  * Remove child element(s)
  * element.innerHTNL = '' has a performance penality!
  * @see http://jsperf.com/empty-an-element/16

@@ -22,6 +22,7 @@
  * Image carousel
  */
 
+import '../utils/closest-polyfill';
 import { createCustomEvent } from '../utils/custom-event';
 import MdlExtAnimationLoop from '../utils/animationloop';
 import { inOutQuintic } from '../utils/easing';
@@ -44,7 +45,7 @@ import { inOutQuintic } from '../utils/easing';
 
   const IS_UPGRADED    = 'is-upgraded';
   const IS_FOCUSED     = 'is-focused';
-  const CAROUSEL       = 'mdlext-carousel';
+  //const CAROUSEL       = 'mdlext-carousel';
   const SLIDE          = 'mdlext-carousel__slide';
   const ROLE           = 'list';
   const SLIDE_ROLE     = 'listitem';
@@ -519,10 +520,7 @@ import { inOutQuintic } from '../utils/easing';
 
   // Helpers
   const getSlide_ = element => {
-    if (!element  || element.parentNode.tagName === undefined || element.classList.contains(CAROUSEL)) {
-      return null;
-    }
-    return element.classList.contains(SLIDE) ? element : getSlide_(element.parentNode);
+    return element.closest(`.${SLIDE}`);
   };
 
   const setFocus_ = slide => {

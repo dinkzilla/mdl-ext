@@ -101,19 +101,6 @@ describe('domHelpers', () => {
     });
   });
 
-  describe('#parent', () => {
-    it('should have parent with tagName section', () => {
-      const p = qs('article p');
-      const section = parent(p, 'section');
-      expect(section).to.not.be.null;
-    });
-    it('should have no parent with given tagName', () => {
-      const p = qs('section p');
-      const article = parent(p, 'article');
-      expect(article).to.be.null;
-    });
-  });
-
   describe('#removeChilds', () => {
 
     after( () => {

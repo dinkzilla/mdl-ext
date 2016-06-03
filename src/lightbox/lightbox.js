@@ -23,6 +23,7 @@
  * Responsive Lightbox
  */
 
+import '../utils/closest-polyfill';
 import { createCustomEvent } from '../utils/custom-event';
 
 (function() {
@@ -113,12 +114,19 @@ import { createCustomEvent } from '../utils/custom-event';
 
       dispatchAction_(this.getAttribute('data-action') || '', this);
 
+      /*
       let n = this;
       while((n = n.parentNode) != null) {
         if(n.classList.contains(LIGHTBOX_CLASS)) {
           n.focus();
           break;
         }
+      }
+      */
+
+      const n = this.closest(`.${LIGHTBOX_CLASS}`);
+      if(n) {
+        n.focus();
       }
     }
   };

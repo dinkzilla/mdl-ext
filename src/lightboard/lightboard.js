@@ -25,6 +25,7 @@
  * design, based on flex layout, similar to what is used in Adobe LightRoom to browse images.
  */
 
+import '../utils/closest-polyfill';
 import { createCustomEvent } from '../utils/custom-event';
 
 (function() {
@@ -41,7 +42,7 @@ import { createCustomEvent } from '../utils/custom-event';
   const VK_ARROW_DOWN = 40;
 
   const IS_UPGRADED = 'is-upgraded';
-  const LIGHTBOARD = 'mdlext-lightboard';
+  //const LIGHTBOARD = 'mdlext-lightboard';
   const SLIDE = 'mdlext-lightboard__slide';
   const SLIDE_TABSTOP = 'mdlext-lightboard__slide__frame';
   const RIPPLE_COMPONENT = 'MaterialRipple';
@@ -183,10 +184,7 @@ import { createCustomEvent } from '../utils/custom-event';
   };
 
   function getSlide(element) {
-    if (!element  || element.classList.contains(LIGHTBOARD)) {
-      return null;
-    }
-    return element.classList.contains(SLIDE) ? element : getSlide(element.parentNode);
+    return element.closest(`.${SLIDE}`);
   }
 
   function focus(slide) {
