@@ -24,43 +24,69 @@
 
 @import "../variables";
 
+
+/* ==========  Bordered fields  ========== */
+$mdlext-bordered-field-border-width                   : 1px !default;
+$mdlext-bordered-field-border-radius                  : 3px !default;
+$mdlext-bordered-field-height                         : 40px !default;
+$mdlext-bordered-field-padding                        : $input-text-padding + 4px !default;
+$mdlext-bordered-field-padding-top                    : 0 !default;
+$mdlext-bordered-field-padding-bottom                 : 0 !default;
+
+$mdlext-bordered-field-background-color               : rgba(#FFFFFF, 0.1) !default;
+$mdlext-bordered-field-focus-border-color             : unquote("rgb(#{$color-primary})") !default;
+$mdlext-bordered-field-focus-background-color         : $mdlext-bordered-field-background-color !default;
+
+$mdlext-bordered-field-disabled-border-color          : $input-text-disabled-color !default;
+$mdlext-bordered-field-disabled-background-color      : $mdlext-bordered-field-background-color !default;
+
+$mdlext-bordered-field-required-border-color          : unquote("rgba(#{$color-accent}, 0.8)") !default;
+$mdlext-bordered-field-required-background-color      : $mdlext-bordered-field-background-color !default;
+
+$mdlext-bordered-field-label-top                      : 45px !default;
+$mdlext-bordered-field-label-focused-top              : 20px !default;
+
+// New
+$mdlext-bordered-field-vertical-spacing-top           : $input-text-vertical-spacing !default;
+$mdlext-bordered-field-vertical-spacing-bottom        : $input-text-vertical-spacing !default;
+$mdlext-bordered-field-font-size                      : $input-text-font-size !default;
+$mdlext-bordered-field-font-weight                    : normal !default;
+
+$mdlext-bordered-field-border-color                   : $input-text-bottom-border-color !default;
+
+$mdlext-bordered-field-required-focus-border-color    : unquote("rgba(#{$color-accent}, 0.8)") !default;
+$mdlext-bordered-field-required-focus-background-color: $mdlext-bordered-field-background-color !default;
+
+$mdlext-bordered-field-error-border-color             : $input-text-error-color;
+$mdlext-bordered-field-error-background-color         : $mdlext-bordered-field-background-color;
+$mdlext-bordered-field-error-focus-border-color       : $input-text-error-color;
+$mdlext-bordered-field-error-focus-background-color   : $mdlext-bordered-field-error-background-color;
+
+
 // "Theme" for this styling
 .mdlext-bordered-fields {
 
   box-sizing: border-box;
 
-  *, *::before, *::after, input[type="search"] {
-    box-sizing: border-box;
-  }
-
   // Styling for textfield and selectfield.
   .mdl-textfield,
   .mdlext-selectfield {
+    box-sizing: border-box;
+    padding: $mdlext-bordered-field-vertical-spacing-top 0 $mdlext-bordered-field-vertical-spacing-bottom 0;
 
-    &.is-dirty {
-      .mdl-textfield__input,
-      .mdlext-selectfield__select {
-        &:required {
-          border-color: $input-text-bottom-border-color;
-          background-color: $mdlext-bordered-field-required-background-color;
-        }
-        &:focus,
-        &:required:focus {
-          border-color: $mdlext-bordered-field-focus-border-color;
-          background-color: $mdlext-bordered-field-focus-background-color;
-        }
-      }
-    }
     .mdl-textfield__input,
     .mdlext-selectfield__select {
-      background-color: $mdlext-bordered-field-background-color;
-      border: $mdlext-bordered-field-border-width solid $input-text-bottom-border-color;
-      border-radius: $mdlext-bordered-field-border-radius;
+      box-sizing: border-box;
       height: $mdlext-bordered-field-height;
+      background-color: $mdlext-bordered-field-background-color;
+      border: $mdlext-bordered-field-border-width solid $mdlext-bordered-field-border-color;
+      border-radius: $mdlext-bordered-field-border-radius;
       padding-top: $mdlext-bordered-field-padding-top;
       padding-right: $mdlext-bordered-field-padding;
       padding-bottom: $mdlext-bordered-field-padding-bottom;
       padding-left: $mdlext-bordered-field-padding;
+      font-size: $mdlext-bordered-field-font-size;
+      font-weight: $mdlext-bordered-field-font-weight;
 
       &:disabled {
         color: $input-text-disabled-text-color;
@@ -77,16 +103,30 @@
         border-color: $mdlext-bordered-field-focus-border-color;
       }
     }
+
     .mdlext-selectfield__select {
       padding-right: calc(1em + #{$input-text-padding});  // space for down arrow
     }
 
+    &.is-dirty {
+      .mdl-textfield__input,
+      .mdlext-selectfield__select {
+        &:required {
+          border-color: $mdlext-bordered-field-border-color;
+          background-color: $mdlext-bordered-field-required-background-color;
+        }
+        &:focus,
+        &:required:focus {
+          border-color: $mdlext-bordered-field-focus-border-color;
+          background-color: $mdlext-bordered-field-focus-background-color;
+        }
+      }
+    }
   }
 
   .mdlext-selectfield:after {
-    // 'magic' numbers
-    top: 60%;
-    transform: translateY(-25%);
+    top: calc(50% - #{($mdlext-bordered-field-vertical-spacing-top - $mdlext-bordered-field-vertical-spacing-bottom)/2});
+    //transform: translateY(-50%);
   }
 
   // Styling for the label / floating label.
@@ -109,7 +149,11 @@
     .mdl-textfield__label,
     .mdlext-selectfield__label {
       padding-left: $mdlext-bordered-field-padding;
-      top: $mdlext-bordered-field-label-top;
+
+      //top: $mdlext-bordered-field-label-top;
+      top: calc(50% - #{($mdlext-bordered-field-vertical-spacing-top - $mdlext-bordered-field-vertical-spacing-top)/2});
+      bottom: auto;
+      transform: translateY(-50%);
 
       // Hides the colored underline for the TextField.
       &:after {
@@ -134,8 +178,8 @@
       & > i,
       & > .mdl-button {
         position: absolute;
-        top: 50%;
-        transform: translateY(-25%);
+        top: calc(50% - #{($mdlext-bordered-field-vertical-spacing-top - $mdlext-bordered-field-vertical-spacing-bottom)/2});
+        transform: translateY(-50%);
       }
     }
     &.mdlext-bordered-fields__icon-left {

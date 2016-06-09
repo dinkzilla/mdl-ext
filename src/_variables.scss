@@ -107,24 +107,6 @@ $mdlext-accordion-content-padding-left           : $mdlext-accordion-content-pad
 $mdlext-accordion-content-background-color       : transparent !default;
 
 
-/* ==========  Bordered fields  ========== */
-$mdlext-bordered-field-border-width             : 1px !default;
-$mdlext-bordered-field-border-radius            : 3px !default;
-$mdlext-bordered-field-background-color         : rgba(#FFFFFF, 0.1) !default;
-$mdlext-bordered-field-height                   : 48px !default;
-$mdlext-bordered-field-padding                  : $input-text-padding + 4px !default;
-$mdlext-bordered-field-padding-top              : 20px !default;
-$mdlext-bordered-field-padding-bottom           : 0 !default;
-$mdlext-bordered-field-focus-border-color       : unquote("rgb(#{$color-primary})") !default;
-$mdlext-bordered-field-focus-background-color   : $mdlext-bordered-field-background-color !default;
-$mdlext-bordered-field-disabled-border-color    : $input-text-disabled-color !default;
-$mdlext-bordered-field-disabled-background-color: $mdlext-bordered-field-background-color !default;
-$mdlext-bordered-field-required-border-color    : unquote("rgba(#{$color-accent}, 0.8)") !default;
-$mdlext-bordered-field-required-background-color: $mdlext-bordered-field-background-color !default;
-$mdlext-bordered-field-label-top                : 45px !default;
-$mdlext-bordered-field-label-focused-top        : 20px !default;
-
-
 /* ==========     Dialog     ========== */
 $mdlext-dialog-padding           : 0;
 $mdlext-dialog-background-color  : transparent !default;
