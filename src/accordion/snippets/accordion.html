@@ -141,9 +141,12 @@
 </section>
 
 
-<ul id="multiselectable-accordion" class="mdlext-accordion mdlext-accordion--vertical mdlext-js-accordion mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events" aria-multiselectable>
+<ul id="multiselectable-accordion"
+    class="mdlext-accordion mdlext-accordion--vertical mdlext-js-accordion mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events"
+    role = "tablist" aria-multiselectable="true">
+
   <li class="mdlext-accordion__panel">
-    <header class="mdlext-accordion__panel__header">
+    <header class="mdlext-accordion__panel__header" role="tab">
       <a href="#" class="mdlext-accordion__panel__header__tabstop">You should not see this</a>
       <div class="mdlext-accordion__panel__header__transform">
         <i class="material-icons md-18">close</i>
@@ -151,7 +154,7 @@
         <i class="mdlext-accordion__panel__state material-icons md-24"></i>
       </div>
     </header>
-    <section class="mdlext-accordion__panel__content">
+    <section class="mdlext-accordion__panel__content" role="tabpanel">
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique eget augue eget gravida.
         Etiam eget imperdiet massa. Aliquam nisi eros, molestie a vulputate quis, tempor nec quam. Ut at libero
         in sem pellentesque imperdiet. Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
