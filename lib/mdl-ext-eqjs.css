@@ -341,7 +341,6 @@
 
 *:not(.mdl-layout--fixed-drawer).has-drawer .mdlext-layout__sticky-header,
 .is-small-screen.has-drawer .mdlext-layout__sticky-header {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
@@ -415,40 +414,24 @@ dialog.mdlext-dialog {
 }
 
 dialog.mdlext-dialog[open] {
-  -webkit-animation: mdlext-open-dialog 0.5s 0.2s forwards;
-          animation: mdlext-open-dialog 0.5s 0.2s forwards;
+  animation: mdlext-open-dialog 0.5s 0.2s forwards;
 }
 
 dialog.mdlext-dialog[open]::-webkit-backdrop {
-  -webkit-animation: mdlext-darken-backdrop 0.2s forwards;
-          animation: mdlext-darken-backdrop 0.2s forwards;
+  animation: mdlext-darken-backdrop 0.2s forwards;
 }
 
 dialog.mdlext-dialog[open]::backdrop {
-  -webkit-animation: mdlext-darken-backdrop 0.2s forwards;
-          animation: mdlext-darken-backdrop 0.2s forwards;
+  animation: mdlext-darken-backdrop 0.2s forwards;
 }
 
 dialog.mdlext-dialog[open] + .backdrop {
-  -webkit-animation: mdlext-darken-backdrop 0.2s forwards;
-          animation: mdlext-darken-backdrop 0.2s forwards;
-}
-
-@-webkit-keyframes mdlext-darken-backdrop {
-  to {
-    background: rgba(0, 0, 0, 0.86);
-  }
+  animation: mdlext-darken-backdrop 0.2s forwards;
 }
 
 @keyframes mdlext-darken-backdrop {
   to {
     background: rgba(0, 0, 0, 0.86);
-  }
-}
-
-@-webkit-keyframes mdlext-open-dialog {
-  to {
-    opacity: 1;
   }
 }
 
@@ -478,16 +461,13 @@ dialog.mdlext-dialog[open] + .backdrop {
  */
 
 .mdlext-grid {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-flow: row wrap;
-      -ms-flex-flow: row wrap;
-          flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
   margin: 0 auto 0 auto;
-  -webkit-align-items: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
+  -ms-flex-align: stretch;
+      align-items: stretch;
 }
 
 .mdlext-grid.mdlext-grid--no-spacing {
@@ -499,27 +479,23 @@ dialog.mdlext-dialog[open] + .backdrop {
 }
 
 .mdlext-grid > .mdlext-cell--top {
-  -webkit-align-self: flex-start;
-      -ms-flex-item-align: start;
-          align-self: flex-start;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
 }
 
 .mdlext-grid > .mdlext-cell--middle {
-  -webkit-align-self: center;
-      -ms-flex-item-align: center;
-          align-self: center;
+  -ms-flex-item-align: center;
+      align-self: center;
 }
 
 .mdlext-grid > .mdlext-cell--bottom {
-  -webkit-align-self: flex-end;
-      -ms-flex-item-align: end;
-          align-self: flex-end;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
 }
 
 .mdlext-grid > .mdlext-cell--stretch {
-  -webkit-align-self: stretch;
-      -ms-flex-item-align: stretch;
-          align-self: stretch;
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
 }
 
 .mdlext-grid .mdlext-grid--no-spacing > .mdlext-cell {
@@ -527,75 +503,63 @@ dialog.mdlext-dialog[open] + .backdrop {
 }
 
 .mdlext-grid > .mdlext-cell--order-1 {
-  -webkit-order: 1;
-      -ms-flex-order: 1;
-          order: 1;
+  -ms-flex-order: 1;
+      order: 1;
 }
 
 .mdlext-grid > .mdlext-cell--order-2 {
-  -webkit-order: 2;
-      -ms-flex-order: 2;
-          order: 2;
+  -ms-flex-order: 2;
+      order: 2;
 }
 
 .mdlext-grid > .mdlext-cell--order-3 {
-  -webkit-order: 3;
-      -ms-flex-order: 3;
-          order: 3;
+  -ms-flex-order: 3;
+      order: 3;
 }
 
 .mdlext-grid > .mdlext-cell--order-4 {
-  -webkit-order: 4;
-      -ms-flex-order: 4;
-          order: 4;
+  -ms-flex-order: 4;
+      order: 4;
 }
 
 .mdlext-grid > .mdlext-cell--order-5 {
-  -webkit-order: 5;
-      -ms-flex-order: 5;
-          order: 5;
+  -ms-flex-order: 5;
+      order: 5;
 }
 
 .mdlext-grid > .mdlext-cell--order-6 {
-  -webkit-order: 6;
-      -ms-flex-order: 6;
-          order: 6;
+  -ms-flex-order: 6;
+      order: 6;
 }
 
 .mdlext-grid > .mdlext-cell--order-7 {
-  -webkit-order: 7;
-      -ms-flex-order: 7;
-          order: 7;
+  -ms-flex-order: 7;
+      order: 7;
 }
 
 .mdlext-grid > .mdlext-cell--order-8 {
-  -webkit-order: 8;
-      -ms-flex-order: 8;
-          order: 8;
+  -ms-flex-order: 8;
+      order: 8;
 }
 
 .mdlext-grid > .mdlext-cell--order-9 {
-  -webkit-order: 9;
-      -ms-flex-order: 9;
-          order: 9;
+  -ms-flex-order: 9;
+      order: 9;
 }
 
 .mdlext-grid > .mdlext-cell--order-10 {
-  -webkit-order: 10;
-      -ms-flex-order: 10;
-          order: 10;
+  -ms-flex-order: 10;
+      order: 10;
 }
 
 .mdlext-grid > .mdlext-cell--order-11 {
-  -webkit-order: 11;
-      -ms-flex-order: 11;
-          order: 11;
+  -ms-flex-order: 11;
+      order: 11;
 }
 
 .mdlext-grid > .mdlext-cell--order-12 {
-  -webkit-order: 12;
-      -ms-flex-order: 12;
-          order: 12;
+  -ms-flex-order: 12;
+      order: 12;
 }
 
 .mdlext-grid:before {
@@ -617,75 +581,63 @@ dialog.mdlext-dialog[open] + .backdrop {
 }
 
 .mdlext-grid[data-eq-state$="grid_phone"] > .mdlext-cell--order-1-phone.mdlext-cell--order-1-phone {
-  -webkit-order: 1;
-      -ms-flex-order: 1;
-          order: 1;
+  -ms-flex-order: 1;
+      order: 1;
 }
 
 .mdlext-grid[data-eq-state$="grid_phone"] > .mdlext-cell--order-2-phone.mdlext-cell--order-2-phone {
-  -webkit-order: 2;
-      -ms-flex-order: 2;
-          order: 2;
+  -ms-flex-order: 2;
+      order: 2;
 }
 
 .mdlext-grid[data-eq-state$="grid_phone"] > .mdlext-cell--order-3-phone.mdlext-cell--order-3-phone {
-  -webkit-order: 3;
-      -ms-flex-order: 3;
-          order: 3;
+  -ms-flex-order: 3;
+      order: 3;
 }
 
 .mdlext-grid[data-eq-state$="grid_phone"] > .mdlext-cell--order-4-phone.mdlext-cell--order-4-phone {
-  -webkit-order: 4;
-      -ms-flex-order: 4;
-          order: 4;
+  -ms-flex-order: 4;
+      order: 4;
 }
 
 .mdlext-grid[data-eq-state$="grid_phone"] > .mdlext-cell--order-5-phone.mdlext-cell--order-5-phone {
-  -webkit-order: 5;
-      -ms-flex-order: 5;
-          order: 5;
+  -ms-flex-order: 5;
+      order: 5;
 }
 
 .mdlext-grid[data-eq-state$="grid_phone"] > .mdlext-cell--order-6-phone.mdlext-cell--order-6-phone {
-  -webkit-order: 6;
-      -ms-flex-order: 6;
-          order: 6;
+  -ms-flex-order: 6;
+      order: 6;
 }
 
 .mdlext-grid[data-eq-state$="grid_phone"] > .mdlext-cell--order-7-phone.mdlext-cell--order-7-phone {
-  -webkit-order: 7;
-      -ms-flex-order: 7;
-          order: 7;
+  -ms-flex-order: 7;
+      order: 7;
 }
 
 .mdlext-grid[data-eq-state$="grid_phone"] > .mdlext-cell--order-8-phone.mdlext-cell--order-8-phone {
-  -webkit-order: 8;
-      -ms-flex-order: 8;
-          order: 8;
+  -ms-flex-order: 8;
+      order: 8;
 }
 
 .mdlext-grid[data-eq-state$="grid_phone"] > .mdlext-cell--order-9-phone.mdlext-cell--order-9-phone {
-  -webkit-order: 9;
-      -ms-flex-order: 9;
-          order: 9;
+  -ms-flex-order: 9;
+      order: 9;
 }
 
 .mdlext-grid[data-eq-state$="grid_phone"] > .mdlext-cell--order-10-phone.mdlext-cell--order-10-phone {
-  -webkit-order: 10;
-      -ms-flex-order: 10;
-          order: 10;
+  -ms-flex-order: 10;
+      order: 10;
 }
 
 .mdlext-grid[data-eq-state$="grid_phone"] > .mdlext-cell--order-11-phone.mdlext-cell--order-11-phone {
-  -webkit-order: 11;
-      -ms-flex-order: 11;
-          order: 11;
+  -ms-flex-order: 11;
+      order: 11;
 }
 
 .mdlext-grid[data-eq-state$="grid_phone"] > .mdlext-cell--order-12-phone.mdlext-cell--order-12-phone {
-  -webkit-order: 12;
-      -ms-flex-order: 12;
-          order: 12;
+  -ms-flex-order: 12;
+      order: 12;
 }
 
 .mdlext-grid[data-eq-state$="grid_phone"] > .mdlext-cell--1-col,
@@ -861,75 +813,63 @@ dialog.mdlext-dialog[open] + .backdrop {
 }
 
 .mdlext-grid[data-eq-state$="grid_tablet"] > .mdlext-cell--order-1-tablet.mdlext-cell--order-1-tablet {
-  -webkit-order: 1;
-      -ms-flex-order: 1;
-          order: 1;
+  -ms-flex-order: 1;
+      order: 1;
 }
 
 .mdlext-grid[data-eq-state$="grid_tablet"] > .mdlext-cell--order-2-tablet.mdlext-cell--order-2-tablet {
-  -webkit-order: 2;
-      -ms-flex-order: 2;
-          order: 2;
+  -ms-flex-order: 2;
+      order: 2;
 }
 
 .mdlext-grid[data-eq-state$="grid_tablet"] > .mdlext-cell--order-3-tablet.mdlext-cell--order-3-tablet {
-  -webkit-order: 3;
-      -ms-flex-order: 3;
-          order: 3;
+  -ms-flex-order: 3;
+      order: 3;
 }
 
 .mdlext-grid[data-eq-state$="grid_tablet"] > .mdlext-cell--order-4-tablet.mdlext-cell--order-4-tablet {
-  -webkit-order: 4;
-      -ms-flex-order: 4;
-          order: 4;
+  -ms-flex-order: 4;
+      order: 4;
 }
 
 .mdlext-grid[data-eq-state$="grid_tablet"] > .mdlext-cell--order-5-tablet.mdlext-cell--order-5-tablet {
-  -webkit-order: 5;
-      -ms-flex-order: 5;
-          order: 5;
+  -ms-flex-order: 5;
+      order: 5;
 }
 
 .mdlext-grid[data-eq-state$="grid_tablet"] > .mdlext-cell--order-6-tablet.mdlext-cell--order-6-tablet {
-  -webkit-order: 6;
-      -ms-flex-order: 6;
-          order: 6;
+  -ms-flex-order: 6;
+      order: 6;
 }
 
 .mdlext-grid[data-eq-state$="grid_tablet"] > .mdlext-cell--order-7-tablet.mdlext-cell--order-7-tablet {
-  -webkit-order: 7;
-      -ms-flex-order: 7;
-          order: 7;
+  -ms-flex-order: 7;
+      order: 7;
 }
 
 .mdlext-grid[data-eq-state$="grid_tablet"] > .mdlext-cell--order-8-tablet.mdlext-cell--order-8-tablet {
-  -webkit-order: 8;
-      -ms-flex-order: 8;
-          order: 8;
+  -ms-flex-order: 8;
+      order: 8;
 }
 
 .mdlext-grid[data-eq-state$="grid_tablet"] > .mdlext-cell--order-9-tablet.mdlext-cell--order-9-tablet {
-  -webkit-order: 9;
-      -ms-flex-order: 9;
-          order: 9;
+  -ms-flex-order: 9;
+      order: 9;
 }
 
 .mdlext-grid[data-eq-state$="grid_tablet"] > .mdlext-cell--order-10-tablet.mdlext-cell--order-10-tablet {
-  -webkit-order: 10;
-      -ms-flex-order: 10;
-          order: 10;
+  -ms-flex-order: 10;
+      order: 10;
 }
 
 .mdlext-grid[data-eq-state$="grid_tablet"] > .mdlext-cell--order-11-tablet.mdlext-cell--order-11-tablet {
-  -webkit-order: 11;
-      -ms-flex-order: 11;
-          order: 11;
+  -ms-flex-order: 11;
+      order: 11;
 }
 
 .mdlext-grid[data-eq-state$="grid_tablet"] > .mdlext-cell--order-12-tablet.mdlext-cell--order-12-tablet {
-  -webkit-order: 12;
-      -ms-flex-order: 12;
-          order: 12;
+  -ms-flex-order: 12;
+      order: 12;
 }
 
 .mdlext-grid[data-eq-state$="grid_tablet"] > .mdlext-cell--1-col,
@@ -1145,75 +1085,63 @@ dialog.mdlext-dialog[open] + .backdrop {
 }
 
 .mdlext-grid[data-eq-state$="grid_desktop"] > .mdlext-cell--order-1-desktop.mdlext-cell--order-1-desktop {
-  -webkit-order: 1;
-      -ms-flex-order: 1;
-          order: 1;
+  -ms-flex-order: 1;
+      order: 1;
 }
 
 .mdlext-grid[data-eq-state$="grid_desktop"] > .mdlext-cell--order-2-desktop.mdlext-cell--order-2-desktop {
-  -webkit-order: 2;
-      -ms-flex-order: 2;
-          order: 2;
+  -ms-flex-order: 2;
+      order: 2;
 }
 
 .mdlext-grid[data-eq-state$="grid_desktop"] > .mdlext-cell--order-3-desktop.mdlext-cell--order-3-desktop {
-  -webkit-order: 3;
-      -ms-flex-order: 3;
-          order: 3;
+  -ms-flex-order: 3;
+      order: 3;
 }
 
 .mdlext-grid[data-eq-state$="grid_desktop"] > .mdlext-cell--order-4-desktop.mdlext-cell--order-4-desktop {
-  -webkit-order: 4;
-      -ms-flex-order: 4;
-          order: 4;
+  -ms-flex-order: 4;
+      order: 4;
 }
 
 .mdlext-grid[data-eq-state$="grid_desktop"] > .mdlext-cell--order-5-desktop.mdlext-cell--order-5-desktop {
-  -webkit-order: 5;
-      -ms-flex-order: 5;
-          order: 5;
+  -ms-flex-order: 5;
+      order: 5;
 }
 
 .mdlext-grid[data-eq-state$="grid_desktop"] > .mdlext-cell--order-6-desktop.mdlext-cell--order-6-desktop {
-  -webkit-order: 6;
-      -ms-flex-order: 6;
-          order: 6;
+  -ms-flex-order: 6;
+      order: 6;
 }
 
 .mdlext-grid[data-eq-state$="grid_desktop"] > .mdlext-cell--order-7-desktop.mdlext-cell--order-7-desktop {
-  -webkit-order: 7;
-      -ms-flex-order: 7;
-          order: 7;
+  -ms-flex-order: 7;
+      order: 7;
 }
 
 .mdlext-grid[data-eq-state$="grid_desktop"] > .mdlext-cell--order-8-desktop.mdlext-cell--order-8-desktop {
-  -webkit-order: 8;
-      -ms-flex-order: 8;
-          order: 8;
+  -ms-flex-order: 8;
+      order: 8;
 }
 
 .mdlext-grid[data-eq-state$="grid_desktop"] > .mdlext-cell--order-9-desktop.mdlext-cell--order-9-desktop {
-  -webkit-order: 9;
-      -ms-flex-order: 9;
-          order: 9;
+  -ms-flex-order: 9;
+      order: 9;
 }
 
 .mdlext-grid[data-eq-state$="grid_desktop"] > .mdlext-cell--order-10-desktop.mdlext-cell--order-10-desktop {
-  -webkit-order: 10;
-      -ms-flex-order: 10;
-          order: 10;
+  -ms-flex-order: 10;
+      order: 10;
 }
 
 .mdlext-grid[data-eq-state$="grid_desktop"] > .mdlext-cell--order-11-desktop.mdlext-cell--order-11-desktop {
-  -webkit-order: 11;
-      -ms-flex-order: 11;
-          order: 11;
+  -ms-flex-order: 11;
+      order: 11;
 }
 
 .mdlext-grid[data-eq-state$="grid_desktop"] > .mdlext-cell--order-12-desktop.mdlext-cell--order-12-desktop {
-  -webkit-order: 12;
-      -ms-flex-order: 12;
-          order: 12;
+  -ms-flex-order: 12;
+      order: 12;
 }
 
 .mdlext-grid[data-eq-state$="grid_desktop"] > .mdlext-cell--1-col,
@@ -1521,15 +1449,12 @@ ul.mdlext-lightboard {
   box-sizing: border-box;
   margin: 0 auto 0 auto;
   padding: 0;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-flow: row wrap;
-      -ms-flex-flow: row wrap;
-          flex-flow: row wrap;
-  -webkit-align-items: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
+  -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
+  -ms-flex-align: stretch;
+      align-items: stretch;
 }
 
 .mdlext-lightboard *,
@@ -1862,18 +1787,15 @@ html:before {
   position: absolute;
   top: 0;
   left: 0;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+      justify-content: center;
 }
 
 .mdlext-lightbox .mdlext-lightbox__slider .mdlext-lightbox__slider__slide {
-  -webkit-flex-shrink: 0;
-      -ms-flex-negative: 0;
-          flex-shrink: 0;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
   display: block;
   text-align: left;
   color: #7f7f7f;
@@ -1913,16 +1835,13 @@ html:before {
   overflow: auto;
   padding: 8px;
   background-color: rgba(255, 255, 255, 0.76);
-  -webkit-transform-origin: bottom;
-          transform-origin: bottom;
-  -webkit-transform: scaleY(0);
-          transform: scaleY(0);
+  transform-origin: bottom;
+  transform: scaleY(0);
   transition: .2s ease-in-out;
 }
 
 .mdlext-lightbox figure figcaption.mdlext-lightbox__show-figcaption {
-  -webkit-transform: scaleY(1);
-          transform: scaleY(1);
+  transform: scaleY(1);
 }
 
 .mdlext-lightbox figure figcaption tbody th {
@@ -1940,22 +1859,18 @@ html:before {
 }
 
 .mdlext-lightbox footer {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center;
   background-color: rgba(255, 255, 255, 0.86);
 }
 
 .mdlext-lightbox footer .mdl-card__supporting-text {
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+      flex: 1;
   overflow: hidden;
   padding: 0;
   height: 18px;
@@ -1963,7 +1878,6 @@ html:before {
 }
 
 .mdlext-lightbox footer nav {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
@@ -2142,8 +2056,7 @@ ul.mdlext-carousel {
   border-right: 0.35em solid transparent;
   position: absolute;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   right: 0.5em;
   padding: 0;
   pointer-events: none;
@@ -2199,6 +2112,11 @@ ul.mdlext-carousel {
 .mdlext-selectfield__select:-moz-focusring {
   color: transparent;
   text-shadow: 0 0 0 #000;
+}
+
+.mdlext-selectfield__select:focus::-ms-value {
+  background-color: inherit;
+  color: inherit;
 }
 
 .mdlext-selectfield__select::-ms-expand {
@@ -2631,12 +2549,10 @@ ul.mdlext-accordion {
   height: 100%;
   padding: 0;
   margin: 0;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-flow: row nowrap;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
   box-sizing: border-box;
 }
 
@@ -2653,30 +2569,23 @@ ul.mdlext-accordion {
   padding: 0;
   width: 48px;
   overflow: hidden;
-  transition: -webkit-flex .15s ease-in;
   transition: flex .15s ease-in;
-  transition: flex .15s ease-in, -webkit-flex .15s ease-in, -ms-flex .15s ease-in;
-  -webkit-flex: 0 0 auto;
-      -ms-flex: 0 0 auto;
-          flex: 0 0 auto;
-  display: -webkit-flex;
+  transition: flex .15s ease-in, -ms-flex .15s ease-in;
+  -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-flow: row nowrap;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
 }
 
 .mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-flow: row nowrap;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
+  -ms-flex-align: center;
+      align-items: center;
   position: relative;
   min-width: 48px;
   margin: 0;
@@ -2730,34 +2639,27 @@ ul.mdlext-accordion {
   bottom: 0;
   left: 0;
   height: 48px;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-flow: row nowrap;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-transform: rotate(-90deg) translateY(100%);
-          transform: rotate(-90deg) translateY(100%);
-  -webkit-transform-origin: bottom left;
-          transform-origin: bottom left;
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
+  -ms-flex-align: center;
+      align-items: center;
+  transform: rotate(-90deg) translateY(100%);
+  transform-origin: bottom left;
 }
 
 .mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > * {
   margin: 0;
   padding: 0;
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+      flex: 1;
 }
 
 .mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > i,
 .mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > img {
-  -webkit-flex: none;
-      -ms-flex: none;
-          flex: none;
+  -ms-flex: none;
+      flex: none;
 }
 
 .mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > i + *,
@@ -2776,9 +2678,8 @@ ul.mdlext-accordion {
 }
 
 .mdlext-accordion .mdlext-accordion__panel[open] {
-  -webkit-flex: 1 1 auto;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
 }
 
 .mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__state:after {
@@ -2792,8 +2693,7 @@ ul.mdlext-accordion {
 
 .mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__content {
   overflow: auto;
-  -webkit-animation: mdlext-accordion__panel-open-keyframe .4s linear;
-          animation: mdlext-accordion__panel-open-keyframe .4s linear;
+  animation: mdlext-accordion__panel-open-keyframe .4s linear;
 }
 
 .mdlext-accordion .mdlext-accordion__panel[disabled] .mdlext-accordion__panel__header {
@@ -2810,20 +2710,17 @@ ul.mdlext-accordion {
 }
 
 .mdlext-accordion.mdlext-accordion--vertical {
-  -webkit-flex-flow: column nowrap;
-      -ms-flex-flow: column nowrap;
-          flex-flow: column nowrap;
+  -ms-flex-flow: column nowrap;
+      flex-flow: column nowrap;
 }
 
 .mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel {
   width: 100%;
   height: 48px;
-  -webkit-flex: none;
-      -ms-flex: none;
-          flex: none;
-  -webkit-flex-flow: column nowrap;
-      -ms-flex-flow: column nowrap;
-          flex-flow: column nowrap;
+  -ms-flex: none;
+      flex: none;
+  -ms-flex-flow: column nowrap;
+      flex-flow: column nowrap;
 }
 
 .mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel .mdlext-accordion__panel__header {
@@ -2839,14 +2736,12 @@ ul.mdlext-accordion {
   width: 100%;
   bottom: auto;
   left: auto;
-  -webkit-transform: rotate(0deg);
-          transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 .mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel[open] {
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+      flex: 1;
 }
 
 .mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel[open] .mdlext-accordion__panel__header {
@@ -2871,10 +2766,8 @@ ul.mdlext-accordion {
 
 .mdlext-accordion.mdlext-accordion--vertical[aria-multiselectable]:not([aria-multiselectable="false"]) .mdlext-accordion__panel[open] .mdlext-accordion__panel__content {
   overflow: hidden;
-  -webkit-animation: mdlext-accordion__panel-open-keyframe 0.1s linear;
-          animation: mdlext-accordion__panel-open-keyframe 0.1s linear;
-  -webkit-animation-delay: 2.2s;
-          animation-delay: 2.2s;
+  animation: mdlext-accordion__panel-open-keyframe 0.1s linear;
+  animation-delay: 2.2s;
 }
 
 /*
@@ -2882,16 +2775,6 @@ ul.mdlext-accordion {
  * Why do we need to animate this? The text overflow auto should be set after the accordion animation has completed!
  * If we omit this, the the overflow scrollbar will flicker during the accordion open transition
  */
-
-@-webkit-keyframes mdlext-accordion__panel-open-keyframe {
-  0% {
-    overflow: hidden;
-  }
-
-  100% {
-    overflow: auto;
-  }
-}
 
 @keyframes mdlext-accordion__panel-open-keyframe {
   0% {

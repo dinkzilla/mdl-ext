@@ -114,6 +114,12 @@
     text-shadow: 0 0 0 #000;
   }
 
+  // MS, remove selected option background color
+  &:focus::-ms-value {
+    background-color: inherit;
+    color: inherit;
+  }
+
   &::-ms-expand {
     display: none;
   }
