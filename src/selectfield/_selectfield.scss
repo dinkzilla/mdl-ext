@@ -182,7 +182,6 @@
   }
 
   .mdlext-selectfield--floating-label.is-focused &,
-  .mdlext-selectfield--floating-label.is-dirty &,
   .mdlext-selectfield--floating-label.is-dirty.is-dirty &,  // TODO: Verify if needed
   .mdlext-selectfield--floating-label.has-placeholder & {
     color: $input-text-highlight-color;

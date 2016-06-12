@@ -830,12 +830,14 @@
       &.is-dirty {
         .mdl-textfield__input,
         .mdlext-selectfield__select {
-          &:required {
-            border-color: $mdlext-dark-input-text-bottom-border-color;
-            background-color: $mdlext-dark-bordered-field-required-background-color;
-          }
-          &:focus,
-          &:required:focus {
+
+          // MDL can not handle required. Planned for MDL-v2
+          //&:required {
+          //  border-color: $mdlext-dark-input-text-bottom-border-color;
+          //  background-color: $mdlext-dark-bordered-field-required-background-color;
+          //}
+          &:focus {
+          //&:required:focus {
             border-color: $mdlext-dark-bordered-field-focus-border-color;
             background-color: $mdlext-dark-bordered-field-focus-background-color;
           }
@@ -851,12 +853,13 @@
           background-color: $mdlext-dark-bordered-field-disabled-background-color;
           border-color: $mdlext-dark-bordered-field-disabled-border-color;
         }
-        &:required {
-          background-color: $mdlext-dark-bordered-field-required-background-color;
-          border-color: $mdlext-dark-bordered-field-required-border-color;
-        }
-        &:focus,
-        &:required:focus {
+        // MDL can not handle required. Planned for MDL-v2
+        //&:required {
+        //  background-color: $mdlext-dark-bordered-field-required-background-color;
+        //  border-color: $mdlext-dark-bordered-field-required-border-color;
+        //}
+        &:focus {
+        //&:required:focus {
           background-color: $mdlext-dark-bordered-field-focus-background-color;
           border-color: $mdlext-dark-bordered-field-focus-border-color;
         }
