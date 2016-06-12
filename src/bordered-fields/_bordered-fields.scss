@@ -30,37 +30,37 @@ $mdlext-bordered-field-border-width                   : 1px !default;
 $mdlext-bordered-field-border-radius                  : 3px !default;
 $mdlext-bordered-field-padding                        : $input-text-padding + 4px !default;
 $mdlext-bordered-field-padding-top                    : $input-text-vertical-spacing !default;
-$mdlext-bordered-field-padding-bottom                 : 4px !default;
+$mdlext-bordered-field-padding-bottom                 : $input-text-padding !default;
 
 $mdlext-bordered-field-background-color               : rgba(#FFFFFF, 0.1) !default;
-$mdlext-bordered-field-focus-border-color             : unquote("rgb(#{$color-primary})") !default;
+$mdlext-bordered-field-focus-border-color             : rgb-string-to-hex($color-primary) !default;
 $mdlext-bordered-field-focus-background-color         : $mdlext-bordered-field-background-color !default;
 
 $mdlext-bordered-field-disabled-border-color          : $input-text-disabled-color !default;
 $mdlext-bordered-field-disabled-background-color      : $mdlext-bordered-field-background-color !default;
 
-$mdlext-bordered-field-required-border-color          : unquote("rgba(#{$color-accent}, 0.8)") !default;
+$mdlext-bordered-field-required-border-color          : rgba(rgb-string-to-hex($color-accent), 0.8) !default;
 $mdlext-bordered-field-required-background-color      : $mdlext-bordered-field-background-color !default;
 
 $mdlext-bordered-field-label-top                      : 45px !default;
 $mdlext-bordered-field-label-focused-top              : 20px !default;
 
 // New
-$mdlext-bordered-field-vertical-spacing-top           : $input-text-vertical-spacing !default;
+$mdlext-bordered-field-vertical-spacing-top           : 0 !default;
 $mdlext-bordered-field-vertical-spacing-bottom        : $input-text-vertical-spacing !default;
 $mdlext-bordered-field-font-size                      : $input-text-font-size !default;
 $mdlext-bordered-field-font-weight                    : normal !default;
 
 $mdlext-bordered-field-border-color                   : $input-text-bottom-border-color !default;
 
-$mdlext-bordered-field-required-focus-border-color    : unquote("rgba(#{$color-accent}, 0.8)") !default;
+$mdlext-bordered-field-required-focus-border-color    : rgba(rgb-string-to-hex($color-accent), 0.8) !default;
 $mdlext-bordered-field-required-focus-background-color: $mdlext-bordered-field-background-color !default;
 
-$mdlext-bordered-field-error-border-color             : $input-text-error-color;
-$mdlext-bordered-field-error-background-color         : $mdlext-bordered-field-background-color;
-$mdlext-bordered-field-error-focus-border-color       : $input-text-error-color;
-$mdlext-bordered-field-error-focus-background-color   : $mdlext-bordered-field-error-background-color;
+$mdlext-bordered-field-error-border-color             : $input-text-error-color !default;
+$mdlext-bordered-field-error-background-color         : rgba(lighten(rgb-string-to-hex($input-text-error-color), 50%), 0.5) !default;
 
+$mdlext-bordered-field-error-focus-border-color       : darken(rgb-string-to-hex($input-text-error-color), 10%) !default;
+$mdlext-bordered-field-error-focus-background-color   : $mdlext-bordered-field-error-background-color !default;
 
 $mdlext-bordered-field-height                         : $mdlext-bordered-field-padding-top + $mdlext-bordered-field-padding-bottom + $mdlext-bordered-field-font-size + 4px !default;
 
@@ -118,6 +118,20 @@ $mdlext-bordered-field-height                         : $mdlext-bordered-field-p
         &:required:focus {
           border-color: $mdlext-bordered-field-focus-border-color;
           background-color: $mdlext-bordered-field-focus-background-color;
+        }
+      }
+    }
+
+    &.is-invalid {
+      .mdl-textfield__input,
+      .mdlext-selectfield__select {
+        border-color: $mdlext-bordered-field-error-border-color;
+        background-color: $mdlext-bordered-field-error-background-color;
+
+        &:focus,
+        &:required:focus {
+          border-color: $mdlext-bordered-field-error-focus-border-color;
+          background-color: $mdlext-bordered-field-error-focus-background-color;
         }
       }
     }
