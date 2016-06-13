@@ -2456,6 +2456,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-bordered-fields .mdl-textfield.is-invalid .mdlext-selectfield__select,
 .mdlext-bordered-fields .mdlext-selectfield.is-invalid .mdl-textfield__input,
 .mdlext-bordered-fields .mdlext-selectfield.is-invalid .mdlext-selectfield__select {
+  color: inherit;
   border-color: #d50000;
   background-color: rgba(255, 213, 213, 0.5);
 }

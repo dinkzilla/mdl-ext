@@ -183,7 +183,7 @@ $mdlext-carousel-slide-ripple-color            : $mdlext-lightboard-ripple-color
 $mdlext-bordered-field-vertical-spacing-top           : 0 !default;
 $mdlext-bordered-field-vertical-spacing-bottom        : $input-text-vertical-spacing !default;
 
-$mdlext-bordered-field-font-size                      : $input-text-font-size !default;
+$mdlext-bordered-field-input-text-font-size           : $input-text-font-size !default;
 $mdlext-bordered-field-font-weight                    : normal !default;
 $mdlext-bordered-field-border-width                   : 1px !default;
 $mdlext-bordered-field-border-radius                  : 3px !default;
@@ -191,7 +191,7 @@ $mdlext-bordered-field-padding                        : $input-text-padding + 4p
 $mdlext-bordered-field-padding-top                    : $input-text-vertical-spacing !default;
 $mdlext-bordered-field-padding-bottom                 : $input-text-padding !default;
 
-$mdlext-bordered-field-input-text-color               : inherit;
+$mdlext-bordered-field-input-text-color               : inherit !default;
 $mdlext-bordered-field-border-color                   : $input-text-bottom-border-color !default;
 $mdlext-bordered-field-background-color               : rgba(#FFFFFF, 0.2) !default;
 $mdlext-bordered-field-focus-border-color             : rgb-string-to-hex($color-primary) !default;
@@ -201,20 +201,20 @@ $mdlext-bordered-field-input-text-disabled-text-color : $input-text-disabled-tex
 $mdlext-bordered-field-disabled-border-color          : $input-text-disabled-color !default;
 $mdlext-bordered-field-disabled-background-color      : $mdlext-bordered-field-background-color !default;
 
-$mdlext-bordered-field-input-text-error-color         : rgb-string-to-hex($input-text-error-color) !default;
-$mdlext-bordered-field-error-border-color             : $mdlext-bordered-field-input-text-error-color !default;
-$mdlext-bordered-field-error-background-color         : rgba(lighten($mdlext-bordered-field-input-text-error-color, 50%), 0.5) !default;
-$mdlext-bordered-field-error-focus-border-color       : darken($mdlext-bordered-field-input-text-error-color, 10%) !default;
+$mdlext-bordered-field-input-text-error-color         : $mdlext-bordered-field-input-text-color !default;
+$mdlext-bordered-field-error-border-color             : rgb-string-to-hex($input-text-error-color) !default;
+$mdlext-bordered-field-error-background-color         : rgba(lighten($mdlext-bordered-field-error-border-color, 50%), 0.5) !default;
+$mdlext-bordered-field-error-focus-border-color       : darken($mdlext-bordered-field-error-border-color, 10%) !default;
 $mdlext-bordered-field-error-focus-background-color   : $mdlext-bordered-field-error-background-color !default;
 
-$mdlext-bordered-field-label-color                    : $input-text-label-color !default;
-$mdlext-bordered-field-label-focus-color              : $mdlext-bordered-field-focus-border-color !default;
-$mdlext-bordered-field-label-error-color              : $mdlext-bordered-field-input-text-error-color !default;
-$mdlext-bordered-field-label-disabled-color           : $input-text-disabled-text-color !default;
+$mdlext-bordered-field-input-text-label-color         : $input-text-label-color !default;
+$mdlext-bordered-field-input-text-label-focus-color   : $mdlext-bordered-field-focus-border-color !default;
+$mdlext-bordered-field-input-text-label-error-color   : $mdlext-bordered-field-error-border-color !default;
+$mdlext-bordered-field-input-text-label-disabled-color: $input-text-disabled-text-color !default;
 $mdlext-bordered-field-floating-label-font-size       : $input-text-floating-label-fontsize !default;
 $mdlext-bordered-field-floating-label-font-weight     : normal !default;
 
-$mdlext-bordered-field-height                         : $mdlext-bordered-field-padding-top + $mdlext-bordered-field-padding-bottom + $mdlext-bordered-field-font-size + 4px !default;
+$mdlext-bordered-field-height                         : $mdlext-bordered-field-padding-top + $mdlext-bordered-field-padding-bottom + $mdlext-bordered-field-input-text-font-size + 4px !default;
 $mdlext-bordered-field-floating-label-focus-bottom    : $mdlext-bordered-field-height - $mdlext-bordered-field-floating-label-font-size - $mdlext-bordered-field-padding-top/2 !default;
 
 // MDL can not handle required. Planned for MDL-v2

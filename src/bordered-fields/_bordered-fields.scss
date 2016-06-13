@@ -46,7 +46,7 @@
       border: $mdlext-bordered-field-border-width solid $mdlext-bordered-field-border-color;
       border-radius: $mdlext-bordered-field-border-radius;
       padding: $mdlext-bordered-field-padding-top $mdlext-bordered-field-padding $mdlext-bordered-field-padding-bottom $mdlext-bordered-field-padding;
-      font-size: $mdlext-bordered-field-font-size;
+      font-size: $mdlext-bordered-field-input-text-font-size;
       font-weight: $mdlext-bordered-field-font-weight;
       color: $mdlext-bordered-field-input-text-color;
 
@@ -85,6 +85,7 @@
     &.is-invalid {
       .mdl-textfield__input,
       .mdlext-selectfield__select {
+        color: $mdlext-bordered-field-input-text-error-color;
         border-color: $mdlext-bordered-field-error-border-color;
         background-color: $mdlext-bordered-field-error-background-color;
 
@@ -131,8 +132,8 @@
 
     .mdl-textfield__label,
     .mdlext-selectfield__label {
-      color: $mdlext-bordered-field-label-color;
-      font-size: $mdlext-bordered-field-font-size;
+      color: $mdlext-bordered-field-input-text-label-color;
+      font-size: $mdlext-bordered-field-input-text-font-size;
       font-weight: $mdlext-bordered-field-font-weight;
       padding-left: $mdlext-bordered-field-padding;
       top: auto;
@@ -154,7 +155,7 @@
 
       .mdl-textfield__label,
       .mdlext-selectfield__label {
-        color: $mdlext-bordered-field-label-focus-color;
+        color: $mdlext-bordered-field-input-text-label-focus-color;
         font-size: $mdlext-bordered-field-floating-label-font-size;
         font-weight: $mdlext-bordered-field-floating-label-font-weight;
         top: auto;
@@ -168,7 +169,7 @@
 
       .mdl-textfield__label,
       .mdlext-selectfield__label {
-        color: $mdlext-bordered-field-label-disabled-color;
+        color: $mdlext-bordered-field-input-text-label-disabled-color;
       }
     }
 
@@ -177,7 +178,7 @@
 
       .mdl-textfield__label,
       .mdlext-selectfield__label {
-        color: $mdlext-bordered-field-label-error-color;
+        color: $mdlext-bordered-field-input-text-label-error-color;
       }
     }
 
@@ -186,7 +187,7 @@
 
   fieldset[disabled] .mdl-textfield .mdl-textfield__label,
   fieldset[disabled] .mdl-selectfield .mdl-selectfield__label {
-    color: $mdlext-bordered-field-label-disabled-color;
+    color: $mdlext-bordered-field-input-text-label-disabled-color;
   }
 
 
