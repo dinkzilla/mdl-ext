@@ -55,7 +55,7 @@
         background-color: $mdlext-bordered-field-disabled-background-color;
         border-color: $mdlext-bordered-field-disabled-border-color;
       }
-      // MDL can not handle required. Planned for MDL-v2
+      // MDL can not handle required attribute properly. Planned for MDL-v2
       //&:required {
       //  background-color: $mdlext-bordered-field-required-background-color;
       //  border-color: $mdlext-bordered-field-required-border-color;
@@ -71,17 +71,14 @@
       //  border-color: $mdlext-bordered-field-required-focus-border-color;
       //}
     }
-
     .mdlext-selectfield__select {
       padding-right: calc(1em + #{$mdlext-bordered-field-padding});  // space for down arrow
     }
-
     &.is-dirty {
       .mdl-textfield__input,
       .mdlext-selectfield__select {
       }
     }
-
     &.is-invalid {
       .mdl-textfield__input,
       .mdlext-selectfield__select {
@@ -129,7 +126,6 @@
         visibility: hidden;
       }
     }
-
     .mdl-textfield__label,
     .mdlext-selectfield__label {
       color: $mdlext-bordered-field-input-text-label-color;
@@ -145,7 +141,6 @@
         visibility: hidden !important;
       }
     }
-
     &.mdl-textfield--floating-label.is-focused.is-focused,
     &.mdl-textfield--floating-label.is-dirty.is-dirty,
     &.mdl-textfield--floating-label.has-placeholder,
@@ -163,7 +158,6 @@
         visibility: visible;
       }
     }
-
     &.mdl-textfield--floating-label.is-disabled.is-disabled,
     &.mdlext-selectfield--floating-label.is-disabled.is-disabled {
 
@@ -172,7 +166,6 @@
         color: $mdlext-bordered-field-input-text-label-disabled-color;
       }
     }
-
     &.mdl-textfield--floating-label.is-invalid.is-invalid,
     &.mdlext-selectfield--floating-label.is-invalid.is-invalid {
 
@@ -181,15 +174,12 @@
         color: $mdlext-bordered-field-input-text-label-error-color;
       }
     }
-
   }
-
 
   fieldset[disabled] .mdl-textfield .mdl-textfield__label,
   fieldset[disabled] .mdl-selectfield .mdl-selectfield__label {
     color: $mdlext-bordered-field-input-text-label-disabled-color;
   }
-
 
   // Icon(s) and/or button(s) inside textfield
   .mdl-textfield,
@@ -224,7 +214,6 @@
       & > .mdl-button ~ .mdlext-selectfield__label {
         left: $input-text-button-size - $mdlext-bordered-field-padding;
       }
-
     }
     &.mdlext-bordered-fields__icon-right {
       & > .mdl-textfield__input {
@@ -245,13 +234,11 @@
 
   fieldset[disabled] .mdl-textfield,
   fieldset[disabled] .mdlext-selectfield {
-
     i,
     .mdl-button {
       color: $mdlext-bordered-field-disabled-border-color;
       pointer-events: none;
     }
   }
-
 }
 

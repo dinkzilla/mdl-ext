@@ -195,7 +195,7 @@ $mdlext-bordered-field-input-text-color               : inherit !default;
 $mdlext-bordered-field-border-color                   : $input-text-bottom-border-color !default;
 $mdlext-bordered-field-background-color               : rgba(#FFFFFF, 0.2) !default;
 $mdlext-bordered-field-focus-border-color             : rgb-string-to-hex($color-primary) !default;
-$mdlext-bordered-field-focus-background-color         : $mdlext-bordered-field-background-color !default;
+$mdlext-bordered-field-focus-background-color         : rgba(#EEEEEE, 0.2) !default;
 
 $mdlext-bordered-field-input-text-disabled-text-color : $input-text-disabled-text-color;
 $mdlext-bordered-field-disabled-border-color          : $input-text-disabled-color !default;
@@ -217,7 +217,8 @@ $mdlext-bordered-field-floating-label-font-weight     : normal !default;
 $mdlext-bordered-field-height                         : $mdlext-bordered-field-padding-top + $mdlext-bordered-field-padding-bottom + $mdlext-bordered-field-input-text-font-size + 4px !default;
 $mdlext-bordered-field-floating-label-focus-bottom    : $mdlext-bordered-field-height - $mdlext-bordered-field-floating-label-font-size - $mdlext-bordered-field-padding-top/2 !default;
 
-// MDL can not handle required. Planned for MDL-v2
+
+// MDL can not handle required attribute properly. Planned for MDL-v2
 //$mdlext-bordered-field-required-border-color          : rgba(rgb-string-to-hex($color-accent), 0.8) !default;
 //$mdlext-bordered-field-required-background-color      : $mdlext-bordered-field-background-color !default;
 //$mdlext-bordered-field-required-focus-border-color    : rgba(rgb-string-to-hex($color-accent), 0.8) !default;
@@ -310,11 +311,11 @@ $mdlext-light-range-bg-focus-color:               rgba($mdlext-color-black, 0.12
 
 // Textfields
 $mdlext-light-input-text-background-color:        transparent !default;
-$mdlext-light-input-text-label-color:             rgba($mdlext-color-black, 0.26) !default;
-$mdlext-light-input-text-bottom-border-color:     rgba($mdlext-color-black, 0.12) !default;
+$mdlext-light-input-text-label-color:             rgba($mdlext-color-black, 0.54) !default;
+$mdlext-light-input-text-bottom-border-color:     rgba($mdlext-color-black, 0.26) !default;
 $mdlext-light-input-text-highlight-color:         $mdlext-light-color-accent-light !default;
-$mdlext-light-input-text-disabled-color:          $mdlext-light-input-text-bottom-border-color !default;
-$mdlext-light-input-text-disabled-text-color:     $mdlext-light-input-text-label-color !default;
+$mdlext-light-input-text-disabled-color:          rgba($mdlext-color-black, 0.12) !default;
+$mdlext-light-input-text-disabled-text-color:     rgba($mdlext-color-black, 0.26) !default;
 $mdlext-light-input-text-error-color:             $mdlext-light-error-color !default;
 
 // Checkboxes
@@ -363,29 +364,28 @@ $mdlext-selectfield-arrow-length: 0.5em;
 
 
 // Bordered fields
+$mdlext-light-bordered-field-input-text-color               : inherit !default;
+$mdlext-light-bordered-field-border-color                   : $mdlext-light-input-text-bottom-border-color !default;
 $mdlext-light-bordered-field-background-color               : rgba($mdlext-light-content-background-color, 0.1) !default;
 $mdlext-light-bordered-field-focus-border-color             : $mdlext-light-color-accent-light !default;
-$mdlext-light-bordered-field-focus-background-color         : $mdlext-light-bordered-field-background-color !default;
+$mdlext-light-bordered-field-focus-background-color         : rgba(darken($mdlext-light-bordered-field-background-color, 10%), 0.1) !default;
+
+$mdlext-light-bordered-field-input-text-disabled-text-color : $mdlext-light-input-text-disabled-text-color;
 $mdlext-light-bordered-field-disabled-border-color          : $mdlext-light-input-text-disabled-color !default;
 $mdlext-light-bordered-field-disabled-background-color      : $mdlext-light-bordered-field-background-color !default;
 
-$mdlext-light-bordered-field-border-color                   : $mdlext-light-input-text-bottom-border-color !default;
+$mdlext-light-bordered-field-input-text-error-color         : $mdlext-light-bordered-field-input-text-color !default;
 $mdlext-light-bordered-field-error-border-color             : $mdlext-light-input-text-error-color !default;
-$mdlext-light-bordered-field-error-background-color         : rgba(lighten($mdlext-light-input-text-error-color, 50%), 0.5) !default;
-$mdlext-light-bordered-field-error-focus-border-color       : darken($mdlext-light-input-text-error-color, 10%) !default;
+$mdlext-light-bordered-field-error-background-color         : rgba(lighten($mdlext-light-bordered-field-error-border-color, 50%), 0.5) !default;
+$mdlext-light-bordered-field-error-focus-border-color       : darken($mdlext-light-bordered-field-error-border-color, 10%) !default;
 $mdlext-light-bordered-field-error-focus-background-color   : $mdlext-light-bordered-field-error-background-color !default;
 
-$mdlext-light-bordered-field-error-color                    : $mdlext-light-input-text-error-color !default;
-$mdlext-light-bordered-field-label-color                    : $mdlext-light-input-text-label-color !default;
-$mdlext-light-bordered-field-label-error-color              : $mdlext-light-bordered-field-error-color !default;
-$mdlext-light-bordered-field-label-disabled-color           : $mdlext-light-input-text-disabled-text-color !default;
+$mdlext-light-bordered-field-input-text-label-color         : $mdlext-light-input-text-label-color !default;
+$mdlext-light-bordered-field-input-text-label-focus-color   : $mdlext-light-bordered-field-focus-border-color !default;
+$mdlext-light-bordered-field-input-text-label-error-color   : $mdlext-light-bordered-field-error-border-color !default;
+$mdlext-light-bordered-field-input-text-label-disabled-color: $mdlext-light-input-text-disabled-text-color !default;
 
-// MDL can not handle required. Planned for MDL-v2
-//$mdlext-light-bordered-field-required-border-color          : rgba($mdlext-light-color-primary-light, 0.8) !default;
-//$mdlext-light-bordered-field-required-background-color      : $mdlext-light-bordered-field-background-color !default;
-//$mdlext-light-bordered-field-required-focus-border-color    : rgba($mdlext-light-color-accent, 0.8) !default;
-//$mdlext-light-bordered-field-required-focus-background-color: $mdlext-light-bordered-field-background-color !default;
-//$mdlext-light-bordered-field-label-required-color           : $mdlext-light-bordered-field-required-border-color !default;
+
 
 // ----------------------------------------------------------------
 // Dark Color Theme.
@@ -472,8 +472,8 @@ $mdlext-dark-input-text-background-color:         transparent !default;
 $mdlext-dark-input-text-label-color:              rgba($mdlext-color-white, 0.50) !default;
 $mdlext-dark-input-text-bottom-border-color:      rgba($mdlext-color-white, 0.26) !default;
 $mdlext-dark-input-text-highlight-color:          $mdlext-dark-color-accent-light !default;
-$mdlext-dark-input-text-disabled-color:           $mdlext-dark-input-text-bottom-border-color !default;
-$mdlext-dark-input-text-disabled-text-color:      $mdlext-dark-input-text-label-color !default;
+$mdlext-dark-input-text-disabled-color:           rgba($mdlext-color-white, 0.12) !default;
+$mdlext-dark-input-text-disabled-text-color:      rgba($mdlext-color-white, 0.26) !default;
 $mdlext-dark-input-text-error-color:              $mdlext-dark-error-color !default;
 
 // Checkboxes
@@ -520,26 +520,23 @@ $mdlext-dark-data-table-dividers:                       1px solid $mdlext-dark-d
 
 
 // Bordered fields
+$mdlext-dark-bordered-field-input-text-color               : inherit !default;
+$mdlext-dark-bordered-field-border-color                   : $mdlext-dark-input-text-bottom-border-color !default;
 $mdlext-dark-bordered-field-background-color               : rgba($mdlext-dark-content-background-color, 0.1) !default;
 $mdlext-dark-bordered-field-focus-border-color             : $mdlext-dark-color-accent-light !default;
-$mdlext-dark-bordered-field-focus-background-color         : $mdlext-dark-bordered-field-background-color !default;
+$mdlext-dark-bordered-field-focus-background-color         : rgba(darken($mdlext-dark-bordered-field-background-color, 10%), 0.1) !default;
+
+$mdlext-dark-bordered-field-input-text-disabled-text-color : $mdlext-dark-input-text-disabled-text-color;
 $mdlext-dark-bordered-field-disabled-border-color          : $mdlext-dark-input-text-disabled-color !default;
 $mdlext-dark-bordered-field-disabled-background-color      : $mdlext-dark-bordered-field-background-color !default;
 
-$mdlext-dark-bordered-field-border-color                   : $mdlext-dark-input-text-bottom-border-color !default;
+$mdlext-dark-bordered-field-input-text-error-color         : $mdlext-dark-bordered-field-input-text-color !default;
 $mdlext-dark-bordered-field-error-border-color             : $mdlext-dark-input-text-error-color !default;
-$mdlext-dark-bordered-field-error-background-color         : rgba(lighten($mdlext-dark-input-text-error-color, 50%), 0.5) !default;
-$mdlext-dark-bordered-field-error-focus-border-color       : darken($mdlext-dark-input-text-error-color, 10%) !default;
+$mdlext-dark-bordered-field-error-background-color         : rgba($mdlext-dark-bordered-field-error-border-color, 0.1) !default;
+$mdlext-dark-bordered-field-error-focus-border-color       : darken($mdlext-dark-bordered-field-error-border-color, 10%) !default;
 $mdlext-dark-bordered-field-error-focus-background-color   : $mdlext-dark-bordered-field-error-background-color !default;
 
-$mdlext-dark-bordered-field-error-color                    : $mdlext-dark-input-text-error-color !default;
-$mdlext-dark-bordered-field-label-color                    : $mdlext-dark-input-text-label-color !default;
-$mdlext-dark-bordered-field-label-error-color              : $mdlext-dark-bordered-field-error-color !default;
-$mdlext-dark-bordered-field-label-disabled-color           : $mdlext-dark-input-text-disabled-text-color !default;
-
-// MDL can not handle required. Planned for MDL-v2
-//$mdlext-dark-bordered-field-required-border-color          : rgba($mdlext-dark-color-primary-light, 0.8) !default;
-//$mdlext-dark-bordered-field-required-background-color      : $mdlext-dark-bordered-field-background-color !default;
-//$mdlext-dark-bordered-field-required-focus-border-color    : rgba($mdlext-dark-color-accent, 0.8) !default;
-//$mdlext-dark-bordered-field-required-focus-background-color: $mdlext-dark-bordered-field-background-color !default;
-//$mdlext-dark-bordered-field-label-required-color           : $mdlext-dark-bordered-field-required-border-color !default;
+$mdlext-dark-bordered-field-input-text-label-color         : $mdlext-dark-input-text-label-color !default;
+$mdlext-dark-bordered-field-input-text-label-focus-color   : $mdlext-dark-bordered-field-focus-border-color !default;
+$mdlext-dark-bordered-field-input-text-label-error-color   : $mdlext-dark-bordered-field-error-border-color !default;
+$mdlext-dark-bordered-field-input-text-label-disabled-color: $mdlext-dark-input-text-disabled-text-color !default;
