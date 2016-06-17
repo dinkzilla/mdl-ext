@@ -756,8 +756,41 @@
 // mdl/src/card/_card.scss
 // ----------------------------------------
 .mdlext-light-color-theme {
+
+  .mdl-card {
+    background: $mdlext-light-card-background-color;
+  }
+
+  .mdl-card__media {
+    background-color: $mdlext-light-card-image-placeholder-color;
+  }
+
+  .mdl-card__title {
+    color: $mdlext-light-card-text-color;
+
+    &.mdl-card--border {
+      border-bottom-color: $mdlext-light-card-border-color;
+    }
+  }
+
+  .mdl-card__title-text {
+    color: inherit;
+  }
+
+  .mdl-card__subtitle-text {
+    color: $mdlext-light-card-subtitle-color;
+  }
+
   .mdl-card__supporting-text {
-    color: $mdlext-light-card-supporting-text-color;
+    color: $mdlext-light-card-supporting-text-text-color;
+  }
+
+  .mdl-card__actions {
+    background-color: rgba(0,0,0,0);
+
+    &.mdl-card--border {
+      border-top-color: $mdlext-light-card-border-color;
+    }
   }
 }
 

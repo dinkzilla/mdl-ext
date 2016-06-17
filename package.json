@@ -11,7 +11,7 @@
     "test:coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/istanbul cover --root ./src ./node_modules/.bin/_mocha -- --opts ./mocha.opts  -r .istanbul-mocha.config.js './test/**/*.spec.js'",
     "check-coverage": "./node_modules/.bin/istanbul check-coverage --statements 90 --branches 70 --functions 90 --lines 90",
     "report-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/codecov",
-    "clean": "rimraf lib && mkdir lib",
+    "clean": "./node_modules/.bin/rimraf lib && mkdir lib",
     "prebuild": "npm run clean && ./node_modules/.bin/webpack",
     "build": "./node_modules/.bin/webpack -p --mode=build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",

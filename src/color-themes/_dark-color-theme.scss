@@ -755,8 +755,40 @@
 // mdl/src/card/_card.scss
 // ----------------------------------------
 .mdlext-dark-color-theme {
+  .mdl-card {
+    background: $mdlext-dark-card-background-color;
+  }
+
+  .mdl-card__media {
+    background-color: $mdlext-dark-card-image-placeholder-color;
+  }
+
+  .mdl-card__title {
+    color: $mdlext-dark-card-text-color;
+
+    &.mdl-card--border {
+      border-bottom-color: $mdlext-dark-card-border-color;
+    }
+  }
+
+  .mdl-card__title-text {
+    color: inherit;
+  }
+
+  .mdl-card__subtitle-text {
+    color: $mdlext-dark-card-subtitle-color;
+  }
+
   .mdl-card__supporting-text {
-    color: $mdlext-dark-card-supporting-text-color;
+    color: $mdlext-dark-card-supporting-text-text-color;
+  }
+
+  .mdl-card__actions {
+    background-color: rgba(255,255,255,0);
+
+    &.mdl-card--border {
+      border-top-color: $mdlext-dark-card-border-color;
+    }
   }
 }
 

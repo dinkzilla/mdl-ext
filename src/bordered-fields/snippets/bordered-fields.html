@@ -105,32 +105,6 @@
     </div>
 
     <div class="mdl-cell mdl-cell--4-col">
-      <p>File upload</p>
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-right ">
-        <input class="mdl-textfield__input" type="text" id="uploadfile2" readonly>
-        <label class="mdl-textfield__label">File (work in progress)</label>
-
-        <label class="mdl-button mdl-js-button mdl-button--primary mdl-button--icon mdl-button--file" for="uploadfile2">
-          <i class="material-icons">attach_file</i>
-          <input type="file" id="uploadBtn2">
-        </label>
-      </div>
-      <!--
-        // Need a script to work properly - something like this
-      -->
-      <script>
-        (function() {
-          'use strict';
-          document.querySelector('#uploadBtn2').addEventListener('change', function() {
-            var n = document.querySelector("#uploadfile2");
-            n.value = this.files[0].name;
-            n.parentNode.classList.add('is-dirty');
-          });
-        }());
-      </script>
-    </div>
-
-    <div class="mdl-cell mdl-cell--4-col">
       <p>Text with icons left and right, disabled</p>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-left mdlext-bordered-fields__icon-right">
         <i class="material-icons">radio</i>
@@ -336,6 +310,32 @@
           <i class="material-icons">settings_voice</i>
         </label>
       </div>
+    </div>
+
+    <div class="mdl-cell mdl-cell--4-col">
+      <p>File upload</p>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-right ">
+        <input class="mdl-textfield__input" type="text" id="uploadfile2" readonly>
+        <label class="mdl-textfield__label">File (work in progress)</label>
+
+        <label class="mdl-button mdl-js-button mdl-button--primary mdl-button--icon mdl-button--file" for="uploadfile2">
+          <i class="material-icons">attach_file</i>
+          <input type="file" id="uploadBtn2">
+        </label>
+      </div>
+      <!--
+        // Need a script to work properly - something like this
+      -->
+      <script>
+        (function() {
+          'use strict';
+          document.querySelector('#uploadBtn2').addEventListener('change', function() {
+            var n = document.querySelector("#uploadfile2");
+            n.value = this.files[0].name;
+            n.parentNode.classList.add('is-dirty');
+          });
+        }());
+      </script>
     </div>
 
   </div>

@@ -2445,7 +2445,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   box-sizing: border-box;
   height: 44px;
   background-color: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(0,0,0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.26);
   border-radius: 3px;
   padding: 20px 8px 4px 8px;
   font-size: 16px;
@@ -2457,9 +2457,9 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select:disabled,
 .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input:disabled,
 .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select:disabled {
-  color: rgba(0,0,0, 0.26);
+  color: rgba(0, 0, 0, 0.12);
   background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(0,0,0, 0.12);
+  border-color: rgba(0, 0, 0, 0.12);
 }
 
 .mdlext-bordered-fields .mdl-textfield .mdl-textfield__input:focus,
@@ -2499,23 +2499,23 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 
 .mdlext-bordered-fields fieldset[disabled] .mdlext-selectfield:after,
 .mdlext-bordered-fields .mdlext-selectfield.is-disabled:after {
-  color: rgba(0,0,0, 0.26);
+  color: rgba(0, 0, 0, 0.12);
   content: '';
   width: 0;
   height: 0;
-  border-top: 0.5em solid rgba(0,0,0, 0.26);
+  border-top: 0.5em solid rgba(0, 0, 0, 0.12);
   border-top-width: 0.5em;
   border-top-style: solid;
-  border-top-color: rgba(0,0,0, 0.26);
+  border-top-color: rgba(0, 0, 0, 0.12);
   border-left: 0.35em solid transparent;
   border-right: 0.35em solid transparent;
 }
 
 .mdlext-bordered-fields fieldset[disabled] .mdl-textfield .mdl-textfield__input,
 .mdlext-bordered-fields fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__select {
-  color: rgba(0,0,0, 0.26);
+  color: rgba(0, 0, 0, 0.12);
   background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(0,0,0, 0.12);
+  border-color: rgba(0, 0, 0, 0.12);
 }
 
 .mdlext-bordered-fields .mdl-textfield.is-dirty .mdl-textfield__label,
@@ -2533,7 +2533,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__label,
 .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__label,
 .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__label {
-  color: rgba(0,0,0, 0.26);
+  color: rgba(0, 0, 0, 0.26);
   font-size: 16px;
   font-weight: normal;
   padding-left: 8px;
@@ -2589,7 +2589,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-bordered-fields .mdlext-selectfield.mdl-textfield--floating-label.is-disabled.is-disabled .mdlext-selectfield__label,
 .mdlext-bordered-fields .mdlext-selectfield.mdlext-selectfield--floating-label.is-disabled.is-disabled .mdl-textfield__label,
 .mdlext-bordered-fields .mdlext-selectfield.mdlext-selectfield--floating-label.is-disabled.is-disabled .mdlext-selectfield__label {
-  color: rgba(0,0,0, 0.26);
+  color: rgba(0, 0, 0, 0.12);
 }
 
 .mdlext-bordered-fields .mdl-textfield.mdl-textfield--floating-label.is-invalid.is-invalid .mdl-textfield__label,
@@ -2605,7 +2605,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 
 .mdlext-bordered-fields fieldset[disabled] .mdl-textfield .mdl-textfield__label,
 .mdlext-bordered-fields fieldset[disabled] .mdl-selectfield .mdl-selectfield__label {
-  color: rgba(0,0,0, 0.26);
+  color: rgba(0, 0, 0, 0.12);
 }
 
 .mdlext-bordered-fields .mdl-textfield.mdlext-bordered-fields__icon-left > i,
@@ -2676,7 +2676,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-bordered-fields .mdl-textfield.is-disabled .mdl-button,
 .mdlext-bordered-fields .mdlext-selectfield.is-disabled i,
 .mdlext-bordered-fields .mdlext-selectfield.is-disabled .mdl-button {
-  color: rgba(0,0,0, 0.12);
+  color: rgba(0, 0, 0, 0.12);
   pointer-events: none;
 }
 
@@ -2684,7 +2684,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-bordered-fields fieldset[disabled] .mdl-textfield .mdl-button,
 .mdlext-bordered-fields fieldset[disabled] .mdlext-selectfield i,
 .mdlext-bordered-fields fieldset[disabled] .mdlext-selectfield .mdl-button {
-  color: rgba(0,0,0, 0.12);
+  color: rgba(0, 0, 0, 0.12);
   pointer-events: none;
 }
 
@@ -3738,8 +3738,40 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   background-color: #E0E0E0;
 }
 
+.mdlext-light-color-theme .mdl-card {
+  background: #FAFAFA;
+}
+
+.mdlext-light-color-theme .mdl-card__media {
+  background-color: #E040FB;
+}
+
+.mdlext-light-color-theme .mdl-card__title {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.mdlext-light-color-theme .mdl-card__title.mdl-card--border {
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+.mdlext-light-color-theme .mdl-card__title-text {
+  color: inherit;
+}
+
+.mdlext-light-color-theme .mdl-card__subtitle-text {
+  color: rgba(0, 0, 0, 0.54);
+}
+
 .mdlext-light-color-theme .mdl-card__supporting-text {
   color: rgba(0, 0, 0, 0.54);
+}
+
+.mdlext-light-color-theme .mdl-card__actions {
+  background-color: transparent;
+}
+
+.mdlext-light-color-theme .mdl-card__actions.mdl-card--border {
+  border-top-color: rgba(0, 0, 0, 0.1);
 }
 
 .mdlext-light-color-theme .mdlext-selectfield.is-disabled:after {
@@ -4626,7 +4658,7 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-menu__item--full-bleed-divider {
-  border-bottom-color: rgba(255, 255, 255, 0.12);
+  border-bottom-color: rgba(255, 255, 255, 0.2);
 }
 
 .mdlext-dark-color-theme .mdl-menu__item[disabled],
@@ -4662,8 +4694,40 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   background-color: #424242;
 }
 
+.mdlext-dark-color-theme .mdl-card {
+  background: #303030;
+}
+
+.mdlext-dark-color-theme .mdl-card__media {
+  background-color: #536DFE;
+}
+
+.mdlext-dark-color-theme .mdl-card__title {
+  color: white;
+}
+
+.mdlext-dark-color-theme .mdl-card__title.mdl-card--border {
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+.mdlext-dark-color-theme .mdl-card__title-text {
+  color: inherit;
+}
+
+.mdlext-dark-color-theme .mdl-card__subtitle-text {
+  color: rgba(0, 0, 0, 0.7);
+}
+
 .mdlext-dark-color-theme .mdl-card__supporting-text {
   color: rgba(255, 255, 255, 0.7);
+}
+
+.mdlext-dark-color-theme .mdl-card__actions {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.mdlext-dark-color-theme .mdl-card__actions.mdl-card--border {
+  border-top-color: rgba(0, 0, 0, 0.1);
 }
 
 .mdlext-dark-color-theme .mdlext-selectfield.is-disabled:after {
