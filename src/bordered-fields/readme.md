@@ -5,7 +5,7 @@ Demonstrates how you can create your own theme of MDL text fields.
 
 ## Introduction
 The Material Design Lite Ext (MDLEXT) bordered fields component is a method for decorating contained
-MDL textfields and MDLEXT selectfields without affecting the original design. You can apply the `mdlext-bordered-fields` class
+MDL textfields and MDLEXT selectfields without affecting the original MDL design. You can apply the `mdlext-bordered-fields` class
 to any HTML block element and use that as a container for the bordered fields.
 
 ### To include a MDLEXT **bordered fields** component:
@@ -87,26 +87,12 @@ The table below lists the available classes and their effects.
 | `mdlext-bordered-fields__icon-right` | Add class on `mdl-textfield` or `mdlext-selectfield` container if you want to embedd a right aligned icon or a button into the bordered field  |  |
 
 
-You can modify the bordered fields trough the following SASS variables.
+### SASS variables.
 
-| SASS variable |Description | Remarks | 
-|-----------|--------|---------|
-| `$mdlext-bordered-field-border-width` | Defines the border width | | 
-| `$mdlext-bordered-field-border-radius` | Defines the border radius of the bordered field | | 
-| `$mdlext-bordered-field-background-color` | Defines the background color of the bordered field | | 
-| `$mdlext-bordered-field-height` | Defines the height of the bordered field | | 
-| `$mdlext-bordered-field-padding` | Defines the padding of the bordered field | | 
-| `$mdlext-bordered-field-padding-top` | Defines the top padding of the bordered field | | 
-| `$mdlext-bordered-field-padding-bottom` | Defines the bottom padding of the bordered field | | 
-| `$mdlext-bordered-field-focus-border-color` | Defines the border color when the field has focus | | 
-| `$mdlext-bordered-field-focus-background-color` | Defines the background color when the field has focus | | 
-| `$mdlext-bordered-field-disabled-border-color` | Defines the border color when the field is disabled | | 
-| `$mdlext-bordered-field-disabled-background-color` | Defines the background color when the field is disabled | | 
-| `$mdlext-bordered-field-required-border-color` | Defines the border color when the field is required | | 
-| `$mdlext-bordered-field-required-background-color` | Defines the background color when the field is disabled | | 
-| `$mdlext-bordered-field-label-top` | Defines the top position of the bordered field's label | | 
-| `$mdlext-bordered-field-label-focused-top` | Defines the top position of a floating label when the field has focus| | 
+See: [variables.scss](../_variables.scss)
 
+### Calculations of heights, vertical spacing and positioning of labels and icons
+See: [bordered-fields.scss](./_bordered-fields.scss)
 
 ### Credits 
 The Bordered Fields component is based on this [CodePen](http://codepen.io/prajwal078/pen/LVJZXz)
