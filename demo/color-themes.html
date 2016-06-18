@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="styles/dialog-polyfill.css">
 <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
-<link rel="stylesheet" href="../lib/mdl-ext-eqjs.css">
+<link rel="stylesheet" href="../lib/mdl-ext-eqjs.min.css">
 <link rel="stylesheet" href="./styles/demo.css">
 
   <title>Material Design Lite Extensions - Color Themes</title>
@@ -286,8 +286,8 @@
 
 <div class="mdl-grid demo-card-grid" style="margin-bottom: 32px;">
 
-  <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
-    <div class="mdl-card  mdlext-light-color-theme mdl-shadow--2dp">
+  <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdlext-light-color-theme">
+    <div class="mdl-card mdl-shadow--2dp">
       <header class="mdl-card__title mdl-color--primary mdl-color-text--primary-contrast">
         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
           <i class="material-icons">view_headline</i>
@@ -350,7 +350,7 @@
 
   <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
 
-    <div class="mdl-card  mdlext-dark-color-theme mdl-shadow--2dp">
+    <div class="mdl-card mdl-shadow--2dp mdlext-dark-color-theme">
       <header class="mdl-card__title mdl-color--primary mdl-color-text--primary-contrast">
         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
           <i class="material-icons">view_headline</i>
@@ -869,6 +869,37 @@
       </div>
 
     </div>
+
+    <fieldset disabled="">
+      <legend>Disabled fieldset</legend>
+      <div class="mdlext-selectfield mdlext-js-selectfield mdlext-selectfield--floating-label">
+        <select class="mdlext-selectfield__select">
+          <option value=""></option>
+          <option value="option1">option 1</option>
+          <option value="option2">option 2</option>
+          <option value="option3">option 3</option>
+          <option value="option4">option 4</option>
+          <option value="option5">option 5</option>
+          <option value="option6">option 5 abcdefghijklmnopqrstuvw0123456789</option>
+        </select>
+        <label class="mdlext-selectfield__label">Profession</label>
+      </div>
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?">
+        <label class="mdl-textfield__label">Number...</label>
+        <span class="mdl-textfield__error">Input is not a number!</span>
+      </div>
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-left mdlext-bordered-fields__icon-right">
+        <i class="material-icons">radio</i>
+        <input class="mdl-textfield__input" type="text">
+        <label class="mdl-textfield__label">Text...</label>
+        <label class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons">settings_voice</i>
+        </label>
+      </div>
+    </fieldset>
 
   </section>
 
@@ -1630,6 +1661,37 @@
       </div>
 
     </div>
+
+    <fieldset disabled="">
+      <legend>Disabled fieldset</legend>
+      <div class="mdlext-selectfield mdlext-js-selectfield mdlext-selectfield--floating-label">
+        <select class="mdlext-selectfield__select">
+          <option value=""></option>
+          <option value="option1">option 1</option>
+          <option value="option2">option 2</option>
+          <option value="option3">option 3</option>
+          <option value="option4">option 4</option>
+          <option value="option5">option 5</option>
+          <option value="option6">option 5 abcdefghijklmnopqrstuvw0123456789</option>
+        </select>
+        <label class="mdlext-selectfield__label">Profession</label>
+      </div>
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?">
+        <label class="mdl-textfield__label">Number...</label>
+        <span class="mdl-textfield__error">Input is not a number!</span>
+      </div>
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-left mdlext-bordered-fields__icon-right">
+        <i class="material-icons">radio</i>
+        <input class="mdl-textfield__input" type="text">
+        <label class="mdl-textfield__label">Text...</label>
+        <label class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons">settings_voice</i>
+        </label>
+      </div>
+    </fieldset>
 
   </section>
 
@@ -2703,7 +2765,7 @@
 <script src="scripts/dialog-polyfill.js" type="text/javascript" charset="utf-8"></script>
 <script src="scripts/eq-customevent-patch.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://code.getmdl.io/1.1.3/material.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../lib/mdl-ext.js" type="text/javascript" charset="utf-8"></script>
+<script src="../lib/mdl-ext.min.js" type="text/javascript" charset="utf-8"></script>
 
 <script>
   /**

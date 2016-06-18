@@ -47,6 +47,7 @@
       </div>
     </div>
 
+
     <div class="mdl-cell mdl-cell--4-col">
       <p>Text with floating label, required field</p>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -101,32 +102,6 @@
         <label class="mdl-textfield__label" >Number...</label>
         <span class="mdl-textfield__error">Input is not a number!</span>
       </div>
-    </div>
-
-    <div class="mdl-cell mdl-cell--4-col">
-      <p>File upload</p>
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-right ">
-        <input class="mdl-textfield__input" type="text" id="uploadfile2" readonly>
-        <label class="mdl-textfield__label">File (work in progress)</label>
-
-        <label class="mdl-button mdl-js-button mdl-button--primary mdl-button--icon mdl-button--file" for="uploadfile2">
-          <i class="material-icons">attach_file</i>
-          <input type="file" id="uploadBtn2">
-        </label>
-      </div>
-      <!--
-        // Need a script to work properly - something like this
-      -->
-      <script>
-        (function() {
-          'use strict';
-          document.querySelector('#uploadBtn2').addEventListener('change', function() {
-            var n = document.querySelector("#uploadfile2");
-            n.value = this.files[0].name;
-            n.parentNode.classList.add('is-dirty');
-          });
-        }());
-      </script>
     </div>
 
     <div class="mdl-cell mdl-cell--4-col">
@@ -337,7 +312,64 @@
       </div>
     </div>
 
+    <div class="mdl-cell mdl-cell--4-col">
+      <p>File upload</p>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-right ">
+        <input class="mdl-textfield__input" type="text" id="uploadfile2" readonly>
+        <label class="mdl-textfield__label">File (work in progress)</label>
+
+        <label class="mdl-button mdl-js-button mdl-button--primary mdl-button--icon mdl-button--file" for="uploadfile2">
+          <i class="material-icons">attach_file</i>
+          <input type="file" id="uploadBtn2">
+        </label>
+      </div>
+      <!--
+        // Need a script to work properly - something like this
+      -->
+      <script>
+        (function() {
+          'use strict';
+          document.querySelector('#uploadBtn2').addEventListener('change', function() {
+            var n = document.querySelector("#uploadfile2");
+            n.value = this.files[0].name;
+            n.parentNode.classList.add('is-dirty');
+          });
+        }());
+      </script>
+    </div>
+
   </div>
+
+  <fieldset disabled>
+    <legend>Disabled fieldset</legend>
+    <div class="mdlext-selectfield mdlext-js-selectfield mdlext-selectfield--floating-label">
+      <select class="mdlext-selectfield__select">
+        <option value=""></option>
+        <option value="option1">option 1</option>
+        <option value="option2">option 2</option>
+        <option value="option3">option 3</option>
+        <option value="option4">option 4</option>
+        <option value="option5">option 5</option>
+        <option value="option6">option 5 abcdefghijklmnopqrstuvw0123456789</option>
+      </select>
+      <label class="mdlext-selectfield__label">Profession</label>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?">
+      <label class="mdl-textfield__label">Number...</label>
+      <span class="mdl-textfield__error">Input is not a number!</span>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-left mdlext-bordered-fields__icon-right">
+      <i class="material-icons">radio</i>
+      <input class="mdl-textfield__input" type="text">
+      <label class="mdl-textfield__label">Text...</label>
+      <label class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">settings_voice</i>
+      </label>
+    </div>
+  </fieldset>
 
 </div>
 
