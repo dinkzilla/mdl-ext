@@ -273,3 +273,19 @@
   $l: rgb-string-to-numbers($value);
   @return rgb(nth($l, 1), nth($l, 2), nth($l, 3));
 }
+
+
+///
+/// Convert hex color to a coresponding `$rgb-string`
+/// @author https://github.com/google/material-design-lite/issues/1689
+/// @param {Number} $hexColor - Value to convert
+/// @return {String} the rgb string value
+///
+/// Usage: $color-primary: hex-to-string(#333);
+@function hex-to-string($hexColor) {
+  // 0.999999 val in alpha actually compiles to 1.0
+  $rgbaVal:  inspect(rgba($hexColor,0.9999999));
+
+  // slice substring between 'rgba(' and '1.0)'
+  @return str-slice($rgbaVal, 6, str-length($rgbaVal)-4);
+}
