@@ -282,7 +282,7 @@
 /// @return {String} the rgb string value
 ///
 /// Usage: $color-primary: hex-to-string(#333);
-@function hex-to-string($hexColor) {
+@function hex-to-rgb-string($hexColor) {
   // 0.999999 val in alpha actually compiles to 1.0
   $rgbaVal:  inspect(rgba($hexColor,0.9999999));
 
