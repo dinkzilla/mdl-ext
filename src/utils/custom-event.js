@@ -28,7 +28,6 @@
  */
 
 export function createCustomEvent( typeArg, customEventInit = { bubbles: false, cancelable: false, detail: null } ) {
-  'use strict';
 
   try {
     // Modern browsers

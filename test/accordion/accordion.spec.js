@@ -1,6 +1,5 @@
 'use strict';
 
-import 'babel-polyfill';
 import requireUncached from 'require-uncached';
 import jsdomify from 'jsdomify';
 import { expect, assert } from 'chai';

@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import jsdomify from 'jsdomify';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';

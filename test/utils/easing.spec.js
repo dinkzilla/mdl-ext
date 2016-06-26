@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import { expect, assert } from 'chai';
 
 import { easeInOutQuad, inOutQuintic } from '../../src/utils/easing';

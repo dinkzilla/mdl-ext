@@ -1,5 +1,4 @@
 'use strict';
-import 'babel-polyfill';
 import jsdomify from 'jsdomify';
 import { expect } from 'chai';
 import { qs, qsa, parent, removeChilds } from './domHelpers';
