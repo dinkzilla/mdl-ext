@@ -4,7 +4,7 @@ import requireUncached from 'require-uncached';
 import jsdomify from 'jsdomify';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
-import { qs, qsa, removeChilds } from '../testutils/domHelpers';
+import { removeChilds } from '../testutils/domHelpers';
 
 describe('MaterialExtAccordion', () => {
 
@@ -235,7 +235,7 @@ describe('MaterialExtAccordion', () => {
   });
 
   it('upgrades successfully', () => {
-    const element = qs('#accordion-1');
+    const element = document.querySelector('#accordion-1');
     assert.isTrue(element.classList.contains('is-upgraded'), 'Expected accordion to upgrade');
 
     const dataUpgraded = element.getAttribute('data-upgraded');
@@ -244,31 +244,31 @@ describe('MaterialExtAccordion', () => {
   });
 
   it('has role="tablist"', () => {
-    [...qsa('.mdlext-accordion')].forEach( accordion => {
+    [...document.querySelectorAll('.mdlext-accordion')].forEach( accordion => {
       assert.equal(accordion.getAttribute('role'), 'tablist');
     });
   });
 
   it('has panels with role="tabpanel"', () => {
-    [...qsa('.mdlext-accordion__panel')].forEach( panel => {
+    [...document.querySelectorAll('.mdlext-accordion__panel')].forEach( panel => {
       assert.equal(panel.getAttribute('role'), 'tabpanel');
     });
   });
 
   it('has headers with role="tab"', () => {
-    [...qsa('.mdlext-accordion__panel__header')].forEach( header => {
+    [...document.querySelectorAll('.mdlext-accordion__panel__header')].forEach( header => {
       assert.equal(header.getAttribute('role'), 'tab');
     });
   });
 
   it('has headers with anchor', () => {
-    [...qsa('.mdlext-accordion__panel__header')].forEach( header => {
-      assert.isNotNull(qs('a', header), 'Expected header to have an anchor element');
+    [...document.querySelectorAll('.mdlext-accordion__panel__header')].forEach( header => {
+      assert.isNotNull(header.querySelector('a'), 'Expected header to have an anchor element');
     });
   });
 
   it('should have attribute "open" and a corresponding header with attribute "aria-expanded"', () => {
-    const panel = qs('#accordion-1 .mdlext-accordion__panel[open]');
+    const panel = document.querySelector('#accordion-1 .mdlext-accordion__panel[open]');
     assert.isNotNull(panel, 'Expected panel with attribute "open"');
 
     const title = [...panel.children].find( n => {
@@ -278,10 +278,10 @@ describe('MaterialExtAccordion', () => {
   });
 
   it('upgrades successfully when a new component is appended to the DOM', () => {
-    const container = qs('#accordion-container-2');
+    const container = document.querySelector('#accordion-container-2');
     try {
       container.insertAdjacentHTML('beforeend', accordion_fragment);
-      const element = qs('#accordion-2');
+      const element = document.querySelector('#accordion-2');
 
       assert.isFalse(element.classList.contains('is-upgraded'), 'Expected class "is-upgraded" to exist after upgrade');
       componentHandler.upgradeElement(element, 'MaterialExtAccordion');
@@ -297,11 +297,11 @@ describe('MaterialExtAccordion', () => {
   });
 
   it('downgrades successfully', () => {
-    const container = qs('#accordion-container-2');
+    const container = document.querySelector('#accordion-container-2');
 
     try {
       container.insertAdjacentHTML('beforeend', accordion_fragment);
-      const element = qs('#accordion-2');
+      const element = document.querySelector('#accordion-2');
 
       componentHandler.upgradeElement(element, 'MaterialExtAccordion');
       assert.isTrue(element.classList.contains('is-upgraded'), 'Expected accordion to upgrade before downgrade');
@@ -316,10 +316,10 @@ describe('MaterialExtAccordion', () => {
   });
 
   it('should be a widget', () => {
-    const container = qs('#accordion-container-2');
+    const container = document.querySelector('#accordion-container-2');
     try {
       container.insertAdjacentHTML('beforeend', accordion_fragment);
-      const element = qs('#accordion-2');
+      const element = document.querySelector('#accordion-2');
       componentHandler.upgradeElement(element, 'MaterialExtAccordion');
       expect(element.MaterialExtAccordion).to.be.a('object');
     }
@@ -329,17 +329,17 @@ describe('MaterialExtAccordion', () => {
   });
 
   it('has ripple effect', () => {
-    const container = qs('#accordion-container-2');
+    const container = document.querySelector('#accordion-container-2');
     try {
       container.insertAdjacentHTML('beforeend', accordion_with_ripple_fragment);
-      const element = qs('#accordion-4');
+      const element = document.querySelector('#accordion-4');
       componentHandler.upgradeDom();
 
       const dataUpgraded = element.getAttribute('data-upgraded');
       assert.isNotNull(dataUpgraded, 'Expected attribute "data-upgraded" to exist');
       assert.isAtLeast(dataUpgraded.indexOf('MaterialRipple'), 0, 'Expected "data-upgraded" attribute to contain "MaterialRipple');
 
-      [...qsa('#accordion-4 .mdlext-accordion__panel__header a')].forEach( a => {
+      [...document.querySelectorAll('#accordion-4 .mdlext-accordion__panel__header a')].forEach( a => {
         const dataUpgraded = a.getAttribute('data-upgraded');
         assert.isNotNull(dataUpgraded, 'Expected attribute "data-upgraded" to exist');
         assert.isAtLeast(dataUpgraded.indexOf('MaterialRipple'), 0, 'Expected "data-upgraded" attribute to contain "MaterialRipple');
@@ -351,9 +351,9 @@ describe('MaterialExtAccordion', () => {
   });
 
   it('throws an error if header is missing', () => {
-    const container = qs('#accordion-container-2');
+    const container = document.querySelector('#accordion-container-2');
     container.insertAdjacentHTML('beforeend', accordion_wo_header_fragment);
-    const element = qs('#accordion-3');
+    const element = document.querySelector('#accordion-3');
     expect( () => {
       componentHandler.upgradeElement(element, 'MaterialExtAccordion');
     }).to.throw('There must be a header element for each accordion panel.');
@@ -370,7 +370,7 @@ describe('MaterialExtAccordion', () => {
   });
 
   it('header interacts with the keyboard', () => {
-    const header = qs('#accordion-1 .mdlext-accordion__panel:nth-child(3) .mdlext-accordion__panel__header');
+    const header = document.querySelector('#accordion-1 .mdlext-accordion__panel:nth-child(3) .mdlext-accordion__panel__header');
     assert.isNotNull(header, 'Expected handle to panel 3 of 5');
 
     spyOnKeyboardEvent(header, VK_ARROW_DOWN);
@@ -386,7 +386,7 @@ describe('MaterialExtAccordion', () => {
   });
 
   it('should emit a click event from header', () => {
-    const header = qs('#accordion-1 .mdlext-accordion__panel .mdlext-accordion__panel__header');
+    const header = document.querySelector('#accordion-1 .mdlext-accordion__panel .mdlext-accordion__panel__header');
     assert.isNotNull(header, 'Expected handle to header');
 
     const spy = sinon.spy();
@@ -405,7 +405,7 @@ describe('MaterialExtAccordion', () => {
   });
 
   it('should emit a click event from header when toggled via enter key', () => {
-    const header = qs('#accordion-1 .mdlext-accordion__panel .mdlext-accordion__panel__header');
+    const header = document.querySelector('#accordion-1 .mdlext-accordion__panel .mdlext-accordion__panel__header');
     assert.isNotNull(header, 'Expected handle to header');
 
     const spy = sinon.spy();
@@ -416,7 +416,7 @@ describe('MaterialExtAccordion', () => {
   });
 
   it('should emit a click event from header when toggled via space key', () => {
-    const header = qs('#accordion-1 .mdlext-accordion__panel .mdlext-accordion__panel__header');
+    const header = document.querySelector('#accordion-1 .mdlext-accordion__panel .mdlext-accordion__panel__header');
     assert.isNotNull(header, 'Expected handle to header');
 
     const spy = sinon.spy();
@@ -427,7 +427,7 @@ describe('MaterialExtAccordion', () => {
   });
 
   it('closes other panels when a new panel opens', () => {
-    const header = qs('#accordion-1 .mdlext-accordion__panel:nth-child(4) .mdlext-accordion__panel__header');
+    const header = document.querySelector('#accordion-1 .mdlext-accordion__panel:nth-child(4) .mdlext-accordion__panel__header');
     assert.isNotNull(header, 'Expected handle to header in panel 4 of 5');
 
     const panel = header.parentNode;
@@ -437,7 +437,7 @@ describe('MaterialExtAccordion', () => {
       header.removeAttribute('aria-selected');
 
       // Let another header have 'aria-selected' attribute
-      const header2 = qs('#accordion-1 .mdlext-accordion__panel:nth-child(1) .mdlext-accordion__panel__header');
+      const header2 = document.querySelector('#accordion-1 .mdlext-accordion__panel:nth-child(1) .mdlext-accordion__panel__header');
       header.setAttribute('aria-selected');
 
     }
@@ -453,22 +453,22 @@ describe('MaterialExtAccordion', () => {
     assert.isTrue(header.hasAttribute('aria-expanded'));
     assert.isTrue(header.hasAttribute('aria-selected'));
 
-    let check = qsa('#accordion-1 .mdlext-accordion__panel[open]');
+    let check = document.querySelectorAll('#accordion-1 .mdlext-accordion__panel[open]');
     assert.lengthOf(check, 1, 'Expected only one panel with state "open"');
 
-    check = qsa('#accordion-1 .mdlext-accordion__panel__header[aria-selected]');
+    check = document.querySelectorAll('#accordion-1 .mdlext-accordion__panel__header[aria-selected]');
     assert.lengthOf(check, 1, 'Expected only one header with state "aria-selected"');
 
-    const n = qsa('#accordion-1 .mdlext-accordion__panel__header');
-    check = qsa('#accordion-1 .mdlext-accordion__panel__header[aria-hidden]');
+    const n = document.querySelectorAll('#accordion-1 .mdlext-accordion__panel__header');
+    check = document.querySelectorAll('#accordion-1 .mdlext-accordion__panel__header[aria-hidden]');
     assert.equal(n.length-check.length, 1, `Expected ${check.length} of ${n.length} headers  to have attribute "aria-hidden"`);
   });
 
   it('emits a custom "toggle" event with "detail.state" and "detail.source" defined when a panel opens or closes', () => {
-    const accordion = qs('#accordion-1');
+    const accordion = document.querySelector('#accordion-1');
     assert.isNotNull(accordion, 'Expected handle to accordion');
 
-    const header = qs('#accordion-1 .mdlext-accordion__panel:nth-child(3) .mdlext-accordion__panel__header');
+    const header = document.querySelector('#accordion-1 .mdlext-accordion__panel:nth-child(3) .mdlext-accordion__panel__header');
     assert.isNotNull(header, 'Expected handle to header in panel 3 of 5');
 
     const spy = sinon.spy();
@@ -497,10 +497,10 @@ describe('MaterialExtAccordion', () => {
 
 
   it('can have multiple panels open simultaneously when aria-multiselectable="true"', () => {
-    const accordion = qs('#multi-accordion');
+    const accordion = document.querySelector('#multi-accordion');
     assert.isNotNull(accordion, 'Expected handle to accordion');
 
-    const header1 = qs('#multi-accordion .mdlext-accordion__panel:nth-child(1) .mdlext-accordion__panel__header');
+    const header1 = document.querySelector('#multi-accordion .mdlext-accordion__panel:nth-child(1) .mdlext-accordion__panel__header');
     assert.isNotNull(header1, 'Expected handle to header in panel 1');
 
     // Trigger click
@@ -512,7 +512,7 @@ describe('MaterialExtAccordion', () => {
       })
     );
 
-    const header2 = qs('#multi-accordion .mdlext-accordion__panel:nth-child(2) .mdlext-accordion__panel__header');
+    const header2 = document.querySelector('#multi-accordion .mdlext-accordion__panel:nth-child(2) .mdlext-accordion__panel__header');
     assert.isNotNull(header2, 'Expected handle to header in panel 3');
 
     header2.dispatchEvent(
@@ -523,7 +523,7 @@ describe('MaterialExtAccordion', () => {
       })
     );
 
-    const header3 = qs('#multi-accordion .mdlext-accordion__panel:nth-child(3) .mdlext-accordion__panel__header');
+    const header3 = document.querySelector('#multi-accordion .mdlext-accordion__panel:nth-child(3) .mdlext-accordion__panel__header');
     assert.isNotNull(header3, 'Expected handle to header in panel 3');
 
     header3.dispatchEvent(
@@ -534,15 +534,15 @@ describe('MaterialExtAccordion', () => {
       })
     );
 
-    const check = qsa('#multi-accordion .mdlext-accordion__panel[open]');
+    const check = document.querySelectorAll('#multi-accordion .mdlext-accordion__panel[open]');
     expect(check).to.have.length.of.at.least(2);
   });
 
   it('should toggle using command custom event', () => {
-    const accordion = qs('#multi-accordion');
+    const accordion = document.querySelector('#multi-accordion');
     assert.isNotNull(accordion, 'Expected handle to accordion');
 
-    const panel = qs('#multi-accordion .mdlext-accordion__panel:nth-child(2)');
+    const panel = document.querySelector('#multi-accordion .mdlext-accordion__panel:nth-child(2)');
     assert.isNotNull(panel, 'Expected handle to accordion panel');
 
     const isOpen = panel.hasAttribute('open');
@@ -557,10 +557,10 @@ describe('MaterialExtAccordion', () => {
   });
 
   it('should not open a panel having attribute "disabled"', () => {
-    const accordion = qs('#multi-accordion');
+    const accordion = document.querySelector('#multi-accordion');
     assert.isNotNull(accordion, 'Expected handle to accordion');
 
-    const panel = qs('#disabled-panel');
+    const panel = document.querySelector('#disabled-panel');
     assert.isNotNull(panel, 'Expected handle to accordion panel');
     panel.setAttribute('disabled', '');
 
@@ -571,22 +571,22 @@ describe('MaterialExtAccordion', () => {
   });
 
   it('should expand all panels not having attribute "disabled"', () => {
-    const accordion = qs('#multi-accordion');
+    const accordion = document.querySelector('#multi-accordion');
     assert.isNotNull(accordion, 'Expected handle to accordion');
 
     // First close all panels
     let ev = new CustomEvent('command', { detail: { action : 'close' } } );
     accordion.dispatchEvent(ev);
 
-    let openPanels = qsa('#multi-accordion .mdlext-accordion__panel[open]');
+    let openPanels = document.querySelectorAll('#multi-accordion .mdlext-accordion__panel[open]');
     assert.equal(openPanels.length, 0, 'Expected all panels to be closed');
 
     // Open all panels not having attribute "disabled"
     ev = new CustomEvent('command', { detail: { action : 'open' } } );
     accordion.dispatchEvent(ev);
 
-    const allPanels = qsa('#multi-accordion .mdlext-accordion__panel');
-    openPanels = qsa('#multi-accordion .mdlext-accordion__panel[open]');
+    const allPanels = document.querySelectorAll('#multi-accordion .mdlext-accordion__panel');
+    openPanels = document.querySelectorAll('#multi-accordion .mdlext-accordion__panel[open]');
     assert.equal(allPanels.length - openPanels.length, 1, `Expected ${openPanels.length} to have attribute "open"`);
   });
 

@@ -4,7 +4,7 @@ import requireUncached from 'require-uncached';
 import jsdomify from 'jsdomify';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
-import { qs, qsa, removeChilds } from '../testutils/domHelpers';
+import { removeChilds } from '../testutils/domHelpers';
 
 describe('MaterialExtLightboard', () => {
 
@@ -119,15 +119,15 @@ describe('MaterialExtLightboard', () => {
   });
 
   it('upgrades successfully', () => {
-    const element = qs('#mdlext-lightboard-1');
+    const element = document.querySelector('#mdlext-lightboard-1');
     expect(element.getAttribute('data-upgraded')).to.include('MaterialExtLightboard');
   });
 
   it('emits a "select" custom event when a slide is clicked', () => {
-    const lightboard = qs('#mdlext-lightboard-1');
+    const lightboard = document.querySelector('#mdlext-lightboard-1');
     assert.isNotNull(lightboard, 'Expected handle to lightboard');
 
-    const slide = qs('.mdlext-lightboard__slide:nth-child(2)', lightboard);
+    const slide = document.querySelector('.mdlext-lightboard__slide:nth-child(2)', lightboard);
     assert.isNotNull(slide, 'Expected handle to slide');
 
     const spy = sinon.spy();
@@ -158,7 +158,7 @@ describe('MaterialExtLightboard', () => {
   });
 
   it('should not emit a "select" custom event when lightboard is clicked', () => {
-    const lightboard = qs('#mdlext-lightboard-1');
+    const lightboard = document.querySelector('#mdlext-lightboard-1');
 
     const spy = sinon.spy();
     lightboard.addEventListener('select', spy);
@@ -185,10 +185,10 @@ describe('MaterialExtLightboard', () => {
   });
 
   it('has attribute "aria-selected" when selected', () => {
-    const lightboard = qs('#mdlext-lightboard-1');
+    const lightboard = document.querySelector('#mdlext-lightboard-1');
     assert.isNotNull(lightboard, 'Expected handle to lightboard');
 
-    const slide = qs('.mdlext-lightboard__slide:nth-child(3)', lightboard);
+    const slide = lightboard.querySelector('.mdlext-lightboard__slide:nth-child(3)');
     assert.isNotNull(slide, 'Expected handle to slide');
 
     const spy = sinon.spy();
@@ -197,7 +197,7 @@ describe('MaterialExtLightboard', () => {
 
     const selectListener = ( event ) => {
       assert.isNotNull(event.detail.source.getAttribute('aria-selected'), 'Expected slide to have attribute "aria-selected"');
-      const selectList = [...qsa('.mdlext-lightboard__slide', lightboard)].filter( slide => slide.hasAttribute('aria-selected'));
+      const selectList = [...lightboard.querySelectorAll('.mdlext-lightboard__slide')].filter( slide => slide.hasAttribute('aria-selected'));
       assert.equal(selectList.length, 1, 'Expected only one slide to have attribute "aria-selected"');
     };
     lightboard.addEventListener('select', selectListener);
@@ -219,30 +219,30 @@ describe('MaterialExtLightboard', () => {
   });
 
   it('has role="grid"', () => {
-    [...qsa('.mdlext-lightboard')].forEach( lightboard => {
+    [...document.querySelectorAll('.mdlext-lightboard')].forEach( lightboard => {
       assert.equal(lightboard.getAttribute('role'), 'grid', 'Expected lightboard to have role="grid');
     });
   });
 
   it('lightboard slides has role="cell"', () => {
-    [...qsa('.mdlext-lightboard__slide')].forEach( slide => {
+    [...document.querySelectorAll('.mdlext-lightboard__slide')].forEach( slide => {
       assert.equal(slide.getAttribute('role'), 'cell', 'Expected slide to have role="cell"');
     });
 
   });
 
   it('has slides with anchor', () => {
-    [...qsa('.mdlext-lightboard__slide')].forEach( slide => {
-      assert.isNotNull(qs('a', slide), 'Expected slide to have an anchor element');
+    [...document.querySelectorAll('.mdlext-lightboard__slide')].forEach( slide => {
+      assert.isNotNull(slide.querySelector('a'), 'Expected slide to have an anchor element');
     });
   });
 
   it('upgrades successfully when a new component is appended to the DOM', () => {
-    const container = qs('#mount-2');
+    const container = document.querySelector('#mount-2');
 
     try {
       container.insertAdjacentHTML('beforeend', lightboard_with_ripple);
-      const element = qs('#lightboard_with_ripple');
+      const element = document.querySelector('#lightboard_with_ripple');
 
       assert.isFalse(element.classList.contains('is-upgraded'), 'Did not expect "is-upgraded" to exist before upgrade');
       componentHandler.upgradeElement(element, 'MaterialExtLightboard');
@@ -258,11 +258,11 @@ describe('MaterialExtLightboard', () => {
   });
 
   it('downgrades successfully', () => {
-    const container = qs('#mount-2');
+    const container = document.querySelector('#mount-2');
 
     try {
       container.insertAdjacentHTML('beforeend', lightboard_with_ripple);
-      const element = qs('#lightboard_with_ripple');
+      const element = document.querySelector('#lightboard_with_ripple');
 
       componentHandler.upgradeElement(element, 'MaterialExtLightboard');
       assert.isTrue(element.classList.contains('is-upgraded'), 'Expected lightboard to upgrade before downgrade');
@@ -277,10 +277,10 @@ describe('MaterialExtLightboard', () => {
   });
 
   it('should be a widget', () => {
-    const container = qs('#mount-2');
+    const container = document.querySelector('#mount-2');
     try {
       container.insertAdjacentHTML('beforeend', lightboard_with_ripple);
-      const element = qs('#lightboard_with_ripple');
+      const element = document.querySelector('#lightboard_with_ripple');
       componentHandler.upgradeElement(element, 'MaterialExtLightboard');
       expect(element.MaterialExtLightboard).to.be.a('object');
     }
@@ -290,17 +290,17 @@ describe('MaterialExtLightboard', () => {
   });
 
   it('has ripple effect', () => {
-    const container = qs('#mount-2');
+    const container = document.querySelector('#mount-2');
     try {
       container.insertAdjacentHTML('beforeend', lightboard_with_ripple);
-      const element = qs('#lightboard_with_ripple');
+      const element = document.querySelector('#lightboard_with_ripple');
       componentHandler.upgradeDom();
 
       const dataUpgraded = element.getAttribute('data-upgraded');
       assert.isNotNull(dataUpgraded, 'Expected attribute "data-upgraded" to exist');
       assert.isAtLeast(dataUpgraded.indexOf('MaterialRipple'), 0, 'Expected "data-upgraded" attribute to contain "MaterialRipple');
 
-      [...qsa('#mount-2 a.mdlext-lightboard__slide__frame')].forEach( a => {
+      [...document.querySelectorAll('#mount-2 a.mdlext-lightboard__slide__frame')].forEach( a => {
         const dataUpgraded = a.getAttribute('data-upgraded');
         assert.isNotNull(dataUpgraded, 'Expected attribute "data-upgraded" to exist');
         assert.isAtLeast(dataUpgraded.indexOf('MaterialRipple'), 0, 'Expected "data-upgraded" attribute to contain "MaterialRipple');
@@ -312,11 +312,11 @@ describe('MaterialExtLightboard', () => {
   });
 
   it('interacts with the keyboard', () => {
-    const lightboard = qs('#mdlext-lightboard-1');
+    const lightboard = document.querySelector('#mdlext-lightboard-1');
     assert.isNotNull(lightboard, 'Expected handle to lightboard');
     lightboard.removeEventListener('select', lightboard);
 
-    const slide = qs('.mdlext-lightboard__slide:nth-child(3)', lightboard);
+    const slide = lightboard.querySelector('.mdlext-lightboard__slide:nth-child(3)');
     assert.isNotNull(slide, 'Expected handle to slide #3');
 
     spyOnKeyboardEvent(lightboard, slide, VK_ARROW_DOWN);

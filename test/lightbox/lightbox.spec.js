@@ -4,7 +4,7 @@ import requireUncached from 'require-uncached';
 import jsdomify from 'jsdomify';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
-import { qs, qsa, removeChilds } from '../testutils/domHelpers';
+import { removeChilds } from '../testutils/domHelpers';
 
 describe('MaterialExtLightbox', () => {
 
@@ -90,7 +90,7 @@ describe('MaterialExtLightbox', () => {
     global.MaterialExtLightbox = window.MaterialExtLightbox;
 
     // Simulate open dialog
-    const dialog = qs('dialog');
+    const dialog = document.querySelector('dialog');
     dialog.setAttribute('open', '');
   });
 
@@ -103,26 +103,26 @@ describe('MaterialExtLightbox', () => {
   });
 
   it('upgrades successfully', () => {
-    const element = qs('#lightbox');
+    const element = document.querySelector('#lightbox');
     expect(element.getAttribute('data-upgraded')).to.include('MaterialExtLightbox');
   });
 
   it('has tabindex', () => {
-    const element = qs('#lightbox');
+    const element = document.querySelector('#lightbox');
     expect(element.getAttribute('tabindex')).not.to.be.NaN;
   });
 
   it('has "data-action" attributes', () => {
-    const elements = qsa('#lightbox [data-action]');
+    const elements = document.querySelectorAll('#lightbox [data-action]');
     expect(elements).to.have.length.of.at.least(1);
   });
 
   it('upgrades successfully when a new component is appended to the DOM', () => {
-    const container = qs('#mount-2');
+    const container = document.querySelector('#mount-2');
 
     try {
       container.insertAdjacentHTML('beforeend', lightboxFragment);
-      const element = qs('#lightbox-2');
+      const element = document.querySelector('#lightbox-2');
 
       assert.isFalse(element.classList.contains('is-upgraded'), 'Did not expect "is-upgraded" to exist before upgrade');
       componentHandler.upgradeElement(element, 'MaterialExtLightbox');
@@ -138,11 +138,11 @@ describe('MaterialExtLightbox', () => {
   });
 
   it('downgrades successfully', () => {
-    const container = qs('#mount-2');
+    const container = document.querySelector('#mount-2');
 
     try {
       container.insertAdjacentHTML('beforeend', lightboxFragment);
-      const element = qs('#lightbox-2');
+      const element = document.querySelector('#lightbox-2');
 
       componentHandler.upgradeElement(element, 'MaterialExtLightbox');
       assert.isTrue(element.classList.contains('is-upgraded'), 'Expected lightbox to upgrade before downgrade');
@@ -157,8 +157,8 @@ describe('MaterialExtLightbox', () => {
   });
 
   it('can load image', () => {
-    const lightbox = qs('#lightbox');
-    const img = qs('img', lightbox);
+    const lightbox = document.querySelector('#lightbox');
+    const img = document.querySelector('img', lightbox);
 
     const spy = sinon.spy();
     img.addEventListener('load', spy);
@@ -168,8 +168,8 @@ describe('MaterialExtLightbox', () => {
   });
 
   it('can not click an image', () => {
-    const lightbox = qs('#lightbox');
-    const img = qs('img', lightbox);
+    const lightbox = document.querySelector('#lightbox');
+    const img = lightbox.querySelector('img');
 
     const spy = sinon.spy();
     img.addEventListener('click', spy);
@@ -191,8 +191,8 @@ describe('MaterialExtLightbox', () => {
   });
 
   it('can drag an image', () => {
-    const lightbox = qs('#lightbox');
-    const img = qs('img', lightbox);
+    const lightbox = document.querySelector('#lightbox');
+    const img = lightbox.querySelector('img');
     img.src = './smiley.jpg';
 
     const mouseDownSpy = sinon.spy();
@@ -244,7 +244,7 @@ describe('MaterialExtLightbox', () => {
 
 
   it('interacts with the keyboard', () => {
-    const lightbox = qs('#lightbox');
+    const lightbox = document.querySelector('#lightbox');
 
     spyOnKeyboardEvent(lightbox, VK_ARROW_DOWN);
     spyOnKeyboardEvent(lightbox, VK_ARROW_UP);
@@ -257,7 +257,7 @@ describe('MaterialExtLightbox', () => {
   });
 
   it('listens to resize', () => {
-    const lightbox = qs('#lightbox');
+    const lightbox = document.querySelector('#lightbox');
     const spy = sinon.spy();
     window.addEventListener('resize', spy, true);
 
@@ -272,7 +272,7 @@ describe('MaterialExtLightbox', () => {
   });
 
   it('listens to orientationchange', () => {
-    const lightbox = qs('#lightbox');
+    const lightbox = document.querySelector('#lightbox');
     const spy = sinon.spy();
     window.addEventListener('orientationchange', spy, true);
 
@@ -287,8 +287,8 @@ describe('MaterialExtLightbox', () => {
   });
 
   it('emits an "action" custom event when a button is clicked', () => {
-    const lightbox = qs('#lightbox');
-    const button = qs('.mdl-button', lightbox);
+    const lightbox = document.querySelector('#lightbox');
+    const button = lightbox.querySelector('.mdl-button');
     assert.isNotNull(button, 'Expected handle to button');
 
     const spy = sinon.spy();

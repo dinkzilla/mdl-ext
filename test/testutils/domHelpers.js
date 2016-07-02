@@ -1,48 +1,6 @@
 'use strict';
 
 /**
- * Get element by CSS selector
- * Alias for (element||document).querySelector
- *
- * @see document.querySelector
- * @see https://github.com/kentcdodds/es6-todomvc/blob/master/js/helpers.js
- * @see http://stackoverflow.com/questions/34157329/queryselector-and-queryselectorall-alias
- * @param selector
- * @param element
- * @returns {Element}
- */
-export function qs(selector, element = document) {
-  return element.querySelector(selector);
-}
-
-/**
- * Get elements by CSS selector
- * Alias for (element||document).querySelectorAll
- * The returned NodeList is not iterable, e.g. with foreach).
- * Use a for loop or the spread operator to iterate
- *
- * @example
- * for (let el of document.qsa('h1')) {
- *   console.log(el);
- * }
- *
- * // ... or use the spread operator:
- * [... document.qsa('h1')].forEach(function (el) {
- *   console.log(el);
- * });
- *
- * @see document.querySelectorAll
- * @see https://github.com/kentcdodds/es6-todomvc/blob/master/js/helpers.js
- * @see http://stackoverflow.com/questions/34157329/queryselector-and-queryselectorall-alias
- * @param selector
- * @param element
- * @returns {NodeList}
- */
-export function qsa(selector, element = document) {
-  return element.querySelectorAll(selector);
-}
-
-/**
  * Remove child element(s)
  * element.innerHTNL = '' has a performance penality!
  * @see http://jsperf.com/empty-an-element/16

@@ -3,7 +3,7 @@ import requireUncached from 'require-uncached';
 import jsdomify from 'jsdomify';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
-import { qs, removeChilds } from '../testutils/domHelpers';
+import { removeChilds } from '../testutils/domHelpers';
 
 describe('MaterialExtSelectfield', () => {
 
@@ -78,7 +78,7 @@ describe('MaterialExtSelectfield', () => {
   });
 
   it('upgrades successfully', () => {
-    const element = qs('#select-1');
+    const element = document.querySelector('#select-1');
     assert.isNotNull(element);
     assert.isTrue(element.parentNode.classList.contains('is-upgraded'));
 
@@ -94,7 +94,7 @@ describe('MaterialExtSelectfield', () => {
     mount.insertAdjacentHTML('beforeend', fragment);
 
     try {
-      const element = qs('#select-country').parentNode;
+      const element = document.querySelector('#select-country').parentNode;
       assert.isNotNull(element);
 
       let dataUpgraded = element.getAttribute('data-upgraded');
@@ -116,7 +116,7 @@ describe('MaterialExtSelectfield', () => {
     mount.insertAdjacentHTML('beforeend', fragment);
 
     try {
-      const element = qs('#select-country').parentNode;
+      const element = document.querySelector('#select-country').parentNode;
       componentHandler.upgradeElement(element, 'MaterialExtSelectfield');
       expect(element.getAttribute('data-upgraded')).to.include('MaterialExtSelectfield');
 
@@ -159,7 +159,7 @@ describe('MaterialExtSelectfield', () => {
   });
 
   it('trigger events', () => {
-    const select = qs('#select-1');
+    const select = document.querySelector('#select-1');
     assert.isNotNull(select);
     spyOnEvent('change', select);
     spyOnEvent('focus', select);
@@ -169,7 +169,7 @@ describe('MaterialExtSelectfield', () => {
 
   it('can call public methodes', () => {
     // Cranking up Code Coverage, not a real test :-)
-    const el = qs('.mdlext-selectfield');
+    const el = document.querySelector('.mdlext-selectfield');
     el.MaterialExtSelectfield.checkDisabled();
     el.MaterialExtSelectfield.checkValidity();
     el.MaterialExtSelectfield.checkDirty();

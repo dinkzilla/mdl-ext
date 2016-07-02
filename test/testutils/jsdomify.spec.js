@@ -1,7 +1,6 @@
 'use strict';
 import jsdomify from 'jsdomify';
 import { expect } from 'chai';
-import { qs } from './domHelpers';
 
 describe('mocha-jsdom-jsdomify verification tests', () => {
 
@@ -45,7 +44,7 @@ describe('mocha-jsdom-jsdomify verification tests', () => {
   it('understands insertAdjacentHTML', () => {
     const mount = document.querySelector('#mount');
     mount.insertAdjacentHTML('beforeend', '<p id="foo">FOO</p>');
-    const p = qs('#foo');
+    const p = document.querySelector('#foo');
     expect(p).to.not.be.null;
   });
 });

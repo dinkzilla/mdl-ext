@@ -3,7 +3,6 @@ import requireUncached from 'require-uncached';
 import jsdomify from 'jsdomify';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
-import { qs } from '../testutils/domHelpers';
 import createMockRaf from '../testutils/mock-raf';
 
 describe('MaterialExtStickyHeader', () => {
@@ -134,7 +133,7 @@ describe('MaterialExtStickyHeader', () => {
   });
 
   it('upgrades successfully', () => {
-    const element = qs('header');
+    const element = document.querySelector('header');
     assert.isTrue(element.classList.contains('is-upgraded'), 'Expected sticky header class list to contain "is-upgraded"');
 
     const dataUpgraded = element.getAttribute('data-upgraded');
@@ -176,8 +175,8 @@ describe('MaterialExtStickyHeader', () => {
   });
 
   it('repositions when content scroll', () => {
-    const header = qs('header');
-    const content = qs('.mdl-layout__content');
+    const header = document.querySelector('header');
+    const content = document.querySelector('.mdl-layout__content');
     const spy = sinon.spy();
     content.addEventListener('scroll', spy, true);
 
