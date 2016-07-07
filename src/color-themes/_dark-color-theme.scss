@@ -62,13 +62,13 @@
 .mdlext-dark-color-theme {
   .mdl-badge {
 
-    &[data-badge]:after {
+    &[data-badge]::after {
       background: $mdlext-dark-badge-background;
       color: $mdlext-dark-badge-color;
     }
 
     &.mdl-badge--no-background {
-      &[data-badge]:after {
+      &[data-badge]::after {
         color: $mdlext-dark-badge-color-inverse;
         background: $mdlext-dark-badge-background-inverse;
       }
@@ -189,7 +189,8 @@
     & .mdl-ripple {
       background: $mdlext-dark-button-secondary-color-alt;
     }
-    &.mdl-button--raised, &.mdl-button--fab {
+    &.mdl-button--raised,
+    &.mdl-button--fab {
       color: $mdlext-dark-button-secondary-color-alt;
       background-color: $mdlext-dark-button-primary-color-alt;
     }
@@ -201,7 +202,8 @@
     & .mdl-ripple {
       background: $mdlext-dark-button-fab-text-color-alt;
     }
-    &.mdl-button--raised, &.mdl-button--fab {
+    &.mdl-button--raised,
+    &.mdl-button--fab {
       color: $mdlext-dark-button-fab-text-color-alt;
       background-color: $mdlext-dark-button-fab-color-alt;
     }
@@ -268,22 +270,26 @@
         color: transparent;
       }
 
+      /* stylelint-disable */
       &::-ms-fill-lower {
-        background: linear-gradient(to right,
+        background: linear-gradient(
+          to right,
           transparent,
           transparent 16px,
           $mdlext-dark-range-color 16px,
-          $mdlext-dark-range-color 0);
+          $mdlext-dark-range-color 0
+        );
       }
 
       &::-ms-fill-upper {
-        background: linear-gradient(to left,
+        background: linear-gradient(
+          to left,
           transparent,
           transparent 16px,
           $mdlext-dark-range-bg-color 16px,
           $mdlext-dark-range-bg-color 0);
       }
-
+      /* stylelint-enable */
 
       &::-webkit-slider-thumb {
         background: $mdlext-dark-range-color;
@@ -313,6 +319,7 @@
         background: $mdlext-dark-range-color;
       }
 
+      /* stylelint-disable */
       &:focus:not(:active)::-ms-thumb {
         background: radial-gradient(circle closest-side,
           $mdlext-dark-range-color 0%,
@@ -320,6 +327,7 @@
           $mdlext-dark-range-faded-color 37.5%,
           $mdlext-dark-range-faded-color 100%);
       }
+      /* stylelint-enable */
 
       &:active::-ms-thumb {
         background: $mdlext-dark-range-color;
@@ -356,6 +364,7 @@
         border-color: $mdlext-dark-range-bg-color;
       }
 
+      /* stylelint-disable */
       &.is-lowest-value::-ms-thumb {
         background: radial-gradient(circle closest-side,
           transparent 0%,
@@ -381,6 +390,7 @@
           $mdlext-dark-range-bg-color 77.78%,
           $mdlext-dark-range-bg-color 100%);
       }
+      /* stylelint-enable */
 
       &.is-lowest-value::-ms-fill-lower {
         background: transparent;
@@ -424,6 +434,7 @@
         background: $mdlext-dark-range-bg-color;
       }
 
+      /* stylelint-disable */
       &.is-lowest-value:disabled:focus::-ms-thumb,
       &.is-lowest-value:disabled:active::-ms-thumb,
       &.is-lowest-value:disabled::-ms-thumb {
@@ -441,6 +452,8 @@
           $mdlext-dark-range-bg-color 25px,
           $mdlext-dark-range-bg-color 0);
       }
+      /* stylelint-enable */
+
     }
   }
 
@@ -478,7 +491,7 @@
   .mdl-textfield__label {
     color: $mdlext-dark-input-text-label-color;
   }
-  .mdl-textfield__label:after {
+  .mdl-textfield__label::after {
     background-color: $mdlext-dark-input-text-highlight-color;
   }
   fieldset[disabled] .mdl-textfield .mdl-textfield__label,
@@ -493,7 +506,7 @@
   .mdl-textfield--floating-label.is-invalid .mdl-textfield__label {
     color: $mdlext-dark-input-text-error-color;
   }
-  .mdl-textfield.is-invalid .mdl-textfield__label:after {
+  .mdl-textfield.is-invalid .mdl-textfield__label::after {
     background-color: $mdlext-dark-input-text-error-color;
   }
   .mdl-textfield__error {
@@ -521,7 +534,7 @@
     background-color: transparent;
   }
   .mdl-checkbox.is-focused.is-checked .mdl-checkbox__focus-helper {
-    box-shadow: 0 0 0px ($checkbox-button-size / 2) $mdlext-dark-checkbox-focus-color;
+    box-shadow: 0 0 0 ($checkbox-button-size / 2) $mdlext-dark-checkbox-focus-color;
     background-color: $mdlext-dark-checkbox-focus-color;
   }
 
@@ -647,7 +660,7 @@
     background-color: rgba(0, 0, 0, 0.1);
   }
   .mdl-switch.is-focused.is-checked .mdl-switch__focus-helper {
-    box-shadow: 0 0 0px (($switch-ripple-size - $switch-helper-size) / 2) $mdlext-dark-switch-faded-color;
+    box-shadow: 0 0 0 (($switch-ripple-size - $switch-helper-size) / 2) $mdlext-dark-switch-faded-color;
     background-color: $mdlext-dark-switch-faded-color;
   }
 
@@ -695,7 +708,7 @@
         color: $mdlext-dark-data-table-header-sorted-color;
 
         &:hover {
-          &:before {
+          &::before {
             color: $mdlext-dark-data-table-header-sorted-icon-hover-color;
           }
         }
@@ -721,7 +734,8 @@
       border-bottom-color: $mdlext-dark-default-item-divider-color;
     }
 
-    &[disabled], &[data-mdl-disabled] {
+    &[disabled],
+    &[data-mdl-disabled] {
       color: $mdlext-dark-disabled-item-text-color;
       background-color: transparent;
 
@@ -784,7 +798,7 @@
   }
 
   .mdl-card__actions {
-    background-color: rgba(255,255,255,0);
+    background-color: rgba(255, 255, 255, 0);
 
     &.mdl-card--border {
       border-top-color: $mdlext-dark-card-border-color;
@@ -797,7 +811,7 @@
 // ----------------------------------------
 .mdlext-dark-color-theme {
 
-  .mdlext-selectfield.is-disabled:after {
+  .mdlext-selectfield.is-disabled::after {
     color: $mdlext-dark-input-text-disabled-color;
     @include mdlext-arrow(bottom, $mdlext-selectfield-arrow-width, $mdlext-selectfield-arrow-length, $mdlext-dark-input-text-disabled-color);
   }
@@ -837,10 +851,10 @@
   .mdlext-selectfield--floating-label.is-invalid .mdlext-selectfield__label {
     color: $mdlext-dark-input-text-error-color;
   }
-  .mdlext-selectfield__label:after {
+  .mdlext-selectfield__label::after {
     background-color: $mdlext-dark-input-text-highlight-color;
   }
-  .mdlext-selectfield.is-invalid .mdlext-selectfield__label:after {
+  .mdlext-selectfield.is-invalid .mdlext-selectfield__label::after {
     background-color: $mdlext-dark-input-text-error-color;
   }
 
@@ -890,8 +904,8 @@
       }
     }
 
-    fieldset[disabled] .mdlext-selectfield:after,
-    .mdlext-selectfield.is-disabled:after {
+    fieldset[disabled] .mdlext-selectfield::after,
+    .mdlext-selectfield.is-disabled::after {
       color: $mdlext-dark-bordered-field-input-text-disabled-text-color;
       @include mdlext-arrow(bottom, $mdlext-selectfield-arrow-width, $mdlext-selectfield-arrow-length, $mdlext-dark-bordered-field-input-text-disabled-text-color);
     }

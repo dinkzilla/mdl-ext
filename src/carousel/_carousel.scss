@@ -35,7 +35,7 @@ ul.mdlext-carousel {
   padding: 0;
   overflow: hidden;
   height: 100%;  // Use a container to constrain height and width
-  width: 100% ;
+  width: 100%;
   display: block;
   white-space: nowrap;
   font-size: 0;
@@ -56,14 +56,17 @@ ul.mdlext-carousel {
   &[aria-selected] {
     border-top-color: $mdlext-carousel-slide-border-top-color;
 
+    /*
     figure {
     }
+    */
+
     figcaption {
       // As far as I can see there is no way to darken/lighten a text color
       // defined by MDL, due to the "unqote" functions.
       // So this is a hack
-      color: rgba(0,0,0, 1) !important;
-      background-color: rgba(255,255,255, 0.25);
+      color: rgba(0, 0, 0, 1) !important;
+      background-color: rgba(255, 255, 255, 0.25);
     }
   }
 
@@ -103,8 +106,8 @@ ul.mdlext-carousel {
         // As far as I can see there is no way to darken/lighten a text color
         // defined by MDL, due to the "unqote" functions.
         // So this is a hack
-        color: rgba(0,0,0, 1) !important;
-        background-color: rgba(255,255,255, 0.25);
+        color: rgba(0, 0, 0, 1) !important;
+        background-color: rgba(255, 255, 255, 0.25);
       }
     }
   }

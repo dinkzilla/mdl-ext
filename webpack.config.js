@@ -7,6 +7,7 @@ const webpack = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 const env = require('yargs').argv.mode;
 
 const css_loader = [
@@ -106,18 +107,10 @@ var config = {
       browsers: ['last 2 versions']
     })
   ],
-  /* Temporarly disabled due to conflict in stylelint packages
-  stylelint: {
-    configFile: path.join(__dirname, './.stylelint.config.js'),
-    configOverrides: {
-      rules: {
-        // Your rule overrides here
-      }
-    }
-  },
-  */
   eslint: {
     // config in '.eslintrc'
+    failOnWarning: false,
+    failOnError: true
   },
   resolve: {
     root: path.resolve('./src'),
@@ -128,6 +121,14 @@ var config = {
     new ExtractTextPlugin(outputCss, {
       disable: false,
       allChunks: true
+    }),
+    new StyleLintPlugin({
+      // http://stylelint.io/user-guide/example-config/
+      configFile: '.stylelintrc',
+      context: 'src',
+      files: '**/*.s?(a|c)ss',
+      syntax: 'scss',
+      failOnError: true
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin()

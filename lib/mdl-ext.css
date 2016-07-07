@@ -247,7 +247,15 @@
  * limitations under the License.
  */
 
+/* stylelint-disable */
+
+/* stylelint-enable */
+
 /* ==========   Sticky Header   ========== */
+
+/* stylelint-disable */
+
+/* stylelint-enable */
 
 /* ==========     Accordion     ========== */
 
@@ -263,6 +271,14 @@
 
 /* ==========  Color Themes  ========== */
 
+/* stylelint-disable */
+
+/* stylelint-enable */
+
+/* stylelint-disable */
+
+/* stylelint-enable */
+
 /**
  * Copyright 2016 Leif Olsen. All Rights Reserved.
  *
@@ -294,8 +310,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/* stylelint-disable */
+
+/* stylelint-enable */
 
 /* ==========   Sticky Header   ========== */
+
+/* stylelint-disable */
+
+/* stylelint-enable */
 
 /* ==========     Accordion     ========== */
 
@@ -315,7 +339,7 @@
   position: absolute;
   overflow: visible;
   background: transparent linear-gradient(to bottom, #3f51b5 0, #3f51b5 100%);
-  transition: .1s ease-in-out;
+  transition: 0.1s ease-in-out;
 }
 
 .mdlext-layout__sticky-header.mdlext-is-scroll {
@@ -332,7 +356,6 @@
 
 *:not(.mdl-layout--fixed-drawer).has-drawer .mdlext-layout__sticky-header,
 .is-small-screen.has-drawer .mdlext-layout__sticky-header {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
@@ -383,7 +406,15 @@
  * limitations under the License.
  */
 
+/* stylelint-disable */
+
+/* stylelint-enable */
+
 /* ==========   Sticky Header   ========== */
+
+/* stylelint-disable */
+
+/* stylelint-enable */
 
 /* ==========     Accordion     ========== */
 
@@ -408,40 +439,24 @@ dialog.mdlext-dialog {
 }
 
 dialog.mdlext-dialog[open] {
-  -webkit-animation: mdlext-open-dialog 0.5s 0.2s forwards;
-          animation: mdlext-open-dialog 0.5s 0.2s forwards;
+  animation: mdlext-open-dialog 0.5s 0.2s forwards;
 }
 
 dialog.mdlext-dialog[open]::-webkit-backdrop {
-  -webkit-animation: mdlext-darken-backdrop 0.2s forwards;
-          animation: mdlext-darken-backdrop 0.2s forwards;
+  animation: mdlext-darken-backdrop 0.2s forwards;
 }
 
 dialog.mdlext-dialog[open]::backdrop {
-  -webkit-animation: mdlext-darken-backdrop 0.2s forwards;
-          animation: mdlext-darken-backdrop 0.2s forwards;
+  animation: mdlext-darken-backdrop 0.2s forwards;
 }
 
 dialog.mdlext-dialog[open] + .backdrop {
-  -webkit-animation: mdlext-darken-backdrop 0.2s forwards;
-          animation: mdlext-darken-backdrop 0.2s forwards;
-}
-
-@-webkit-keyframes mdlext-darken-backdrop {
-  to {
-    background: rgba(0, 0, 0, 0.86);
-  }
+  animation: mdlext-darken-backdrop 0.2s forwards;
 }
 
 @keyframes mdlext-darken-backdrop {
   to {
     background: rgba(0, 0, 0, 0.86);
-  }
-}
-
-@-webkit-keyframes mdlext-open-dialog {
-  to {
-    opacity: 1;
   }
 }
 
@@ -471,16 +486,13 @@ dialog.mdlext-dialog[open] + .backdrop {
  */
 
 .mdlext-grid {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-flow: row wrap;
-      -ms-flex-flow: row wrap;
-          flex-flow: row wrap;
-  margin: 0 auto 0 auto;
-  -webkit-align-items: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
+  -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
+  margin: 0 auto;
+  -ms-flex-align: stretch;
+      align-items: stretch;
 }
 
 .mdlext-grid.mdlext-grid--no-spacing {
@@ -492,27 +504,23 @@ dialog.mdlext-dialog[open] + .backdrop {
 }
 
 .mdlext-cell--top {
-  -webkit-align-self: flex-start;
-      -ms-flex-item-align: start;
-          align-self: flex-start;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
 }
 
 .mdlext-cell--middle {
-  -webkit-align-self: center;
-      -ms-flex-item-align: center;
-          align-self: center;
+  -ms-flex-item-align: center;
+      align-self: center;
 }
 
 .mdlext-cell--bottom {
-  -webkit-align-self: flex-end;
-      -ms-flex-item-align: end;
-          align-self: flex-end;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
 }
 
 .mdlext-cell--stretch {
-  -webkit-align-self: stretch;
-      -ms-flex-item-align: stretch;
-          align-self: stretch;
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
 }
 
 .mdlext-grid.mdlext-grid--no-spacing > .mdlext-cell {
@@ -520,78 +528,70 @@ dialog.mdlext-dialog[open] + .backdrop {
 }
 
 .mdlext-cell--order-1 {
-  -webkit-order: 1;
-      -ms-flex-order: 1;
-          order: 1;
+  -ms-flex-order: 1;
+      order: 1;
 }
 
 .mdlext-cell--order-2 {
-  -webkit-order: 2;
-      -ms-flex-order: 2;
-          order: 2;
+  -ms-flex-order: 2;
+      order: 2;
 }
 
 .mdlext-cell--order-3 {
-  -webkit-order: 3;
-      -ms-flex-order: 3;
-          order: 3;
+  -ms-flex-order: 3;
+      order: 3;
 }
 
 .mdlext-cell--order-4 {
-  -webkit-order: 4;
-      -ms-flex-order: 4;
-          order: 4;
+  -ms-flex-order: 4;
+      order: 4;
 }
 
 .mdlext-cell--order-5 {
-  -webkit-order: 5;
-      -ms-flex-order: 5;
-          order: 5;
+  -ms-flex-order: 5;
+      order: 5;
 }
 
 .mdlext-cell--order-6 {
-  -webkit-order: 6;
-      -ms-flex-order: 6;
-          order: 6;
+  -ms-flex-order: 6;
+      order: 6;
 }
 
 .mdlext-cell--order-7 {
-  -webkit-order: 7;
-      -ms-flex-order: 7;
-          order: 7;
+  -ms-flex-order: 7;
+      order: 7;
 }
 
 .mdlext-cell--order-8 {
-  -webkit-order: 8;
-      -ms-flex-order: 8;
-          order: 8;
+  -ms-flex-order: 8;
+      order: 8;
 }
 
 .mdlext-cell--order-9 {
-  -webkit-order: 9;
-      -ms-flex-order: 9;
-          order: 9;
+  -ms-flex-order: 9;
+      order: 9;
 }
 
 .mdlext-cell--order-10 {
-  -webkit-order: 10;
-      -ms-flex-order: 10;
-          order: 10;
+  -ms-flex-order: 10;
+      order: 10;
 }
 
 .mdlext-cell--order-11 {
-  -webkit-order: 11;
-      -ms-flex-order: 11;
-          order: 11;
+  -ms-flex-order: 11;
+      order: 11;
 }
 
 .mdlext-cell--order-12 {
-  -webkit-order: 12;
-      -ms-flex-order: 12;
-          order: 12;
+  -ms-flex-order: 12;
+      order: 12;
 }
 
+/* stylelint-disable */
+
 @media (max-width: 479px) {
+  /* stylelint-enable */
+
   .mdlext-grid {
     padding: 8px;
   }
@@ -610,75 +610,63 @@ dialog.mdlext-dialog[open] + .backdrop {
   }
 
   .mdlext-cell--order-1-phone.mdlext-cell--order-1-phone {
-    -webkit-order: 1;
-        -ms-flex-order: 1;
-            order: 1;
+    -ms-flex-order: 1;
+        order: 1;
   }
 
   .mdlext-cell--order-2-phone.mdlext-cell--order-2-phone {
-    -webkit-order: 2;
-        -ms-flex-order: 2;
-            order: 2;
+    -ms-flex-order: 2;
+        order: 2;
   }
 
   .mdlext-cell--order-3-phone.mdlext-cell--order-3-phone {
-    -webkit-order: 3;
-        -ms-flex-order: 3;
-            order: 3;
+    -ms-flex-order: 3;
+        order: 3;
   }
 
   .mdlext-cell--order-4-phone.mdlext-cell--order-4-phone {
-    -webkit-order: 4;
-        -ms-flex-order: 4;
-            order: 4;
+    -ms-flex-order: 4;
+        order: 4;
   }
 
   .mdlext-cell--order-5-phone.mdlext-cell--order-5-phone {
-    -webkit-order: 5;
-        -ms-flex-order: 5;
-            order: 5;
+    -ms-flex-order: 5;
+        order: 5;
   }
 
   .mdlext-cell--order-6-phone.mdlext-cell--order-6-phone {
-    -webkit-order: 6;
-        -ms-flex-order: 6;
-            order: 6;
+    -ms-flex-order: 6;
+        order: 6;
   }
 
   .mdlext-cell--order-7-phone.mdlext-cell--order-7-phone {
-    -webkit-order: 7;
-        -ms-flex-order: 7;
-            order: 7;
+    -ms-flex-order: 7;
+        order: 7;
   }
 
   .mdlext-cell--order-8-phone.mdlext-cell--order-8-phone {
-    -webkit-order: 8;
-        -ms-flex-order: 8;
-            order: 8;
+    -ms-flex-order: 8;
+        order: 8;
   }
 
   .mdlext-cell--order-9-phone.mdlext-cell--order-9-phone {
-    -webkit-order: 9;
-        -ms-flex-order: 9;
-            order: 9;
+    -ms-flex-order: 9;
+        order: 9;
   }
 
   .mdlext-cell--order-10-phone.mdlext-cell--order-10-phone {
-    -webkit-order: 10;
-        -ms-flex-order: 10;
-            order: 10;
+    -ms-flex-order: 10;
+        order: 10;
   }
 
   .mdlext-cell--order-11-phone.mdlext-cell--order-11-phone {
-    -webkit-order: 11;
-        -ms-flex-order: 11;
-            order: 11;
+    -ms-flex-order: 11;
+        order: 11;
   }
 
   .mdlext-cell--order-12-phone.mdlext-cell--order-12-phone {
-    -webkit-order: 12;
-        -ms-flex-order: 12;
-            order: 12;
+    -ms-flex-order: 12;
+        order: 12;
   }
 
   .mdlext-cell--1-col,
@@ -847,7 +835,11 @@ dialog.mdlext-dialog[open] + .backdrop {
   }
 }
 
+/* stylelint-disable */
+
 @media (min-width: 480px) and (max-width: 839px) {
+  /* stylelint-enable */
+
   .mdlext-grid {
     padding: 8px;
   }
@@ -866,75 +858,63 @@ dialog.mdlext-dialog[open] + .backdrop {
   }
 
   .mdlext-cell--order-1-tablet.mdlext-cell--order-1-tablet {
-    -webkit-order: 1;
-        -ms-flex-order: 1;
-            order: 1;
+    -ms-flex-order: 1;
+        order: 1;
   }
 
   .mdlext-cell--order-2-tablet.mdlext-cell--order-2-tablet {
-    -webkit-order: 2;
-        -ms-flex-order: 2;
-            order: 2;
+    -ms-flex-order: 2;
+        order: 2;
   }
 
   .mdlext-cell--order-3-tablet.mdlext-cell--order-3-tablet {
-    -webkit-order: 3;
-        -ms-flex-order: 3;
-            order: 3;
+    -ms-flex-order: 3;
+        order: 3;
   }
 
   .mdlext-cell--order-4-tablet.mdlext-cell--order-4-tablet {
-    -webkit-order: 4;
-        -ms-flex-order: 4;
-            order: 4;
+    -ms-flex-order: 4;
+        order: 4;
   }
 
   .mdlext-cell--order-5-tablet.mdlext-cell--order-5-tablet {
-    -webkit-order: 5;
-        -ms-flex-order: 5;
-            order: 5;
+    -ms-flex-order: 5;
+        order: 5;
   }
 
   .mdlext-cell--order-6-tablet.mdlext-cell--order-6-tablet {
-    -webkit-order: 6;
-        -ms-flex-order: 6;
-            order: 6;
+    -ms-flex-order: 6;
+        order: 6;
   }
 
   .mdlext-cell--order-7-tablet.mdlext-cell--order-7-tablet {
-    -webkit-order: 7;
-        -ms-flex-order: 7;
-            order: 7;
+    -ms-flex-order: 7;
+        order: 7;
   }
 
   .mdlext-cell--order-8-tablet.mdlext-cell--order-8-tablet {
-    -webkit-order: 8;
-        -ms-flex-order: 8;
-            order: 8;
+    -ms-flex-order: 8;
+        order: 8;
   }
 
   .mdlext-cell--order-9-tablet.mdlext-cell--order-9-tablet {
-    -webkit-order: 9;
-        -ms-flex-order: 9;
-            order: 9;
+    -ms-flex-order: 9;
+        order: 9;
   }
 
   .mdlext-cell--order-10-tablet.mdlext-cell--order-10-tablet {
-    -webkit-order: 10;
-        -ms-flex-order: 10;
-            order: 10;
+    -ms-flex-order: 10;
+        order: 10;
   }
 
   .mdlext-cell--order-11-tablet.mdlext-cell--order-11-tablet {
-    -webkit-order: 11;
-        -ms-flex-order: 11;
-            order: 11;
+    -ms-flex-order: 11;
+        order: 11;
   }
 
   .mdlext-cell--order-12-tablet.mdlext-cell--order-12-tablet {
-    -webkit-order: 12;
-        -ms-flex-order: 12;
-            order: 12;
+    -ms-flex-order: 12;
+        order: 12;
   }
 
   .mdlext-cell--1-col,
@@ -1166,75 +1146,63 @@ dialog.mdlext-dialog[open] + .backdrop {
   }
 
   .mdlext-cell--order-1-desktop.mdlext-cell--order-1-desktop {
-    -webkit-order: 1;
-        -ms-flex-order: 1;
-            order: 1;
+    -ms-flex-order: 1;
+        order: 1;
   }
 
   .mdlext-cell--order-2-desktop.mdlext-cell--order-2-desktop {
-    -webkit-order: 2;
-        -ms-flex-order: 2;
-            order: 2;
+    -ms-flex-order: 2;
+        order: 2;
   }
 
   .mdlext-cell--order-3-desktop.mdlext-cell--order-3-desktop {
-    -webkit-order: 3;
-        -ms-flex-order: 3;
-            order: 3;
+    -ms-flex-order: 3;
+        order: 3;
   }
 
   .mdlext-cell--order-4-desktop.mdlext-cell--order-4-desktop {
-    -webkit-order: 4;
-        -ms-flex-order: 4;
-            order: 4;
+    -ms-flex-order: 4;
+        order: 4;
   }
 
   .mdlext-cell--order-5-desktop.mdlext-cell--order-5-desktop {
-    -webkit-order: 5;
-        -ms-flex-order: 5;
-            order: 5;
+    -ms-flex-order: 5;
+        order: 5;
   }
 
   .mdlext-cell--order-6-desktop.mdlext-cell--order-6-desktop {
-    -webkit-order: 6;
-        -ms-flex-order: 6;
-            order: 6;
+    -ms-flex-order: 6;
+        order: 6;
   }
 
   .mdlext-cell--order-7-desktop.mdlext-cell--order-7-desktop {
-    -webkit-order: 7;
-        -ms-flex-order: 7;
-            order: 7;
+    -ms-flex-order: 7;
+        order: 7;
   }
 
   .mdlext-cell--order-8-desktop.mdlext-cell--order-8-desktop {
-    -webkit-order: 8;
-        -ms-flex-order: 8;
-            order: 8;
+    -ms-flex-order: 8;
+        order: 8;
   }
 
   .mdlext-cell--order-9-desktop.mdlext-cell--order-9-desktop {
-    -webkit-order: 9;
-        -ms-flex-order: 9;
-            order: 9;
+    -ms-flex-order: 9;
+        order: 9;
   }
 
   .mdlext-cell--order-10-desktop.mdlext-cell--order-10-desktop {
-    -webkit-order: 10;
-        -ms-flex-order: 10;
-            order: 10;
+    -ms-flex-order: 10;
+        order: 10;
   }
 
   .mdlext-cell--order-11-desktop.mdlext-cell--order-11-desktop {
-    -webkit-order: 11;
-        -ms-flex-order: 11;
-            order: 11;
+    -ms-flex-order: 11;
+        order: 11;
   }
 
   .mdlext-cell--order-12-desktop.mdlext-cell--order-12-desktop {
-    -webkit-order: 12;
-        -ms-flex-order: 12;
-            order: 12;
+    -ms-flex-order: 12;
+        order: 12;
   }
 
   .mdlext-cell--1-col,
@@ -1530,7 +1498,15 @@ dialog.mdlext-dialog[open] + .backdrop {
  * limitations under the License.
  */
 
+/* stylelint-disable */
+
+/* stylelint-enable */
+
 /* ==========   Sticky Header   ========== */
+
+/* stylelint-disable */
+
+/* stylelint-enable */
 
 /* ==========     Accordion     ========== */
 
@@ -1552,17 +1528,14 @@ ul.mdlext-lightboard {
 
 .mdlext-lightboard {
   box-sizing: border-box;
-  margin: 0 auto 0 auto;
+  margin: 0 auto;
   padding: 0;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-flow: row wrap;
-      -ms-flex-flow: row wrap;
-          flex-flow: row wrap;
-  -webkit-align-items: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
+  -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
+  -ms-flex-align: stretch;
+      align-items: stretch;
 }
 
 .mdlext-lightboard *,
@@ -1583,7 +1556,7 @@ ul.mdlext-lightboard {
   outline: 0;
 }
 
-.mdlext-lightboard .mdlext-lightboard__slide:before {
+.mdlext-lightboard .mdlext-lightboard__slide::before {
   content: '';
   display: block;
   padding-top: 100%;
@@ -1671,7 +1644,7 @@ ul.mdlext-lightboard {
 }
 
 .mdlext-lightboard {
-  padding: calc((0px - 2px) / 2);
+  padding: calc((0 - 2px) / 2);
 }
 
 .mdlext-lightboard .mdlext-lightboard__slide {
@@ -1708,7 +1681,15 @@ ul.mdlext-lightboard {
  * limitations under the License.
  */
 
+/* stylelint-disable */
+
+/* stylelint-enable */
+
 /* ==========   Sticky Header   ========== */
+
+/* stylelint-disable */
+
+/* stylelint-enable */
 
 /* ==========     Accordion     ========== */
 
@@ -1724,9 +1705,13 @@ ul.mdlext-lightboard {
 
 /* ==========  Color Themes  ========== */
 
+/* stylelint-disable */
+
 @media (min-width: 480px) and (max-width: 659px) {
+  /* stylelint-enable */
+
   .mdlext-lightboard {
-    padding: calc((0px - 4px) / 2);
+    padding: calc((px - 4px) / 2);
   }
 
   .mdlext-lightboard .mdlext-lightboard__slide {
@@ -1748,9 +1733,13 @@ ul.mdlext-lightboard {
   }
 }
 
+/* stylelint-disable */
+
 @media (min-width: 660px) and (max-width: 839px) {
+  /* stylelint-enable */
+
   .mdlext-lightboard {
-    padding: calc((0px - 4px) / 2);
+    padding: calc((0 - 4px) / 2);
   }
 
   .mdlext-lightboard .mdlext-lightboard__slide {
@@ -1772,9 +1761,13 @@ ul.mdlext-lightboard {
   }
 }
 
+/* stylelint-disable */
+
 @media (min-width: 840px) and (max-width: 1199px) {
+  /* stylelint-enable */
+
   .mdlext-lightboard {
-    padding: calc((0px - 8px) / 2);
+    padding: calc((0 - 8px) / 2);
   }
 
   .mdlext-lightboard .mdlext-lightboard__slide {
@@ -1798,7 +1791,7 @@ ul.mdlext-lightboard {
 
 @media (min-width: 1200px) {
   .mdlext-lightboard {
-    padding: calc((0px - 8px) / 2);
+    padding: calc((0 - 8px) / 2);
   }
 
   .mdlext-lightboard .mdlext-lightboard__slide {
@@ -1852,7 +1845,15 @@ ul.mdlext-lightboard {
  * limitations under the License.
  */
 
+/* stylelint-disable */
+
+/* stylelint-enable */
+
 /* ==========   Sticky Header   ========== */
+
+/* stylelint-disable */
+
+/* stylelint-enable */
 
 /* ==========     Accordion     ========== */
 
@@ -1897,18 +1898,15 @@ ul.mdlext-lightboard {
   position: absolute;
   top: 0;
   left: 0;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+      justify-content: center;
 }
 
 .mdlext-lightbox .mdlext-lightbox__slider .mdlext-lightbox__slider__slide {
-  -webkit-flex-shrink: 0;
-      -ms-flex-negative: 0;
-          flex-shrink: 0;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
   display: block;
   text-align: left;
   color: #7f7f7f;
@@ -1948,16 +1946,13 @@ ul.mdlext-lightboard {
   overflow: auto;
   padding: 8px;
   background-color: rgba(255, 255, 255, 0.76);
-  -webkit-transform-origin: bottom;
-          transform-origin: bottom;
-  -webkit-transform: scaleY(0);
-          transform: scaleY(0);
-  transition: .2s ease-in-out;
+  transform-origin: bottom;
+  transform: scaleY(0);
+  transition: 0.2s ease-in-out;
 }
 
 .mdlext-lightbox figure figcaption.mdlext-lightbox__show-figcaption {
-  -webkit-transform: scaleY(1);
-          transform: scaleY(1);
+  transform: scaleY(1);
 }
 
 .mdlext-lightbox figure figcaption tbody th {
@@ -1975,22 +1970,18 @@ ul.mdlext-lightboard {
 }
 
 .mdlext-lightbox footer {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center;
   background-color: rgba(255, 255, 255, 0.86);
 }
 
 .mdlext-lightbox footer .mdl-card__supporting-text {
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+      flex: 1;
   overflow: hidden;
   padding: 0;
   height: 18px;
@@ -1998,7 +1989,6 @@ ul.mdlext-lightboard {
 }
 
 .mdlext-lightbox footer nav {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
@@ -2059,6 +2049,10 @@ ul.mdlext-carousel {
 
 .mdlext-carousel__slide[aria-selected] {
   border-top-color: #ff4081;
+  /*
+    figure {
+    }
+    */
 }
 
 .mdlext-carousel__slide[aria-selected] figcaption {
@@ -2149,6 +2143,10 @@ ul.mdlext-carousel {
  *   https://github.com/mebibou/mdl-selectfield
  */
 
+/* stylelint-disable */
+
+/* stylelint-enable */
+
 .mdlext-selectfield {
   position: relative;
   font-size: 16px;
@@ -2165,7 +2163,7 @@ ul.mdlext-carousel {
   bottom: 20px;
 }
 
-.mdlext-selectfield:after {
+.mdlext-selectfield::after {
   content: '';
   width: 0;
   height: 0;
@@ -2177,14 +2175,13 @@ ul.mdlext-carousel {
   border-right: 0.35em solid transparent;
   position: absolute;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   right: 0.5em;
   padding: 0;
   pointer-events: none;
 }
 
-.mdlext-selectfield.is-disabled:after {
+.mdlext-selectfield.is-disabled::after {
   color: rgba(0,0,0, 0.12);
   content: '';
   width: 0;
@@ -2233,7 +2230,7 @@ ul.mdlext-carousel {
 
 .mdlext-selectfield__select:-moz-focusring {
   color: transparent;
-  text-shadow: 0 0 0 #000;
+  text-shadow: 0 0 0 #000000;
 }
 
 .mdlext-selectfield__select:focus::-ms-value {
@@ -2321,7 +2318,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   font-size: 12px;
 }
 
-.mdlext-selectfield__label:after {
+.mdlext-selectfield__label::after {
   background-color: rgb(63,81,181);
   bottom: 20px;
   content: '';
@@ -2334,13 +2331,13 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   width: 10px;
 }
 
-.mdlext-selectfield.is-focused .mdlext-selectfield__label:after {
+.mdlext-selectfield.is-focused .mdlext-selectfield__label::after {
   left: 0;
   visibility: visible;
   width: 100%;
 }
 
-.mdlext-selectfield.is-invalid .mdlext-selectfield__label:after {
+.mdlext-selectfield.is-invalid .mdlext-selectfield__label::after {
   background-color: rgb(213,0,0);
 }
 
@@ -2371,7 +2368,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   max-width: 600px;
 }
 
-.mdlext-selectfield__expandable-holder .mdlext-selectfield__label:after {
+.mdlext-selectfield__expandable-holder .mdlext-selectfield__label::after {
   bottom: 0;
 }
 
@@ -2411,7 +2408,15 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
  * limitations under the License.
  */
 
+/* stylelint-disable */
+
+/* stylelint-enable */
+
 /* ==========   Sticky Header   ========== */
+
+/* stylelint-disable */
+
+/* stylelint-enable */
 
 /* ==========     Accordion     ========== */
 
@@ -2427,6 +2432,10 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 
 /* ==========  Color Themes  ========== */
 
+/* stylelint-disable */
+
+/* stylelint-enable */
+
 .mdlext-bordered-fields {
   box-sizing: border-box;
 }
@@ -2436,6 +2445,13 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   box-sizing: border-box;
   padding: 0;
   margin: 0 0 20px 0;
+  /*
+    &.is-dirty {
+      .mdl-textfield__input,
+      .mdlext-selectfield__select {
+      }
+    }
+    */
 }
 
 .mdlext-bordered-fields .mdl-textfield .mdl-textfield__input,
@@ -2492,13 +2508,13 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   background-color: rgba(255, 213, 213, 0.5);
 }
 
-.mdlext-bordered-fields .mdlext-selectfield:after {
+.mdlext-bordered-fields .mdlext-selectfield::after {
   top: auto;
   bottom: 4px;
 }
 
-.mdlext-bordered-fields fieldset[disabled] .mdlext-selectfield:after,
-.mdlext-bordered-fields .mdlext-selectfield.is-disabled:after {
+.mdlext-bordered-fields fieldset[disabled] .mdlext-selectfield::after,
+.mdlext-bordered-fields .mdlext-selectfield.is-disabled::after {
   color: rgba(0, 0, 0, 0.12);
   content: '';
   width: 0;
@@ -2541,10 +2557,10 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   bottom: 4px;
 }
 
-.mdlext-bordered-fields .mdl-textfield .mdl-textfield__label:after,
-.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__label:after,
-.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__label:after,
-.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__label:after {
+.mdlext-bordered-fields .mdl-textfield .mdl-textfield__label::after,
+.mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__label::after,
+.mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__label::after,
+.mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__label::after {
   background-color: transparent !important;
   visibility: hidden !important;
 }
@@ -2725,7 +2741,15 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
  * limitations under the License.
  */
 
+/* stylelint-disable */
+
+/* stylelint-enable */
+
 /* ==========   Sticky Header   ========== */
+
+/* stylelint-disable */
+
+/* stylelint-enable */
 
 /* ==========     Accordion     ========== */
 
@@ -2750,7 +2774,6 @@ ul.mdlext-accordion {
   height: 100%;
   padding: 0;
   margin: 0;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   box-sizing: border-box;
@@ -2762,25 +2785,20 @@ ul.mdlext-accordion {
   padding: 0;
   width: 48px;
   overflow: hidden;
-  transition: -webkit-flex .15s ease-in;
-  transition: flex .15s ease-in;
-  transition: flex .15s ease-in, -webkit-flex .15s ease-in, -ms-flex .15s ease-in;
-  -webkit-flex: 0 0 auto;
-      -ms-flex: 0 0 auto;
-          flex: 0 0 auto;
-  display: -webkit-flex;
+  transition: flex 0.15s ease-in;
+  transition: flex 0.15s ease-in, -ms-flex 0.15s ease-in;
+  -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
   display: -ms-flexbox;
   display: flex;
   box-sizing: border-box;
 }
 
 .mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+      align-items: center;
   position: relative;
   min-width: 48px;
   margin: 0;
@@ -2806,8 +2824,8 @@ ul.mdlext-accordion {
   font-size: 0;
   position: absolute;
   top: 1px;
-  right: 0px;
-  bottom: 0px;
+  right: 0;
+  bottom: 0;
   left: 1px;
   z-index: 1;
   box-sizing: border-box;
@@ -2836,32 +2854,26 @@ ul.mdlext-accordion {
   bottom: 0;
   left: 0;
   height: 48px;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-transform: rotate(-90deg) translateY(100%);
-          transform: rotate(-90deg) translateY(100%);
-  -webkit-transform-origin: bottom left;
-          transform-origin: bottom left;
+  -ms-flex-align: center;
+      align-items: center;
+  transform: rotate(-90deg) translateY(100%);
+  transform-origin: bottom left;
   box-sizing: border-box;
 }
 
 .mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > * {
   margin: 0;
   padding: 0;
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+      flex: 1;
 }
 
 .mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > i,
 .mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > img {
-  -webkit-flex: none;
-      -ms-flex: none;
-          flex: none;
+  -ms-flex: none;
+      flex: none;
 }
 
 .mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > i + *,
@@ -2869,7 +2881,7 @@ ul.mdlext-accordion {
   margin-left: 8px;
 }
 
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__state:after {
+.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__state::after {
   content: '+';
 }
 
@@ -2881,12 +2893,11 @@ ul.mdlext-accordion {
 }
 
 .mdlext-accordion .mdlext-accordion__panel[open] {
-  -webkit-flex: 1 1 auto;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
 }
 
-.mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__state:after {
+.mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__state::after {
   content: '-';
 }
 
@@ -2897,8 +2908,7 @@ ul.mdlext-accordion {
 
 .mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__content {
   overflow: auto;
-  -webkit-animation: mdlext-accordion__panel-open-keyframe .4s linear;
-          animation: mdlext-accordion__panel-open-keyframe .4s linear;
+  animation: mdlext-accordion__panel-open-keyframe 0.4s linear;
 }
 
 .mdlext-accordion .mdlext-accordion__panel[disabled] .mdlext-accordion__panel__header {
@@ -2915,20 +2925,17 @@ ul.mdlext-accordion {
 }
 
 .mdlext-accordion.mdlext-accordion--vertical {
-  -webkit-flex-flow: column nowrap;
-      -ms-flex-flow: column nowrap;
-          flex-flow: column nowrap;
+  -ms-flex-flow: column nowrap;
+      flex-flow: column nowrap;
 }
 
 .mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel {
   width: 100%;
   height: 48px;
-  -webkit-flex: none;
-      -ms-flex: none;
-          flex: none;
-  -webkit-flex-flow: column nowrap;
-      -ms-flex-flow: column nowrap;
-          flex-flow: column nowrap;
+  -ms-flex: none;
+      flex: none;
+  -ms-flex-flow: column nowrap;
+      flex-flow: column nowrap;
 }
 
 .mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel .mdlext-accordion__panel__header {
@@ -2944,14 +2951,12 @@ ul.mdlext-accordion {
   width: 100%;
   bottom: auto;
   left: auto;
-  -webkit-transform: rotate(0deg);
-          transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 .mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel[open] {
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+      flex: 1;
 }
 
 .mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel[open] .mdlext-accordion__panel__header {
@@ -2966,7 +2971,7 @@ ul.mdlext-accordion {
 .mdlext-accordion.mdlext-accordion--vertical[aria-multiselectable]:not([aria-multiselectable="false"]) .mdlext-accordion__panel {
   height: auto;
   max-height: 48px;
-  transition: max-height .1s ease-out;
+  transition: max-height 0.1s ease-out;
 }
 
 .mdlext-accordion.mdlext-accordion--vertical[aria-multiselectable]:not([aria-multiselectable="false"]) .mdlext-accordion__panel[open] {
@@ -2976,10 +2981,8 @@ ul.mdlext-accordion {
 
 .mdlext-accordion.mdlext-accordion--vertical[aria-multiselectable]:not([aria-multiselectable="false"]) .mdlext-accordion__panel[open] .mdlext-accordion__panel__content {
   overflow: hidden;
-  -webkit-animation: mdlext-accordion__panel-open-keyframe 0.1s linear;
-          animation: mdlext-accordion__panel-open-keyframe 0.1s linear;
-  -webkit-animation-delay: 2.2s;
-          animation-delay: 2.2s;
+  animation: mdlext-accordion__panel-open-keyframe 0.1s linear;
+  animation-delay: 2.2s;
 }
 
 /*
@@ -2987,16 +2990,6 @@ ul.mdlext-accordion {
  * Why do we need to animate this? The text overflow auto should be set after the accordion animation has completed!
  * If we omit this, the the overflow scrollbar will flicker during the accordion open transition
  */
-
-@-webkit-keyframes mdlext-accordion__panel-open-keyframe {
-  0% {
-    overflow: hidden;
-  }
-
-  100% {
-    overflow: auto;
-  }
-}
 
 @keyframes mdlext-accordion__panel-open-keyframe {
   0% {
@@ -3115,12 +3108,12 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   color: #E040FB;
 }
 
-.mdlext-light-color-theme .mdl-badge[data-badge]:after {
+.mdlext-light-color-theme .mdl-badge[data-badge]::after {
   background: #E040FB;
   color: #FAFAFA;
 }
 
-.mdlext-light-color-theme .mdl-badge.mdl-badge--no-background[data-badge]:after {
+.mdlext-light-color-theme .mdl-badge.mdl-badge--no-background[data-badge]::after {
   color: #E040FB;
   background: #FAFAFA;
 }
@@ -3274,9 +3267,17 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
 .mdlext-light-color-theme .mdl-slider.is-upgraded {
   background: transparent;
   color: #E040FB;
+  /* stylelint-disable */
+  /* stylelint-enable */
   /**************************** Thumbs ****************************/
+  /* stylelint-disable */
+  /* stylelint-enable */
   /**************************** 0-value ****************************/
+  /* stylelint-disable */
+  /* stylelint-enable */
   /**************************** Disabled ****************************/
+  /* stylelint-disable */
+  /* stylelint-enable */
 }
 
 .mdlext-light-color-theme .mdl-slider.is-upgraded::-webkit-slider-runnable-track {
@@ -3457,7 +3458,7 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   color: rgba(0, 0, 0, 0.54);
 }
 
-.mdlext-light-color-theme .mdl-textfield__label:after {
+.mdlext-light-color-theme .mdl-textfield__label::after {
   background-color: #E040FB;
 }
 
@@ -3476,7 +3477,7 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   color: #D32F2F;
 }
 
-.mdlext-light-color-theme .mdl-textfield.is-invalid .mdl-textfield__label:after {
+.mdlext-light-color-theme .mdl-textfield.is-invalid .mdl-textfield__label::after {
   background-color: #D32F2F;
 }
 
@@ -3502,7 +3503,7 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-checkbox.is-focused.is-checked .mdl-checkbox__focus-helper {
-  box-shadow: 0 0 0px 8px rgba(224, 64, 251, 0.26);
+  box-shadow: 0 0 0 8px rgba(224, 64, 251, 0.26);
   background-color: rgba(224, 64, 251, 0.26);
 }
 
@@ -3632,7 +3633,7 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
 }
 
 .mdlext-light-color-theme .mdl-switch.is-focused.is-checked .mdl-switch__focus-helper {
-  box-shadow: 0 0 0px 20px rgba(224, 64, 251, 0.26);
+  box-shadow: 0 0 0 20px rgba(224, 64, 251, 0.26);
   background-color: rgba(224, 64, 251, 0.26);
 }
 
@@ -3672,8 +3673,8 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   color: rgba(0, 0, 0, 0.87);
 }
 
-.mdlext-light-color-theme .mdl-data-table th.mdl-data-table__header--sorted-ascending:hover:before,
-.mdlext-light-color-theme .mdl-data-table th.mdl-data-table__header--sorted-descending:hover:before {
+.mdlext-light-color-theme .mdl-data-table th.mdl-data-table__header--sorted-ascending:hover::before,
+.mdlext-light-color-theme .mdl-data-table th.mdl-data-table__header--sorted-descending:hover::before {
   color: rgba(0, 0, 0, 0.26);
 }
 
@@ -3760,7 +3761,7 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   border-top-color: rgba(0, 0, 0, 0.1);
 }
 
-.mdlext-light-color-theme .mdlext-selectfield.is-disabled:after {
+.mdlext-light-color-theme .mdlext-selectfield.is-disabled::after {
   color: rgba(0, 0, 0, 0.12);
   content: '';
   width: 0;
@@ -3814,11 +3815,11 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   color: #D32F2F;
 }
 
-.mdlext-light-color-theme .mdlext-selectfield__label:after {
+.mdlext-light-color-theme .mdlext-selectfield__label::after {
   background-color: #E040FB;
 }
 
-.mdlext-light-color-theme .mdlext-selectfield.is-invalid .mdlext-selectfield__label:after {
+.mdlext-light-color-theme .mdlext-selectfield.is-invalid .mdlext-selectfield__label::after {
   background-color: #D32F2F;
 }
 
@@ -3869,8 +3870,8 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   background-color: rgba(255, 255, 255, 0.5);
 }
 
-.mdlext-light-color-theme .mdlext-bordered-fields fieldset[disabled] .mdlext-selectfield:after,
-.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-disabled:after {
+.mdlext-light-color-theme .mdlext-bordered-fields fieldset[disabled] .mdlext-selectfield::after,
+.mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-disabled::after {
   color: rgba(0, 0, 0, 0.26);
   content: '';
   width: 0;
@@ -4072,12 +4073,12 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   color: #536DFE;
 }
 
-.mdlext-dark-color-theme .mdl-badge[data-badge]:after {
+.mdlext-dark-color-theme .mdl-badge[data-badge]::after {
   background: #536DFE;
   color: #FFFFFF;
 }
 
-.mdlext-dark-color-theme .mdl-badge.mdl-badge--no-background[data-badge]:after {
+.mdlext-dark-color-theme .mdl-badge.mdl-badge--no-background[data-badge]::after {
   color: #536DFE;
   background: #FFFFFF;
 }
@@ -4231,8 +4232,16 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
 .mdlext-dark-color-theme .mdl-slider.is-upgraded {
   background: transparent;
   color: #536DFE;
+  /* stylelint-disable */
+  /* stylelint-enable */
+  /* stylelint-disable */
+  /* stylelint-enable */
   /**************************** 0-value ****************************/
+  /* stylelint-disable */
+  /* stylelint-enable */
   /**************************** Disabled ****************************/
+  /* stylelint-disable */
+  /* stylelint-enable */
 }
 
 .mdlext-dark-color-theme .mdl-slider.is-upgraded::-webkit-slider-runnable-track {
@@ -4413,7 +4422,7 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   color: rgba(255, 255, 255, 0.5);
 }
 
-.mdlext-dark-color-theme .mdl-textfield__label:after {
+.mdlext-dark-color-theme .mdl-textfield__label::after {
   background-color: #536DFE;
 }
 
@@ -4432,7 +4441,7 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   color: #FF1744;
 }
 
-.mdlext-dark-color-theme .mdl-textfield.is-invalid .mdl-textfield__label:after {
+.mdlext-dark-color-theme .mdl-textfield.is-invalid .mdl-textfield__label::after {
   background-color: #FF1744;
 }
 
@@ -4458,7 +4467,7 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-checkbox.is-focused.is-checked .mdl-checkbox__focus-helper {
-  box-shadow: 0 0 0px 8px rgba(83, 109, 254, 0.26);
+  box-shadow: 0 0 0 8px rgba(83, 109, 254, 0.26);
   background-color: rgba(83, 109, 254, 0.26);
 }
 
@@ -4588,7 +4597,7 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
 }
 
 .mdlext-dark-color-theme .mdl-switch.is-focused.is-checked .mdl-switch__focus-helper {
-  box-shadow: 0 0 0px 20px rgba(83, 109, 254, 0.26);
+  box-shadow: 0 0 0 20px rgba(83, 109, 254, 0.26);
   background-color: rgba(83, 109, 254, 0.26);
 }
 
@@ -4628,8 +4637,8 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   color: rgba(255, 255, 255, 0.87);
 }
 
-.mdlext-dark-color-theme .mdl-data-table th.mdl-data-table__header--sorted-ascending:hover:before,
-.mdlext-dark-color-theme .mdl-data-table th.mdl-data-table__header--sorted-descending:hover:before {
+.mdlext-dark-color-theme .mdl-data-table th.mdl-data-table__header--sorted-ascending:hover::before,
+.mdlext-dark-color-theme .mdl-data-table th.mdl-data-table__header--sorted-descending:hover::before {
   color: rgba(255, 255, 255, 0.26);
 }
 
@@ -4716,7 +4725,7 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   border-top-color: rgba(0, 0, 0, 0.1);
 }
 
-.mdlext-dark-color-theme .mdlext-selectfield.is-disabled:after {
+.mdlext-dark-color-theme .mdlext-selectfield.is-disabled::after {
   color: rgba(255, 255, 255, 0.12);
   content: '';
   width: 0;
@@ -4770,11 +4779,11 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   color: #FF1744;
 }
 
-.mdlext-dark-color-theme .mdlext-selectfield__label:after {
+.mdlext-dark-color-theme .mdlext-selectfield__label::after {
   background-color: #536DFE;
 }
 
-.mdlext-dark-color-theme .mdlext-selectfield.is-invalid .mdlext-selectfield__label:after {
+.mdlext-dark-color-theme .mdlext-selectfield.is-invalid .mdlext-selectfield__label::after {
   background-color: #FF1744;
 }
 
@@ -4825,8 +4834,8 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   background-color: rgba(255, 23, 68, 0.1);
 }
 
-.mdlext-dark-color-theme .mdlext-bordered-fields fieldset[disabled] .mdlext-selectfield:after,
-.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-disabled:after {
+.mdlext-dark-color-theme .mdlext-bordered-fields fieldset[disabled] .mdlext-selectfield::after,
+.mdlext-dark-color-theme .mdlext-bordered-fields .mdlext-selectfield.is-disabled::after {
   color: rgba(255, 255, 255, 0.26);
   content: '';
   width: 0;

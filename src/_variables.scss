@@ -67,6 +67,7 @@ $mdlext-sticky-header-gradient-color-scroll-start: rgba($mdlext-sticky-header-gr
 $mdlext-sticky-header-gradient-color-scroll-end  : rgba($mdlext-sticky-header-gradient-color, 0.95) !default;
 
 // Background shorthand
+/* stylelint-disable */
 $mdlext-sticky-header-background                 : $mdlext-sticky-header-background-color
                                                    linear-gradient(to bottom,
                                                       $mdlext-sticky-header-gradient-color-start 0,
@@ -77,6 +78,7 @@ $mdlext-sticky-header-background-scroll          : $mdlext-sticky-header-backgro
                                                    linear-gradient(to bottom,
                                                       $mdlext-sticky-header-gradient-color-scroll-start 100%,
                                                       $mdlext-sticky-header-gradient-color-scroll-end 100%) !default;
+/* stylelint-enable */
 
 /* ==========     Accordion     ========== */
 $mdlext-accordion-header-background-color-base   : $mdlext-palette-grey-500 !default;
@@ -112,8 +114,8 @@ $mdlext-accordion-content-background-color       : transparent !default;
 $mdlext-dialog-padding           : 0;
 $mdlext-dialog-background-color  : transparent !default;
 $mdlext-dialog-backdrop-color    : rgba(0, 0, 0, 0.86) !default;
-$mdlext-dialog-open-animation    : .5s .2s forwards !default;
-$mdlext-dialog-backdrop-animation: .2s forwards !default;
+$mdlext-dialog-open-animation    : 0.5s 0.2s forwards !default;
+$mdlext-dialog-backdrop-animation: 0.2s forwards !default;
 
 
 /* ==========     Lightbox     ========== */
@@ -133,27 +135,27 @@ $mdlext-lightboard-medium-large-breakpoint     : $grid-desktop-breakpoint !defau
 $mdlext-lightboard-large-breakpoint            : $grid-desktop-breakpoint + 360px !default; // 840+360
 
 $mdlext-lightboard-small-gutter                : 2px !default;
-$mdlext-lightboard-small-margin                : 0px !default;
+$mdlext-lightboard-small-margin                : 0 !default;
 $mdlext-lightboard-small-columns               : 2 !default;
 $mdlext-lightboard-small-frame-width           : 8px !default;
 
 $mdlext-lightboard-medium-small-gutter         : 4px !default;
-$mdlext-lightboard-medium-small-margin         : 0px !default;
+$mdlext-lightboard-medium-small-margin         : px !default;
 $mdlext-lightboard-medium-small-columns        : 4 !default;
 $mdlext-lightboard-medium-small-frame-width    : 8px !default;
 
 $mdlext-lightboard-medium-gutter               : 4px !default;
-$mdlext-lightboard-medium-margin               : 0px !default;
+$mdlext-lightboard-medium-margin               : 0 !default;
 $mdlext-lightboard-medium-columns              : 5 !default;
 $mdlext-lightboard-medium-frame-width          : 8px !default;
 
 $mdlext-lightboard-medium-large-gutter         : 8px !default;
-$mdlext-lightboard-medium-large-margin         : 0px !default;
+$mdlext-lightboard-medium-large-margin         : 0 !default;
 $mdlext-lightboard-medium-large-columns        : 6 !default;
 $mdlext-lightboard-medium-large-frame-width    : 12px !default;
 
 $mdlext-lightboard-large-gutter                : 8px !default;
-$mdlext-lightboard-large-margin                : 0px !default;
+$mdlext-lightboard-large-margin                : 0 !default;
 $mdlext-lightboard-large-columns               : 7 !default;
 $mdlext-lightboard-large-frame-width           : 12px !default;
 
@@ -162,10 +164,10 @@ $mdlext-lightboard-slide-border-color          : #D8D8D8 !default;
 $mdlext-lightboard-slide-background-color      : #F8F8F8 !default;
 $mdlext-lightboard-slide-border-radius         : 5px !default;
 $mdlext-lightboard-slide-inner-border-radius   : 3px !default;
-$mdlext-lightboard-slide-box-shadow            : 2px 2px 6px -1px rgba(219,215,219,0.5) !default;
+$mdlext-lightboard-slide-box-shadow            : 2px 2px 6px -1px rgba(219, 215, 219, 0.5) !default;
 $mdlext-lightboard-slide-border-color-hover    : #B8B8B8 !default;
 $mdlext-lightboard-slide-background-color-hover: #E8E8E8 !default;
-$mdlext-lightboard-slide-box-shadow-hover      : 2px 2px 12px -1px rgba(219,215,219,1)  !default;
+$mdlext-lightboard-slide-box-shadow-hover      : 2px 2px 12px -1px rgba(219, 215, 219, 1) !default;
 $mdlext-lightboard-ripple-color                : $tab-highlight-color !default;
 $mdlext-lightboard-focus-outline-color         : #777777 !default;
 $mdlext-lightboard-figcaption-text-color       : rgb-string-to-hex($palette-grey-400) !default;
@@ -257,7 +259,7 @@ $mdlext-light-card-background-color:              $mdlext-light-content-backgrou
 $mdlext-light-card-text-color:                    $mdlext-light-text-color-primary !default;
 $mdlext-light-card-image-placeholder-color:       $mdlext-light-color-accent !default;
 $mdlext-light-card-supporting-text-text-color:    rgba($mdlext-color-black, 0.54) !default;
-$mdlext-light-card-border-color:                  rgba(0,0,0,0.1) !default;
+$mdlext-light-card-border-color:                  rgba(0, 0, 0, 0.1) !default;
 $mdlext-light-card-subtitle-color:                rgba($mdlext-color-black, 0.54) !default;
 
 //  Item

@@ -74,11 +74,15 @@
     .mdlext-selectfield__select {
       padding-right: calc(1em + #{$mdlext-bordered-field-padding});  // space for down arrow
     }
+
+    /*
     &.is-dirty {
       .mdl-textfield__input,
       .mdlext-selectfield__select {
       }
     }
+    */
+
     &.is-invalid {
       .mdl-textfield__input,
       .mdlext-selectfield__select {
@@ -87,7 +91,7 @@
         background-color: $mdlext-bordered-field-error-background-color;
 
         &:focus {
-        //&:required:focus {
+          //&:required:focus {
           border-color: $mdlext-bordered-field-error-focus-border-color;
           background-color: $mdlext-bordered-field-error-focus-background-color;
         }
@@ -95,13 +99,13 @@
     }
   }
 
-  .mdlext-selectfield:after {
+  .mdlext-selectfield::after {
     top: auto;
     bottom: $mdlext-bordered-field-padding-bottom;  // Position of down arrow
   }
 
-  fieldset[disabled] .mdlext-selectfield:after,
-  .mdlext-selectfield.is-disabled:after {
+  fieldset[disabled] .mdlext-selectfield::after,
+  .mdlext-selectfield.is-disabled::after {
     color: $mdlext-bordered-field-input-text-disabled-text-color;
     @include mdlext-arrow(bottom, $mdlext-selectfield-arrow-width, $mdlext-selectfield-arrow-length, $mdlext-bordered-field-input-text-disabled-text-color);
   }
@@ -136,7 +140,7 @@
       bottom: $mdlext-bordered-field-padding-bottom;
 
       // Hides the colored underline for the textField/selectfield.
-      &:after {
+      &::after {
         background-color: transparent !important;
         visibility: hidden !important;
       }

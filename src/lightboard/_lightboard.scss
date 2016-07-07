@@ -34,15 +34,19 @@ ul.mdlext-lightboard {
 
 .mdlext-lightboard {
   box-sizing: border-box;
-  margin: 0 auto 0 auto;
+  margin: 0 auto;
   padding: 0;
   display: flex;
   flex-flow:row wrap;
   align-items: stretch;
 
-  *, *::before, *::after, input[type="search"] {
+  *,
+  *::before,
+  *::after,
+  input[type="search"] {
     box-sizing: border-box;
   }
+
   .mdlext-lightboard__slide {
     background-color: $mdlext-lightboard-slide-background-color;
     border: 1px solid $mdlext-lightboard-slide-border-color;
@@ -53,7 +57,7 @@ ul.mdlext-lightboard {
     max-width: $mdlext-lightboard-slide-max-size;
     outline: 0;
 
-    &:before {
+    &::before {
       // 1:1 ratio
       // TODO: Use a class for ratio so the grid can display slides with different ratios (16:9, 16:10, 4:3 ...)
       content: '';
@@ -125,8 +129,8 @@ ul.mdlext-lightboard {
           // As far as I can see there is no way to darken/lighten a text color
           // defined by MDL, due to the "unqote" functions.
           // So this is a hack
-          color: rgba(0,0,0, 1) !important;
-          background-color: rgba(255,255,255, 0.2);
+          color: rgba(0, 0, 0, 1) !important;
+          background-color: rgba(255, 255, 255, 0.2);
         }
       }
     }
@@ -138,7 +142,7 @@ ul.mdlext-lightboard {
   padding: calc((#{$mdlext-lightboard-small-margin} - #{$mdlext-lightboard-small-gutter}) / 2);
 
   .mdlext-lightboard__slide {
-    margin: calc(#{$mdlext-lightboard-small-gutter} / 2 );
+    margin: calc(#{$mdlext-lightboard-small-gutter} / 2);
     width: calc(1 / #{$mdlext-lightboard-small-columns} * 100% - #{$mdlext-lightboard-small-gutter});
 
     .mdlext-lightboard__slide__frame figure {
@@ -150,7 +154,7 @@ ul.mdlext-lightboard {
 
     .mdlext-lightboard__slide {
       margin: 0;
-      width: calc(1 / #{$mdlext-lightboard-small-columns} * 100% );
+      width: calc(1 / #{$mdlext-lightboard-small-columns} * 100%);
     }
   }
 }

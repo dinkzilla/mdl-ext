@@ -65,13 +65,13 @@
 .mdlext-light-color-theme {
   .mdl-badge {
 
-    &[data-badge]:after {
+    &[data-badge]::after {
       background: $mdlext-light-badge-background;
       color: $mdlext-light-badge-color;
     }
 
     &.mdl-badge--no-background {
-      &[data-badge]:after {
+      &[data-badge]::after {
         color: $mdlext-light-badge-color-inverse;
         background: $mdlext-light-badge-background-inverse;
       }
@@ -192,7 +192,8 @@
     & .mdl-ripple {
       background: $mdlext-light-button-secondary-color-alt;
     }
-    &.mdl-button--raised, &.mdl-button--fab {
+    &.mdl-button--raised,
+    &.mdl-button--fab {
       color: $mdlext-light-button-secondary-color-alt;
       background-color: $mdlext-light-button-primary-color-alt;
     }
@@ -204,7 +205,8 @@
     & .mdl-ripple {
       background: $mdlext-light-button-fab-text-color-alt;
     }
-    &.mdl-button--raised, &.mdl-button--fab {
+    &.mdl-button--raised,
+    &.mdl-button--fab {
       color: $mdlext-light-button-fab-text-color-alt;
       background-color: $mdlext-light-button-fab-color-alt;
     }
@@ -269,6 +271,7 @@
         color: transparent;
       }
 
+      /* stylelint-disable */
       &::-ms-fill-lower {
         background: linear-gradient(to right,
           transparent,
@@ -284,6 +287,7 @@
           $mdlext-light-range-bg-color 16px,
           $mdlext-light-range-bg-color 0);
       }
+      /* stylelint-enable */
 
 
       /**************************** Thumbs ****************************/
@@ -315,6 +319,7 @@
         background: $mdlext-light-range-color;
       }
 
+      /* stylelint-disable */
       &:focus:not(:active)::-ms-thumb {
         background: radial-gradient(circle closest-side,
           $mdlext-light-range-color 0%,
@@ -322,6 +327,7 @@
           $mdlext-light-range-faded-color 37.5%,
           $mdlext-light-range-faded-color 100%);
       }
+      /* stylelint-enable */
 
       &:active::-ms-thumb {
         background: $mdlext-light-range-color;
@@ -358,6 +364,7 @@
         border-color: $mdlext-light-range-bg-color;
       }
 
+      /* stylelint-disable */
       &.is-lowest-value::-ms-thumb {
         background: radial-gradient(circle closest-side,
           transparent 0%,
@@ -383,6 +390,7 @@
           $mdlext-light-range-bg-color 77.78%,
           $mdlext-light-range-bg-color 100%);
       }
+      /* stylelint-enable */
 
       &.is-lowest-value::-ms-fill-lower {
         background: transparent;
@@ -426,6 +434,7 @@
         background: $mdlext-light-range-bg-color;
       }
 
+      /* stylelint-disable */
       &.is-lowest-value:disabled:focus::-ms-thumb,
       &.is-lowest-value:disabled:active::-ms-thumb,
       &.is-lowest-value:disabled::-ms-thumb {
@@ -443,6 +452,8 @@
           $mdlext-light-range-bg-color 25px,
           $mdlext-light-range-bg-color 0);
       }
+      /* stylelint-enable */
+
     }
   }
 
@@ -480,7 +491,7 @@
   .mdl-textfield__label {
     color: $mdlext-light-input-text-label-color;
   }
-  .mdl-textfield__label:after {
+  .mdl-textfield__label::after {
     background-color: $mdlext-light-input-text-highlight-color;
   }
   fieldset[disabled] .mdl-textfield .mdl-textfield__label,
@@ -495,7 +506,7 @@
   .mdl-textfield--floating-label.is-invalid .mdl-textfield__label {
     color: $mdlext-light-input-text-error-color;
   }
-  .mdl-textfield.is-invalid .mdl-textfield__label:after {
+  .mdl-textfield.is-invalid .mdl-textfield__label::after {
     background-color: $mdlext-light-input-text-error-color;
   }
   .mdl-textfield__error {
@@ -523,7 +534,7 @@
     background-color: transparent;
   }
   .mdl-checkbox.is-focused.is-checked .mdl-checkbox__focus-helper {
-    box-shadow: 0 0 0px ($checkbox-button-size / 2) $mdlext-light-checkbox-focus-color;
+    box-shadow: 0 0 0 ($checkbox-button-size / 2) $mdlext-light-checkbox-focus-color;
     background-color: $mdlext-light-checkbox-focus-color;
   }
 
@@ -649,7 +660,7 @@
     background-color: rgba(0, 0, 0, 0.1);
   }
   .mdl-switch.is-focused.is-checked .mdl-switch__focus-helper {
-    box-shadow: 0 0 0px (($switch-ripple-size - $switch-helper-size) / 2) $mdlext-light-switch-faded-color;
+    box-shadow: 0 0 0 (($switch-ripple-size - $switch-helper-size) / 2) $mdlext-light-switch-faded-color;
     background-color: $mdlext-light-switch-faded-color;
   }
 
@@ -694,7 +705,7 @@
         color: $mdlext-light-data-table-header-sorted-color;
 
         &:hover {
-          &:before {
+          &::before {
             color: $mdlext-light-data-table-header-sorted-icon-hover-color;
           }
         }
@@ -721,7 +732,8 @@
       border-bottom-color: $mdlext-light-default-item-divider-color;
     }
 
-    &[disabled], &[data-mdl-disabled] {
+    &[disabled],
+    &[data-mdl-disabled] {
       color: $mdlext-light-disabled-item-text-color;
       background-color: transparent;
 
@@ -786,7 +798,7 @@
   }
 
   .mdl-card__actions {
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
 
     &.mdl-card--border {
       border-top-color: $mdlext-light-card-border-color;
@@ -799,7 +811,7 @@
 // ----------------------------------------
 .mdlext-light-color-theme {
 
-  .mdlext-selectfield.is-disabled:after {
+  .mdlext-selectfield.is-disabled::after {
     color: $mdlext-light-input-text-disabled-color;
     @include mdlext-arrow(bottom, $mdlext-selectfield-arrow-width, $mdlext-selectfield-arrow-length, $mdlext-light-input-text-disabled-color);
   }
@@ -839,10 +851,10 @@
   .mdlext-selectfield--floating-label.is-invalid .mdlext-selectfield__label {
     color: $mdlext-light-input-text-error-color;
   }
-  .mdlext-selectfield__label:after {
+  .mdlext-selectfield__label::after {
     background-color: $mdlext-light-input-text-highlight-color;
   }
-  .mdlext-selectfield.is-invalid .mdlext-selectfield__label:after {
+  .mdlext-selectfield.is-invalid .mdlext-selectfield__label::after {
     background-color: $mdlext-light-input-text-error-color;
   }
 
@@ -892,8 +904,8 @@
       }
     }
 
-    fieldset[disabled] .mdlext-selectfield:after,
-    .mdlext-selectfield.is-disabled:after {
+    fieldset[disabled] .mdlext-selectfield::after,
+    .mdlext-selectfield.is-disabled::after {
       color: $mdlext-light-bordered-field-input-text-disabled-text-color;
       @include mdlext-arrow(bottom, $mdlext-selectfield-arrow-width, $mdlext-selectfield-arrow-length, $mdlext-light-bordered-field-input-text-disabled-text-color);
     }

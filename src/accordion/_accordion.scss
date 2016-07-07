@@ -43,7 +43,7 @@ ul.mdlext-accordion {
     padding: 0;
     width: $mdlext-accordion-header-height;
     overflow: hidden;
-    transition: flex .15s ease-in;
+    transition: flex 0.15s ease-in;
     flex: 0 0 auto; // == flex: none;
     display: flex;
     box-sizing: border-box;
@@ -72,8 +72,8 @@ ul.mdlext-accordion {
         font-size: 0;
         position: absolute;
         top: 1px;
-        right: 0px;
-        bottom: 0px;
+        right: 0;
+        bottom: 0;
         left: 1px;
         z-index: 1;
         box-sizing: border-box;
@@ -125,7 +125,7 @@ ul.mdlext-accordion {
         }
       }
     }
-    .mdlext-accordion__panel__state:after {
+    .mdlext-accordion__panel__state::after {
       content: '+';  // Should be modified by client, use e.g. iconfont
     }
     .mdlext-accordion__panel__content {
@@ -138,7 +138,7 @@ ul.mdlext-accordion {
     &[open] {
       flex: 1 1 auto; // == flex: auto;
 
-      .mdlext-accordion__panel__state:after {
+      .mdlext-accordion__panel__state::after {
         content: '-';
       }
       .mdlext-accordion__panel__header {
@@ -147,7 +147,7 @@ ul.mdlext-accordion {
       }
       .mdlext-accordion__panel__content {
         overflow: auto;
-        animation: mdlext-accordion__panel-open-keyframe .4s linear; // Should be greater than transition animation
+        animation: mdlext-accordion__panel-open-keyframe 0.4s linear; // Should be greater than transition animation
       }
     }
 
@@ -208,7 +208,7 @@ ul.mdlext-accordion {
       .mdlext-accordion__panel {
         height: auto;
         max-height: $mdlext-accordion-header-height; // For animating open / close
-        transition: max-height .1s ease-out;
+        transition: max-height 0.1s ease-out;
 
         &[open] {
           max-height: 20000px;

@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 /**
  * This code is modified from Material Design Lite _grid.sass,
  * which is Licensed under the Apache License, Version 2.0
@@ -29,7 +30,7 @@
 .mdlext-grid {
   display: flex;
   flex-flow: row wrap;
-  margin: 0 auto 0 auto;
+  margin: 0 auto;
   align-items: stretch;
 
   &.mdlext-grid--no-spacing {
@@ -70,23 +71,23 @@
 
 // Mixins for width calculation.
 @mixin _partial-size($size, $columns, $gutter) {
-  width: calc(#{(($size / $columns) * 100)+"%"} - #{$gutter});
+  width: calc(#{(($size / $columns) * 100) + "%"} - #{$gutter});
 }
 @mixin _full-size($gutter) {
   @include _partial-size(1, 1, $gutter);
 }
 @mixin _offset-size($size, $columns, $gutter) {
-  margin-left: calc(#{(($size / $columns) * 100)+"%"} + #{$gutter / 2});
+  margin-left: calc(#{(($size / $columns) * 100) + "%"} + #{$gutter / 2});
 }
 
 @mixin _partial-size-no-spacing($size, $columns) {
-  width: #{(($size / $columns) * 100)+"%"};
+  width: #{(($size / $columns) * 100) + "%"};
 }
 @mixin _full-size-no-spacing() {
   @include _partial-size-no-spacing(1, 1);
 }
 @mixin _offset-size-no-spacing($size, $columns) {
-  margin-left: #{(($size / $columns) * 100)+"%"};
+  margin-left: #{(($size / $columns) * 100) + "%"};
 }
 
 

@@ -35,7 +35,10 @@
   outline: 0;
   display: block; // display: flex and IE11 has issues with reposition. Set display:block for now.
 
-  *, *::before, *::after, input[type="search"] {
+  *,
+  *::before,
+  *::after,
+  input[type="search"] {
     box-sizing: border-box;
   }
 
@@ -92,7 +95,7 @@
       background-color: $mdlext-lightbox-figcaption-background-color;
       transform-origin: bottom;
       transform: scaleY(0);
-      transition: .2s ease-in-out;
+      transition: 0.2s ease-in-out;
 
       &.mdlext-lightbox__show-figcaption {
         transform: scaleY(1);
@@ -101,7 +104,8 @@
         th {
           text-align: left;
         }
-        th, td {
+        th,
+        td {
           vertical-align: text-top;
         }
       }
@@ -122,7 +126,7 @@
       overflow: hidden;
       padding: 0;
       height: $card-supporting-text-line-height;
-      width: 100%
+      width: 100%;
     }
     nav {
       display: flex;

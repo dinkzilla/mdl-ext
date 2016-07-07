@@ -51,7 +51,7 @@
   }
 
   // Styling the down arrow
-  &:after {
+  &::after {
     @include mdlext-arrow(bottom, $mdlext-selectfield-arrow-width, $mdlext-selectfield-arrow-length, inherit);
     position: absolute;
     top: 50%;
@@ -63,7 +63,7 @@
 }
 
 .mdlext-selectfield.is-disabled {
-  &:after {
+  &::after {
     color: $input-text-disabled-color;
     @include mdlext-arrow(bottom, $mdlext-selectfield-arrow-width, $mdlext-selectfield-arrow-length, $input-text-disabled-color);
   }
@@ -111,7 +111,7 @@
   // Mozilla, remove focusring
   &:-moz-focusring {
     color: transparent;
-    text-shadow: 0 0 0 #000;
+    text-shadow: 0 0 0 #000000;
   }
 
   // MS, remove selected option background color
@@ -182,10 +182,10 @@
   }
 
   .mdlext-selectfield--floating-label.is-focused &,
-  .mdlext-selectfield--floating-label.is-dirty.is-dirty &,  // TODO: Verify if needed
+  .mdlext-selectfield--floating-label.is-dirty.is-dirty &,
   .mdlext-selectfield--floating-label.has-placeholder & {
     color: $input-text-highlight-color;
-    font-size : $input-text-floating-label-fontsize;
+    font-size: $input-text-floating-label-fontsize;
     top: $input-text-vertical-spacing - ($input-text-floating-label-fontsize + $input-text-padding);
     visibility: visible;
   }
@@ -202,7 +202,7 @@
   }
 
   // The after label is the colored underline for the TextField.
-  &:after {
+  &::after {
     background-color: $input-text-highlight-color;
     bottom: $input-text-vertical-spacing;
     content: '';
@@ -214,13 +214,13 @@
     width: 10px;
   }
 
-  .mdlext-selectfield.is-focused &:after {
+  .mdlext-selectfield.is-focused &::after {
     left: 0;
     visibility: visible;
     width: 100%;
   }
 
-  .mdlext-selectfield.is-invalid &:after {
+  .mdlext-selectfield.is-invalid &::after {
     background-color: $input-text-error-color;
   }
 }
@@ -253,14 +253,15 @@
   // inner element :(
   max-width: 0.1px;
 
-  .mdlext-selectfield.is-focused &, .mdlext-selectfield.is-dirty & {
+  .mdlext-selectfield.is-focused &,
+  .mdlext-selectfield.is-dirty & {
     // This is an unfortunate hack. Animating between widths in percent (%)
     // in many browsers (Chrome, Firefox) only animates the inner visual style
     // of the input - the outer bounding box still 'jumps'.
     // Thus assume a sensible maximum, and animate to/from that value.
     max-width: 600px;
   }
-  .mdlext-selectfield__label:after {
+  .mdlext-selectfield__label::after {
     bottom: 0;
   }
 }

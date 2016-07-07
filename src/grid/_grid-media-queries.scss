@@ -31,7 +31,7 @@
 .mdlext-grid {
   display: flex;
   flex-flow: row wrap;
-  margin: 0 auto 0 auto;
+  margin: 0 auto;
   align-items: stretch;
 
   &.mdlext-grid--no-spacing {
@@ -74,10 +74,10 @@
 
 // Mixins for width calculation.
 @mixin partial-size($size, $columns, $gutter) {
-  width: calc(#{(($size / $columns) * 100)+"%"} - #{$gutter});
+  width: calc(#{(($size / $columns) * 100) + "%"} - #{$gutter});
 
   .mdlext-grid--no-spacing > & {
-    width: #{(($size / $columns) * 100)+"%"};
+    width: #{(($size / $columns) * 100) + "%"};
   }
 }
 
@@ -86,10 +86,10 @@
 }
 
 @mixin offset-size($size, $columns, $gutter) {
-  margin-left: calc(#{(($size / $columns) * 100)+"%"} + #{$gutter / 2});
+  margin-left: calc(#{(($size / $columns) * 100) + "%"} + #{$gutter / 2});
 
   .mdlext-grid.mdlext-grid--no-spacing > & {
-    margin-left: #{(($size / $columns) * 100)+"%"};
+    margin-left: #{(($size / $columns) * 100) + "%"};
   }
 }
 
@@ -97,15 +97,16 @@
 
 ////////// Phone //////////
 
+/* stylelint-disable */
 @media (max-width: $grid-tablet-breakpoint - 1) {
+/* stylelint-enable */
   .mdlext-grid {
     padding: $grid-phone-margin - ($grid-phone-gutter / 2);
   }
 
   .mdlext-cell {
     margin: $grid-phone-gutter / 2;
-    @include partial-size($grid-cell-default-columns, $grid-phone-columns,
-      $grid-phone-gutter);
+    @include partial-size($grid-cell-default-columns, $grid-phone-columns, $grid-phone-gutter);
   }
 
   .mdlext-cell--hide-phone {
@@ -147,15 +148,15 @@
 
 ////////// Tablet //////////
 
-@media (min-width: $grid-tablet-breakpoint) and (max-width: $grid-desktop-breakpoint - 1) {
+/* stylelint-disable */
+@media (min-width: $grid-tablet-breakpoint) and (max-width: $grid-desktop-breakpoint - 1) { /* stylelint-enable */
   .mdlext-grid {
     padding: $grid-tablet-margin - ($grid-tablet-gutter / 2);
   }
 
   .mdlext-cell {
     margin: $grid-tablet-gutter / 2;
-    @include partial-size($grid-cell-default-columns, $grid-tablet-columns,
-      $grid-tablet-gutter);
+    @include partial-size($grid-cell-default-columns, $grid-tablet-columns, $grid-tablet-gutter);
   }
 
   .mdlext-cell--hide-tablet {
@@ -204,8 +205,7 @@
 
   .mdlext-cell {
     margin: $grid-desktop-gutter / 2;
-    @include partial-size($grid-cell-default-columns, $grid-desktop-columns,
-      $grid-desktop-gutter);
+    @include partial-size($grid-cell-default-columns, $grid-desktop-columns, $grid-desktop-gutter);
   }
 
   .mdlext-cell--hide-desktop {
