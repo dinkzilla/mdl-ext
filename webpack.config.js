@@ -68,15 +68,6 @@ var config = {
           path.join(__dirname, 'test')
         ]
       }
-      /* Temporarly disabled due to conflict in stylelint packages
-      {
-        loader: 'stylelint',
-        test: /\.s(a|c)ss$/,
-        include: [
-          path.join(__dirname, 'src')
-        ]
-      }
-      */
     ],
     loaders: [
       {
