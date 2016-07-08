@@ -74,7 +74,7 @@
    * @private
    */
   /*eslint no-unused-vars: 0*/
-  MaterialExtSelectfield.prototype.onFocus_ = function(event) {
+  MaterialExtSelectfield.prototype.onFocus_ = function( /*event*/ ) {
     this.element_.classList.add(this.CssClasses_.IS_FOCUSED);
   };
 
@@ -85,7 +85,7 @@
    * @private
    */
   /*eslint no-unused-vars: 0*/
-  MaterialExtSelectfield.prototype.onBlur_ = function(event) {
+  MaterialExtSelectfield.prototype.onBlur_ = function( /*event*/ ) {
     this.element_.classList.remove(this.CssClasses_.IS_FOCUSED);
   };
 
@@ -95,7 +95,7 @@
    * @param {Event} event The event that fired.
    * @private
    */
-  MaterialExtSelectfield.prototype.onReset_ = function(event) {
+  MaterialExtSelectfield.prototype.onReset_ = function( /*event*/ ) {
     this.updateClasses_();
   };
 
@@ -254,7 +254,6 @@
   // The component registers itself. It can assume componentHandler is available
   // in the global scope.
   /*eslint no-undef: 0*/
-  /*jshint undef:false */
   componentHandler.register({
     constructor: MaterialExtSelectfield,
     classAsString: 'MaterialExtSelectfield',

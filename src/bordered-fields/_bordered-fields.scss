@@ -34,13 +34,11 @@
   // Styling for textfield and selectfield.
   .mdl-textfield,
   .mdlext-selectfield {
-    box-sizing: border-box;
     padding: 0;
     margin: $mdlext-bordered-field-vertical-spacing-top 0 $mdlext-bordered-field-vertical-spacing-bottom 0;
 
     .mdl-textfield__input,
     .mdlext-selectfield__select {
-      box-sizing: border-box;
       height: $mdlext-bordered-field-height;
       background-color: $mdlext-bordered-field-background-color;
       border: $mdlext-bordered-field-border-width solid $mdlext-bordered-field-border-color;
@@ -55,11 +53,13 @@
         background-color: $mdlext-bordered-field-disabled-background-color;
         border-color: $mdlext-bordered-field-disabled-border-color;
       }
+
       // MDL can not handle required attribute properly. Planned for MDL-v2
       //&:required {
       //  background-color: $mdlext-bordered-field-required-background-color;
       //  border-color: $mdlext-bordered-field-required-border-color;
       //}
+
       &:focus {
         background-color: $mdlext-bordered-field-focus-background-color;
         border-color: $mdlext-bordered-field-focus-border-color;

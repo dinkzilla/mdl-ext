@@ -17,6 +17,7 @@
 /*
  * Copied/Modified/Inspired from/by:
  *   https://github.com/google/material-design-lite/tree/master/src/textfield
+ *   http://red-team-design.com/making-html-dropdowns-not-suck/
  *   http://codepen.io/etcpe9/pen/PqyOye,
  *   http://codepen.io/pudgereyem/pen/PqBxQx
  *   https://github.com/MEYVN-digital/mdl-selectfield
@@ -31,6 +32,7 @@
 
 // The container for the selectfield.
 .mdlext-selectfield {
+  box-sizing: border-box;
   position: relative;
   font-size: $input-text-font-size;
   display: inline-block;
@@ -38,26 +40,20 @@
   max-width: 100%;
   margin: 0;
   padding: $input-text-vertical-spacing 0;
-  box-sizing: border-box;
-
-  //*, *::before, *::after {
-  //  box-sizing: border-box;
-  //}
 
   // Align buttons, if used.
   & .mdl-button {
-    position: absolute;
     bottom: $input-text-vertical-spacing;
+    position: absolute;
   }
 
   // Styling the down arrow
   &::after {
-    @include mdlext-arrow(bottom, $mdlext-selectfield-arrow-width, $mdlext-selectfield-arrow-length, inherit);
+    @include mdlext-arrow(bottom, $mdlext-selectfield-arrow-width, $mdlext-selectfield-arrow-length);
     position: absolute;
+    right: 0.5em;
     top: 50%;
     transform: translateY(-50%);
-    right: 0.5em;
-    padding: 0;
     pointer-events: none;
   }
 }
@@ -81,32 +77,38 @@
 
 // Optional class to make the select field expandable.
 .mdlext-selectfield--expandable {
+  min-height: $input-text-button-size;
   min-width: $input-text-button-size;
   width: auto;
-  min-height: $input-text-button-size;
 }
 
 // Styling for the select element.
 .mdlext-selectfield__select {
-  border: none;
-  border-bottom: 1px solid $input-text-bottom-border-color;
-  display: block;
-  font-size: $input-text-font-size;
-  font-family: $performance_font;
-  margin: 0;
-  padding: $input-text-padding calc(1.2em + #{$input-text-padding}) $input-text-padding 0;  // calc(1.2em + #{$input-text-padding}): space for down arrow
-  width: $input-text-width;
-  background: none;
-  text-align: left;
-  color: inherit;
 
-  // removes rounded corners at bottom and the down arrow icon as well.
+  // Reset select
+  box-sizing: border-box;
+  border: 0;
   border-radius: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
+  -ms-appearance: none;
   appearance: none;
   text-indent: 0.01px; // Removes default arrow from firefox
-  text-overflow: "";   // Removes default arrow from firefox
+  text-overflow: '';   // Removes default arrow from firefox
+  outline: none;
+  box-shadow: none;
+  // End Reset select
+
+  font-size: $input-text-font-size;
+  font-family: $performance_font;
+  padding: $input-text-padding calc(1.2em + #{$input-text-padding}) $input-text-padding 0;
+  width: $input-text-width;
+  border-bottom: 1px solid $input-text-bottom-border-color;
+  display: block;
+  margin: 0;
+  background: none;
+  text-align: left;
+  color: inherit;
 
   // Mozilla, remove focusring
   &:-moz-focusring {
@@ -135,28 +137,30 @@
 
   fieldset[disabled] .mdlext-selectfield &,
   .mdlext-selectfield.is-disabled & {
-    background-color: transparent;
     border-bottom: 1px dotted $input-text-disabled-color;
     color: $input-text-disabled-text-color;
+    background-color: transparent;
   }
 
   option {
-    background-color: inherit;
     color: $text-color-primary;
+    box-sizing: border-box;
+    background-color: inherit;
   }
 }
 
 // Styling for the label / floating label.
 .mdlext-selectfield__label {
-  bottom: 0;
+  box-sizing: border-box;
   color: $input-text-label-color;
   font-size: $input-text-font-size;
+  top: ($input-text-padding + $input-text-vertical-spacing);
+  bottom: 0;
   left: 0;
   right: 0;
   pointer-events: none;
   position: absolute;
   display: block;
-  top: ($input-text-padding + $input-text-vertical-spacing);
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
@@ -201,7 +205,7 @@
     font-size: $input-text-floating-label-fontsize;
   }
 
-  // The after label is the colored underline for the TextField.
+  // The after label is the colored underline for the Selectfield.
   &::after {
     background-color: $input-text-highlight-color;
     bottom: $input-text-vertical-spacing;
@@ -228,8 +232,8 @@
 // SelectField Error.
 .mdlext-selectfield__error {
   color: $input-text-error-color;
-  position: absolute;
   font-size: $input-text-floating-label-fontsize;
+  position: absolute;
   margin-top: 3px;
   visibility: hidden;
   display: block;
