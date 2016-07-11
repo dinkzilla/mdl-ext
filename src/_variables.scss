@@ -86,10 +86,10 @@ $mdlext-accordion-header-background-color        : rgba($mdlext-accordion-header
 $mdlext-accordion-header-background-open-color   : rgba($mdlext-accordion-header-background-color-base, 0.30) !default;
 $mdlext-accordion-header-background-active-color : rgba($mdlext-accordion-header-background-color-base, 0.40) !default;
 $mdlext-accordion-header-border-color            : rgba($mdlext-accordion-header-background-color-base, 0.50) !default;
-$mdlext-accordion-header-background-hover-color  : rgba($mdlext-accordion-header-background-color-base, 0.60) !default;
+$mdlext-accordion-header-background-hover-color  : rgba($mdlext-accordion-header-background-color-base, 0.40) !default;
 $mdlext-accordion-header-border-open-color       : rgba($mdlext-accordion-header-background-color-base, 0.60) !default;
-$mdlext-accordion-header-focus-outline-color     : $mdlext-palette-grey-400 !default;
-$mdlext-accordion-header-disabled-color          : rgba($mdlext-color-black, 0.12) !default;
+$mdlext-accordion-header-focus-outline-color     : rgb-string-to-hex($color-primary) !default;
+$mdlext-accordion-header-disabled-color          : rgba($mdlext-accordion-header-background-color-base, 0.12) !default;
 $mdlext-accordion-header-secondary-color         : $mdlext-color-black !default;
 $mdlext-accordion-header-secondary-color-disabled: rgba($mdlext-color-black, 0.26) !default;
 
@@ -140,7 +140,7 @@ $mdlext-lightboard-small-columns               : 2 !default;
 $mdlext-lightboard-small-frame-width           : 8px !default;
 
 $mdlext-lightboard-medium-small-gutter         : 4px !default;
-$mdlext-lightboard-medium-small-margin         : px !default;
+$mdlext-lightboard-medium-small-margin         : 0 !default;
 $mdlext-lightboard-medium-small-columns        : 4 !default;
 $mdlext-lightboard-medium-small-frame-width    : 8px !default;
 

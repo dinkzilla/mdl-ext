@@ -1,18 +1,145 @@
-<h5 class="mdlext-demo-header">Accordion</h5>
+<h2 class="mdlext-demo-header">Accordion</h2>
 <p>A Collection of panels within a common outer pane.</p>
 
-<ul role="tablist" multiselectable="false">
-  <li>
-    <header aria-expanded="true" role="tab">Header Tab #1</header>
-    <section role="tabpanel" aria-hidden="false">
-      <p>Content goes here</p>
+<ul class="mdlext-accordion2" role="tablist" aria-multiselectable="false">
+  <li class="mdlext-accordion2__tab">
+    <header class="mdlext-accordion2__header" aria-expanded="true" role="tab">
+      <i class="material-icons">info</i>
+      <span>First section</span>
+      <i class="mdlext-aria-toggle"></i>
+    </header>
+    <section class="mdlext-accordion2__panel" role="tabpanel" aria-hidden="false">
+      <h5>Content #1 goes here</h5>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique eget augue eget gravida.
+        Etiam eget imperdiet massa. Aliquam nisi eros, molestie a vulputate quis, tempor nec quam. Ut at libero
+        in sem pellentesque imperdiet. Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
+        ac dignissim odio tortor nec quam.Fusce tincidunt leo in est <a href="#">venenatis porta</a>.
+      </p>
+      <p>Maecenas eu vestibulum orci. Ut eget nisi a est sagittis euismod a vel
+        justo. Quisque at dui urna. Duis vel velit leo. Nulla nunc sem, rutrum at aliquet in, aliquet id velit. Duis
+        mattis placerat erat, a aliquam leo rhoncus vel. Sed nec diam ex. Praesent convallis purus lorem, vel porttitor
+        neque gravida quis. Etiam et malesuada dui. Nunc vitae viverra dui. Suspendisse feugiat efficitur augue, quis
+        blandit leo ullamcorper vel.
+      </p>
     </section>
   </li>
-
-  <li>
-    <header aria-expanded="false" role="tab">Header tab #2</header>
-    <section role="tabpanel" aria-hidden="true">
-      <p>Content goes here</p>
+  <li class="mdlext-accordion2__tab">
+    <header class="mdlext-accordion2__header" aria-expanded="false" role="tab">
+      <span>Header tab #2</span><i class="mdlext-aria-toggle"></i>
+    </header>
+    <section class="mdlext-accordion2__panel" role="tabpanel" hidden aria-hidden="true">
+      <h5>Content #2 goes here</h5>
+      <p>Curabitur malesuada placerat nunc, id dapibus justo tempor in. Ut molestie
+        arcu justo, id volutpat eros vestibulum eget. Fusce tincidunt leo in est venenatis porta.
+      </p>
+    </section>
+  </li>
+  <li class="mdlext-accordion2__tab">
+    <header class="mdlext-accordion2__header" aria-expanded="false" role="tab" disabled tabindex="0">
+      <span>Header tab #3 (disabled)</span>
+      <i class="mdlext-aria-toggle"></i>
+    </header>
+    <section class="mdlext-accordion2__panel" role="tabpanel" hidden aria-hidden="true">
+      <h5>Content #3 goes here</h5>
+      <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
+        ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
+        maximus massa felis quis quam. usce tincidunt leo in est venenatis porta.
+      </p>
+    </section>
+  </li>
+  <li class="mdlext-accordion2__tab">
+    <header class="mdlext-accordion2__header" aria-expanded="false" role="tab">
+      <span>Header tab #4</span>
+      <i class="mdlext-aria-toggle"></i>
+    </header>
+    <section class="mdlext-accordion2__panel" role="tabpanel" hidden aria-hidden="true">
+      <h5>Content #4 goes here</h5>
+      <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
+        ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
+        maximus massa felis quis quam. usce tincidunt leo in est venenatis porta.
+      </p>
     </section>
   </li>
 </ul>
+
+
+
+<script>
+  (function() {
+    'use strict';
+
+    addToggleListeners(document.querySelector('.mdlext-accordion2'));
+
+
+    function addToggleListeners( accordion ) {
+
+      var headers = accordion.querySelectorAll('.mdlext-accordion2__header');
+
+      for (var i = 0; i < headers.length; i++) {
+        var header = headers[i];
+        header.setAttribute('role', 'tab');
+
+        if(header.hasAttribute('disabled')) {
+          header.setAttribute('tabindex', '-1');
+          header.setAttribute('aria-expanded', 'false');
+        }
+        if(!header.hasAttribute('tabindex')) {
+          header.setAttribute('tabindex', '0');
+        }
+
+        var panel = header.nextElementSibling;
+        panel.setAttribute('role', 'tabpanel');
+
+        var expanded = header.getAttribute('aria-expanded').toLowerCase() === 'true';
+        if(expanded) {
+          panel.removeAttribute('hidden');
+          panel.setAttribute('aria-hidden', 'false');
+        }
+        else {
+          header.setAttribute('aria-expanded', 'false');
+          panel.setAttribute('hidden', '');
+          panel.setAttribute('aria-hidden', 'true');
+        }
+
+        header.addEventListener('click', function( /*event*/ ) {
+          setTimeout(function() {
+            toggle(this);
+          }.bind(this), 0);
+        });
+      }
+    }
+
+    function toggle(header) {
+
+      var expanded = header.getAttribute('aria-expanded').toLowerCase() === 'true';
+      var panel = header.nextElementSibling;
+
+      if(expanded) {
+        header.setAttribute('aria-expanded', 'false');
+        panel.setAttribute('hidden', '');
+        panel.setAttribute('aria-hidden', 'true');
+      }
+      else {
+        var accordion = header.closest('.mdlext-accordion2');
+        var multiSelectable = accordion.getAttribute('aria-multiselectable');
+        multiSelectable = multiSelectable && multiSelectable.toLowerCase() === 'true';
+
+        if(!multiSelectable) {
+          var expandedElements = accordion.querySelectorAll('[aria-expanded="true"]');
+          for (var j = 0; j < expandedElements.length; j++) {
+            expandedElements[j].setAttribute('aria-expanded', 'false');
+            var p = expandedElements[j].nextElementSibling;
+            p.setAttribute('hidden', '');
+            p.setAttribute('aria-hidden', 'true');
+          }
+        }
+
+        header.setAttribute('aria-expanded', 'true');
+        panel.removeAttribute('hidden');
+        panel.setAttribute('aria-hidden', 'false');
+      }
+    }
+
+  }());
+
+</script>

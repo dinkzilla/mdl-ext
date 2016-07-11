@@ -1,11 +1,83 @@
-/*
- * http://codepen.io/vnordev/pen/pJdWee
- * http://codepen.io/peyman/pen/gover
- * http://codepen.io/josh_vogt/pen/EaaZbP
- */
+@import "../variables";
 
-.mdlext-accordion {
+.mdlext-aria-toggle {
+  @include mdlext-aria-toggle($font-family: inherit, $font-size: 1.4em);
+}
+
+.mdlext-accordion2 {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   list-style: none;
+
+  &__header {
+    box-sizing: border-box;
+    position: relative;
+    margin: 0;
+    padding: 16px 8px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    user-select: none;
+    color: $mdlext-accordion-header-secondary-color;
+    background-color: $mdlext-accordion-header-background-color;
+    border-top: 1px solid $mdlext-accordion-header-border-color;
+
+    @include typo-title();
+
+    &:focus {
+      outline-offset: -2px;
+    }
+    &[aria-expanded='true'] {
+      background-color: $mdlext-accordion-header-background-open-color;
+    }
+
+    &[disabled] {
+      background-color: $mdlext-accordion-header-disabled-color;
+      color: $mdlext-accordion-header-secondary-color-disabled;
+      pointer-events: none;
+    }
+
+    &:hover:not([disabled]) {
+      background-color: $mdlext-accordion-header-background-hover-color;
+    }
+
+    * {
+      // Uses 'align-items: center' - so no need for margins
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    > * {
+      padding-left: 8px;
+    }
+
+    > *:first-child {
+      padding-left: 0;
+    }
+
+    > *:last-child:not(:only-child) {
+      // If more than one element, push last element right
+      margin-left: auto;
+    }
+  }
+
+  &__tab:first-child > &__header {
+    // Use container to set outer borders
+    border-top-color: transparent;
+  }
+
+  &__panel {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0 8px;
+    display: inline-block;
+    width: 100%;
+    border-top: 1px solid $mdlext-accordion-header-border-color;
+
+    &[hidden] {
+      @include mdlext-visually-hidden;
+    }
+  }
+
 }
