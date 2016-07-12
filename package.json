@@ -70,7 +70,7 @@
     "autoprefixer": "6.3.7",
     "babel-cli": "6.10.1",
     "babel-core": "6.10.4",
-    "babel-eslint": "6.1.0",
+    "babel-eslint": "6.1.2",
     "babel-loader": "6.2.4",
     "babel-plugin-add-module-exports": "0.2.1",
     "babel-plugin-syntax-decorators": "6.8.0",
@@ -124,6 +124,6 @@
     "url-loader": "0.5.7",
     "webpack": "1.13.1",
     "webpack-dev-server": "1.14.1",
-    "yargs": "4.7.1"
+    "yargs": "4.8.0"
   }
 }

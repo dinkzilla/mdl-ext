@@ -53,6 +53,7 @@
 /// @param {string} $icon ['+'] - icon to display when 'aria-expanded="false"'
 /// @param {string} $icon-expanded ['-'] - icon to display when 'aria-expanded="true"'
 /// @link https://github.com/google/material-design-icons Modified from '.material-icons' class
+/// @param {Length} $icon-offset [0] - Icon offset
 ///
 /// @example - +/- toggle
 ///   .plus-minus {
@@ -70,7 +71,7 @@
 ///     <i class="more-less"></i>
 ///   </div>
 
-@mixin mdlext-aria-toggle($font-family: 'Material Icons', $font-size: 24px, $icon: '+', $icon-expanded: '-') {
+@mixin mdlext-aria-toggle($font-family: 'Material Icons', $font-size: 24px, $icon: '+', $icon-expanded: '-', $icon-offset: 0) {
   font-family: $font-family;
   font-weight: normal;
   font-style: normal;
@@ -100,11 +101,13 @@
 
   &::after {
     content: $icon;
+    margin-left: $icon-offset;
   }
 
   [aria-expanded='true'] > & {
     &::after {
       content: $icon-expanded;
+      margin-left: $icon-offset;
     }
   }
 }

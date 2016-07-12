@@ -119,7 +119,7 @@ var config = {
       context: 'src',
       files: '**/*.s?(a|c)ss',
       syntax: 'scss',
-      failOnError: env !== 'dev'
+      failOnError: false
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin()

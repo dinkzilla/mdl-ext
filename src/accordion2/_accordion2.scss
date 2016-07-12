@@ -1,7 +1,11 @@
 @import "../variables";
 
-.mdlext-aria-toggle {
+.mdlext-aria-toggle-plus-minus {
   @include mdlext-aria-toggle($font-family: inherit, $font-size: 1.4em);
+}
+
+.mdlext-aria-toggle-material-icons {
+  @include mdlext-aria-toggle($font-size: 1.3em, $icon: 'expand_more', $icon-expanded: 'expand_less', $icon-offset: -8px);
 }
 
 .mdlext-accordion2 {
@@ -14,22 +18,27 @@
     box-sizing: border-box;
     position: relative;
     margin: 0;
-    padding: 16px 8px;
-    width: 100%;
+    padding: 0 $mdlext-accordion-header-padding;
+    min-width: $mdlext-accordion-header-height;
+    min-height: $mdlext-accordion-header-height;
     display: flex;
     align-items: center;
     user-select: none;
     color: $mdlext-accordion-header-secondary-color;
     background-color: $mdlext-accordion-header-background-color;
-    border-top: 1px solid $mdlext-accordion-header-border-color;
 
     @include typo-title();
 
     &:focus {
       outline-offset: -2px;
     }
+
     &[aria-expanded='true'] {
       background-color: $mdlext-accordion-header-background-open-color;
+    }
+
+    &[aria-selected='true'] {
+      background-color: $mdlext-accordion-header-background-active-color;
     }
 
     &[disabled] {
@@ -42,42 +51,135 @@
       background-color: $mdlext-accordion-header-background-hover-color;
     }
 
-    * {
-      // Uses 'align-items: center' - so no need for margins
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-
     > * {
-      padding-left: 8px;
+      // Uses 'align-items: center' - so no need for margins
+      margin: 0;
+      padding-left: $mdlext-accordion-header-padding;
     }
 
-    > *:first-child {
-      padding-left: 0;
+    .mdlext-accordion2__header_caption {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-
-    > *:last-child:not(:only-child) {
-      // If more than one element, push last element right
-      margin-left: auto;
-    }
-  }
-
-  &__tab:first-child > &__header {
-    // Use container to set outer borders
-    border-top-color: transparent;
   }
 
   &__panel {
     box-sizing: border-box;
     margin: 0;
-    padding: 0 8px;
-    display: inline-block;
-    width: 100%;
-    border-top: 1px solid $mdlext-accordion-header-border-color;
+    padding: 0 $mdlext-accordion-content-padding;
+    display: block;
+    overflow: auto;
+    flex-grow: 1;
+
+    background-color: yellow; // trace color
 
     &[hidden] {
       @include mdlext-visually-hidden;
     }
   }
-
 }
+
+// Vertical layout
+.mdlext-accordion2 {
+
+  &--vertical {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    .mdlext-accordion2__presentation {
+      min-height: $mdlext-accordion-header-height;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      overflow: hidden;
+    }
+
+    .mdlext-accordion2__header {
+      height: $mdlext-accordion-header-height;
+      border-top: 1px solid $mdlext-accordion-header-border-color;
+      width: 100%;
+
+      > *:first-child {
+        padding-left: 0;
+      }
+
+      > *:last-child:not(:only-child) {
+        // If more than one element, push last element right
+        margin-left: auto;
+      }
+
+      .mdlext-accordion2__header_caption {
+        flex: 1;
+      }
+    }
+
+    .mdlext-accordion2__panel {
+      border-top: 1px solid $mdlext-accordion-header-border-color;
+    }
+  }
+}
+
+// Horizontal layout
+.mdlext-accordion2 {
+
+  &--horizontal {
+    display: flex;
+    height: 300px;
+
+    .mdlext-accordion2__presentation {
+      position: relative;
+      display: flex;
+      overflow: hidden;
+      min-width: $mdlext-accordion-header-height;
+      width: $mdlext-accordion-header-height;
+    }
+
+    .mdlext-accordion2__header {
+      flex-direction: column-reverse;
+      width: $mdlext-accordion-header-height;
+      height: 100%;
+      white-space: nowrap;
+      border-left: 1px solid $mdlext-accordion-header-border-color;
+
+      > * {
+        transform: rotate(-90deg) translateX(50%);
+      }
+
+      > img,
+      > button,
+      > .material-icons,
+      > *:first-child,
+      > *:last-child {
+        padding-left: 0;
+      }
+
+      > *:last-child:not(:only-child) {
+        // If more than one element, push last element to top
+        margin-bottom: auto;
+        transform: rotate(-90deg) translateX(0);
+      }
+    }
+
+    .mdlext-accordion2__panel {
+      border-left: 1px solid $mdlext-accordion-header-border-color;
+    }
+  }
+}
+
+.mdlext-accordion2 {
+
+  &__presentation:first-child > &__header {
+    // Use container to set outer borders
+    border-top-color: transparent;
+    border-left-color: transparent;
+  }
+
+  &[aria-multiselectable="false"] {
+    .mdlext-accordion2__presentation.is-expanded {
+      flex-grow: 1;
+    }
+  }
+}
+

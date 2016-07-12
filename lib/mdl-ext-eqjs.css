@@ -2754,7 +2754,7 @@ ul.mdlext-accordion {
   position: relative;
   margin: 0;
   padding: 0;
-  width: 48px;
+  width: 56px;
   overflow: hidden;
   transition: flex 0.15s ease-in;
   transition: flex 0.15s ease-in, -ms-flex 0.15s ease-in;
@@ -2771,7 +2771,7 @@ ul.mdlext-accordion {
   -ms-flex-align: center;
       align-items: center;
   position: relative;
-  min-width: 48px;
+  min-width: 56px;
   margin: 0;
   padding: 0;
   color: #000000;
@@ -2824,7 +2824,7 @@ ul.mdlext-accordion {
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 48px;
+  height: 56px;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
@@ -2902,7 +2902,7 @@ ul.mdlext-accordion {
 
 .mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel {
   width: 100%;
-  height: 48px;
+  height: 56px;
   -ms-flex: none;
       flex: none;
   -ms-flex-flow: column nowrap;
@@ -2910,8 +2910,8 @@ ul.mdlext-accordion {
 }
 
 .mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel .mdlext-accordion__panel__header {
-  height: 48px;
-  min-height: 48px;
+  height: 56px;
+  min-height: 56px;
   border-right: 0;
   border-bottom: 1px solid rgba(158, 158, 158, 0.5);
 }
@@ -2941,7 +2941,7 @@ ul.mdlext-accordion {
 
 .mdlext-accordion.mdlext-accordion--vertical[aria-multiselectable]:not([aria-multiselectable="false"]) .mdlext-accordion__panel {
   height: auto;
-  max-height: 48px;
+  max-height: 56px;
   transition: max-height 0.1s ease-out;
 }
 
@@ -3012,7 +3012,7 @@ ul.mdlext-accordion {
 
 /* ==========  Color Themes  ========== */
 
-.mdlext-aria-toggle {
+.mdlext-aria-toggle-plus-minus {
   font-family: inherit;
   font-weight: normal;
   font-style: normal;
@@ -3032,12 +3032,44 @@ ul.mdlext-accordion {
   font-feature-settings: 'liga';
 }
 
-.mdlext-aria-toggle::after {
+.mdlext-aria-toggle-plus-minus::after {
   content: "+";
+  margin-left: 0;
 }
 
-[aria-expanded='true'] > .mdlext-aria-toggle::after {
+[aria-expanded='true'] > .mdlext-aria-toggle-plus-minus::after {
   content: "-";
+  margin-left: 0;
+}
+
+.mdlext-aria-toggle-material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.3em;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'liga';
+}
+
+.mdlext-aria-toggle-material-icons::after {
+  content: "expand_more";
+  margin-left: -8px;
+}
+
+[aria-expanded='true'] > .mdlext-aria-toggle-material-icons::after {
+  content: "expand_less";
+  margin-left: -8px;
 }
 
 .mdlext-accordion2 {
@@ -3051,8 +3083,9 @@ ul.mdlext-accordion {
   box-sizing: border-box;
   position: relative;
   margin: 0;
-  padding: 16px 8px;
-  width: 100%;
+  padding: 0 8px;
+  min-width: 56px;
+  min-height: 56px;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
@@ -3063,7 +3096,6 @@ ul.mdlext-accordion {
           user-select: none;
   color: #000000;
   background-color: rgba(158, 158, 158, 0.2);
-  border-top: 1px solid rgba(158, 158, 158, 0.5);
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-size: 20px;
   font-weight: 500;
@@ -3079,6 +3111,10 @@ ul.mdlext-accordion {
   background-color: rgba(158, 158, 158, 0.3);
 }
 
+.mdlext-accordion2__header[aria-selected='true'] {
+  background-color: rgba(158, 158, 158, 0.4);
+}
+
 .mdlext-accordion2__header[disabled] {
   background-color: rgba(158, 158, 158, 0.12);
   color: rgba(0, 0, 0, 0.26);
@@ -3089,34 +3125,26 @@ ul.mdlext-accordion {
   background-color: rgba(158, 158, 158, 0.4);
 }
 
-.mdlext-accordion2__header * {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
 .mdlext-accordion2__header > * {
+  margin: 0;
   padding-left: 8px;
 }
 
-.mdlext-accordion2__header > *:first-child {
-  padding-left: 0;
-}
-
-.mdlext-accordion2__header > *:last-child:not(:only-child) {
-  margin-left: auto;
-}
-
-.mdlext-accordion2__tab:first-child > .mdlext-accordion2__header {
-  border-top-color: transparent;
+.mdlext-accordion2__header .mdlext-accordion2__header_caption {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mdlext-accordion2__panel {
   box-sizing: border-box;
   margin: 0;
   padding: 0 8px;
-  display: inline-block;
-  width: 100%;
-  border-top: 1px solid rgba(158, 158, 158, 0.5);
+  display: block;
+  overflow: auto;
+  -ms-flex-positive: 1;
+      flex-grow: 1;
+  background-color: yellow;
 }
 
 .mdlext-accordion2__panel[hidden] {
@@ -3128,6 +3156,104 @@ ul.mdlext-accordion {
   padding: 0;
   position: absolute;
   width: 1px;
+}
+
+.mdlext-accordion2--vertical {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+}
+
+.mdlext-accordion2--vertical .mdlext-accordion2__presentation {
+  min-height: 56px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.mdlext-accordion2--vertical .mdlext-accordion2__header {
+  height: 56px;
+  border-top: 1px solid rgba(158, 158, 158, 0.5);
+  width: 100%;
+}
+
+.mdlext-accordion2--vertical .mdlext-accordion2__header > *:first-child {
+  padding-left: 0;
+}
+
+.mdlext-accordion2--vertical .mdlext-accordion2__header > *:last-child:not(:only-child) {
+  margin-left: auto;
+}
+
+.mdlext-accordion2--vertical .mdlext-accordion2__header .mdlext-accordion2__header_caption {
+  -ms-flex: 1;
+      flex: 1;
+}
+
+.mdlext-accordion2--vertical .mdlext-accordion2__panel {
+  border-top: 1px solid rgba(158, 158, 158, 0.5);
+}
+
+.mdlext-accordion2--horizontal {
+  display: -ms-flexbox;
+  display: flex;
+  height: 300px;
+}
+
+.mdlext-accordion2--horizontal .mdlext-accordion2__presentation {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  min-width: 56px;
+  width: 56px;
+}
+
+.mdlext-accordion2--horizontal .mdlext-accordion2__header {
+  -ms-flex-direction: column-reverse;
+      flex-direction: column-reverse;
+  width: 56px;
+  height: 100%;
+  white-space: nowrap;
+  border-left: 1px solid rgba(158, 158, 158, 0.5);
+}
+
+.mdlext-accordion2--horizontal .mdlext-accordion2__header > * {
+  transform: rotate(-90deg) translateX(50%);
+}
+
+.mdlext-accordion2--horizontal .mdlext-accordion2__header > img,
+.mdlext-accordion2--horizontal .mdlext-accordion2__header > button,
+.mdlext-accordion2--horizontal .mdlext-accordion2__header > .material-icons,
+.mdlext-accordion2--horizontal .mdlext-accordion2__header > *:first-child,
+.mdlext-accordion2--horizontal .mdlext-accordion2__header > *:last-child {
+  padding-left: 0;
+}
+
+.mdlext-accordion2--horizontal .mdlext-accordion2__header > *:last-child:not(:only-child) {
+  margin-bottom: auto;
+  transform: rotate(-90deg) translateX(0);
+}
+
+.mdlext-accordion2--horizontal .mdlext-accordion2__panel {
+  border-left: 1px solid rgba(158, 158, 158, 0.5);
+}
+
+.mdlext-accordion2__presentation:first-child > .mdlext-accordion2__header {
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+
+.mdlext-accordion2[aria-multiselectable="false"] .mdlext-accordion2__presentation.is-expanded {
+  -ms-flex-positive: 1;
+      flex-grow: 1;
 }
 
 /* -------------------------------------------------------------

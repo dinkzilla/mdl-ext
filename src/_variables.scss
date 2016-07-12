@@ -95,15 +95,15 @@ $mdlext-accordion-header-secondary-color-disabled: rgba($mdlext-color-black, 0.2
 
 $mdlext-accordion-ripple-color                   : rgb-string-to-hex($color-accent-contrast) !default; //$color-primary-contrast !default;
 $mdlext-accordion-header-padding                 : 8px !default;
-$mdlext-accordion-header-padding-top             : $mdlext-accordion-header-padding !default;
+$mdlext-accordion-header-padding-top             : $mdlext-accordion-header-padding * 2 !default;
 $mdlext-accordion-header-padding-right           : $mdlext-accordion-header-padding !default;
-$mdlext-accordion-header-padding-bottom          : $mdlext-accordion-header-padding !default;
+$mdlext-accordion-header-padding-bottom          : $mdlext-accordion-header-padding * 2 !default;
 $mdlext-accordion-header-padding-left            : $mdlext-accordion-header-padding !default;
 $mdlext-accordion-header-icon-text-space         : 8px !default;
-$mdlext-accordion-header-height                  : 48px !default;
+$mdlext-accordion-header-height                  : 56px !default;
 
 $mdlext-accordion-content-padding                : $mdlext-accordion-header-padding !default;
-$mdlext-accordion-content-padding-top            : $mdlext-accordion-content-padding !default;
+$mdlext-accordion-content-padding-top            : 0 !default;
 $mdlext-accordion-content-padding-right          : $mdlext-accordion-content-padding !default;
 $mdlext-accordion-content-padding-bottom         : $mdlext-accordion-content-padding !default;
 $mdlext-accordion-content-padding-left           : $mdlext-accordion-content-padding !default;
