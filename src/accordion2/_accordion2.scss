@@ -23,6 +23,7 @@
     min-height: $mdlext-accordion-header-height;
     display: flex;
     align-items: center;
+    align-self: stretch;
     user-select: none;
     color: $mdlext-accordion-header-secondary-color;
     background-color: $mdlext-accordion-header-background-color;
@@ -72,8 +73,6 @@
     overflow: auto;
     flex-grow: 1;
 
-    background-color: yellow; // trace color
-
     &[hidden] {
       @include mdlext-visually-hidden;
     }
@@ -99,7 +98,6 @@
     .mdlext-accordion2__header {
       height: $mdlext-accordion-header-height;
       border-top: 1px solid $mdlext-accordion-header-border-color;
-      width: 100%;
 
       > *:first-child {
         padding-left: 0;
@@ -126,7 +124,6 @@
 
   &--horizontal {
     display: flex;
-    height: 300px;
 
     .mdlext-accordion2__presentation {
       position: relative;
@@ -136,10 +133,13 @@
       width: $mdlext-accordion-header-height;
     }
 
+    &[aria-multiselectable='true'] .mdlext-accordion2__presentation.is-expanded {
+      width: 100%;
+    }
+
     .mdlext-accordion2__header {
       flex-direction: column-reverse;
       width: $mdlext-accordion-header-height;
-      height: 100%;
       white-space: nowrap;
       border-left: 1px solid $mdlext-accordion-header-border-color;
 
@@ -166,6 +166,7 @@
       border-left: 1px solid $mdlext-accordion-header-border-color;
     }
   }
+
 }
 
 .mdlext-accordion2 {

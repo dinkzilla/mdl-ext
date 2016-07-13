@@ -3129,6 +3129,8 @@ ul.mdlext-accordion {
   display: flex;
   -ms-flex-align: center;
       align-items: center;
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -3183,7 +3185,6 @@ ul.mdlext-accordion {
   overflow: auto;
   -ms-flex-positive: 1;
       flex-grow: 1;
-  background-color: yellow;
 }
 
 .mdlext-accordion2__panel[hidden] {
@@ -3220,7 +3221,6 @@ ul.mdlext-accordion {
 .mdlext-accordion2--vertical .mdlext-accordion2__header {
   height: 56px;
   border-top: 1px solid rgba(158, 158, 158, 0.5);
-  width: 100%;
 }
 
 .mdlext-accordion2--vertical .mdlext-accordion2__header > *:first-child {
@@ -3243,7 +3243,6 @@ ul.mdlext-accordion {
 .mdlext-accordion2--horizontal {
   display: -ms-flexbox;
   display: flex;
-  height: 300px;
 }
 
 .mdlext-accordion2--horizontal .mdlext-accordion2__presentation {
@@ -3255,11 +3254,14 @@ ul.mdlext-accordion {
   width: 56px;
 }
 
+.mdlext-accordion2--horizontal[aria-multiselectable='true'] .mdlext-accordion2__presentation.is-expanded {
+  width: 100%;
+}
+
 .mdlext-accordion2--horizontal .mdlext-accordion2__header {
   -ms-flex-direction: column-reverse;
       flex-direction: column-reverse;
   width: 56px;
-  height: 100%;
   white-space: nowrap;
   border-left: 1px solid rgba(158, 158, 158, 0.5);
 }
