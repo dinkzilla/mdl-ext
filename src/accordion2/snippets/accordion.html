@@ -5,27 +5,28 @@
 
 <style>
   .demo-accordion-1 {
-    height: 300px;
+    height: 300px; /* In horizontal layout, the accordion must have a height */
   }
 
-  .demo-accordion-1 .mdlext-accordion2__header_caption {
-    max-width: 200px;  /* In horizontal layout, the caption must have a maxwidth */
+  .demo-accordion-1 .mdlext-accordion2__tab__caption {
+    max-width: 200px;  /* In horizontal layout, the caption must have a max-width */
   }
 
-  .demo-accordion-1 .mdlext-accordion2__panel {
+  .demo-accordion-1 .mdlext-accordion2__tabpanel {
     background-color: rgba(239, 154, 154, 0.4);  /* Just a trace color */
   }
 </style>
 
-<ul class="mdlext-accordion2 mdlext-accordion2--horizontal demo-accordion-1" role="tablist" aria-multiselectable="false">
+<ul class="mdlext-accordion2 mdlext-js-accordion2 mdlext-accordion2--horizontal demo-accordion-1"
+    role="tablist" aria-multiselectable="false">
 
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="true" role="tab">
+    <header class="mdlext-accordion2__tab" aria-expanded="true" role="tab">
       <i class="material-icons">info</i>
-      <span class="mdlext-accordion2__header_caption">First section. A long caption should not push the state icon</span>
+      <span class="mdlext-accordion2__tab__caption">First section. A long caption should not push the state icon</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" aria-hidden="false">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" aria-hidden="false">
       <h5>Content #1 goes here</h5>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique eget augue eget gravida.
         Etiam eget imperdiet massa. Aliquam nisi eros, molestie a vulputate quis, tempor nec quam. Ut at libero
@@ -52,11 +53,11 @@
     </section>
   </li>
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="false" role="tab">
-      <span class="mdlext-accordion2__header_caption">Header tab #2</span>
+    <header class="mdlext-accordion2__tab" aria-expanded="false" role="tab">
+      <span class="mdlext-accordion2__tab__caption">Header tab #2</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" hidden aria-hidden="true">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" hidden aria-hidden="true">
       <h5>Content #2 goes here</h5>
       <p>Curabitur malesuada placerat nunc, id dapibus justo tempor in. Ut molestie
         arcu justo, id volutpat eros vestibulum eget. Fusce tincidunt leo in est venenatis porta.
@@ -64,12 +65,12 @@
     </section>
   </li>
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="false" role="tab" disabled tabindex="0">
+    <header class="mdlext-accordion2__tab" aria-expanded="false" role="tab" disabled tabindex="0">
       <i class="material-icons">warning</i>
-      <span class="mdlext-accordion2__header_caption">Header tab #3 (disabled)</span>
+      <span class="mdlext-accordion2__tab__caption">Header tab #3 (disabled)</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" hidden aria-hidden="true">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" hidden aria-hidden="true">
       <h5>Content #3 goes here</h5>
       <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
         ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
@@ -78,14 +79,14 @@
     </section>
   </li>
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="false" role="tab">
+    <header class="mdlext-accordion2__tab" aria-expanded="false" role="tab">
       <i class="material-icons">accessibility</i>
       <i class="material-icons">help_outline</i>
       <i class="material-icons">radio</i>
-      <span class="mdlext-accordion2__header_caption">Header tab #4</span>
+      <span class="mdlext-accordion2__tab__caption">Header tab #4</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" hidden aria-hidden="true">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" hidden aria-hidden="true">
       <h5>Content #4 goes here</h5>
       <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
         ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
@@ -94,13 +95,13 @@
     </section>
   </li>
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="false" role="tab">
+    <header class="mdlext-accordion2__tab" aria-expanded="false" role="tab">
       <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">favorite</i></button>
       <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">share</i></button>
-      <span class="mdlext-accordion2__header_caption">#5, with icon buttons</span>
+      <span class="mdlext-accordion2__tab__caption">#5, with icon buttons</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" hidden aria-hidden="true">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" hidden aria-hidden="true">
       <h5>Content #5 goes here</h5>
       <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
         ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
@@ -119,24 +120,24 @@
     height: 300px;
   }
 
-  .demo-accordion-2 .mdlext-accordion2__header_caption {
+  .demo-accordion-2 .mdlext-accordion2__tab__caption {
     max-width: 200px; /* In horizontal layout, the caption must have a maxwidth */
   }
 
-  .demo-accordion-2 .mdlext-accordion2__panel {
+  .demo-accordion-2 .mdlext-accordion2__tabpanel {
     background-color: rgba(206, 147, 216, 0.4);
   }
 </style>
 
-<ul class="mdlext-accordion2 mdlext-accordion2--horizontal demo-accordion-2" role="tablist" aria-multiselectable="true">
+<ul class="mdlext-accordion2 mdlext-js-accordion2 mdlext-accordion2--horizontal demo-accordion-2" role="tablist" aria-multiselectable="true">
 
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="true" role="tab">
+    <header class="mdlext-accordion2__tab" aria-expanded="true" role="tab">
       <i class="material-icons">info</i>
-      <span class="mdlext-accordion2__header_caption">First section. A long caption should not push the state icon</span>
+      <span class="mdlext-accordion2__tab__caption">First section. A long caption should not push the state icon</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" aria-hidden="false">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" aria-hidden="false">
       <h5>Content #1 goes here</h5>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique eget augue eget gravida.
         Etiam eget imperdiet massa. Aliquam nisi eros, molestie a vulputate quis, tempor nec quam. Ut at libero
@@ -163,11 +164,11 @@
     </section>
   </li>
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="false" role="tab">
-      <span class="mdlext-accordion2__header_caption">Header tab #2</span>
+    <header class="mdlext-accordion2__tab" aria-expanded="false" role="tab">
+      <span class="mdlext-accordion2__tab__caption">Header tab #2</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" hidden aria-hidden="true">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" hidden aria-hidden="true">
       <h5>Content #2 goes here</h5>
       <p>Curabitur malesuada placerat nunc, id dapibus justo tempor in. Ut molestie
         arcu justo, id volutpat eros vestibulum eget. Fusce tincidunt leo in est venenatis porta.
@@ -175,12 +176,12 @@
     </section>
   </li>
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="false" role="tab" disabled tabindex="0">
+    <header class="mdlext-accordion2__tab" aria-expanded="false" role="tab" disabled tabindex="0">
       <i class="material-icons">warning</i>
-      <span class="mdlext-accordion2__header_caption">Header tab #3 (disabled)</span>
+      <span class="mdlext-accordion2__tab__caption">Header tab #3 (disabled)</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" hidden aria-hidden="true">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" hidden aria-hidden="true">
       <h5>Content #3 goes here</h5>
       <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
         ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
@@ -189,14 +190,14 @@
     </section>
   </li>
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="false" role="tab">
+    <header class="mdlext-accordion2__tab" aria-expanded="false" role="tab">
       <i class="material-icons">accessibility</i>
       <i class="material-icons">help_outline</i>
       <i class="material-icons">radio</i>
-      <span class="mdlext-accordion2__header_caption">Header tab #4</span>
+      <span class="mdlext-accordion2__tab__caption">Header tab #4</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" hidden aria-hidden="true">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" hidden aria-hidden="true">
       <h5>Content #4 goes here</h5>
       <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
         ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
@@ -205,13 +206,13 @@
     </section>
   </li>
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="false" role="tab">
+    <header class="mdlext-accordion2__tab" aria-expanded="false" role="tab">
       <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">favorite</i></button>
       <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">share</i></button>
-      <span class="mdlext-accordion2__header_caption">#5, with icon buttons</span>
+      <span class="mdlext-accordion2__tab__caption">#5, with icon buttons</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" hidden aria-hidden="true">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" hidden aria-hidden="true">
       <h5>Content #5 goes here</h5>
       <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
         ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
@@ -224,20 +225,21 @@
 <h4>Vertical accordion, aria-multiselectable="true"</h4>
 
 <style>
-  .demo-accordion-3 .mdlext-accordion2__panel {
+  .demo-accordion-3 .mdlext-accordion2__tabpanel {
     background-color: rgba(144, 202, 249, 0.4);
   }
 </style>
 
-<ul class="mdlext-accordion2 mdlext-accordion2--vertical demo-accordion-3" role="tablist" aria-multiselectable="true">
+<ul class="mdlext-accordion2 mdlext-js-accordion2 mdlext-accordion2--vertical demo-accordion-3"
+    role="tablist" aria-multiselectable="true">
 
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="true" role="tab">
+    <header class="mdlext-accordion2__tab" aria-expanded="true" role="tab">
       <i class="material-icons">info</i>
-      <span class="mdlext-accordion2__header_caption">First section. A long caption should not push the state icon</span>
+      <span class="mdlext-accordion2__tab__caption">First section. A long caption should not push the state icon</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" aria-hidden="false">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" aria-hidden="false">
       <h5>Content #1 goes here</h5>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique eget augue eget gravida.
         Etiam eget imperdiet massa. Aliquam nisi eros, molestie a vulputate quis, tempor nec quam. Ut at libero
@@ -253,11 +255,11 @@
     </section>
   </li>
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="false" role="tab">
-      <span class="mdlext-accordion2__header_caption">Header tab #2</span>
+    <header class="mdlext-accordion2__tab" aria-expanded="false" role="tab">
+      <span class="mdlext-accordion2__tab__caption">Header tab #2</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" hidden aria-hidden="true">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" hidden aria-hidden="true">
       <h5>Content #2 goes here</h5>
       <p>Curabitur malesuada placerat nunc, id dapibus justo tempor in. Ut molestie
         arcu justo, id volutpat eros vestibulum eget. Fusce tincidunt leo in est venenatis porta.
@@ -265,12 +267,12 @@
     </section>
   </li>
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="false" role="tab" disabled tabindex="0">
+    <header class="mdlext-accordion2__tab" aria-expanded="false" role="tab" disabled tabindex="0">
       <i class="material-icons">warning</i>
-      <span class="mdlext-accordion2__header_caption">Header tab #3 (disabled)</span>
+      <span class="mdlext-accordion2__tab__caption">Header tab #3 (disabled)</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" hidden aria-hidden="true">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" hidden aria-hidden="true">
       <h5>Content #3 goes here</h5>
       <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
         ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
@@ -279,14 +281,14 @@
     </section>
   </li>
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="false" role="tab">
+    <header class="mdlext-accordion2__tab" aria-expanded="false" role="tab">
       <i class="material-icons">accessibility</i>
       <i class="material-icons">help_outline</i>
       <i class="material-icons">radio</i>
-      <span class="mdlext-accordion2__header_caption">Header tab #4</span>
+      <span class="mdlext-accordion2__tab__caption">Header tab #4</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" hidden aria-hidden="true">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" hidden aria-hidden="true">
       <h5>Content #4 goes here</h5>
       <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
         ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
@@ -295,13 +297,13 @@
     </section>
   </li>
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="false" role="tab">
+    <header class="mdlext-accordion2__tab" aria-expanded="false" role="tab">
       <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">favorite</i></button>
       <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">share</i></button>
-      <span class="mdlext-accordion2__header_caption">#5, with icon buttons</span>
+      <span class="mdlext-accordion2__tab__caption">#5, with icon buttons</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" hidden aria-hidden="true">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" hidden aria-hidden="true">
       <h5>Content #5 goes here</h5>
       <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
         ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
@@ -320,20 +322,20 @@
     height: 800px;
     border: 1px solid #00b0ff;
   }
-  .demo-accordion-4 .mdlext-accordion2__panel {
+  .demo-accordion-4 .mdlext-accordion2__tabpanel {
     background-color: rgba(165, 214, 167, 0.4);
   }
 </style>
 
-<ul class="mdlext-accordion2 mdlext-accordion2--vertical demo-accordion-4" role="tablist" aria-multiselectable="false">
+<ul class="mdlext-accordion2 mdlext-js-accordion2 mdlext-accordion2--vertical demo-accordion-4" role="tablist" aria-multiselectable="false">
 
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="true" role="tab">
+    <header class="mdlext-accordion2__tab" aria-expanded="true" role="tab">
       <i class="material-icons">info</i>
-      <span class="mdlext-accordion2__header_caption">First section. A long caption should not push the state icon</span>
+      <span class="mdlext-accordion2__tab__caption">First section. A long caption should not push the state icon</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" aria-hidden="false">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" aria-hidden="false">
       <h5>Content #1 goes here</h5>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique eget augue eget gravida.
         Etiam eget imperdiet massa. Aliquam nisi eros, molestie a vulputate quis, tempor nec quam. Ut at libero
@@ -349,11 +351,11 @@
     </section>
   </li>
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="false" role="tab">
-      <span class="mdlext-accordion2__header_caption">Header tab #2</span>
+    <header class="mdlext-accordion2__tab" aria-expanded="false" role="tab">
+      <span class="mdlext-accordion2__tab__caption">Header tab #2</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" hidden aria-hidden="true">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" hidden aria-hidden="true">
       <h5>Content #2 goes here</h5>
       <p>Curabitur malesuada placerat nunc, id dapibus justo tempor in. Ut molestie
         arcu justo, id volutpat eros vestibulum eget. Fusce tincidunt leo in est venenatis porta.
@@ -361,12 +363,12 @@
     </section>
   </li>
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="false" role="tab" disabled tabindex="0">
+    <header class="mdlext-accordion2__tab" aria-expanded="false" role="tab" disabled tabindex="0">
       <i class="material-icons">warning</i>
-      <span class="mdlext-accordion2__header_caption">Header tab #3 (disabled)</span>
+      <span class="mdlext-accordion2__tab__caption">Header tab #3 (disabled)</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" hidden aria-hidden="true">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" hidden aria-hidden="true">
       <h5>Content #3 goes here</h5>
       <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
         ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
@@ -375,14 +377,14 @@
     </section>
   </li>
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="false" role="tab">
+    <header class="mdlext-accordion2__tab" aria-expanded="false" role="tab">
       <i class="material-icons">accessibility</i>
       <i class="material-icons">help_outline</i>
       <i class="material-icons">radio</i>
-      <span class="mdlext-accordion2__header_caption">Header tab #4</span>
+      <span class="mdlext-accordion2__tab__caption">Header tab #4</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" hidden aria-hidden="true">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" hidden aria-hidden="true">
       <h5>Content #4 goes here</h5>
       <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
         ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
@@ -391,13 +393,13 @@
     </section>
   </li>
   <li class="mdlext-accordion2__presentation" role="presentation">
-    <header class="mdlext-accordion2__header" aria-expanded="false" role="tab">
+    <header class="mdlext-accordion2__tab" aria-expanded="false" role="tab">
       <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">favorite</i></button>
       <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">share</i></button>
-      <span class="mdlext-accordion2__header_caption">#5, with icon buttons</span>
+      <span class="mdlext-accordion2__tab__caption">#5, with icon buttons</span>
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
-    <section class="mdlext-accordion2__panel" role="tabpanel" hidden aria-hidden="true">
+    <section class="mdlext-accordion2__tabpanel" role="tabpanel" hidden aria-hidden="true">
       <h5>Content #5 goes here</h5>
       <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
         ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
@@ -409,113 +411,3 @@
 
 <br/>
 
-
-<script>
-  (function() {
-    'use strict';
-
-    var accordions = document.querySelectorAll('.mdlext-accordion2');
-    for (var i = 0; i < accordions.length; i++) {
-      initAccordion(accordions[i]);
-    }
-
-
-    function initAccordion( accordion ) {
-
-      var headers = accordion.querySelectorAll('.mdlext-accordion2__header');
-
-      for (var i = 0; i < headers.length; i++) {
-        var header = headers[i];
-        header.setAttribute('role', 'tab');
-
-        if(header.hasAttribute('disabled')) {
-          header.setAttribute('tabindex', '-1');
-          header.setAttribute('aria-expanded', 'false');
-        }
-        if(!header.hasAttribute('tabindex')) {
-          header.setAttribute('tabindex', '0');
-        }
-
-        var panel = header.nextElementSibling;
-        panel.setAttribute('role', 'tabpanel');
-
-        var expanded = header.getAttribute('aria-expanded').toLowerCase() === 'true';
-        var presentation = header.closest('.mdlext-accordion2__presentation');
-
-        if(expanded) {
-          panel.removeAttribute('hidden');
-          panel.setAttribute('aria-hidden', 'false');
-          presentation.classList.add('is-expanded');
-        }
-        else {
-          header.setAttribute('aria-expanded', 'false');
-          panel.setAttribute('hidden', '');
-          panel.setAttribute('aria-hidden', 'true');
-          presentation.classList.remove('is-expanded');
-        }
-
-        header.addEventListener('click', function( /*event*/ ) {
-          setTimeout(function() {
-            toggle(this);
-          }.bind(this), 0);
-        });
-
-        header.addEventListener('focus', function( /*event*/ ) {
-          setTimeout(function() {
-            setAriaSelected(this);
-          }.bind(this), 0);
-        });
-
-      }
-    }
-
-    function toggle(header) {
-
-      var expanded = header.getAttribute('aria-expanded').toLowerCase() === 'true';
-      var panel = header.nextElementSibling;
-      var presentation = header.closest('.mdlext-accordion2__presentation');
-
-      if(expanded) {
-        header.setAttribute('aria-expanded', 'false');
-        panel.setAttribute('hidden', '');
-        panel.setAttribute('aria-hidden', 'true');
-        presentation.classList.remove('is-expanded');
-      }
-      else {
-        var accordion = header.closest('.mdlext-accordion2');
-        var multiSelectable = accordion.getAttribute('aria-multiselectable');
-        multiSelectable = multiSelectable && multiSelectable.toLowerCase() === 'true';
-
-        if(!multiSelectable) {
-          var expandedElements = accordion.querySelectorAll('[aria-expanded="true"]');
-          for (var j = 0; j < expandedElements.length; j++) {
-            expandedElements[j].setAttribute('aria-expanded', 'false');
-            var pnl = expandedElements[j].nextElementSibling;
-            pnl.setAttribute('hidden', '');
-            pnl.setAttribute('aria-hidden', 'true');
-            var pres = pnl.closest('.mdlext-accordion2__presentation');
-            pres.classList.remove('is-expanded');
-          }
-        }
-
-        header.setAttribute('aria-expanded', 'true');
-        panel.removeAttribute('hidden');
-        panel.setAttribute('aria-hidden', 'false');
-        presentation.classList.add('is-expanded');
-      }
-    }
-
-    function setAriaSelected(header) {
-      var accordion = header.closest('.mdlext-accordion2');
-      var headers = accordion.querySelectorAll('.mdlext-accordion2__header[aria-selected="true"]');
-
-      for (var i = 0; i < headers.length; i++) {
-        headers[i].removeAttribute('aria-selected');
-      }
-
-      header.setAttribute('aria-selected', 'true');
-    }
-
-  }());
-
-</script>

@@ -3118,7 +3118,14 @@ ul.mdlext-accordion {
   list-style: none;
 }
 
-.mdlext-accordion2__header {
+.mdlext-accordion2__tab {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  line-height: 1.1;
   box-sizing: border-box;
   position: relative;
   margin: 0;
@@ -3137,47 +3144,48 @@ ul.mdlext-accordion {
           user-select: none;
   color: #000000;
   background-color: rgba(158, 158, 158, 0.2);
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: 0.02em;
+  cursor: pointer;
 }
 
-.mdlext-accordion2__header:focus {
+.mdlext-accordion2__tab:focus {
   outline-offset: -2px;
 }
 
-.mdlext-accordion2__header[aria-expanded='true'] {
+.mdlext-accordion2__tab[aria-expanded='true'] {
   background-color: rgba(158, 158, 158, 0.3);
 }
 
-.mdlext-accordion2__header[aria-selected='true'] {
+.mdlext-accordion2__tab[aria-selected='true'] {
   background-color: rgba(158, 158, 158, 0.4);
 }
 
-.mdlext-accordion2__header[disabled] {
+.mdlext-accordion2__tab[disabled] {
   background-color: rgba(158, 158, 158, 0.12);
   color: rgba(0, 0, 0, 0.26);
   pointer-events: none;
 }
 
-.mdlext-accordion2__header:hover:not([disabled]) {
+.mdlext-accordion2__tab:hover:not([disabled]) {
   background-color: rgba(158, 158, 158, 0.4);
 }
 
-.mdlext-accordion2__header > * {
+.mdlext-accordion2__tab > * {
   margin: 0;
-  padding-left: 8px;
+  padding: 0;
 }
 
-.mdlext-accordion2__header .mdlext-accordion2__header_caption {
+.mdlext-accordion2__tab__caption {
+  padding-left: 8px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.mdlext-accordion2__panel {
+.mdlext-accordion2__tab > *:first-child {
+  padding-left: 0;
+}
+
+.mdlext-accordion2__tabpanel {
   box-sizing: border-box;
   margin: 0;
   padding: 0 8px;
@@ -3187,7 +3195,7 @@ ul.mdlext-accordion {
       flex-grow: 1;
 }
 
-.mdlext-accordion2__panel[hidden] {
+.mdlext-accordion2__tabpanel[hidden] {
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -3218,25 +3226,24 @@ ul.mdlext-accordion {
   overflow: hidden;
 }
 
-.mdlext-accordion2--vertical .mdlext-accordion2__header {
+.mdlext-accordion2--vertical .mdlext-accordion2__tab {
   height: 56px;
   border-top: 1px solid rgba(158, 158, 158, 0.5);
 }
 
-.mdlext-accordion2--vertical .mdlext-accordion2__header > *:first-child {
+.mdlext-accordion2--vertical .mdlext-accordion2__tab > * {
+  padding-left: 8px;
+}
+
+.mdlext-accordion2--vertical .mdlext-accordion2__tab > *:first-child {
   padding-left: 0;
 }
 
-.mdlext-accordion2--vertical .mdlext-accordion2__header > *:last-child:not(:only-child) {
+.mdlext-accordion2--vertical .mdlext-accordion2__tab > *:last-child:not(:only-child) {
   margin-left: auto;
 }
 
-.mdlext-accordion2--vertical .mdlext-accordion2__header .mdlext-accordion2__header_caption {
-  -ms-flex: 1;
-      flex: 1;
-}
-
-.mdlext-accordion2--vertical .mdlext-accordion2__panel {
+.mdlext-accordion2--vertical .mdlext-accordion2__tabpanel {
   border-top: 1px solid rgba(158, 158, 158, 0.5);
 }
 
@@ -3258,7 +3265,7 @@ ul.mdlext-accordion {
   width: 100%;
 }
 
-.mdlext-accordion2--horizontal .mdlext-accordion2__header {
+.mdlext-accordion2--horizontal .mdlext-accordion2__tab {
   -ms-flex-direction: column-reverse;
       flex-direction: column-reverse;
   width: 56px;
@@ -3266,28 +3273,20 @@ ul.mdlext-accordion {
   border-left: 1px solid rgba(158, 158, 158, 0.5);
 }
 
-.mdlext-accordion2--horizontal .mdlext-accordion2__header > * {
+.mdlext-accordion2--horizontal .mdlext-accordion2__tab > * {
   transform: rotate(-90deg) translateX(50%);
 }
 
-.mdlext-accordion2--horizontal .mdlext-accordion2__header > img,
-.mdlext-accordion2--horizontal .mdlext-accordion2__header > button,
-.mdlext-accordion2--horizontal .mdlext-accordion2__header > .material-icons,
-.mdlext-accordion2--horizontal .mdlext-accordion2__header > *:first-child,
-.mdlext-accordion2--horizontal .mdlext-accordion2__header > *:last-child {
-  padding-left: 0;
-}
-
-.mdlext-accordion2--horizontal .mdlext-accordion2__header > *:last-child:not(:only-child) {
+.mdlext-accordion2--horizontal .mdlext-accordion2__tab > *:last-child:not(:only-child) {
   margin-bottom: auto;
   transform: rotate(-90deg) translateX(0);
 }
 
-.mdlext-accordion2--horizontal .mdlext-accordion2__panel {
+.mdlext-accordion2--horizontal .mdlext-accordion2__tabpanel {
   border-left: 1px solid rgba(158, 158, 158, 0.5);
 }
 
-.mdlext-accordion2__presentation:first-child > .mdlext-accordion2__header {
+.mdlext-accordion2__presentation:first-child > .mdlext-accordion2__tab {
   border-top-color: transparent;
   border-left-color: transparent;
 }
