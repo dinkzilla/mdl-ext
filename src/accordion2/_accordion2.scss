@@ -14,6 +14,13 @@
   padding: 0;
   list-style: none;
 
+  &__panel {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
   &__tab {
     @include typo-title();
     font-weight: 400;
@@ -48,6 +55,11 @@
       background-color: $mdlext-accordion-header-disabled-color;
       color: $mdlext-accordion-header-secondary-color-disabled;
       pointer-events: none;
+
+      > * {
+        color: $mdlext-accordion-header-secondary-color-disabled;
+      }
+
     }
 
     &:hover:not([disabled]) {
@@ -93,12 +105,9 @@
     flex-direction: column;
     flex-wrap: nowrap;
 
-    .mdlext-accordion2__presentation {
+    .mdlext-accordion2__panel {
       min-height: $mdlext-accordion-header-height;
-      display: flex;
       flex-direction: column;
-      flex-wrap: nowrap;
-      overflow: hidden;
     }
 
     .mdlext-accordion2__tab {
@@ -130,15 +139,12 @@
   &--horizontal {
     display: flex;
 
-    .mdlext-accordion2__presentation {
-      position: relative;
-      display: flex;
-      overflow: hidden;
+    .mdlext-accordion2__panel {
       min-width: $mdlext-accordion-header-height;
       width: $mdlext-accordion-header-height;
     }
 
-    &[aria-multiselectable='true'] .mdlext-accordion2__presentation.is-expanded {
+    &[aria-multiselectable='true'] .mdlext-accordion2__panel.is-expanded {
       width: 100%;
     }
 
@@ -168,16 +174,36 @@
 
 .mdlext-accordion2 {
 
-  &__presentation:first-child > &__tab {
+  &__panel:first-child > &__tab {
     // Use container to set outer borders
     border-top-color: transparent;
     border-left-color: transparent;
   }
 
   &[aria-multiselectable="false"] {
-    .mdlext-accordion2__presentation.is-expanded {
+    .mdlext-accordion2__panel.is-expanded {
       flex-grow: 1;
     }
+  }
+}
+
+// Making accordion appear disabled.
+// Note: does not prevent tabbing into an disabled accordion
+.mdlext-accordion2[disabled] {
+  * {
+    pointer-events: none;
+  }
+  .mdlext-accordion2__tab {
+    background-color: $mdlext-accordion-header-disabled-color;
+    color: $mdlext-accordion-header-secondary-color-disabled;
+
+    > * {
+      color: $mdlext-accordion-header-secondary-color-disabled;
+    }
+  }
+  .mdlext-accordion2__tabpanel {
+    opacity: 0.8;
+    filter: blur(1px) grayscale(80%);
   }
 }
 

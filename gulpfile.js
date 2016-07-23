@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const posthtml = require('gulp-posthtml');
 
-gulp.task('build-demo', ['posthtml-build-demo', 'copy-css', 'copy-scripts']);
+gulp.task('build-demo', ['posthtml-build-demo', 'copy-css', 'copy-scripts', 'copy-assets']);
 
 gulp.task('posthtml-build-demo', function() {
   const plugins = [
@@ -31,3 +31,11 @@ gulp.task('copy-scripts', function() {
   ])
   .pipe(gulp.dest('./demo/scripts'));
 });
+
+gulp.task('copy-assets', function() {
+  return gulp.src([
+    './src/demo/assets/**/*'
+  ])
+  .pipe(gulp.dest('./demo/assets'));
+});
+

@@ -12,7 +12,7 @@
     "test": "./node_modules/.bin/mocha  -w --opts ./mocha.opts './test/**/*.spec.js'",
     "test:pattern": "./node_modules/.bin/mocha  -w --opts ./mocha.opts './test/**/*.spec.js' --grep $pattern",
     "test:coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/istanbul cover --root ./src ./node_modules/.bin/_mocha -- --opts ./mocha.opts  -r .istanbul-mocha.config.js './test/**/*.spec.js'",
-    "check-coverage": "./node_modules/.bin/istanbul check-coverage --statements 70 --branches 70 --functions 70 --lines 70",
+    "check-coverage": "./node_modules/.bin/istanbul check-coverage --statements 60 --branches 60 --functions 60 --lines 60",
     "report-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/codecov",
     "clean": "./node_modules/.bin/rimraf lib && mkdir lib",
     "prebuild": "npm run clean && ./node_modules/.bin/webpack",
@@ -91,7 +91,7 @@
     "doctrine": "1.2.2",
     "eq.js": "1.9.0",
     "es6-promise": "3.2.1",
-    "eslint": "3.0.1",
+    "eslint": "3.1.0",
     "eslint-loader": "1.4.1",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.9.0",
@@ -124,6 +124,6 @@
     "url-loader": "0.5.7",
     "webpack": "1.13.1",
     "webpack-dev-server": "1.14.1",
-    "yargs": "4.8.0"
+    "yargs": "4.8.1"
   }
 }

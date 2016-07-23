@@ -578,15 +578,15 @@ import { inOutQuintic } from '../utils/easing';
       slide.setAttribute('role', SLIDE_ROLE);
 
       if(this.config_.interactive) {
-        if (!Number.isInteger(slide.getAttribute('tabindex'))) {
-          slide.setAttribute('tabindex', 0);
+        if(!slide.getAttribute('tabindex')) {
+          slide.setAttribute('tabindex', '0');
         }
         if (hasRippleEffect) {
           addRipple_(slide);
         }
       }
       else {
-        slide.setAttribute('tabindex', -1);
+        slide.setAttribute('tabindex', '-1');
       }
     });
   };
