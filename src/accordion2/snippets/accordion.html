@@ -426,7 +426,7 @@
       <i class="mdlext-aria-toggle-material-icons"></i>
     </header>
     <section class="mdlext-accordion2__tabpanel" role="tabpanel" aria-hidden="false">
-      <h5>Content #1 goes here</h5>
+      <h5>Content goes here</h5>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique eget augue eget gravida.
         Etiam eget imperdiet massa. Aliquam nisi eros, molestie a vulputate quis, tempor nec quam. Ut at libero
         in sem pellentesque imperdiet. Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
@@ -494,7 +494,7 @@
 
 
 
-<h4>Public methods</h4>
+<h4>Accordion API</h4>
 
 <style>
   .cmd-button {
@@ -505,6 +505,8 @@
     background: rgba(255, 224, 130, 0.4);
   }
 </style>
+
+<h5>Public methods</h5>
 
 <section style="margin-bottom: 16px">
   <button id="btn-api-expand-all" class="cmd-button mdl-button mdl-js-button mdl-button--raised">
@@ -526,6 +528,30 @@
     Add a new tab
   </button>
 </section>
+
+<h5>Custom events</h5>
+
+<section style="margin-bottom: 16px">
+  <button id="btn-event-expand-all" class="cmd-button mdl-button mdl-js-button mdl-button--raised">
+    Expand all
+  </button>
+  <button id="btn-event-collapse-all" class="cmd-button mdl-button mdl-js-button mdl-button--raised">
+    Collapse all
+  </button>
+  <button id="btn-event-open-tab2" class="cmd-button mdl-button mdl-js-button mdl-button--raised">
+    Open tab #2
+  </button>
+  <button id="btn-event-close-tab2" class="cmd-button mdl-button mdl-js-button mdl-button--raised">
+    Close tab #2
+  </button>
+  <button id="btn-event-toggle-tab2" class="cmd-button mdl-button mdl-js-button mdl-button--raised">
+    Toggle tab #2
+  </button>
+  <button id="btn-event-new-tab" class="cmd-button mdl-button mdl-js-button mdl-button--raised">
+    Add a new tab
+  </button>
+</section>
+
 
 <ul id="demo-accordion-6" class="mdlext-accordion2 mdlext-js-accordion2 mdlext-accordion2--vertical demo-accordion-6"
     role="tablist" aria-multiselectable="true">
@@ -617,8 +643,34 @@
   (function() {
     'use strict';
 
+    function newPanel() {
+      var panel =
+        '<li class="mdlext-accordion2__panel">'
+        +  '<header class="mdlext-accordion2__tab" aria-expanded="true">'
+        +    '<span class="mdlext-accordion2__tab__caption">New Tab</span>'
+        +    '<i class="mdlext-aria-toggle-material-icons"></i>'
+        +  '</header>'
+        +  '<section class="mdlext-accordion2__tabpanel">'
+        +    '<h5>New tab content</h5>'
+        +    '<p>Curabitur malesuada placerat nunc, id dapibus justo tempor in. Ut molestie'
+        +      'arcu justo, id volutpat eros vestibulum eget. Fusce tincidunt leo in est venenatis porta.'
+        +    '</p>'
+        +  '</section>'
+        +'</li>';
+
+      var accordion = document.querySelector('#demo-accordion-6');
+      accordion.insertAdjacentHTML('beforeend', panel);
+    }
+
     window.addEventListener('load', function() {
 
+      // Listen to accordion toggle event
+      document.querySelector('#demo-accordion-6').addEventListener('toggle', function(e) {
+        //console.log('Accordion tab toggled. New state:', e.detail.state, 'Tab:', e.detail.tab, 'Tabpanel:', e.detail.tabpanel);
+        console.log('Accordion tab toggled. New state:', e.detail.state);
+      });
+
+      // Interact with accordion using public methods
       document.querySelector('#btn-api-expand-all').addEventListener('click', function(e) {
         var accordion = document.querySelector('#demo-accordion-6');
         accordion.MaterialExtAccordion2.openTab();
@@ -648,30 +700,46 @@
       });
 
       document.querySelector('#btn-api-new-tab').addEventListener('click', function(e) {
-        var newPanel =
-          '<li class="mdlext-accordion2__panel">'
-        +  '<header class="mdlext-accordion2__tab" aria-expanded="true">'
-        +    '<span class="mdlext-accordion2__tab__caption">New Tab</span>'
-        +    '<i class="mdlext-aria-toggle-material-icons"></i>'
-        +  '</header>'
-        +  '<section class="mdlext-accordion2__tabpanel">'
-        +    '<h5>New tab content</h5>'
-        +    '<p>Curabitur malesuada placerat nunc, id dapibus justo tempor in. Ut molestie'
-        +      'arcu justo, id volutpat eros vestibulum eget. Fusce tincidunt leo in est venenatis porta.'
-        +    '</p>'
-        +  '</section>'
-        +'</li>';
-
-        var accordion = document.querySelector('#demo-accordion-6');
-        accordion.insertAdjacentHTML('beforeend', newPanel);
-
-        var newTab  = document.querySelector('#demo-accordion-6 .mdlext-accordion2__panel:last-child');
-        accordion.MaterialExtAccordion2.upgradeTab(newTab);
+        newPanel();
+        var panelElement  = document.querySelector('#demo-accordion-6 .mdlext-accordion2__panel:last-child');
+        accordion.MaterialExtAccordion2.upgradeTab(panelElement);
       });
 
-      document.querySelector('#demo-accordion-6').addEventListener('toggle', function(e) {
-        console.log('Accordion toggled. State:', e.detail.state, 'Tab:', e.detail.tab, 'Tabpanel:', e.detail.tabpanel);
-      });
+      // Interact with accordion using custom event
+      var eventButtons = document.querySelectorAll('button[id^="btn-event-"]');
+      for (var i = 0, n = eventButtons.length; i < n; i++) {
+        eventButtons[i].addEventListener('click', function(e) {
+          var ce;
+          var tab2 = document.querySelector('#demo-accordion-6 .mdlext-accordion2__panel:nth-child(2)');
+
+          switch (e.target.id) {
+            case 'btn-event-expand-all':
+              ce = createCustomEvent('command', { detail: { action : 'open' } });
+              break;
+            case 'btn-event-collapse-all':
+              ce = createCustomEvent('command', { detail: { action : 'close' } });
+              break;
+            case 'btn-event-open-tab2':
+              ce = createCustomEvent('command', { detail: { action : 'open', target: tab2 } });
+              break;
+            case 'btn-event-close-tab2':
+              ce = createCustomEvent('command', { detail: { action : 'close', target: tab2 } });
+              break;
+            case 'btn-event-toggle-tab2':
+              ce = createCustomEvent('command', { detail: { action : 'toggle', target: tab2 } });
+              break;
+            case 'btn-event-new-tab':
+              newPanel();
+              var panelElement  = document.querySelector('#demo-accordion-6 .mdlext-accordion2__panel:last-child');
+              ce = createCustomEvent('command', { detail: { action : 'upgrade', target: panelElement } });
+              break;
+            default:
+              return;
+          }
+          var accordion = document.querySelector('#demo-accordion-6');
+          accordion.dispatchEvent(ce);
+        });
+      }
 
     });
 

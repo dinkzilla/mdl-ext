@@ -134,6 +134,9 @@ import { createCustomEvent } from '../utils/custom-event';
         case 'toggle':
           this.toggleTab(event.detail.target);
           break;
+        case 'upgrade':
+          this.upgradeTab(event.detail.target);
+          break;
       }
     }
   };
@@ -247,14 +250,6 @@ import { createCustomEvent } from '../utils/custom-event';
   MaterialExtAccordion2.prototype.upgradeTab = function( tabElement ) {
 
     const {panel, tab, tabpanel} = accordionElements( tabElement );
-
-    if(tab === null) {
-      throw new Error('There must be a tab element for each accordion panel.');
-    }
-
-    if(tabpanel === null) {
-      throw new Error('There must be a tabpanel element for each accordion panel.');
-    }
 
     const disableTab = () => {
       panel.classList.remove(IS_EXPANDED);
@@ -372,6 +367,14 @@ import { createCustomEvent } from '../utils/custom-event';
         this.toggleTab_(panel, tab, tabpanel);
       }
     };
+
+    if(tab === null) {
+      throw new Error('There must be a tab element for each accordion panel.');
+    }
+
+    if(tabpanel === null) {
+      throw new Error('There must be a tabpanel element for each accordion panel.');
+    }
 
     panel.setAttribute('role', PANEL_ROLE);
     tab.setAttribute('role', TAB_ROLE);
