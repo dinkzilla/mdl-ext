@@ -42,6 +42,8 @@ import { createCustomEvent } from '../utils/custom-event';
   const VK_ARROW_RIGHT       = 39;
   const VK_ARROW_DOWN        = 40;
   const ACCORDION            = 'mdlext-accordion2';
+  const ACCORDION_VERTICAL   = 'mdlext-accordion2--vertical';
+  const ACCORDION_HORIZONTAL = 'mdlext-accordion2--horizontal';
   const PANEL                = 'mdlext-accordion2__panel';
   const PANEL_ROLE           = 'presentation';
   const TAB                  = 'mdlext-accordion2__tab';
@@ -76,6 +78,10 @@ import { createCustomEvent } from '../utils/custom-event';
   MaterialExtAccordion2.prototype.init = function() {
     if (this.element_) {
       // Do the init required for this component to work
+      if( !(this.element_.classList.contains(ACCORDION_HORIZONTAL) || this.element_.classList.contains(ACCORDION_VERTICAL))) {
+        throw new Error(`Accordion must have one of the classes "${ACCORDION_HORIZONTAL}" or "${ACCORDION_VERTICAL}"`);
+      }
+
       this.element_.setAttribute('role', 'tablist');
 
       if(!this.element_.hasAttribute(ARIA_MULTISELECTABLE)) {
@@ -351,14 +357,24 @@ import { createCustomEvent } from '../utils/custom-event';
             else {
               break;
             }
-
-          } while(nextPanel !== panel);
+          }
+          while(nextPanel !== panel);
         }
 
         if (nextTab) {
           e.preventDefault();
           e.stopPropagation();
           nextTab.focus();
+
+          // Workaround for JSDom testing:
+          // In JsDom 'element.focus()' does not trigger any focus event
+          if(!nextTab.hasAttribute(ARIA_SELECTED)) {
+
+            [...this.element_.querySelectorAll(`.${TAB}[aria-selected="true"]`)]
+              .forEach( selectedTab => selectedTab.removeAttribute(ARIA_SELECTED) );
+
+            nextTab.setAttribute(ARIA_SELECTED, 'true');
+          }
         }
       }
       else if (e.keyCode === VK_ENTER || e.keyCode === VK_SPACE) {
