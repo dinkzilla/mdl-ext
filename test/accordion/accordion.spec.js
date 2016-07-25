@@ -25,6 +25,7 @@ describe('MaterialExtAccordion', () => {
 
   const PANEL = 'mdlext-accordion__panel';
   const TAB = 'mdlext-accordion__tab';
+  const TAB_CAPTION = 'mdlext-accordion__tab__caption';
   const TABPANEL = 'mdlext-accordion__tabpanel';
 
   const fixture = `
@@ -77,10 +78,18 @@ describe('MaterialExtAccordion', () => {
 </html>`;
 
   const accordion2_no_aria_multiselectable = `
-<ul id="accordion-2" class="mdlext-accordion mdlext-js-accordion mdlext-accordion--horizontal">
+<ul id="accordion-2" class="mdlext-accordion mdlext-js-accordion mdlext-accordion--horizontal" style="height:300px">
   <li class="mdlext-accordion__panel">
     <header class="mdlext-accordion__tab" aria-expanded="true">
       <span class="mdlext-accordion__tab__caption">Tab #1</span>
+    </header>
+    <section class="mdlext-accordion__tabpanel">
+      <p>Some content</p>
+    </section>
+  </li>
+  <li class="mdlext-accordion__panel">
+    <header class="mdlext-accordion__tab" aria-expanded="true">
+      <span class="mdlext-accordion__tab__caption">Tab #2</span>
     </header>
     <section class="mdlext-accordion__tabpanel">
       <p>Some content</p>
@@ -548,8 +557,6 @@ describe('MaterialExtAccordion', () => {
     }
   });
 
-
-
   it('emits a custom "toggle" event when tab is toggled', () => {
     const accordion = document.querySelector('#accordion-1');
     const tab = accordion.querySelector(`.${PANEL}:first-child .${TAB}`);
@@ -651,7 +658,27 @@ describe('MaterialExtAccordion', () => {
     expect(openTabs).to.have.lengthOf(1, 'Expected excactly one tab to have aria-expanded="true"');
   });
 
+  /*
+  //
+  // Can not test this. In JsDom, offsetWidth and offsetHeight properties do not work.
+  // getBoundingClientRect() return only zero values
+  //
+  it('calculates a max caption width when accordion has horizontal layout', () => {
+    const container = document.querySelector('#mount');
+    try {
+      container.insertAdjacentHTML('beforeend', accordion2_no_aria_multiselectable);
+      const element = document.querySelector('#accordion-2');
+      console.log('*****', element.getBoundingClientRect(), element.offsetWidth, '*****' );
 
+      [...element.querySelectorAll(`.${TAB} .${TAB_CAPTION}`)].forEach( caption => {
+        console.log('*****', caption.getBoundingClientRect());
+      })
+    }
+    finally {
+      removeChilds(container);
+    }
+  });
+  */
 
   const anyOpenTab = accordion => {
     return [...accordion.querySelectorAll(`.${PANEL} .${TAB}`)].find(tab => tab.getAttribute('aria-expanded') == 'true') || null;

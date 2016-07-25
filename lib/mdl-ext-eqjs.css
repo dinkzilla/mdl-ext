@@ -2802,7 +2802,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   box-sizing: border-box;
   position: relative;
   margin: 0;
-  padding: 0 8px;
+  padding: 0;
   min-width: 56px;
   min-height: 56px;
   display: -ms-flexbox;
@@ -2853,6 +2853,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 
 .mdlext-accordion__tab__caption {
   padding-left: 8px;
+  padding-right: 8px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2901,6 +2902,8 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-accordion--vertical .mdlext-accordion__tab {
   height: 56px;
   border-top: 1px solid rgba(158, 158, 158, 0.5);
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .mdlext-accordion--vertical .mdlext-accordion__tab > * {
@@ -2942,12 +2945,17 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 }
 
 .mdlext-accordion--horizontal .mdlext-accordion__tab > * {
-  transform: rotate(-90deg) translateX(50%);
+  transform: rotate(-90deg) translateX(8px);
 }
 
 .mdlext-accordion--horizontal .mdlext-accordion__tab > *:last-child:not(:only-child) {
   margin-bottom: auto;
   transform: rotate(-90deg) translateX(0);
+}
+
+.mdlext-accordion--horizontal .mdlext-accordion__tab__caption {
+  transform: rotate(-90deg) translateX(50%);
+  padding-right: 24px;
 }
 
 .mdlext-accordion--horizontal .mdlext-accordion__tabpanel {

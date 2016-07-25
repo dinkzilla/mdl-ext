@@ -47,6 +47,7 @@ import { createCustomEvent } from '../utils/custom-event';
   const PANEL                = 'mdlext-accordion__panel';
   const PANEL_ROLE           = 'presentation';
   const TAB                  = 'mdlext-accordion__tab';
+  const TAB_CAPTION          = 'mdlext-accordion__tab__caption';
   const TAB_ROLE             = 'tab';
   const TABPANEL             = 'mdlext-accordion__tabpanel';
   const TABPANEL_ROLE        = 'tabpanel';
@@ -87,6 +88,7 @@ import { createCustomEvent } from '../utils/custom-event';
       if(!this.element_.hasAttribute(ARIA_MULTISELECTABLE)) {
         this.element_.setAttribute(ARIA_MULTISELECTABLE, 'false');
       }
+
       this.element_.addEventListener('command', this.commandHandler_.bind(this), false);
 
       [...this.element_.querySelectorAll(`.${ACCORDION} > .${PANEL}`)].forEach( panel => this.upgradeTab(panel) );
@@ -98,7 +100,7 @@ import { createCustomEvent } from '../utils/custom-event';
 
 
   // Helpers
-  const accordionElements = ( element ) => {
+  const accordionPanelElements = ( element ) => {
     if (element.classList.contains(PANEL)) {
       return {
         panel: element,
@@ -255,7 +257,7 @@ import { createCustomEvent } from '../utils/custom-event';
    */
   MaterialExtAccordion.prototype.upgradeTab = function( tabElement ) {
 
-    const {panel, tab, tabpanel} = accordionElements( tabElement );
+    const { panel, tab, tabpanel } = accordionPanelElements( tabElement );
 
     const disableTab = () => {
       panel.classList.remove(IS_EXPANDED);
@@ -281,6 +283,24 @@ import { createCustomEvent } from '../utils/custom-event';
         panel.classList.remove(IS_EXPANDED);
         tabpanel.setAttribute('hidden', '');
         tabpanel.setAttribute(ARIA_HIDDEN, 'true');
+      }
+    };
+
+    // In horizontal layout, caption must have a max-width defined to prevent pushing elements to the right out of view.
+    // In JsDom, offsetWidth and offsetHeight properties do not work, so this function is not testable.
+    /* istanbul ignore next */
+    const calcMaxTabCaptionWidth = () => {
+
+      const tabCaption = tab.querySelector(`.${TAB_CAPTION}`);
+      if(tabCaption !== null) {
+        const w = [...tab.children]
+          .filter( el => el.classList && !el.classList.contains(TAB_CAPTION) )
+          .reduce( (v, el) => v + el.offsetWidth, 0 );
+
+        const maxWidth = tab.clientHeight - w;
+        if(maxWidth > 0) {
+          tabCaption.style['max-width'] = `${maxWidth}px`;
+        }
       }
     };
 
@@ -403,6 +423,12 @@ import { createCustomEvent } from '../utils/custom-event';
       enableTab();
     }
 
+    if( this.element_.classList.contains(ACCORDION_HORIZONTAL)) {
+      calcMaxTabCaptionWidth();
+    }
+
+
+
     tab.removeEventListener('click', clickHandler);
     tab.removeEventListener('focus', focusHandler);
     tab.removeEventListener('keydown', keydownHandler);
@@ -426,7 +452,7 @@ import { createCustomEvent } from '../utils/custom-event';
       this.openTabs_();
     }
     else if(tabElement !== null) {
-      const { panel, tab, tabpanel } = accordionElements( tabElement );
+      const { panel, tab, tabpanel } = accordionPanelElements( tabElement );
       if(tab.getAttribute(ARIA_EXPANDED).toLowerCase() !== 'true') {
         this.toggleTab_(panel, tab, tabpanel);
       }
@@ -444,7 +470,7 @@ import { createCustomEvent } from '../utils/custom-event';
       this.closeTabs_();
     }
     else if(tabElement !== null) {
-      const { panel, tab, tabpanel } = accordionElements( tabElement );
+      const { panel, tab, tabpanel } = accordionPanelElements( tabElement );
 
       if(tab.getAttribute(ARIA_EXPANDED).toLowerCase() === 'true') {
         this.toggleTab_(panel, tab, tabpanel);
@@ -460,7 +486,7 @@ import { createCustomEvent } from '../utils/custom-event';
    */
   MaterialExtAccordion.prototype.toggleTab = function( tabElement ) {
     if(tabElement) {
-      const { panel, tab, tabpanel } = accordionElements( tabElement );
+      const { panel, tab, tabpanel } = accordionPanelElements( tabElement );
       this.toggleTab_(panel, tab, tabpanel);
     }
   };

@@ -28,7 +28,7 @@
     box-sizing: border-box;
     position: relative;
     margin: 0;
-    padding: 0 $mdlext-accordion-header-padding;
+    padding: 0; // $mdlext-accordion-header-padding;
     min-width: $mdlext-accordion-header-height;
     min-height: $mdlext-accordion-header-height;
     display: flex;
@@ -73,6 +73,7 @@
 
     &__caption {
       padding-left: $mdlext-accordion-header-padding;
+      padding-right: $mdlext-accordion-header-padding;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -113,6 +114,8 @@
     .mdlext-accordion__tab {
       height: $mdlext-accordion-header-height;
       border-top: 1px solid $mdlext-accordion-header-border-color;
+      padding-left: $mdlext-accordion-header-padding;
+      padding-right: $mdlext-accordion-header-padding;
 
       > * {
         padding-left: $mdlext-accordion-header-padding;
@@ -155,13 +158,19 @@
       border-left: 1px solid $mdlext-accordion-header-border-color;
 
       > * {
-        transform: rotate(-90deg) translateX(50%);
+        //transform: rotate(-90deg) translateX(50%);
+        transform: rotate(-90deg) translateX($mdlext-accordion-header-padding);
       }
 
       > *:last-child:not(:only-child) {
         // If more than one element, push last element to top
         margin-bottom: auto;
         transform: rotate(-90deg) translateX(0);
+      }
+
+      &__caption {
+        transform: rotate(-90deg) translateX(50%);
+        padding-right: $mdlext-accordion-header-padding + 16px;
       }
     }
 

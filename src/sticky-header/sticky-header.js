@@ -70,7 +70,7 @@
    */
   MaterialExtStickyHeader.prototype.resizeHandler_ = function( /* event */ ) {
 
-    // See: https://developer.mozilla.org/ru/docs/Web/Events/resize
+    // See: https://developer.mozilla.org/en-US/docs/Web/Events/resize
     if(!this.drawing_) {
       // Assumes MDL has polyfilled rAF
       window.requestAnimationFrame( () => {
