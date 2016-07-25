@@ -21,7 +21,7 @@
 /**
  * A WAI-ARIA friendly accordion component.
  * An accordion is a collection of expandable panels associated with a common outer container. Panels consist
- * of a header and an associated content region or panel. The primary use of an Accordion is to present multiple sections
+ * of a header and an associated content region or tabpanel. The primary use of an Accordion is to present multiple sections
  * of content on a single page without scrolling, where all of the sections are peers in the application or object hierarchy.
  * The general look is similar to a tree where each root tree node is an expandable accordion header. The user navigates
  * and makes the contents of each panel visible (or not) by interacting with the Accordion Header
@@ -29,49 +29,94 @@
 
 import { createCustomEvent } from '../utils/custom-event';
 
+
 (function() {
   'use strict';
 
-
-  const RIPPLE_COMPONENT = 'MaterialRipple';
-  const VK_TAB = 9;
-  const VK_ENTER = 13;
-  const VK_SPACE = 32;
-  const VK_END = 35;
-  const VK_HOME = 36;
-  const VK_ARROW_LEFT = 37;
-  const VK_ARROW_UP = 38;
-  const VK_ARROW_RIGHT = 39;
-  const VK_ARROW_DOWN = 40;
-
-  const PANEL = 'mdlext-accordion__panel';
-  const HEADER = 'mdlext-accordion__panel__header';
-  const HEADER_TABSTOP = 'mdlext-accordion__panel__header__tabstop';
-  const IS_UPGRADED = 'is-upgraded';
-  const RIPPLE = 'mdl-ripple';
-  const RIPPLE_CONTAINER = 'mdlext-accordion__panel__header__ripple-container';
-  const RIPPLE_EFFECT = 'mdl-js-ripple-effect';
-  const RIPPLE_EFFECT_IGNORE_EVENTS = 'mdl-js-ripple-effect--ignore-events';
-
+  const VK_ENTER             = 13;
+  const VK_SPACE             = 32;
+  const VK_END               = 35;
+  const VK_HOME              = 36;
+  const VK_ARROW_LEFT        = 37;
+  const VK_ARROW_UP          = 38;
+  const VK_ARROW_RIGHT       = 39;
+  const VK_ARROW_DOWN        = 40;
+  const ACCORDION            = 'mdlext-accordion';
+  const ACCORDION_VERTICAL   = 'mdlext-accordion--vertical';
+  const ACCORDION_HORIZONTAL = 'mdlext-accordion--horizontal';
+  const PANEL                = 'mdlext-accordion__panel';
+  const PANEL_ROLE           = 'presentation';
+  const TAB                  = 'mdlext-accordion__tab';
+  const TAB_ROLE             = 'tab';
+  const TABPANEL             = 'mdlext-accordion__tabpanel';
+  const TABPANEL_ROLE        = 'tabpanel';
+  const ARIA_MULTISELECTABLE = 'aria-multiselectable';
+  const ARIA_EXPANDED        = 'aria-expanded';
+  const ARIA_HIDDEN          = 'aria-hidden';
+  const ARIA_SELECTED        = 'aria-selected';
+  const IS_EXPANDED          = 'is-expanded';
+  const IS_UPGRADED          = 'is-upgraded';
 
   /**
-   * Class constructor for Accordion MDLEXT component.
-   * Implements MDL component design pattern defined at:
-   * https://github.com/jasonmayes/mdl-component-design-pattern
-   *
    * @constructor
    * @param {Element} element The element that will be upgraded.
    */
-  const MaterialExtAccordion = function MaterialExtAccordion(element) {
+  const MaterialExtAccordion = function MaterialExtAccordion( element ) {
+
     // Stores the Accordion HTML element.
     this.element_ = element;
 
     // Initialize instance.
     this.init();
   };
-
   window['MaterialExtAccordion'] = MaterialExtAccordion;
 
+
+  /**
+   * Initialize component
+   */
+  MaterialExtAccordion.prototype.init = function() {
+    if (this.element_) {
+      // Do the init required for this component to work
+      if( !(this.element_.classList.contains(ACCORDION_HORIZONTAL) || this.element_.classList.contains(ACCORDION_VERTICAL))) {
+        throw new Error(`Accordion must have one of the classes "${ACCORDION_HORIZONTAL}" or "${ACCORDION_VERTICAL}"`);
+      }
+
+      this.element_.setAttribute('role', 'tablist');
+
+      if(!this.element_.hasAttribute(ARIA_MULTISELECTABLE)) {
+        this.element_.setAttribute(ARIA_MULTISELECTABLE, 'false');
+      }
+      this.element_.addEventListener('command', this.commandHandler_.bind(this), false);
+
+      [...this.element_.querySelectorAll(`.${ACCORDION} > .${PANEL}`)].forEach( panel => this.upgradeTab(panel) );
+
+      // Set upgraded flag
+      this.element_.classList.add(IS_UPGRADED);
+    }
+  };
+
+
+  // Helpers
+  const accordionElements = ( element ) => {
+    if (element.classList.contains(PANEL)) {
+      return {
+        panel: element,
+        tab: element.querySelector(`.${TAB}`),
+        tabpanel: element.querySelector(`.${TABPANEL}`)
+      };
+    }
+    else {
+      return {
+        panel: element.parentNode,
+        tab: element.parentNode.querySelector(`.${TAB}`),
+        tabpanel: element.parentNode.querySelector(`.${TABPANEL}`)
+      };
+    }
+  };
+
+
+  // Private methods.
 
   /**
    * Handles custom command event, 'open', 'close', or 'toggle'
@@ -85,285 +130,356 @@ import { createCustomEvent } from '../utils/custom-event';
     if(event.detail && event.detail.action) {
       const action = event.detail.action.toLowerCase();
 
-      if('open' === action || 'close' === action || 'toggle' === action) {
-
-        if(event.detail.target === undefined) {
-
-          if(this.element_.hasAttribute('aria-multiselectable') &&
-            'false' !== this.element_.getAttribute('aria-multiselectable').toLowerCase()) {
-
-            [...this.element_.querySelectorAll(`.${PANEL}`)].forEach(panel => {
-              panel.dispatchEvent(
-                createCustomEvent('command_', {
-                  detail: {action: action}
-                })
-              );
-            });
-          }
-        }
-        else if (event.detail.target !== null) {
-
-          event.detail.target.dispatchEvent(
-            // Let the even bubble, in case the evnt is dispatched to a child element of the panel
-            createCustomEvent('command_', {
-              bubbles: true, detail: { action: action }
-            })
-          );
-        }
+      switch (action) {
+        case 'open':
+          this.openTab(event.detail.target);
+          break;
+        case 'close':
+          this.closeTab(event.detail.target);
+          break;
+        case 'toggle':
+          this.toggleTab(event.detail.target);
+          break;
+        case 'upgrade':
+          this.upgradeTab(event.detail.target);
+          break;
       }
     }
   };
 
   /**
-   * Initialize accordion's panels
-   *
+   * Dispatch toggle event
+   * @param {string} state
+   * @param {Element} tab
+   * @param {Element} tabpanel
    * @private
    */
-  MaterialExtAccordion.prototype.initAccordion_ = function() {
-
-    this.element_.setAttribute('role', 'tablist');
-
-    if (this.element_.classList.contains(RIPPLE_EFFECT)) {
-      this.element_.classList.add(RIPPLE_EFFECT_IGNORE_EVENTS);
-    }
-
-    [...this.element_.querySelectorAll(`.${PANEL}`)].forEach( panel => {
-      new MaterialExtAccordionPanel(panel, this);
+  MaterialExtAccordion.prototype.dispatchToggleEvent_ = function ( state, tab, tabpanel ) {
+    const ce = createCustomEvent('toggle', {
+      bubbles: true,
+      cancelable: true,
+      detail: { state: state, tab: tab, tabpanel: tabpanel }
     });
-
-    this.element_.addEventListener('command', this.commandHandler_.bind(this), false);
-
-    this.element_.classList.add(IS_UPGRADED);
+    this.element_.dispatchEvent(ce);
   };
 
   /**
-   * Initialize Accordion element.
+   * Open tab
+   * @param {Element} panel
+   * @param {Element} tab
+   * @param {Element} tabpanel
+   * @private
    */
-  MaterialExtAccordion.prototype.init = function() {
-    if (this.element_) {
-      this.initAccordion_();
-    }
+  MaterialExtAccordion.prototype.openTab_ = function( panel, tab, tabpanel ) {
+    panel.classList.add(IS_EXPANDED);
+    tab.setAttribute(ARIA_EXPANDED, 'true');
+    tabpanel.removeAttribute('hidden');
+    tabpanel.setAttribute(ARIA_HIDDEN, 'false');
+    this.dispatchToggleEvent_('open', tab, tabpanel);
   };
 
+  /**
+   * Close tab
+   * @param {Element} panel
+   * @param {Element} tab
+   * @param {Element} tabpanel
+   * @private
+   */
+  MaterialExtAccordion.prototype.closeTab_ = function( panel, tab, tabpanel ) {
+    panel.classList.remove(IS_EXPANDED);
+    tab.setAttribute(ARIA_EXPANDED, 'false');
+    tabpanel.setAttribute('hidden', '');
+    tabpanel.setAttribute(ARIA_HIDDEN, 'true');
+    this.dispatchToggleEvent_('close', tab, tabpanel);
+  };
 
   /**
-   * Constructor for an individual accordion panel.
-   *
-   * @constructor
-   * @param {Element} panel The HTML element for the tab.
-   * @param {MaterialExtAccordion} ctx The MaterialExtAccordion object that owns the panel.
+   * Toggle tab
+   * @param {Element} panel
+   * @param {Element} tab
+   * @param {Element} tabpanel
+   * @private
    */
-  function MaterialExtAccordionPanel(panel, ctx) {
-
-    const header = panel.querySelector(`.${HEADER}`);
-    if(header === null) {
-      throw new Error('There must be a header element for each accordion panel.');
-    }
-
-    header.setAttribute('role', 'tab');
-
-    let a = header.querySelector(`a.${HEADER_TABSTOP}`);
-    if(a === null) {
-      // An anchor is required for focus/tab stop
-      a = document.createElement('a');
-      a.href = '#';
-      a.classList.add(HEADER_TABSTOP);
-      header.appendChild(a);
-    }
-
-    panel.setAttribute('role', 'tabpanel');
-
-    if(panel.hasAttribute('open')) {
-      header.setAttribute('aria-expanded', '');
-    }
-    else {
-      header.setAttribute('aria-hidden', '');
-    }
-
-    if (ctx.element_.classList.contains(RIPPLE_EFFECT)) {
-      const rippleContainer = a;
-      rippleContainer.classList.add(RIPPLE_CONTAINER);
-      rippleContainer.classList.add(RIPPLE_EFFECT);
-      const ripple = document.createElement('span');
-      ripple.classList.add(RIPPLE);
-      rippleContainer.appendChild(ripple);
-      componentHandler.upgradeElement(rippleContainer, RIPPLE_COMPONENT);
-    }
-
-    header.addEventListener('click', ( event => {
-
-      event.preventDefault();
-      event.stopPropagation();
-
-      if(!panel.hasAttribute('disabled')) {
-
-        if(panel.hasAttribute('open')) {
-
-          closePanel(panel, header);
-
-          // Dispatch toggle event to accordion element
-          dispatchToggleEvent('close', panel, ctx.element_);
-        }
-        else {
-          if(ctx.element_.hasAttribute('aria-multiselectable') &&
-            'false' === ctx.element_.getAttribute('aria-multiselectable').toLowerCase()) {
-
-            const openPanel = ctx.element_.querySelector(`.${PANEL}[open]`);
-            if (openPanel) {
-              closePanel(openPanel, openPanel.querySelector(`.${HEADER}`));
-
-              // Dispatch toggle event to accordion element
-              dispatchToggleEvent('close', openPanel, ctx.element_);
-            }
-            removeAriaSelectedAttribute();
-          }
-
-          openPanel(panel, header);
-
-          // Dispatch toggle event to accordion element
-          dispatchToggleEvent('open', panel, ctx.element_);
-        }
-        focus(panel);
-      }
-    }), true);
-
-
-    header.addEventListener('keydown', ( event => {
-      if (event.keyCode === VK_TAB
-        || event.keyCode === VK_ENTER || event.keyCode === VK_SPACE
-        || event.keyCode === VK_END || event.keyCode === VK_HOME
-        || event.keyCode === VK_ARROW_UP || event.keyCode === VK_ARROW_LEFT
-        || event.keyCode === VK_ARROW_DOWN || event.keyCode === VK_ARROW_RIGHT) {
-
-        const panels = panel.parentNode.children;
-        let nextPanel = null;
-        const n = panel.parentNode.childElementCount - 1;
-
-        for (let i = 0; i <= n; i++) {
-
-          if (event.keyCode === VK_HOME) {
-            nextPanel = panels[0];
-            break;
-          }
-          else if (event.keyCode === VK_END) {
-            nextPanel = panels[n];
-            break;
-          }
-
-          if(panels[i] == panel) {
-            if(event.keyCode === VK_ARROW_UP || event.keyCode === VK_ARROW_LEFT) {
-              nextPanel = i > 0 ? panels[i-1] :  panels[n];
-            }
-            else if (event.keyCode === VK_ARROW_DOWN || event.keyCode === VK_ARROW_RIGHT) {
-              nextPanel = i < n ? panels[i+1] : panels[0];
-            }
-            else if (event.keyCode === VK_TAB) {
-              if(event.shiftKey) {
-                if(i > 0 && !panels[i-1].hasAttribute('open')) {
-                  nextPanel = panels[i-1];
-                }
-              }
-              else if (i < n) {
-                if(!panel.hasAttribute('open')) {
-                  nextPanel = panels[i+1];
-                }
-              }
-            }
-            else if (event.keyCode === VK_ENTER || event.keyCode === VK_SPACE) {
-              event.preventDefault();
-              event.stopPropagation();
-
-              // Trigger mouse click event for any attached listeners.
-              const evt = new MouseEvent('click', {
-                bubbles: true,
-                cancelable: true,
-                view: window
-              });
-              header.dispatchEvent(evt);
-            }
-            break;
-          }
-        }
-        if(nextPanel) {
-          event.preventDefault();
-          event.stopPropagation();
-          focus(nextPanel);
-        }
-      }
-    }), true);
-
-    panel.addEventListener('command_', ( event => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      if(event.detail && event.detail.action) {
-        const action = event.detail.action.toLowerCase();
-        switch (action) {
-          case 'open':
-            openPanel(panel, header);
-            break;
-          case 'close':
-            closePanel(panel, header);
-            break;
-          case 'toggle':
-            togglePanel(panel, header);
-            break;
-        }
-      }
-    }));
-
-
-    function togglePanel(panel, header) {
-      if(panel.hasAttribute('open')) {
-        closePanel(panel, header);
+  MaterialExtAccordion.prototype.toggleTab_ = function( panel, tab, tabpanel ) {
+    if( !(this.element_.hasAttribute('disabled') || tab.hasAttribute('disabled')) ) {
+      if (tab.getAttribute(ARIA_EXPANDED).toLowerCase() === 'true') {
+        this.closeTab_(panel, tab, tabpanel);
       }
       else {
-        openPanel(panel, header);
+        if (this.element_.getAttribute(ARIA_MULTISELECTABLE).toLowerCase() !== 'true') {
+          this.closeTabs_();
+        }
+        this.openTab_(panel, tab, tabpanel);
       }
     }
+  };
 
-    function openPanel(panel, header) {
-      if(!panel.hasAttribute('disabled')) {
-        panel.setAttribute('open', '');
-        header.setAttribute('aria-expanded', '');
-        header.setAttribute('aria-selected', '');
-        header.removeAttribute('aria-hidden', '');
-      }
+  /**
+   * Open tabs
+   * @private
+   */
+  MaterialExtAccordion.prototype.openTabs_ = function() {
+    if (this.element_.getAttribute(ARIA_MULTISELECTABLE).toLowerCase() === 'true') {
+      [...this.element_.querySelectorAll(`.${ACCORDION} > .${PANEL}`)]
+        .filter(panel => !panel.classList.contains(IS_EXPANDED))
+        .forEach(closedItem => {
+          const tab = closedItem.querySelector(`.${TAB}`);
+          if (!tab.hasAttribute('disabled')) {
+            this.openTab_(closedItem, tab, closedItem.querySelector(`.${TABPANEL}`));
+          }
+        });
     }
+  };
 
-    function closePanel(panel, header) {
-      if(!panel.hasAttribute('disabled')) {
-        panel.removeAttribute('open');
-        header.removeAttribute('aria-expanded');
-        header.setAttribute('aria-hidden', '');
-      }
-    }
-
-    function removeAriaSelectedAttribute() {
-      const selectedHeader = ctx.element_.querySelector(`.${HEADER}[aria-selected]`);
-      if(selectedHeader) {
-        selectedHeader.removeAttribute('aria-selected');
-      }
-    }
-
-    function focus(nextPanel) {
-      const a = nextPanel.querySelector(`.${HEADER} a`);
-      if(a) {
-        removeAriaSelectedAttribute();
-        a.focus();
-        nextPanel.querySelector(`.${HEADER}`).setAttribute('aria-selected', '');
-      }
-    }
-
-    function dispatchToggleEvent(state, source, target) {
-      const evt = createCustomEvent('toggle', {
-        bubbles: true,
-        cancelable: true,
-        detail: { state: state, source: source }
+  /**
+   * Close tabs
+   * @private
+   */
+  MaterialExtAccordion.prototype.closeTabs_ = function() {
+    [...this.element_.querySelectorAll(`.${ACCORDION} > .${PANEL}.${IS_EXPANDED}`)]
+      .forEach( panel => {
+        const tab = panel.querySelector(`.${TAB}`);
+        if(!tab.hasAttribute('disabled')) {
+          this.closeTab_(panel, tab, panel.querySelector(`.${TABPANEL}`));
+        }
       });
-      target.dispatchEvent(evt);
+  };
+
+
+  // Public methods.
+
+  /**
+   * Upgrade an individual accordion tab
+   * @public
+   * @param {Element} tabElement The HTML element for the accordion panel.
+   */
+  MaterialExtAccordion.prototype.upgradeTab = function( tabElement ) {
+
+    const {panel, tab, tabpanel} = accordionElements( tabElement );
+
+    const disableTab = () => {
+      panel.classList.remove(IS_EXPANDED);
+      tab.setAttribute('tabindex', '-1');
+      tab.setAttribute(ARIA_EXPANDED, 'false');
+      tabpanel.setAttribute('hidden', '');
+      tabpanel.setAttribute(ARIA_HIDDEN, 'true');
+    };
+
+    const enableTab = () => {
+      if(!tab.hasAttribute(ARIA_EXPANDED)) {
+        tab.setAttribute(ARIA_EXPANDED, 'false');
+      }
+
+      tab.setAttribute('tabindex', '0');
+
+      if(tab.getAttribute(ARIA_EXPANDED).toLowerCase() === 'true') {
+        panel.classList.add(IS_EXPANDED);
+        tabpanel.removeAttribute('hidden');
+        tabpanel.setAttribute(ARIA_HIDDEN, 'false');
+      }
+      else {
+        panel.classList.remove(IS_EXPANDED);
+        tabpanel.setAttribute('hidden', '');
+        tabpanel.setAttribute(ARIA_HIDDEN, 'true');
+      }
+    };
+
+    const clickHandler = e => {
+      e.preventDefault();
+      e.stopPropagation();
+      this.toggleTab_(panel, tab, tabpanel);
+    };
+
+    const focusHandler = e => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      [...this.element_.querySelectorAll(`.${TAB}[aria-selected="true"]`)].forEach(
+        selectedTab => selectedTab.removeAttribute(ARIA_SELECTED)
+      );
+      tab.setAttribute(ARIA_SELECTED, 'true');
+    };
+
+    const keydownHandler = e => {
+
+      if(this.element_.hasAttribute('disabled')) {
+        return;
+      }
+
+      if ( e.keyCode === VK_END        || e.keyCode === VK_HOME
+        || e.keyCode === VK_ARROW_UP   || e.keyCode === VK_ARROW_LEFT
+        || e.keyCode === VK_ARROW_DOWN || e.keyCode === VK_ARROW_RIGHT ) {
+
+        let nextTab = null;
+        let keyCode = e.keyCode;
+
+        if (keyCode === VK_HOME) {
+          nextTab = this.element_.querySelector(`.${PANEL}:first-child > .${TAB}`);
+          if(nextTab && nextTab.hasAttribute('disabled')) {
+            nextTab = null;
+            keyCode = VK_ARROW_DOWN;
+          }
+        }
+        else if (keyCode === VK_END) {
+          nextTab = this.element_.querySelector(`.${PANEL}:last-child > .${TAB}`);
+          if(nextTab && nextTab.hasAttribute('disabled')) {
+            nextTab = null;
+            keyCode = VK_ARROW_UP;
+          }
+        }
+
+        if(!nextTab) {
+          let nextPanel = panel;
+
+          do {
+            if (keyCode === VK_ARROW_UP || keyCode === VK_ARROW_LEFT) {
+              nextPanel = nextPanel.previousElementSibling;
+              if(!nextPanel) {
+                nextPanel = this.element_.querySelector(`.${PANEL}:last-child`);
+              }
+              if (nextPanel) {
+                nextTab = nextPanel.querySelector(`.${PANEL} > .${TAB}`);
+              }
+            }
+            else if (keyCode === VK_ARROW_DOWN || keyCode === VK_ARROW_RIGHT) {
+              nextPanel = nextPanel.nextElementSibling;
+              if(!nextPanel) {
+                nextPanel = this.element_.querySelector(`.${PANEL}:first-child`);
+              }
+              if (nextPanel) {
+                nextTab = nextPanel.querySelector(`.${PANEL} > .${TAB}`);
+              }
+            }
+
+            if(nextTab && nextTab.hasAttribute('disabled')) {
+              nextTab = null;
+            }
+            else {
+              break;
+            }
+          }
+          while(nextPanel !== panel);
+        }
+
+        if (nextTab) {
+          e.preventDefault();
+          e.stopPropagation();
+          nextTab.focus();
+
+          // Workaround for JSDom testing:
+          // In JsDom 'element.focus()' does not trigger any focus event
+          if(!nextTab.hasAttribute(ARIA_SELECTED)) {
+
+            [...this.element_.querySelectorAll(`.${TAB}[aria-selected="true"]`)]
+              .forEach( selectedTab => selectedTab.removeAttribute(ARIA_SELECTED) );
+
+            nextTab.setAttribute(ARIA_SELECTED, 'true');
+          }
+        }
+      }
+      else if (e.keyCode === VK_ENTER || e.keyCode === VK_SPACE) {
+        e.preventDefault();
+        e.stopPropagation();
+        this.toggleTab_(panel, tab, tabpanel);
+      }
+    };
+
+    if(tab === null) {
+      throw new Error('There must be a tab element for each accordion panel.');
     }
-  }
+
+    if(tabpanel === null) {
+      throw new Error('There must be a tabpanel element for each accordion panel.');
+    }
+
+    panel.setAttribute('role', PANEL_ROLE);
+    tab.setAttribute('role', TAB_ROLE);
+    tabpanel.setAttribute('role', TABPANEL_ROLE);
+
+    if(tab.hasAttribute('disabled')) {
+      disableTab();
+    }
+    else {
+      enableTab();
+    }
+
+    tab.removeEventListener('click', clickHandler);
+    tab.removeEventListener('focus', focusHandler);
+    tab.removeEventListener('keydown', keydownHandler);
+
+    tab.addEventListener('click', clickHandler);
+    tab.addEventListener('focus', focusHandler);
+    tab.addEventListener('keydown', keydownHandler);
+
+  };
+  MaterialExtAccordion.prototype['upgradeTab'] = MaterialExtAccordion.prototype.upgradeTab;
+
+
+  /**
+   * Open tab
+   * @public
+   * @param {Element} tabElement
+   */
+  MaterialExtAccordion.prototype.openTab = function( tabElement ) {
+
+    if(tabElement === undefined) {
+      this.openTabs_();
+    }
+    else if(tabElement !== null) {
+      const { panel, tab, tabpanel } = accordionElements( tabElement );
+      if(tab.getAttribute(ARIA_EXPANDED).toLowerCase() !== 'true') {
+        this.toggleTab_(panel, tab, tabpanel);
+      }
+    }
+  };
+  MaterialExtAccordion.prototype['openTab'] = MaterialExtAccordion.prototype.openTab;
+
+  /**
+   * Close tab
+   * @public
+   * @param {Element} tabElement
+   */
+  MaterialExtAccordion.prototype.closeTab = function( tabElement ) {
+    if(tabElement === undefined) {
+      this.closeTabs_();
+    }
+    else if(tabElement !== null) {
+      const { panel, tab, tabpanel } = accordionElements( tabElement );
+
+      if(tab.getAttribute(ARIA_EXPANDED).toLowerCase() === 'true') {
+        this.toggleTab_(panel, tab, tabpanel);
+      }
+    }
+  };
+  MaterialExtAccordion.prototype['closeTab'] = MaterialExtAccordion.prototype.closeTab;
+
+  /**
+   * Toggle tab
+   * @public
+   * @param {Element} tabElement
+   */
+  MaterialExtAccordion.prototype.toggleTab = function( tabElement ) {
+    if(tabElement) {
+      const { panel, tab, tabpanel } = accordionElements( tabElement );
+      this.toggleTab_(panel, tab, tabpanel);
+    }
+  };
+  MaterialExtAccordion.prototype['toggleTab'] = MaterialExtAccordion.prototype.toggleTab;
+
+
+  /*
+   * Downgrade component
+   * E.g remove listeners and clean up resources
+   *
+   * Note: There is a bug i material component container; downgrade is never called!
+   * Disables method temporarly to keep code coverage at 100% for functions.
+   *
+   MaterialExtAccordion.prototype.mdlDowngrade_ = function() {
+     'use strict';
+     console.log('***** MaterialExtAccordion.mdlDowngrade');
+   };
+   */
+
 
   // The component registers itself. It can assume componentHandler is available
   // in the global scope.

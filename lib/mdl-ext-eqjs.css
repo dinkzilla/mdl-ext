@@ -2691,303 +2691,6 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
  * limitations under the License.
  */
 
-/*
- * Accordion
- * The Accordion CSS are based on / inspired by this CodePen: http://codepen.io/aann/pen/dPqBML
- */
-
-/**
- * Copyright 2016 Leif Olsen. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/* stylelint-disable */
-
-/* stylelint-enable */
-
-/* ==========   Sticky Header   ========== */
-
-/* stylelint-disable */
-
-/* stylelint-enable */
-
-/* ==========     Accordion     ========== */
-
-/* ==========     Dialog     ========== */
-
-/* ==========     Lightbox     ========== */
-
-/* ==========  Lightboard  ========== */
-
-/* ==========  Carousel  ========== */
-
-/* ==========  Bordered fields  ========== */
-
-/* ==========  Color Themes  ========== */
-
-ul.mdlext-accordion {
-  list-style: none;
-}
-
-.mdlext-accordion {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  display: -ms-flexbox;
-  display: flex;
-  box-sizing: border-box;
-}
-
-.mdlext-accordion .mdlext-accordion__panel {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  width: 56px;
-  overflow: hidden;
-  transition: flex 0.15s ease-in;
-  transition: flex 0.15s ease-in, -ms-flex 0.15s ease-in;
-  -ms-flex: 0 0 auto;
-      flex: 0 0 auto;
-  display: -ms-flexbox;
-  display: flex;
-  box-sizing: border-box;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-      align-items: center;
-  position: relative;
-  min-width: 56px;
-  margin: 0;
-  padding: 0;
-  color: #000000;
-  background-color: rgba(158, 158, 158, 0.2);
-  border-right: 1px solid rgba(158, 158, 158, 0.5);
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  box-sizing: border-box;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header:hover {
-  background-color: rgba(158, 158, 158, 0.4);
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header a.mdlext-accordion__panel__header__tabstop,
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container {
-  text-decoration: none;
-  overflow: hidden;
-  font-size: 0;
-  position: absolute;
-  top: 1px;
-  right: 0;
-  bottom: 0;
-  left: 1px;
-  z-index: 1;
-  box-sizing: border-box;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header a.mdlext-accordion__panel__header__tabstop:focus,
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container:focus {
-  outline: thin solid #3f51b5;
-  outline-offset: -1px;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container {
-  width: 99.9%;
-  height: 99.9%;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__ripple-container .mdl-ripple {
-  background: white;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform {
-  white-space: nowrap;
-  margin: 0;
-  padding: 0 8px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 56px;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-      align-items: center;
-  transform: rotate(-90deg) translateY(100%);
-  transform-origin: bottom left;
-  box-sizing: border-box;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > * {
-  margin: 0;
-  padding: 0;
-  -ms-flex: 1;
-      flex: 1;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > i,
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > img {
-  -ms-flex: none;
-      flex: none;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > i + *,
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform > img + * {
-  margin-left: 8px;
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__state::after {
-  content: '+';
-}
-
-.mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__content {
-  width: 100%;
-  padding: 8px;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-.mdlext-accordion .mdlext-accordion__panel[open] {
-  -ms-flex: 1 1 auto;
-      flex: 1 1 auto;
-}
-
-.mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__state::after {
-  content: '-';
-}
-
-.mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__header {
-  background-color: rgba(158, 158, 158, 0.3);
-  border-right: 1px solid rgba(158, 158, 158, 0.6);
-}
-
-.mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__content {
-  overflow: auto;
-  animation: mdlext-accordion__panel-open-keyframe 0.4s linear;
-}
-
-.mdlext-accordion .mdlext-accordion__panel[disabled] .mdlext-accordion__panel__header {
-  background-color: rgba(158, 158, 158, 0.12);
-  color: rgba(0, 0, 0, 0.26);
-}
-
-.mdlext-accordion .mdlext-accordion__panel[disabled] .mdlext-accordion__panel__header:hover {
-  background-color: rgba(158, 158, 158, 0.12);
-}
-
-.mdlext-accordion .mdlext-accordion__panel[disabled] .mdlext-accordion__panel__content {
-  pointer-events: none;
-}
-
-.mdlext-accordion.mdlext-accordion--vertical {
-  -ms-flex-flow: column nowrap;
-      flex-flow: column nowrap;
-}
-
-.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel {
-  width: 100%;
-  height: 56px;
-  -ms-flex: none;
-      flex: none;
-  -ms-flex-flow: column nowrap;
-      flex-flow: column nowrap;
-}
-
-.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel .mdlext-accordion__panel__header {
-  height: 56px;
-  min-height: 56px;
-  border-right: 0;
-  border-bottom: 1px solid rgba(158, 158, 158, 0.5);
-}
-
-.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel .mdlext-accordion__panel__header .mdlext-accordion__panel__header__transform {
-  white-space: normal;
-  position: relative;
-  width: 100%;
-  bottom: auto;
-  left: auto;
-  transform: rotate(0deg);
-}
-
-.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel[open] {
-  -ms-flex: 1;
-      flex: 1;
-}
-
-.mdlext-accordion.mdlext-accordion--vertical .mdlext-accordion__panel[open] .mdlext-accordion__panel__header {
-  border-right: 0;
-  border-bottom: 1px solid rgba(158, 158, 158, 0.6);
-}
-
-.mdlext-accordion.mdlext-accordion--vertical[aria-multiselectable]:not([aria-multiselectable="false"]) {
-  height: auto;
-}
-
-.mdlext-accordion.mdlext-accordion--vertical[aria-multiselectable]:not([aria-multiselectable="false"]) .mdlext-accordion__panel {
-  height: auto;
-  max-height: 56px;
-  transition: max-height 0.1s ease-out;
-}
-
-.mdlext-accordion.mdlext-accordion--vertical[aria-multiselectable]:not([aria-multiselectable="false"]) .mdlext-accordion__panel[open] {
-  max-height: 20000px;
-  transition: max-height 2s ease-in;
-}
-
-.mdlext-accordion.mdlext-accordion--vertical[aria-multiselectable]:not([aria-multiselectable="false"]) .mdlext-accordion__panel[open] .mdlext-accordion__panel__content {
-  overflow: hidden;
-  animation: mdlext-accordion__panel-open-keyframe 0.1s linear;
-  animation-delay: 2.2s;
-}
-
-/*
- * Animating overflow:hidden -> overflow:auto, see: https://jdsteinbach.com/css/snippet-animate-display-transform/
- * Why do we need to animate this? The text overflow auto should be set after the accordion animation has completed!
- * If we omit this, the the overflow scrollbar will flicker during the accordion open transition
- */
-
-@keyframes mdlext-accordion__panel-open-keyframe {
-  0% {
-    overflow: hidden;
-  }
-
-  100% {
-    overflow: auto;
-  }
-}
-
-/**
- * Copyright 2016 Leif Olsen. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 /* stylelint-disable */
 
 /* stylelint-enable */
@@ -3072,14 +2775,14 @@ ul.mdlext-accordion {
   margin-left: -8px;
 }
 
-.mdlext-accordion2 {
+.mdlext-accordion {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.mdlext-accordion2__panel {
+.mdlext-accordion__panel {
   position: relative;
   overflow: hidden;
   display: -ms-flexbox;
@@ -3088,7 +2791,7 @@ ul.mdlext-accordion {
       flex-wrap: nowrap;
 }
 
-.mdlext-accordion2__tab {
+.mdlext-accordion__tab {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-size: 20px;
   font-weight: 500;
@@ -3117,49 +2820,49 @@ ul.mdlext-accordion {
   cursor: pointer;
 }
 
-.mdlext-accordion2__tab:focus {
+.mdlext-accordion__tab:focus {
   outline-offset: -2px;
 }
 
-.mdlext-accordion2__tab[aria-expanded='true'] {
+.mdlext-accordion__tab[aria-expanded='true'] {
   background-color: rgba(158, 158, 158, 0.3);
 }
 
-.mdlext-accordion2__tab[aria-selected='true'] {
+.mdlext-accordion__tab[aria-selected='true'] {
   background-color: rgba(158, 158, 158, 0.4);
 }
 
-.mdlext-accordion2__tab[disabled] {
+.mdlext-accordion__tab[disabled] {
   background-color: rgba(158, 158, 158, 0.12);
   color: rgba(0, 0, 0, 0.26);
   pointer-events: none;
 }
 
-.mdlext-accordion2__tab[disabled] > * {
+.mdlext-accordion__tab[disabled] > * {
   color: rgba(0, 0, 0, 0.26);
 }
 
-.mdlext-accordion2__tab:hover:not([disabled]) {
+.mdlext-accordion__tab:hover:not([disabled]) {
   background-color: rgba(158, 158, 158, 0.4);
 }
 
-.mdlext-accordion2__tab > * {
+.mdlext-accordion__tab > * {
   margin: 0;
   padding: 0;
 }
 
-.mdlext-accordion2__tab__caption {
+.mdlext-accordion__tab__caption {
   padding-left: 8px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.mdlext-accordion2__tab > *:first-child {
+.mdlext-accordion__tab > *:first-child {
   padding-left: 0;
 }
 
-.mdlext-accordion2__tabpanel {
+.mdlext-accordion__tabpanel {
   box-sizing: border-box;
   margin: 0;
   padding: 0 8px;
@@ -3169,7 +2872,7 @@ ul.mdlext-accordion {
       flex-grow: 1;
 }
 
-.mdlext-accordion2__tabpanel[hidden] {
+.mdlext-accordion__tabpanel[hidden] {
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -3180,7 +2883,7 @@ ul.mdlext-accordion {
   width: 1px;
 }
 
-.mdlext-accordion2--vertical {
+.mdlext-accordion--vertical {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
@@ -3189,48 +2892,48 @@ ul.mdlext-accordion {
       flex-wrap: nowrap;
 }
 
-.mdlext-accordion2--vertical .mdlext-accordion2__panel {
+.mdlext-accordion--vertical .mdlext-accordion__panel {
   min-height: 56px;
   -ms-flex-direction: column;
       flex-direction: column;
 }
 
-.mdlext-accordion2--vertical .mdlext-accordion2__tab {
+.mdlext-accordion--vertical .mdlext-accordion__tab {
   height: 56px;
   border-top: 1px solid rgba(158, 158, 158, 0.5);
 }
 
-.mdlext-accordion2--vertical .mdlext-accordion2__tab > * {
+.mdlext-accordion--vertical .mdlext-accordion__tab > * {
   padding-left: 8px;
 }
 
-.mdlext-accordion2--vertical .mdlext-accordion2__tab > *:first-child {
+.mdlext-accordion--vertical .mdlext-accordion__tab > *:first-child {
   padding-left: 0;
 }
 
-.mdlext-accordion2--vertical .mdlext-accordion2__tab > *:last-child:not(:only-child) {
+.mdlext-accordion--vertical .mdlext-accordion__tab > *:last-child:not(:only-child) {
   margin-left: auto;
 }
 
-.mdlext-accordion2--vertical .mdlext-accordion2__tabpanel {
+.mdlext-accordion--vertical .mdlext-accordion__tabpanel {
   border-top: 1px solid rgba(158, 158, 158, 0.5);
 }
 
-.mdlext-accordion2--horizontal {
+.mdlext-accordion--horizontal {
   display: -ms-flexbox;
   display: flex;
 }
 
-.mdlext-accordion2--horizontal .mdlext-accordion2__panel {
+.mdlext-accordion--horizontal .mdlext-accordion__panel {
   min-width: 56px;
   width: 56px;
 }
 
-.mdlext-accordion2--horizontal[aria-multiselectable='true'] .mdlext-accordion2__panel.is-expanded {
+.mdlext-accordion--horizontal[aria-multiselectable='true'] .mdlext-accordion__panel.is-expanded {
   width: 100%;
 }
 
-.mdlext-accordion2--horizontal .mdlext-accordion2__tab {
+.mdlext-accordion--horizontal .mdlext-accordion__tab {
   -ms-flex-direction: column-reverse;
       flex-direction: column-reverse;
   width: 56px;
@@ -3238,43 +2941,43 @@ ul.mdlext-accordion {
   border-left: 1px solid rgba(158, 158, 158, 0.5);
 }
 
-.mdlext-accordion2--horizontal .mdlext-accordion2__tab > * {
+.mdlext-accordion--horizontal .mdlext-accordion__tab > * {
   transform: rotate(-90deg) translateX(50%);
 }
 
-.mdlext-accordion2--horizontal .mdlext-accordion2__tab > *:last-child:not(:only-child) {
+.mdlext-accordion--horizontal .mdlext-accordion__tab > *:last-child:not(:only-child) {
   margin-bottom: auto;
   transform: rotate(-90deg) translateX(0);
 }
 
-.mdlext-accordion2--horizontal .mdlext-accordion2__tabpanel {
+.mdlext-accordion--horizontal .mdlext-accordion__tabpanel {
   border-left: 1px solid rgba(158, 158, 158, 0.5);
 }
 
-.mdlext-accordion2__panel:first-child > .mdlext-accordion2__tab {
+.mdlext-accordion__panel:first-child > .mdlext-accordion__tab {
   border-top-color: transparent;
   border-left-color: transparent;
 }
 
-.mdlext-accordion2[aria-multiselectable="false"] .mdlext-accordion2__panel.is-expanded {
+.mdlext-accordion[aria-multiselectable="false"] .mdlext-accordion__panel.is-expanded {
   -ms-flex-positive: 1;
       flex-grow: 1;
 }
 
-.mdlext-accordion2[disabled] * {
+.mdlext-accordion[disabled] * {
   pointer-events: none;
 }
 
-.mdlext-accordion2[disabled] .mdlext-accordion2__tab {
+.mdlext-accordion[disabled] .mdlext-accordion__tab {
   background-color: rgba(158, 158, 158, 0.12);
   color: rgba(0, 0, 0, 0.26);
 }
 
-.mdlext-accordion2[disabled] .mdlext-accordion2__tab > * {
+.mdlext-accordion[disabled] .mdlext-accordion__tab > * {
   color: rgba(0, 0, 0, 0.26);
 }
 
-.mdlext-accordion2[disabled] .mdlext-accordion2__tabpanel {
+.mdlext-accordion[disabled] .mdlext-accordion__tabpanel {
   opacity: 0.8;
   -webkit-filter: blur(1px) grayscale(80%);
           filter: blur(1px) grayscale(80%);

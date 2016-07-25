@@ -75,13 +75,24 @@
   <style>
   /* Ugly CSS! Only for demo. */
 
-  .mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__state:after {
-    content: 'expand_more';
-  }
-  .mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__state:after {
-    content: 'expand_less';
+  #demo-drawer-accordion {
+    height: 100%;
   }
 
+  #demo-drawer-accordion .mdlext-accordion__tab {
+    height: 64px;
+  }
+
+  .is-small-screen #demo-drawer-accordion .mdlext-accordion__tab {
+    height: 56px;
+  }
+
+  #demo-drawer-accordion .mdlext-accordion__tabpanel,
+  #demo-drawer-accordion .mdlext-accordion__tabpanel nav {
+    padding: 0;
+  }
+
+  /*
   #demo-drawer-accordion li {
     max-height: 64px;
   }
@@ -110,24 +121,21 @@
   #demo-drawer-accordion li section nav {
     padding: 0;
   }
+  */
 </style>
 
 
 <aside class="mdl-layout__drawer">
 
-  <ul id="demo-drawer-accordion" class="mdlext-accordion mdlext-accordion--vertical mdlext-js-accordion mdlext-js-accordion mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events" aria-multiselectable="false">
-    <li class="mdlext-accordion__panel" open="">
-      <header class="mdlext-accordion__panel__header">
-        <a href="#" class="mdlext-accordion__panel__header__tabstop"></a>
-        <div class="mdlext-accordion__panel__header__transform">
-          <h5>MDL Extensions</h5>
-          <i class="mdlext-accordion__panel__state material-icons md-24"></i>
-        </div>
+  <ul id="demo-drawer-accordion" class="mdlext-accordion mdlext-js-accordion mdlext-accordion--vertical" aria-multiselectable="false">
+    <li class="mdlext-accordion__panel">
+      <header class="mdlext-accordion__tab" aria-expanded="true">
+        <span class="mdlext-accordion__tab__caption">MDL Extensions</span>
+        <i class="mdlext-aria-toggle-material-icons"></i>
       </header>
-      <section class="mdlext-accordion__panel__content">
+      <section class="mdlext-accordion__tabpanel">
         <nav class="mdl-navigation">
           <a class="mdl-navigation__link" href="accordion.html">Accordion</a>
-          <a class="mdl-navigation__link" href="accordion2.html">Accordion II</a>
           <a class="mdl-navigation__link" href="bordered-fields.html">Bordered Fields</a>
           <a class="mdl-navigation__link" href="color-themes.html">Color Themes</a>
           <a class="mdl-navigation__link" href="grid.html">Grid</a>
@@ -139,14 +147,11 @@
       </section>
     </li>
     <li class="mdlext-accordion__panel">
-      <header class="mdlext-accordion__panel__header">
-        <a href="#" class="mdlext-accordion__panel__header__tabstop"></a>
-        <div class="mdlext-accordion__panel__header__transform">
-          <h6>Sticky headers</h6>
-          <i class="mdlext-accordion__panel__state material-icons md-24"></i>
-        </div>
+      <header class="mdlext-accordion__tab">
+        <span class="mdlext-accordion__tab__caption">Sticky headers</span>
+        <i class="mdlext-aria-toggle-material-icons"></i>
       </header>
-      <section class="mdlext-accordion__panel__content">
+      <section class="mdlext-accordion__tabpanel">
         <nav class="mdl-navigation">
           <a class="mdl-navigation__link" href="sticky-header.html">Sticky Header I</a>
           <a class="mdl-navigation__link" href="sticky-header-ii.html">Sticky Header II</a>
@@ -176,6 +181,7 @@
   </main>
 </div>
 <script src="scripts/dialog-polyfill.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 <script src="scripts/eq-customevent-patch.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://code.getmdl.io/1.1.3/material.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../lib/mdl-ext.js" type="text/javascript" charset="utf-8"></script>
