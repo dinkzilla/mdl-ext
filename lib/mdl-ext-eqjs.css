@@ -2885,7 +2885,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 }
 
 .mdlext-accordion__tab--ripple[aria-selected='true']:focus:not(:active)::before {
-  animation: mdlext-accordion-tab-ripple 1s cubic-bezier(0.4, 0, 1, 1);
+  animation: mdlext-accordion-tab-ripple 1s cubic-bezier(0.4, 0, 0.4, 1) 0.01s alternate forwards;
 }
 
 .mdlext-accordion__tabpanel {
@@ -2965,12 +2965,12 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   border-top: 1px solid rgba(158, 158, 158, 0.5);
 }
 
-.mdlext-accordion--vertical.mdlext-accordion--animate-tabpanel .mdlext-accordion__tabpanel {
+.mdlext-accordion--vertical .mdlext-accordion__tabpanel--animation {
   transform: scaleY(1);
-  animation: mdlext-accordion-show-tabpanel-y 0.3s ease-in-out;
+  animation: mdlext-accordion-show-tabpanel-y 0.2s ease-in-out;
 }
 
-.mdlext-accordion--vertical.mdlext-accordion--animate-tabpanel .mdlext-accordion__tabpanel[hidden] {
+.mdlext-accordion--vertical .mdlext-accordion__tabpanel--animation[hidden] {
   transform: scaleY(0);
   animation: mdlext-accordion-hide-tabpanel-y 0.2s ease-out;
   animation-delay: 0.1s;
@@ -3032,16 +3032,12 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   border-left: 1px solid rgba(158, 158, 158, 0.5);
 }
 
-.mdlext-accordion--horizontal .mdlext-accordion__tabpanel[hidden] {
-  animation: mdlext-accordion-hide-tabpanel-x 0.2s ease-out;
-}
-
-.mdlext-accordion--horizontal.mdlext-accordion--animate-tabpanel .mdlext-accordion__tabpanel {
+.mdlext-accordion--horizontal .mdlext-accordion__tabpanel--animation {
   transform: scaleX(1);
-  animation: mdlext-accordion-show-tabpanel-x 0.3s ease-in-out;
+  animation: mdlext-accordion-show-tabpanel-x 0.2s ease-in-out;
 }
 
-.mdlext-accordion--horizontal.mdlext-accordion--animate-tabpanel .mdlext-accordion__tabpanel[hidden] {
+.mdlext-accordion--horizontal .mdlext-accordion__tabpanel--animation[hidden] {
   transform: scaleX(0);
   animation: mdlext-accordion-hide-tabpanel-x 0.2s ease-out;
 }
@@ -3092,29 +3088,29 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   }
 }
 
+/*
+@keyframes mdlext-accordion-show-tabpanel-y {
+  0% { transform: scaleY(0.1); }
+  40% { transform: scaleY(1.03); }
+  60% { transform: scaleY(0.98); }
+  80% { transform: scaleY(1.03); }
+  100% { transform: scaleY(0.98); }
+  80% { transform: scaleY(1.01); }
+  100% { transform: scaleY(1); }
+}
+*/
+
 @keyframes mdlext-accordion-show-tabpanel-y {
   0% {
-    transform: scaleY(0.1);
-  }
-
-  40% {
-    transform: scaleY(1.03);
+    transform: scaleY(0);
   }
 
   60% {
-    transform: scaleY(0.98);
-  }
-
-  80% {
-    transform: scaleY(1.03);
-  }
-
-  100% {
-    transform: scaleY(0.98);
-  }
-
-  80% {
     transform: scaleY(1.01);
+  }
+
+  80% {
+    transform: scaleY(0.98);
   }
 
   100% {
@@ -3140,29 +3136,29 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   }
 }
 
+/*
+@keyframes mdlext-accordion-show-tabpanel-x {
+  0% { transform: scaleX(0.1); }
+  40% { transform: scaleX(1.03); }
+  60% { transform: scaleX(0.98); }
+  80% { transform: scaleX(1.03); }
+  100% { transform: scaleX(0.98); }
+  80% { transform: scaleX(1.01); }
+  100% { transform: scaleX(1); }
+}
+*/
+
 @keyframes mdlext-accordion-show-tabpanel-x {
   0% {
-    transform: scaleX(0.1);
-  }
-
-  40% {
-    transform: scaleX(1.03);
+    transform: scaleX(0);
   }
 
   60% {
-    transform: scaleX(0.98);
-  }
-
-  80% {
-    transform: scaleX(1.03);
-  }
-
-  100% {
-    transform: scaleX(0.98);
-  }
-
-  80% {
     transform: scaleX(1.01);
+  }
+
+  80% {
+    transform: scaleX(0.98);
   }
 
   100% {
@@ -3180,7 +3176,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   }
 
   80% {
-    transform: scaleX(1.02);
+    transform: scaleX(1.01);
   }
 
   100% {

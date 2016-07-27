@@ -25,8 +25,9 @@ describe('MaterialExtAccordion', () => {
 
   const PANEL = 'mdlext-accordion__panel';
   const TAB = 'mdlext-accordion__tab';
-  const TAB_CAPTION = 'mdlext-accordion__tab__caption';
   const TABPANEL = 'mdlext-accordion__tabpanel';
+  const RIPPLE = 'mdlext-accordion__tab--ripple';
+  const ANIMATION = 'mdlext-accordion__tabpanel--animation';
 
   const fixture = `
 <!DOCTYPE html>
@@ -36,7 +37,7 @@ describe('MaterialExtAccordion', () => {
   <title>Accordion Fixture</title>
 </head>
 <body>
-<ul id="accordion-1" class="mdlext-accordion mdlext-js-accordion mdlext-accordion--vertical">
+<ul id="accordion-1" class="mdlext-accordion mdlext-js-accordion mdlext-js-ripple-effect mdlext-js-animation-effect mdlext-accordion--vertical">
   <li class="mdlext-accordion__panel">
     <header class="mdlext-accordion__tab" aria-expanded="true">
       <span class="mdlext-accordion__tab__caption">Tab #1</span>
@@ -226,7 +227,7 @@ describe('MaterialExtAccordion', () => {
       'closeTab',
       'toggleTab'
     ];
-    methods.forEach((fn) => {
+    methods.forEach( fn => {
       expect(element.MaterialExtAccordion[fn]).to.be.a('function');
     });
   });
@@ -697,6 +698,20 @@ describe('MaterialExtAccordion', () => {
       removeChilds(container);
     }
 
+  });
+
+  it('has ripple effect on tabs', () => {
+    const element = document.querySelector('#accordion-1');
+    [...element.querySelectorAll(`.${TAB}`)].forEach( tab => {
+      assert.isTrue(tab.classList.contains(RIPPLE), `Expected panel to have class "${RIPPLE}"`);
+    })
+  });
+
+  it('has animated tabpanels', () => {
+    const element = document.querySelector('#accordion-1');
+    [...element.querySelectorAll(`.${TABPANEL}`)].forEach( tab => {
+      assert.isTrue(tab.classList.contains(ANIMATION), `Expected panel to have class "${ANIMATION}"`);
+    })
   });
 
   /*

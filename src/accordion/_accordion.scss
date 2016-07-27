@@ -98,7 +98,8 @@
         transform-origin: 50% 50%;
       }
       &[aria-selected='true']:focus:not(:active)::before {
-        animation: mdlext-accordion-tab-ripple 1s cubic-bezier(0.4, 0.0, 1, 1); //cubic-bezier(0.4, 0.0, 0.4, 1) 0.01s alternate forwards; //ease-out;
+        // http://easings.net/
+        animation: mdlext-accordion-tab-ripple 1s cubic-bezier(0.4, 0.0, 0.4, 1) 0.01s alternate forwards; // cubic-bezier(0.4, 0.0, 1, 1); //cubic-bezier(0.4, 0.0, 0.4, 1) 0.01s alternate forwards; //ease-out;
       }
     }
   }
@@ -171,13 +172,10 @@
 
     .mdlext-accordion__tabpanel {
       border-top: 1px solid $mdlext-accordion-header-border-color;
-    }
 
-    &.mdlext-accordion--animate-tabpanel {
-
-      .mdlext-accordion__tabpanel {
+      &--animation {
         transform: scaleY(1);
-        animation: mdlext-accordion-show-tabpanel-y 0.3s ease-in-out;
+        animation: mdlext-accordion-show-tabpanel-y 0.2s ease-in-out;
 
         &[hidden] {
           transform: scaleY(0);
@@ -252,16 +250,9 @@
     .mdlext-accordion__tabpanel {
       border-left: 1px solid $mdlext-accordion-header-border-color;
 
-      &[hidden] {
-        animation: mdlext-accordion-hide-tabpanel-x 0.2s ease-out;
-      }
-    }
-
-    &.mdlext-accordion--animate-tabpanel {
-
-      .mdlext-accordion__tabpanel {
+      &--animation {
         transform: scaleX(1);
-        animation: mdlext-accordion-show-tabpanel-x 0.3s ease-in-out;
+        animation: mdlext-accordion-show-tabpanel-x 0.2s ease-in-out;
 
         &[hidden] {
           transform: scaleX(0);
@@ -323,6 +314,7 @@
   }
 }
 
+/*
 @keyframes mdlext-accordion-show-tabpanel-y {
   0% { transform: scaleY(0.1); }
   40% { transform: scaleY(1.03); }
@@ -330,6 +322,14 @@
   80% { transform: scaleY(1.03); }
   100% { transform: scaleY(0.98); }
   80% { transform: scaleY(1.01); }
+  100% { transform: scaleY(1); }
+}
+*/
+
+@keyframes mdlext-accordion-show-tabpanel-y {
+  0% { transform: scaleY(0); }
+  60% { transform: scaleY(1.01); }
+  80% { transform: scaleY(0.98); }
   100% { transform: scaleY(1); }
 }
 
@@ -340,6 +340,7 @@
   100% { transform: scaleY(0); }
 }
 
+/*
 @keyframes mdlext-accordion-show-tabpanel-x {
   0% { transform: scaleX(0.1); }
   40% { transform: scaleX(1.03); }
@@ -349,10 +350,18 @@
   80% { transform: scaleX(1.01); }
   100% { transform: scaleX(1); }
 }
+*/
+
+@keyframes mdlext-accordion-show-tabpanel-x {
+  0% { transform: scaleX(0); }
+  60% { transform: scaleX(1.01); }
+  80% { transform: scaleX(0.98); }
+  100% { transform: scaleX(1); }
+}
 
 @keyframes mdlext-accordion-hide-tabpanel-x {
   0% { transform: scaleX(1); }
   60% { transform: scaleX(0.98); }
-  80% { transform: scaleX(1.02); }
+  80% { transform: scaleX(1.01); }
   100% { transform: scaleX(0); }
 }

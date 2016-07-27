@@ -57,8 +57,10 @@ import { createCustomEvent } from '../utils/custom-event';
   const ARIA_SELECTED               = 'aria-selected';
   const IS_EXPANDED                 = 'is-expanded';
   const IS_UPGRADED                 = 'is-upgraded';
-  const RIPPLE_EFFECT               = 'mdl-js-ripple-effect';
+  const RIPPLE_EFFECT               = 'mdlext-js-ripple-effect';
   const RIPPLE                      = 'mdlext-accordion__tab--ripple';
+  const ANIMATION_EFFECT            = 'mdlext-js-animation-effect';
+  const ANIMATION                   = 'mdlext-accordion__tabpanel--animation';
 
   /**
    * @constructor
@@ -445,6 +447,10 @@ import { createCustomEvent } from '../utils/custom-event';
 
     if (this.element_.classList.contains(RIPPLE_EFFECT)) {
       tab.classList.add(RIPPLE);
+    }
+
+    if (this.element_.classList.contains(ANIMATION_EFFECT)) {
+      tabpanel.classList.add(ANIMATION);
     }
 
     tab.removeEventListener('click', tabClickHandler);
