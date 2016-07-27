@@ -33,30 +33,32 @@ import { createCustomEvent } from '../utils/custom-event';
 (function() {
   'use strict';
 
-  const VK_ENTER             = 13;
-  const VK_SPACE             = 32;
-  const VK_END               = 35;
-  const VK_HOME              = 36;
-  const VK_ARROW_LEFT        = 37;
-  const VK_ARROW_UP          = 38;
-  const VK_ARROW_RIGHT       = 39;
-  const VK_ARROW_DOWN        = 40;
-  const ACCORDION            = 'mdlext-accordion';
-  const ACCORDION_VERTICAL   = 'mdlext-accordion--vertical';
-  const ACCORDION_HORIZONTAL = 'mdlext-accordion--horizontal';
-  const PANEL                = 'mdlext-accordion__panel';
-  const PANEL_ROLE           = 'presentation';
-  const TAB                  = 'mdlext-accordion__tab';
-  const TAB_CAPTION          = 'mdlext-accordion__tab__caption';
-  const TAB_ROLE             = 'tab';
-  const TABPANEL             = 'mdlext-accordion__tabpanel';
-  const TABPANEL_ROLE        = 'tabpanel';
-  const ARIA_MULTISELECTABLE = 'aria-multiselectable';
-  const ARIA_EXPANDED        = 'aria-expanded';
-  const ARIA_HIDDEN          = 'aria-hidden';
-  const ARIA_SELECTED        = 'aria-selected';
-  const IS_EXPANDED          = 'is-expanded';
-  const IS_UPGRADED          = 'is-upgraded';
+  const VK_ENTER                    = 13;
+  const VK_SPACE                    = 32;
+  const VK_END                      = 35;
+  const VK_HOME                     = 36;
+  const VK_ARROW_LEFT               = 37;
+  const VK_ARROW_UP                 = 38;
+  const VK_ARROW_RIGHT              = 39;
+  const VK_ARROW_DOWN               = 40;
+  const ACCORDION                   = 'mdlext-accordion';
+  const ACCORDION_VERTICAL          = 'mdlext-accordion--vertical';
+  const ACCORDION_HORIZONTAL        = 'mdlext-accordion--horizontal';
+  const PANEL                       = 'mdlext-accordion__panel';
+  const PANEL_ROLE                  = 'presentation';
+  const TAB                         = 'mdlext-accordion__tab';
+  const TAB_CAPTION                 = 'mdlext-accordion__tab__caption';
+  const TAB_ROLE                    = 'tab';
+  const TABPANEL                    = 'mdlext-accordion__tabpanel';
+  const TABPANEL_ROLE               = 'tabpanel';
+  const ARIA_MULTISELECTABLE        = 'aria-multiselectable';
+  const ARIA_EXPANDED               = 'aria-expanded';
+  const ARIA_HIDDEN                 = 'aria-hidden';
+  const ARIA_SELECTED               = 'aria-selected';
+  const IS_EXPANDED                 = 'is-expanded';
+  const IS_UPGRADED                 = 'is-upgraded';
+  const RIPPLE_EFFECT               = 'mdl-js-ripple-effect';
+  const RIPPLE                      = 'mdlext-accordion__tab--ripple';
 
   /**
    * @constructor
@@ -304,23 +306,37 @@ import { createCustomEvent } from '../utils/custom-event';
       }
     };
 
-    const clickHandler = e => {
+    const selectTab = () => {
+      if( !tab.hasAttribute(ARIA_SELECTED) ) {
+        [...this.element_.querySelectorAll(`.${TAB}[aria-selected="true"]`)].forEach(
+          selectedTab => selectedTab.removeAttribute(ARIA_SELECTED)
+        );
+        tab.setAttribute(ARIA_SELECTED, 'true');
+      }
+    };
+
+    const tabClickHandler = e => {
       e.preventDefault();
       e.stopPropagation();
       this.toggleTab_(panel, tab, tabpanel);
+      selectTab();
     };
 
-    const focusHandler = e => {
+    const tabFocusHandler = e => {
       e.preventDefault();
       e.stopPropagation();
-
-      [...this.element_.querySelectorAll(`.${TAB}[aria-selected="true"]`)].forEach(
-        selectedTab => selectedTab.removeAttribute(ARIA_SELECTED)
-      );
-      tab.setAttribute(ARIA_SELECTED, 'true');
+      selectTab();
     };
 
-    const keydownHandler = e => {
+    const tabpanelClickHandler = () => {
+      selectTab();
+    };
+
+    const tabpanelFocusHandler = () => {
+      selectTab();
+    };
+
+    const tabKeydownHandler = e => {
 
       if(this.element_.hasAttribute('disabled')) {
         return;
@@ -427,16 +443,21 @@ import { createCustomEvent } from '../utils/custom-event';
       calcMaxTabCaptionWidth();
     }
 
+    if (this.element_.classList.contains(RIPPLE_EFFECT)) {
+      tab.classList.add(RIPPLE);
+    }
 
+    tab.removeEventListener('click', tabClickHandler);
+    tab.removeEventListener('focus', tabFocusHandler);
+    tab.removeEventListener('keydown', tabKeydownHandler);
+    tabpanel.removeEventListener('click', tabpanelClickHandler);
+    tabpanel.removeEventListener('focus', tabpanelFocusHandler);
 
-    tab.removeEventListener('click', clickHandler);
-    tab.removeEventListener('focus', focusHandler);
-    tab.removeEventListener('keydown', keydownHandler);
-
-    tab.addEventListener('click', clickHandler);
-    tab.addEventListener('focus', focusHandler);
-    tab.addEventListener('keydown', keydownHandler);
-
+    tab.addEventListener('click', tabClickHandler);
+    tab.addEventListener('focus', tabFocusHandler);
+    tab.addEventListener('keydown', tabKeydownHandler);
+    tabpanel.addEventListener('click', tabpanelClickHandler, true);
+    tabpanel.addEventListener('focus', tabpanelFocusHandler, true);
   };
   MaterialExtAccordion.prototype['upgradeTab'] = MaterialExtAccordion.prototype.upgradeTab;
 

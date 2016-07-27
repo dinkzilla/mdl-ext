@@ -71,11 +71,15 @@
 
   #demo-drawer-accordion .mdlext-accordion__tab {
     height: 64px;
+    min-height: 64px;
+    min-width: 64px;
     padding-left: 16px;
   }
 
   .is-small-screen #demo-drawer-accordion .mdlext-accordion__tab {
     height: 56px;
+    min-height: 56px;
+    min-width: 56px;
   }
 
   #demo-drawer-accordion .mdlext-accordion__tabpanel,
@@ -87,7 +91,7 @@
 
 <aside class="mdl-layout__drawer">
 
-  <ul id="demo-drawer-accordion" class="mdlext-accordion mdlext-js-accordion mdlext-accordion--vertical" aria-multiselectable="false">
+  <ul id="demo-drawer-accordion" class="mdlext-accordion mdlext-js-accordion mdlext-accordion--vertical mdl-js-ripple-effect" aria-multiselectable="false">
     <li class="mdlext-accordion__panel">
       <header class="mdlext-accordion__tab" aria-expanded="true">
         <span class="mdlext-accordion__tab__caption">MDL Extensions</span>

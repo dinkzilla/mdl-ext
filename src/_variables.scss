@@ -88,12 +88,13 @@ $mdlext-accordion-header-background-active-color : rgba($mdlext-accordion-header
 $mdlext-accordion-header-border-color            : rgba($mdlext-accordion-header-background-color-base, 0.50) !default;
 $mdlext-accordion-header-background-hover-color  : rgba($mdlext-accordion-header-background-color-base, 0.40) !default;
 $mdlext-accordion-header-border-open-color       : rgba($mdlext-accordion-header-background-color-base, 0.60) !default;
-$mdlext-accordion-header-focus-outline-color     : rgb-string-to-hex($color-primary) !default;
+$mdlext-accordion-header-focus-outline-color     : default !default; //rgba(rgb-string-to-hex($color-primary), 0.30) !default;
 $mdlext-accordion-header-disabled-color          : rgba($mdlext-accordion-header-background-color-base, 0.12) !default;
 $mdlext-accordion-header-secondary-color         : $mdlext-color-black !default;
 $mdlext-accordion-header-secondary-color-disabled: rgba($mdlext-color-black, 0.26) !default;
+$mdlext-accordion-header-highlight-color         : darken($mdlext-accordion-header-border-color, 3%) !default;
 
-$mdlext-accordion-ripple-color                   : rgb-string-to-hex($color-accent-contrast) !default; //$color-primary-contrast !default;
+$mdlext-accordion-ripple-color                   : rgba(rgb-string-to-hex($color-accent-contrast), 0.5) !default;
 $mdlext-accordion-header-padding                 : 8px !default;
 $mdlext-accordion-header-padding-top             : $mdlext-accordion-header-padding * 2 !default;
 $mdlext-accordion-header-padding-right           : $mdlext-accordion-header-padding !default;
@@ -174,11 +175,11 @@ $mdlext-lightboard-figcaption-text-color       : rgb-string-to-hex($palette-grey
 
 
 /* ==========  Carousel  ========== */
-$mdlext-carousel-slide-border-top-width        : 3px;
+$mdlext-carousel-slide-border-top-width        : 2px !default;
+$mdlext-carousel-slide-border-top-color        : rgb-string-to-hex($color-accent) !default;
 $mdlext-carousel-slide-margin-horizontal       : 0;
-$mdlext-carousel-slide-border-top-color        : rgb-string-to-hex($color-accent);
-$mdlext-carousel-slide-figcaption-color        : $mdlext-lightboard-figcaption-text-color;
-$mdlext-carousel-slide-ripple-color            : $mdlext-lightboard-ripple-color;
+$mdlext-carousel-slide-figcaption-color        : $mdlext-lightboard-figcaption-text-color !default;
+$mdlext-carousel-slide-ripple-color            : $mdlext-lightboard-ripple-color !default;
 
 
 /* ==========  Bordered fields  ========== */

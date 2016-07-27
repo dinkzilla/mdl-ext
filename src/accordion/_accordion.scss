@@ -38,9 +38,11 @@
     color: $mdlext-accordion-header-secondary-color;
     background-color: $mdlext-accordion-header-background-color;
     cursor: pointer;
+    overflow: hidden;
 
     &:focus {
       outline-offset: -2px;
+      outline-color: $mdlext-accordion-header-focus-outline-color;
     }
 
     &[aria-expanded='true'] {
@@ -82,6 +84,23 @@
     > *:first-child {
       padding-left: 0;
     }
+
+    &--ripple {
+      &[aria-selected='true']::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background: $mdlext-accordion-ripple-color;
+        opacity: 0;
+        border-radius: 100%;
+        transform: scale(1, 1) translate(-50%);
+        transform-origin: 50% 50%;
+      }
+      &[aria-selected='true']:focus:not(:active)::before {
+        animation: mdlext-accordion-tab-ripple 1s cubic-bezier(0.4, 0.0, 1, 1); //cubic-bezier(0.4, 0.0, 0.4, 1) 0.01s alternate forwards; //ease-out;
+      }
+    }
   }
 
   &__tabpanel {
@@ -117,6 +136,19 @@
       padding-left: $mdlext-accordion-header-padding;
       padding-right: $mdlext-accordion-header-padding;
 
+      &[aria-selected='true']::after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 1px;
+        width: 100%;
+        display: block;
+        content: " ";
+        background: $mdlext-accordion-header-highlight-color;
+        animation: border-expand 0.2s cubic-bezier(0.4, 0.0, 0.4, 1) 0.01s alternate forwards;
+        transition: all 1s cubic-bezier(0.4, 0.0, 1, 1);
+      }
+
       > * {
         padding-left: $mdlext-accordion-header-padding;
       }
@@ -128,10 +160,31 @@
       > *:last-child:not(:only-child) {
         margin-left: auto; // If more than one element, push last element to the right
       }
+
+      &--ripple {
+        &[aria-selected='true']::before {
+          width: 5%;
+          height: 10%;
+        }
+      }
     }
 
     .mdlext-accordion__tabpanel {
       border-top: 1px solid $mdlext-accordion-header-border-color;
+    }
+
+    &.mdlext-accordion--animate-tabpanel {
+
+      .mdlext-accordion__tabpanel {
+        transform: scaleY(1);
+        animation: mdlext-accordion-show-tabpanel-y 0.3s ease-in-out;
+
+        &[hidden] {
+          transform: scaleY(0);
+          animation: mdlext-accordion-hide-tabpanel-y 0.2s ease-out;
+          animation-delay: 0.1s;
+        }
+      }
     }
   }
 }
@@ -157,6 +210,21 @@
       white-space: nowrap;
       border-left: 1px solid $mdlext-accordion-header-border-color;
 
+      &[aria-selected='true']::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 1px;
+        display: block;
+        content: " ";
+        background: $mdlext-accordion-header-highlight-color;
+
+        // Figure out how to animate a vertical line
+        //animation: border-expand 0.2s cubic-bezier(0.4, 0.0, 0.4, 1) 0.01s alternate forwards;
+        //transition: all 1s cubic-bezier(0.4, 0.0, 1, 1);
+      }
+
       > * {
         //transform: rotate(-90deg) translateX(50%);
         transform: rotate(-90deg) translateX($mdlext-accordion-header-padding);
@@ -172,13 +240,36 @@
         transform: rotate(-90deg) translateX(50%);
         padding-right: $mdlext-accordion-header-padding + 16px;
       }
+
+      &--ripple {
+        &[aria-selected='true']::before {
+          width: 10%;
+          height: 5%;
+        }
+      }
     }
 
     .mdlext-accordion__tabpanel {
       border-left: 1px solid $mdlext-accordion-header-border-color;
+
+      &[hidden] {
+        animation: mdlext-accordion-hide-tabpanel-x 0.2s ease-out;
+      }
+    }
+
+    &.mdlext-accordion--animate-tabpanel {
+
+      .mdlext-accordion__tabpanel {
+        transform: scaleX(1);
+        animation: mdlext-accordion-show-tabpanel-x 0.3s ease-in-out;
+
+        &[hidden] {
+          transform: scaleX(0);
+          animation: mdlext-accordion-hide-tabpanel-x 0.2s ease-out;
+        }
+      }
     }
   }
-
 }
 
 .mdlext-accordion {
@@ -214,4 +305,54 @@
     opacity: 0.8;
     filter: blur(1px) grayscale(80%);
   }
+}
+
+
+@keyframes mdlext-accordion-tab-ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+@keyframes mdlext-accordion-show-tabpanel-y {
+  0% { transform: scaleY(0.1); }
+  40% { transform: scaleY(1.03); }
+  60% { transform: scaleY(0.98); }
+  80% { transform: scaleY(1.03); }
+  100% { transform: scaleY(0.98); }
+  80% { transform: scaleY(1.01); }
+  100% { transform: scaleY(1); }
+}
+
+@keyframes mdlext-accordion-hide-tabpanel-y {
+  0% { transform: scaleY(1); }
+  60% { transform: scaleY(0.98); }
+  80% { transform: scaleY(1.01); }
+  100% { transform: scaleY(0); }
+}
+
+@keyframes mdlext-accordion-show-tabpanel-x {
+  0% { transform: scaleX(0.1); }
+  40% { transform: scaleX(1.03); }
+  60% { transform: scaleX(0.98); }
+  80% { transform: scaleX(1.03); }
+  100% { transform: scaleX(0.98); }
+  80% { transform: scaleX(1.01); }
+  100% { transform: scaleX(1); }
+}
+
+@keyframes mdlext-accordion-hide-tabpanel-x {
+  0% { transform: scaleX(1); }
+  60% { transform: scaleX(0.98); }
+  80% { transform: scaleX(1.02); }
+  100% { transform: scaleX(0); }
 }

@@ -50,17 +50,11 @@ ul.mdlext-carousel {
   margin: 0 $mdlext-carousel-slide-margin-horizontal;
   padding:0;
   height: 100%;
-  border-top: $mdlext-carousel-slide-border-top-width solid transparent;
+  border-top: $mdlext-carousel-slide-border-top-width solid transparent; // Makes room for the animated select/focus line
 
   //&:focus,
-  &[aria-selected] {
-    border-top-color: $mdlext-carousel-slide-border-top-color;
-
-    /*
-    figure {
-    }
-    */
-
+  &[aria-selected],
+  &[aria-selected='true'] {
     figcaption {
       // As far as I can see there is no way to darken/lighten a text color
       // defined by MDL, due to the "unqote" functions.
@@ -69,6 +63,21 @@ ul.mdlext-carousel {
       background-color: rgba(255, 255, 255, 0.25);
     }
   }
+
+  &[aria-selected]::after,
+  &[aria-selected='true']::after {
+    height: $mdlext-carousel-slide-border-top-width;
+    width: 100%;
+    display: block;
+    content: ' ';
+    top: (-$mdlext-carousel-slide-border-top-width);
+    left: 0;
+    position: absolute;
+    background: $mdlext-carousel-slide-border-top-color;
+    animation: border-expand 0.2s cubic-bezier(0.4, 0.0, 0.4, 1) 0.01s alternate forwards;
+    transition: all 1s cubic-bezier(0.4, 0.0, 1, 1);
+  }
+
 
   a {
     text-decoration: none;

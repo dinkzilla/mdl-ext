@@ -641,7 +641,6 @@ describe('MaterialExtAccordion', () => {
     }
   });
 
-
   it('has only one panel open simultaneously when aria-multiselectable="false"', () => {
     const element = document.querySelector('#accordion-1');
 
@@ -658,9 +657,51 @@ describe('MaterialExtAccordion', () => {
     expect(openTabs).to.have.lengthOf(1, 'Expected excactly one tab to have aria-expanded="true"');
   });
 
+  it('tab get aria-selected="true" when corresponding tabpanel is clicked or receives focus', () => {
+
+    const container = document.querySelector('#mount');
+    try {
+      container.insertAdjacentHTML('beforeend', accordion6_multiselectable);
+      const element = document.querySelector('#accordion-6');
+      componentHandler.upgradeElement(element, 'MaterialExtAccordion');
+
+      let tab1 = element.querySelector(`.${PANEL}:first-child .${TAB}`);
+      let tab4 = element.querySelector(`.${PANEL}:nth-child(4) .${TAB}`);
+
+      element.MaterialExtAccordion.openTab(tab1);
+      element.MaterialExtAccordion.openTab(tab4);
+
+      const tabpanel1 = element.querySelector(`.${PANEL}:first-child .${TABPANEL}`);
+      tabpanel1.dispatchEvent(
+        new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+          view: window
+        })
+      );
+      tab1 = element.querySelector(`.${PANEL}:first-child .${TAB}`);
+      assert.equal(tab1.getAttribute('aria-selected'), 'true', 'Expected tab to have aria-selected="true"');
+
+      const tabpanel4 = element.querySelector(`.${PANEL}:nth-child(4) .${TABPANEL}`);
+      tabpanel4.dispatchEvent(
+        new Event('focus', {
+          bubbles: true,
+          cancelable: true,
+          view: window
+        })
+      );
+      tab4 = element.querySelector(`.${PANEL}:nth-child(4) .${TAB}`);
+      assert.equal(tab4.getAttribute('aria-selected'), 'true', 'Expected tab to have aria-selected="true"');
+    }
+    finally {
+      removeChilds(container);
+    }
+
+  });
+
   /*
   //
-  // Can not test this. In JsDom, offsetWidth and offsetHeight properties do not work.
+  // Can not test this. In JsDom, offsetWidth and offsetHeight properties does not work.
   // getBoundingClientRect() return only zero values
   //
   it('calculates a max caption width when accordion has horizontal layout', () => {
