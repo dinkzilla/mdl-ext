@@ -87,27 +87,15 @@ $mdlext-accordion-header-background-open-color   : rgba($mdlext-accordion-header
 $mdlext-accordion-header-background-active-color : rgba($mdlext-accordion-header-background-color-base, 0.40) !default;
 $mdlext-accordion-header-border-color            : rgba($mdlext-accordion-header-background-color-base, 0.50) !default;
 $mdlext-accordion-header-background-hover-color  : rgba($mdlext-accordion-header-background-color-base, 0.40) !default;
-$mdlext-accordion-header-border-open-color       : rgba($mdlext-accordion-header-background-color-base, 0.60) !default;
 $mdlext-accordion-header-focus-outline-color     : default !default; //rgba(rgb-string-to-hex($color-primary), 0.30) !default;
 $mdlext-accordion-header-disabled-color          : rgba($mdlext-accordion-header-background-color-base, 0.12) !default;
 $mdlext-accordion-header-secondary-color         : $mdlext-color-black !default;
 $mdlext-accordion-header-secondary-color-disabled: rgba($mdlext-color-black, 0.26) !default;
 $mdlext-accordion-header-highlight-color         : darken($mdlext-accordion-header-border-color, 3%) !default;
-
 $mdlext-accordion-ripple-color                   : rgba(rgb-string-to-hex($color-accent-contrast), 0.5) !default;
 $mdlext-accordion-header-padding                 : 8px !default;
-$mdlext-accordion-header-padding-top             : $mdlext-accordion-header-padding * 2 !default;
-$mdlext-accordion-header-padding-right           : $mdlext-accordion-header-padding !default;
-$mdlext-accordion-header-padding-bottom          : $mdlext-accordion-header-padding * 2 !default;
-$mdlext-accordion-header-padding-left            : $mdlext-accordion-header-padding !default;
-$mdlext-accordion-header-icon-text-space         : 8px !default;
 $mdlext-accordion-header-height                  : 56px !default;
-
 $mdlext-accordion-content-padding                : $mdlext-accordion-header-padding !default;
-$mdlext-accordion-content-padding-top            : 0 !default;
-$mdlext-accordion-content-padding-right          : $mdlext-accordion-content-padding !default;
-$mdlext-accordion-content-padding-bottom         : $mdlext-accordion-content-padding !default;
-$mdlext-accordion-content-padding-left           : $mdlext-accordion-content-padding !default;
 $mdlext-accordion-content-background-color       : transparent !default;
 
 

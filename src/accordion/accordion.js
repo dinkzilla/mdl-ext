@@ -93,6 +93,7 @@ import { createCustomEvent } from '../utils/custom-event';
         this.element_.setAttribute(ARIA_MULTISELECTABLE, 'false');
       }
 
+      this.element_.removeEventListener('command', this.commandHandler_);
       this.element_.addEventListener('command', this.commandHandler_.bind(this), false);
 
       [...this.element_.querySelectorAll(`.${ACCORDION} > .${PANEL}`)].forEach( panel => this.upgradeTab(panel) );
@@ -105,7 +106,14 @@ import { createCustomEvent } from '../utils/custom-event';
 
   // Helpers
   const accordionPanelElements = ( element ) => {
-    if (element.classList.contains(PANEL)) {
+    if(!element) {
+      return {
+        panel: null,
+        tab: null,
+        tabpanel: null
+      };
+    }
+    else if (element.classList.contains(PANEL)) {
       return {
         panel: element,
         tab: element.querySelector(`.${TAB}`),
@@ -125,7 +133,7 @@ import { createCustomEvent } from '../utils/custom-event';
   // Private methods.
 
   /**
-   * Handles custom command event, 'open', 'close', or 'toggle'
+   * Handles custom command event, 'open', 'close', 'toggle' or upgrade
    * @param event. A custom event
    * @private
    */
@@ -133,23 +141,8 @@ import { createCustomEvent } from '../utils/custom-event';
     event.preventDefault();
     event.stopPropagation();
 
-    if(event.detail && event.detail.action) {
-      const action = event.detail.action.toLowerCase();
-
-      switch (action) {
-        case 'open':
-          this.openTab(event.detail.target);
-          break;
-        case 'close':
-          this.closeTab(event.detail.target);
-          break;
-        case 'toggle':
-          this.toggleTab(event.detail.target);
-          break;
-        case 'upgrade':
-          this.upgradeTab(event.detail.target);
-          break;
-      }
+    if(event && event.detail) {
+      this.command(event.detail);
     }
   };
 
@@ -290,7 +283,7 @@ import { createCustomEvent } from '../utils/custom-event';
       }
     };
 
-    // In horizontal layout, caption must have a max-width defined to prevent pushing elements to the right out of view.
+    // In horizontal layout, caption must have a max-width defined to prevent pushing elements to the right of the caption out of view.
     // In JsDom, offsetWidth and offsetHeight properties do not work, so this function is not testable.
     /* istanbul ignore next */
     const calcMaxTabCaptionWidth = () => {
@@ -469,56 +462,69 @@ import { createCustomEvent } from '../utils/custom-event';
 
 
   /**
-   * Open tab
-   * @public
-   * @param {Element} tabElement
+   * Execute command
+   * @param detail
    */
-  MaterialExtAccordion.prototype.openTab = function( tabElement ) {
+  MaterialExtAccordion.prototype.command = function( detail ) {
 
-    if(tabElement === undefined) {
-      this.openTabs_();
-    }
-    else if(tabElement !== null) {
-      const { panel, tab, tabpanel } = accordionPanelElements( tabElement );
-      if(tab.getAttribute(ARIA_EXPANDED).toLowerCase() !== 'true') {
+    const openTab = tabElement => {
+
+      if(tabElement === undefined) {
+        this.openTabs_();
+      }
+      else if(tabElement !== null) {
+        const { panel, tab, tabpanel } = accordionPanelElements( tabElement );
+        if(tab.getAttribute(ARIA_EXPANDED).toLowerCase() !== 'true') {
+          this.toggleTab_(panel, tab, tabpanel);
+        }
+      }
+    };
+
+    const closeTab = tabElement => {
+      if(tabElement === undefined) {
+        this.closeTabs_();
+      }
+      else if(tabElement !== null) {
+        const { panel, tab, tabpanel } = accordionPanelElements( tabElement );
+
+        if(tab.getAttribute(ARIA_EXPANDED).toLowerCase() === 'true') {
+          this.toggleTab_(panel, tab, tabpanel);
+        }
+      }
+    };
+
+    const toggleTab = tabElement => {
+      if(tabElement) {
+        const { panel, tab, tabpanel } = accordionPanelElements( tabElement );
         this.toggleTab_(panel, tab, tabpanel);
+      }
+    };
+
+
+    if(detail && detail.action) {
+      const { action, target } = detail;
+
+      switch (action.toLowerCase()) {
+        case 'open':
+          openTab(target);
+          break;
+        case 'close':
+          closeTab(target);
+          break;
+        case 'toggle':
+          toggleTab(target);
+          break;
+        case 'upgrade':
+          if(target) {
+            this.upgradeTab(target);
+          }
+          break;
+        default:
+          throw new Error(`Unknown action "${action}". Action must be one of "open", "close", "toggle" or "upgrade"`);
       }
     }
   };
-  MaterialExtAccordion.prototype['openTab'] = MaterialExtAccordion.prototype.openTab;
-
-  /**
-   * Close tab
-   * @public
-   * @param {Element} tabElement
-   */
-  MaterialExtAccordion.prototype.closeTab = function( tabElement ) {
-    if(tabElement === undefined) {
-      this.closeTabs_();
-    }
-    else if(tabElement !== null) {
-      const { panel, tab, tabpanel } = accordionPanelElements( tabElement );
-
-      if(tab.getAttribute(ARIA_EXPANDED).toLowerCase() === 'true') {
-        this.toggleTab_(panel, tab, tabpanel);
-      }
-    }
-  };
-  MaterialExtAccordion.prototype['closeTab'] = MaterialExtAccordion.prototype.closeTab;
-
-  /**
-   * Toggle tab
-   * @public
-   * @param {Element} tabElement
-   */
-  MaterialExtAccordion.prototype.toggleTab = function( tabElement ) {
-    if(tabElement) {
-      const { panel, tab, tabpanel } = accordionPanelElements( tabElement );
-      this.toggleTab_(panel, tab, tabpanel);
-    }
-  };
-  MaterialExtAccordion.prototype['toggleTab'] = MaterialExtAccordion.prototype.toggleTab;
-
+  MaterialExtAccordion.prototype['command'] = MaterialExtAccordion.prototype.command;
 
   /*
    * Downgrade component

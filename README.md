@@ -10,7 +10,7 @@
 Material Design Lite Ext (MDLEXT).
 Components built with the [Google Material Design Lite](https://github.com/google/material-design-lite) framework. MDLEXT provides the following components.
 
-* **Accordion**<br/>A WAI-ARIA friendly accordion component with vertcial or horizontal layout.
+* **Accordion**<br/>A WAI-ARIA friendly accordion component with vertcial or horizontal layout.<br/>**Note:** The accordion has been refactored and is not compatible with accordion prior to version 0.9.13
 * **Bordered fields**<br/>The Material Design Lite Ext (MDLEXT) bordered fields component demonstrates how you can create your own theme of MDL text fields.
 * **Carousel**<br/>A responsive image carousel.
 * **Color themes**<br/>Material design color themes.
@@ -99,10 +99,16 @@ $ npm install --save eq.js
   <main class="mdl-layout__content">
   </main>
 </div>
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 <script type="text/javascript" src="node_modules/material-design-lite/material.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="node_modules/mdl-ext/lib/mdl-ext.min.js" charset="utf-8"></script>
 </body>
 </html>
+```
+
+>**Note:** You'll probably need several polyfills. If you don't want to waist time writing your own polyfills, the [polyfill.io](https://polyfill.io/v2/docs/) hosted service is a good choice. 
+```html
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 ```
 
 ### Use it with element queries in your (static) page
@@ -121,6 +127,7 @@ $ npm install --save eq.js
   <main class="mdl-layout__content">
   </main>
 </div>
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 <script type="text/javascript" src="node_modules/material-design-lite/material.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="node_modules/mdl-ext/lib/mdl-ext.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="node_modules/eq.js/dist/eq.min.js" charset="utf-8"></script>
@@ -238,6 +245,8 @@ how you can set up MDL with Babel(6) and Webpack, and how to self host Font Robo
 >* [eqjs](https://github.com/Snugug/eq.js)
 >* [custom-event polyfill](https://github.com/webmodules/custom-event) or [similar](https://github.com/leifoolsen/mdl-ext/blob/master/src/utils/custom-event-polyfill.js)
 >* [mutation-observer polyfill](https://github.com/webmodules/mutation-observer)
+>* [polyfill.io](https://polyfill.io/v2/docs/) 
+
 
 
 ## Licence

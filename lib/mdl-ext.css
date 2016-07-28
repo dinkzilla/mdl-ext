@@ -2931,6 +2931,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   box-sizing: border-box;
   margin: 0;
   padding: 0 8px;
+  background-color: transparent;
   display: block;
   overflow: auto;
   -ms-flex-positive: 1;

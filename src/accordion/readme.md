@@ -3,226 +3,147 @@
 
 A WAI-ARIA friendly accordion component.
 
+>**Note:** The accordion has been refactored and is not compatible with accordion prior to version 0.9.13
+
 ## Introduction
 An accordion component is a collection of expandable panels associated with a common outer container. Panels consist
-of a header and an associated content region or panel. The primary use of an Accordion is to present multiple sections
+of a tab header and an associated content region or panel. The primary use of an Accordion is to present multiple sections
 of content on a single page without scrolling, where all of the sections are peers in the application or object hierarchy.
 The general look is similar to a tree where each root tree node is an expandable accordion header. The user navigates
-and makes the contents of each panel visible (or not) by interacting with the Accordion Header.
+and makes the contents of each panel visible (or not) by interacting with the Accordion tab header.
 
-This component relates to the guidelines given in [WAI-ARIA Authoring Practices 1.1, Accordion](https://www.w3.org/TR/wai-aria-practices-1.1/#accordion). 
+### Features:
+* The accordion component relates to the guidelines given in [WAI-ARIA Authoring Practices 1.1, Accordion](https://www.w3.org/TR/wai-aria-practices-1.1/#accordion) 
+* User interactions via keyboard or mouse 
+* Toggle a particular tab  using enter or space key, or by clicking a tab
+* Client can interact with accordion using a public api og by dispatching a custom action event 
+* The accordion emits a custom toggle events reflecting the tab toggled
+
 
 ### To include a MDLEXT **accordion** component:
 
-&nbsp;1. Code a `<div>` element to hold dimensions of the accordion. If the accordion has horizontal layout (the default), then define a height for the container. 
+&nbsp;1. Code a `<ul>` element with `class="mdlext-accordion mdlext-js-accordion mdlext-accordion--horizontal"`  to hold the accordion with horizontal layout. 
 ```html
-<div style="height: 300px; width: 100%;">
-</div>
+<ul class="mdlext-accordion mdlext-js-accordion mdlext-accordion--horizontal">
+<ul>
 ```
 
-&nbsp;2. Code a `<ul>` element with `class="mdlext-accordion mdlext-js-accordion"`  to hold the accordion. 
+&nbsp;2. Code a `<li>` element with `class="mdlext-accordion__panel"`  to hold an individual accordion panel. 
 ```html
-<div style="height: 300px; width: 100%;">
-  <ul class="mdlext-accordion mdlext-js-accordion">
-  <ul>
-</div>
+<ul class="mdlext-accordion mdlext-js-accordion mdlext-accordion--horizontal">
+  <li class="mdlext-accordion__panel">
+  <li>
+<ul>
 ```
 
-&nbsp;3. Code a `<li>` element with `class="mdlext-accordion__panel"`  to hold an individual accordion panel. 
+&nbsp;3. Code a `<header>` element with `class="mdlext-accordion__tab"`  to hold the accordion tab header. 
 ```html
-<div style="height: 300px; width: 100%;">
-  <ul class="mdlext-accordion mdlext-js-accordion">
-    <li class="mdlext-accordion__panel">
-    <li>
-  <ul>
-</div>
+<ul class="mdlext-accordion mdlext-js-accordion mdlext-accordion--horizontal">
+  <li class="mdlext-accordion__panel">
+    <header class="mdlext-accordion__tab">
+    </header>
+  <li>
+<ul>
 ```
 
-&nbsp;4. Code a `<header>` element with `class="mdlext-accordion__panel__header"`  to hold the header. 
+&nbsp;4. Code a `<span>` element with `class="mdlext-accordion__tab__caption"` to hold tha accordion tab header caption. 
 ```html
-<div style="height: 300px; width: 100%;">
-  <ul class="mdlext-accordion mdlext-js-accordion">
-    <li class="mdlext-accordion__panel">
-      <header class="mdlext-accordion__panel__header">
-      </header>
-    <li>
-  <ul>
-</div>
+<ul class="mdlext-accordion mdlext-js-accordion mdlext-accordion--horizontal">
+  <li class="mdlext-accordion__panel">
+    <header class="mdlext-accordion__tab">
+      <span class="mdlext-accordion__tab__caption">A tab caption</span>
+    </header>
+  <li>
+<ul>
 ```
 
-&nbsp;5. Code a `<div>` element with `class="mdlext-accordion__panel__header__transform"`  so the header content can rotate 90 deg. when the accordion has horizontal layout. 
+&nbsp;5. Code a `<section>` element with `class="mdlext-accordion__tabpanel"`  to hold the tab content. 
 ```html
-<div style="height: 300px; width: 100%;">
-  <ul class="mdlext-accordion mdlext-js-accordion">
-    <li class="mdlext-accordion__panel">
-      <header class="mdlext-accordion__panel__header">
-        <div class="mdlext-accordion__panel__header__transform">
-        </div>
-      </header>
-    <li>
-  <ul>
-</div>
+<ul class="mdlext-accordion mdlext-js-accordion mdlext-accordion--horizontal">
+  <li class="mdlext-accordion__panel">
+    <header class="mdlext-accordion__tab">
+      <span class="mdlext-accordion__tab__caption">A tab caption</span>
+    </header>
+    <section class="mdlext-accordion__tabpanel">
+      <p>Content goes here ...</p>
+    </section>
+  <li>
+<ul>
 ```
 
-&nbsp;6. Apply header content. 
-```html
-<div style="height: 300px; width: 100%;">
-  <ul class="mdlext-accordion mdlext-js-accordion">
-    <li class="mdlext-accordion__panel">
-      <header class="mdlext-accordion__panel__header">
-        <div class="mdlext-accordion__panel__header__transform">
-          <h5>A header</h5>
-        </div>
-      </header>
-    <li>
-  <ul>
-</div>
-```
-
-&nbsp;7. Optionally decorate header with an icon or image. 
-```html
-<div style="height: 300px; width: 100%;">
-  <ul class="mdlext-accordion mdlext-js-accordion">
-    <li class="mdlext-accordion__panel">
-      <header class="mdlext-accordion__panel__header">
-        <div class="mdlext-accordion__panel__header__transform">
-          <i class="material-icons md-18">share</i>
-          <h5>A header</h5>
-        </div>
-      </header>
-    <li>
-  <ul>
-</div>
-```
-
-&nbsp;8. Optionally decorate header with a state icon. 
-```html
-<div style="height: 300px; width: 100%;">
-  <ul class="mdlext-accordion mdlext-js-accordion">
-    <li class="mdlext-accordion__panel">
-      <header class="mdlext-accordion__panel__header">
-        <div class="mdlext-accordion__panel__header__transform">
-          <i class="material-icons md-18">share</i>
-          <h5>A header</h5>
-          <i class="mdlext-accordion__panel__state material-icons md-24"></i>
-        </div>
-      </header>
-    <li>
-  <ul>
-</div>
-```
-
-&nbsp;9. Code a `<section>` element with `class="mdlext-accordion__panel__content"`  to hold the content. 
-```html
-<div style="height: 300px; width: 100%;">
-  <ul class="mdlext-accordion mdlext-js-accordion">
-    <li class="mdlext-accordion__panel">
-      <header class="mdlext-accordion__panel__header">
-        <div class="mdlext-accordion__panel__header__transform">
-          <i class="material-icons md-18">share</i>
-          <h5>A header</h5>
-          <i class="mdlext-accordion__panel__state material-icons md-24"></i>
-        </div>
-      </header>
-      <section class="mdlext-accordion__panel__content">
-      </section>
-    <li>
-  <ul>
-</div>
-```
-
-&nbsp;10. Repeat steps 3..9 for each panel required. 
+&nbsp;6. Repeat steps 2..5 for each accordion panel required. 
 
 ### Example
-Vertical accordion with three panels, with ripple effect on each panel header, decorated with icon left and state icon right. Subscribes to accordion toggle event.
+Multiselectable vertical accordion with three panels, aria attributes, ripple effect on each tab header, decorated with 
+a glyph left and a state icon right. Tab #1 is open at page load (aria-expanded="true"). Subscribes to accordion toggle event.
 
 ```html
-<style>
-  /* Color the panels */
-  .mdlext-accordion__panel-colored:nth-child(1) {
-    background: rgba(144, 202, 249, 0.4);
-  }
-  .mdlext-accordion__panel-colored:nth-child(2) {
-    background: rgba(165, 214, 167, 0.4);
-  }
-  .mdlext-accordion__panel-colored:nth-child(3) {
-    background: rgba(255, 224, 130, 0.4);
-  }
+<ul id="my-accordion" 
+  class="mdlext-accordion mdlext-js-accordion mdlext-accordion--vertical mdlext-js-ripple-effect"
+  role="tablist" aria-multiselectable="true">
 
-  /* Open/Close state is default +/-. We override this using Material Icons */
-  .mdlext-accordion .mdlext-accordion__panel .mdlext-accordion__panel__state:after {
-    content: 'expand_more';
-  }
-  .mdlext-accordion .mdlext-accordion__panel[open] .mdlext-accordion__panel__state:after {
-    content: 'expand_less';
-  }
-</style>
-
-<div style="height: 500px; width: 200px">
-  <ul id="my-accordion" class="mdlext-accordion mdlext-accordion--vertical mdlext-js-accordion mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events" aria-multiselectable="false">
-    <li class="mdlext-accordion__panel mdlext-accordion__panel-colored">
-      <header class="mdlext-accordion__panel__header">
-        <div class="mdlext-accordion__panel__header__transform">
-          <i class="material-icons md-18">close</i>
-          <h5>First section</h5>
-          <i class="mdlext-accordion__panel__state material-icons md-24"></i>
-        </div>
-      </header>
-      <section class="mdlext-accordion__panel__content">
-        <p>Content first section ...</p>
-      </section>
-    </li>
-    <li class="mdlext-accordion__panel mdlext-accordion__panel-colored" open>
-      <header class="mdlext-accordion__panel__header">
-        <div class="mdlext-accordion__panel__header__transform">
-          <i class="material-icons md-18">check</i>
-          <h5>Second</h5>
-          <i class="mdlext-accordion__panel__state material-icons md-24"></i>
-        </div>
-      </header>
-      <section class="mdlext-accordion__panel__content">
-        <p>Content second section</p>
-      </section>
-    </li>
-    <li class="mdlext-accordion__panel mdlext-accordion__panel-colored">
-      <header class="mdlext-accordion__panel__header">
-        <div class="mdlext-accordion__panel__header__transform">
-          <i class="material-icons md-18">share</i>
-          <h5>Section #3</h5>
-          <i class="mdlext-accordion__panel__state material-icons md-24"></i>
-        </div>
-      </header>
-      <section class="mdlext-accordion__panel__content">
-        <p>Content section #3</p>
-      </section>
-    </li>
-  </ul>
-</div>
+  <li class="mdlext-accordion__panel" role="presentation">
+    <header class="mdlext-accordion__tab" role="tab" aria-expanded="true">
+      <i class="material-icons">dns</i>
+      <span class="mdlext-accordion__tab__caption">First section. A long caption should not push the state icon</span>
+      <i class="mdlext-aria-toggle-material-icons"></i>
+    </header>
+    <section class="mdlext-accordion__tabpanel" role="tabpanel" aria-hidden="false">
+      <h5>Content #1 goes here</h5>
+      <p>Some content <a href="#">with an anchor</a> as a focusable element.</p>
+    </section>
+  </li>
+  <li class="mdlext-accordion__panel" role="presentation">
+    <header class="mdlext-accordion__tab" role="tab" aria-expanded="false">
+      <i class="material-icons">all_inclusive</i>
+      <span class="mdlext-accordion__tab__caption">Tab #2</span>
+      <i class="mdlext-aria-toggle-material-icons"></i>
+    </header>
+    <section class="mdlext-accordion__tabpanel" role="tabpanel" aria-hidden="true" hidden>
+      <h5>Content #2 goes here</h5>
+      <p>Some content....</p>
+    </section>
+  </li>
+  <li class="mdlext-accordion__panel" role="presentation">
+    <header class="mdlext-accordion__tab" role="tab" aria-expanded="false">
+      <i class="material-icons">build</i>
+      <span class="mdlext-accordion__tab__caption">Tab #3</span>
+      <i class="mdlext-aria-toggle-material-icons"></i>
+    </header>
+    <section class="mdlext-accordion__tabpanel" role="tabpanel" aria-hidden="true" hidden>
+      <h5>Content #3 goes here</h5>
+    </section>
+  </li>
+</ul>
 
 <script>
   'use strict';
   window.addEventListener('load', function() {
     var accordion = document.querySelector('#my-accordion');
     accordion.addEventListener('toggle', function(e) {
-      console.log('Accordion toggled. State:', e.detail.state, 'Source:', e.detail.source);
+      console.log('Accordion toggled. State:', e.detail.state, 'Source:', e.detail.tab);
     });
   });
 </script>
 
 ```
+>**Note:** All required aria attributes will be added by the accordion component during initialization - so it is not 
+strictly necessary to apply the attributes in markup.
 
-More examles can be found in [here](./snippets/accordion.html)
+### More examples
+* The [snippets/accordion.html](./snippets/accordion.html) and the [tests](../../test/accordionl/accordion.spec.js) provides more detailed examples.
+* Try out the [live demo](http://leifoolsen.github.io/mdl-ext/demo/accordion.html)
 
 
 ## Keyboard interaction
 The accordion interacts with the following keyboard keys.
 
-*   `Tab` - When focus is on an accordion header, pressing the `Tab` key moves focus in the following manner:
-    1.  If interactive glyphs or menus are present in the accordion header, focus moves to each in order. (Not implemented yet)
-    2.  When the corresponding panel is expanded (its [aria-expanded](http://www.w3.org/TR/wai-aria-1.1/#aria-expanded) state is 'true'), then focus moves to the first focusable element in the panel.
-    3.  If the panel is collapsed (its aria-expanded state is 'false' or missing), OR, when the last interactive element of a panel is reached, the next `Tab` key press moves focus as follows:
-        *   If a subsequent accordion panel is already expanded, focus moves to the first focusable element in this subsequent panel.
-        *   If no subsequent accordion panel is expanded, focus moves to the first focusable element outside the accordion component.
+*   `Tab` - When focus is on an accordion (tab)header, pressing the `Tab` key moves focus in the following manner:
+    1.  If interactive glyphs or menus are present in the accordion header, focus moves to each in order.
+    2.  When the corresponding tab panel is expanded (its [aria-expanded](http://www.w3.org/TR/wai-aria-1.1/#aria-expanded) state is 'true'), then focus moves to the first focusable element in the panel.
+    3.  If the panel is collapsed (its aria-expanded state is 'false'), OR, when the last interactive element of a panel is reached, the next `Tab` key press moves focus as follows:
+        *   Moves focus to the next logical accordion header.
+        *   When focus reaches the last header, focus moves to the first focusable element outside the accordion component.
 *   `Left arrow`
     *   When focus is on the accordion header, a press of up/left arrow keys moves focus to the previous logical accordion header.
     *   When focus reaches the first header, further up/left arrow key presses optionally wrap to the first header.
@@ -240,34 +161,67 @@ The accordion interacts with the following keyboard keys.
 
 
 ## Events
-The accordion emits a custom **toggle** event when a panel opens or closes via mouse click or keyboard interaction. 
-The event has a detail object with the following content:
-```
-detail: {
-  state,  // "open" or "close"
-  source  // the panel element instance that caused the event 
-}
-```
+Interaction with the component programmatically is performed by sending events to the component (or by using the public api).  
 
-Set up an event listener to receive the toggle event.
+### Events the component listenes to
+A client can send a `command` custom event to the accordion. The command event holds a detail object defining the action 
+to perform and a target for the action.
+
+The detail object has the following structure:
 ```javascript
-document.querySelector('#my-accordion').addEventListener('toggle', function(e) {
-  console.log('Accordion toggled. State:', e.detail.state, 'Source:', e.detail.source);
-});
-```
-
-A client can send a `command` custom event to open or close panel(s) in an accordion. The triggered event should send a `detail`
-object holding the action to execute and the target panel of the action.
-
-```
 detail: { 
-  action, // "open", "close" or "toggle" 
-  target  // Target of action, "undefined" if all panels should be targeted.
+  action, // "open", "close", "toggle" or "upgrade" 
+  target  // Target, panel or tab, of action, "undefined" if all panels should be targeted.
           // Note: If you send a null target, the action is cancelled
 }
 ```
 
-Example. Expand all panels:
+#### open
+Open a targeted tab and it's corresponding tabpanel.
+
+```javascript
+myAccrdion = document.querySelector('#my-accordion');
+target = myAccordion.querySelector('#my-accordion .mdlext-accordion__panel:nth-child(3)'); 
+ce = new CustomEvent('command', { detail: { action : 'open', target: target } });
+```
+If `target` is undefined, the action will open all panels.
+**Note**: Opening all panels only makes sense if the accordion has the aria attribute `aria-multiselectable` set to `true`, 
+and will be cancelled otherwise. 
+
+#### close.
+Close a targeted tab and it's corresponding tabpanel.
+
+```javascript
+myAccrdion = document.querySelector('#my-accordion');
+target = myAccordion.querySelector('#my-accordion .mdlext-accordion__panel:nth-child(3)'); 
+ce = new CustomEvent('command', { detail: { action : 'close', target: target } });
+```
+If `target` is undefined, the action will close all panels.
+**Note**: Closing all panels only makes sense if the accordion has the aria attribute `aria-multiselectable` set to `true`, 
+and will be cancelled otherwise. 
+
+#### toggle
+Toggle a targeted tab. Open or close a targeted tab and it's corresponding tabpanel.
+
+```javascript
+myAccrdion = document.querySelector('#my-accordion');
+target = myAccordion.querySelector('#my-accordion .mdlext-accordion__panel:nth-child(3)'); 
+ce = new CustomEvent('command', { detail: { action : 'toggle', target: target } });
+```
+If `target` is undefined, the action will be cancelled.
+
+#### upgrade
+Upgrade a targeted panel. If you add a panel to the accordion after the page has loaded, you must call `upgrade` to 
+notify the accordion component about the new panel.
+
+```javascript
+myAccrdion = document.querySelector('#my-accordion');
+addedPanel = myAccordion.querySelector('#my-accordion .mdlext-accordion__panel:nth-child(4)'); 
+ce = new CustomEvent('command', { detail: { action : 'toggle', target: addedPanel } });
+```
+If `target` is undefined, the action will be cancelled.
+
+#### Example: Expand all panels.
 ```javascript
 var ce = new CustomEvent( 'command', { 
   detail: { 
@@ -277,21 +231,104 @@ var ce = new CustomEvent( 'command', {
 document.querySelector('#my-accordion').dispatchEvent(ce);
 ```
 
-**Note**: Open all panels and Close all panels only makes sense if the accordion has aria attribute 
-`aria-multiselectable="true`, and will be cancelled otherwise. 
-
-
-Example. Toggle a spesific panel:
+#### Example: Toggle a spesific tab.
 ```javascript
-var panel3 = document.querySelector('#my-accordion .mdlext-accordion__panel:nth-child(3)');
+var panel3 = document.querySelector('#my-accordion .mdlext-accordion__panel:nth-child(3) .mdlext-accordion__tab');
 var ce = new CustomEvent('command', { 
   detail: { 
     action: 'toggle', 
     target: panel3 
   } 
 });
-document.querySelector('#multiselectable-accordion').dispatchEvent(ce);
+document.querySelector('#my-accordion').dispatchEvent(ce);
 ```
+
+#### Example: Append a new panel.
+```javascript
+var panel =
+  '<li class="mdlext-accordion__panel">'
+  +  '<header class="mdlext-accordion__tab" aria-expanded="true">'
+  +    '<span class="mdlext-accordion__tab__caption">New Tab</span>'
+  +    '<i class="mdlext-aria-toggle-material-icons"></i>'
+  +  '</header>'
+  +  '<section class="mdlext-accordion__tabpanel">'
+  +    '<h5>New tab content</h5>'
+  +    '<p>Some content</p>'
+  +  '</section>'
+  +'</li>';
+
+var accordion = document.querySelector('#my-accordion');
+accordion.insertAdjacentHTML('beforeend', panel);
+
+var theNewPanel = document.querySelector('#my-accordion .mdlext-accordion__panel:last-child');
+var ce = new CustomEvent('command', { detail: { action : 'upgrade', target: theNewPanel } });
+document.querySelector('#my-accordion').dispatchEvent(ce);
+```
+
+Refer to [snippets/accordion.html](./snippets/accordion.html) or the [tests](../../test/accordionl/accordion.spec.js) for detailed usage.
+
+
+### Events the component emits
+The accordion emits a custom `toggle` event when a panel opens or closes. The event has a detail object with the following structure:
+
+```javascript
+detail: {
+  state,    // "open" or "close"
+  tab,      // the haeder tab element instance that caused the event
+  tabpanel  // the cooresponding tabpanel element instance
+}
+```
+
+Set up an event listener to receive the toggle event.
+```javascript
+document.querySelector('#my-accordion').addEventListener('toggle', function(e) {
+  console.log('Accordion toggled. State:', e.detail.state, 'Source:', e.detail.source);
+});
+```
+Refer to [snippets/accordion.html](./snippets/accordion.html) or the [tests](../../test/accordionl/accordion.spec.js) for detailed usage.
+
+
+## Public methods
+
+### command(detail)
+Executes an action, targeting a specific tab. The actions corresponds to the custom events defined for this component.
+ 
+The detail object parameter has the following structure:
+```javascript
+detail: { 
+  action, // "open", "close", "toggle" or "upgrade" 
+  target  // Target, panel or tab, of action, "undefined" if all panels should be targeted.
+          // Note: If you send a null target, the action is cancelled
+}
+```
+#### open: command( {action: 'open', target: tabOrPanelElement } )
+Open a targeted tab and it's corresponding tabpanel.
+
+#### close: command( {action: 'close', target: tabOrPanelElement } )
+Close a targeted tab and it's corresponding tabpanel.
+
+#### toggle: command( {action: 'toggle', target: tabOrPanelElement } )
+Toggle a targeted tab. Open or close a targeted tab and it's corresponding tabpanel.
+
+#### upgrade: command( {action: 'upgrade', target: tabOrPanelElement } )
+Upgrade a targeted panel. If you add a panel to the accordion after the page has loaded, you must call `upgrade` to 
+notify the accordion component about the new panel.
+
+#### Example: Expand all panels.
+```javascript
+var accordion = document.querySelector('#my-accordion');
+accordion.MaterialExtAccordion.command( {action: 'open'} );
+```
+
+#### Example: Toggle panel.
+```javascript
+var accordion = document.querySelector('#my-accordion');
+var panel3 = document.querySelector('#my-accordion .mdlext-accordion__panel:nth-child(3) .mdlext-accordion__tab');
+accordion.MaterialExtAccordion.command( {action: 'toggle', target: panel3} );
+```
+
+Refer to [snippets/accordion.html](./snippets/accordion.html) or the [tests](../../test/accordionl/accordion.spec.js) for detailed usage.
+
 
 ## Configuration options
 
@@ -299,37 +336,33 @@ The MDLEXT CSS classes apply various predefined visual and behavioral enhancemen
 The table below lists the available classes and their effects.
 
 | MDLEXT class | Effect | Remarks |
-|-----------|--------|---------|
-| `mdlext-accordion` | Defines container as an MDL component | Required on "outer" `<div>` or `<ul>` element |
-| `mdlext-js-accordion` | Assigns basic MDL behavior to accordion | Required on "outer" `<div>` or `<ul>` element |
-| `mdlext-accordion--vertical` | Vertical layot of an accordion | Optional; Without this class an accordion has horizontal layout |
-| `mdlext-accordion__panel` | Defines a container for each section of the accordion | Required on first inner `<div>` element or `<li>` element  |
-| `mdlext-accordion__panel__header` | Defines a header for a section | Required on `<header>` element |
-| `mdlext-accordion__panel__header__transform` | Rotates content 90 deg if accordion has horizontal layout  | Required |
-| `mdlext-accordion__panel__header__state` | A state indicator, typical an icon, showing open/closed state | Optional; goes inside the header |
-| `material-icons` | Decorate header with an icon | Optional; goes inside the header using an `<i>` element  |
-| `mdlext-accordion__panel__content` | The content | Required on `<section`> element |
-| `mdl-js-ripple-effect` | Applies ripple click effect to accordion header | Optional; goes on "outer" `<ul>` or `<div>` element |
-| `mdl-js-ripple-effect--ignore-events` |  | Should be added by the component, but that does not seem to happen. For now, add this class if `mdl-js-ripple-effect` class is applied |
+|--------------|--------|---------|
+|`mdlext-accordion`| Defines container as an MDL component | Required on "outer" `<div>` or `<ul>` element |
+|`mdlext-js-accordion`| Assigns basic MDL behavior to accordion | Required on "outer" `<div>` or `<ul>` element |
+|`mdlext-accordion--horizontal`| Horizontal layot of an accordion | Required; The accordion must have one of `mdlext-accordion--horizontal` or `mdlext-accordion--vertical` defined |
+|`mdlext-accordion--vertical`| Vertical layot of an accordion | Required; The accordion must have one of `mdlext-accordion--horizontal` or `mdlext-accordion--vertical` defined |
+|`mdlext-js-ripple-effect`| Applies ripple click effect to accordion tab header | Optional; goes on "outer" `<ul>` or `<div>` element |
+|`mdlext-js-animation-effect`| Applies animation effect to accordion tab panel | Optional; goes on "outer" `<ul>` or `<div>` element |
+|`mdlext-accordion__panel`| Defines a container for each section of the accordion - the tab and tabpanel element | Required on first inner `<div>` element or `<li>` element  |
+|`mdlext-accordion__tab`| Defines a tab header for a corresponding tabpanel | Required on `<header>` or `<div>` element |
+|`mdlext-accordion__tabpanel`| The content | Required on `<section>` or `<div>` element |
 
 
 The table below lists available attributes and their effects.
 
-| Attribute | Effect | Remarks |
-|-----------|--------|---------|
-| `aria-multiselectable` | If true, multiple panels may be open simultaneously | Add this attribute to the `mdlext-accordion` element to keep multiple panels open at the same time. **Note**: Only implemented for vertical accordion (a multiselectable horizontal accordion does not make sense) |
-| `role=tablist` | The accordion component must have a role of tablist | Added by component to `mdlext-accordion` element |
-| `open` | Indicates an open panel | The panel content is visible. If this attribue is removed only the panel header i visible |
-| `disabled` | Indicates a disabled panel | The panel will not open or close |
-| `role=tabpanel` | The accordion panel has the role tabpanel | Added by component to `mdlext-accordion__panel` element |
-| `role=tab` | Each header tab in the tablist has a role of tab | Added by component to `mdlext-accordion__panel__header` element |
-| `aria-expanded` | An accordion should manage the expanded/collapsed state of each tab by maintain its aria-expanded state | Added by component to `mdlext-accordion__panel_header` element |
-| `aria-selected` | An accordion should manage the selected state of each tab by maintaining its aria-selected state | Added by component to `mdlext-accordion__panel_header` element. |
-| `aria-hidden` | An accordion should convey the visibility of each tabpanel by maintaining its aria-hidden state | Added by component to `mdlext-accordion__panel_header` element. Note: Can't see any practical use for this attribute, but implemented as a state on the header tab. |
+| Attribute | Description | Remarks |
+|-----------|-------------|---------|
+|`aria-multiselectable`| If true, multiple panels may be open simultaneously | Required. Add `aria-multiselectable="true"` to the `mdlext-accordion` element to keep multiple panels open at the same time. If not present, the component will set `aria-multiselectable="false"` during initialization.|
+|`role=tablist`| Component role | Required. Added by component during initialization if not present. |
+|`role=presentation`| Accordion panel role | Required. Added by component during initialization if not present. |
+|`role=tab`| Accordion tab header role | Required. Added by component during initialization if not present. |
+|`aria-expanded`| Accordion tab header attribute.  An accordion should manage the expanded/collapsed state of each tab by maintain its aria-expanded state. | Required. Defaults to `aria-expanded="false"`. Set `aria-expanded="true"` if you want a tab to open during page load. |
+|`aria-selected`| Accordion tab header attribute. An accordion should manage the selected state of each tab by maintaining its aria-selected state | Optional. Added by component. |
+|`disabled`| Accordion tab header attribute. Indicates a disabled tab and tabpanel | Optional. If this attribute is present, the tabpanel will not open or close. |
+|`role=tabpanel`| Accordion tabpanel role. | Required. Added by component during initialization if not present. |
+|`aria-hidden`| Accordion tabpanel attribute. An accordion should convey the visibility of each tabpanel by maintaining its aria-hidden state | Required. Added by component. |
+|`hidden`| Accordion tabpanel attribute. | Required. Added by component if `aria-hidden="true"`. |
  
 
-## How to use the component programmatically
-The tests provides examples on how to use the component [programmatically](https://github.com/leifoolsen/mdl-ext/blob/master/test/accordion/accordion.spec.js)
-
 ### Credits 
-The Accordion component is based on this [CodePen](http://codepen.io/aann/pen/dPqBML)
+The Accordion component is based on / inspired by this [CodePen](http://codepen.io/aann/pen/dPqBML)

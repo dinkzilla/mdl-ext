@@ -131,6 +131,7 @@
   <main id="mount" class="mdl-layout__content">
     <h3 class="mdlext-demo-header">Accordion</h3>
 <p>A Collection of panels within a common outer pane.</p>
+<p><strong>Note:</strong> The accordion has been refactored and is not compatible with the accordion prior to version 0.9.13</p>
 
 <h4>Horizontal accordion, ripple effect, animated tabpanel, aria-multiselectable="false"</h4>
 
@@ -761,14 +762,165 @@
   </li>
 </ul>
 
-<div style="margin-top: 64px"></div>
 
+
+<h5>Styling the accordion</h5>
+
+<style>
+  .demo-accordion-7 {
+    height: 300px;
+  }
+  .demo-accordion-7 .mdlext-accordion__panel,
+  .demo-accordion-7 .mdlext-accordion__tab {
+    min-width: 40px;
+    min-height: 40px;
+    width: 40px;
+  }
+  .colored-panel:nth-child(1) {
+    background: rgba(239, 154, 154, 0.4);
+  }
+  .colored-panel:nth-child(2) {
+    background: rgba(206, 147, 216, 0.4);
+  }
+  .colored-panel:nth-child(3) {
+    background: rgba(144, 202, 249, 0.4);
+  }
+  .colored-panel:nth-child(4) {
+    background: rgba(165, 214, 167, 0.4);
+  }
+  .colored-panel:nth-child(5) {
+    background: rgba(255, 224, 130, 0.4);
+  }
+  .mdlext-aria-toggle-plus-minus {
+    font-size: 20px;
+  }
+  .img-box {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .img-box--6 {
+    background-image: url(./images/_D806374.jpg);
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%,rgba(255,255,255,0.2) 100%), url(./images/_D806374.jpg);
+  }
+  .img-box--7 {
+    background-image: url('./images/_D802478.jpg');
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%,rgba(255,255,255,0.1) 100%), url(./images/_D802478.jpg);
+  }
+  .img-box--8 {
+    background-image: url('./images/_D803221.jpg');
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.5) 100%), url(./images/_D803221.jpg);
+  }
+  .img-box--9 {
+    background-image: url('./images/_D802143-2.jpg');
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%,rgba(255,255,255,0.2) 100%), url(./images/_D802143-2.jpg);
+  }
+  .img-box--10 {
+    background-image: url('./images/_D809758-2.jpg');
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%,rgba(255,255,255,0.1) 100%), url(./images/_D809758-2.jpg);
+  }
+</style>
+
+<ul id="demo-accordion-7" class="mdlext-accordion mdlext-js-accordion mdlext-accordion--horizontal mdlext-js-ripple-effect mdlext-js-animation-effect demo-accordion-7">
+  <li class="mdlext-accordion__panel colored-panel">
+    <header class="mdlext-accordion__tab" aria-expanded="true">
+      <i class="material-icons md-16">dns</i>
+      <span class="mdlext-accordion__tab__caption mdl-typography--subhead-color-contrast">Accordion</span>
+      <i class="mdlext-aria-toggle-plus-minus"></i>
+    </header>
+    <section class="mdlext-accordion__tabpanel img-box img-box--6">
+      <h5>Introduction</h5>
+      <p>An accordion component is a collection of expandable panels associated with a common outer container. Panels consist
+        of a header and an associated content region or panel. The primary use of an Accordion is to present multiple sections
+        of content on a single page without scrolling, where all of the sections are peers in the application or object hierarchy.
+        The general look is similar to a tree where each root tree node is an expandable accordion header. The user navigates
+        and makes the contents of each panel visible (or not) by interacting with the Accordion Header.</p>
+    </section>
+  </li>
+  <li class="mdlext-accordion__panel colored-panel">
+    <header class="mdlext-accordion__tab">
+      <i class="material-icons md-16">all_inclusive</i>
+      <span class="mdlext-accordion__tab__caption mdl-typography--subhead-color-contrast">Include Component</span>
+      <i class="mdlext-aria-toggle-plus-minus"></i>
+    </header>
+    <section class="mdlext-accordion__tabpanel img-box img-box--7">
+      <p style="margin-top:128px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique eget augue eget gravida.
+        Etiam eget imperdiet massa. Aliquam nisi eros, molestie a vulputate quis, tempor nec quam. Ut at libero
+        in sem pellentesque imperdiet. Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
+        ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
+        maximus massa felis quis quam. Curabitur malesuada placerat nunc, id dapibus justo tempor in. Ut molestie
+        arcu justo, id volutpat eros vestibulum eget. Fusce tincidunt leo in est venenatis porta.</p>
+      <p>Maecenas eu vestibulum orci. Ut eget nisi a est sagittis euismod a vel
+        justo. Quisque at dui urna. Duis vel velit leo. Nulla nunc sem, rutrum at aliquet in, aliquet id velit. Duis
+        mattis placerat erat, a aliquam leo rhoncus vel. Sed nec diam ex. Praesent convallis purus lorem, vel porttitor
+        neque gravida quis. Etiam et malesuada dui. Nunc vitae viverra dui. Suspendisse feugiat efficitur augue, quis
+        blandit leo ullamcorper vel.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique eget augue eget gravida.
+        Etiam eget imperdiet massa. Aliquam nisi eros, molestie a vulputate quis, tempor nec quam. Ut at libero
+        in sem pellentesque imperdiet. Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
+        ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
+        maximus massa felis quis quam. Curabitur malesuada placerat nunc, id dapibus justo tempor in. Ut molestie
+        arcu justo, id volutpat eros vestibulum eget. Fusce tincidunt leo in est venenatis porta.</p>
+    </section>
+  </li>
+  <li class="mdlext-accordion__panel colored-panel">
+    <header class="mdlext-accordion__tab">
+      <i class="material-icons md-16">build</i>
+      <span class="mdlext-accordion__tab__caption mdl-typography--subhead-color-contrast">Configuration Options</span>
+      <i class="mdlext-aria-toggle-plus-minus"></i>
+    </header>
+    <section class="mdlext-accordion__tabpanel img-box img-box--8">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique eget augue eget gravida.
+        Etiam eget imperdiet massa. Aliquam nisi eros, molestie a vulputate quis, tempor nec quam. Ut at libero
+        in sem pellentesque imperdiet. Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
+        ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
+        maximus massa felis quis quam. Curabitur malesuada placerat nunc, id dapibus justo tempor in. Ut molestie
+        arcu justo, id volutpat eros vestibulum eget. Fusce tincidunt leo in est venenatis porta.</p>
+    </section>
+  </li>
+  <li class="mdlext-accordion__panel colored-panel">
+    <header class="mdlext-accordion__tab">
+      <i class="material-icons md-16">public</i>
+      <span class="mdlext-accordion__tab__caption mdl-typography--subhead-color-contrast">Fourth section</span>
+      <i class="mdlext-aria-toggle-plus-minus"></i>
+    </header>
+    <section class="mdlext-accordion__tabpanel img-box img-box--9">
+      <p>Maecenas eu vestibulum orci. Ut eget nisi a est sagittis euismod a vel
+        justo. Quisque at dui urna. Duis vel velit leo. Nulla nunc sem, rutrum at aliquet in, aliquet id velit. Duis
+        mattis placerat erat, a aliquam leo rhoncus vel. Sed nec diam ex. Praesent convallis purus lorem, vel porttitor
+        neque gravida quis. Etiam et malesuada dui. Nunc vitae viverra dui. Suspendisse feugiat efficitur augue, quis
+        blandit leo ullamcorper vel.</p>
+    </section>
+  </li>
+  <li class="mdlext-accordion__panel colored-panel">
+    <header class="mdlext-accordion__tab">
+      <i class="material-icons md-16">public</i>
+      <span class="mdlext-accordion__tab__caption mdl-typography--subhead-color-contrast">Fifth</span>
+      <i class="mdlext-aria-toggle-plus-minus"></i>
+    </header>
+    <section class="mdlext-accordion__tabpanel img-box img-box--10">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique eget augue eget gravida.
+        Etiam eget imperdiet massa. Aliquam nisi eros, molestie a vulputate quis, tempor nec quam. Ut at libero
+        in sem pellentesque imperdiet. Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
+        ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
+        maximus massa felis quis quam. Curabitur malesuada placerat nunc, id dapibus justo tempor in. Ut molestie
+        arcu justo, id volutpat eros vestibulum eget. Fusce tincidunt leo in est venenatis porta.</p>
+    </section>
+  </li>
+</ul>
+
+<p class="mdl-typography--caption" style="margin-top: 64px;">
+  All images appearing in this page are the exclusive property of Leif Olsen and are protected under the United States and International Copyright laws.
+  The images may not be reproduced or manipulated without the written permission of Leif Olsen.
+  Use of any image as the basis for another photographic concept or illustration (digital, artist rendering or alike) is a violation of the United States and International Copyright laws.
+  All images are copyrighted &copy; Leif Olsen, 2016.
+</p>
 
 <script>
   (function() {
     'use strict';
 
-    function newPanel() {
+    function insertPanel() {
       var panel =
         '<li class="mdlext-accordion__panel">'
         +  '<header class="mdlext-accordion__tab" aria-expanded="true">'
@@ -798,37 +950,37 @@
       // Interact with accordion using public methods
       document.querySelector('#btn-api-expand-all').addEventListener('click', function(e) {
         var accordion = document.querySelector('#demo-accordion-6');
-        accordion.MaterialExtAccordion.openTab();
+        accordion.MaterialExtAccordion.command( {action: 'open'} );
       });
 
       document.querySelector('#btn-api-collapse-all').addEventListener('click', function(e) {
         var accordion = document.querySelector('#demo-accordion-6');
-        accordion.MaterialExtAccordion.closeTab();
+        accordion.MaterialExtAccordion.command( {action: 'close'} );
       });
 
       document.querySelector('#btn-api-open-tab2').addEventListener('click', function(e) {
         var accordion = document.querySelector('#demo-accordion-6');
         var tab2 = document.querySelector('#demo-accordion-6 .mdlext-accordion__panel:nth-child(2) .mdlext-accordion__tab');
-        accordion.MaterialExtAccordion.openTab(tab2);
+        accordion.MaterialExtAccordion.command( {action: 'open', target: tab2} );
       });
 
       document.querySelector('#btn-api-close-tab2').addEventListener('click', function(e) {
         var accordion = document.querySelector('#demo-accordion-6');
         var tab2 = document.querySelector('#demo-accordion-6 .mdlext-accordion__panel:nth-child(2)');
-        accordion.MaterialExtAccordion.closeTab(tab2);
+        accordion.MaterialExtAccordion.command( {action: 'close', target: tab2} );
       });
 
       document.querySelector('#btn-api-toggle-tab2').addEventListener('click', function(e) {
         var accordion = document.querySelector('#demo-accordion-6');
         var tab2 = document.querySelector('#demo-accordion-6 .mdlext-accordion__panel:nth-child(2)');
-        accordion.MaterialExtAccordion.toggleTab(tab2);
+        accordion.MaterialExtAccordion.command( {action: 'toggle', target: tab2} );
       });
 
       document.querySelector('#btn-api-new-tab').addEventListener('click', function(e) {
-        newPanel();
+        insertPanel();
         var accordion = document.querySelector('#demo-accordion-6');
         var panelElement  = document.querySelector('#demo-accordion-6 .mdlext-accordion__panel:last-child');
-        accordion.MaterialExtAccordion.upgradeTab(panelElement);
+        accordion.MaterialExtAccordion.command( {action: 'upgrade', target: panelElement} );
       });
 
       // Interact with accordion using custom event
@@ -855,7 +1007,7 @@
               ce = createCustomEvent('command', { detail: { action : 'toggle', target: tab2 } });
               break;
             case 'btn-event-new-tab':
-              newPanel();
+              insertPanel();
               var panelElement  = document.querySelector('#demo-accordion-6 .mdlext-accordion__panel:last-child');
               ce = createCustomEvent('command', { detail: { action : 'upgrade', target: panelElement } });
               break;
@@ -866,7 +1018,6 @@
           accordion.dispatchEvent(ce);
         });
       }
-
     });
 
   }());

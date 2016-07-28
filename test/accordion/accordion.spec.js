@@ -223,9 +223,7 @@ describe('MaterialExtAccordion', () => {
     const element = document.querySelector('#accordion-1');
     const methods = [
       'upgradeTab',
-      'openTab',
-      'closeTab',
-      'toggleTab'
+      'command'
     ];
     methods.forEach( fn => {
       expect(element.MaterialExtAccordion[fn]).to.be.a('function');
@@ -243,7 +241,7 @@ describe('MaterialExtAccordion', () => {
   it('has expected expanded tab attributes', () => {
     const element = document.querySelector('#accordion-1');
     const panel = document.querySelector(`#accordion-1 .${PANEL}:first-child`);
-    element.MaterialExtAccordion.openTab(panel);
+    element.MaterialExtAccordion.command( { action: 'open', target: panel } );
 
     const tab = panel.querySelector(`.${TAB}`);
     const tabpanel = panel.querySelector(`.${TABPANEL}`);
@@ -256,7 +254,7 @@ describe('MaterialExtAccordion', () => {
   it('has expected closed tab attributes', () => {
     const element = document.querySelector('#accordion-1');
     const panel = document.querySelector(`#accordion-1 .${PANEL}:nth-child(2)`);
-    element.MaterialExtAccordion.closeTab(panel);
+    element.MaterialExtAccordion.command( {action: 'close', target: panel} );
 
     const tab = panel.querySelector(`.${TAB}`);
     const tabpanel = panel.querySelector(`.${TABPANEL}`);
@@ -318,37 +316,46 @@ describe('MaterialExtAccordion', () => {
     }
   });
 
-  it('throws an error if required accordion class is missing', () => {
+  it('throws error if required accordion class is missing', () => {
     const container = document.querySelector('#mount');
-    container.insertAdjacentHTML('beforeend', accordion3_missing_class);
-    const element = document.querySelector('#accordion-3');
-    expect( () => {
-      componentHandler.upgradeElement(element, 'MaterialExtAccordion');
-    }).to.throw(Error);
-
-    removeChilds(container);
+    try {
+      container.insertAdjacentHTML('beforeend', accordion3_missing_class);
+      const element = document.querySelector('#accordion-3');
+      expect(() => {
+        componentHandler.upgradeElement(element, 'MaterialExtAccordion');
+      }).to.throw(Error);
+    }
+    finally {
+      removeChilds(container);
+    }
   });
 
-  it('throws an error if tab class is missing', () => {
+  it('throws error if tab class is missing', () => {
     const container = document.querySelector('#mount');
-    container.insertAdjacentHTML('beforeend', accordion4_missing_tab);
-    const element = document.querySelector('#accordion-4');
-    expect( () => {
-      componentHandler.upgradeElement(element, 'MaterialExtAccordion');
-    }).to.throw(Error);
-
-    removeChilds(container);
+    try {
+      container.insertAdjacentHTML('beforeend', accordion4_missing_tab);
+      const element = document.querySelector('#accordion-4');
+      expect(() => {
+        componentHandler.upgradeElement(element, 'MaterialExtAccordion');
+      }).to.throw(Error);
+    }
+    finally {
+      removeChilds(container);
+    }
   });
 
   it('throws an error if tabpanel class is missing', () => {
     const container = document.querySelector('#mount');
-    container.insertAdjacentHTML('beforeend', accordion5_missing_tabpanel);
-    const element = document.querySelector('#accordion-5');
-    expect( () => {
-      componentHandler.upgradeElement(element, 'MaterialExtAccordion');
-    }).to.throw(Error);
-
-    removeChilds(container);
+    try {
+      container.insertAdjacentHTML('beforeend', accordion5_missing_tabpanel);
+      const element = document.querySelector('#accordion-5');
+      expect(() => {
+        componentHandler.upgradeElement(element, 'MaterialExtAccordion');
+      }).to.throw(Error);
+    }
+    finally {
+      removeChilds(container);
+    }
   });
 
   it('inserts a new accordion tab', () => {
@@ -362,6 +369,33 @@ describe('MaterialExtAccordion', () => {
 
     insertedPanel  = element.querySelector(`.${PANEL}:last-child`);
     expectedPanelAttributes(insertedPanel);
+  });
+
+  it('upgrades an existing accordion tab', () => {
+    const container = document.querySelector('#mount');
+    try {
+      container.insertAdjacentHTML('beforeend', accordion6_multiselectable);
+      const element = document.querySelector('#accordion-6');
+      componentHandler.upgradeElement(element, 'MaterialExtAccordion');
+      const tab2 = element.querySelector(`.${PANEL}:nth-child(2) .${TAB}`);
+
+      expect( () => {
+        element.MaterialExtAccordion.upgradeTab(tab2);
+      }).to.not.throw(Error);
+    }
+    finally {
+      removeChilds(container);
+    }
+  });
+
+  it('throws error if accordion tab to upgrade is undefined or null', () => {
+    const element = document.querySelector('#accordion-1');
+    expect( () => {
+      element.MaterialExtAccordion.upgradeTab();
+    }).to.throw(Error);
+    expect( () => {
+      element.MaterialExtAccordion.upgradeTab(null);
+    }).to.throw(Error);
   });
 
   it('interacts with the keyboard', () => {
@@ -424,7 +458,7 @@ describe('MaterialExtAccordion', () => {
     const ariaHidden = panel.querySelector(`.${TABPANEL}`).getAttribute('aria-hidden');
 
     // Toggle tab
-    element.MaterialExtAccordion.toggleTab(tab);
+    element.MaterialExtAccordion.command( {action: 'toggle', target: tab} );
 
     /*
      // ... or trigger click event to toggle tab
@@ -450,13 +484,13 @@ describe('MaterialExtAccordion', () => {
     const ariaHidden = panel.querySelector(`.${TABPANEL}`).getAttribute('aria-hidden');
 
     // Toggle tab
-    element.MaterialExtAccordion.toggleTab(tab);
+    element.MaterialExtAccordion.command( {action: 'toggle', target: tab} );
 
     assert.equal(ariaExpanded, panel.querySelector(`.${TAB}`).getAttribute('aria-expanded'), 'Disabled accordion tab state should not change');
     assert.equal(ariaHidden, panel.querySelector(`.${TABPANEL}`).getAttribute('aria-hidden'), 'Disabled accordion tabpanel state should not change');
   });
 
-  it('last focused tab should have aria-selected="true"', () => {
+  it('has aria-selected="true" on last focused tab', () => {
     const element = document.querySelector('#accordion-1');
     const tab = document.querySelector(`#accordion-1 .${PANEL}:nth-child(2) .${TAB}`);
     assert.isNotNull(tab, 'Expected handle to disabled accordion tab');
@@ -491,7 +525,7 @@ describe('MaterialExtAccordion', () => {
       const element = document.querySelector('#accordion-6');
       componentHandler.upgradeElement(element, 'MaterialExtAccordion');
 
-      element.MaterialExtAccordion.closeTab();
+      element.MaterialExtAccordion.command({action: 'close'});
 
       const firstTab = element.querySelector(`.${PANEL}:first-child .${TAB}`);
       const tab3 = element.querySelector(`.${PANEL}:nth-child(3) .${TAB}`);
@@ -529,7 +563,7 @@ describe('MaterialExtAccordion', () => {
           shiftKey: false
         })
       );
-      assert.isTrue(tab4.hasAttribute('aria-selected'), 'Expected accordion panel tab #2 to have attribute "aria-selected"');
+      assert.isTrue(tab4.hasAttribute('aria-selected'), 'Expected accordion panel tab #4 to have attribute "aria-selected"');
 
       // First available tab to select is tab #4
       tab2.dispatchEvent(
@@ -540,7 +574,7 @@ describe('MaterialExtAccordion', () => {
           shiftKey: false
         })
       );
-      assert.isTrue(tab4.hasAttribute('aria-selected'), 'Expected accordion panel tab #2 to have attribute "aria-selected"');
+      assert.isTrue(tab4.hasAttribute('aria-selected'), 'Expected accordion panel tab #4 to have attribute "aria-selected"');
 
       // First available tab to select is tab #2
       tab4.dispatchEvent(
@@ -605,14 +639,14 @@ describe('MaterialExtAccordion', () => {
       const element = document.querySelector('#accordion-6');
       componentHandler.upgradeElement(element, 'MaterialExtAccordion');
 
-      element.MaterialExtAccordion.closeTab();
+      element.MaterialExtAccordion.command( {action: 'close' } );
       assert.isNull(anyOpenTab(element), 'Expected all tabs to have aria-expanded="false');
 
       const tab1 = element.querySelector(`.${PANEL}:first-child .${TAB}`);
       const tab4 = element.querySelector(`.${PANEL}:nth-child(4) .${TAB}`);
 
-      element.MaterialExtAccordion.openTab(tab1);
-      element.MaterialExtAccordion.openTab(tab4);
+      element.MaterialExtAccordion.command( {action: 'open', target: tab1} );
+      element.MaterialExtAccordion.command( {action: 'open', target: tab4} );
 
       const openTabs =  [...element.querySelectorAll(`.${PANEL} .${TAB}`)].filter(tab => tab.getAttribute('aria-expanded') == 'true');
       expect(openTabs).to.have.lengthOf(2, 'Expected excactly two tabs to have aria-expanded="true"');
@@ -629,7 +663,7 @@ describe('MaterialExtAccordion', () => {
       const element = document.querySelector('#accordion-6');
       componentHandler.upgradeElement(element, 'MaterialExtAccordion');
 
-      element.MaterialExtAccordion.openTab();
+      element.MaterialExtAccordion.command( {action: 'open'} );;
 
       const allTabs = [...element.querySelectorAll(`.${PANEL} .${TAB}`)];
       const disabledTabs = [...element.querySelectorAll(`.${PANEL} .${TAB}`)].filter(tab => tab.hasAttribute('disabled'));
@@ -645,20 +679,20 @@ describe('MaterialExtAccordion', () => {
   it('has only one panel open simultaneously when aria-multiselectable="false"', () => {
     const element = document.querySelector('#accordion-1');
 
-    element.MaterialExtAccordion.closeTab();
+    element.MaterialExtAccordion.command( {action: 'close' } );
     assert.isNull(anyOpenTab(element), 'Expected all tabs to have aria-expanded="false');
 
     const tab1 = element.querySelector(`.${PANEL}:first-child .${TAB}`);
     const tab4 = element.querySelector(`.${PANEL}:nth-child(4) .${TAB}`);
 
-    element.MaterialExtAccordion.openTab(tab1);
-    element.MaterialExtAccordion.openTab(tab4);
+    element.MaterialExtAccordion.command( {action: 'open', target: tab1} );
+    element.MaterialExtAccordion.command( {action: 'open', target: tab4} );
 
     const openTabs =  [...element.querySelectorAll(`.${PANEL} .${TAB}`)].filter(tab => tab.getAttribute('aria-expanded') == 'true');
     expect(openTabs).to.have.lengthOf(1, 'Expected excactly one tab to have aria-expanded="true"');
   });
 
-  it('tab get aria-selected="true" when corresponding tabpanel is clicked or receives focus', () => {
+  it('has aria-selected="true" when corresponding tabpanel is clicked or receives focus', () => {
 
     const container = document.querySelector('#mount');
     try {
@@ -669,8 +703,8 @@ describe('MaterialExtAccordion', () => {
       let tab1 = element.querySelector(`.${PANEL}:first-child .${TAB}`);
       let tab4 = element.querySelector(`.${PANEL}:nth-child(4) .${TAB}`);
 
-      element.MaterialExtAccordion.openTab(tab1);
-      element.MaterialExtAccordion.openTab(tab4);
+      element.MaterialExtAccordion.command( {action: 'open', target: tab1} );
+      element.MaterialExtAccordion.command( {action: 'open', target: tab4} );
 
       const tabpanel1 = element.querySelector(`.${PANEL}:first-child .${TABPANEL}`);
       tabpanel1.dispatchEvent(
@@ -698,6 +732,13 @@ describe('MaterialExtAccordion', () => {
       removeChilds(container);
     }
 
+  });
+
+  it('throws error if unknown command', () => {
+    const element = document.querySelector('#accordion-1');
+    expect( () => {
+      element.MaterialExtAccordion.command( {action: 'foo-bar-baz'} );
+    }).to.throw(Error);
   });
 
   it('has ripple effect on tabs', () => {

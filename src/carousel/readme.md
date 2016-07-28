@@ -144,8 +144,8 @@ Example 2, double quotes in JSON config string:
 Interaction with the component programmatically is performed by sending events to the component, and receive responses 
 from the component.  
 
-### Events listened to
-A client can send a `command` custom event to the carousel. The command event holds an action detial object defining 
+### Events the component listenes to
+A client can send a `command` custom event to the carousel. The command event holds an action detail object defining 
 the action to perform.
 
 ```javascript
@@ -171,20 +171,16 @@ Refer to [snippets/lightbox.html](./snippets/carousel.html) for usage.
 
 ### Events emitted
 When a user interacts with the component, or the component receives a `command` custom event, the component responds
-with a `select` custom event reflecting the action performed and the selected slide element.
+with a `select` custom event reflecting the action performed and a detail object holding the selected slide element.
 
-The `select` event has the following format:
+The `select` detail object has the following format:
 
 ```javascript
-const ev = createCustomEvent('select', {
-  bubbles: true,
-  cancelable: true,
-  detail: {
-    command: command,
-    keyCode: keyCode,
-    source: slide
-  }
-});
+detail: {
+  command, // The command executed (`first`, `scroll-prev`, `prev`, `next`, `scroll-next`, `last`) 
+  keyCode, // Key pressed, if any 
+  source   // The element that caused the event
+}
 ```
 
 Set up a `select` listener.
@@ -227,7 +223,7 @@ componentHandler.downgradeElements([...content]);
 ```
 
 ### `upgradeSlides()`
-The component uses a mutation observer oo upgrade slides inserted into the components DOM tree after component 
+The component uses a mutation observer to upgrade slides inserted into the components DOM tree after component 
 initialization. If the observer, for some reason, does not work, call `upgradeSlides()` to upgrade newly inserted slides.
 
 ### `getConfig()`

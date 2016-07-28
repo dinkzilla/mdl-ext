@@ -108,6 +108,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0 $mdlext-accordion-content-padding;
+    background-color: $mdlext-accordion-content-background-color;
     display: block;
     overflow: auto;
     flex-grow: 1;
