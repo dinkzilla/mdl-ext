@@ -188,8 +188,8 @@ If `target` is undefined, the action will open all panels.
 **Note**: Opening all panels only makes sense if the accordion has the aria attribute `aria-multiselectable` set to `true`, 
 and will be cancelled otherwise. 
 
-#### close.
-Close a targeted tab and it's corresponding tabpanel.
+#### close
+Close a targeted tab and its corresponding tabpanel.
 
 ```javascript
 myAccrdion = document.querySelector('#my-accordion');
@@ -217,7 +217,7 @@ notify the accordion component about the new panel.
 ```javascript
 myAccrdion = document.querySelector('#my-accordion');
 addedPanel = myAccordion.querySelector('#my-accordion .mdlext-accordion__panel:nth-child(4)'); 
-ce = new CustomEvent('command', { detail: { action : 'toggle', target: addedPanel } });
+ce = new CustomEvent('command', { detail: { action : 'upgrade', target: addedPanel } });
 ```
 If `target` is undefined, the action will be cancelled.
 
@@ -268,7 +268,7 @@ document.querySelector('#my-accordion').dispatchEvent(ce);
 Refer to [snippets/accordion.html](./snippets/accordion.html) or the [tests](../../test/accordionl/accordion.spec.js) for detailed usage.
 
 
-### Events the component emits
+### Events emitted from the component
 The accordion emits a custom `toggle` event when a panel opens or closes. The event has a detail object with the following structure:
 
 ```javascript
@@ -339,10 +339,10 @@ The table below lists the available classes and their effects.
 |--------------|--------|---------|
 |`mdlext-accordion`| Defines container as an MDL component | Required on "outer" `<div>` or `<ul>` element |
 |`mdlext-js-accordion`| Assigns basic MDL behavior to accordion | Required on "outer" `<div>` or `<ul>` element |
-|`mdlext-accordion--horizontal`| Horizontal layot of an accordion | Required; The accordion must have one of `mdlext-accordion--horizontal` or `mdlext-accordion--vertical` defined |
-|`mdlext-accordion--vertical`| Vertical layot of an accordion | Required; The accordion must have one of `mdlext-accordion--horizontal` or `mdlext-accordion--vertical` defined |
-|`mdlext-js-ripple-effect`| Applies ripple click effect to accordion tab header | Optional; goes on "outer" `<ul>` or `<div>` element |
-|`mdlext-js-animation-effect`| Applies animation effect to accordion tab panel | Optional; goes on "outer" `<ul>` or `<div>` element |
+|`mdlext-accordion--horizontal`| Horizontal layot of an accordion | Required. The accordion must have one of `mdlext-accordion--horizontal` or `mdlext-accordion--vertical` defined |
+|`mdlext-accordion--vertical`| Vertical layot of an accordion | Required. The accordion must have one of `mdlext-accordion--horizontal` or `mdlext-accordion--vertical` defined |
+|`mdlext-js-ripple-effect`| Applies ripple click effect to accordion tab header | Optional. Goes on "outer" `<ul>` or `<div>` element |
+|`mdlext-js-animation-effect`| Applies animation effect to accordion tab panel | Optional. Goes on "outer" `<ul>` or `<div>` element |
 |`mdlext-accordion__panel`| Defines a container for each section of the accordion - the tab and tabpanel element | Required on first inner `<div>` element or `<li>` element  |
 |`mdlext-accordion__tab`| Defines a tab header for a corresponding tabpanel | Required on `<header>` or `<div>` element |
 |`mdlext-accordion__tabpanel`| The content | Required on `<section>` or `<div>` element |
