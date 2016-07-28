@@ -131,7 +131,7 @@ a glyph left and a state icon right. Tab #1 is open at page load (aria-expanded=
 strictly necessary to apply the attributes in markup.
 
 ### More examples
-* The [snippets/accordion.html](./snippets/accordion.html) and the [tests](../../test/accordionl/accordion.spec.js) provides more detailed examples.
+* The [snippets/accordion.html](./snippets/accordion.html) and the [tests](../../test/accordion/accordion.spec.js) provides more detailed examples.
 * Try out the [live demo](http://leifoolsen.github.io/mdl-ext/demo/accordion.html)
 
 
@@ -265,7 +265,7 @@ var ce = new CustomEvent('command', { detail: { action : 'upgrade', target: theN
 document.querySelector('#my-accordion').dispatchEvent(ce);
 ```
 
-Refer to [snippets/accordion.html](./snippets/accordion.html) or the [tests](../../test/accordionl/accordion.spec.js) for detailed usage.
+Refer to [snippets/accordion.html](./snippets/accordion.html) or the [tests](../../test/accordion/accordion.spec.js) for detailed usage.
 
 
 ### Events emitted from the component
@@ -285,7 +285,7 @@ document.querySelector('#my-accordion').addEventListener('toggle', function(e) {
   console.log('Accordion toggled. State:', e.detail.state, 'Source:', e.detail.source);
 });
 ```
-Refer to [snippets/accordion.html](./snippets/accordion.html) or the [tests](../../test/accordionl/accordion.spec.js) for detailed usage.
+Refer to [snippets/accordion.html](./snippets/accordion.html) or the [tests](../../test/accordion/accordion.spec.js) for detailed usage.
 
 
 ## Public methods
@@ -327,7 +327,7 @@ var panel3 = document.querySelector('#my-accordion .mdlext-accordion__panel:nth-
 accordion.MaterialExtAccordion.command( {action: 'toggle', target: panel3} );
 ```
 
-Refer to [snippets/accordion.html](./snippets/accordion.html) or the [tests](../../test/accordionl/accordion.spec.js) for detailed usage.
+Refer to [snippets/accordion.html](./snippets/accordion.html) or the [tests](../../test/accordion/accordion.spec.js) for detailed usage.
 
 
 ## Configuration options
