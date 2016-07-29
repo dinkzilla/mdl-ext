@@ -13,6 +13,7 @@
   margin: 0;
   padding: 0;
   list-style: none;
+  display: flex;
 
   &__panel {
     position: relative;
@@ -123,7 +124,6 @@
 .mdlext-accordion {
 
   &--vertical {
-    display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
 
@@ -159,7 +159,7 @@
         padding-left: 0;
       }
 
-      > *:last-child:not(:only-child) {
+      > *:last-child:not(:only-child):not(.mdlext-accordion__tab__caption) {
         margin-left: auto; // If more than one element, push last element to the right
       }
 
@@ -169,6 +169,7 @@
           height: 10%;
         }
       }
+
     }
 
     .mdlext-accordion__tabpanel {
@@ -192,7 +193,6 @@
 .mdlext-accordion {
 
   &--horizontal {
-    display: flex;
 
     .mdlext-accordion__panel {
       min-width: $mdlext-accordion-header-height;
@@ -229,7 +229,7 @@
         transform: rotate(-90deg) translateX($mdlext-accordion-header-padding);
       }
 
-      > *:last-child:not(:only-child) {
+      > *:last-child:not(:only-child):not(.mdlext-accordion__tab__caption) {
         // If more than one element, push last element to top
         margin-bottom: auto;
         transform: rotate(-90deg) translateX(0);
