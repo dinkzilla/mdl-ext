@@ -211,13 +211,21 @@ The lightboard interacts with the following keyboard keys.
 *   `Enter/Space` - When focus is on slide, pressing `Enter`/`Space` selects that particular slide. The lightboard emits a **select** event.
 *   `Shift+Tab` - Generally the reverse of `Tab`.
 
+
 ## Events
-The lightboard emits a custom **select** event when a slide is clicked. The event has a detail object with the following content:
+The lightboard emits a custom `select` event when a slide is clicked. The event has a detail object with the following content:
 ```
 {
   source  // the slide instance that caused the event
 }
 ```
+
+## Public methods
+
+### upgradeSlides()
+Upgrade a slides with aria attributes and ripple effects. If you add slides to the lightboard after the page has loaded, 
+you must call `upgradeSlides()` to notify the component about the added slides.
+
 
 ## Configuration options
 
@@ -239,52 +247,9 @@ A lightboard and its assosiated slides has the following roles.
 
 | Attribute | Effect | Remarks |
 |-----------|--------|---------|
-| `role=grid` | Defines the lightboard as a WAI-ARIA grid | Added to `mdlext-lightboard` when component innitializes |
-| `role=cell` | Defines the slide as a WAI-ARIA cell | Added to `mdlext-lightboard__slide` when component innitializes |
+| `role="grid"` | Defines the lightboard as a WAI-ARIA grid | Added to `mdlext-lightboard` when component innitializes |
+| `role="gridcell"` | Defines the slide as a WAI-ARIA cell | Added to `mdlext-lightboard__slide` when component innitializes |
 | `aria-selected` | Defines a slide as selected | Added to `mdlext-lightboard__slide` when a slide is clicked |
-
-
-
-You can modify the lightboard trough the following SASS variables.
-
-| SASS variables |
-|----------------|
-| `$mdlext-lightboard-medium-small-breakpoint     ` |
-| `$mdlext-lightboard-medium-breakpoint           ` |
-| `$mdlext-lightboard-medium-large-breakpoint     ` |
-| `$mdlext-lightboard-large-breakpoint            ` |
-| `$mdlext-lightboard-small-gutter                ` |
-| `$mdlext-lightboard-small-margin                ` |
-| `$mdlext-lightboard-small-columns               ` |
-| `$mdlext-lightboard-small-frame-width           ` |
-| `$mdlext-lightboard-medium-small-gutter         ` |
-| `$mdlext-lightboard-medium-small-margin         ` |
-| `$mdlext-lightboard-medium-small-columns        ` |
-| `$mdlext-lightboard-medium-small-frame-width    ` |
-| `$mdlext-lightboard-medium-gutter               ` |
-| `$mdlext-lightboard-medium-margin               ` |
-| `$mdlext-lightboard-medium-columns              ` |
-| `$mdlext-lightboard-medium-frame-width          ` |
-| `$mdlext-lightboard-medium-large-gutter         ` |
-| `$mdlext-lightboard-medium-large-margin         ` |
-| `$mdlext-lightboard-medium-large-columns        ` |
-| `$mdlext-lightboard-medium-large-frame-width    ` |
-| `$mdlext-lightboard-large-gutter                ` |
-| `$mdlext-lightboard-large-margin                ` |
-| `$mdlext-lightboard-large-columns               ` |
-| `$mdlext-lightboard-large-frame-width           ` |
-| `$mdlext-lightboard-slide-max-size              ` |
-| `$mdlext-lightboard-slide-border-color          ` |
-| `$mdlext-lightboard-slide-background-color      ` |
-| `$mdlext-lightboard-slide-border-radius         ` |
-| `$mdlext-lightboard-slide-inner-border-radius   ` |
-| `$mdlext-lightboard-slide-box-shadow            ` |
-| `$mdlext-lightboard-slide-border-color-hover    ` |
-| `$mdlext-lightboard-slide-background-color-hover` |
-| `$mdlext-lightboard-slide-box-shadow-hover      ` |
-| `$mdlext-lightboard-ripple-color`                 |
-| `$mdlext-lightboard-focus-outline-color`          |
-| `$mdlext-lightboard-figcaption-text-color`        |
 
 
 ## How to use the component programmatically

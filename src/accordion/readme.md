@@ -311,8 +311,8 @@ Close a targeted tab and it's corresponding tabpanel.
 Toggle a targeted tab. Open or close a targeted tab and it's corresponding tabpanel.
 
 #### upgrade: command( {action: 'upgrade', target: tabOrPanelElement } )
-Upgrade a targeted panel. If you add a panel to the accordion after the page has loaded, you must call `upgrade` to 
-notify the accordion component about the new panel.
+Upgrade a targeted panel with aria attributes and ripple effects. If you add a panel to the accordion after the page has 
+loaded, you must call `upgrade` to notify the accordion component about the newly added panel.
 
 #### Example: Expand all panels.
 ```javascript

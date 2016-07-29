@@ -93,6 +93,16 @@ describe('MaterialExtLightboard', () => {
   </li>
 </ul>`;
 
+  const slide_to_insert_after_component_upgrade = `
+<li class="mdlext-lightboard__slide">
+  <a href="#" class="mdlext-lightboard__slide__frame">
+    <figure>
+      <img src="_D802181.jpg" title="Landscape in blue pastel"/>
+      <figcaption>_D802181.jpg</figcaption>
+    </figure>
+  </a>
+</li>`;
+
   before ( () => {
     jsdomify.create(fixture);
 
@@ -104,10 +114,6 @@ describe('MaterialExtLightboard', () => {
     requireUncached('../../src/lightboard/lightboard');
     assert.isNotNull(window.MaterialExtLightboard, 'Expected MaterialExtAccordion not to be null');
     global.MaterialExtLightboard = window.MaterialExtLightboard;
-
-    //global.componentHandler.upgradeAllRegistered();
-    //global.componentHandler.upgradeDom();
-
   });
 
   after ( () => {
@@ -121,6 +127,29 @@ describe('MaterialExtLightboard', () => {
   it('upgrades successfully', () => {
     const element = document.querySelector('#mdlext-lightboard-1');
     expect(element.getAttribute('data-upgraded')).to.include('MaterialExtLightboard');
+  });
+
+  it('should have public methods available via widget', () => {
+    const element = document.querySelector('#mdlext-lightboard-1');
+    const methods = [
+      'upgradeSlides'
+    ];
+    methods.forEach( fn => {
+      expect(element.MaterialExtLightboard[fn]).to.be.a('function');
+    });
+  });
+
+  it('should be a widget', () => {
+    const container = document.querySelector('#mount-2');
+    try {
+      container.insertAdjacentHTML('beforeend', lightboard_with_ripple);
+      const element = document.querySelector('#lightboard_with_ripple');
+      componentHandler.upgradeElement(element, 'MaterialExtLightboard');
+      expect(element.MaterialExtLightboard).to.be.a('object');
+    }
+    finally {
+      removeChilds(container);
+    }
   });
 
   it('emits a "select" custom event when a slide is clicked', () => {
@@ -224,11 +253,10 @@ describe('MaterialExtLightboard', () => {
     });
   });
 
-  it('lightboard slides has role="cell"', () => {
+  it('lightboard slides has role="gridcell"', () => {
     [...document.querySelectorAll('.mdlext-lightboard__slide')].forEach( slide => {
-      assert.equal(slide.getAttribute('role'), 'cell', 'Expected slide to have role="cell"');
+      assert.equal(slide.getAttribute('role'), 'gridcell', 'Expected slide to have role="gridcell"');
     });
-
   });
 
   it('has slides with anchor', () => {
@@ -276,19 +304,6 @@ describe('MaterialExtLightboard', () => {
     }
   });
 
-  it('should be a widget', () => {
-    const container = document.querySelector('#mount-2');
-    try {
-      container.insertAdjacentHTML('beforeend', lightboard_with_ripple);
-      const element = document.querySelector('#lightboard_with_ripple');
-      componentHandler.upgradeElement(element, 'MaterialExtLightboard');
-      expect(element.MaterialExtLightboard).to.be.a('object');
-    }
-    finally {
-      removeChilds(container);
-    }
-  });
-
   it('has ripple effect', () => {
     const container = document.querySelector('#mount-2');
     try {
@@ -310,6 +325,36 @@ describe('MaterialExtLightboard', () => {
       removeChilds(container);
     }
   });
+
+  it('upgrades inserted slides', () => {
+    const container = document.querySelector('#mount-2');
+    try {
+      container.insertAdjacentHTML('beforeend', lightboard_with_ripple);
+      const element = document.querySelector('#lightboard_with_ripple');
+      componentHandler.upgradeDom();
+
+      // Insert a new slide
+      element.insertAdjacentHTML('beforeend', slide_to_insert_after_component_upgrade);
+
+      const insertedSlide = element.querySelector('.mdlext-lightboard__slide:last-child');
+      assert.isFalse(insertedSlide.hasAttribute('role'), 'Slide should not have attribute "role" before upgraded');
+
+      element.MaterialExtLightboard.upgradeSlides();
+
+      [...document.querySelectorAll('#mount-2 .mdlext-lightboard .mdlext-lightboard__slide')].forEach( slide => {
+        assert.equal(slide.getAttribute('role'), 'gridcell', 'Expected slide to have role="gridcell"');
+
+        const a = slide.querySelector('.mdlext-lightboard__slide__frame');
+        const dataUpgraded = a.getAttribute('data-upgraded');
+        assert.isNotNull(dataUpgraded, 'Expected attribute "data-upgraded" to exist');
+        assert.isAtLeast(dataUpgraded.indexOf('MaterialRipple'), 0, 'Expected "data-upgraded" attribute to contain "MaterialRipple');
+      });
+    }
+    finally {
+      removeChilds(container);
+    }
+  });
+
 
   it('interacts with the keyboard', () => {
     const lightboard = document.querySelector('#mdlext-lightboard-1');

@@ -43,7 +43,9 @@ import { createCustomEvent } from '../utils/custom-event';
 
   const IS_UPGRADED = 'is-upgraded';
   //const LIGHTBOARD = 'mdlext-lightboard';
+  const LIGHTBOARD_ROLE = 'grid';
   const SLIDE = 'mdlext-lightboard__slide';
+  const SLIDE_ROLE  = 'gridcell';
   const SLIDE_TABSTOP = 'mdlext-lightboard__slide__frame';
   const RIPPLE_COMPONENT = 'MaterialRipple';
   const RIPPLE = 'mdl-ripple';
@@ -65,57 +67,35 @@ import { createCustomEvent } from '../utils/custom-event';
   window['MaterialExtLightboard'] = MaterialExtLightboard;
 
   /**
-   * Initialize lightboard slides
-   *
-   * @private
+   * Initialize component
    */
-  MaterialExtLightboard.prototype.initLightboard_ = function() {
+  MaterialExtLightboard.prototype.init = function() {
 
-    this.element_.setAttribute('role', 'grid');
-    [...this.element_.querySelectorAll(`.${SLIDE}`)].forEach(
-      slide => slide.setAttribute('role', 'cell')
-    );
+    const getSlide = element => {
+      return element.closest(`.${SLIDE}`);
+    };
 
-    if (this.element_.classList.contains(RIPPLE_EFFECT)) {
-      this.element_.classList.add(RIPPLE_EFFECT_IGNORE_EVENTS);
+    const focus = slide => {
+      if(slide) {
+        const a = slide.querySelector(`a.${SLIDE_TABSTOP}`);
+        if (a) {
+          a.focus();
+        }
+      }
+    };
 
-      [...this.element_.querySelectorAll(`.${SLIDE}`)].forEach(
-        slide => addRipple(slide)
-      );
-    }
-
-    /**
-     * Trigger when user cliks on a slide
-     */
-    this.element_.addEventListener('click', ( function(event) {
-      event.preventDefault();
-      event.stopPropagation();
-      const slide = getSlide(event.target);
-
-      if(event.target !== this) {
-        focus(slide);
-
-        // Remove 'aria-selected' attribute
-        [...this.children]   // Should I use querySelectorAll ???
-          .filter( panel => panel.hasAttribute('aria-selected'))
-          .forEach( selected => selected.removeAttribute('aria-selected'));
-
-        // Set 'aria-selected' on current slide
-        slide.setAttribute('aria-selected', '');
-
-        const evt = createCustomEvent('select', {
+    const emitSelectvent = slide => {
+      this.element_.dispatchEvent(
+        createCustomEvent('select', {
           bubbles: true,
           cancelable: true,
           detail: { source: slide }
-        });
-        this.dispatchEvent(evt);
-      }
-    }).bind(this.element_), true);
+        })
+      );
+    };
 
-    /**
-     * Trigger when user presses a keboard key
-     */
-    this.element_.addEventListener('keydown', ( function(event) {
+    const keydownHandler = event => {
+
       // Maybe this function should be throttled??
       if (event.keyCode === VK_TAB
         || event.keyCode === VK_ENTER || event.keyCode === VK_SPACE
@@ -123,101 +103,133 @@ import { createCustomEvent } from '../utils/custom-event';
         || event.keyCode === VK_ARROW_UP || event.keyCode === VK_ARROW_LEFT
         || event.keyCode === VK_ARROW_DOWN || event.keyCode === VK_ARROW_RIGHT) {
 
-        if(event.target !== this) {
-          const panel = getSlide(event.target);
-          const panels = this.children;
-          let nextPanel = null;
-          const n = this.childElementCount - 1;
+        if(event.target !== this.element_) {
+
+          const slide = getSlide(event.target);
+          const slides = this.element_.children;
+          let nextSlide = null;
+          const n = this.element_.childElementCount - 1;
 
           for (let i = 0; i <= n; i++) {
             if (event.keyCode === VK_HOME) {
-              nextPanel = panels[0];
+              nextSlide = slides[0];
               break;
             }
             else if (event.keyCode === VK_END) {
-              nextPanel = panels[n];
+              nextSlide = slides[n];
               break;
             }
 
-            if (panels[i] === panel) {
+            if (slides[i] === slide) {
               if (event.keyCode === VK_ARROW_UP || event.keyCode === VK_ARROW_LEFT) {
-                nextPanel =  i > 0 ? panels[i - 1] : panels[n];
+                nextSlide =  i > 0 ? slides[i - 1] : slides[n];
               }
               else if (event.keyCode === VK_ARROW_DOWN || event.keyCode === VK_ARROW_RIGHT) {
-                nextPanel = i < n ? panels[i + 1] : panels[0];
+                nextSlide = i < n ? slides[i + 1] : slides[0];
               }
               else if (event.keyCode === VK_TAB) {
                 if (event.shiftKey) {
                   if (i > 0) {
-                    nextPanel = panels[i - 1];
+                    nextSlide = slides[i - 1];
                   }
                 }
                 else if (i < n) {
-                  nextPanel = panels[i + 1];
+                  nextSlide = slides[i + 1];
                 }
               }
               else if (event.keyCode === VK_ENTER || event.keyCode === VK_SPACE) {
                 event.preventDefault();
                 event.stopPropagation();
-
-                // Trigger mouse click event for any attached listeners.
-                const evt = new MouseEvent('click', {
-                  bubbles: true,
-                  cancelable: true,
-                  view: window
-                });
-                panel.dispatchEvent(evt);
+                slide.setAttribute('aria-selected', '');
+                emitSelectvent(slide);
               }
               break;
             }
           }
-          if (nextPanel) {
+          if (nextSlide) {
             event.preventDefault();
             event.stopPropagation();
-            focus(nextPanel);
+            focus(nextSlide);
           }
         }
       }
-    }).bind(this.element_), true);
+    };
 
-    this.element_.classList.add(IS_UPGRADED);
-  };
+    const clickHandler = event => {
+      event.preventDefault();
+      event.stopPropagation();
 
-  function getSlide(element) {
-    return element.closest(`.${SLIDE}`);
-  }
+      if(event.target !== this.element_) {
+        const slide = getSlide(event.target);
+        focus(slide);
 
-  function focus(slide) {
-    if(slide) {
-      const a = slide.querySelector(`a.${SLIDE_TABSTOP}`);
-      if (a) {
-        a.focus();
+        // Remove 'aria-selected' attribute
+        [...this.element_.children]   // Should I use querySelectorAll ???
+          .filter( panel => panel.hasAttribute('aria-selected') )
+          .forEach( selected => selected.removeAttribute('aria-selected') );
+
+        // Set 'aria-selected' on current slide
+        slide.setAttribute('aria-selected', 'true');
+        emitSelectvent(slide);
       }
-    }
-  }
+    };
 
-  function addRipple(slide) {
-    // Use anchor as ripple container
-    const a = slide.querySelector(`a.${SLIDE_TABSTOP}`);
-    if(a) {
-      const rippleContainer = a;
-      rippleContainer.classList.add(RIPPLE_CONTAINER);
-      rippleContainer.classList.add(RIPPLE_EFFECT);
-      const ripple = document.createElement('span');
-      ripple.classList.add(RIPPLE);
-      rippleContainer.appendChild(ripple);
-      componentHandler.upgradeElement(rippleContainer, RIPPLE_COMPONENT);
+    if (this.element_) {
+      this.element_.setAttribute('role', LIGHTBOARD_ROLE);
+
+      if (this.element_.classList.contains(RIPPLE_EFFECT)) {
+        this.element_.classList.add(RIPPLE_EFFECT_IGNORE_EVENTS);
+      }
+
+      // Listen to keyboard events
+      this.element_.removeEventListener('keydown', keydownHandler);
+      this.element_.removeEventListener('click', clickHandler);
+
+      this.element_.addEventListener('keydown', keydownHandler, true);
+      this.element_.addEventListener('click', clickHandler, true);
+
+      this.upgradeSlides();
+
+      this.element_.classList.add(IS_UPGRADED);
     }
-  }
+  };
 
   /**
-   * Initialize component
+   * Initialize lightboard slides
+   *
+   * @private
    */
-  MaterialExtLightboard.prototype.init = function() {
-    if (this.element_) {
-      this.initLightboard_();
-    }
+  MaterialExtLightboard.prototype.upgradeSlides = function() {
+
+    const addRipple = slide => {
+      // Use anchor as ripple container
+      if(!slide.querySelector(`.${RIPPLE_CONTAINER}`)) {
+        const a = slide.querySelector(`a.${SLIDE_TABSTOP}`);
+        if(a) {
+          const rippleContainer = a;
+          rippleContainer.classList.add(RIPPLE_CONTAINER);
+          rippleContainer.classList.add(RIPPLE_EFFECT);
+          const ripple = document.createElement('span');
+          ripple.classList.add(RIPPLE);
+          rippleContainer.appendChild(ripple);
+          componentHandler.upgradeElement(rippleContainer, RIPPLE_COMPONENT);
+        }
+      }
+    };
+
+    const hasRippleEffect = this.element_.classList.contains(RIPPLE_EFFECT);
+
+    [...this.element_.querySelectorAll(`.${SLIDE}`)].forEach( slide => {
+      slide.setAttribute('role', SLIDE_ROLE);
+
+      if(hasRippleEffect) {
+        addRipple(slide);
+      }
+    });
   };
+
+  MaterialExtLightboard.prototype['upgradeSlides'] = MaterialExtLightboard.prototype.upgradeSlides;
+
 
   // The component registers itself. It can assume componentHandler is available
   // in the global scope.
@@ -229,4 +241,5 @@ import { createCustomEvent } from '../utils/custom-event';
     cssClass: 'mdlext-js-lightboard',
     widget: true
   });
+
 })();
