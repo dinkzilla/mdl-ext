@@ -13,7 +13,7 @@ The Material Design Lite Ext (MDLEXT) lightboard is defined and enclosed by a co
 distributed in a row column fashion, with repect to the available screen size. The slides scales proportionally to fill 
 available horizontal space, or the available content size, depending on the type of queries you choose to apply 
 for your responsive breakpoints. The number of slides per row depends on available space. The component 
-adds `role='grid'` to the lightboard and `role='cell'` to the individual slides.
+adds `role='grid'` to the lightboard and `role='gridcell` to the individual slides.
 
 The Material Design Lite Ext (MDLEXT) lightboard has two versions; one version based on media queries and one version 
 based on **element queries**.
