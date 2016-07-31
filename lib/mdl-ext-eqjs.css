@@ -1520,7 +1520,6 @@ ul.mdlext-lightboard {
   position: relative;
   display: block;
   max-width: 250px;
-  outline: 0;
 }
 
 .mdlext-lightboard .mdlext-lightboard__slide::before {
@@ -1537,8 +1536,29 @@ ul.mdlext-lightboard {
   box-shadow: 2px 2px 12px -1px #dbd7db;
 }
 
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame,
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container {
+.mdlext-lightboard .mdlext-lightboard__slide:hover figcaption,
+.mdlext-lightboard .mdlext-lightboard__slide:active figcaption,
+.mdlext-lightboard .mdlext-lightboard__slide:focus figcaption {
+  color: black !important;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.mdlext-lightboard .mdlext-lightboard__slide:focus {
+  outline-offset: -2px;
+  outline-color: default;
+}
+
+.mdlext-lightboard .mdlext-lightboard__slide[aria-selected='true'] {
+  background-color: #E8E8E8;
+}
+
+.mdlext-lightboard .mdlext-lightboard__slide[aria-selected='true'] figcaption {
+  color: black !important;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.mdlext-lightboard .mdlext-lightboard__slide__frame,
+.mdlext-lightboard .mdlext-lightboard__slide__ripple-container {
   text-decoration: none;
   display: block;
   overflow: hidden;
@@ -1547,22 +1567,21 @@ ul.mdlext-lightboard {
   left: 0;
   right: 0;
   bottom: 0;
-  outline: 0;
 }
 
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame:focus,
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container:focus {
-  outline: thin dotted #777777;
-  outline-offset: -4px;
+.mdlext-lightboard .mdlext-lightboard__slide__frame:focus,
+.mdlext-lightboard .mdlext-lightboard__slide__ripple-container:focus {
+  outline-offset: -2px;
+  outline-color: default;
 }
 
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame .mdl-ripple,
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container .mdl-ripple {
+.mdlext-lightboard .mdlext-lightboard__slide__frame .mdl-ripple,
+.mdlext-lightboard .mdlext-lightboard__slide__ripple-container .mdl-ripple {
   background: rgb(63,81,181);
 }
 
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure,
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container figure {
+.mdlext-lightboard .mdlext-lightboard__slide__frame figure,
+.mdlext-lightboard .mdlext-lightboard__slide__ripple-container figure {
   display: block;
   position: absolute;
   top: 0;
@@ -1571,8 +1590,8 @@ ul.mdlext-lightboard {
   bottom: 0;
 }
 
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure img,
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container figure img {
+.mdlext-lightboard .mdlext-lightboard__slide__frame figure img,
+.mdlext-lightboard .mdlext-lightboard__slide__ripple-container figure img {
   position: absolute;
   top: 0;
   left: 0;
@@ -1585,8 +1604,8 @@ ul.mdlext-lightboard {
   border-radius: 3px;
 }
 
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame figure figcaption,
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container figure figcaption {
+.mdlext-lightboard .mdlext-lightboard__slide__frame figure figcaption,
+.mdlext-lightboard .mdlext-lightboard__slide__ripple-container figure figcaption {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-size: 12px;
   font-weight: 400;
@@ -1604,8 +1623,8 @@ ul.mdlext-lightboard {
   padding: 4px 0;
 }
 
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__frame:hover figcaption,
-.mdlext-lightboard .mdlext-lightboard__slide .mdlext-lightboard__slide__ripple-container:hover figcaption {
+.mdlext-lightboard .mdlext-lightboard__slide__frame:hover figcaption,
+.mdlext-lightboard .mdlext-lightboard__slide__ripple-container:hover figcaption {
   color: black !important;
   background-color: rgba(255, 255, 255, 0.2);
 }

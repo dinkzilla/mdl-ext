@@ -31,7 +31,6 @@ import { createCustomEvent } from '../utils/custom-event';
 (function() {
   'use strict';
 
-  const VK_TAB = 9;
   const VK_ENTER = 13;
   const VK_SPACE = 32;
   const VK_END = 35;
@@ -66,91 +65,48 @@ import { createCustomEvent } from '../utils/custom-event';
   };
   window['MaterialExtLightboard'] = MaterialExtLightboard;
 
+
+  // Helpers
+  const getSlide = element => {
+    return element ? element.closest(`.${SLIDE}`) : null;
+  };
+
+
   /**
    * Initialize component
    */
   MaterialExtLightboard.prototype.init = function() {
 
-    const getSlide = element => {
-      return element.closest(`.${SLIDE}`);
-    };
-
-    const focus = slide => {
-      if(slide) {
-        const a = slide.querySelector(`a.${SLIDE_TABSTOP}`);
-        if (a) {
-          a.focus();
-        }
-      }
-    };
-
-    const emitSelectvent = slide => {
-      this.element_.dispatchEvent(
-        createCustomEvent('select', {
-          bubbles: true,
-          cancelable: true,
-          detail: { source: slide }
-        })
-      );
-    };
-
     const keydownHandler = event => {
 
-      // Maybe this function should be throttled??
-      if (event.keyCode === VK_TAB
-        || event.keyCode === VK_ENTER || event.keyCode === VK_SPACE
-        || event.keyCode === VK_END || event.keyCode === VK_HOME
-        || event.keyCode === VK_ARROW_UP || event.keyCode === VK_ARROW_LEFT
-        || event.keyCode === VK_ARROW_DOWN || event.keyCode === VK_ARROW_RIGHT) {
-
-        if(event.target !== this.element_) {
-
-          const slide = getSlide(event.target);
-          const slides = this.element_.children;
-          let nextSlide = null;
-          const n = this.element_.childElementCount - 1;
-
-          for (let i = 0; i <= n; i++) {
-            if (event.keyCode === VK_HOME) {
-              nextSlide = slides[0];
-              break;
-            }
-            else if (event.keyCode === VK_END) {
-              nextSlide = slides[n];
-              break;
-            }
-
-            if (slides[i] === slide) {
-              if (event.keyCode === VK_ARROW_UP || event.keyCode === VK_ARROW_LEFT) {
-                nextSlide =  i > 0 ? slides[i - 1] : slides[n];
-              }
-              else if (event.keyCode === VK_ARROW_DOWN || event.keyCode === VK_ARROW_RIGHT) {
-                nextSlide = i < n ? slides[i + 1] : slides[0];
-              }
-              else if (event.keyCode === VK_TAB) {
-                if (event.shiftKey) {
-                  if (i > 0) {
-                    nextSlide = slides[i - 1];
-                  }
-                }
-                else if (i < n) {
-                  nextSlide = slides[i + 1];
-                }
-              }
-              else if (event.keyCode === VK_ENTER || event.keyCode === VK_SPACE) {
-                event.preventDefault();
-                event.stopPropagation();
-                slide.setAttribute('aria-selected', '');
-                emitSelectvent(slide);
-              }
-              break;
-            }
-          }
-          if (nextSlide) {
-            event.preventDefault();
-            event.stopPropagation();
-            focus(nextSlide);
-          }
+      if(event.target !== this.element_) {
+        let action;
+        let target;
+        switch (event.keyCode) {
+          case VK_HOME:
+            action = 'first';
+            break;
+          case VK_END:
+            action = 'last';
+            break;
+          case VK_ARROW_UP:
+          case VK_ARROW_LEFT:
+            action = 'prev';
+            break;
+          case VK_ARROW_DOWN:
+          case VK_ARROW_RIGHT:
+            action = 'next';
+            break;
+          case VK_ENTER:
+          case VK_SPACE:
+            action = 'select';
+            target = event.target;
+            break;
+        }
+        if(action)  {
+          event.preventDefault();
+          event.stopPropagation();
+          this.command( { action: action, target: target } );
         }
       }
     };
@@ -160,19 +116,19 @@ import { createCustomEvent } from '../utils/custom-event';
       event.stopPropagation();
 
       if(event.target !== this.element_) {
-        const slide = getSlide(event.target);
-        focus(slide);
-
-        // Remove 'aria-selected' attribute
-        [...this.element_.children]   // Should I use querySelectorAll ???
-          .filter( panel => panel.hasAttribute('aria-selected') )
-          .forEach( selected => selected.removeAttribute('aria-selected') );
-
-        // Set 'aria-selected' on current slide
-        slide.setAttribute('aria-selected', 'true');
-        emitSelectvent(slide);
+        this.command( { action: 'select', target: event.target } );
       }
     };
+
+    const focusHandler = event => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if(event.target !== this.element_) {
+        this.selectSlide_(event.target);
+      }
+    };
+
 
     if (this.element_) {
       this.element_.setAttribute('role', LIGHTBOARD_ROLE);
@@ -181,12 +137,15 @@ import { createCustomEvent } from '../utils/custom-event';
         this.element_.classList.add(RIPPLE_EFFECT_IGNORE_EVENTS);
       }
 
-      // Listen to keyboard events
+      this.element_.removeEventListener('command', this.commandHandler_);
       this.element_.removeEventListener('keydown', keydownHandler);
       this.element_.removeEventListener('click', clickHandler);
+      this.element_.removeEventListener('focus', focusHandler);
 
+      this.element_.addEventListener('command', this.commandHandler_.bind(this), false);
       this.element_.addEventListener('keydown', keydownHandler, true);
       this.element_.addEventListener('click', clickHandler, true);
+      this.element_.addEventListener('focus', focusHandler, true);
 
       this.upgradeSlides();
 
@@ -194,17 +153,67 @@ import { createCustomEvent } from '../utils/custom-event';
     }
   };
 
+
+  // Private methods.
+
+  /**
+   * Select a slide, i.e. set aria-selected="true"
+   * @param element
+   * @private
+   */
+  MaterialExtLightboard.prototype.selectSlide_ = function(element) {
+    const slide = getSlide(element);
+    if( slide && !slide.hasAttribute('aria-selected') ) {
+      [...this.element_.querySelectorAll(`.${SLIDE}[aria-selected="true"]`)]
+        .forEach(selectedSlide => selectedSlide.removeAttribute('aria-selected'));
+
+      slide.setAttribute('aria-selected', 'true');
+    }
+  };
+
+
+  /**
+   * Dispatch select event
+   * @param {Element} slide The slide that caused the event
+   * @private
+   */
+  MaterialExtLightboard.prototype.dispatchSelectEvent_ = function ( slide ) {
+    this.element_.dispatchEvent(
+      createCustomEvent('select', {
+        bubbles: true,
+        cancelable: true,
+        detail: { source: slide }
+      })
+    );
+  };
+
+  /**
+   * Handles custom command event, 'first', 'next', 'prev', 'last', 'select' or upgrade
+   * @param event. A custom event
+   * @private
+   */
+  MaterialExtLightboard.prototype.commandHandler_ = function( event ) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if(event && event.detail) {
+      this.command(event.detail);
+    }
+  };
+
+
+  // Public methods
+
   /**
    * Initialize lightboard slides
-   *
-   * @private
+   * @public
    */
   MaterialExtLightboard.prototype.upgradeSlides = function() {
 
     const addRipple = slide => {
-      // Use anchor as ripple container
+      // Use slide frame as ripple container
       if(!slide.querySelector(`.${RIPPLE_CONTAINER}`)) {
-        const a = slide.querySelector(`a.${SLIDE_TABSTOP}`);
+        const a = slide.querySelector(`.${SLIDE_TABSTOP}`);
         if(a) {
           const rippleContainer = a;
           rippleContainer.classList.add(RIPPLE_CONTAINER);
@@ -220,15 +229,93 @@ import { createCustomEvent } from '../utils/custom-event';
     const hasRippleEffect = this.element_.classList.contains(RIPPLE_EFFECT);
 
     [...this.element_.querySelectorAll(`.${SLIDE}`)].forEach( slide => {
+
       slide.setAttribute('role', SLIDE_ROLE);
 
+      if(!slide.querySelector('a')) {
+        slide.setAttribute('tabindex', '0');
+      }
       if(hasRippleEffect) {
         addRipple(slide);
       }
     });
   };
-
   MaterialExtLightboard.prototype['upgradeSlides'] = MaterialExtLightboard.prototype.upgradeSlides;
+
+
+  /**
+   * Execute command
+   * @param detail
+   * @public
+   */
+  MaterialExtLightboard.prototype.command = function( detail ) {
+
+    const firstSlide = () => {
+      return this.element_.querySelector(`.${SLIDE}:first-child`);
+    };
+
+    const lastSlide = () => {
+      return this.element_.querySelector(`.${SLIDE}:last-child`);
+    };
+
+    const nextSlide = () => {
+      const slide = this.element_.querySelector(`.${SLIDE}[aria-selected="true"]`).nextElementSibling;
+      return slide ? slide : firstSlide();
+    };
+
+    const prevSlide = () => {
+      const slide = this.element_.querySelector(`.${SLIDE}[aria-selected="true"]`).previousElementSibling;
+      return slide ? slide : lastSlide();
+    };
+
+    if(detail && detail.action) {
+
+      const { action, target } = detail;
+
+      let slide;
+      switch (action.toLowerCase()) {
+        case 'select':
+          slide = getSlide(target);
+          this.dispatchSelectEvent_(slide);
+          break;
+        case 'first':
+          slide = firstSlide();
+          break;
+        case 'next':
+          slide = nextSlide();
+          break;
+        case 'prev':
+          slide = prevSlide();
+          break;
+        case 'last':
+          slide = lastSlide();
+          break;
+        case 'upgrade':
+          this.upgradeSlides();
+          break;
+        default:
+          throw new Error(`Unknown action "${action}". Action must be one of "first", "next", "prev", "last", "select" or "upgrade"`);
+      }
+
+      if (slide) {
+        const a = slide.querySelector('a');
+        if (a) {
+          a.focus();
+        }
+        else {
+          slide.focus();
+        }
+
+        // Workaround for JSDom testing:
+        // In JsDom 'element.focus()' does not trigger any focus event
+        if(!slide.hasAttribute('aria-selected')) {
+          this.selectSlide_(slide);
+        }
+
+      }
+    }
+  };
+  MaterialExtLightboard.prototype['command'] = MaterialExtLightboard.prototype.command;
 
 
   // The component registers itself. It can assume componentHandler is available

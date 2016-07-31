@@ -182,14 +182,13 @@ Lightboard with eight slides, ripple effect on each slide, no spacing between sl
     </a>
   </li>
 </ul>
-```
 
-```javascript
 <script>
-  'use strict';
-  var lightboard = document.querySelector('#lightboard-1');
-  lightboard.addEventListener('select', function(e) {
-    console.log('Slide selected. Source:', e.detail.source);
+  window.addEventListener('load', function() {
+    var lightboard = document.querySelector('#lightboard-1');
+    lightboard.addEventListener('select', function(e) {
+      console.log('Slide selected. Source:', e.detail.source);
+    });
   });
 </script>
 ```
@@ -213,6 +212,92 @@ The lightboard interacts with the following keyboard keys.
 
 
 ## Events
+Interaction with the component programmatically is performed receiving events from the component or by sending events to 
+the component (or by using the public api).  
+
+### Events the component listenes to
+A client can send a `command` custom event to the lightboard. The command event holds a detail object defining the action 
+to perform and a optionally a target for the action.
+
+The detail object has the following structure:
+
+```javascript
+detail: { 
+  action, // "first", "last", "next", "prev", "upgrade" or "select" 
+  target  // Target, the slide that should be affected by the event 
+}
+```
+
+Possible actions are:
+
+#### first
+Focuses the first slide.
+
+```javascript
+myLightboard = document.querySelector('#my-lightboard');
+ce = new CustomEvent('command', { detail: { action : 'first' } });
+myLightboard.dispatchEvent(ce);
+```
+
+#### last
+Focuses the last slide.
+
+```javascript
+myLightboard = document.querySelector('#my-lightboard');
+ce = new CustomEvent('command', { detail: { action : 'last' } });
+myLightboard.dispatchEvent(ce);
+```
+
+#### next
+Focuses the next slide.
+
+```javascript
+myLightboard = document.querySelector('#my-lightboard');
+ce = new CustomEvent('command', { detail: { action : 'next' } });
+myLightboard.dispatchEvent(ce);
+```
+
+#### prev
+Focuses the previous slide.
+
+```javascript
+myLightboard = document.querySelector('#my-lightboard');
+ce = new CustomEvent('command', { detail: { action : 'prev' } });
+myLightboard.dispatchEvent(ce);
+```
+
+#### select
+Selects a slide, i.e. adds `aria-selected="true"` on the targeted slide. The lightboard responds with a `select` event.
+
+```javascript
+myLightboard = document.querySelector('#my-lightboard');
+slide = lightboard.querySelector('.mdlext-lightboard__slide:nth-child(2)');
+ce = new CustomEvent('command', { detail: { action : 'prev', target: slide } });
+myLightboard.dispatchEvent(ce);
+```
+
+#### upgrade
+Upgrade slides. If you add slides to the lightboard after the page has loaded, you must call `upgrade` to 
+notify the lightboard component about the new slides.
+
+```javascript
+myLightboard = document.querySelector('#my-lightboard');
+slide = 
+   '<li class="mdlext-lightboard__slide">'
+  +'  <a href="#" class="mdlext-lightboard__slide__frame">'
+  +'    <figure>'
+  +'      <img src="_D802181.jpg" title="Landscape in blue pastel"/>'
+  +'      <figcaption>_D802181.jpg</figcaption>'
+  +'    </figure>'
+  +'  </a>'
+  +'</li>';
+
+myLightboard.insertAdjacentHTML('beforeend', slide);
+ce = new CustomEvent('command', { detail: { action : 'upgrade' } });
+myLightboard.dispatchEvent(ce);
+```
+
+### Events emitted from the component
 The lightboard emits a custom `select` event when a slide is clicked. The event has a detail object with the following content:
 ```
 {
@@ -220,12 +305,97 @@ The lightboard emits a custom `select` event when a slide is clicked. The event 
 }
 ```
 
+Set up an event listener to receive the select event.
+```javascript
+document.querySelector('#my-lightboard').addEventListener('select', function(e) {
+  console.log('Slide selected:', e.detail.source);
+});
+```
+
+Trigger the event.
+```javascript
+myLightboard = document.querySelector('#my-lightboard');
+slide = lightboard.querySelector('.mdlext-lightboard__slide:nth-child(2)');
+ce = new CustomEvent('command', { detail: { action : 'select', target: slide } });
+myLightboard.dispatchEvent(ce);
+```
+
 ## Public methods
 
-### upgradeSlides()
-Upgrade a slides with aria attributes and ripple effects. If you add slides to the lightboard after the page has loaded, 
-you must call `upgradeSlides()` to notify the component about the added slides.
+### command( detail )
+Executes an action, optionally targeting a specific slide. The actions corresponds to the custom events defined for this 
+component.
+ 
+The detail object parameter has the following structure:
+```javascript
+detail: { 
+  action, // "first", "last", "next", "prev", "upgrade" or "select" 
+  target  // Target, the slide that should be affected by the event 
+}
+```
 
+Possible actions are:
+
+#### first: command( {action: 'first' } )
+Focuses the first slide.
+
+```javascript
+myLightboard = document.querySelector('#my-lightboard');
+myLightboard.MaterialExtLightboard.command( {action: 'first'} );
+```
+
+#### last: command( {action: 'last' } )
+Focuses the last slide.
+
+```javascript
+myLightboard = document.querySelector('#my-lightboard');
+myLightboard.MaterialExtLightboard.command( {action: 'last'} );
+```
+
+#### next: command( {action: 'next' } )
+Focuses the next slide.
+
+```javascript
+myLightboard = document.querySelector('#my-lightboard');
+myLightboard.MaterialExtLightboard.command( {action: 'next'} );
+```
+
+#### prev: command( {action: 'prev' } )
+Focuses the previous slide.
+
+```javascript
+myLightboard = document.querySelector('#my-lightboard');
+myLightboard.MaterialExtLightboard.command( {action: 'prev'} );
+```
+
+#### select: command( {action: 'first', target: slide } )
+Selects a slide, i.e. adds `aria-selected="true"` on the targeted slide. The lightboard responds with a `select` event.
+
+```javascript
+myLightboard = document.querySelector('#my-lightboard');
+slide = lightboard.querySelector('.mdlext-lightboard__slide:nth-child(2)');
+myLightboard.MaterialExtLightboard.command( {action: 'prev', target: slide} );
+```
+
+#### upgrade: command( {action: 'upgrade' } )
+Upgrade slides. If you add slides to the lightboard after the page has loaded, you must call `upgrade` to 
+notify the lightboard component about the new slides.
+
+```javascript
+myLightboard = document.querySelector('#my-lightboard');
+slide = 
+   '<li class="mdlext-lightboard__slide">'
+  +'  <a href="#" class="mdlext-lightboard__slide__frame">'
+  +'    <figure>'
+  +'      <img src="_D802181.jpg" title="Landscape in blue pastel"/>'
+  +'      <figcaption>_D802181.jpg</figcaption>'
+  +'    </figure>'
+  +'  </a>'
+  +'</li>';
+
+myLightboard.insertAdjacentHTML('beforeend', slide);
+myLightboard.MaterialExtLightboard.command( {action: 'upgrade'} );
+```
 
 ## Configuration options
 
@@ -240,7 +410,7 @@ The table below lists the available classes and their effects.
 | `mdlext-lightboard__slide` | Defines a slide | Required on `<li>` element |
 | `mdlext-lightboard__slide__frame` | Defines the slide frame, makes the frame focusable and selectable | Required on `<a>` element. First inner element of `<li>`  |
 | `mdl-js-ripple-effect` | Applies ripple click effect to slides | Optional; goes on "outer" `<ul>` element |
-| `mdl-js-ripple-effect--ignore-events` |  | Should be added when the component initializes, but that does not seem to happen. For now, add this class if `mdl-js-ripple-effect` class is applied |
+| `mdl-js-ripple-effect--ignore-events` |  | Should be added when the component initializes, but that does not seem to happen due to bug/limitation in MDL. For now, add this class if `mdl-js-ripple-effect` class is applied |
 
 
 A lightboard and its assosiated slides has the following roles.
@@ -253,4 +423,5 @@ A lightboard and its assosiated slides has the following roles.
 
 
 ## How to use the component programmatically
-The tests provides examples on how to use the component [programmatically](https://github.com/leifoolsen/mdl-ext/blob/master/test/lightboard/lightboard.spec.js).
+Refer to [snippets/lightboard.html](./snippets/lightboard.html) or the [tests](../../test/lightboard/lightboard.spec.js) 
+for detailed usage.

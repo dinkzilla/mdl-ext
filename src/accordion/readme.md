@@ -161,7 +161,8 @@ The accordion interacts with the following keyboard keys.
 
 
 ## Events
-Interaction with the component programmatically is performed by sending events to the component (or by using the public api).  
+Interaction with the component programmatically is performed receiving events from the component or by sending events to 
+the component (or by using the public api).  
 
 ### Events the component listenes to
 A client can send a `command` custom event to the accordion. The command event holds a detail object defining the action 
@@ -175,6 +176,8 @@ detail: {
           // Note: If you send a null target, the action is cancelled
 }
 ```
+
+Possible actions are:
 
 #### open
 Open a targeted tab and it's corresponding tabpanel.
@@ -301,6 +304,7 @@ detail: {
           // Note: If you send a null target, the action is cancelled
 }
 ```
+
 #### open: command( {action: 'open', target: tabOrPanelElement } )
 Open a targeted tab and it's corresponding tabpanel.
 

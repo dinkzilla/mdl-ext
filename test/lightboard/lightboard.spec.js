@@ -8,7 +8,6 @@ import { removeChilds } from '../testutils/domHelpers';
 
 describe('MaterialExtLightboard', () => {
 
-  const VK_TAB = 9;
   const VK_ENTER = 13;
   const VK_SPACE = 32;
   const VK_END = 35;
@@ -17,6 +16,8 @@ describe('MaterialExtLightboard', () => {
   const VK_ARROW_UP = 38;
   const VK_ARROW_RIGHT = 39;
   const VK_ARROW_DOWN = 40;
+  const SLIDE = 'mdlext-lightboard__slide';
+
 
   const fixture = `
 <!DOCTYPE html>
@@ -93,6 +94,24 @@ describe('MaterialExtLightboard', () => {
   </li>
 </ul>`;
 
+  const lightboard_without_anchor = `
+<ul id="lightboard_without_anchor" class="mdlext-lightboard mdlext-js-lightboard mdl-js-ripple-effect">
+  <li class="mdlext-lightboard__slide">
+    <span class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="_D801274.jpg" />
+      </figure>
+    </span>
+  </li>
+  <li class="mdlext-lightboard__slide">
+    <span class="mdlext-lightboard__slide__frame">
+      <figure>
+        <img src="_D801392.jpg" />
+      </figure>
+    </span>
+  </li>
+</ul>`;
+
   const slide_to_insert_after_component_upgrade = `
 <li class="mdlext-lightboard__slide">
   <a href="#" class="mdlext-lightboard__slide__frame">
@@ -132,7 +151,8 @@ describe('MaterialExtLightboard', () => {
   it('should have public methods available via widget', () => {
     const element = document.querySelector('#mdlext-lightboard-1');
     const methods = [
-      'upgradeSlides'
+      'upgradeSlides',
+      'command'
     ];
     methods.forEach( fn => {
       expect(element.MaterialExtLightboard[fn]).to.be.a('function');
@@ -213,7 +233,7 @@ describe('MaterialExtLightboard', () => {
     assert.isFalse(spy.called, 'Did not expect "select" event to fire');
   });
 
-  it('has attribute "aria-selected" when selected', () => {
+  it('has attribute aria-selected="true" when selected', () => {
     const lightboard = document.querySelector('#mdlext-lightboard-1');
     assert.isNotNull(lightboard, 'Expected handle to lightboard');
 
@@ -225,8 +245,13 @@ describe('MaterialExtLightboard', () => {
 
 
     const selectListener = ( event ) => {
-      assert.isNotNull(event.detail.source.getAttribute('aria-selected'), 'Expected slide to have attribute "aria-selected"');
-      const selectList = [...lightboard.querySelectorAll('.mdlext-lightboard__slide')].filter( slide => slide.hasAttribute('aria-selected'));
+      const slide = event.detail.source;
+      assert.isNotNull(slide.getAttribute('aria-selected'), 'Expected slide to have attribute "aria-selected"');
+      assert.equal(slide.getAttribute('aria-selected'), 'true', 'Expected slide to have aria-selected="true"');
+
+      const selectList = [...lightboard.querySelectorAll('.mdlext-lightboard__slide')]
+        .filter( slide => slide.hasAttribute('aria-selected'));
+
       assert.equal(selectList.length, 1, 'Expected only one slide to have attribute "aria-selected"');
     };
     lightboard.addEventListener('select', selectListener);
@@ -355,7 +380,6 @@ describe('MaterialExtLightboard', () => {
     }
   });
 
-
   it('interacts with the keyboard', () => {
     const lightboard = document.querySelector('#mdlext-lightboard-1');
     assert.isNotNull(lightboard, 'Expected handle to lightboard');
@@ -368,13 +392,88 @@ describe('MaterialExtLightboard', () => {
     spyOnKeyboardEvent(lightboard, slide, VK_ARROW_UP);
     spyOnKeyboardEvent(lightboard, slide, VK_ARROW_LEFT);
     spyOnKeyboardEvent(lightboard, slide, VK_ARROW_RIGHT);
-    spyOnKeyboardEvent(lightboard, slide, VK_ENTER);
-    spyOnKeyboardEvent(lightboard, slide, VK_SPACE);
-    spyOnKeyboardEvent(lightboard, slide, VK_TAB);
-    spyOnKeyboardEvent(lightboard, slide, VK_TAB, true);
     spyOnKeyboardEvent(lightboard, slide, VK_END);
     spyOnKeyboardEvent(lightboard, slide, VK_HOME);
+    spyOnKeyboardEvent(lightboard, slide, VK_ENTER);
+    spyOnKeyboardEvent(lightboard, slide, VK_SPACE);
   });
+
+  it('listens to "command" custom events', () => {
+    const lightboard = document.querySelector('#mdlext-lightboard-1');
+    spyOnCommandEvent(lightboard, 'first');
+    spyOnCommandEvent(lightboard, 'last');
+    spyOnCommandEvent(lightboard, 'next');
+    spyOnCommandEvent(lightboard, 'prev');
+    spyOnCommandEvent(lightboard, 'upgrade');
+
+    const slide = lightboard.querySelector(`.${SLIDE}:first-child`);
+    spyOnCommandEvent(lightboard, 'select', slide);
+  });
+
+  it('has aria-selected="true" when selcted via custom event', () => {
+    const lightboard = document.querySelector('#mdlext-lightboard-1');
+    const slide = lightboard.querySelector(`.${SLIDE}:first-child`);
+    slide.removeAttribute('aria-selected');
+
+    spyOnCommandEvent(lightboard, 'select', slide);
+    assert.equal(slide.getAttribute('aria-selected'), 'true', 'Expected slide to have aria-selected="true"');
+  });
+
+  it('accepts commands', () => {
+    const lightboard = document.querySelector('#mdlext-lightboard-1');
+    expect( () => {
+      lightboard.MaterialExtLightboard.command( {action: 'first'} );
+      lightboard.MaterialExtLightboard.command( {action: 'last'} );
+      lightboard.MaterialExtLightboard.command( {action: 'prev'} );
+      lightboard.MaterialExtLightboard.command( {action: 'next'} );
+      lightboard.MaterialExtLightboard.command( {action: 'first'} );
+      lightboard.MaterialExtLightboard.command( {action: 'upgrade'} );
+
+      const slide = lightboard.querySelector(`.${SLIDE}:nth-child(2)`);
+      lightboard.MaterialExtLightboard.command( {action: 'select', target: slide} );
+
+    }).to.not.throw(Error);
+  });
+
+  it('throws error if unknown command', () => {
+    const lightboard = document.querySelector('#mdlext-lightboard-1');
+    expect( () => {
+      lightboard.MaterialExtLightboard.command( {action: 'foo-bar-baz'} );
+    }).to.throw(Error);
+  });
+
+  it('can focus', () => {
+    const lightboard = document.querySelector('#mdlext-lightboard-1');
+    const slide = lightboard.querySelector(`.${SLIDE}:nth-child(2)`);
+    expect( () => {
+      slide.dispatchEvent(
+        new Event('focus', {
+          bubbles: true,
+          cancelable: true,
+          view: window
+        })
+      );
+    }).to.not.throw(Error);
+  });
+
+  it('works without anchor element', () => {
+    const container = document.querySelector('#mount-2');
+    try {
+      container.insertAdjacentHTML('beforeend', lightboard_without_anchor);
+      const element = document.querySelector('#lightboard_without_anchor');
+
+      expect( () => {
+        componentHandler.upgradeDom();
+      }).to.not.throw(Error);
+
+      assert.isNotNull(element, 'Expected handle to lightboard');
+
+    }
+    finally {
+      removeChilds(container);
+    }
+  });
+
 
   function spyOnKeyboardEvent(target, source, keyCode, shiftKey=false) {
     const spy = sinon.spy();
@@ -396,5 +495,18 @@ describe('MaterialExtLightboard', () => {
 
     assert.isTrue(spy.calledOnce, `Expected "keydown" event to fire once for key code ${keyCode}`);
   }
+
+  const spyOnCommandEvent = (lightboard, action, target = undefined) => {
+    const spy = sinon.spy();
+    lightboard.addEventListener('command', spy);
+    try {
+      const event = new CustomEvent('command', { detail: { action : action, target: target } });
+      lightboard.dispatchEvent(event);
+    }
+    finally {
+      lightboard.removeEventListener('select', spy);
+    }
+    assert.isTrue(spy.calledOnce, `Expected "command" event to fire once for action ${action}`);
+  };
 
 });

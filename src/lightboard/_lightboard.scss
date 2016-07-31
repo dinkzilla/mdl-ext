@@ -55,7 +55,6 @@ ul.mdlext-lightboard {
     position: relative;
     display: block;
     max-width: $mdlext-lightboard-slide-max-size;
-    outline: 0;
 
     &::before {
       // 1:1 ratio
@@ -70,9 +69,26 @@ ul.mdlext-lightboard {
       border-color: $mdlext-lightboard-slide-border-color-hover;
       background-color: $mdlext-lightboard-slide-background-color-hover;
       box-shadow: $mdlext-lightboard-slide-box-shadow-hover;
+
+      figcaption {
+        color: rgba(0, 0, 0, 1) !important;
+        background-color: rgba(255, 255, 255, 0.2);
+      }
     }
-    .mdlext-lightboard__slide__frame,
-    .mdlext-lightboard__slide__ripple-container {
+    &:focus {
+      outline-offset: -2px;
+      outline-color: $mdlext-lightboard-focus-outline-color;
+    }
+    &[aria-selected='true'] {
+      background-color: $mdlext-lightboard-slide-active-bacground-color;
+
+      figcaption {
+        color: rgba(0, 0, 0, 1) !important;
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+    &__frame,
+    &__ripple-container {
       text-decoration: none;
       display: block;
       overflow: hidden;
@@ -81,11 +97,10 @@ ul.mdlext-lightboard {
       left: 0;
       right: 0;
       bottom: 0;
-      outline: 0;
 
       &:focus {
-        outline: thin dotted $mdlext-lightboard-focus-outline-color;
-        outline-offset: -4px;
+        outline-offset: -2px;
+        outline-color: $mdlext-lightboard-focus-outline-color;
       }
       & .mdl-ripple {
         background: $mdlext-lightboard-ripple-color;
