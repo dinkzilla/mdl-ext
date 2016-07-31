@@ -124,6 +124,38 @@ bringing the header back when a user might need it: they reach the bottom of the
 * [Sticky header, Waterfall, No Drawer](http://leifoolsen.github.io/mdl-ext/demo/sticky-header-vi.html)
 
 
+## Component configuration
+The component can be configured using a `data-config` attribute. The attribute value is a JSON string with the following properties.
+
+| Property             |    |    |
+|----------------------|----|----|
+| `visibleAtScrollEnd` | if `true`, the header vil show when page is scrolled to the bottom | default: `false` |
+
+
+The `data-config` attribute must be a valid JSON string. You can use single or double quotes for the JSON properties. 
+
+Example 1, single quotes in JSON config string:
+```html
+<header class="mdl-layout__header mdlext-layout__sticky-header mdlext-js-sticky-header" 
+  data-config="{ 'visibleAtScrollEnd': true }">
+  
+  <div class="mdl-layout__header-row">
+    <span id="header-title" class="mdl-layout-title">Title goes here</span>
+  </div>
+</header>
+```
+
+Example 2, double quotes in JSON config string:
+```html
+<header class="mdl-layout__header mdlext-layout__sticky-header mdlext-js-sticky-header" 
+  data-config='{ "visibleAtScrollEnd": true }'>
+  
+  <div class="mdl-layout__header-row">
+    <span id="header-title" class="mdl-layout-title">Title goes here</span>
+  </div>
+</header>
+```
+
 ## Configuration options
 
 The MDLEXT CSS classes apply various predefined visual and behavioral enhancements to the lightbox.
@@ -134,25 +166,6 @@ The table below lists the available classes and their effects.
 | `mdlext-layout__sticky-header` | Defines a header as an MDLEXT header component | Required on `<header>` element |
 | `mdlext-js-sticky-header` | Assigns basic MDL behavior to header | Required on `<header>` element |
 
-
-You can modify the sticky-header trough the following SASS variables.
-
-| SASS variable  | Value |
-|----------------|-------|
-| `$mdlext-sticky-header-background-color`            | transparent |
-| `$mdlext-sticky-header-background-color-scroll`     | transparent |
-| `$mdlext-sticky-header-gradient-color`              | $color-primary !default |
-| `$mdlext-sticky-header-gradient-color-start`        | unquote("rgb(#{$mdlext-sticky-header-gradient-color})") |
-| `$mdlext-sticky-header-gradient-color-end`          | $mdlext-sticky-header-gradient-color-start |
-| `$mdlext-sticky-header-gradient-color-scroll-start` | unquote("rgba(#{$mdlext-sticky-header-gradient-color}, 0.98)") |
-| `$mdlext-sticky-header-gradient-color-scroll-end`   | unquote("rgba(#{$mdlext-sticky-header-gradient-color}, 0.95)") |
-| // Background shorthand                             | |
-| `$mdlext-sticky-header-background`                  | `$mdlext-sticky-header-background-color linear-gradient(to bottom, $mdlext-sticky-header-gradient-color-start 0, $mdlext-sticky-header-gradient-color-end 100%)` |
-| // Background shorthand when content is scrolling   | |
-| `$mdlext-sticky-header-background-scroll`           | `$mdlext-sticky-header-background-color-scroll linear-gradient(to bottom, $mdlext-sticky-header-gradient-color-scroll-start 100%, $mdlext-sticky-header-gradient-color-scroll-end 100%)`|
-
->**Note:** Only the shorthand variables, `$mdlext-sticky-header-background` and `$mdlext-sticky-header-background-scroll`, 
-are used in the [SASS file](./_sticky-header.scss). The other variables are only helpers.
 
 ## How to use the component programmatically
 The [tests](../../test/sticky-header/sticky-header.spec.js) provides example code on how to use the component programmatically.

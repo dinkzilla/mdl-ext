@@ -3,6 +3,7 @@ import requireUncached from 'require-uncached';
 import jsdomify from 'jsdomify';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
+import { removeChilds } from '../testutils/domHelpers';
 import createMockRaf from '../testutils/mock-raf';
 
 describe('MaterialExtStickyHeader', () => {
@@ -29,7 +30,10 @@ describe('MaterialExtStickyHeader', () => {
         <a class="mdl-navigation__link" href="sticky-header.html">Sticky Header</a>
       </nav>
     </aside>
-  
+
+    <div id="mount-2">
+    </div>
+    
     <main id="mount" class="mdl-layout__content">
       <h1>Sticky Header Example</h1>
       <p>A sticky header makes site navigation easily accessible anywhere on the page and saves content space at the same.</p>
@@ -39,6 +43,25 @@ describe('MaterialExtStickyHeader', () => {
   </div>
 </body>
 </html>`;
+
+
+  const header_with_data_config = `
+<header id="header-2" class="mdl-layout__header mdl-layout__header--waterfall mdlext-layout__sticky-header mdlext-js-sticky-header" 
+  data-config="{ 'visibleAtScrollEnd': true }">
+  
+  <div class="mdl-layout__header-row">
+    <span id="header-title" class="mdl-layout-title">Title goes here</span>
+  </div>
+</header>`;
+
+  const header_with_malformed_data_config = `
+<header id="header-3" class="mdl-layout__header mdl-layout__header--waterfall mdlext-layout__sticky-header mdlext-js-sticky-header" 
+  data-config='{ "visibleAtScrollEnd: true }'>
+  
+  <div class="mdl-layout__header-row">
+    <span id="header-title" class="mdl-layout-title">Title goes here</span>
+  </div>
+</header>`;
 
   const fragment = `
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In porttitor lorem eu faucibus aliquet. 
@@ -241,4 +264,35 @@ describe('MaterialExtStickyHeader', () => {
     assert.isTrue(spy.called, 'Expected "resize" event to fire');
     assert.notStrictEqual(header.style.top, startY, 'Expected header position to change')
   });
+
+  it('reads "data-config" attribute', () => {
+    const container = document.querySelector('#mount-2');
+    container.insertAdjacentHTML('beforeend', header_with_data_config);
+
+    try {
+      const element = document.querySelector('#header-2');
+      expect(() => {
+        componentHandler.upgradeElement(element, 'MaterialExtStickyHeader');
+      }).to.not.throw(Error);
+    }
+    finally {
+      removeChilds(container);
+    }
+  });
+
+  it('throws an error if "data-config" attribute is malformed', () => {
+    const container = document.querySelector('#mount-2');
+    container.insertAdjacentHTML('beforeend', header_with_malformed_data_config);
+
+    try {
+      const element = document.querySelector('#carousel-4');
+      expect(() => {
+        componentHandler.upgradeElement(element, 'MaterialExtStickyHeader');
+      }).to.throw(Error);
+    }
+    finally {
+      removeChilds(container);
+    }
+  });
+
 });

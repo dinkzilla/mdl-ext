@@ -110,7 +110,7 @@ The carousel interacts with the following keyboard keys.
 *   `Drag or Swipe right` - Move slides outside container viewport into view
 
 
-## Configuration
+## Component configuration
 The component can be configured using a `data-config` attribute. The attribute value is a JSON string with the following properties.
 
 | Property        |    |    |
@@ -234,7 +234,7 @@ myCarousel.MaterialExtCarousel.upgradeSlides();
 Returns the `config` object.
 
 
-## CSS classes, attributes and SASS variables
+## Configuration options
 The MDLEXT CSS classes apply various predefined visual and behavioral enhancements to the carousel.
 The table below lists the available classes and their effects.
 

@@ -315,17 +315,6 @@ The table below lists the available classes and their effects.
 | `data-img-url-prev` | Displays previous image when dragging | URL to previous image in a collection |
 | `data-img-url-next` | Displays next image when dragging | URL to next imagein a collection |
 
-You can modify the lightbox trough the following SASS variables.
-
-| SASS variables |
-|----------------|
-| `$mdlext-lightbox-background-color` |
-| `$mdlext-lightbox-border` |
-| `$mdlext-lightbox-border-radius` |
-| `$mdlext-lightbox-figure-margin` |
-| `$mdlext-lightbox-figure-padding` |
-| `$mdlext-lightbox-footer-background-color` |
-
 
 ## How to use the component programmatically
 The [tests](../../test/lightbox/lightbox.spec.js) and the [snippets/lightbox.html](./snippets/lightbox.html) 

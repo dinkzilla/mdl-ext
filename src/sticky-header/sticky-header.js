@@ -48,6 +48,12 @@
     // false: allow rAF to be called, true: blocks rAF
     this.drawing_ = false;
 
+    // Default config
+    this.config_ = {
+      visibleAtScrollEnd: false
+    };
+
+
     // Initialize instance.
     this.init();
   };
@@ -118,7 +124,7 @@
       if (this.content_.scrollHeight - this.content_.scrollTop <= this.content_.offsetHeight) {
         // Bottom of content
         if(headerTop != 0) {
-          this.header_.style.top = '0';
+          this.header_.style.top = this.config_.visibleAtScrollEnd ? '0' : `-${this.header_.offsetHeight}px`;
         }
       }
       else {
@@ -162,6 +168,18 @@
   MaterialExtStickyHeader.prototype.init = function() {
 
     if (this.header_) {
+
+      if(this.header_.hasAttribute('data-config')) {
+        const s = this.header_.getAttribute('data-config').replace(/'/g, '"');
+        try {
+          const c = JSON.parse(s);
+          Object.assign(this.config_, c);
+        }
+        catch (e) {
+          throw new Error(`Failed to parse data-config: ${s}. Error: ${e.message}`);
+        }
+      }
+
       this.content_ = this.header_.parentNode.querySelector(`.${CONTENT_CLASS}`) || null;
 
       if(this.content_) {
