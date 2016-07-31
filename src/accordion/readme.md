@@ -293,6 +293,16 @@ Refer to [snippets/accordion.html](./snippets/accordion.html) or the [tests](../
 
 ## Public methods
 
+### upgradeTab(tabOrPanelElement)
+Upgrade a targeted panel with aria attributes and ripple effects. If you add a panel to the accordion after the page has 
+loaded, you must call `upgrade` to notify the accordion component about the newly added panel.
+
+```javascript
+var accordion = document.querySelector('#my-accordion');
+var panel3 = document.querySelector('#my-accordion .mdlext-accordion__panel:nth-child(3)');
+accordion.MaterialExtAccordion.upgradeTab( panel3 );
+```
+
 ### command(detail)
 Executes an action, targeting a specific tab. The actions corresponds to the custom events defined for this component.
  

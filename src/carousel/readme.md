@@ -23,7 +23,6 @@ interchangeably.
 * User interactions via keyboard, mouse or touch events may be blocked, if configured 
 * Start slideshow at component initialization using a data attribute
 * The carousel emits custom events reflecting a user action. E.g. clicking an image will emit a 'select' event with a detail object holding a reference to the selected image.
-* Listen to mutation events, to detect insertions of elements into components DOM tree 
 
 ### Limitations:
 * The carousel should pause any running animation on window.bur or tab.blur - not implemented
@@ -223,8 +222,13 @@ componentHandler.downgradeElements([...content]);
 ```
 
 ### `upgradeSlides()`
-The component uses a mutation observer to upgrade slides inserted into the components DOM tree after component 
-initialization. If the observer, for some reason, does not work, call `upgradeSlides()` to upgrade newly inserted slides.
+Upgrade slides. If you add slides to the carousel after the page has loaded, you must call `upgradeSlides` to 
+notify the component about the newly inserted slides.
+
+```javascript
+myCarousel = document.querySelector('#my-carousel');
+myCarousel.MaterialExtCarousel.upgradeSlides();
+```
 
 ### `getConfig()`
 Returns the `config` object.
@@ -249,16 +253,6 @@ Attributes.
 | `list` | The component add the role `list` to self |  |
 | `listitem` | The component add the role `listitem` to `mdlext-carousel__slide` items |  |
 
-
-SASS variables.
-
-| SASS variable |
-|----------------|
-| `$mdlext-carousel-slide-border-top-width` | 
-| `$mdlext-carousel-slide-border-top-color` | 
-| `$mdlext-carousel-slide-margin-horizontal` |
-| `$mdlext-carousel-slide-figcaption-color` | 
-| `$mdlext-carousel-slide-ripple-color` |     
 
 ## How to use the component programmatically
 The [tests](../../test/carousel/carousel.spec.js) and the [snippets/lightbox.html](./snippets/carousel.html) 

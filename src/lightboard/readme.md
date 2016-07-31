@@ -322,6 +322,26 @@ myLightboard.dispatchEvent(ce);
 
 ## Public methods
 
+### upgradeSlides()
+Upgrade slides. If you add slides to the lightboard after the page has loaded, you must call `upgradeSlides` to 
+notify the component about the new slides.
+
+```javascript
+slide = 
+   '<li class="mdlext-lightboard__slide">'
+  +'  <a href="#" class="mdlext-lightboard__slide__frame">'
+  +'    <figure>'
+  +'      <img src="_D802181.jpg" title="Landscape in blue pastel"/>'
+  +'      <figcaption>_D802181.jpg</figcaption>'
+  +'    </figure>'
+  +'  </a>'
+  +'</li>';
+
+myLightboard = document.querySelector('#my-lightboard');
+myLightboard.insertAdjacentHTML('beforeend', slide);
+myLightboard.MaterialExtLightboard.upgradeSlides();
+```
+
 ### command( detail )
 Executes an action, optionally targeting a specific slide. The actions corresponds to the custom events defined for this 
 component.

@@ -75,8 +75,6 @@ import { inOutQuintic } from '../utils/easing';
 
     this.scrollAnimation_ = new MdlExtAnimationLoop(33);
 
-    this.drawing_ = false; // Used by MutationObserver
-
     // Initialize instance.
     this.init();
   };
@@ -655,11 +653,11 @@ import { inOutQuintic } from '../utils/easing';
       // Listen to custom 'command' event
       this.element_.addEventListener('command', this.commandHandler_.bind(this), false);
 
+      /* Not needed. Difficult to test. Call upgradeSlides() from client instead.
       // Detect insertions into components DOM
       const MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
 
       // jsdom does not support MutationObserver - so this is not testable
-      /* istanbul ignore next */
       new MutationObserver( mutations => {
         mutations.forEach( mutation => {
           if (mutation.addedNodes.length > 0) {
@@ -672,6 +670,7 @@ import { inOutQuintic } from '../utils/easing';
         characterData: false,
         subtree: false
       });
+      */
 
       // Slides collection
       this.upgradeSlides();

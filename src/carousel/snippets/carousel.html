@@ -509,7 +509,7 @@
     Add image to carousel
   </button>
   <p class="mdl-typography--caption" style="margin-top: 8px">
-    Verify that the MutationObserver works: Click the button to add a new image to the carousel. Move to the inserted
+    Click the button to add a new image to the carousel. Move to the inserted
     image and click it. It should have ripple effect if upgraded correctly.
   </p>
 </div>
@@ -598,6 +598,7 @@
         var slide_fragment = '<li class="mdlext-carousel__slide"><figure><img src="./images/_D809914-2.jpg" alt="Humpback whale" title="Humpback whale"/></figure></li>';
         var carousel = document.querySelector('#mdlext-carousel-demo2');
         carousel.insertAdjacentHTML('beforeend', slide_fragment);
+        carousel.MaterialExtCarousel.upgradeSlides();
       });
 
     });

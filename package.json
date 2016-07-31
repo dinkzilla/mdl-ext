@@ -91,7 +91,7 @@
     "doctrine": "1.2.2",
     "eq.js": "1.9.0",
     "es6-promise": "3.2.1",
-    "eslint": "3.1.1",
+    "eslint": "3.2.0",
     "eslint-loader": "1.5.0",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.9.0",

@@ -153,7 +153,7 @@ describe('MaterialExtCarousel', () => {
     window.cancelAnimationFrame = mockRaf.raf.cancel;
     rAFStub = sinon.stub(window, 'requestAnimationFrame', mockRaf.raf);
 
-
+    /* Not needed. Difficult to test. Call upgradeSlides() from client instead.
     // Stub unsupported jsdom window.MutationObserver
     window.MutationObserver = window.MutationObserver ||  (function(undefined) {
         "use strict";
@@ -180,9 +180,8 @@ describe('MaterialExtCarousel', () => {
         return MutationObserver;
       })(void 0);
 
-    // TODO: Use mutationobserver-polyfill.js
-    //requireUncached('../testutils/mutationobserver-polyfill');
     global.MutationObserver = window.MutationObserver;
+    */
 
   });
 
@@ -332,6 +331,7 @@ describe('MaterialExtCarousel', () => {
 
       // Insert a new slide after component has been upgraded
       element.insertAdjacentHTML('beforeend', carousel_slide_fragment);
+      element.MaterialExtCarousel.upgradeSlides();
 
       [...document.querySelectorAll('#mount-2 mdlext-carousel__slide')].forEach( slide => {
 
