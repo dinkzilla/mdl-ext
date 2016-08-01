@@ -27,31 +27,31 @@
 
 import '../utils/closest-polyfill';
 import { createCustomEvent } from '../utils/custom-event';
+import {
+  VK_ENTER,
+  VK_SPACE,
+  VK_END,
+  VK_HOME,
+  VK_ARROW_LEFT,
+  VK_ARROW_UP,
+  VK_ARROW_RIGHT,
+  VK_ARROW_DOWN,
+  IS_UPGRADED,
+  MDL_RIPPLE,
+  MDL_RIPPLE_COMPONENT,
+  MDL_RIPPLE_CONTAINER,
+  MDL_RIPPLE_EFFECT,
+  MDL_RIPPLE_EFFECT_IGNORE_EVENTS
+} from '../utils/constants';
 
 (function() {
   'use strict';
 
-  const VK_ENTER = 13;
-  const VK_SPACE = 32;
-  const VK_END = 35;
-  const VK_HOME = 36;
-  const VK_ARROW_LEFT = 37;
-  const VK_ARROW_UP = 38;
-  const VK_ARROW_RIGHT = 39;
-  const VK_ARROW_DOWN = 40;
-
-  const IS_UPGRADED = 'is-upgraded';
   //const LIGHTBOARD = 'mdlext-lightboard';
   const LIGHTBOARD_ROLE = 'grid';
   const SLIDE = 'mdlext-lightboard__slide';
   const SLIDE_ROLE  = 'gridcell';
   const SLIDE_TABSTOP = 'mdlext-lightboard__slide__frame';
-  const RIPPLE_COMPONENT = 'MaterialRipple';
-  const RIPPLE = 'mdl-ripple';
-  const RIPPLE_CONTAINER = 'mdlext-lightboard__slide__ripple-container';
-  const RIPPLE_EFFECT = 'mdl-js-ripple-effect';
-  const RIPPLE_EFFECT_IGNORE_EVENTS = 'mdl-js-ripple-effect--ignore-events';
-
   /**
    * @constructor
    * @param {Element} element The element that will be upgraded.
@@ -133,8 +133,8 @@ import { createCustomEvent } from '../utils/custom-event';
     if (this.element_) {
       this.element_.setAttribute('role', LIGHTBOARD_ROLE);
 
-      if (this.element_.classList.contains(RIPPLE_EFFECT)) {
-        this.element_.classList.add(RIPPLE_EFFECT_IGNORE_EVENTS);
+      if (this.element_.classList.contains(MDL_RIPPLE_EFFECT)) {
+        this.element_.classList.add(MDL_RIPPLE_EFFECT_IGNORE_EVENTS);
       }
 
       this.element_.removeEventListener('command', this.commandHandler_);
@@ -212,21 +212,21 @@ import { createCustomEvent } from '../utils/custom-event';
 
     const addRipple = slide => {
       // Use slide frame as ripple container
-      if(!slide.querySelector(`.${RIPPLE_CONTAINER}`)) {
+      if(!slide.querySelector(`.${MDL_RIPPLE_CONTAINER}`)) {
         const a = slide.querySelector(`.${SLIDE_TABSTOP}`);
         if(a) {
           const rippleContainer = a;
-          rippleContainer.classList.add(RIPPLE_CONTAINER);
-          rippleContainer.classList.add(RIPPLE_EFFECT);
+          rippleContainer.classList.add(MDL_RIPPLE_CONTAINER);
+          rippleContainer.classList.add(MDL_RIPPLE_EFFECT);
           const ripple = document.createElement('span');
-          ripple.classList.add(RIPPLE);
+          ripple.classList.add(MDL_RIPPLE);
           rippleContainer.appendChild(ripple);
-          componentHandler.upgradeElement(rippleContainer, RIPPLE_COMPONENT);
+          componentHandler.upgradeElement(rippleContainer, MDL_RIPPLE_COMPONENT);
         }
       }
     };
 
-    const hasRippleEffect = this.element_.classList.contains(RIPPLE_EFFECT);
+    const hasRippleEffect = this.element_.classList.contains(MDL_RIPPLE_EFFECT);
 
     [...this.element_.querySelectorAll(`.${SLIDE}`)].forEach( slide => {
 

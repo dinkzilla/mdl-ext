@@ -25,20 +25,21 @@
 
 import '../utils/closest-polyfill';
 import { createCustomEvent } from '../utils/custom-event';
+import {
+  VK_ESC,
+  VK_SPACE,
+  VK_END,
+  VK_HOME,
+  VK_ARROW_LEFT,
+  VK_ARROW_UP,
+  VK_ARROW_RIGHT,
+  VK_ARROW_DOWN,
+  IS_UPGRADED
+} from '../utils/constants';
 
 (function() {
   'use strict';
 
-  const VK_ESC = 27;
-  const VK_SPACE = 32;
-  const VK_END = 35;
-  const VK_HOME = 36;
-  const VK_ARROW_LEFT = 37;
-  const VK_ARROW_UP = 38;
-  const VK_ARROW_RIGHT = 39;
-  const VK_ARROW_DOWN = 40;
-
-  const IS_UPGRADED = 'is-upgraded';
   const LIGHTBOX = 'mdlext-lightbox';
   const LIGHTBOX_SLIDER = 'mdlext-lightbox__slider';
   const LIGHTBOX_SLIDER_SLIDE = 'mdlext-lightbox__slider__slide';

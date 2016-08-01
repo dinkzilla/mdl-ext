@@ -24,11 +24,16 @@
  * bringing the header back when a user might need it: they reach the bottom of the page or start scrolling up.
  */
 
+import { jsonStringToObject } from '../utils/json-utils';
+import {
+  IS_UPGRADED
+} from '../utils/constants';
+
+
 (function() {
   'use strict';
 
-  const IS_UPGRADED = 'is-upgraded';
-  const CONTENT_CLASS  = 'mdl-layout__content';
+  const MDL_LAYOUT_CONTENT  = 'mdl-layout__content';
   const IS_SCROLL_CLASS  = 'mdlext-is-scroll';
   //const STICKY_HEADER_CLASS  = 'mdlext-layout__sticky-header';
 
@@ -170,17 +175,10 @@
     if (this.header_) {
 
       if(this.header_.hasAttribute('data-config')) {
-        const s = this.header_.getAttribute('data-config').replace(/'/g, '"');
-        try {
-          const c = JSON.parse(s);
-          Object.assign(this.config_, c);
-        }
-        catch (e) {
-          throw new Error(`Failed to parse data-config: ${s}. Error: ${e.message}`);
-        }
+        this.config_ = jsonStringToObject(this.header_.getAttribute('data-config'));
       }
 
-      this.content_ = this.header_.parentNode.querySelector(`.${CONTENT_CLASS}`) || null;
+      this.content_ = this.header_.parentNode.querySelector(`.${MDL_LAYOUT_CONTENT}`) || null;
 
       if(this.content_) {
         this.content_.style.paddingTop = `${this.header_.offsetHeight}px`;  // Make room for sticky header

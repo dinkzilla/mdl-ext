@@ -4,6 +4,18 @@ import requireUncached from 'require-uncached';
 import jsdomify from 'jsdomify';
 import { removeChilds } from '../testutils/domHelpers';
 
+import {
+  VK_ENTER,
+  VK_SPACE,
+  VK_END,
+  VK_HOME,
+  VK_ARROW_LEFT,
+  VK_ARROW_UP,
+  VK_ARROW_RIGHT,
+  VK_ARROW_DOWN
+} from '../../src/utils/constants';
+
+
 const describe = require('mocha').describe;
 const before = require('mocha').before;
 const after = require('mocha').after;
@@ -13,15 +25,6 @@ const assert = require('chai').assert;
 const sinon = require('sinon');
 
 describe('MaterialExtAccordion', () => {
-
-  const VK_ENTER = 13;
-  const VK_SPACE = 32;
-  const VK_END = 35;
-  const VK_HOME = 36;
-  const VK_ARROW_LEFT = 37;
-  const VK_ARROW_UP = 38;
-  const VK_ARROW_RIGHT = 39;
-  const VK_ARROW_DOWN = 40;
 
   const PANEL = 'mdlext-accordion__panel';
   const TAB = 'mdlext-accordion__tab';

@@ -26,35 +26,37 @@ import '../utils/closest-polyfill';
 import { createCustomEvent } from '../utils/custom-event';
 import MdlExtAnimationLoop from '../utils/animationloop';
 import { inOutQuintic } from '../utils/easing';
+import { jsonStringToObject} from '../utils/json-utils';
+import {
+  VK_TAB,
+  VK_ENTER,
+  VK_ESC,
+  VK_SPACE,
+  VK_PAGE_UP,
+  VK_PAGE_DOWN,
+  VK_END,
+  VK_HOME,
+  VK_ARROW_LEFT,
+  VK_ARROW_UP,
+  VK_ARROW_RIGHT,
+  VK_ARROW_DOWN,
+  IS_UPGRADED,
+  IS_FOCUSED,
+  MDL_RIPPLE,
+  MDL_RIPPLE_COMPONENT,
+  MDL_RIPPLE_CONTAINER,
+  MDL_RIPPLE_EFFECT,
+  MDL_RIPPLE_EFFECT_IGNORE_EVENTS
+} from '../utils/constants';
 
 (function() {
   'use strict';
 
-  const VK_TAB         = 9;
-  const VK_ENTER       = 13;
-  const VK_ESC         = 27;
-  const VK_SPACE       = 32;
-  const VK_PAGE_UP     = 33;
-  const VK_PAGE_DOWN   = 34;
-  const VK_END         = 35;
-  const VK_HOME        = 36;
-  const VK_ARROW_LEFT  = 37;
-  const VK_ARROW_UP    = 38;
-  const VK_ARROW_RIGHT = 39;
-  const VK_ARROW_DOWN  = 40;
+  //const CAROUSEL = 'mdlext-carousel';
+  const SLIDE      = 'mdlext-carousel__slide';
+  const ROLE       = 'list';
+  const SLIDE_ROLE = 'listitem';
 
-  const IS_UPGRADED    = 'is-upgraded';
-  const IS_FOCUSED     = 'is-focused';
-  //const CAROUSEL       = 'mdlext-carousel';
-  const SLIDE          = 'mdlext-carousel__slide';
-  const ROLE           = 'list';
-  const SLIDE_ROLE     = 'listitem';
-
-  const RIPPLE           = 'mdl-ripple';
-  const RIPPLE_COMPONENT = 'MaterialRipple';
-  const RIPPLE_CONTAINER = 'mdlext-carousel__slide__ripple-container';
-  const RIPPLE_EFFECT    = 'mdl-js-ripple-effect';
-  const RIPPLE_EFFECT_IGNORE_EVENTS = 'mdl-js-ripple-effect--ignore-events';
 
   /**
    * @constructor
@@ -528,12 +530,12 @@ import { inOutQuintic } from '../utils/easing';
   };
 
   const addRipple_ = slide => {
-    if(!slide.querySelector(`.${RIPPLE_CONTAINER}`)) {
+    if(!slide.querySelector(`.${MDL_RIPPLE_CONTAINER}`)) {
       const rippleContainer = document.createElement('span');
-      rippleContainer.classList.add(RIPPLE_CONTAINER);
-      rippleContainer.classList.add(RIPPLE_EFFECT);
+      rippleContainer.classList.add(MDL_RIPPLE_CONTAINER);
+      rippleContainer.classList.add(MDL_RIPPLE_EFFECT);
       const ripple = document.createElement('span');
-      ripple.classList.add(RIPPLE);
+      ripple.classList.add(MDL_RIPPLE);
       rippleContainer.appendChild(ripple);
 
       const img = slide.querySelector('img');
@@ -542,7 +544,7 @@ import { inOutQuintic } from '../utils/easing';
         rippleContainer.title = img.title;
       }
       slide.appendChild(rippleContainer);
-      componentHandler.upgradeElement(rippleContainer, RIPPLE_COMPONENT);
+      componentHandler.upgradeElement(rippleContainer, MDL_RIPPLE_COMPONENT);
     }
   };
   // End helpers
@@ -569,7 +571,7 @@ import { inOutQuintic } from '../utils/easing';
    */
   MaterialExtCarousel.prototype.upgradeSlides = function() {
 
-    const hasRippleEffect = this.element_.classList.contains(RIPPLE_EFFECT);
+    const hasRippleEffect = this.element_.classList.contains(MDL_RIPPLE_EFFECT);
 
     [...this.element_.querySelectorAll(`.${SLIDE}`)].forEach( slide => {
 
@@ -609,14 +611,7 @@ import { inOutQuintic } from '../utils/easing';
     if (this.element_) {
       // Config
       if(this.element_.hasAttribute('data-config')) {
-        const s = this.element_.getAttribute('data-config').replace(/'/g, '"');
-        try {
-          const c = JSON.parse(s);
-          Object.assign(this.config_, c);
-        }
-        catch (e) {
-          throw new Error(`Failed to parse "data-config = ${s}". Error: ${e.message}`);
-        }
+        this.config_ = jsonStringToObject(this.element_.getAttribute('data-config'), this.config_);
       }
 
       // Wai-Aria
@@ -630,9 +625,9 @@ import { inOutQuintic } from '../utils/easing';
       if(this.config_.interactive) {
 
         // Ripple
-        const hasRippleEffect = this.element_.classList.contains(RIPPLE_EFFECT);
+        const hasRippleEffect = this.element_.classList.contains(MDL_RIPPLE_EFFECT);
         if (hasRippleEffect) {
-          this.element_.classList.add(RIPPLE_EFFECT_IGNORE_EVENTS);
+          this.element_.classList.add(MDL_RIPPLE_EFFECT_IGNORE_EVENTS);
         }
 
         // Listen to focus/blur events

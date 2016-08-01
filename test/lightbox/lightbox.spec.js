@@ -5,17 +5,18 @@ import jsdomify from 'jsdomify';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
 import { removeChilds } from '../testutils/domHelpers';
+import {
+  VK_ESC,
+  VK_SPACE,
+  VK_END,
+  VK_HOME,
+  VK_ARROW_LEFT,
+  VK_ARROW_UP,
+  VK_ARROW_RIGHT,
+  VK_ARROW_DOWN
+} from '../../src/utils/constants';
 
 describe('MaterialExtLightbox', () => {
-
-  const VK_ESC = 27;
-  const VK_SPACE = 32;
-  const VK_END = 35;
-  const VK_HOME = 36;
-  const VK_ARROW_LEFT = 37;
-  const VK_ARROW_UP = 38;
-  const VK_ARROW_RIGHT = 39;
-  const VK_ARROW_DOWN = 40;
 
   const fixture = `
 <!DOCTYPE html>

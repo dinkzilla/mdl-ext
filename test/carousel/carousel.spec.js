@@ -6,20 +6,22 @@ import sinon from 'sinon';
 import { removeChilds } from '../testutils/domHelpers';
 import createMockRaf from '../testutils/mock-raf';
 
-describe('MaterialExtCarousel', () => {
+import {
+  VK_TAB,
+  VK_ENTER,
+  VK_ESC,
+  VK_SPACE,
+  VK_PAGE_UP,
+  VK_PAGE_DOWN,
+  VK_END,
+  VK_HOME,
+  VK_ARROW_LEFT,
+  VK_ARROW_UP,
+  VK_ARROW_RIGHT,
+  VK_ARROW_DOWN
+} from '../../src/utils/constants';
 
-  const VK_TAB         = 9;
-  const VK_ENTER       = 13;
-  const VK_ESC         = 27;
-  const VK_SPACE       = 32;
-  const VK_PAGE_UP     = 33;
-  const VK_PAGE_DOWN   = 34;
-  const VK_END         = 35;
-  const VK_HOME        = 36;
-  const VK_ARROW_LEFT  = 37;
-  const VK_ARROW_UP    = 38;
-  const VK_ARROW_RIGHT = 39;
-  const VK_ARROW_DOWN  = 40;
+describe('MaterialExtCarousel', () => {
 
   const fixture = `
 <!DOCTYPE html>

@@ -56,7 +56,7 @@ describe('MaterialExtStickyHeader', () => {
 
   const header_with_malformed_data_config = `
 <header id="header-3" class="mdl-layout__header mdl-layout__header--waterfall mdlext-layout__sticky-header mdlext-js-sticky-header" 
-  data-config='{ "visibleAtScrollEnd: true }'>
+  data-config='{ visibleAtScrollEnd: true }'>
   
   <div class="mdl-layout__header-row">
     <span id="header-title" class="mdl-layout-title">Title goes here</span>

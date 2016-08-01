@@ -28,19 +28,26 @@
  */
 
 import { createCustomEvent } from '../utils/custom-event';
+import {
+  VK_ENTER,
+  VK_SPACE,
+  VK_END,
+  VK_HOME,
+  VK_ARROW_LEFT,
+  VK_ARROW_UP,
+  VK_ARROW_RIGHT,
+  VK_ARROW_DOWN,
+  IS_EXPANDED,
+  IS_UPGRADED,
+  ARIA_MULTISELECTABLE,
+  ARIA_EXPANDED,
+  ARIA_HIDDEN,
+  ARIA_SELECTED
+} from '../utils/constants';
 
 
 (function() {
   'use strict';
-
-  const VK_ENTER                    = 13;
-  const VK_SPACE                    = 32;
-  const VK_END                      = 35;
-  const VK_HOME                     = 36;
-  const VK_ARROW_LEFT               = 37;
-  const VK_ARROW_UP                 = 38;
-  const VK_ARROW_RIGHT              = 39;
-  const VK_ARROW_DOWN               = 40;
   const ACCORDION                   = 'mdlext-accordion';
   const ACCORDION_VERTICAL          = 'mdlext-accordion--vertical';
   const ACCORDION_HORIZONTAL        = 'mdlext-accordion--horizontal';
@@ -51,12 +58,6 @@ import { createCustomEvent } from '../utils/custom-event';
   const TAB_ROLE                    = 'tab';
   const TABPANEL                    = 'mdlext-accordion__tabpanel';
   const TABPANEL_ROLE               = 'tabpanel';
-  const ARIA_MULTISELECTABLE        = 'aria-multiselectable';
-  const ARIA_EXPANDED               = 'aria-expanded';
-  const ARIA_HIDDEN                 = 'aria-hidden';
-  const ARIA_SELECTED               = 'aria-selected';
-  const IS_EXPANDED                 = 'is-expanded';
-  const IS_UPGRADED                 = 'is-upgraded';
   const RIPPLE_EFFECT               = 'mdlext-js-ripple-effect';
   const RIPPLE                      = 'mdlext-accordion__tab--ripple';
   const ANIMATION_EFFECT            = 'mdlext-js-animation-effect';

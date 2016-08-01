@@ -22,6 +22,14 @@
  * Copied/Modified from https://github.com/google/material-design-lite/tree/master/src/textfield
  */
 
+import {
+  IS_DIRTY,
+  IS_FOCUSED,
+  IS_DISABLED,
+  IS_INVALID,
+  IS_UPGRADED
+} from '../utils/constants';
+
 (function() {
   'use strict';
 
@@ -59,12 +67,7 @@
    */
   MaterialExtSelectfield.prototype.CssClasses_ = {
     LABEL: 'mdlext-selectfield__label',
-    INPUT: 'mdlext-selectfield__select',
-    IS_DIRTY: 'is-dirty',
-    IS_FOCUSED: 'is-focused',
-    IS_DISABLED: 'is-disabled',
-    IS_INVALID: 'is-invalid',
-    IS_UPGRADED: 'is-upgraded'
+    INPUT: 'mdlext-selectfield__select'
   };
 
   /**
@@ -75,7 +78,7 @@
    */
   /*eslint no-unused-vars: 0*/
   MaterialExtSelectfield.prototype.onFocus_ = function( /*event*/ ) {
-    this.element_.classList.add(this.CssClasses_.IS_FOCUSED);
+    this.element_.classList.add(IS_FOCUSED);
   };
 
   /**
@@ -86,7 +89,7 @@
    */
   /*eslint no-unused-vars: 0*/
   MaterialExtSelectfield.prototype.onBlur_ = function( /*event*/ ) {
-    this.element_.classList.remove(this.CssClasses_.IS_FOCUSED);
+    this.element_.classList.remove(IS_FOCUSED);
   };
 
   /**
@@ -120,9 +123,9 @@
    */
   MaterialExtSelectfield.prototype.checkDisabled = function() {
     if (this.select_.disabled) {
-      this.element_.classList.add(this.CssClasses_.IS_DISABLED);
+      this.element_.classList.add(IS_DISABLED);
     } else {
-      this.element_.classList.remove(this.CssClasses_.IS_DISABLED);
+      this.element_.classList.remove(IS_DISABLED);
     }
   };
   MaterialExtSelectfield.prototype['checkDisabled'] = MaterialExtSelectfield.prototype.checkDisabled;
@@ -136,9 +139,9 @@
   MaterialExtSelectfield.prototype.checkFocus = function() {
     /*eslint no-extra-boolean-cast: 0*/
     if (Boolean(this.element_.querySelector(':focus'))) {
-      this.element_.classList.add(this.CssClasses_.IS_FOCUSED);
+      this.element_.classList.add(IS_FOCUSED);
     } else {
-      this.element_.classList.remove(this.CssClasses_.IS_FOCUSED);
+      this.element_.classList.remove(IS_FOCUSED);
     }
   };
 
@@ -174,9 +177,9 @@
    */
   MaterialExtSelectfield.prototype.checkDirty = function() {
     if (this.select_.value && this.select_.value.length > 0) {
-      this.element_.classList.add(this.CssClasses_.IS_DIRTY);
+      this.element_.classList.add(IS_DIRTY);
     } else {
-      this.element_.classList.remove(this.CssClasses_.IS_DIRTY);
+      this.element_.classList.remove(IS_DIRTY);
     }
   };
 
@@ -236,12 +239,12 @@
         this.select_.addEventListener('blur', this.boundBlurHandler);
         this.select_.addEventListener('reset', this.boundResetHandler);
 
-        const invalid = this.element_.classList.contains(this.CssClasses_.IS_INVALID);
+        const invalid = this.element_.classList.contains(IS_INVALID);
         this.updateClasses_();
-        this.element_.classList.add(this.CssClasses_.IS_UPGRADED);
+        this.element_.classList.add(IS_UPGRADED);
 
         if (invalid) {
-          this.element_.classList.add(this.CssClasses_.IS_INVALID);
+          this.element_.classList.add(IS_INVALID);
         }
         if (this.select_.hasAttribute('autofocus')) {
           this.element_.focus();
