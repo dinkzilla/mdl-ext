@@ -3,7 +3,7 @@
  * @param jsonString
  * @param source
  */
-export const jsonStringToObject = (jsonString, source = {} ) => {
+const jsonStringToObject = (jsonString, source = {} ) => {
   const s = jsonString.replace(/'/g, '"');
   try {
     return Object.assign(source, JSON.parse(s));
@@ -12,3 +12,5 @@ export const jsonStringToObject = (jsonString, source = {} ) => {
     throw new Error(`Failed to parse data-config: ${s}. Error: ${e.message}`);
   }
 };
+
+export { jsonStringToObject };
