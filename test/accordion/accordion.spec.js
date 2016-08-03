@@ -2,6 +2,7 @@
 
 import requireUncached from 'require-uncached';
 import jsdomify from 'jsdomify';
+import {patchJsDom} from '../testutils/patch-jsdom';
 
 import {
   VK_ENTER,
@@ -30,6 +31,7 @@ describe('MaterialExtAccordion', () => {
 
   const PANEL = 'mdlext-accordion__panel';
   const TAB = 'mdlext-accordion__tab';
+  const TAB_CAPTION = 'mdlext-accordion__tab__caption';
   const TABPANEL = 'mdlext-accordion__tabpanel';
   const RIPPLE = 'mdlext-accordion__tab--ripple';
   const ANIMATION = 'mdlext-accordion__tabpanel--animation';
@@ -190,16 +192,12 @@ describe('MaterialExtAccordion', () => {
 
 
   before ( () => {
-    jsdomify.create(fixture);
+    patchJsDom(fixture);
 
     // Must load MDL after jsdom, see: https://github.com/mochajs/mocha/issues/1722
     requireUncached( 'material-design-lite/material');
     global.componentHandler = window.componentHandler;
     assert.isObject(componentHandler, 'No global MDL component handler');
-
-    // JsDoom need closest polyfill
-    requireUncached('../../src/utils/closest-polyfill');
-    assert.isTrue(typeof Element.prototype.matches === 'function');
 
     requireUncached('../../src/accordion/accordion');
     assert.isNotNull(window.MaterialExtAccordion, 'Expected MaterialExtAccordion not to be null');
@@ -710,7 +708,7 @@ describe('MaterialExtAccordion', () => {
       removeChilds(container);
     }
   });
-  */
+   */
 
   const anyOpenTab = accordion => {
     return [...accordion.querySelectorAll(`.${PANEL} .${TAB}`)].find(tab => tab.getAttribute('aria-expanded') == 'true') || null;

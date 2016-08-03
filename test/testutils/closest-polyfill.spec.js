@@ -57,7 +57,7 @@ describe('closest', () => {
     Element.prototype.webkitMatchesSelector = undefined;
     Element.prototype.closest = undefined;
 
-    requireUncached( '../../src/utils/closest-polyfill');
+    requireUncached( './closest-polyfill');
   });
 
   after ( () => {

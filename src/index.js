@@ -1,6 +1,4 @@
 'use strict';
-//import 'utils/closest-polyfill';
-//import 'utils/constants';
 import 'utils/custom-event';
 import 'utils/animationloop';
 import 'utils/easing';

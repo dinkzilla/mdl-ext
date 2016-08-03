@@ -22,7 +22,7 @@
  * Image carousel
  */
 
-import '../utils/closest-polyfill';
+//import '../utils/closest-polyfill';
 import { createCustomEvent } from '../utils/custom-event';
 import MdlExtAnimationLoop from '../utils/animationloop';
 import { inOutQuintic } from '../utils/easing';

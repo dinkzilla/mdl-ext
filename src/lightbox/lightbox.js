@@ -23,7 +23,7 @@
  * Responsive Lightbox
  */
 
-import '../utils/closest-polyfill';
+//import '../utils/closest-polyfill';
 import { createCustomEvent } from '../utils/custom-event';
 import {
   VK_ESC,

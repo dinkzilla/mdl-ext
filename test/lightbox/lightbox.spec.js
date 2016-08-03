@@ -2,6 +2,7 @@
 
 import requireUncached from 'require-uncached';
 import jsdomify from 'jsdomify';
+import {patchJsDom} from '../testutils/patch-jsdom';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
 import { shouldBehaveLikeAMdlComponent } from '../testutils/shared-component-behaviours';
@@ -80,7 +81,7 @@ describe('MaterialExtLightbox', () => {
     </div>`;
 
   before ( () => {
-    jsdomify.create(fixture);
+    patchJsDom(fixture);
 
     // Must load MDL after jsdom, see: https://github.com/mochajs/mocha/issues/1722
     requireUncached( 'material-design-lite/material');
