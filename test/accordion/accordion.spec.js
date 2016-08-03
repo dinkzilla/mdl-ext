@@ -197,6 +197,10 @@ describe('MaterialExtAccordion', () => {
     global.componentHandler = window.componentHandler;
     assert.isObject(componentHandler, 'No global MDL component handler');
 
+    // JsDoom need closest polyfill
+    requireUncached('../../src/utils/closest-polyfill');
+    assert.isTrue(typeof Element.prototype.matches === 'function');
+
     requireUncached('../../src/accordion/accordion');
     assert.isNotNull(window.MaterialExtAccordion, 'Expected MaterialExtAccordion not to be null');
     global.MaterialExtAccordion = window.MaterialExtAccordion;

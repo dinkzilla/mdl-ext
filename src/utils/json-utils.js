@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Converts a JSON string to object
  * @param jsonString

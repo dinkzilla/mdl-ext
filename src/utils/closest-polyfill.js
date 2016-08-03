@@ -1,3 +1,5 @@
+'use strict';
+
 /*
  * Code pulled from:
  * https://github.com/jonathantneal/closest/blob/master/closest.js

@@ -4,6 +4,7 @@
  * Code copied from: https://coderwall.com/p/oo7i_g/mutationobserver-polyfill
  * See also: https://github.com/megawac/MutationObserver.js
  */
+'use strict';
 
 
 (function() {

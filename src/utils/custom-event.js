@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * @license
  * Copyright 2016 Leif Olsen. All Rights Reserved.

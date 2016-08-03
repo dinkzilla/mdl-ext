@@ -1,3 +1,5 @@
+'use strict';
+
 /*
  * Based on: https://gist.github.com/yannickcr/6129327b31b27b14efc5
  *         : https://github.com/tmpvar/jsdom/issues/135#issuecomment-68191941

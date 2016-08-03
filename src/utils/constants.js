@@ -1,3 +1,5 @@
+'use strict';
+
 const VK_TAB         = 9;
 const VK_ENTER       = 13;
 const VK_ESC         = 27;

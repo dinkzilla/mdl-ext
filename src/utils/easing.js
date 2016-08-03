@@ -1,3 +1,5 @@
+'use strict';
+
 // See: http://robertpenner.com/easing/
 
 const easeInOutQuad = (t, b, c, d) => {

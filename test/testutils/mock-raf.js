@@ -1,3 +1,5 @@
+'use strict';
+
 // See: https://github.com/chenglou/react-motion/blob/dafff3f2b00ac11f39d91f3363cc97de664b2406/test/createMockRaf.js
 // See: https://github.com/chenglou/react-motion/blob/master/test/createMockRaf.js
 // See: https://github.com/FormidableLabs/mock-raf
