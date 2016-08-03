@@ -5,6 +5,7 @@ import jsdomify from 'jsdomify';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
 import { removeChilds } from '../testutils/domHelpers';
+import { shouldBehaveLikeAMdlComponent } from '../testutils/shared-component-behaviours';
 import {
   VK_ENTER,
   VK_SPACE,
@@ -140,13 +141,11 @@ describe('MaterialExtLightboard', () => {
     jsdomify.destroy();
   });
 
-  it('is globally available', () => {
-    assert.isFunction(window['MaterialExtLightboard'], 'Expected MaterialExtLightboard to be globally available');
-  });
-
-  it('upgrades successfully', () => {
-    const element = document.querySelector('#mdlext-lightboard-1');
-    expect(element.getAttribute('data-upgraded')).to.include('MaterialExtLightboard');
+  shouldBehaveLikeAMdlComponent({
+    componentName: 'MaterialExtLightboard',
+    componentCssClass: 'mdlext-js-lightboard',
+    newComponenrMountNodeSelector: '#mount-2',
+    newComponentHtml: lightboard_with_ripple
   });
 
   it('should have public methods available via widget', () => {
@@ -158,19 +157,6 @@ describe('MaterialExtLightboard', () => {
     methods.forEach( fn => {
       expect(element.MaterialExtLightboard[fn]).to.be.a('function');
     });
-  });
-
-  it('should be a widget', () => {
-    const container = document.querySelector('#mount-2');
-    try {
-      container.insertAdjacentHTML('beforeend', lightboard_with_ripple);
-      const element = document.querySelector('#lightboard_with_ripple');
-      componentHandler.upgradeElement(element, 'MaterialExtLightboard');
-      expect(element.MaterialExtLightboard).to.be.a('object');
-    }
-    finally {
-      removeChilds(container);
-    }
   });
 
   it('emits a "select" custom event when a slide is clicked', () => {
@@ -289,45 +275,6 @@ describe('MaterialExtLightboard', () => {
     [...document.querySelectorAll('.mdlext-lightboard__slide')].forEach( slide => {
       assert.isNotNull(slide.querySelector('a'), 'Expected slide to have an anchor element');
     });
-  });
-
-  it('upgrades successfully when a new component is appended to the DOM', () => {
-    const container = document.querySelector('#mount-2');
-
-    try {
-      container.insertAdjacentHTML('beforeend', lightboard_with_ripple);
-      const element = document.querySelector('#lightboard_with_ripple');
-
-      assert.isFalse(element.classList.contains('is-upgraded'), 'Did not expect "is-upgraded" to exist before upgrade');
-      componentHandler.upgradeElement(element, 'MaterialExtLightboard');
-      assert.isTrue(element.classList.contains('is-upgraded'), 'Expected lightboard to upgrade');
-
-      const dataUpgraded = element.getAttribute('data-upgraded');
-      assert.isNotNull(dataUpgraded, 'Expected attribute "data-upgraded" to exist');
-      assert.isAtLeast(dataUpgraded.indexOf('MaterialExtLightboard'), 0, 'Expected "data-upgraded" attribute to contain "MaterialExtLightboard');
-    }
-    finally {
-      removeChilds(container);
-    }
-  });
-
-  it('downgrades successfully', () => {
-    const container = document.querySelector('#mount-2');
-
-    try {
-      container.insertAdjacentHTML('beforeend', lightboard_with_ripple);
-      const element = document.querySelector('#lightboard_with_ripple');
-
-      componentHandler.upgradeElement(element, 'MaterialExtLightboard');
-      assert.isTrue(element.classList.contains('is-upgraded'), 'Expected lightboard to upgrade before downgrade');
-      expect(element.getAttribute('data-upgraded')).to.include('MaterialExtLightboard');
-
-      componentHandler.downgradeElements(element);
-      expect(element.getAttribute('data-upgraded')).to.not.include('MaterialExtLightboard');
-    }
-    finally {
-      removeChilds(container);
-    }
   });
 
   it('has ripple effect', () => {

@@ -3,7 +3,7 @@ import requireUncached from 'require-uncached';
 import jsdomify from 'jsdomify';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
-import { removeChilds } from '../testutils/domHelpers';
+import { shouldBehaveLikeAMdlComponent } from '../testutils/shared-component-behaviours';
 
 describe('MaterialExtSelectfield', () => {
 
@@ -73,65 +73,11 @@ describe('MaterialExtSelectfield', () => {
     jsdomify.destroy();
   });
 
-  it('is globally available', () => {
-    assert.isFunction(window['MaterialExtSelectfield'], 'No global MaterialExtSelecfield');
-  });
-
-  it('upgrades successfully', () => {
-    const element = document.querySelector('#select-1');
-    assert.isNotNull(element);
-    assert.isTrue(element.parentNode.classList.contains('is-upgraded'));
-
-    const dataUpgraded = element.parentNode.getAttribute('data-upgraded');
-    assert.isNotNull(dataUpgraded);
-    assert.isAtLeast(dataUpgraded.indexOf('MaterialExtSelectfield'), 0);
-  });
-
-  it('upgrades successfully when a new component is appended to the DOM', () => {
-    const mount = document.getElementById('mount-2');
-    assert.isNotNull(mount);
-
-    mount.insertAdjacentHTML('beforeend', fragment);
-
-    try {
-      const element = document.querySelector('#select-country').parentNode;
-      assert.isNotNull(element);
-
-      let dataUpgraded = element.getAttribute('data-upgraded');
-      assert.isNull(dataUpgraded);
-
-      componentHandler.upgradeElement(element, 'MaterialExtSelectfield');
-
-      dataUpgraded = element.getAttribute('data-upgraded');
-      assert.isNotNull(dataUpgraded);
-      assert.isAtLeast(dataUpgraded.indexOf('MaterialExtSelectfield'), 0);
-    }
-    finally {
-      removeChilds(mount);
-    }
-  });
-
-  it('downgrades successfully when a component is removed from DOM', () => {
-    const mount = document.getElementById('mount-2');
-    mount.insertAdjacentHTML('beforeend', fragment);
-
-    try {
-      const element = document.querySelector('#select-country').parentNode;
-      componentHandler.upgradeElement(element, 'MaterialExtSelectfield');
-      expect(element.getAttribute('data-upgraded')).to.include('MaterialExtSelectfield');
-
-      componentHandler.downgradeElements(element);
-      expect(element.getAttribute('data-upgraded')).to.not.include('MaterialExtSelectfield');
-    }
-    finally {
-      removeChilds(mount);
-    }
-  });
-
-  it('should be a widget', () => {
-    const el = createSingleLineSelectfield();
-    componentHandler.upgradeElement(el, 'MaterialExtSelectfield');
-    expect(el.MaterialExtSelectfield).to.be.a('object');
+  shouldBehaveLikeAMdlComponent({
+    componentName: 'MaterialExtSelectfield',
+    componentCssClass: 'mdlext-js-selectfield',
+    newComponenrMountNodeSelector: '#mount-2',
+    newComponentHtml: fragment
   });
 
   it('should have public methods available via widget', () => {
@@ -146,8 +92,8 @@ describe('MaterialExtSelectfield', () => {
       'enable',
       'change'
     ];
-    methods.forEach((item) => {
-      expect(el.MaterialExtSelectfield[item]).to.be.a('function');
+    methods.forEach( fn => {
+      expect(el.MaterialExtSelectfield[fn]).to.be.a('function');
     });
   });
 
@@ -161,23 +107,26 @@ describe('MaterialExtSelectfield', () => {
   it('trigger events', () => {
     const select = document.querySelector('#select-1');
     assert.isNotNull(select);
-    spyOnEvent('change', select);
-    spyOnEvent('focus', select);
-    spyOnEvent('blur', select);
-    spyOnEvent('reset', select);
+    expect( () => {
+      spyOnEvent('change', select);
+      spyOnEvent('focus', select);
+      spyOnEvent('blur', select);
+      spyOnEvent('reset', select);
+    }).to.not.throw(Error);
   });
 
   it('can call public methodes', () => {
-    // Cranking up Code Coverage, not a real test :-)
     const el = document.querySelector('.mdlext-selectfield');
-    el.MaterialExtSelectfield.checkDisabled();
-    el.MaterialExtSelectfield.checkValidity();
-    el.MaterialExtSelectfield.checkDirty();
-    el.MaterialExtSelectfield.checkFocus();
-    el.MaterialExtSelectfield.disable();
-    el.MaterialExtSelectfield.enable();
-    el.MaterialExtSelectfield.checkFocus();
-    el.MaterialExtSelectfield.change('option2');
+    expect( () => {
+      el.MaterialExtSelectfield.checkDisabled();
+      el.MaterialExtSelectfield.checkValidity();
+      el.MaterialExtSelectfield.checkDirty();
+      el.MaterialExtSelectfield.checkFocus();
+      el.MaterialExtSelectfield.disable();
+      el.MaterialExtSelectfield.enable();
+      el.MaterialExtSelectfield.checkFocus();
+      el.MaterialExtSelectfield.change('option2');
+    }).to.not.throw(Error);
 
 /*eslint-disable */
     new MaterialExtSelectfield(null);

@@ -5,6 +5,8 @@ import { expect, assert } from 'chai';
 import sinon from 'sinon';
 import { removeChilds } from '../testutils/domHelpers';
 import createMockRaf from '../testutils/mock-raf';
+import { shouldBehaveLikeAMdlComponent } from '../testutils/shared-component-behaviours';
+import { spyOnKeyboardEvent } from '../testutils/spy-on-keyboard-event';
 
 import {
   VK_TAB,
@@ -154,39 +156,7 @@ describe('MaterialExtCarousel', () => {
     window.requestAnimationFrame = mockRaf.raf;
     window.cancelAnimationFrame = mockRaf.raf.cancel;
     rAFStub = sinon.stub(window, 'requestAnimationFrame', mockRaf.raf);
-
-    /* Not needed. Difficult to test. Call upgradeSlides() from client instead.
-    // Stub unsupported jsdom window.MutationObserver
-    window.MutationObserver = window.MutationObserver ||  (function(undefined) {
-        "use strict";
-
-        function MutationObserver(listener) {
-          this._watched = [];
-          this._listener = listener;
-        }
-
-        MutationObserver.prototype = {
-
-          observe: function($target, config) {
-          },
-
-          takeRecords: function() {
-            var mutations = [];
-            return mutations;
-          },
-          disconnect: function() {
-            this._watched = [];
-          }
-        };
-
-        return MutationObserver;
-      })(void 0);
-
-    global.MutationObserver = window.MutationObserver;
-    */
-
   });
-
 
   after ( () => {
     rAFStub.restore();
@@ -195,72 +165,11 @@ describe('MaterialExtCarousel', () => {
     jsdomify.destroy();
   });
 
-  it('is globally available', () => {
-    assert.isFunction(window['MaterialExtCarousel'], 'Expected global MaterialExtCarousel');
-  });
-
-  it('should have css class "is-upgraded"', () => {
-    const element = document.querySelector('#carousel-1');
-    assert.isNotNull(element);
-    assert.isTrue(element.classList.contains('is-upgraded'), 'Expected class "is-upgraded" to exist');
-  });
-
-  it('should have attribute "data-upgraded"', () => {
-    const dataUpgraded = document.querySelector('#carousel-1').getAttribute('data-upgraded');
-    assert.isNotNull(dataUpgraded, 'Expected MaterialExtCarousel to have "data-upgraded" attribute');
-    assert.isAtLeast(dataUpgraded.indexOf('MaterialExtCarousel'), 0, 'Expected "data-upgraded" attribute to contain "MaterialExtCarousel"');
-  });
-
-  it('upgrades successfully when a new component is appended to the DOM', () => {
-    const container = document.querySelector('#mount-2');
-    container.insertAdjacentHTML('beforeend', fragment);
-
-    try {
-      const element = document.querySelector('#carousel-2');
-      assert.isFalse(element.classList.contains('is-upgraded'), 'Expected class "is-upgraded" to not exist before upgrade');
-
-      componentHandler.upgradeElement(element, 'MaterialExtCarousel');
-
-      assert.isTrue(element.classList.contains('is-upgraded'), 'Expected carousel to upgrade');
-
-      const dataUpgraded = element.getAttribute('data-upgraded');
-      assert.isNotNull(dataUpgraded, 'Expected MaterialExtCarousel to have "data-upgraded" attribute');
-      assert.isAtLeast(dataUpgraded.indexOf('MaterialExtCarousel'), 0, 'Expected "data-upgraded" attribute to contain "MaterialExtCarousel"');
-    }
-    finally {
-      removeChilds(container);
-    }
-  });
-
-  it('downgrades successfully when a component is removed from DOM', () => {
-    const container = document.getElementById('mount-2');
-    container.insertAdjacentHTML('beforeend', fragment);
-
-    try {
-      const element = document.querySelector('#carousel-2');
-      componentHandler.upgradeElement(element, 'MaterialExtCarousel');
-      expect(element.getAttribute('data-upgraded')).to.include('MaterialExtCarousel');
-
-      componentHandler.downgradeElements(element);
-      expect(element.getAttribute('data-upgraded')).to.not.include('MaterialExtCarousel');
-    }
-    finally {
-      removeChilds(container);
-    }
-  });
-
-  it('should be a widget', () => {
-    const container = document.getElementById('mount-2');
-    container.insertAdjacentHTML('beforeend', fragment);
-
-    try {
-      const element = document.querySelector('#carousel-2');
-      componentHandler.upgradeElement(element, 'MaterialExtCarousel');
-      expect(element.MaterialExtCarousel).to.be.a('object');
-    }
-    finally {
-      removeChilds(container);
-    }
+  shouldBehaveLikeAMdlComponent({
+    componentName: 'MaterialExtCarousel',
+    componentCssClass: 'mdlext-js-carousel',
+    newComponenrMountNodeSelector: '#mount-2',
+    newComponentHtml: fragment
   });
 
   // role=list, A section containing listitem elements.
@@ -362,19 +271,11 @@ describe('MaterialExtCarousel', () => {
     const slide = carousel.querySelector('.mdlext-carousel__slide:nth-child(1)');
     slide.setAttribute('aria-selected', '');
 
-    spyOnKeyboardEvent(slide, VK_ARROW_DOWN);
-    spyOnKeyboardEvent(slide, VK_ARROW_UP);
-    spyOnKeyboardEvent(slide, VK_ARROW_LEFT);
-    spyOnKeyboardEvent(slide, VK_ARROW_RIGHT);
-    spyOnKeyboardEvent(slide, VK_END);
-    spyOnKeyboardEvent(slide, VK_HOME);
-    spyOnKeyboardEvent(slide, VK_ESC);
-    spyOnKeyboardEvent(slide, VK_SPACE);
-    spyOnKeyboardEvent(slide, VK_TAB);
+    spyOnKeyboardEvents(slide, [
+      VK_ARROW_DOWN, VK_ARROW_UP, VK_ARROW_LEFT, VK_ARROW_RIGHT, VK_END,
+      VK_HOME, VK_ESC, VK_SPACE, VK_TAB, VK_ENTER, VK_PAGE_DOWN, VK_PAGE_UP
+    ]);
     spyOnKeyboardEvent(slide, VK_TAB, true);
-    spyOnKeyboardEvent(slide, VK_ENTER);
-    spyOnKeyboardEvent(slide, VK_PAGE_DOWN);
-    spyOnKeyboardEvent(slide, VK_PAGE_UP);
   });
 
   it('listens to "command" custom events', () => {
@@ -750,26 +651,9 @@ describe('MaterialExtCarousel', () => {
     assert.isTrue(spy.calledOnce, `Expected event ${name} to fire once`);
   }
 
-  function spyOnKeyboardEvent(target, keyCode, shiftKey=false) {
-    const spy = sinon.spy();
-    target.addEventListener('keydown', spy, true);
-
-    try {
-      const event = new KeyboardEvent('keydown', {
-        bubbles: true,
-        cancelable: true,
-        keyCode: keyCode,
-        shiftKey: shiftKey,
-        view: window
-      });
-      target.dispatchEvent(event);
-    }
-    finally {
-      target.removeEventListener('keydown', spy);
-    }
-
-    assert.isTrue(spy.calledOnce, `Expected "keydown" event to fire once for key code ${keyCode}`);
-  }
+  const spyOnKeyboardEvents = (target, keyCodes) => {
+    keyCodes.forEach( keyCode => spyOnKeyboardEvent(target, keyCode));
+  };
 
   function spyOnCommandEvent(target, action) {
     const spy = sinon.spy();

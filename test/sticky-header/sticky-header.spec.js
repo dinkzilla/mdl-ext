@@ -5,10 +5,9 @@ import { expect, assert } from 'chai';
 import sinon from 'sinon';
 import { removeChilds } from '../testutils/domHelpers';
 import createMockRaf from '../testutils/mock-raf';
+import { shouldBehaveLikeAMdlComponent } from '../testutils/shared-component-behaviours';
 
 describe('MaterialExtStickyHeader', () => {
-
-  // TODO: Need more (sanity) tests
 
   const fixture = `
 <!DOCTYPE html>
@@ -24,6 +23,9 @@ describe('MaterialExtStickyHeader', () => {
       </div>
     </header>
   
+    <div id="mount-2">
+    </div>
+
     <aside class="mdl-layout__drawer">
       <span class="mdl-layout-title">MDL Extensions</span>
       <nav class="mdl-navigation">
@@ -31,9 +33,6 @@ describe('MaterialExtStickyHeader', () => {
       </nav>
     </aside>
 
-    <div id="mount-2">
-    </div>
-    
     <main id="mount" class="mdl-layout__content">
       <h1>Sticky Header Example</h1>
       <p>A sticky header makes site navigation easily accessible anywhere on the page and saves content space at the same.</p>
@@ -44,6 +43,12 @@ describe('MaterialExtStickyHeader', () => {
 </body>
 </html>`;
 
+  const header2 = `
+<header class="mdlext-layout__sticky-header mdlext-js-sticky-header">
+  <div class="mdl-layout__header-row">
+    <span id="header-title" class="mdl-layout-title">Title goes here</span>
+  </div>
+</header>`;
 
   const header_with_data_config = `
 <header id="header-2" class="mdl-layout__header mdl-layout__header--waterfall mdlext-layout__sticky-header mdlext-js-sticky-header" 
@@ -151,17 +156,9 @@ describe('MaterialExtStickyHeader', () => {
     jsdomify.destroy();
   });
 
-  it('is globally available', () => {
-    assert.isFunction(window['MaterialExtStickyHeader'], 'No global MaterialExtStickyHeader');
-  });
-
-  it('upgrades successfully', () => {
-    const element = document.querySelector('header');
-    assert.isTrue(element.classList.contains('is-upgraded'), 'Expected sticky header class list to contain "is-upgraded"');
-
-    const dataUpgraded = element.getAttribute('data-upgraded');
-    assert.isNotNull(dataUpgraded, 'Expected attribute "data-upgraded" to exist');
-    assert.isAtLeast(dataUpgraded.indexOf('MaterialExtStickyHeader'), 0, 'Expected "data-upgraded" attribute to contain "MaterialExtStickyHeader');
+  shouldBehaveLikeAMdlComponent({
+    componentName: 'MaterialExtStickyHeader',
+    componentCssClass: 'mdlext-js-sticky-header'
   });
 
   it('listens to window resize', () => {

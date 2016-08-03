@@ -4,7 +4,8 @@ import requireUncached from 'require-uncached';
 import jsdomify from 'jsdomify';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
-import { removeChilds } from '../testutils/domHelpers';
+import { shouldBehaveLikeAMdlComponent } from '../testutils/shared-component-behaviours';
+import { spyOnKeyboardEvent } from '../testutils/spy-on-keyboard-event';
 import {
   VK_ESC,
   VK_SPACE,
@@ -99,13 +100,11 @@ describe('MaterialExtLightbox', () => {
     jsdomify.destroy();
   });
 
-  it('is globally available', () => {
-    assert.isFunction(window['MaterialExtLightbox'], 'Expected MaterialExtLightbox to be globally available');
-  });
-
-  it('upgrades successfully', () => {
-    const element = document.querySelector('#lightbox');
-    expect(element.getAttribute('data-upgraded')).to.include('MaterialExtLightbox');
+  shouldBehaveLikeAMdlComponent({
+    componentName: 'MaterialExtLightbox',
+    componentCssClass: 'mdlext-js-lightbox',
+    newComponenrMountNodeSelector: '#mount-2',
+    newComponentHtml: lightboxFragment
   });
 
   it('has tabindex', () => {
@@ -116,45 +115,6 @@ describe('MaterialExtLightbox', () => {
   it('has "data-action" attributes', () => {
     const elements = document.querySelectorAll('#lightbox [data-action]');
     expect(elements).to.have.length.of.at.least(1);
-  });
-
-  it('upgrades successfully when a new component is appended to the DOM', () => {
-    const container = document.querySelector('#mount-2');
-
-    try {
-      container.insertAdjacentHTML('beforeend', lightboxFragment);
-      const element = document.querySelector('#lightbox-2');
-
-      assert.isFalse(element.classList.contains('is-upgraded'), 'Did not expect "is-upgraded" to exist before upgrade');
-      componentHandler.upgradeElement(element, 'MaterialExtLightbox');
-      assert.isTrue(element.classList.contains('is-upgraded'), 'Expected lightbox to upgrade');
-
-      const dataUpgraded = element.getAttribute('data-upgraded');
-      assert.isNotNull(dataUpgraded, 'Expected attribute "data-upgraded" to exist');
-      assert.isAtLeast(dataUpgraded.indexOf('MaterialExtLightbox'), 0, 'Expected "data-upgraded" attribute to contain "MaterialExtLightbox');
-    }
-    finally {
-      removeChilds(container);
-    }
-  });
-
-  it('downgrades successfully', () => {
-    const container = document.querySelector('#mount-2');
-
-    try {
-      container.insertAdjacentHTML('beforeend', lightboxFragment);
-      const element = document.querySelector('#lightbox-2');
-
-      componentHandler.upgradeElement(element, 'MaterialExtLightbox');
-      assert.isTrue(element.classList.contains('is-upgraded'), 'Expected lightbox to upgrade before downgrade');
-      expect(element.getAttribute('data-upgraded')).to.include('MaterialExtLightbox');
-
-      componentHandler.downgradeElements(element);
-      expect(element.getAttribute('data-upgraded')).to.not.include('MaterialExtLightbox');
-    }
-    finally {
-      removeChilds(container);
-    }
   });
 
   it('can load image', () => {
@@ -317,25 +277,5 @@ describe('MaterialExtLightbox', () => {
 
     assert.isTrue(spy.called, 'Expected "action" event to fire');
   });
-
-  function spyOnKeyboardEvent(target, keyCode) {
-    const spy = sinon.spy();
-    target.addEventListener('keydown', spy, true);
-
-    try {
-      const event = new KeyboardEvent('keydown', {
-        bubbles: true,
-        cancelable: true,
-        keyCode: keyCode,
-        view: window
-      });
-      target.dispatchEvent(event);
-    }
-    finally {
-      target.removeEventListener('keydown', spy);
-    }
-
-    assert.isTrue(spy.calledOnce, `Expected "keydown" event to fire once for key code ${keyCode}`);
-  }
 
 });

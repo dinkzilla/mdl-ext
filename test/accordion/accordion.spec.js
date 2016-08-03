@@ -2,7 +2,6 @@
 
 import requireUncached from 'require-uncached';
 import jsdomify from 'jsdomify';
-import { removeChilds } from '../testutils/domHelpers';
 
 import {
   VK_ENTER,
@@ -15,7 +14,6 @@ import {
   VK_ARROW_DOWN
 } from '../../src/utils/constants';
 
-
 const describe = require('mocha').describe;
 const before = require('mocha').before;
 const after = require('mocha').after;
@@ -23,6 +21,10 @@ const it = require('mocha').it;
 const expect = require('chai').expect;
 const assert = require('chai').assert;
 const sinon = require('sinon');
+
+import { removeChilds } from '../testutils/domHelpers';
+import { shouldBehaveLikeAMdlComponent } from '../testutils/shared-component-behaviours';
+import { spyOnKeyboardEvent } from '../testutils/spy-on-keyboard-event';
 
 describe('MaterialExtAccordion', () => {
 
@@ -204,22 +206,11 @@ describe('MaterialExtAccordion', () => {
     jsdomify.destroy();
   });
 
-  it('is globally available', () => {
-    assert.isFunction(window['MaterialExtAccordion'], 'Expected MaterialExtAccordion to be globally available');
-  });
-
-  it('upgrades successfully', () => {
-    const element = document.querySelector('#accordion-1');
-    assert.isTrue(element.classList.contains('is-upgraded'), 'Expected accordion to upgrade');
-
-    const dataUpgraded = element.getAttribute('data-upgraded');
-    assert.isNotNull(dataUpgraded, 'Expected attribute "data-upgraded" to exist');
-    assert.isAtLeast(dataUpgraded.indexOf('MaterialExtAccordion'), 0, 'Expected "data-upgraded" attribute to contain "MaterialExtAccordion');
-  });
-
-  it('should be a widget', () => {
-    const element = document.querySelector('#accordion-1');
-    expect(element.MaterialExtAccordion).to.be.a('object');
+  shouldBehaveLikeAMdlComponent({
+    componentName: 'MaterialExtAccordion',
+    componentCssClass: 'mdlext-js-accordion',
+    newComponenrMountNodeSelector: '#mount',
+    newComponentHtml: accordion2_no_aria_multiselectable
   });
 
   it('should have public methods available via widget', () => {
@@ -265,42 +256,6 @@ describe('MaterialExtAccordion', () => {
     assert.isFalse(panel.classList.contains('is-expanded'), 'Expected a closed accordion panel to not have class "is-expanded"');
     assert.equal(tab.getAttribute('aria-expanded'), 'false', 'Expected a closed accordion panel tab to have attribute aria-expanded="false"');
     assert.equal(tabpanel.getAttribute('aria-hidden'), 'true', 'Expected a closed accordion panel tabpanel to have attribute aria-hidden="true"');
-  });
-
-  it('upgrades successfully when a new component is appended to the DOM', () => {
-    const container = document.querySelector('#mount');
-    try {
-      container.insertAdjacentHTML('beforeend', accordion2_no_aria_multiselectable);
-      const element = document.querySelector('#accordion-2');
-
-      assert.isFalse(element.classList.contains('is-upgraded'), 'Expected class "is-upgraded" to not exist before upgrade');
-      componentHandler.upgradeElement(element, 'MaterialExtAccordion');
-      assert.isTrue(element.classList.contains('is-upgraded'), 'Expected accordion to upgrade');
-
-      const dataUpgraded = element.getAttribute('data-upgraded');
-      assert.isNotNull(dataUpgraded, 'Expected attribute "data-upgraded" to exist');
-      assert.isAtLeast(dataUpgraded.indexOf('MaterialExtAccordion'), 0, 'Expected "data-upgraded" attribute to contain "MaterialExtAccordion"');
-    }
-    finally {
-      removeChilds(container);
-    }
-  });
-
-  it('downgrades successfully', () => {
-    const container = document.querySelector('#mount');
-    try {
-      container.insertAdjacentHTML('beforeend', accordion2_no_aria_multiselectable);
-      const element = document.querySelector('#accordion-2');
-
-      componentHandler.upgradeElement(element, 'MaterialExtAccordion');
-      assert.isTrue(element.classList.contains('is-upgraded'), 'Expected accordion to upgrade before downgrade');
-
-      componentHandler.downgradeElements(element);
-      expect(element.getAttribute('data-upgraded')).to.not.include('MaterialExtAccordion');
-    }
-    finally {
-      removeChilds(container);
-    }
   });
 
   it('should have aria-multiselectable="false" if attribute not given in markup', () => {
@@ -402,52 +357,25 @@ describe('MaterialExtAccordion', () => {
   });
 
   it('interacts with the keyboard', () => {
+
     const tab = document.querySelector(`#accordion-1 .${PANEL}:nth-child(2) .${TAB}`);
     expect( () => {
-      spyOnKeyboardEvent(tab, VK_ARROW_DOWN);
-      spyOnKeyboardEvent(tab, VK_ARROW_UP);
-      spyOnKeyboardEvent(tab, VK_ARROW_LEFT);
-      spyOnKeyboardEvent(tab, VK_ARROW_RIGHT);
-      spyOnKeyboardEvent(tab, VK_ENTER);
-      spyOnKeyboardEvent(tab, VK_SPACE);
-      spyOnKeyboardEvent(tab, VK_END);
-      spyOnKeyboardEvent(tab, VK_HOME);
+      spyOnKeyboardEvents(tab, [VK_ARROW_DOWN, VK_ARROW_UP, VK_ARROW_LEFT, VK_ARROW_RIGHT, VK_ENTER, VK_SPACE, VK_END, VK_HOME]);
     }).to.not.throw(Error);
 
     const firstTab = document.querySelector(`#accordion-1 .${PANEL}:first-child .${TAB}`);
     expect( () => {
-      spyOnKeyboardEvent(firstTab, VK_ARROW_DOWN);
-      spyOnKeyboardEvent(firstTab, VK_ARROW_UP);
-      spyOnKeyboardEvent(firstTab, VK_ARROW_LEFT);
-      spyOnKeyboardEvent(firstTab, VK_ARROW_RIGHT);
-      spyOnKeyboardEvent(firstTab, VK_ENTER);
-      spyOnKeyboardEvent(firstTab, VK_SPACE);
-      spyOnKeyboardEvent(firstTab, VK_END);
-      spyOnKeyboardEvent(firstTab, VK_HOME);
+      spyOnKeyboardEvents(firstTab, [VK_ARROW_DOWN, VK_ARROW_UP, VK_ARROW_LEFT, VK_ARROW_RIGHT, VK_ENTER, VK_SPACE, VK_END, VK_HOME]);
     }).to.not.throw(Error);
 
     const lastTab = document.querySelector(`#accordion-1 .${PANEL}:last-child .${TAB}`);
     expect( () => {
-      spyOnKeyboardEvent(lastTab, VK_ARROW_DOWN);
-      spyOnKeyboardEvent(lastTab, VK_ARROW_UP);
-      spyOnKeyboardEvent(lastTab, VK_ARROW_LEFT);
-      spyOnKeyboardEvent(lastTab, VK_ARROW_RIGHT);
-      spyOnKeyboardEvent(lastTab, VK_ENTER);
-      spyOnKeyboardEvent(lastTab, VK_SPACE);
-      spyOnKeyboardEvent(lastTab, VK_END);
-      spyOnKeyboardEvent(lastTab, VK_HOME);
+      spyOnKeyboardEvents(lastTab, [VK_ARROW_DOWN, VK_ARROW_UP, VK_ARROW_LEFT, VK_ARROW_RIGHT, VK_ENTER, VK_SPACE, VK_END, VK_HOME]);
     }).to.not.throw(Error);
 
     const disabledTab = document.querySelector(`#accordion-1 .${PANEL}:nth-child(3) .${TAB}`);
     expect( () => {
-      spyOnKeyboardEvent(disabledTab, VK_ARROW_DOWN);
-      spyOnKeyboardEvent(disabledTab, VK_ARROW_UP);
-      spyOnKeyboardEvent(disabledTab, VK_ARROW_LEFT);
-      spyOnKeyboardEvent(disabledTab, VK_ARROW_RIGHT);
-      spyOnKeyboardEvent(disabledTab, VK_ENTER);
-      spyOnKeyboardEvent(disabledTab, VK_SPACE);
-      spyOnKeyboardEvent(disabledTab, VK_END);
-      spyOnKeyboardEvent(disabledTab, VK_HOME);
+      spyOnKeyboardEvents(disabledTab, [VK_ARROW_DOWN, VK_ARROW_UP, VK_ARROW_LEFT, VK_ARROW_RIGHT, VK_ENTER, VK_SPACE, VK_END, VK_HOME]);
     }).to.not.throw(Error);
   });
 
@@ -800,23 +728,8 @@ describe('MaterialExtAccordion', () => {
     assert.isTrue(tabpanel.hasAttribute('aria-hidden'), 'Expected accordion panel tabpanel to have attribute "aria-hidden"');
   };
 
-  const spyOnKeyboardEvent = (target, keyCode, shiftKey=false) => {
-    const spy = sinon.spy();
-    target.addEventListener('keydown', spy);
-
-    try {
-      const event = new KeyboardEvent('keydown', {
-        bubbles: true,
-        cancelable: true,
-        keyCode: keyCode,
-        shiftKey: shiftKey
-      });
-      target.dispatchEvent(event);
-    }
-    finally {
-      target.removeEventListener('keydown', spy);
-    }
-    assert.isTrue(spy.calledOnce, `Expected "keydown" event to fire once for key ${keyCode}`);
+  const spyOnKeyboardEvents = (target, keyCodes) => {
+    keyCodes.forEach( keyCode => spyOnKeyboardEvent(target, keyCode));
   };
 
   const spyOnCommandEvent = (accordion, action, target = undefined) => {
