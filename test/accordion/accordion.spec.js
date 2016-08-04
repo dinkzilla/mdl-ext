@@ -381,7 +381,28 @@ describe('MaterialExtAccordion', () => {
     }).to.not.throw(Error);
   });
 
-  it('changes state when an accordion tab is toggled', () => {
+  it('toggles when an accordion tab is clicked', () => {
+    const panel = document.querySelector(`#accordion-1 .${PANEL}:first-child`);
+    assert.isNotNull(panel, 'Expected handle to accordion panel');
+
+    const tab = panel.querySelector(`.${TAB}`);
+    const ariaExpanded = tab.getAttribute('aria-expanded');
+    const ariaHidden = panel.querySelector(`.${TABPANEL}`).getAttribute('aria-hidden');
+
+    // Trigger click event to toggle tab
+    tab.dispatchEvent(
+      new MouseEvent('click', {
+       bubbles: true,
+       cancelable: true,
+       view: window
+      })
+    );
+
+    assert.notEqual(ariaExpanded, panel.querySelector(`.${TAB}`).getAttribute('aria-expanded'), 'Expected accordion tab state to change');
+    assert.notEqual(ariaHidden, panel.querySelector(`.${TABPANEL}`).getAttribute('aria-hidden'), 'Expected accordion tabpanel state to change');
+  });
+
+  it('toggles when toggle action is called via api', () => {
     const element = document.querySelector('#accordion-1');
     const panel = document.querySelector(`#accordion-1 .${PANEL}:first-child`);
     assert.isNotNull(panel, 'Expected handle to accordion panel');
@@ -392,18 +413,7 @@ describe('MaterialExtAccordion', () => {
 
     // Toggle tab
     element.MaterialExtAccordion.command( {action: 'toggle', target: tab} );
-
-    /*
-     // ... or trigger click event to toggle tab
-     const evt = new MouseEvent('click', {
-     bubbles: true,
-     cancelable: true,
-     view: window
-     });
-     tab.dispatchEvent(evt);
-     */
-
-    assert.notEqual(ariaExpanded, panel.querySelector(`.${TAB}`).getAttribute('aria-expanded'), 'Expected accordion tab state to change');
+    assert.notEqual(ariaExpanded, tab.getAttribute('aria-expanded'), 'Expected accordion tab state to change');
     assert.notEqual(ariaHidden, panel.querySelector(`.${TABPANEL}`).getAttribute('aria-hidden'), 'Expected accordion tabpanel state to change');
   });
 
