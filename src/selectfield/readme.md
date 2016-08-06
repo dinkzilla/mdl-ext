@@ -71,7 +71,7 @@ The select field component is ready for use.
 Select field with a standard label.
 ```html
 <div class="mdlext-selectfield mdlext-js-selectfield">
-  <select id="some-id">
+  <select id="some-id" class="mdlext-selectfield__select">
     <option value=""></option>
     <option value="option1">option 1</option>
     <option value="option2">option 2</option>
@@ -84,7 +84,7 @@ Select field with a standard label.
 Select field with a floating label.
 ```html
 <div class="mdlext-selectfield mdlext-js-selectfield mdlext-selectfield--floating-label">
-  <select id="some-id">
+  <select id="some-id" class="mdlext-selectfield__select">
     <option value=""></option>
     <option value="option1">option 1</option>
     <option value="option2">option 2</option>
@@ -97,7 +97,7 @@ Select field with a floating label.
 Select field with a standard label and error message.
 ```html
 <div class="mdlext-selectfield mdlext-js-selectfield">
-  <select id="some-id">
+  <select id="some-id" class="mdlext-selectfield__select">
     <option value=""></option>
     <option value="option1">option 1</option>
     <option value="option2">option 2</option>
