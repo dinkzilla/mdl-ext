@@ -3,6 +3,7 @@ import 'utils/custom-event';
 import 'utils/animationloop';
 import 'utils/easing';
 import 'utils/json-utils';
+import 'utils/string-utils';
 import 'sticky-header/sticky-header';
 import 'selectfield/selectfield';
 import 'accordion/accordion';

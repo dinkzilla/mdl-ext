@@ -5,6 +5,7 @@ import {patchJsDom} from '../testutils/patch-jsdom';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
 import { shouldBehaveLikeAMdlComponent } from '../testutils/shared-component-behaviours';
+import { removeChilds } from '../testutils/domHelpers';
 
 describe('MaterialExtSelectfield', () => {
 
@@ -52,6 +53,32 @@ describe('MaterialExtSelectfield', () => {
     <option value="option5">Finalnd</option>
   </select>
   <label class="mdlext-selectfield__label" for="select-country">Country</label>
+</div>`;
+
+  const select_has_id_label_has_no_for_attribute = `
+<div class="mdlext-selectfield mdlext-js-selectfield" id="country">
+  <select class="mdlext-selectfield__select" id="select-country" name="select-country" autofocus >
+    <option value=""></option>
+    <option value="option1">Norway</option>
+    <option value="option2">Iceland</option>
+    <option value="option3">Sweden</option>
+    <option value="option4">Denmark</option>
+    <option value="option5">Finalnd</option>
+  </select>
+  <label class="mdlext-selectfield__label">Country</label>
+</div>`;
+
+  const select_without_id_label_without_for_attribute = `
+<div class="mdlext-selectfield mdlext-js-selectfield" id="country">
+  <select class="mdlext-selectfield__select" name="select-country" autofocus >
+    <option value=""></option>
+    <option value="option1">Norway</option>
+    <option value="option2">Iceland</option>
+    <option value="option3">Sweden</option>
+    <option value="option4">Denmark</option>
+    <option value="option5">Finalnd</option>
+  </select>
+  <label class="mdlext-selectfield__label">Country</label>
 </div>`;
 
   before ( () => {
@@ -140,6 +167,99 @@ describe('MaterialExtSelectfield', () => {
     new MaterialExtSelectfield(el3).init();
 /*eslint-enable */
     assert(true);
+  });
+
+  it('receives focus', () => {
+    const element = document.querySelector('.mdlext-js-selectfield');
+    assert.isNotNull(element, 'Expected handle to mdlext-js-selectfield');
+    const select = element.querySelector('.mdlext-selectfield__select');
+    assert.isNotNull(select, 'Expected handle to mdlext-selectfield__select');
+
+    select.dispatchEvent(
+      new Event('focus', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      })
+    );
+    assert.isTrue(element.classList.contains('is-focused'), 'Expected select component to have focus');
+  });
+
+  it('should not modify "id" and "for" attributes if provided in markup', () => {
+    const container = document.querySelector("#mount-2");
+    try {
+      container.insertAdjacentHTML('beforeend', fragment);
+      const element = container.querySelector('.mdlext-js-selectfield');
+      assert.isNotNull(element, 'Expected handle to "mdlext-js-selectfield"');
+
+      const select = container.querySelector('.mdlext-selectfield__select');
+      assert.isNotNull(select, 'Expected handle to "mdlext-selectfield__select"');
+      const id = select.id;
+
+      const label = container.querySelector('.mdlext-selectfield__label');
+      assert.isNotNull(label, 'Expected handle to "mdlext-selectfield__select"');
+      const labelFor = label.getAttribute('for');
+
+      componentHandler.upgradeElement(element, 'MaterialExtSelectfield');
+
+      assert.equal(select.id, id, 'Expected select "id" attribute value to not be modified');
+      assert.equal(label.getAttribute('for'), labelFor, 'Expected label "for" attribute value not to be modified');
+    }
+    finally {
+      removeChilds(container);
+    }
+  });
+
+  it('should add label "for" attribute if not provided in markup', () => {
+    const container = document.querySelector("#mount-2");
+    try {
+      container.insertAdjacentHTML('beforeend', select_has_id_label_has_no_for_attribute);
+      const element = container.querySelector('.mdlext-js-selectfield');
+      assert.isNotNull(element, 'Expected handle to "mdlext-js-selectfield"');
+
+      const select = container.querySelector('.mdlext-selectfield__select');
+      assert.isNotNull(select, 'Expected handle to "mdlext-selectfield__select"');
+      const id = select.id;
+
+      const label = container.querySelector('.mdlext-selectfield__label');
+      assert.isNotNull(label, 'Expected handle to "mdlext-selectfield__select"');
+      assert.isFalse(label.hasAttribute('for'), 'Expected label "for" attribute to not exist');
+
+      componentHandler.upgradeElement(element, 'MaterialExtSelectfield');
+
+      assert.equal(select.id, id, 'Expected select "id" attribute value to not be modified');
+      assert.equal(label.getAttribute('for'), select.id, 'Expected "for" attribute value to be equal to select "id" attribute value');
+    }
+    finally {
+      removeChilds(container);
+    }
+  });
+
+  it('should add pseudo id if id not provided in markup', () => {
+    const container = document.querySelector("#mount-2");
+    try {
+      container.insertAdjacentHTML('beforeend', select_without_id_label_without_for_attribute);
+      const element = container.querySelector('.mdlext-js-selectfield');
+      assert.isNotNull(element, 'Expected handle to "mdlext-js-selectfield"');
+
+      const select = container.querySelector('.mdlext-selectfield__select');
+      assert.isNotNull(select, 'Expected handle to "mdlext-selectfield__select"');
+      assert.isFalse(select.hasAttribute('id'), 'Expected select "id" attribute to not exist');
+
+      const label = container.querySelector('.mdlext-selectfield__label');
+      assert.isNotNull(label, 'Expected handle to "mdlext-selectfield__select"');
+      assert.isFalse(label.hasAttribute('for'), 'Expected label "for" attribute to not exist');
+
+      componentHandler.upgradeElement(element, 'MaterialExtSelectfield');
+
+      assert.isTrue(select.hasAttribute('id'), 'Expected select "id" attribute to exist after upgrade');
+      assert.isTrue(label.hasAttribute('for'), 'Expected label "for" attribute to exist after upgrade');
+
+      assert.equal(label.getAttribute('for'), select.id, 'Expected label "for" attribute value to be equal to select "id" attribute value');
+    }
+    finally {
+      removeChilds(container);
+    }
   });
 
 

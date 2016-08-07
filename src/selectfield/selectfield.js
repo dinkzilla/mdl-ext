@@ -22,6 +22,7 @@
  * Copied/Modified from https://github.com/google/material-design-lite/tree/master/src/textfield
  */
 
+import { randomString } from '../utils/string-utils';
 import {
   IS_DIRTY,
   IS_FOCUSED,
@@ -32,6 +33,8 @@ import {
 
 (function() {
   'use strict';
+  const LABEL = 'mdlext-selectfield__label';
+  const INPUT = 'mdlext-selectfield__select';
 
   /**
    * Class constructor for Selectfield MDLEXT component.
@@ -47,28 +50,6 @@ import {
   };
 
   window['MaterialExtSelectfield'] = MaterialExtSelectfield;
-
-  /**
-   * Store constants in one place so they can be updated easily.
-   *
-   * @enum {string | number}
-   * @private
-   */
-  MaterialExtSelectfield.prototype.Constant_ = {
-  };
-
-  /**
-   * Store strings for class names defined by this component that are used in
-   * JavaScript. This allows us to simply change it in one place should we
-   * decide to modify at a later date.
-   *
-   * @enum {string}
-   * @private
-   */
-  MaterialExtSelectfield.prototype.CssClasses_ = {
-    LABEL: 'mdlext-selectfield__label',
-    INPUT: 'mdlext-selectfield__select'
-  };
 
   /**
    * Handle focus.
@@ -137,6 +118,7 @@ import {
    * @public
    */
   MaterialExtSelectfield.prototype.checkFocus = function() {
+    // Note: element.querySelector(':focus') always return null in JsDom, even if select element has focus
     /*eslint no-extra-boolean-cast: 0*/
     if (Boolean(this.element_.querySelector(':focus'))) {
       this.element_.classList.add(IS_FOCUSED);
@@ -226,18 +208,37 @@ import {
    */
   MaterialExtSelectfield.prototype.init = function() {
     if (this.element_) {
-      this.label_ = this.element_.querySelector(`.${this.CssClasses_.LABEL}`);
-      this.select_ = this.element_.querySelector(`.${this.CssClasses_.INPUT}`);
+      this.label_ = this.element_.querySelector(`.${LABEL}`);
+      this.select_ = this.element_.querySelector(`.${INPUT}`);
 
       if (this.select_) {
         this.boundUpdateClassesHandler = this.updateClasses_.bind(this);
         this.boundFocusHandler = this.onFocus_.bind(this);
         this.boundBlurHandler = this.onBlur_.bind(this);
         this.boundResetHandler = this.onReset_.bind(this);
+        this.select_.removeEventListener('change', this.boundUpdateClassesHandler);
+        this.select_.removeEventListener('focus', this.boundFocusHandler);
+        this.select_.removeEventListener('blur', this.boundBlurHandler);
+        this.select_.removeEventListener('reset', this.boundResetHandler);
         this.select_.addEventListener('change', this.boundUpdateClassesHandler);
         this.select_.addEventListener('focus', this.boundFocusHandler);
         this.select_.addEventListener('blur', this.boundBlurHandler);
         this.select_.addEventListener('reset', this.boundResetHandler);
+
+        if(this.label_) {
+          let id;
+          if(!this.select_.hasAttribute('id')) {
+            id = `select-${randomString()}`;
+            this.select_.id = id;
+          }
+          else {
+            id = this.select_.id;
+          }
+
+          if(!this.label_.hasAttribute('for')) {
+            this.label_.setAttribute('for', id);
+          }
+        }
 
         const invalid = this.element_.classList.contains(IS_INVALID);
         this.updateClasses_();

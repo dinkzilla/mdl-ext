@@ -48,20 +48,20 @@ import {
 
 (function() {
   'use strict';
-  const ACCORDION                   = 'mdlext-accordion';
-  const ACCORDION_VERTICAL          = 'mdlext-accordion--vertical';
-  const ACCORDION_HORIZONTAL        = 'mdlext-accordion--horizontal';
-  const PANEL                       = 'mdlext-accordion__panel';
-  const PANEL_ROLE                  = 'presentation';
-  const TAB                         = 'mdlext-accordion__tab';
-  const TAB_CAPTION                 = 'mdlext-accordion__tab__caption';
-  const TAB_ROLE                    = 'tab';
-  const TABPANEL                    = 'mdlext-accordion__tabpanel';
-  const TABPANEL_ROLE               = 'tabpanel';
-  const RIPPLE_EFFECT               = 'mdlext-js-ripple-effect';
-  const RIPPLE                      = 'mdlext-accordion__tab--ripple';
-  const ANIMATION_EFFECT            = 'mdlext-js-animation-effect';
-  const ANIMATION                   = 'mdlext-accordion__tabpanel--animation';
+  const ACCORDION            = 'mdlext-accordion';
+  const ACCORDION_VERTICAL   = 'mdlext-accordion--vertical';
+  const ACCORDION_HORIZONTAL = 'mdlext-accordion--horizontal';
+  const PANEL                = 'mdlext-accordion__panel';
+  const PANEL_ROLE           = 'presentation';
+  const TAB                  = 'mdlext-accordion__tab';
+  const TAB_CAPTION          = 'mdlext-accordion__tab__caption';
+  const TAB_ROLE             = 'tab';
+  const TABPANEL             = 'mdlext-accordion__tabpanel';
+  const TABPANEL_ROLE        = 'tabpanel';
+  const RIPPLE_EFFECT        = 'mdlext-js-ripple-effect';
+  const RIPPLE               = 'mdlext-accordion__tab--ripple';
+  const ANIMATION_EFFECT     = 'mdlext-js-animation-effect';
+  const ANIMATION            = 'mdlext-accordion__tabpanel--animation';
 
   /**
    * @constructor
