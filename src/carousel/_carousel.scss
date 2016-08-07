@@ -30,7 +30,6 @@ ul.mdlext-carousel {
 
 .mdlext-carousel {
   box-sizing: border-box;
-
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -98,6 +97,7 @@ ul.mdlext-carousel {
     figcaption {
       box-sizing: border-box;
       @include typo-caption($colorContrast: false, $usePreferred: true);
+
       color: $mdlext-carousel-slide-figcaption-color;
       position: absolute;
       bottom: 0;

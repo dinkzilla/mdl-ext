@@ -50,6 +50,7 @@
   // Styling the down arrow
   &::after {
     @include mdlext-arrow(bottom, $mdlext-selectfield-arrow-width, $mdlext-selectfield-arrow-length);
+
     position: absolute;
     right: 0.5em;
     top: 50%;
@@ -214,6 +215,7 @@
     left: 45%;
     position: absolute;
     @include material-animation-default();
+
     visibility: hidden;
     width: 10px;
   }

@@ -127,6 +127,7 @@ ul.mdlext-lightboard {
         }
         figcaption {
           @include typo-caption($colorContrast: false, $usePreferred: true);
+
           color: $mdlext-lightboard-figcaption-text-color;
           position: absolute;
           bottom: -2px;

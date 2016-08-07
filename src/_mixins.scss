@@ -13,7 +13,6 @@
   font-size: $font-size;
   line-height: $font-size;
   border-#{mdlext-opposite-direction($direction)}: $length solid $color;
-
   border-#{mdlext-opposite-direction($direction)}-width: $length;
   border-#{mdlext-opposite-direction($direction)}-style: solid;
   border-#{mdlext-opposite-direction($direction)}-color: $color;
