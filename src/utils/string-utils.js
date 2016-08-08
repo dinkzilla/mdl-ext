@@ -22,26 +22,29 @@
  * The function takes a delimiter string and any number of arguments which can be a string or object.
  * Inspired by (but not copied from) JedWatson/classnames, https://github.com/JedWatson/classnames
  * @param delimiter delimiter to separate joined strings
- * @param  strings the strings to join
- * @return {String} the joined string
+ * @param  {Array} args the strings to join
+ * @return {String} the joined strings and/or objects
  * @example
  * // Returns 'foo, bar, baz, quux'
  * joinStrings(', ', 'foo', { bar: true, duck: false }, 'baz', { quux: true });
  * @example see the tests for mpre examples
  */
-const joinStrings = (delimiter=' ', ...strings) => {
+const joinStrings = (delimiter = ' ', ...args) => {
 
   const isString = str => str != null && typeof str === 'string';
 
-  const reduceString = (result, str) => isString(str)
-    ? result ? `${result}${delimiter}${str}` : str
-    : Object.keys(str)
-      .filter( key => str[key] )
-      .reduce( (result, key) => result ? `${result}${delimiter}${key}` : key, result );
+  const joinStrings = (a, b) => a ? `${a}${delimiter}${b}` : b;
 
-  return strings
-    .filter( str => !!str)
-    .reduce( (result, str) => reduceString(result, str), '' );
+  const toString = (prevString, arg) =>
+    isString(arg)
+    ? joinStrings(prevString, arg)
+    : Object.keys(arg)
+        .filter( key => arg[key] )
+        .reduce( (result, key) => joinStrings(result, key), prevString );
+
+  return args
+    .filter( arg => !!arg)
+    .reduce( (result, arg) => toString(result, arg), '' );
 };
 
 /**
@@ -54,7 +57,7 @@ const joinStrings = (delimiter=' ', ...strings) => {
  * randomString(8);
  * @example see the tests for more examples
  */
-const randomString = (n=12) => Array(n+1).join((`${Math.random().toString(36)}00000000000000000`).slice(2, 18)).slice(0, n);
+const randomString = ( n=12 ) => Array( n+1 ).join((`${Math.random().toString(36)}00000000000000000`).slice(2, 18)).slice(0, n);
 
 export { joinStrings, randomString };
 
