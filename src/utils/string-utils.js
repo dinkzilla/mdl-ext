@@ -22,8 +22,8 @@
  * The function takes a delimiter string and any number of arguments which can be a string or object.
  * Inspired by (but not copied from) JedWatson/classnames, https://github.com/JedWatson/classnames
  * @param delimiter delimiter to separate joined strings
- * @param  {Array} args the strings to join
- * @return {String} the joined strings and/or objects
+ * @param  {Array} args the strings and/or objects to join
+ * @return {String} the joined strings
  * @example
  * // Returns 'foo, bar, baz, quux'
  * joinStrings(', ', 'foo', { bar: true, duck: false }, 'baz', { quux: true });
@@ -33,14 +33,14 @@ const joinStrings = (delimiter = ' ', ...args) => {
 
   const isString = str => str != null && typeof str === 'string';
 
-  const joinStrings = (a, b) => a ? `${a}${delimiter}${b}` : b;
+  const joinAb = (a, b) => a ? `${a}${delimiter}${b}` : b;
 
   const toString = (prevString, arg) =>
     isString(arg)
-    ? joinStrings(prevString, arg)
+    ? joinAb(prevString, arg)
     : Object.keys(arg)
         .filter( key => arg[key] )
-        .reduce( (result, key) => joinStrings(result, key), prevString );
+        .reduce( (result, key) => joinAb(result, key), prevString );
 
   return args
     .filter( arg => !!arg)
