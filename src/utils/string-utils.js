@@ -27,7 +27,7 @@
  * @example
  * // Returns 'foo, bar, baz, quux'
  * joinStrings(', ', 'foo', { bar: true, duck: false }, 'baz', { quux: true });
- * @example see the tests for mpre examples
+ * @example see the tests for more examples
  */
 const joinStrings = (delimiter = ' ', ...args) => {
 
@@ -39,12 +39,12 @@ const joinStrings = (delimiter = ' ', ...args) => {
     isString(arg)
     ? joinAb(prevString, arg)
     : Object.keys(arg)
-        .filter( key => arg[key] )
-        .reduce( (result, key) => joinAb(result, key), prevString );
+        .filter(key => arg[key])
+        .reduce((result, key) => joinAb(result, key), prevString);
 
   return args
-    .filter( arg => !!arg)
-    .reduce( (result, arg) => toString(result, arg), '' );
+    .filter(arg => !!arg)
+    .reduce((result, arg) => toString(result, arg), '');
 };
 
 /**
@@ -53,7 +53,7 @@ const joinStrings = (delimiter = ' ', ...args) => {
  * @see http://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
  * @return {String} the random string
  * @example
- * // Returns e.g. 'pd781w0y8zpi'
+ * // Returns e.g. 'pd781w0y'
  * randomString(8);
  * @example see the tests for more examples
  */
