@@ -18,34 +18,47 @@
  */
 
 /**
- * A simple javascript utility for conditionally joining strings together (using map-reduce).
+ * A javascript utility for conditionally creating a list of strings.
+ * The function takes any number of arguments which can be a string or object.
+ *
+ * @param  {*} args the strings and/or objects to
+ * @return {Array} a list of strings
+ * @example
+ * // Returns ['foo', 'bar', 'baz', 'quux']
+ * joinStrings(', ', 'foo', { bar: true, duck: false }, 'baz', { quux: true });
+ * @example see the tests for more examples
+ */
+const stringList = (...args) => {
+
+  const isString = str => str != null && typeof str === 'string';
+
+  const flatten = list => list.reduce((a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []);
+
+  const objectToStrings = arg =>
+    Object.keys(arg)
+      .filter(key => arg[key])
+      .map(key => key);
+
+  return args
+    .filter(arg => !!arg)
+    .map(arg => isString(arg) ? arg : objectToStrings(arg))
+    .reduce((result, arg) => result.concat(Array.isArray(arg) ? flatten(arg) : arg), []);
+};
+
+/**
+ * A simple javascript utility for conditionally joining strings together.
  * The function takes a delimiter string and any number of arguments which can be a string or object.
  * Inspired by (but not copied from) JedWatson/classnames, https://github.com/JedWatson/classnames
+ *
  * @param delimiter delimiter to separate joined strings
- * @param  {Array} args the strings and/or objects to join
+ * @param  {*} args the strings and/or objects to join
  * @return {String} the joined strings
  * @example
  * // Returns 'foo, bar, baz, quux'
  * joinStrings(', ', 'foo', { bar: true, duck: false }, 'baz', { quux: true });
  * @example see the tests for more examples
  */
-const joinStrings = (delimiter = ' ', ...args) => {
-
-  const isString = str => str != null && typeof str === 'string';
-
-  const joinAb = (a, b) => a ? `${a}${delimiter}${b}` : b;
-
-  const toString = (prevString, arg) =>
-    isString(arg)
-    ? joinAb(prevString, arg)
-    : Object.keys(arg)
-        .filter(key => arg[key])
-        .reduce((result, key) => joinAb(result, key), prevString);
-
-  return args
-    .filter(arg => !!arg)
-    .reduce((result, arg) => toString(result, arg), '');
-};
+const joinStrings = (delimiter = ' ', ...args) => stringList(...args).join(delimiter);
 
 /**
  * Generates a random string with a given length
@@ -59,5 +72,5 @@ const joinStrings = (delimiter = ' ', ...args) => {
  */
 const randomString = ( n=12 ) => Array( n+1 ).join((`${Math.random().toString(36)}00000000000000000`).slice(2, 18)).slice(0, n);
 
-export { joinStrings, randomString };
+export { joinStrings, randomString, stringList };
 

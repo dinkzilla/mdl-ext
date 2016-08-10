@@ -11,7 +11,7 @@ const jsonStringToObject = (jsonString, source = {} ) => {
     return Object.assign(source, JSON.parse(s));
   }
   catch (e) {
-    throw new Error(`Failed to parse data-config: ${s}. Error: ${e.message}`);
+    throw new Error(`Failed to parse json string: ${s}. Error: ${e.message}`);
   }
 };
 
