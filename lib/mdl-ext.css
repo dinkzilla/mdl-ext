@@ -2952,6 +2952,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   box-sizing: border-box;
   margin: 0;
   padding: 0 8px;
+  color: inherit;
   background-color: transparent;
   display: block;
   overflow: auto;
@@ -2998,7 +2999,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   width: 100%;
   display: block;
   content: " ";
-  background: rgba(150, 150, 150, 0.5);
+  background-color: rgba(150, 150, 150, 0.5);
   animation: border-expand 0.2s cubic-bezier(0.4, 0, 0.4, 1) 0.01s alternate forwards;
   transition: all 1s cubic-bezier(0.4, 0, 1, 1);
 }
@@ -3060,7 +3061,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   width: 1px;
   display: block;
   content: " ";
-  background: rgba(150, 150, 150, 0.5);
+  background-color: rgba(150, 150, 150, 0.5);
 }
 
 .mdlext-accordion--horizontal .mdlext-accordion__tab > * {

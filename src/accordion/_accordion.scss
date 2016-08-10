@@ -109,6 +109,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0 $mdlext-accordion-content-padding;
+    color: $mdlext-accordion-content-color;
     background-color: $mdlext-accordion-content-background-color;
     display: block;
     overflow: auto;
@@ -146,7 +147,7 @@
         width: 100%;
         display: block;
         content: " ";
-        background: $mdlext-accordion-header-highlight-color;
+        background-color: $mdlext-accordion-header-highlight-color;
         animation: border-expand 0.2s cubic-bezier(0.4, 0.0, 0.4, 1) 0.01s alternate forwards;
         transition: all 1s cubic-bezier(0.4, 0.0, 1, 1);
       }
@@ -217,7 +218,7 @@
         width: 1px;
         display: block;
         content: " ";
-        background: $mdlext-accordion-header-highlight-color;
+        background-color: $mdlext-accordion-header-highlight-color;
 
         // Figure out how to animate a vertical line
         //animation: border-expand 0.2s cubic-bezier(0.4, 0.0, 0.4, 1) 0.01s alternate forwards;
