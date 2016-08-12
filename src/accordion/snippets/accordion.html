@@ -863,24 +863,24 @@
 
           switch (e.target.id) {
             case 'btn-event-expand-all':
-              ce = createCustomEvent('command', { detail: { action : 'open' } });
+              ce = new CustomEvent('command', { detail: { action : 'open' } });
               break;
             case 'btn-event-collapse-all':
-              ce = createCustomEvent('command', { detail: { action : 'close' } });
+              ce = new CustomEvent('command', { detail: { action : 'close' } });
               break;
             case 'btn-event-open-tab2':
-              ce = createCustomEvent('command', { detail: { action : 'open', target: tab2 } });
+              ce = new CustomEvent('command', { detail: { action : 'open', target: tab2 } });
               break;
             case 'btn-event-close-tab2':
-              ce = createCustomEvent('command', { detail: { action : 'close', target: tab2 } });
+              ce = new CustomEvent('command', { detail: { action : 'close', target: tab2 } });
               break;
             case 'btn-event-toggle-tab2':
-              ce = createCustomEvent('command', { detail: { action : 'toggle', target: tab2 } });
+              ce = new CustomEvent('command', { detail: { action : 'toggle', target: tab2 } });
               break;
             case 'btn-event-new-tab':
               insertPanel();
               var panelElement  = document.querySelector('#demo-accordion-6 .mdlext-accordion__panel:last-child');
-              ce = createCustomEvent('command', { detail: { action : 'upgrade', target: panelElement } });
+              ce = new CustomEvent('command', { detail: { action : 'upgrade', target: panelElement } });
               break;
             default:
               return;

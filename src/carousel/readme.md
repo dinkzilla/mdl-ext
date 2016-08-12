@@ -1,6 +1,6 @@
 # Carousel
 
-![Lightbox](../../etc/carousel.png)
+![Carousel](../../etc/carousel.png)
 
 A responsive image carousel.
 
@@ -31,7 +31,6 @@ interchangeably.
 
 
 ### To include a MDLEXT **carousel** component:
-
 &nbsp;1. Code a block element, e.g. a `<div>` element, to hold dimensions of the carousel. 
 ```html
 <div style="height: 200px; width: 100%;">
@@ -198,28 +197,7 @@ Refer to [snippets/lightbox.html](./snippets/carousel.html) for usage.
 
 ### `stopAnimation()`
 
-Due to a bug in Material Design Lite (v1.1.3), a client is required to stop any running animation before the component is removed 
-from the MDL component handler. If you are building e.g. a single page application, any running animation must be stopped
-before a page frament containing the carousel is removed from DOM. In a static page web application there is no need to 
-stop any running animation.
-
-The following code snippet demonstrates how to properly clean up components before removing them from DOM.
-
-```javascript
-// Clean up
-const content = document.querySelectorAll('#content .is-upgraded');
-componentHandler.downgradeElements([...content]);
-
-// Stop animation - if any
-[...content.querySelectorAll('.mdlext-js-carousel')].forEach( carousel => {
-  if(carousel.MaterialExtCarousel) {
-    carousel.MaterialExtCarousel.stopAnimation();
-  }
-});
-
-// Remove elements from DOM.
-// Proper method to remove elements from DOM, see: http://jsperf.com/empty-an-element/16 
-```
+Stops animation - if any.
 
 ### `upgradeSlides()`
 Upgrade slides. If you add slides to the carousel after the page has loaded, you must call `upgradeSlides` to 
@@ -253,6 +231,37 @@ Attributes.
 | `list` | The component add the role `list` to self |  |
 | `listitem` | The component add the role `listitem` to `mdlext-carousel__slide` items |  |
 
+
+## Note for single page applications
+If you use Material Design Lite in a dynamic page, e.g. a single page application, any running animations must be 
+stopped before a page frament containing a carousel component is removed from the DOM. Call 
+`componentHandler.downgradeElements` to stop any running animation and clean up component resources. 
+In a static web application there should be no need to call `componentHandler.downgradeElements`.
+
+The following code snippet demonstrates how to properly clean up components before removing them from DOM.
+
+```javascript
+// Call 'componentHandler.downgradeElements' to clean up
+const content = document.querySelector('#content');
+const components = content.querySelectorAll('.is-upgraded');
+componentHandler.downgradeElements([...components]);
+
+// Remove elements from DOM.
+// See: http://jsperf.com/empty-an-element/16
+const removeChildElements = (element, forceReflow = true) => {
+  while (element.lastChild) {
+    element.removeChild(element.lastChild);
+  }
+  if(forceReflow) {
+    // See: http://jsperf.com/force-reflow
+    const d = element.style.display;
+    element.style.display = 'none';
+    element.style.display = d;
+  }
+}
+
+removeChildElements(content); 
+```
 
 ## How to use the component programmatically
 The [tests](../../test/carousel/carousel.spec.js) and the [snippets/lightbox.html](./snippets/carousel.html) 

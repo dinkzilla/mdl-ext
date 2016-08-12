@@ -7,9 +7,8 @@
  * @see http://jsperf.com/force-reflow
  * @param element
  * @param forceReflow
- * @returns {*}
  */
-export function removeChilds(element, forceReflow = true) {
+const removeChilds = (element, forceReflow = true) => {
 
   // See: http://jsperf.com/empty-an-element/16
   while (element.lastChild) {
@@ -22,5 +21,7 @@ export function removeChilds(element, forceReflow = true) {
     element.style.display = 'none';
     element.style.display = d;
   }
-  return element;
-}
+};
+
+export {removeChilds};
+

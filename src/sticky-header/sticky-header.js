@@ -58,6 +58,7 @@ import {
       visibleAtScrollEnd: false
     };
 
+    this.mutationObserver_ = null;
 
     // Initialize instance.
     this.init();
@@ -191,10 +192,14 @@ import {
         // Adjust header width if content changes (e.g. in a SPA)
         const MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
 
+        if(this.mutationObserver_) {
+          this.mutationObserver_.disconnect();
+          this.mutationObserver_ = null;
+        }
 
         // jsdom does not support MutationObserver - so this is not testable
         /* istanbul ignore next */
-        new MutationObserver( ( /*mutations*/ ) => {
+        this.mutationObserver_ =  new MutationObserver( ( /*mutations*/ ) => {
 
           if(!this.drawing_) {
             window.requestAnimationFrame( () => {
@@ -223,13 +228,19 @@ import {
   /*
    * Downgrade component
    * E.g remove listeners and clean up resources
-   * Note: There is a bug i material component container; downgrade is never called!
-   * Disables method temporarly to keep code coverage at 100% for functions.
+   *
+   * Nothing to clean
    *
    MaterialExtStickyHeader.prototype.mdlDowngrade_ = function() {
      'use strict';
+     console.log('***** MaterialExtStickyHeader.prototype.mdlDowngrade_');
+
+     if(this.mutationObserver_) {
+       this.mutationObserver_.disconnect();
+       this.mutationObserver_ = null;
+     }
    };
-  */
+   */
 
 
   // The component registers itself. It can assume componentHandler is available

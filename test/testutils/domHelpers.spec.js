@@ -47,12 +47,14 @@ describe('domHelpers', () => {
     });
 
     it('should remove child elements', () => {
-      const element = removeChilds(document.querySelector('#mount'));
+      const element = document.querySelector('#mount');
+      removeChilds(element);
       expect(element.childNodes).to.have.lengthOf(0);
     });
 
     it('should remove child elements with reflow = false', () => {
-      const element = removeChilds(document.querySelector('#mount'), false);
+      const element = document.querySelector('#mount');
+      removeChilds(element, false);
       expect(element.childNodes).to.have.lengthOf(0);
     });
 

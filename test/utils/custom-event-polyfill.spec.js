@@ -12,7 +12,7 @@ describe('CustomEvent polyfill for IE11', () => {
     // Simulate IExploder11
     x = window.CustomEvent;
     global.CustomEvent = window.CustomEvent = undefined;
-    requireUncached('./custom-event-polyfill');
+    requireUncached('../../src/utils/custom-event-polyfill');
     global.CustomEvent = window.CustomEvent;
   });
 

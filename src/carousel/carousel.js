@@ -648,24 +648,8 @@ import {
       // Listen to custom 'command' event
       this.element_.addEventListener('command', this.commandHandler_.bind(this), false);
 
-      /* Not needed. Difficult to test. Call upgradeSlides() from client instead.
-      // Detect insertions into components DOM
-      const MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-
-      // jsdom does not support MutationObserver - so this is not testable
-      new MutationObserver( mutations => {
-        mutations.forEach( mutation => {
-          if (mutation.addedNodes.length > 0) {
-            window.requestAnimationFrame(() => this.upgradeSlides() );
-          }
-        });
-      }).observe( this.element_, {
-        attributes: false,
-        childList: true,
-        characterData: false,
-        subtree: false
-      });
-      */
+      // Listen to 'mdl-componentdowngraded' event
+      this.element_.addEventListener('mdl-componentdowngraded', this.mdlDowngrade_.bind(this));
 
       // Slides collection
       this.upgradeSlides();
@@ -683,15 +667,14 @@ import {
   /*
    * Downgrade component
    * E.g remove listeners and clean up resources
-   *
-   * Note: There is a bug i material component container; downgrade is never called!
-   * Disables method temporarly to keep code coverage at 100% for functions.
-   *
+   */
   MaterialExtCarousel.prototype.mdlDowngrade_ = function() {
     'use strict';
-    console.log('***** MaterialExtCarousel.mdlDowngrade');
+    //console.log('***** MaterialExtCarousel.mdlDowngrade_');
+
+    // Stop animation - if any
+    this.stopAnimation();
   };
-   */
 
   // The component registers itself. It can assume componentHandler is available
   // in the global scope.

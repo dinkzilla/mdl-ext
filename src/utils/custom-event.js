@@ -19,6 +19,8 @@
 
 
 /**
+ * Note: The CustomEvent bug is fixed in mdl-1.2.0
+ *
  * Due to a bug in mdl-1.1.3 it is not possible to use a globally polyfilled CustomEvent constructor
  * Since I do not care too much about IE11, a brute force approach is sufficient.
  *

@@ -42,6 +42,8 @@
  * -----Data table
  * -----Dialog
  * -----Snackbar
+ * -----Tooltip
+ * -----Chip
  *
  * Even though all variables have the `!default` directive, most of them
  * should not be changed as they are dependent one another. This can cause
@@ -206,6 +208,8 @@
 /* SNACKBAR */
 
 /* TOOLTIP */
+
+/* CHIP */
 
 /**
  * Copyright 2015 Google Inc. All Rights Reserved.

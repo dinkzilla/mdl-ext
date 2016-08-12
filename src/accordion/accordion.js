@@ -447,6 +447,7 @@ import {
       tabpanel.classList.add(ANIMATION);
     }
 
+    // Remove listeners, just in case ...
     tab.removeEventListener('click', tabClickHandler);
     tab.removeEventListener('focus', tabFocusHandler);
     tab.removeEventListener('keydown', tabKeydownHandler);
@@ -531,8 +532,7 @@ import {
    * Downgrade component
    * E.g remove listeners and clean up resources
    *
-   * Note: There is a bug i material component container; downgrade is never called!
-   * Disables method temporarly to keep code coverage at 100% for functions.
+   * Nothing to downgrade
    *
    MaterialExtAccordion.prototype.mdlDowngrade_ = function() {
      'use strict';

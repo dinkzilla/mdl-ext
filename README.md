@@ -247,6 +247,35 @@ how you can set up MDL with Babel(6) and Webpack, and how to self host Font Robo
 >* [mutation-observer polyfill](https://github.com/webmodules/mutation-observer)
 >* [polyfill.io](https://polyfill.io/v2/docs/) 
 
+### Using Material Design Lite in a Single Page Application (SPA)
+If you use Material Design Lite in a dynamic page, e.g. a single page application, you must call 
+`componentHandler.downgradeElements` to properly clean up component resources. 
+In a static web application there should be no need to call `componentHandler.downgradeElements`.
+
+The following code snippet demonstrates how to properly clean up MDL components before removing them from DOM.
+
+```javascript
+// Call 'componentHandler.downgradeElements' to clean up
+const content = document.querySelector('#content');
+const components = content.querySelectorAll('.is-upgraded');
+componentHandler.downgradeElements([...components]);
+
+// Remove elements from DOM.
+// See: http://jsperf.com/empty-an-element/16
+const removeChildElements = (element, forceReflow = true) => {
+  while (element.lastChild) {
+    element.removeChild(element.lastChild);
+  }
+  if(forceReflow) {
+    // See: http://jsperf.com/force-reflow
+    const d = element.style.display;
+    element.style.display = 'none';
+    element.style.display = d;
+  }
+}
+
+removeChildElements(content); 
+```
 
 
 ## Licence
