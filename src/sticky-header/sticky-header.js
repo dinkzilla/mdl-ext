@@ -32,10 +32,8 @@ import {
 
 (function() {
   'use strict';
-
   const MDL_LAYOUT_CONTENT  = 'mdl-layout__content';
   const IS_SCROLL_CLASS  = 'mdlext-is-scroll';
-  //const STICKY_HEADER_CLASS  = 'mdlext-layout__sticky-header';
 
 
   /**
@@ -150,6 +148,7 @@ import {
    */
   MaterialExtStickyHeader.prototype.scrollHandler_ = function( /* event */ ) {
     // See: https://developer.mozilla.org/ru/docs/Web/Events/resize
+    // See: https://developer.mozilla.org/en-US/docs/Web/Events/scroll
     if(!this.drawing_) {
       window.requestAnimationFrame( () => {
         this.reposition_();
@@ -169,11 +168,32 @@ import {
   };
 
   /**
+   * Removes event listeners
+   * @private
+   */
+  MaterialExtStickyHeader.prototype.removeListeners_ = function() {
+    window.removeEventListener('resize', this.resizeHandler_);
+    window.removeEventListener('orientationchange', this.resizeHandler_);
+    this.header_.removeEventListener('mdl-componentdowngraded', this.mdlDowngrade_);
+
+    if(this.content_) {
+      this.content_.removeEventListener('scroll', this.scrollHandler_);
+    }
+
+    if(this.mutationObserver_) {
+      this.mutationObserver_.disconnect();
+      this.mutationObserver_ = null;
+    }
+  };
+
+  /**
    * Initialize component
    */
   MaterialExtStickyHeader.prototype.init = function() {
 
     if (this.header_) {
+
+      this.removeListeners_();
 
       if(this.header_.hasAttribute('data-config')) {
         this.config_ = jsonStringToObject(this.header_.getAttribute('data-config'));
@@ -189,27 +209,14 @@ import {
         window.addEventListener('resize', this.resizeHandler_.bind(this));
         window.addEventListener('orientationchange', this.resizeHandler_.bind(this));
 
-        // Adjust header width if content changes (e.g. in a SPA)
-        const MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-
-        if(this.mutationObserver_) {
-          this.mutationObserver_.disconnect();
-          this.mutationObserver_ = null;
-        }
-
         // jsdom does not support MutationObserver - so this is not testable
         /* istanbul ignore next */
-        this.mutationObserver_ =  new MutationObserver( ( /*mutations*/ ) => {
+        this.mutationObserver_ = new MutationObserver( ( /*mutations*/ ) => {
+          // Adjust header width if content changes (e.g. in a SPA)
+          this.updatePosition_();
+        });
 
-          if(!this.drawing_) {
-            window.requestAnimationFrame( () => {
-              this.updatePosition_();
-              this.drawing_ = false;
-            });
-          }
-          this.drawing_ = true;
-
-        }).observe( this.content_, {
+        this.mutationObserver_.observe( this.content_, {
           attributes: false,
           childList: true,
           characterData: false,
@@ -234,11 +241,6 @@ import {
    MaterialExtStickyHeader.prototype.mdlDowngrade_ = function() {
      'use strict';
      console.log('***** MaterialExtStickyHeader.prototype.mdlDowngrade_');
-
-     if(this.mutationObserver_) {
-       this.mutationObserver_.disconnect();
-       this.mutationObserver_ = null;
-     }
    };
    */
 

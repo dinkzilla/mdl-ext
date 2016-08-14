@@ -72,87 +72,6 @@ import {
   };
 
 
-  /**
-   * Initialize component
-   */
-  MaterialExtLightboard.prototype.init = function() {
-
-    const keydownHandler = event => {
-
-      if(event.target !== this.element_) {
-        let action;
-        let target;
-        switch (event.keyCode) {
-          case VK_HOME:
-            action = 'first';
-            break;
-          case VK_END:
-            action = 'last';
-            break;
-          case VK_ARROW_UP:
-          case VK_ARROW_LEFT:
-            action = 'prev';
-            break;
-          case VK_ARROW_DOWN:
-          case VK_ARROW_RIGHT:
-            action = 'next';
-            break;
-          case VK_ENTER:
-          case VK_SPACE:
-            action = 'select';
-            target = event.target;
-            break;
-        }
-        if(action)  {
-          event.preventDefault();
-          event.stopPropagation();
-          this.command( { action: action, target: target } );
-        }
-      }
-    };
-
-    const clickHandler = event => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      if(event.target !== this.element_) {
-        this.command( { action: 'select', target: event.target } );
-      }
-    };
-
-    const focusHandler = event => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      if(event.target !== this.element_) {
-        this.selectSlide_(event.target);
-      }
-    };
-
-
-    if (this.element_) {
-      this.element_.setAttribute('role', LIGHTBOARD_ROLE);
-
-      if (this.element_.classList.contains(MDL_RIPPLE_EFFECT)) {
-        this.element_.classList.add(MDL_RIPPLE_EFFECT_IGNORE_EVENTS);
-      }
-
-      this.element_.removeEventListener('command', this.commandHandler_);
-      this.element_.removeEventListener('keydown', keydownHandler);
-      this.element_.removeEventListener('click', clickHandler);
-      this.element_.removeEventListener('focus', focusHandler);
-
-      this.element_.addEventListener('command', this.commandHandler_.bind(this), false);
-      this.element_.addEventListener('keydown', keydownHandler, true);
-      this.element_.addEventListener('click', clickHandler, true);
-      this.element_.addEventListener('focus', focusHandler, true);
-
-      this.upgradeSlides();
-
-      this.element_.classList.add(IS_UPGRADED);
-    }
-  };
-
 
   // Private methods.
 
@@ -317,6 +236,88 @@ import {
   };
   MaterialExtLightboard.prototype['command'] = MaterialExtLightboard.prototype.command;
 
+
+  /**
+   * Initialize component
+   */
+  MaterialExtLightboard.prototype.init = function() {
+
+    const keydownHandler = event => {
+
+      if(event.target !== this.element_) {
+        let action;
+        let target;
+        switch (event.keyCode) {
+          case VK_HOME:
+            action = 'first';
+            break;
+          case VK_END:
+            action = 'last';
+            break;
+          case VK_ARROW_UP:
+          case VK_ARROW_LEFT:
+            action = 'prev';
+            break;
+          case VK_ARROW_DOWN:
+          case VK_ARROW_RIGHT:
+            action = 'next';
+            break;
+          case VK_ENTER:
+          case VK_SPACE:
+            action = 'select';
+            target = event.target;
+            break;
+        }
+        if(action)  {
+          event.preventDefault();
+          event.stopPropagation();
+          this.command( { action: action, target: target } );
+        }
+      }
+    };
+
+    const clickHandler = event => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if(event.target !== this.element_) {
+        this.command( { action: 'select', target: event.target } );
+      }
+    };
+
+    const focusHandler = event => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if(event.target !== this.element_) {
+        this.selectSlide_(event.target);
+      }
+    };
+
+
+    if (this.element_) {
+      this.element_.setAttribute('role', LIGHTBOARD_ROLE);
+
+      if (this.element_.classList.contains(MDL_RIPPLE_EFFECT)) {
+        this.element_.classList.add(MDL_RIPPLE_EFFECT_IGNORE_EVENTS);
+      }
+
+      // Remove listeners, just in case ...
+      this.element_.removeEventListener('command', this.commandHandler_);
+      this.element_.removeEventListener('keydown', keydownHandler);
+      this.element_.removeEventListener('click', clickHandler);
+      this.element_.removeEventListener('focus', focusHandler);
+
+      this.element_.addEventListener('command', this.commandHandler_.bind(this), false);
+      this.element_.addEventListener('keydown', keydownHandler, true);
+      this.element_.addEventListener('click', clickHandler, true);
+      this.element_.addEventListener('focus', focusHandler, true);
+
+      this.upgradeSlides();
+
+      this.element_.classList.add(IS_UPGRADED);
+    }
+  };
 
   // The component registers itself. It can assume componentHandler is available
   // in the global scope.

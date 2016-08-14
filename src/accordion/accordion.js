@@ -78,33 +78,6 @@ import {
   window['MaterialExtAccordion'] = MaterialExtAccordion;
 
 
-  /**
-   * Initialize component
-   */
-  MaterialExtAccordion.prototype.init = function() {
-    if (this.element_) {
-      // Do the init required for this component to work
-      if( !(this.element_.classList.contains(ACCORDION_HORIZONTAL) || this.element_.classList.contains(ACCORDION_VERTICAL))) {
-        throw new Error(`Accordion must have one of the classes "${ACCORDION_HORIZONTAL}" or "${ACCORDION_VERTICAL}"`);
-      }
-
-      this.element_.setAttribute('role', 'tablist');
-
-      if(!this.element_.hasAttribute(ARIA_MULTISELECTABLE)) {
-        this.element_.setAttribute(ARIA_MULTISELECTABLE, 'false');
-      }
-
-      this.element_.removeEventListener('command', this.commandHandler_);
-      this.element_.addEventListener('command', this.commandHandler_.bind(this), false);
-
-      [...this.element_.querySelectorAll(`.${ACCORDION} > .${PANEL}`)].forEach( panel => this.upgradeTab(panel) );
-
-      // Set upgraded flag
-      this.element_.classList.add(IS_UPGRADED);
-    }
-  };
-
-
   // Helpers
   const accordionPanelElements = ( element ) => {
     if(!element) {
@@ -527,6 +500,34 @@ import {
     }
   };
   MaterialExtAccordion.prototype['command'] = MaterialExtAccordion.prototype.command;
+
+
+  /**
+   * Initialize component
+   */
+  MaterialExtAccordion.prototype.init = function() {
+    if (this.element_) {
+      // Do the init required for this component to work
+      if( !(this.element_.classList.contains(ACCORDION_HORIZONTAL) || this.element_.classList.contains(ACCORDION_VERTICAL))) {
+        throw new Error(`Accordion must have one of the classes "${ACCORDION_HORIZONTAL}" or "${ACCORDION_VERTICAL}"`);
+      }
+
+      this.element_.setAttribute('role', 'tablist');
+
+      if(!this.element_.hasAttribute(ARIA_MULTISELECTABLE)) {
+        this.element_.setAttribute(ARIA_MULTISELECTABLE, 'false');
+      }
+
+      this.element_.removeEventListener('command', this.commandHandler_);
+      this.element_.addEventListener('command', this.commandHandler_.bind(this), false);
+
+      [...this.element_.querySelectorAll(`.${ACCORDION} > .${PANEL}`)].forEach( panel => this.upgradeTab(panel) );
+
+      // Set upgraded flag
+      this.element_.classList.add(IS_UPGRADED);
+    }
+  };
+
 
   /*
    * Downgrade component

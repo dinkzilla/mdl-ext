@@ -636,7 +636,7 @@ describe('MaterialExtCarousel', () => {
     assert.notEqual(carousel.scrollLeft, 0);
   });
 
-  it('it cleans up after itself', () => {
+  it('cleans up after itself', () => {
     const container = document.querySelector('#mount-2');
     container.insertAdjacentHTML('beforeend', data_config_fragment_double_quotes);
 
@@ -651,13 +651,16 @@ describe('MaterialExtCarousel', () => {
       const ev = new CustomEvent('command', { detail: { action : 'play', type: 'slide', interval: 100 } } );
       element.dispatchEvent(ev);
 
+      let c = element.MaterialExtCarousel.getConfig();
+      assert.isTrue(c.animationLoop.running, 'Expected animation to run before carousel downgrade');
+
       element.addEventListener('mdl-componentdowngraded', spy);
 
       componentHandler.downgradeElements(element);
 
       assert.isTrue(spy.calledOnce, 'Expected "mdl-componentdowngraded" event to fire after call to "componentHandler.downgradeElements"');
 
-      const c = element.MaterialExtCarousel.getConfig();
+      c = element.MaterialExtCarousel.getConfig();
       assert.isFalse(c.animationLoop.running, 'Expected animation to stop after carousel downgrade');
     }
     finally {

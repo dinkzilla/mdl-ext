@@ -212,15 +212,16 @@ import {
       this.select_ = this.element_.querySelector(`.${INPUT}`);
 
       if (this.select_) {
-        this.boundUpdateClassesHandler = this.updateClasses_.bind(this);
-        this.boundFocusHandler = this.onFocus_.bind(this);
-        this.boundBlurHandler = this.onBlur_.bind(this);
-        this.boundResetHandler = this.onReset_.bind(this);
+        // Remove listeners, just in case ...
+        this.select_.removeEventListener('change', this.updateClasses_);
+        this.select_.removeEventListener('focus', this.onFocus_);
+        this.select_.removeEventListener('blur', this.onBlur_);
+        this.select_.removeEventListener('reset', this.onReset_);
 
-        this.select_.addEventListener('change', this.boundUpdateClassesHandler);
-        this.select_.addEventListener('focus', this.boundFocusHandler);
-        this.select_.addEventListener('blur', this.boundBlurHandler);
-        this.select_.addEventListener('reset', this.boundResetHandler);
+        this.select_.addEventListener('change', this.updateClasses_.bind(this));
+        this.select_.addEventListener('focus', this.onFocus_.bind(this));
+        this.select_.addEventListener('blur', this.onBlur_.bind(this));
+        this.select_.addEventListener('reset', this.onReset_.bind(this));
 
         if(this.label_) {
           let id;

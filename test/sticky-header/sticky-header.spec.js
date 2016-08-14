@@ -80,6 +80,7 @@ describe('MaterialExtStickyHeader', () => {
   luctus sem sollicitudin in. Etiam libero tellus, porttitor sit amet velit a, commodo sodales neque.
 </p>`;
 
+  let MutationObserver;
   let realRaf;
   let realCaf;
   let mockRaf;
@@ -115,39 +116,12 @@ describe('MaterialExtStickyHeader', () => {
       };
     };
 
+    MutationObserver = window.MutationObserver
+      || window.WebKitMutationObserver
+      || window.MozMutationObserver
+      || require('mutation-observer');
 
-    // Stub unsupported jsdom window.MutationObserver
-    window.MutationObserver = window.MutationObserver || (function(undefined) {
-      "use strict";
-
-      function MutationObserver(listener) {
-        this._watched = [];
-        this._listener = listener;
-      }
-
-      MutationObserver.prototype = {
-
-        observe: function($target, config) {
-        },
-
-        takeRecords: function() {
-          var mutations = [];
-          return mutations;
-        },
-        disconnect: function() {
-          this._watched = [];
-        }
-      };
-
-      return MutationObserver;
-    })(void 0);
-
-    // TODO: Use mutationobserver-polyfill.js
-    //requireUncached('../testutils/mutationobserver-polyfill');
-    global.MutationObserver = window.MutationObserver;
-
-    //componentHandler.upgradeAllRegistered();
-    //componentHandler.upgradeDom();
+    global.MutationObserver = window.MutationObserver = MutationObserver;
   });
 
   after ( () => {
@@ -283,7 +257,7 @@ describe('MaterialExtStickyHeader', () => {
     container.insertAdjacentHTML('beforeend', header_with_malformed_data_config);
 
     try {
-      const element = document.querySelector('#carousel-4');
+      const element = container.querySelector('#header-3');
       expect(() => {
         componentHandler.upgradeElement(element, 'MaterialExtStickyHeader');
       }).to.throw(Error);
@@ -292,4 +266,12 @@ describe('MaterialExtStickyHeader', () => {
       removeChilds(container);
     }
   });
+
+  it('can call init more than once', () => {
+    const header = document.querySelector('header');
+    expect(() => {
+      header.MaterialExtStickyHeader.init();
+    }).to.not.throw(Error);
+  });
+
 });

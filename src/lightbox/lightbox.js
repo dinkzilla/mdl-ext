@@ -356,14 +356,6 @@ import {
    * Nothing to downgrade
    *
   MaterialExtLightbox.prototype.mdlDowngrade_ = function() {
-
-    if (this.element_) {
-      [...this.element_.querySelectorAll(`.${BUTTON}`)].forEach(
-        button => button.removeEventListener('click', this.buttonClickHandler_)
-      );
-
-      this.element_.removeEventListener('keydown', this.keyDownHandler_);
-    }
   };
   */
 

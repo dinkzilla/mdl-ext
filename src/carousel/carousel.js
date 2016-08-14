@@ -420,6 +420,16 @@ import {
   };
 
   /**
+   * Handle click
+   * @param event
+   * @private
+   */
+  MaterialExtCarousel.prototype.clickHandler_ = function(event) {
+    // Click is handled by drag
+    event.preventDefault();
+  };
+
+  /**
    * Handle focus
    * @param event
    * @private
@@ -515,6 +525,21 @@ import {
       );
       slide.setAttribute('aria-selected', '');
     }
+  };
+
+  /**
+   * Removes event listeners
+   * @private
+   */
+  MaterialExtCarousel.prototype.removeListeners_ = function() {
+    this.element_.removeEventListener('focus', this.focusHandler_);
+    this.element_.removeEventListener('blur', this.blurHandler_);
+    this.element_.removeEventListener('keydown', this.keyDownHandler_);
+    this.element_.removeEventListener('mousedown', this.dragHandler_);
+    this.element_.removeEventListener('touchstart', this.dragHandler_);
+    this.element_.removeEventListener('click', this.clickHandler_, false);
+    this.element_.removeEventListener('command', this.commandHandler_);
+    this.element_.removeEventListener('mdl-componentdowngraded', this.mdlDowngrade_);
   };
 
 
@@ -622,6 +647,9 @@ import {
         this.element_.setAttribute('tabindex', -1);
       }
 
+      // Remove listeners, just in case ...
+      this.removeListeners_();
+
       if(this.config_.interactive) {
 
         // Ripple
@@ -641,8 +669,8 @@ import {
         this.element_.addEventListener('mousedown', this.dragHandler_.bind(this), false);
         this.element_.addEventListener('touchstart', this.dragHandler_.bind(this), false);
 
-        // Click is handled by drag
-        this.element_.addEventListener('click', e => e.preventDefault(), false);
+        // Listen to click events
+        this.element_.addEventListener('click', this.clickHandler_.bind(this), false);
       }
 
       // Listen to custom 'command' event
@@ -674,6 +702,9 @@ import {
 
     // Stop animation - if any
     this.stopAnimation();
+
+    // Remove listeners
+    this.removeListeners_();
   };
 
   // The component registers itself. It can assume componentHandler is available
