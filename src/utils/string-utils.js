@@ -20,12 +20,13 @@
 /**
  * A javascript utility for conditionally creating a list of strings.
  * The function takes any number of arguments which can be a string or object.
+ * Inspired by (but not copied from) JedWatson/classnames, https://github.com/JedWatson/classnames
  *
  * @param  {*} args the strings and/or objects to
  * @return {Array} a list of strings
  * @example
  * // Returns ['foo', 'bar', 'baz', 'quux']
- * joinStrings(', ', 'foo', { bar: true, duck: false }, 'baz', { quux: true });
+ * stringList(', ', 'foo', { bar: true, duck: false }, 'baz', { quux: true });
  * @example see the tests for more examples
  */
 const stringList = (...args) => {
@@ -48,7 +49,6 @@ const stringList = (...args) => {
 /**
  * A simple javascript utility for conditionally joining strings together.
  * The function takes a delimiter string and any number of arguments which can be a string or object.
- * Inspired by (but not copied from) JedWatson/classnames, https://github.com/JedWatson/classnames
  *
  * @param delimiter delimiter to separate joined strings
  * @param  {*} args the strings and/or objects to join

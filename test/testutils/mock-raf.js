@@ -1,6 +1,5 @@
 'use strict';
 
-// See: https://github.com/chenglou/react-motion/blob/dafff3f2b00ac11f39d91f3363cc97de664b2406/test/createMockRaf.js
 // See: https://github.com/chenglou/react-motion/blob/master/test/createMockRaf.js
 // See: https://github.com/FormidableLabs/mock-raf
 // See: https://github.com/lukastaegert/mock-raf
@@ -29,7 +28,7 @@ export default function() {
     const allCallbacksBefore = allCallbacks;
     allCallbacks = [];
     prevTime += ms;
-    allCallbacksBefore.forEach(({cb}) => cb(prevTime));
+    allCallbacksBefore.forEach( ({cb}) => cb(prevTime) );
   };
 
   const step = (howMany = 1, ms = defaultTimeInterval) => {

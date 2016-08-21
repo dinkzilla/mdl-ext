@@ -18,7 +18,7 @@ catch(e) {
       detail: null
     };
 
-    var e = document.createEvent('CustomEvent');
+    const e = document.createEvent('CustomEvent');
     e.initCustomEvent(inType, Boolean(params.bubbles), Boolean(params.cancelable), params.detail);
     e.preventDefault = function() {
       Object.defineProperty(this, 'defaultPrevented', {

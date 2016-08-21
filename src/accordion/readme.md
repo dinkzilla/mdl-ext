@@ -46,7 +46,7 @@ and makes the contents of each panel visible (or not) by interacting with the Ac
 <ul>
 ```
 
-&nbsp;4. Code a `<span>` element with `class="mdlext-accordion__tab__caption"` to hold tha accordion tab header caption. 
+&nbsp;4. Code a `<span>` element with `class="mdlext-accordion__tab__caption"` to hold the accordion tab header caption. 
 ```html
 <ul class="mdlext-accordion mdlext-js-accordion mdlext-accordion--horizontal">
   <li class="mdlext-accordion__panel">
