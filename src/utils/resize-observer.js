@@ -105,6 +105,9 @@
      */
     observe(target) {
       if(target) {
+        if (!(target instanceof HTMLElement)) {
+          throw new TypeError('target parameter must be an HTMLElement');
+        }
         if (!this.observationTargets_.find(t => t.target === target)) {
           this.observationTargets_.push(ResizeObservation(target));
         }

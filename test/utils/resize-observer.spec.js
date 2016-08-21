@@ -69,10 +69,6 @@ describe('ResizeObserver', () => {
       expect(window.ResizeObserver).not.to.be.undefined;
     });
 
-    //it('begins waiting', () => {
-    //  expect(window.requestAnimationFrame.calledOnce).to.be.true;
-    //});
-
     it('creates a new ResizeObserver', () => {
       const ro = new window.ResizeObserver(()=>{});
       expect(ro).to.be.an.instanceof(window.ResizeObserver);
@@ -87,6 +83,13 @@ describe('ResizeObserver', () => {
     it('adds a ResizeObserver instance to document.resizeObservers', () => {
       new window.ResizeObserver(()=>{});
       expect(document.resizeObservers.length).to.equal(1);
+    });
+
+    it('accepts only HTMLElement as observe argument', () => {
+      const ro = new window.ResizeObserver(()=>{});
+      expect(() => {
+        ro.observe('bar');
+      }).to.throw(TypeError);
     });
 
     it('has one observed element', () => {
