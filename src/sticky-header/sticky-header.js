@@ -24,7 +24,7 @@
  * bringing the header back when a user might need it: they reach the bottom of the page or start scrolling up.
  */
 
-//import throttledFunction from '../utils/throttled-function';
+import throttledFunction from '../utils/throttled-function';
 import { jsonStringToObject } from '../utils/json-utils';
 import {
   IS_UPGRADED
@@ -49,15 +49,14 @@ import {
     this.content_ = null;
     this.lastScrollTop_ = 0;
 
-    // false: allow rAF to be called, true: blocks rAF
-    this.drawing_ = false;
-
     // Default config
     this.config_ = {
       visibleAtScrollEnd: false
     };
 
     this.mutationObserver_ = null;
+
+    this.drawing_ = false;
 
     // Initialize instance.
     this.init();
@@ -74,22 +73,15 @@ import {
     this.header_.style.width = `${this.content_.clientWidth}px`;
   };
 
+  const throttleResize = throttledFunction( self => self.recalcWidth_() );
+
   /**
    * Adjust header width when window resizes or oreientation changes
    * @param event
    * @private
    */
   MaterialExtStickyHeader.prototype.resizeHandler_ = function( /* event */ ) {
-
-    // See: https://developer.mozilla.org/en-US/docs/Web/Events/resize
-    if(!this.drawing_) {
-      // Assumes MDL has polyfilled rAF
-      window.requestAnimationFrame( () => {
-        this.recalcWidth_();
-        this.drawing_ = false;
-      });
-    }
-    this.drawing_ = true;
+    throttleResize(this);
   };
 
 
@@ -142,22 +134,16 @@ import {
     this.lastScrollTop_ = currentContentScrollTop;
   };
 
+
+  const throttleScroll = throttledFunction((self) => self.reposition_());
+
   /**
    * Scroll header when content scrolls
    * @param event
    * @private
    */
   MaterialExtStickyHeader.prototype.scrollHandler_ = function( /* event */ ) {
-
-    // See: https://developer.mozilla.org/ru/docs/Web/Events/resize
-    // See: https://developer.mozilla.org/en-US/docs/Web/Events/scroll
-    if(!this.drawing_) {
-      window.requestAnimationFrame( () => {
-        this.reposition_();
-        this.drawing_ = false;
-      });
-    }
-    this.drawing_ = true;
+    throttleScroll(this);
   };
 
   /**
@@ -170,13 +156,34 @@ import {
   };
 
   /**
+   * Add mutation observer
+   * @private
+   */
+  MaterialExtStickyHeader.prototype.addMutationObserver_ = function() {
+
+    // jsdom does not support MutationObserver - so this is not testable
+    /* istanbul ignore next */
+    this.mutationObserver_ = new MutationObserver( ( /*mutations*/ ) => {
+      // Adjust header width if content changes (e.g. in a SPA)
+      this.updatePosition_();
+    });
+
+    this.mutationObserver_.observe( this.content_, {
+      attributes: false,
+      childList: true,
+      characterData: false,
+      subtree: true
+    });
+  };
+
+    /**
    * Removes event listeners
    * @private
    */
   MaterialExtStickyHeader.prototype.removeListeners_ = function() {
+
     window.removeEventListener('resize', this.resizeHandler_);
     window.removeEventListener('orientationchange', this.resizeHandler_);
-    this.header_.removeEventListener('mdl-componentdowngraded', this.mdlDowngrade_);
 
     if(this.content_) {
       this.content_.removeEventListener('scroll', this.scrollHandler_);
@@ -208,27 +215,10 @@ import {
         this.lastScrollTop_ = this.content_.scrollTop;
 
         this.content_.addEventListener('scroll', this.scrollHandler_.bind(this));
-
-
-        //window.addEventListener('resize', throttledFunction( () => repositionDialog_(this.element_) ));
         window.addEventListener('resize', this.resizeHandler_.bind(this));
         window.addEventListener('orientationchange', this.resizeHandler_.bind(this));
 
-        // jsdom does not support MutationObserver - so this is not testable
-        /* istanbul ignore next */
-        this.mutationObserver_ = new MutationObserver( ( /*mutations*/ ) => {
-          // Adjust header width if content changes (e.g. in a SPA)
-          this.updatePosition_();
-        });
-
-        this.mutationObserver_.observe( this.content_, {
-          attributes: false,
-          childList: true,
-          characterData: false,
-          subtree: true
-        });
-
-        // Set initial position
+        this.addMutationObserver_();
         this.updatePosition_();
 
         // Set upgraded flag

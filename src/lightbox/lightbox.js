@@ -287,7 +287,7 @@ import {
 
     window.addEventListener('mousemove', drag);
     window.addEventListener('touchmove', drag);
-    window.addEventListener('mouseup', endDrag); // .bind(this) does not work here
+    window.addEventListener('mouseup', endDrag);
     window.addEventListener('touchend',endDrag);
   };
 
@@ -326,7 +326,6 @@ import {
         img.addEventListener('mousedown', this.imgDragHandler_.bind(img), true);
         img.addEventListener('touchstart', this.imgDragHandler_.bind(img), true);
       }
-
       window.addEventListener('resize', throttledFunction( () => repositionDialog_(this.element_) ));
       window.addEventListener('orientationchange', () => repositionDialog_(this.element_));
 
