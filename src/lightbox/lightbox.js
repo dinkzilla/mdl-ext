@@ -23,7 +23,7 @@
  * Responsive Lightbox
  */
 
-//import '../utils/closest-polyfill';
+import throttledFunction from '../utils/throttled-function';
 import { createCustomEvent } from '../utils/custom-event';
 import {
   VK_ESC,
@@ -54,9 +54,6 @@ import {
   const MaterialExtLightbox = function MaterialExtLightbox(element) {
     // Stores the element.
     this.element_ = element;
-
-    // false: allow rAF to be called, true: blocks rAF
-    this.drawing_ = false;
 
     // Initialize instance.
     this.init();
@@ -330,18 +327,7 @@ import {
         img.addEventListener('touchstart', this.imgDragHandler_.bind(img), true);
       }
 
-      // See: https://developer.mozilla.org/ru/docs/Web/Events/resize
-      window.addEventListener('resize', () => {
-        if(!this.drawing_) {
-          // Assumes MDL has polyfilled rAF
-          window.requestAnimationFrame( () => {
-            repositionDialog_(this.element_);
-            this.drawing_ = false;
-          });
-        }
-        this.drawing_ = true;
-      });
-
+      window.addEventListener('resize', throttledFunction( () => repositionDialog_(this.element_) ));
       window.addEventListener('orientationchange', () => repositionDialog_(this.element_));
 
       // Set upgraded flag

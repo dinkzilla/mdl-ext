@@ -24,6 +24,7 @@
  * bringing the header back when a user might need it: they reach the bottom of the page or start scrolling up.
  */
 
+//import throttledFunction from '../utils/throttled-function';
 import { jsonStringToObject } from '../utils/json-utils';
 import {
   IS_UPGRADED
@@ -147,6 +148,7 @@ import {
    * @private
    */
   MaterialExtStickyHeader.prototype.scrollHandler_ = function( /* event */ ) {
+
     // See: https://developer.mozilla.org/ru/docs/Web/Events/resize
     // See: https://developer.mozilla.org/en-US/docs/Web/Events/scroll
     if(!this.drawing_) {
@@ -206,6 +208,9 @@ import {
         this.lastScrollTop_ = this.content_.scrollTop;
 
         this.content_.addEventListener('scroll', this.scrollHandler_.bind(this));
+
+
+        //window.addEventListener('resize', throttledFunction( () => repositionDialog_(this.element_) ));
         window.addEventListener('resize', this.resizeHandler_.bind(this));
         window.addEventListener('orientationchange', this.resizeHandler_.bind(this));
 

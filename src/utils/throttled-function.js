@@ -26,7 +26,7 @@ const throttledFunction = (callback) => {
       window.requestAnimationFrame( () => {
         callback(...args);
         throttling = false;
-      })
+      });
     }
   };
 };
