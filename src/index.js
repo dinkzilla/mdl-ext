@@ -1,6 +1,5 @@
 'use strict';
 import 'utils/throttled-function';
-import 'utils/custom-event'; // Note: The CustomEvent bug is fixed in mdl-1.2.0.
 import 'utils/animationloop';
 import 'utils/easing';
 import 'utils/json-utils';

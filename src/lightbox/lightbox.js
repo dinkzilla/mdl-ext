@@ -24,7 +24,6 @@
  */
 
 import throttledFunction from '../utils/throttled-function';
-import { createCustomEvent } from '../utils/custom-event';
 import {
   VK_ESC,
   VK_SPACE,
@@ -130,7 +129,7 @@ import {
    */
   const dispatchAction_ = (action, source, target = source) => {
 
-    target.dispatchEvent(createCustomEvent('action', {
+    target.dispatchEvent(new CustomEvent('action', {
       bubbles: true,
       cancelable: true,
       detail: {

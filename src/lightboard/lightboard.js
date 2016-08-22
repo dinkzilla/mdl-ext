@@ -25,8 +25,6 @@
  * design, based on flex layout, similar to what is used in Adobe LightRoom to browse images.
  */
 
-//import '../utils/closest-polyfill';
-import { createCustomEvent } from '../utils/custom-event';
 import {
   VK_ENTER,
   VK_SPACE,
@@ -98,7 +96,7 @@ import {
    */
   MaterialExtLightboard.prototype.dispatchSelectEvent_ = function ( slide ) {
     this.element_.dispatchEvent(
-      createCustomEvent('select', {
+      new CustomEvent('select', {
         bubbles: true,
         cancelable: true,
         detail: { source: slide }

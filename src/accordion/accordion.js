@@ -27,7 +27,6 @@
  * and makes the contents of each panel visible (or not) by interacting with the Accordion Header
  */
 
-import { createCustomEvent } from '../utils/custom-event';
 import {
   VK_ENTER,
   VK_SPACE,
@@ -128,7 +127,7 @@ import {
    * @private
    */
   MaterialExtAccordion.prototype.dispatchToggleEvent_ = function ( state, tab, tabpanel ) {
-    const ce = createCustomEvent('toggle', {
+    const ce = new CustomEvent('toggle', {
       bubbles: true,
       cancelable: true,
       detail: { state: state, tab: tab, tabpanel: tabpanel }

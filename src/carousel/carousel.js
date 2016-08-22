@@ -22,8 +22,6 @@
  * Image carousel
  */
 
-//import '../utils/closest-polyfill';
-import { createCustomEvent } from '../utils/custom-event';
 import MdlExtAnimationLoop from '../utils/animationloop';
 import { inOutQuintic } from '../utils/easing';
 import { jsonStringToObject} from '../utils/json-utils';
@@ -467,7 +465,7 @@ import {
     if(slide) {
       this.moveSlideIntoViewport_(slide);
 
-      const evt = createCustomEvent('select', {
+      const evt = new CustomEvent('select', {
         bubbles: true,
         cancelable: true,
         detail: {

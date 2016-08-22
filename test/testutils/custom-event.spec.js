@@ -3,7 +3,7 @@ import jsdomify from 'jsdomify';
 import { assert } from 'chai';
 import sinon from 'sinon';
 
-import { createCustomEvent } from '../../src/utils/custom-event';
+import { createCustomEvent } from './custom-event';
 
 describe('createCustomEvent', () => {
 
