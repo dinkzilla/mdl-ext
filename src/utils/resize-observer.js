@@ -7,6 +7,8 @@
  *
  */
 
+import MdlExtAnimationLoop from './animationloop';
+
 ((window, document) => {
   'use strict';
 
@@ -14,12 +16,15 @@
     return;
   }
 
+  document.resizeObservers = [];
+
   const clientDimension = target => target.getBoundingClientRect();
 
   const dimensionHasChanged = (target, lastWidth, lastHeight) => {
     const {width, height} = clientDimension(target);
     return width !== lastWidth || height !== lastHeight;
   };
+
 
   /**
    * ResizeObservation holds observation information for a single Element.
@@ -34,8 +39,6 @@
       broadcastWidth: width,
       broadcastHeight: height,
 
-      //isActive: () => dimensionHasChanged(target, width, height)
-      // ...is this  more readable than closure above ?
       isActive() {
         return dimensionHasChanged(this.target, this.broadcastWidth, this.broadcastHeight);
       }
@@ -110,6 +113,7 @@
         }
         if (!this.observationTargets_.find(t => t.target === target)) {
           this.observationTargets_.push(ResizeObservation(target));
+          resizeController.start();
         }
       }
     }
@@ -122,6 +126,7 @@
       const i = this.observationTargets_.findIndex(t => t.target === target);
       if(i > -1) {
         this.observationTargets_.splice(i, 1);
+        resizeController.stop();
       }
     }
 
@@ -135,11 +140,14 @@
     }
 
     populateActiveTargets_() {
-      this.activeTargets_ = this.observationTargets_.filter(resizeObervation => resizeObervation.isActive());
+      this.activeTargets_ = this.observationTargets_.filter(
+        resizeObervation => resizeObervation.target && resizeObervation.target.parentNode && resizeObervation.isActive()
+      );
     }
 
     broadcast_() {
       this.populateActiveTargets_();
+
       if (this.activeTargets_.length > 0) {
         const entries = [];
         for (const resizeObservation of this.activeTargets_) {
@@ -155,30 +163,49 @@
   }
 
 
-  // Polling - for now
-  const resizeController = () => {
+  //let MdlExtAnimationLoop = require('./animationloop');
+
+  /**
+   * Broadcasts Element.resize events
+   * @return {{start: (function()), stop: (function())}}
+   * @constructor
+   */
+  const ResizeController = () => {
+
+    const rafLoop = new MdlExtAnimationLoop();
 
     const execute = () => {
       for(const resizeObserver of document.resizeObservers) {
         resizeObserver.broadcast_();
       }
-      poll(execute);
+      return document.resizeObservers.length > 0;
     };
 
-    const poll = callback => {
-      window.requestAnimationFrame(callback);
+    const shouldStop = () => {
+      return document.resizeObservers.findIndex( resizeObserver => resizeObserver.observationTargets.length > 0 ) > -1;
     };
 
     return {
-      run() {
-        poll(execute);
+      start() {
+        if(!rafLoop.running) {
+          //console.log('***** Start poll');
+
+          rafLoop.start( () => execute() );
+        }
+      },
+      stop() {
+        if(shouldStop()) {
+          //console.log('***** Stop poll');
+
+          rafLoop.stop();
+        }
       }
     };
   };
 
-  document.resizeObservers = [];
   window.ResizeObserver = ResizeObserver;
 
-  resizeController().run();
+  const resizeController = ResizeController();
+  //console.log('***** ResizeObserver ready');
 
 })(window, document);

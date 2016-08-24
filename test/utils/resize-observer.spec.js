@@ -69,6 +69,10 @@ describe('ResizeObserver', () => {
       expect(window.ResizeObserver).not.to.be.undefined;
     });
 
+    //it('begins waiting', () => {
+    //  expect(window.requestAnimationFrame.calledOnce).to.be.true;
+    //});
+
     it('creates a new ResizeObserver', () => {
       const ro = new window.ResizeObserver(()=>{});
       expect(ro).to.be.an.instanceof(window.ResizeObserver);
@@ -170,6 +174,7 @@ describe('ResizeObserver', () => {
       expect(callback.called).to.equal(false);
       elementHeight = 10;
       mockRaf.step();
+
       expect(callback.called).to.equal(true);
     });
 
@@ -206,20 +211,32 @@ describe('ResizeObserver', () => {
       expect(callback.calledTwice).to.equal(true);
     });
 
-    it('stops observing', () => {
+    it('stops observing after call to unobserve(element)', () => {
+      resizeObserver.unobserve(element);
+      elementWidth = 10;
+      elementHeight = 10;
+
+      getBoundingClientRectStub.reset();
+      mockRaf.step();
+
+      expect(callback.called).to.equal(false);
+      expect(getBoundingClientRectStub.called).to.equal(false);
+    });
+
+    it('stops observing after element is removed from DOM', () => {
+      expect(callback.called).to.equal(false);
+      elementWidth = 10;
+      mockRaf.step();
+      expect(callback.calledOnce).to.equal(true);
+
+      const p = element.parentNode;
+      const el = p.removeChild(element);
       try {
-        resizeObserver.unobserve(element);
-        elementWidth = 10;
-        elementHeight = 10;
-
-        getBoundingClientRectStub.reset();
         mockRaf.step();
-
-        expect(callback.called).to.equal(false);
-        expect(getBoundingClientRectStub.called).to.equal(false);
+        expect(callback.calledTwice).to.equal(false);
       }
       finally {
-        resizeObserver.observe(element);
+        p.appendChild(el);
       }
 
     });

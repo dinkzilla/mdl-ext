@@ -1,7 +1,9 @@
-*, *::before, *::after, input[type="search"] {
+html {
   box-sizing: border-box;
 }
-
+*, *::before, *::after, input[type="search"] {
+  box-sizing: inherit;
+}
 body {
   overflow: hidden;
 }
