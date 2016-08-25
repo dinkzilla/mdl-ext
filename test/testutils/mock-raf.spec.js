@@ -77,10 +77,23 @@ describe('mock-raf', () => {
     assert.equal(initialTime + 1000/60, mockRaf.now());
   });
 
+  it('should advance the mocked time coordinate when calling step with 100ms interval', function () {
+    const initialTime = mockRaf.now();
+    mockRaf.step(1, 100);
+    assert.equal(Math.floor(initialTime)+100, mockRaf.now());
+  });
+
   it('should properly advance time for several steps', function () {
     const initialTime = mockRaf.now();
     mockRaf.step(2, 1);
     assert.equal(initialTime + 2, mockRaf.now());
+  });
+
+  it('should call the callback after 100ms', function () {
+    const callback = sinon.stub();
+    mockRaf.raf(callback);
+    mockRaf.step(1, 100);
+    expect(callback.calledOnce).to.be.true;
   });
 
   it('should call the callbacks only once for several steps', function () {
@@ -168,6 +181,9 @@ describe('mock-raf', () => {
 
       mockRaf.step(2);
       expect(rafStub.callCount).to.equal(4);
+
+      mockRaf.step(1, 200);
+      expect(rafStub.callCount).to.equal(5);
 
       rafStub.restore();
     });

@@ -117,10 +117,12 @@
 
       function grow() {
         var inc = parseInt(document.querySelector('#input-inc').value);
-        for (var el of document.querySelectorAll('.resize')) {
-          let s = window.getComputedStyle(el);
-          let w = parseFloat(s.width);
-          let h = parseFloat(s.height);
+        var elements = document.querySelectorAll('.resize');
+        for (var i = 0; i < elements.length; i++) {
+          var el = elements[i];
+          var s = window.getComputedStyle(el);
+          var w = parseFloat(s.width);
+          var h = parseFloat(s.height);
           el.style.width = (w + inc) + 'px';
           el.style.height = (h + inc * 2 / 3) + 'px';
         }
@@ -128,10 +130,12 @@
 
       function shrink() {
         var dec = parseInt(document.querySelector('#input-inc').value);
-        for (var el of document.querySelectorAll('.resize')) {
-          let s = window.getComputedStyle(el);
-          let w = parseFloat(s.width);
-          let h = parseFloat(s.height);
+        var elements = document.querySelectorAll('.resize');
+        for (var i = 0; i < elements.length; i++) {
+          var el = elements[i];
+          var s = window.getComputedStyle(el);
+          var w = parseFloat(s.width);
+          var h = parseFloat(s.height);
           el.style.width = (w - dec) + 'px';
           el.style.height = (h - dec * 2 / 3) + 'px';
         }
@@ -139,8 +143,9 @@
 
 
       function initResizeHandlers() {
-        for (let el of document.querySelectorAll('.maptiles')) {
-          el.onresize = function() { this.style.borderColor = nextColor() };
+        var elements = document.querySelectorAll('.maptiles');
+        for (var i = 0; i < elements.length; i++) {
+          elements[i].onresize = function() { this.style.borderColor = nextColor() };
         }
       }
 
@@ -169,7 +174,8 @@
 
         displayNotification(entries.length);
 
-        for (let entry of entries) {
+        for (var i = 0; i < entries.length; i++) {
+          var entry = entries[i];
           if (!entry.target || !entry.target.parentNode) {
             throw new Error("detected resize on removed element");
           }
@@ -183,14 +189,15 @@
         var isObserve = document.querySelector('#cb-observe').checked;
         displayNotification(isObserve ? 'on' : 'off');
 
+        var elements = document.querySelectorAll('.resize');
         if (isObserve) {
-          for (let el of document.querySelectorAll('.resize')) {
-            ro.observe(el);
+          for (var i = 0; i < elements.length; i++) {
+            ro.observe(elements[i]);
           }
         }
         else {
-          for (let el of document.querySelectorAll('.resize')) {
-            ro.unobserve(el);
+          for (var i = 0; i < elements.length; i++) {
+            ro.unobserve(elements[i]);
           }
         }
       }
