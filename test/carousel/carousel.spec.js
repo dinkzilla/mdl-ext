@@ -4,7 +4,7 @@ import jsdomify from 'jsdomify';
 import {patchJsDom} from '../testutils/patch-jsdom';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
-import { removeChilds } from '../testutils/domHelpers';
+import { removeChildElements } from '../testutils/dom-utils';
 import createMockRaf from '../testutils/mock-raf';
 import { shouldBehaveLikeAMdlComponent } from '../testutils/shared-component-behaviours';
 import { spyOnKeyboardEvent } from '../testutils/spy-on-keyboard-event';
@@ -228,7 +228,7 @@ describe('MaterialExtCarousel', () => {
       });
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
 
@@ -259,7 +259,7 @@ describe('MaterialExtCarousel', () => {
       });
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
 
@@ -555,7 +555,7 @@ describe('MaterialExtCarousel', () => {
       expect(c.animationLoop).to.not.be.null;
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
 
@@ -577,7 +577,7 @@ describe('MaterialExtCarousel', () => {
       expect(c.animationLoop).to.not.be.null;
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
 
@@ -592,7 +592,7 @@ describe('MaterialExtCarousel', () => {
       }).to.throw(Error);
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
 
@@ -665,7 +665,7 @@ describe('MaterialExtCarousel', () => {
     }
     finally {
       element.removeEventListener('mdl-componentdowngraded', spy);
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
 

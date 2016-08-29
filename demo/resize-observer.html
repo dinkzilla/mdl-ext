@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="styles/dialog-polyfill.css">
 <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
-<link rel="stylesheet" href="../lib/mdl-ext-eqjs.min.css">
+<link rel="stylesheet" href="../lib/mdl-ext-eqjs.css">
 <link rel="stylesheet" href="./styles/demo.css">
 
   <title>Material Design Lite Extensions - Resize Observer</title>
@@ -134,9 +134,9 @@
 
 <style>
   .resize {
-    border: 20px solid rgba(0,255,0, 0.5);
+    border: 2em solid rgba(0,255,0, 0.5);
     background-color: #DDD;
-    width: 300.49px;
+    width: 90%; //300.49px;
     height: 200.5px;
     overflow: hidden;
     position:relative;
@@ -309,7 +309,7 @@
         for (var i = 0; i < entries.length; i++) {
           var entry = entries[i];
           if (!entry.target || !entry.target.parentNode) {
-            throw new Error("detected resize on removed element");
+            throw new Error("detected resize on orphan element");
           }
           if (entry.target.onresize) {
             entry.target.onresize(entry);
@@ -361,7 +361,7 @@
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 <script src="scripts/eq.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://code.getmdl.io/1.1.3/material.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../lib/mdl-ext.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../lib/mdl-ext.js" type="text/javascript" charset="utf-8"></script>
 
 <script>
   (function() {

@@ -1,7 +1,3 @@
-// See: https://developer.mozilla.org/en-US/docs/Web/Events/resize#Example
-// See: https://gist.github.com/yoavniran/d1d33f278bb7744d55c3
-// See: https://github.com/pelotoncycle/frame-throttle
-
 /**
  * Since some events can fire at a high rate, the event handler should be limited to execute computationally
  * expensive operations, such as DOM modifications, inside a single rendered frame.
@@ -15,8 +11,11 @@
  *
  * @param callback the function to throttle
  * @return {function(...[*]=)}
+ * @see https://developer.mozilla.org/en-US/docs/Web/Events/resize#Example
+ * @see https://gist.github.com/yoavniran/d1d33f278bb7744d55c3
+ * @see https://github.com/pelotoncycle/frame-throttle
  */
-const throttledFunction = (callback) => {
+const throttleFunction = (callback) => {
 
   let throttling = false;
 
@@ -31,5 +30,5 @@ const throttledFunction = (callback) => {
   };
 };
 
-export default throttledFunction;
+export default throttleFunction;
 

@@ -2,9 +2,9 @@
 
 <style>
   .resize {
-    border: 20px solid rgba(0,255,0, 0.5);
+    border: 2em solid rgba(0,255,0, 0.5);
     background-color: #DDD;
-    width: 300.49px;
+    width: 90%; //300.49px;
     height: 200.5px;
     overflow: hidden;
     position:relative;
@@ -177,7 +177,7 @@
         for (var i = 0; i < entries.length; i++) {
           var entry = entries[i];
           if (!entry.target || !entry.target.parentNode) {
-            throw new Error("detected resize on removed element");
+            throw new Error("detected resize on orphan element");
           }
           if (entry.target.onresize) {
             entry.target.onresize(entry);

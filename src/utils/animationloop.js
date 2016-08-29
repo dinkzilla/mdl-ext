@@ -24,6 +24,8 @@
  * rAF based animation loop
  */
 
+const DEFAULT_INTERVAL = 1000/60;
+
 class MdlExtAnimationLoop {
 
   /**
@@ -31,11 +33,11 @@ class MdlExtAnimationLoop {
    *
    * @param interval
    */
-  constructor(interval = 17) {
-    this.interval     = interval;
-    this.running_     = false;
-    this.rAFId_       = 0;
-    this.timeElapsed_ = 0;
+  constructor(interval = DEFAULT_INTERVAL) {
+    this.interval      = interval;
+    this.running_      = false;
+    this.rAFId_        = 0;
+    this.timeElapsed_  = 0;
   }
 
   /**
@@ -43,7 +45,7 @@ class MdlExtAnimationLoop {
    * @param interval
    */
   set interval(interval) {
-    this.interval_ = interval < 17 ? 17 : interval;  // 17 ~ 60fps
+    this.interval_ = interval < DEFAULT_INTERVAL ? DEFAULT_INTERVAL : interval;
   }
 
   /**
@@ -77,8 +79,8 @@ class MdlExtAnimationLoop {
       if (this.running_) {
         this.rAFId_ = window.requestAnimationFrame( () => loop( Date.now() ));
         this.timeElapsed_ += now - timeStart;
-
         if(this.timeElapsed_ >= this.interval_) {
+
           this.running_ = tick( this.timeElapsed_ );
           if( (this.timeElapsed_ -= this.interval_) > this.interval_) {
             // time elapsed - interval > interval , indicates inactivity

@@ -29,16 +29,20 @@ import MdlExtAnimationLoop from './animationloop';
   /**
    * ResizeObservation holds observation information for a single Element.
    * @param target
-   * @return {{target: *, broadcastWidth, broadcastHeight, isActive: (function())}}
+   * @return {{target: *, broadcastWidth, broadcastHeight, isOrphan: (function()), isActive: (function())}}
    * @constructor
    */
   const ResizeObservation = target => {
     const {width, height} = clientDimension(target);
+
     return {
       target: target,
       broadcastWidth: width,
       broadcastHeight: height,
 
+      isOrphan() {
+        return !this.target || !this.target.parentNode;
+      },
       isActive() {
         return dimensionHasChanged(this.target, this.broadcastWidth, this.broadcastHeight);
       }
@@ -104,7 +108,7 @@ import MdlExtAnimationLoop from './animationloop';
 
     /**
      * Adds target to the list of observed elements.
-     * @param target The target to observe
+     * @param {HTMLElement} target The target to observe
      */
     observe(target) {
       if(target) {
@@ -139,15 +143,53 @@ import MdlExtAnimationLoop from './animationloop';
       this.activeTargets_ = [];
     }
 
-    populateActiveTargets_() {
-      this.activeTargets_ = this.observationTargets_.filter(
-        resizeObervation => resizeObervation.target && resizeObervation.target.parentNode && resizeObervation.isActive()
-      );
+    /**
+     * Removes the ResizeObserver from the list of observers
+     */
+    destroy() {
+      this.disconnect();
+      const i = document.resizeObservers.findIndex(o => o === this);
+      if(i > -1) {
+        document.resizeObservers.splice(i, 1);
+        resizeController.stop();
+      }
+    }
+
+    deleteOrphansAndPopulateActiveTargets_() {
+
+      // Works
+      //this.observationTargets_ = this.observationTargets_.filter( resizeObervation => !resizeObervation.isOrphan());
+      //this.activeTargets_ = this.observationTargets_.filter( resizeObervation => resizeObervation.isActive());
+
+      // Same result as above
+      /*
+      this.activeTargets_ = [];
+      let n = this.observationTargets_.length-1;
+      while(n >= 0) {
+        if(this.observationTargets_[n].isOrphan()) {
+          this.observationTargets_.splice(n, 1);
+        }
+        else if(this.observationTargets_[n].isActive()) {
+          this.activeTargets_.push(this.observationTargets_[n]);
+        }
+        n -= 1;
+      }
+      */
+
+      // Same result as above
+      this.activeTargets_ = this.observationTargets_.reduceRight( (prev, resizeObservation, index, arr) => {
+        if(resizeObservation.isOrphan()) {
+          arr.splice(index, 1);
+        }
+        else if(resizeObservation.isActive()) {
+          prev.push(resizeObservation);
+        }
+        return prev;
+      }, []);
     }
 
     broadcast_() {
-      this.populateActiveTargets_();
-
+      this.deleteOrphansAndPopulateActiveTargets_();
       if (this.activeTargets_.length > 0) {
         const entries = [];
         for (const resizeObservation of this.activeTargets_) {
@@ -172,9 +214,10 @@ import MdlExtAnimationLoop from './animationloop';
    */
   const ResizeController = () => {
 
-    const rafLoop = new MdlExtAnimationLoop();
+    const rafLoop = new MdlExtAnimationLoop(200);
 
     const execute = () => {
+      //console.log('***** Execute');
       for(const resizeObserver of document.resizeObservers) {
         resizeObserver.broadcast_();
       }
@@ -189,14 +232,13 @@ import MdlExtAnimationLoop from './animationloop';
       start() {
         if(!rafLoop.running) {
           //console.log('***** Start poll');
-
           rafLoop.start( () => execute() );
+
         }
       },
       stop() {
         if(shouldStop()) {
           //console.log('***** Stop poll');
-
           rafLoop.stop();
         }
       }

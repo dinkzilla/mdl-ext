@@ -4,7 +4,7 @@ import jsdomify from 'jsdomify';
 import {patchJsDom} from '../testutils/patch-jsdom';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
-import { removeChilds } from '../testutils/domHelpers';
+import { removeChildElements } from '../testutils/dom-utils';
 import createMockRaf from '../testutils/mock-raf';
 import { shouldBehaveLikeAMdlComponent } from '../testutils/shared-component-behaviours';
 
@@ -248,7 +248,7 @@ describe('MaterialExtStickyHeader', () => {
       }).to.not.throw(Error);
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
 
@@ -263,7 +263,7 @@ describe('MaterialExtStickyHeader', () => {
       }).to.throw(Error);
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
 

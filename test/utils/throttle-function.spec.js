@@ -1,13 +1,13 @@
 import jsdomify from 'jsdomify';
 import sinon from 'sinon';
 import createMockRaf from '../testutils/mock-raf';
-import throttledFunction from '../../src/utils/throttled-function';
+import throttledFunction from '../../src/utils/throttle-function';
 
 const describe = require('mocha').describe;
 const it = require('mocha').it;
 const expect = require('chai').expect;
 
-describe('throttledFunction', () => {
+describe('throttleFunction', () => {
   "use strict";
 
   let realRaf;

@@ -23,7 +23,7 @@ const expect = require('chai').expect;
 const assert = require('chai').assert;
 const sinon = require('sinon');
 
-import { removeChilds } from '../testutils/domHelpers';
+import { removeChildElements } from '../testutils/dom-utils';
 import { shouldBehaveLikeAMdlComponent } from '../testutils/shared-component-behaviours';
 import { spyOnKeyboardEvent } from '../testutils/spy-on-keyboard-event';
 
@@ -272,7 +272,7 @@ describe('MaterialExtAccordion', () => {
       assert.equal(element.getAttribute('aria-multiselectable'), 'false', 'Expected accordion to have attribute aria-multiselectable="false"');
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
 
@@ -286,7 +286,7 @@ describe('MaterialExtAccordion', () => {
       }).to.throw(Error);
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
 
@@ -300,7 +300,7 @@ describe('MaterialExtAccordion', () => {
       }).to.throw(Error);
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
 
@@ -314,7 +314,7 @@ describe('MaterialExtAccordion', () => {
       }).to.throw(Error);
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
 
@@ -344,7 +344,7 @@ describe('MaterialExtAccordion', () => {
       }).to.not.throw(Error);
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
 
@@ -531,7 +531,7 @@ describe('MaterialExtAccordion', () => {
       assert.isTrue(tab2.hasAttribute('aria-selected'), 'Expected accordion panel tab #2 to have attribute "aria-selected"');
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
 
@@ -595,7 +595,7 @@ describe('MaterialExtAccordion', () => {
       expect(openTabs).to.have.lengthOf(2, 'Expected excactly two tabs to have aria-expanded="true"');
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
 
@@ -615,7 +615,7 @@ describe('MaterialExtAccordion', () => {
       expect(openTabs).to.have.lengthOf(n, `Expected ${n} tabs to have aria-expanded="true"`);
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
 
@@ -672,7 +672,7 @@ describe('MaterialExtAccordion', () => {
       assert.equal(tab4.getAttribute('aria-selected'), 'true', 'Expected tab to have aria-selected="true"');
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
 
   });
@@ -715,7 +715,7 @@ describe('MaterialExtAccordion', () => {
       })
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
    */

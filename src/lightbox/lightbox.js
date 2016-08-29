@@ -23,7 +23,7 @@
  * Responsive Lightbox
  */
 
-import throttledFunction from '../utils/throttled-function';
+import throttleFunction from '../utils/throttle-function';
 import {
   VK_ESC,
   VK_SPACE,
@@ -325,7 +325,7 @@ import {
         img.addEventListener('mousedown', this.imgDragHandler_.bind(img), true);
         img.addEventListener('touchstart', this.imgDragHandler_.bind(img), true);
       }
-      window.addEventListener('resize', throttledFunction( () => repositionDialog_(this.element_) ));
+      window.addEventListener('resize', throttleFunction( () => repositionDialog_(this.element_) ));
       window.addEventListener('orientationchange', () => repositionDialog_(this.element_));
 
       // Set upgraded flag

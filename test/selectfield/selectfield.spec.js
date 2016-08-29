@@ -5,7 +5,7 @@ import {patchJsDom} from '../testutils/patch-jsdom';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
 import { shouldBehaveLikeAMdlComponent } from '../testutils/shared-component-behaviours';
-import { removeChilds } from '../testutils/domHelpers';
+import { removeChildElements } from '../testutils/dom-utils';
 
 describe('MaterialExtSelectfield', () => {
 
@@ -206,7 +206,7 @@ describe('MaterialExtSelectfield', () => {
       assert.equal(label.getAttribute('for'), labelFor, 'Expected label "for" attribute value not to be modified');
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
 
@@ -231,7 +231,7 @@ describe('MaterialExtSelectfield', () => {
       assert.equal(label.getAttribute('for'), select.id, 'Expected "for" attribute value to be equal to select "id" attribute value');
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
 
@@ -258,7 +258,7 @@ describe('MaterialExtSelectfield', () => {
       assert.equal(label.getAttribute('for'), select.id, 'Expected label "for" attribute value to be equal to select "id" attribute value');
     }
     finally {
-      removeChilds(container);
+      removeChildElements(container);
     }
   });
 

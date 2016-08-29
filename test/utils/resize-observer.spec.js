@@ -6,7 +6,6 @@ import createMockRaf from '../testutils/mock-raf';
 const describe = require('mocha').describe;
 const it = require('mocha').it;
 const expect = require('chai').expect;
-const assert = require('chai').assert;
 
 
 describe('ResizeObserver', () => {
@@ -37,7 +36,6 @@ describe('ResizeObserver', () => {
     realResizeObserver = window.ResizeObserver;
     realRaf = window.requestAnimationFrame;
     realCaf = window.cancelAnimationFrame;
-
     mockRaf = createMockRaf();
     window.requestAnimationFrame = mockRaf.raf;
     window.cancelAnimationFrame = mockRaf.raf.cancel;
@@ -58,7 +56,7 @@ describe('ResizeObserver', () => {
   afterEach(() => {
   });
 
-  describe('when testing the basics', () => {
+  describe('general behaviour', () => {
     let element;
 
     beforeEach(() => {
@@ -68,10 +66,6 @@ describe('ResizeObserver', () => {
     it('is globally available', () => {
       expect(window.ResizeObserver).not.to.be.undefined;
     });
-
-    //it('begins waiting', () => {
-    //  expect(window.requestAnimationFrame.calledOnce).to.be.true;
-    //});
 
     it('creates a new ResizeObserver', () => {
       const ro = new window.ResizeObserver(()=>{});
@@ -134,6 +128,21 @@ describe('ResizeObserver', () => {
       expect(ro.observationTargets.length).to.equal(0);
       expect(ro.activeTargets.length).to.equal(0);
     });
+
+    it('removes the observer from the observation list', () => {
+      const element2 = document.querySelector('#div-2');
+      const ro = new window.ResizeObserver(()=>{});
+      ro.observe(element);
+      ro.observe(element2);
+      expect(ro.observationTargets.length).of.at.least(2);
+      expect(document.resizeObservers.findIndex(o => o === ro)).to.not.equal(-1);
+
+      ro.destroy();
+      expect(ro.observationTargets.length).to.equal(0);
+      expect(ro.activeTargets.length).to.equal(0);
+      expect(document.resizeObservers.findIndex(o => o === ro)).to.equal(-1);
+    });
+
   });
 
 
@@ -145,6 +154,8 @@ describe('ResizeObserver', () => {
     let getBoundingClientRectStub;
     let callback;
     let resizeObserver;
+    let clock;
+    const interval = 200;
 
     beforeEach(() => {
       element = document.querySelector('#div-1');
@@ -163,9 +174,13 @@ describe('ResizeObserver', () => {
       callback = sinon.spy();
       resizeObserver = new window.ResizeObserver(callback);
       resizeObserver.observe(element);
+
+      clock = sinon.useFakeTimers(Date.now());
+      clock.tick(interval);
     });
 
     afterEach(() => {
+      clock.restore();
       getBoundingClientRectStub.restore();
       rafStub.restore();
     });
@@ -207,6 +222,7 @@ describe('ResizeObserver', () => {
       expect(callback.calledOnce).to.equal(true);
 
       elementWidth = 20;
+      clock.tick(interval);
       mockRaf.step();
       expect(callback.calledTwice).to.equal(true);
     });
@@ -223,11 +239,13 @@ describe('ResizeObserver', () => {
       expect(getBoundingClientRectStub.called).to.equal(false);
     });
 
-    it('stops observing after element is removed from DOM', () => {
+    it('stops observing orphans', () => {
       expect(callback.called).to.equal(false);
       elementWidth = 10;
       mockRaf.step();
       expect(callback.calledOnce).to.equal(true);
+
+      elementHeight = 20;
 
       const p = element.parentNode;
       const el = p.removeChild(element);
@@ -238,7 +256,6 @@ describe('ResizeObserver', () => {
       finally {
         p.appendChild(el);
       }
-
     });
 
   });
@@ -250,8 +267,10 @@ describe('ResizeObserver', () => {
     let elementHeights;
     let mockGbcrs;
     let resizeObserver;
+    let clock;
+    const interval = 200;
 
-    beforeEach(() => {
+    beforeEach( () => {
       elements = [];
       elementWidths = [];
       elementHeights = [];
@@ -275,6 +294,12 @@ describe('ResizeObserver', () => {
         resizeObserver.observe(el);
       });
 
+      clock = sinon.useFakeTimers(Date.now());
+      clock.tick(interval);
+    });
+
+    afterEach( () => {
+      clock.restore();
     });
 
     it('calls the callback when either element\'s size has changed', () => {
@@ -286,6 +311,7 @@ describe('ResizeObserver', () => {
       expect(callback.calledOnce).to.equal(true);
 
       elementWidths[1] = 10;
+      clock.tick(interval);
       mockRaf.step();
 
       expect(callback.calledTwice).to.equal(true);
@@ -298,11 +324,9 @@ describe('ResizeObserver', () => {
       elementWidths[1] = 10;
 
       mockRaf.step();
-
       expect(callback.calledOnce).to.equal(true);
 
       mockRaf.step();
-
       expect(callback.calledOnce).to.equal(true);
     });
 
@@ -329,6 +353,7 @@ describe('ResizeObserver', () => {
 
         mockGbcrs[0].reset();
         mockGbcrs[1].reset();
+        clock.tick(interval);
         mockRaf.step();
 
         expect(callback.called).to.equal(true);
@@ -359,6 +384,8 @@ describe('ResizeObserver', () => {
 
         mockGbcrs[0].reset();
         mockGbcrs[1].reset();
+        clock.tick(interval);
+        clock.tick(interval);
         mockRaf.step();
 
         expect(callback.called).to.equal(true);

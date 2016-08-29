@@ -11,7 +11,8 @@ describe('MdlExtAnimationLoop', () => {
   let realRaf;
   let realCaf;
   let mockRaf;
-  let stub;
+  let rafStub;
+  let clock;
 
   before ( () => {
     jsdomify.create('<!doctype html><html><body><div id="mount"></div></body></html>');
@@ -20,11 +21,13 @@ describe('MdlExtAnimationLoop', () => {
     mockRaf = createMockRaf();
     window.requestAnimationFrame = mockRaf.raf;
     window.cancelAnimationFrame = mockRaf.raf.cancel;
-    stub = sinon.stub(window, 'requestAnimationFrame', mockRaf.raf);
+    rafStub = sinon.stub(window, 'requestAnimationFrame', mockRaf.raf);
+    clock = sinon.useFakeTimers(Date.now());
   });
 
   after ( () => {
-    stub.restore();
+    clock.restore();
+    rafStub.restore();
     window.requestAnimationFrame = realRaf;
     window.cancelAnimationFrame = realCaf;
     jsdomify.destroy();
@@ -40,7 +43,7 @@ describe('MdlExtAnimationLoop', () => {
 
     it('zero arguments defaults to ~60fps', () => {
       const animationLoop = new MdlExtAnimationLoop();
-      expect(animationLoop.interval_).to.be.equal(17);
+      expect(animationLoop.interval_).to.be.equal(1000/60);
     });
 
     it('takes one argument', () => {
@@ -60,11 +63,14 @@ describe('MdlExtAnimationLoop', () => {
     it('runs animation loop callback', () => {
       let t = 0;
       let n = 0;
+      let interval = 50;
       let duration = 100;
 
-      new MdlExtAnimationLoop().start( timeElapsed => {
+      const animationLoop = new MdlExtAnimationLoop(interval);
+      animationLoop.start( timeElapsed => {
         t += timeElapsed;
-        if(t < duration) {
+
+        if(t <= duration) {
           ++n;
           return true;
         }
@@ -73,17 +79,23 @@ describe('MdlExtAnimationLoop', () => {
         }
       });
 
-      mockRaf.step(100);
+      clock.tick(interval);
+      mockRaf.step(1);
+
+      clock.tick(interval);
+      mockRaf.step(1);
+
       assert.isAtLeast(n, 2, 'Expected animation loop to be called multiple times');
+      animationLoop.stop();
     });
 
     it('stops animation loop', () => {
-
-      const animationLoop = new MdlExtAnimationLoop().start( () => {
+      const animationLoop = new MdlExtAnimationLoop();
+      animationLoop.start( () => {
         return true;
       });
-
       expect(animationLoop.running).to.be.true;
+      clock.tick(1000/60);
       mockRaf.step(1);
       animationLoop.stop();
       expect(animationLoop.running).to.be.false;

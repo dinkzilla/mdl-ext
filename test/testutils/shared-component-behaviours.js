@@ -1,6 +1,6 @@
 'use strict';
 
-import { removeChilds } from '../testutils/domHelpers';
+import { removeChildElements } from '../testutils/dom-utils';
 
 const it = require('mocha').it;
 const assert = require('chai').assert;
@@ -48,7 +48,7 @@ const shouldBehaveLikeAMdlComponent = args => {
         assert.isAtLeast(dataUpgraded.indexOf(componentName), 0, `Expected attriobute "data-upgraded" attribute to contain "${componentName}"`);
       }
       finally {
-        removeChilds(container);
+        removeChildElements(container);
       }
     }
   });
@@ -67,7 +67,7 @@ const shouldBehaveLikeAMdlComponent = args => {
         expect(element.getAttribute('data-upgraded')).to.not.include(componentName, `Expected "${componentName}" to downgrade`);
       }
       finally {
-        removeChilds(container);
+        removeChildElements(container);
       }
     }
   });

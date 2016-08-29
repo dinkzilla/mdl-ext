@@ -1,6 +1,7 @@
 'use strict';
 import 'utils/resize-observer';
-import 'utils/throttled-function';
+import 'utils/debounce-function';
+import 'utils/throttle-function';
 import 'utils/animationloop';
 import 'utils/easing';
 import 'utils/json-utils';
