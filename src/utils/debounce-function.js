@@ -49,7 +49,7 @@ const debounceFunction = function(callback, threshold=250, context) {
     };
 
     if (context === undefined || context === null) {
-      context = this;
+      context = this || window;
     }
 
     cancel();
