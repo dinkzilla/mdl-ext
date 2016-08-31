@@ -54,7 +54,7 @@ const throttleFunction = (callback, delay=MIN_DELAY, context) => {
     return {
       cancel: () => cancel(),
       immediate: () => execute()
-    }
+    };
   };
 };
 
