@@ -24,6 +24,10 @@ const debounceFunction = function(callback, threshold=250, context) {
     threshold = MIN_THRESHOLD;
   }
 
+  if (context === undefined || context === null) {
+    context = this || window;
+  }
+
   let next = null;
   let start = 0;
 
@@ -47,10 +51,6 @@ const debounceFunction = function(callback, threshold=250, context) {
       }
       next = window.requestAnimationFrame(later);
     };
-
-    if (context === undefined || context === null) {
-      context = this || window;
-    }
 
     cancel();
     start = Date.now();

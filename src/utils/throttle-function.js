@@ -18,6 +18,10 @@ const throttleFunction = (callback, delay=MIN_DELAY, context) => {
     delay = MIN_DELAY;
   }
 
+  if (context === undefined || context === null) {
+    context = this || window;
+  }
+
   let next = null;
   let start = 0;
 
@@ -41,10 +45,6 @@ const throttleFunction = (callback, delay=MIN_DELAY, context) => {
       }
       next = window.requestAnimationFrame(later);
     };
-
-    if (context === undefined || context === null) {
-      context = this || window;
-    }
 
     if(next === null) {
       start = Date.now();
