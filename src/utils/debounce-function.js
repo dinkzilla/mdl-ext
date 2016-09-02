@@ -33,19 +33,19 @@ const debounceFunction = function(callback, threshold=250, context) {
 
   return function (...args) {
 
-    const cancel = function() {
+    const cancel = () => {
       if(next) {
         window.cancelAnimationFrame(next);
         next = null;
       }
     };
 
-    const execute = function() {
+    const execute = () => {
       cancel();
       return Reflect.apply(callback, context, args);
     };
 
-    const later = function() {
+    const later = () => {
       if (threshold - (Date.now() - start) <= 0) {
         return execute();
       }

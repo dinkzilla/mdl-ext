@@ -27,19 +27,19 @@ const throttleFunction = (callback, delay=MIN_DELAY, context) => {
 
   return (...args) => {
 
-    const cancel = function() {
+    const cancel = () => {
       if(next !== null) {
         window.cancelAnimationFrame(next);
         next = null;
       }
     };
 
-    const execute = function() {
+    const execute = () => {
       cancel();
       return Reflect.apply(callback, context, args);
     };
 
-    const later = function() {
+    const later = () => {
       if (delay - (Date.now() - start) <= 0) {
         return execute();
       }

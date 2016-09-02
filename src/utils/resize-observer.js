@@ -7,7 +7,7 @@
  *
  */
 
-import MdlExtAnimationLoop from './animationloop';
+import intervalFunction from './interval-function';
 
 ((window, document) => {
   'use strict';
@@ -130,7 +130,6 @@ import MdlExtAnimationLoop from './animationloop';
       const i = this.observationTargets_.findIndex(t => t.target === target);
       if(i > -1) {
         this.observationTargets_.splice(i, 1);
-        resizeController.stop();
       }
     }
 
@@ -151,7 +150,6 @@ import MdlExtAnimationLoop from './animationloop';
       const i = document.resizeObservers.findIndex(o => o === this);
       if(i > -1) {
         document.resizeObservers.splice(i, 1);
-        resizeController.stop();
       }
     }
 
@@ -205,7 +203,7 @@ import MdlExtAnimationLoop from './animationloop';
   }
 
 
-  //let MdlExtAnimationLoop = require('./animationloop');
+  //let interval = require('./interval-function');
 
   /**
    * Broadcasts Element.resize events
@@ -214,33 +212,31 @@ import MdlExtAnimationLoop from './animationloop';
    */
   const ResizeController = () => {
 
-    const rafLoop = new MdlExtAnimationLoop(200);
+    const shouldStop = () => {
+      return document.resizeObservers.findIndex( resizeObserver => resizeObserver.observationTargets.length > 0 ) > -1;
+    };
 
     const execute = () => {
       //console.log('***** Execute');
       for(const resizeObserver of document.resizeObservers) {
         resizeObserver.broadcast_();
       }
-      return document.resizeObservers.length > 0;
+
+      return shouldStop();
     };
 
-    const shouldStop = () => {
-      return document.resizeObservers.findIndex( resizeObserver => resizeObserver.observationTargets.length > 0 ) > -1;
-    };
+    const interval = intervalFunction(execute, 200)();
 
     return {
       start() {
-        if(!rafLoop.running) {
+        if(!interval.started) {
           //console.log('***** Start poll');
-          rafLoop.start( () => execute() );
-
+          interval.start();
         }
       },
       stop() {
-        if(shouldStop()) {
-          //console.log('***** Stop poll');
-          rafLoop.stop();
-        }
+        //console.log('***** Stop poll');
+        interval.stop();
       }
     };
   };

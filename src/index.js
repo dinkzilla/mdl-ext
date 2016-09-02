@@ -3,7 +3,6 @@ import 'utils/debounce-function';
 import 'utils/throttle-function';
 import 'utils/interval-function';
 import 'utils/resize-observer';
-import 'utils/animationloop';
 import 'utils/easing';
 import 'utils/json-utils';
 import 'utils/string-utils';
