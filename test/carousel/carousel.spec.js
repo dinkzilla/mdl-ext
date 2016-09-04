@@ -652,7 +652,7 @@ describe('MaterialExtCarousel', () => {
       element.dispatchEvent(ev);
 
       let c = element.MaterialExtCarousel.getConfig();
-      assert.isTrue(c.animationLoop.running, 'Expected animation to run before carousel downgrade');
+      assert.isTrue(c.animationLoop.started, 'Expected animation to run before carousel downgrade');
 
       element.addEventListener('mdl-componentdowngraded', spy);
 
@@ -661,7 +661,7 @@ describe('MaterialExtCarousel', () => {
       assert.isTrue(spy.calledOnce, 'Expected "mdl-componentdowngraded" event to fire after call to "componentHandler.downgradeElements"');
 
       c = element.MaterialExtCarousel.getConfig();
-      assert.isFalse(c.animationLoop.running, 'Expected animation to stop after carousel downgrade');
+      assert.isFalse(c.animationLoop.started, 'Expected animation to stop after carousel downgrade');
     }
     finally {
       element.removeEventListener('mdl-componentdowngraded', spy);

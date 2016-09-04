@@ -155,11 +155,11 @@ import intervalFunction from './interval-function';
 
     deleteOrphansAndPopulateActiveTargets_() {
 
-      // Works
+      // Works, but to iterations
       //this.observationTargets_ = this.observationTargets_.filter( resizeObervation => !resizeObervation.isOrphan());
       //this.activeTargets_ = this.observationTargets_.filter( resizeObervation => resizeObervation.isActive());
 
-      // Same result as above
+      // Same result as above, one iteration
       /*
       this.activeTargets_ = [];
       let n = this.observationTargets_.length-1;
@@ -174,7 +174,7 @@ import intervalFunction from './interval-function';
       }
       */
 
-      // Same result as above
+      // Same result as above - but reduce is cooler :-)
       this.activeTargets_ = this.observationTargets_.reduceRight( (prev, resizeObservation, index, arr) => {
         if(resizeObservation.isOrphan()) {
           arr.splice(index, 1);
@@ -225,18 +225,14 @@ import intervalFunction from './interval-function';
       return shouldStop();
     };
 
-    const interval = intervalFunction(execute, 200)();
+    const interval = intervalFunction(200);
 
     return {
       start() {
         if(!interval.started) {
           //console.log('***** Start poll');
-          interval.start();
+          interval.start(execute);
         }
-      },
-      stop() {
-        //console.log('***** Stop poll');
-        interval.stop();
       }
     };
   };

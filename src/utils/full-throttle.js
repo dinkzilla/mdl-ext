@@ -10,9 +10,14 @@
  * is rendered to the screen.
  * *
  * @param callback the function to throttle
+ * @param context  optional context of this, default to global
  * @return {function(...[*])}
  */
-const fullThrottle = (callback) => {
+const fullThrottle = (callback, context) => {
+
+  if (!context) {
+    context = this || window;
+  }
 
   let throttling = false;
 
@@ -20,8 +25,8 @@ const fullThrottle = (callback) => {
     if(!throttling) {
       throttling = true;
       window.requestAnimationFrame( () => {
-        callback(...args);
         throttling = false;
+        return Reflect.apply(callback, context, args);
       });
     }
   };

@@ -24,7 +24,7 @@ const debounceFunction = function(callback, threshold=250, context) {
     threshold = MIN_THRESHOLD;
   }
 
-  if (context === undefined || context === null) {
+  if (!context) {
     context = this || window;
   }
 

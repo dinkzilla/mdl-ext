@@ -16,7 +16,6 @@ describe('intervalFunction', () => {
   let mockRaf;
   let rafStub;
   let clock;
-  let interval = 1000/60;
 
   before ( () => {
     jsdomify.create('<!doctype html><html><body><div id="mount"></div></body></html>');
@@ -38,39 +37,34 @@ describe('intervalFunction', () => {
   });
 
   it('creates an interval function', () => {
-    const callback = () => {};
-    const interval = intervalFunction(callback);
-    expect(interval).to.be.a('function');
+    const interval = intervalFunction();
+    expect(interval).to.be.a('object');
   });
 
   it('returns refernce to "start", "stop", "immediate" and "started"', () => {
-    const callback = () => {};
-    const interval = intervalFunction(callback)();
-    const {start, stop, immediate, started} = interval;
+    const intervalFn = intervalFunction();
+    const {start, stop, immediate, started, interval} = intervalFn;
     expect(start).to.be.a('function');
     expect(stop).to.be.a('function');
     expect(immediate).to.be.a('function');
     expect(started).to.be.a('boolean');
+    expect(interval).to.be.a('number');
   });
 
   it('should not start when constructed', () => {
-    const callback = () => {};
-    const interval = intervalFunction(callback)();
+    const interval = intervalFunction(10);
     expect(interval.started).to.be.false;
   });
 
-
   it('trigger the callback once per interval', () => {
-    let n = 0;
     let interval = 40;
+    const loop = intervalFunction(interval);
 
-    const loop = intervalFunction( () => {
+    let n = 0;
+    loop.start( () => {
       ++n;
       return true;
-    }, interval)();
-
-
-    loop.start();
+    });
 
     clock.tick(interval);
     mockRaf.step();
@@ -97,7 +91,9 @@ describe('intervalFunction', () => {
     let interval = 50;
     let duration = 100;
 
-    const loop = intervalFunction(timeElapsed => {
+    const loop = intervalFunction(interval);
+
+    loop.start( timeElapsed => {
       t += timeElapsed;
       ++n;
 
@@ -107,10 +103,7 @@ describe('intervalFunction', () => {
       else {
         return false;
       }
-    }, interval)();
-
-
-    loop.start();
+    });
 
     clock.tick(interval);
     mockRaf.step();
@@ -133,22 +126,52 @@ describe('intervalFunction', () => {
   });
 
   it('trigger the callback twice when immediate is called', () => {
+    const interval = 1000;
     let n = 0;
 
-    const loop = intervalFunction( () => {
+    const loop = intervalFunction(interval);
+
+    loop.start( () => {
       ++n;
       return true;
-    }, 10)();
+    });
 
     loop.immediate();
-    loop.start();
 
-    clock.tick(1000);
+    clock.tick(interval);
     mockRaf.step();
 
-    assert.equal(n, 2, 'Expected animation loop to be called twice');
+    assert.equal(n, 2, 'Expected loop to be called twice');
     loop.stop();
   });
 
+  it('can change interval', () => {
+    const intervalFn = intervalFunction();
+    const startInterval = intervalFn.interval;
+    intervalFn.interval = 100;
+
+    assert.notEqual(startInterval, intervalFn.interval, 'Expected interval to change');
+    assert.equal(intervalFn.interval, 100, 'Expected new interval to be 100');
+  });
+
+  it('given interval less than 1000/60ms defaults to 1000/60ms', () => {
+    const intervalFn = intervalFunction();
+    intervalFn.interval = 1;
+    assert.equal(intervalFn.interval, 1000/60, 'Expected interval to be 1000/60ms');
+  });
+
+  it('accepts only a function as callback paramater', () => {
+    const intervalFn = intervalFunction();
+    expect(() => {
+      intervalFn.start('foo');
+    }).to.throw(TypeError);
+  });
+
+  it('can not call immediate before start', () => {
+    const intervalFn = intervalFunction();
+    expect(() => {
+      intervalFn.immediate();
+    }).to.throw(ReferenceError);
+  });
 
 });

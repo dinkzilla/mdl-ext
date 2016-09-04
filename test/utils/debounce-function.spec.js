@@ -140,4 +140,43 @@ describe('debounceFunction', () => {
     expect(x).to.equal('AabB');
   });
 
+  it('debounces an event', () => {
+    let eventFlag = undefined;
+    let listener = (e) => { eventFlag = e; };
+    listener = sinon.spy(listener);
+
+    const debouncedListener = debounceFunction(listener);
+    window.addEventListener('resize', debouncedListener);
+
+    const event = new Event('resize');
+    window.dispatchEvent(event);
+
+    expect(listener.called).to.equal(false);
+
+    clock.tick(threshold);
+    mockRaf.step();
+    expect(listener.called).to.equal(true);
+    expect(eventFlag).to.not.equal(undefined);
+
+    window.dispatchEvent(new Event('resize'));
+
+    clock.tick(threshold/4);
+    mockRaf.step();
+    window.dispatchEvent(new Event('resize'));
+
+    clock.tick(threshold/4);
+    mockRaf.step();
+
+    window.dispatchEvent(new Event('resize'));
+    clock.tick(threshold/4);
+    mockRaf.step();
+    clock.tick(threshold/4);
+    mockRaf.step();
+    clock.tick(threshold/2);
+    mockRaf.step();
+    expect(listener.calledTwice).to.equal(true);
+
+    window.removeEventListener('resize', debouncedListener);
+  });
+
 });

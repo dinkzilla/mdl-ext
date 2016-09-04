@@ -1,11 +1,10 @@
 'use strict';
-import 'utils/debounce-function';
-import 'utils/throttle-function';
+import 'utils/string-utils';
+import 'utils/json-utils';
+import 'utils/full-throttle';
+import 'utils/easing';
 import 'utils/interval-function';
 import 'utils/resize-observer';
-import 'utils/easing';
-import 'utils/json-utils';
-import 'utils/string-utils';
 import 'sticky-header/sticky-header';
 import 'selectfield/selectfield';
 import 'accordion/accordion';

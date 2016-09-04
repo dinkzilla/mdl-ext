@@ -22,7 +22,7 @@
  * Image carousel
  */
 
-import MdlExtAnimationLoop from '../utils/animationloop';
+import intervalFunction from '../utils/interval-function';
 import { inOutQuintic } from '../utils/easing';
 import { jsonStringToObject} from '../utils/json-utils';
 import {
@@ -70,10 +70,10 @@ import {
       autostart    : false,
       type         : 'slide',
       interval     : 1000,
-      animationLoop: new MdlExtAnimationLoop(1000)
+      animationLoop: intervalFunction(1000)
     };
 
-    this.scrollAnimation_ = new MdlExtAnimationLoop(33);
+    this.scrollAnimation_ = intervalFunction(33);
 
     // Initialize instance.
     this.init();
@@ -125,19 +125,19 @@ import {
     };
 
 
-    if(!this.config_.animationLoop.running) {
+    if(!this.config_.animationLoop.started) {
       this.config_.animationLoop.interval = this.config_.interval;
       let direction = 'next';
 
       if('scroll' === this.config_.type) {
-        this.config_.animationLoop.start(() => {
+        this.config_.animationLoop.start( () => {
           direction = nextScroll(direction);
           return true; // It runs until cancelSlideShow_ is triggered
         });
       }
       else {
         nextSlide();
-        this.config_.animationLoop.start(() => {
+        this.config_.animationLoop.start( () => {
           return nextSlide(); // It runs until cancelSlideShow_ is triggered
         });
       }
@@ -151,7 +151,7 @@ import {
    * @private
    */
   MaterialExtCarousel.prototype.cancelSlideShow_ = function() {
-    if(this.config_.animationLoop.running) {
+    if(this.config_.animationLoop.started) {
       this.config_.animationLoop.stop();
       this.emitSelectEvent_('pause', VK_ESC, this.element_.querySelector(`.${SLIDE}[aria-selected]`));
     }
@@ -172,7 +172,8 @@ import {
     if(distance !== 0) {
       const duration = Math.max(Math.min(Math.abs(distance), newDuration||400), 100); // duration is between 100 and newDuration||400ms||distance
       let t = 0;
-      this.scrollAnimation_.stop().start( timeElapsed => {
+      this.scrollAnimation_.stop();
+      this.scrollAnimation_.start( timeElapsed => {
         t += timeElapsed;
         if(t < duration) {
           this.element_.scrollLeft = inOutQuintic(t, start, distance, duration);

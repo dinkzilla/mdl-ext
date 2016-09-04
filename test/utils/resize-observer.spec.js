@@ -249,9 +249,27 @@ describe('ResizeObserver', () => {
 
       const p = element.parentNode;
       const el = p.removeChild(element);
+
       try {
+        clock.tick(interval);
         mockRaf.step();
         expect(callback.calledTwice).to.equal(false);
+      }
+      finally {
+        p.appendChild(el);
+      }
+    });
+
+    it('removes observed orphans from observationTargets', () => {
+
+      const n = resizeObserver.observationTargets.length;
+      const p = element.parentNode;
+      const el = p.removeChild(element);
+
+      try {
+        clock.tick(interval);
+        mockRaf.step();
+        expect(resizeObserver.observationTargets.length).to.equal(n-1);
       }
       finally {
         p.appendChild(el);

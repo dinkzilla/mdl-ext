@@ -24,7 +24,7 @@
  * bringing the header back when a user might need it: they reach the bottom of the page or start scrolling up.
  */
 
-import throttleFunction from '../utils/throttle-function';
+import fullThrottle from '../utils/full-throttle';
 import { jsonStringToObject } from '../utils/json-utils';
 import {
   IS_UPGRADED
@@ -73,7 +73,7 @@ import {
     this.header_.style.width = `${this.content_.clientWidth}px`;
   };
 
-  const throttleResize = throttleFunction(self => self.recalcWidth_() );
+  const throttleResize = fullThrottle(self => self.recalcWidth_() );
 
   /**
    * Adjust header width when window resizes or oreientation changes
@@ -135,7 +135,7 @@ import {
   };
 
 
-  const throttleScroll = throttleFunction((self) => self.reposition_());
+  const throttleScroll = fullThrottle((self) => self.reposition_());
 
   /**
    * Scroll header when content scrolls

@@ -18,7 +18,7 @@ const throttleFunction = (callback, delay=MIN_DELAY, context) => {
     delay = MIN_DELAY;
   }
 
-  if (context === undefined || context === null) {
+  if (!context) {
     context = this || window;
   }
 
