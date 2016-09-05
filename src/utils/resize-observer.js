@@ -18,10 +18,59 @@ import intervalFunction from './interval-function';
 
   document.resizeObservers = [];
 
-  const clientDimension = target => target.getBoundingClientRect();
+  /**
+   * The content rect is defined in section 2.3 ResizeObserverEntry of the spec
+   * @param target the element to calculate the content rect for
+   * @return {{top: (Number|number), left: (Number|number), width: number, height: number}}
+   *
+   * Note:
+   * Avoid using margins on the observed element. The calculation can return incorrect values when margins are involved.
+   *
+   * The following CSS will report incorrect width (Chrome OSX):
+   *
+   * <div id="outer" style="width: 300px; height:300px; background-color: green;overflow:auto;">
+   *   <div id="observed" style="width: 400px; height:400px; background-color: yellow; margin:30px; border: 20px solid red; padding:10px;">
+   *   </div>
+   * </div>
+   *
+   * The calculated width is 280. The actual (correct) width is 340 since Chrome clips the margin.
+   *
+   * Use an outer container if you really need a "margin":
+   *
+   * <div id="outer" style="width: 300px; height:300px; background-color: green;overflow:auto; padding:30px;">
+   *   <div id="observed" style="width: 400px; height:400px; background-color: yellow; margin: 0; border: 20px solid red; padding:10px;">
+   *   </div>
+   * </div>
+   *
+   * A more detailed explanation can be fund here:
+   * http://stackoverflow.com/questions/21064101/understanding-offsetwidth-clientwidth-scrollwidth-and-height-respectively
+   */
+  const getContentRect = target => {
+    const cs = window.getComputedStyle(target);
+    const r = target.getBoundingClientRect();
+    const top = parseFloat(cs.paddingTop) || 0;
+    const left = parseFloat(cs.paddingLeft) || 0;
+    const width = r.width  - (
+        (parseFloat(cs.marginLeft) || 0) +
+        (parseFloat(cs.marginRight) || 0) +
+        (parseFloat(cs.borderLeftWidth) || 0) +
+        (parseFloat(cs.borderRightWidth) || 0) +
+        (left) +
+        (parseFloat(cs.paddingRight) || 0)
+      );
+    const height = r.height  - (
+        (parseFloat(cs.marginTop) || 0) +
+        (parseFloat(cs.marginBottom) || 0) +
+        (parseFloat(cs.borderTopWidth) || 0) +
+        (parseFloat(cs.borderBottomWidth) || 0) +
+        (top) +
+        (parseFloat(cs.paddingBottom) || 0)
+      );
+    return {width: width, height: height, top: top, left: left};
+  };
 
   const dimensionHasChanged = (target, lastWidth, lastHeight) => {
-    const {width, height} = clientDimension(target);
+    const {width, height} = getContentRect(target);
     return width !== lastWidth || height !== lastHeight;
   };
 
@@ -33,7 +82,7 @@ import intervalFunction from './interval-function';
    * @constructor
    */
   const ResizeObservation = target => {
-    const {width, height} = clientDimension(target);
+    const {width, height} = getContentRect(target);
 
     return {
       target: target,
@@ -191,7 +240,7 @@ import intervalFunction from './interval-function';
       if (this.activeTargets_.length > 0) {
         const entries = [];
         for (const resizeObservation of this.activeTargets_) {
-          const rect = clientDimension(resizeObservation.target);
+          const rect = getContentRect(resizeObservation.target);
           resizeObservation.broadcastWidth = rect.width;
           resizeObservation.broadcastHeight = rect.height;
           entries.push(ResizeObserverEntry(resizeObservation.target, rect));
