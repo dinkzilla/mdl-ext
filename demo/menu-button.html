@@ -28,12 +28,10 @@
 <link rel="stylesheet" href="../lib/mdl-ext-eqjs.css">
 <link rel="stylesheet" href="./styles/demo.css">
 
-  <title>Material Design Lite Extensions - Sticky Header</title>
+  <title>Material Design Lite Extensions - Menu Button</title>
 </head>
-
 <body>
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
   <header class="mdl-layout__header mdlext-layout__sticky-header mdlext-js-sticky-header">
   <div class="mdl-layout__header-row">
 
@@ -142,19 +140,37 @@
   </ul>
 </aside>
 
-
   <main id="mount" class="mdl-layout__content">
+    <h5 class="mdlext-demo-header">Menu Button</h5>
 
-    <h5>Sticky Header, Drawer (not fixed)</h5>
+<div class="menu-button" role="presentation">
+  <button id="menu-example-button" class="menu-button__button" role="button" aria-haspopup="true" aria-controls="menu-example-dropdown" tabindex="0">
+    <span class="menu-button__label">I'm the label!</span>
+  </button>
+  <ul id="menu-example-dropdown" class="menu-button__dropdown" role="menu" aria-labelledby="menu-example">
+    <li class="menu-button__dropdown__item" role="menuitem">Menu item #1</li>
+    <li class="menu-button__dropdown__item" role="menuitem">Menu item #2</li>
+    <li class="menu-button__dropdown__item" role="menuitem">Menu item #n</li>
+  </ul>
+</div>
 
-    <p>A sticky header makes site navigation easily accessible anywhere on the page and saves content space at the same.</p>
-    <p>The header should auto-hide, i.e. hiding the header automatically when a user starts scrolling down the page
-      and bringing the header back when a user might need it: they reach the bottom of the page or start scrolling up.</p>
-    <p class="mdl-typography--subhead">To see how the sticky header works, click the button a few
-      times to add content. Next scroll the page up and down.</p>
-    <button id="a-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-      Click to add more content
-    </button>
+
+<!--
+https://www.w3.org/TR/wai-aria-practices/#menubutton
+http://w3c.github.io/aria-practices/examples/menu-button/menu-button-1.html
+http://w3c.github.io/aria-practices/examples/menu-button/menu-button-2.html
+http://tympanus.net/codrops/2012/10/04/custom-drop-down-list-styling/
+http://www.slideshare.net/webaxe/html5-dev-con-2012-aria-widget
+http://terrillthompson.com/blog/474
+https://github.com/davidtheclark/react-aria-menubutton
+https://codepen.io/tiffanytse/pen/Dkvtr
+https://codepen.io/andytran/pen/vLNGvN
+https://codepen.io/dapacreative/pen/WQoLzb
+https://codepen.io/gabrieltomescu/pen/ZGGyPK
+https://codepen.io/Idered/pen/vowrB
+https://codepen.io/Stedesign/pen/DbAJh
+-->
+
   </main>
 </div>
 <script src="scripts/dialog-polyfill.js" type="text/javascript" charset="utf-8"></script>
@@ -169,52 +185,10 @@
     document.addEventListener('DOMContentLoaded', function() {
       var title = document.querySelector('#header-title');
       if(title) {
-        title.innerHTML = 'Sticky Header';
+        title.innerHTML = 'Menu Button';
       }
     });
-
-    var btn = document.querySelector('#a-button');
-    btn.addEventListener('click', function() {
-
-      var content = document.querySelector('.mdl-layout__content');
-      content.insertAdjacentHTML('beforeend',
-        '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In porttitor lorem eu faucibus aliquet. ' +
-        'In vehicula risus turpis, ut dictum ante tristique et. Aenean ultricies sed urna ac condimentum. ' +
-        'Vivamus nisl tortor, ultricies at aliquam nec, semper at purus. Duis purus tortor, laoreet eget ante a, ' +
-        'rhoncus vulputate lorem. Pellentesque id enim ut massa posuere vestibulum sit amet eget elit. Nulla quis ' +
-        'euismod massa, id varius dui. Ut congue urna non ipsum placerat rhoncus. Curabitur a sollicitudin diam. ' +
-        'Donec id lectus eleifend, blandit magna a, mattis turpis. Fusce non tellus pulvinar, finibus dui ac, ' +
-        'porttitor ante. Vestibulum et commodo purus, et tincidunt nulla. Suspendisse blandit sodales est, nec ' +
-        'luctus sem sollicitudin in. Etiam libero tellus, porttitor sit amet velit a, commodo sodales neque.</p>' +
-        '<p>Maecenas id sodales lacus, eu ullamcorper nibh. Sed posuere consectetur nunc nec dapibus. Nam tristique ' +
-        'ex vel urna dapibus luctus. Phasellus eget mi ac tortor aliquet auctor non vitae risus. Cum sociis natoque ' +
-        'penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec et egestas elit. Sed id lorem enim.' +
-        'Aliquam maximus enim sed tincidunt pretium.</p>' +
-        '<p>Phasellus dictum, leo vel bibendum efficitur, mauris metus volutpat magna, at pharetra libero dolor id ' +
-        'tellus. Mauris convallis tempus libero, sit amet suscipit massa maximus a. Duis ut dignissim nulla, nec ' +
-        'gravida purus. Proin eget erat justo. Phasellus congue sapien eleifend sapien mollis, nec molestie eros ' +
-        'efficitur. Pellentesque et diam at risus ultrices pharetra nec in augue. Phasellus vestibulum, lacus a ' +
-        'dictum vulputate, mauris nisi dictum massa, in venenatis felis sapien a nunc. Integer mi tellus, imperdiet ' +
-        'vel dignissim sed, fringilla ut urna.</p>' +
-        '<p>Suspendisse potenti. Pellentesque eget suscipit orci, at tempor est. Cras sed sollicitudin nunc. Donec ' +
-        'convallis, arcu a euismod cursus, arcu odio pharetra lectus, vitae feugiat diam massa vestibulum metus. In ' +
-        'odio tellus, consectetur eget est et, vehicula hendrerit dolor. Ut ultrices nulla tellus, sit amet ' +
-        'consectetur dolor aliquet quis. Etiam non fermentum dolor.</p>' +
-        '<p>Donec accumsan risus in lectus sollicitudin ' +
-        'vulputate. Praesent condimentum a leo at interdum. Donec ' +
-        'pharetra congue erat a accumsan. Aliquam gravida ' +
-        'lobortis mi, id elementum sapien ultrices vel. ' +
-        'Pellentesque habitant morbi tristique senectus et ' +
-        'netus et malesuada fames ac turpis egestas. Proin ' +
-        'consequat enim orci, nec blandit lorem luctus ut. ' +
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
-        'Etiam pretium nunc non metus gravida, nec tincidunt ' +
-        'tortor volutpat. Aliquam erat volutpat. Curabitur ' +
-        'varius purus ac auctor pharetra.</p>');
-    });
-
   }());
 </script>
-
 </body>
 </html>
