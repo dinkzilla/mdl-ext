@@ -11,3 +11,4 @@ import 'accordion/accordion';
 import 'lightboard/lightboard';
 import 'lightbox/lightbox';
 import 'carousel/carousel';
+import 'menu-button/menu-button';

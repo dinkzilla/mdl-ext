@@ -1,20 +1,34 @@
 <h5 class="mdlext-demo-header">Menu Button</h5>
 
-<div class="menu-button" role="presentation">
-  <button id="menu-example-button" class="menu-button__button"
+<div class="mdlext-menu-button mdlext-js-menu-button" role="presentation">
+  <button id="menu-example-button" class="mdlext-menu-button__button"
     role="button"
     aria-haspopup="true"
     aria-controls="menu-example-dropdown"
+    aria-expanded="true"
     tabindex="0">
-    <span class="menu-button__label">I'm the label!</span>
+    <span class="mdlext-menu-button__label">I'm the label!</span>
   </button>
-  <ul id="menu-example-dropdown" class="menu-button__dropdown" role="menu" aria-labelledby="menu-example">
-    <li class="menu-button__dropdown__item" role="menuitem">Menu item #1</li>
-    <li class="menu-button__dropdown__item" role="menuitem">Menu item #2</li>
-    <li class="menu-button__dropdown__item" role="menuitem">Menu item #n</li>
+  <ul id="menu-example-dropdown" class="mdlext-menu-button__menu"
+      role="menu"
+      aria-labelledby="menu-example-button">
+    <li class="mdlext-menu-button__menu__item" role="menuitem">Menu item #1</li>
+    <li class="mdlext-menu-button__menu__item" role="menuitem">Menu item #2</li>
+    <li class="mdlext-menu-button__menu__item" role="menuitem">Menu item #n</li>
   </ul>
 </div>
 
+
+<div class="mdlext-menu-button mdlext-js-menu-button">
+  <button class="mdlext-menu-button__button">
+    <span class="mdlext-menu-button__label">I'm the label!</span>
+  </button>
+  <ul class="mdlext-menu-button__menu">
+    <li class="mdlext-menu-button__menu__item">Menu item #1</li>
+    <li class="mdlext-menu-button__menu__item">Menu item #2</li>
+    <li class="mdlext-menu-button__menu__item">Menu item #n</li>
+  </ul>
+</div>
 
 <!--
 https://www.w3.org/TR/wai-aria-practices/#menubutton

@@ -1,6 +1,6 @@
 'use strict';
 
-import { removeChildElements } from '../testutils/dom-utils';
+import { removeChildElements } from './dom-utils';
 
 const it = require('mocha').it;
 const assert = require('chai').assert;
