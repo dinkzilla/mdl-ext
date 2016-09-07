@@ -143,11 +143,6 @@ describe('ResizeObserver', () => {
       expect(document.resizeObservers.findIndex(o => o === ro)).to.equal(-1);
     });
 
-    it('has not implemented skipped targets', () => {
-      const ro = new window.ResizeObserver(()=>{});
-      expect(ro.skippedTargets.length).to.equal(0);
-    });
-
   });
 
 
@@ -268,7 +263,27 @@ describe('ResizeObserver', () => {
       }
     });
 
+    it('throws ErrorEvent if observer has skipped observations', () => {
+      expect(callback.called).to.equal(false);
+      elementHeight = 10;
+      mockRaf.step();
+      expect(callback.called).to.equal(true);
+
+      // Move the observed element up one level
+      document.body.appendChild(element);
+      try {
+        expect(() => {
+          elementHeight = 20;
+          clock.tick(interval);
+          mockRaf.step();
+        }).to.throw(ErrorEvent);
+      }
+      finally {
+        document.querySelector('#mount').appendChild(element);
+      }
+    });
   });
+
 
   describe('when observing many elements', () => {
     let callback;

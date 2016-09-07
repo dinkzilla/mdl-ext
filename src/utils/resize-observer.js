@@ -18,6 +18,8 @@ import intervalFunction from './interval-function';
 
   document.resizeObservers = [];
 
+  const MAX_DEPTH = 65535; // Infinity, kind of :)
+
   const isOrphan = target => !target || !target.parentNode;
 
   /**
@@ -124,6 +126,7 @@ import intervalFunction from './interval-function';
       target: target,
       broadcastWidth: width,
       broadcastHeight: height,
+      depth: MAX_DEPTH,
 
       get isOrphan() {
         return !this.target || !this.target.parentNode;
@@ -184,6 +187,7 @@ import intervalFunction from './interval-function';
       this.observationTargets_ = [];
       this.activeTargets_ = [];
       this.skippedTargets_ = [];
+      this.shallowestDepth = 0;
 
       document.resizeObservers.push(this);
     }
@@ -270,7 +274,6 @@ import intervalFunction from './interval-function';
      * It computes all active observations for a document. To gather active observations at depth, run these steps:
      *
      * 1. Let depth be the depth passed in.
-     *    TODO: How do I determine the depth passed in??
      * 2. For each observer in resizeObservers run these steps:
      *   1. Clear observer’s activeTargets, and skippedTargets
      *   2. For each observation in observer.observationTargets run this step:
@@ -304,15 +307,17 @@ import intervalFunction from './interval-function';
       this.activeTargets_ = [];
       this.skippedTargets_ = [];
       let index = this.observationTargets_.length-1;
-      while(index >= 0) {
+      while(index > -1) {
         const resizeObservation = this.observationTargets_[index];
 
         if(resizeObservation.isOrphan) {
           this.observationTargets_.splice(index, 1);
         }
         else if(resizeObservation.isActive) {
+          const targetDepth = depthOfNode(resizeObservation.target);
+          resizeObservation.depth = targetDepth;
 
-          if(depthOfNode(resizeObservation.target) > depth) {
+          if(targetDepth >= depth) {
             this.activeTargets_.push(resizeObservation);
           }
           else {
@@ -337,53 +342,80 @@ import intervalFunction from './interval-function';
      *     2. Add entry to entries
      *     3. Set observation.broadcastWidth to entry.contentRect.width.
      *     4. Set observation.broadcastHeight to entry.contentRect.height.
-     *     5. Set targetDepth to the result of calculate depth for node for observation.target ???.
-     *     6. Set shallowestTargetDepth to targetDepth if targetDepth < shallowestTargetDepth ???
+     *     5. Set targetDepth to the result of calculate depth for node for observation.target.
+     *     6. Set shallowestTargetDepth to targetDepth if targetDepth < shallowestTargetDepth
      *   4. Invoke observer.callback with entries.
      *   5. Clear observer.activeTargets.
      * 3. Return shallowestTargetDepth.
      *
+     * @return {number} the shallowest target depth, 0 if observer has no active targets
      * @private
      */
-    broadcast_() {
-      this.gatherActiveObservationsAtDepth_(0); // TODO: How do I determine depth value??
 
+    broadcastActiveObservations_() {
       if (this.activeTargets_.length > 0) {
+        let shallowestTargetDepth = MAX_DEPTH;
         const entries = [];
 
         for (const resizeObservation of this.activeTargets_) {
           const rect = getContentRect(resizeObservation.target);
           resizeObservation.broadcastWidth = rect.width;
           resizeObservation.broadcastHeight = rect.height;
+          if(resizeObservation.depth < shallowestTargetDepth) {
+            shallowestTargetDepth = resizeObservation.depth;
+          }
           entries.push(ResizeObserverEntry(resizeObservation.target, rect));
         }
         this.callback_(entries);
+
+        return shallowestTargetDepth;
       }
+      return 0;
     }
   }
 
 
   /**
    * Broadcasts Element.resize events
+   *
+   * For each fully active Document in docs, run the following steps for that Document and its browsing contentx:
+   * 1. recalc styles
+   * 2. update layout
+   * 3. set depth to 0
+   * 4. gather active observations at depth depth for Document
+   * 5. repeat while (document has active observations)
+   *   1. set depth to broadcast active observations
+   *   2. recalc styles
+   *   3. update layout
+   *   4. gather active observations at depth depth for Document
+   * 6. if Document has skipped observations then deliver resize loop error notification
+   *
    * @return {{start: (function()), stop: (function())}}
    * @constructor
    */
   const ResizeController = () => {
+
+    const interval = intervalFunction(200);
 
     const shouldStop = () => {
       return document.resizeObservers.findIndex( resizeObserver => resizeObserver.observationTargets.length > 0 ) > -1;
     };
 
     const execute = () => {
-      //console.log('***** Execute');
       for(const resizeObserver of document.resizeObservers) {
-        resizeObserver.broadcast_();
-      }
+        resizeObserver.gatherActiveObservationsAtDepth_(resizeObserver.shallowestDepth);
+        resizeObserver.shallowestDepth = resizeObserver.broadcastActiveObservations_();
 
+        if(resizeObserver.skippedTargets.length > 0) {
+          interval.stop();
+          throw new ErrorEvent('Skipped targets detected', {
+            error : new Error('Resize loop error'),
+            message : 'Observer has skipped observations',
+          });
+        }
+      }
       return shouldStop();
     };
-
-    const interval = intervalFunction(200);
 
     return {
       start() {
@@ -392,6 +424,7 @@ import intervalFunction from './interval-function';
           interval.start(execute);
         }
       }
+
     };
   };
 
