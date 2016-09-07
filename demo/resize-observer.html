@@ -236,6 +236,13 @@
 
 <div id="observed-element" class="resize maptiles"></div>
 
+<div id="outer" style="width: 300px; height:300px; background-color: green;overflow:auto;">
+  <div id="inner" style="width: 400px; height:400px; background-color: yellow; margin:30px; border: 20px solid red; padding:10px;">
+    <div id="content" style="width:100%; height:100%; background-color:blue;"></div>
+  </div>
+</div>
+<button id="btn-foo" class="cmd-button mdl-button mdl-js-button mdl-button--raised">Click</button>
+
 <script>
   'use strict';
 
@@ -357,7 +364,36 @@
       // Start
       initResizeHandlers()
       toggleObserve();
+
+
+      document.querySelector('#btn-foo').addEventListener('click', function() {
+        var inner = document.querySelector("#inner");
+        var cs = window.getComputedStyle(inner);
+        var r = inner.getBoundingClientRect();
+
+        var width = r.width  - (
+          (parseFloat(cs.marginLeft) || 0) +
+          (parseFloat(cs.marginRight) || 0) +
+          (parseFloat(cs.borderLeftWidth) || 0) +
+          (parseFloat(cs.borderRightWidth) || 0) +
+          (parseFloat(cs.paddingLeft) || 0) +
+          (parseFloat(cs.paddingRight) || 0)
+          );
+
+        console.log(
+        cs.getPropertyValue('margin-left'),
+        cs.getPropertyValue('margin-right'),
+        cs.getPropertyValue('border-left-width'),
+        cs.getPropertyValue('border-right-width'),
+        cs.getPropertyValue('padding-left'),
+        cs.getPropertyValue('padding-right'));
+
+        var content = document.querySelector("#content");
+        console.log(r.width, cs.width, width, content.getBoundingClientRect().width);
+      });
+
     });
+
 
   }());
 </script>

@@ -143,6 +143,11 @@ describe('ResizeObserver', () => {
       expect(document.resizeObservers.findIndex(o => o === ro)).to.equal(-1);
     });
 
+    it('has not implemented skipped targets', () => {
+      const ro = new window.ResizeObserver(()=>{});
+      expect(ro.skippedTargets.length).to.equal(0);
+    });
+
   });
 
 
@@ -245,6 +250,8 @@ describe('ResizeObserver', () => {
       mockRaf.step();
       expect(callback.calledOnce).to.equal(true);
 
+      const n = resizeObserver.observationTargets.length;
+
       elementHeight = 20;
 
       const p = element.parentNode;
@@ -254,21 +261,6 @@ describe('ResizeObserver', () => {
         clock.tick(interval);
         mockRaf.step();
         expect(callback.calledTwice).to.equal(false);
-      }
-      finally {
-        p.appendChild(el);
-      }
-    });
-
-    it('removes observed orphans from observationTargets', () => {
-
-      const n = resizeObserver.observationTargets.length;
-      const p = element.parentNode;
-      const el = p.removeChild(element);
-
-      try {
-        clock.tick(interval);
-        mockRaf.step();
         expect(resizeObserver.observationTargets.length).to.equal(n-1);
       }
       finally {
