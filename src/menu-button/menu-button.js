@@ -26,6 +26,11 @@
  */
 import { randomString } from '../utils/string-utils';
 import {
+  VK_ENTER,
+  VK_SPACE,
+  VK_ARROW_UP,
+  VK_ARROW_DOWN,
+  VK_TAB,
   IS_UPGRADED,
   MDL_RIPPLE_EFFECT,
   MDL_RIPPLE_EFFECT_IGNORE_EVENTS
@@ -58,6 +63,43 @@ import {
 
 
   // Public methods.
+
+  /**
+   * Open menu
+   * @public
+   */
+  MaterialExtMenuButton.prototype.openMenu = function() {
+    this.button_.setAttribute('aria-expanded', 'true');
+    this.menu_.removeAttribute('hidden');
+  };
+  MaterialExtMenuButton.prototype['openMenu'] = MaterialExtMenuButton.prototype.openMenu;
+
+  /**
+   * Close menu
+   * @public
+   */
+  MaterialExtMenuButton.prototype.closeMenu = function() {
+    this.button_.setAttribute('aria-expanded', 'false');
+    this.menu_.setAttribute('hidden', '');
+  };
+  MaterialExtMenuButton.prototype['closeMenu'] = MaterialExtMenuButton.prototype.closeMenu;
+
+  /**
+   * Toggle menu
+   * @public
+
+  MaterialExtMenuButton.prototype.toggleMenu = function() {
+    if (this.button_.getAttribute('aria-expanded').toLowerCase() === 'false') {
+      this.openMenu();
+    }
+    else {
+      this.closeMenu();
+    }
+  };
+  MaterialExtMenuButton.prototype['toggleMenu'] = MaterialExtMenuButton.prototype.toggleMenu;
+  */
+
+
 
   /**
    * Upgrades component
@@ -111,13 +153,53 @@ import {
       }
     };
 
-    // Remove listeners ...just in case
+    const buttonKeyUpHandler = event => {
+
+      switch (event.keyCode) {
+        case VK_ARROW_UP:
+          this.openMenu();
+          break;
+
+        case VK_ARROW_DOWN:
+          this.openMenu();
+          break;
+
+        case VK_SPACE:
+        case VK_ENTER:
+          this.openMenu();
+          break;
+
+        case VK_TAB:
+          this.closeMenu();
+          return;
+
+        default:
+          return;
+      }
+
+      event.stopPropagation();
+      event.preventDefault();
+    };
+
+    const buttonClickHandler = () => {
+      this.openMenu();
+    };
+
 
     // Add WAI-ARIA
     addWaiAria();
 
+    // Button
+
+    // Remove listeners ...just in case
+    this.button_.removeEventListener('keyup', buttonKeyUpHandler);
+    this.button_.removeEventListener('click', buttonClickHandler);
 
     // Add listeners
+    this.button_.addEventListener('keyup', buttonKeyUpHandler);
+    this.button_.addEventListener('click', buttonClickHandler);
+
+    // Menu
 
   };
 

@@ -32,6 +32,7 @@ downward pointing arrow or triangle to hint that activating the button will disp
 * `role="menu"`: identifies the element as a menu widget.
 * `role="menuitem"`: identifies an element as a menu item widget.
 * `aria-labelledby`: use to provide a label for the menu widget.
+* `aria-selected`: 
 * `tabindex`:
  
 >The roles, states, and properties needed for the menu are described in more detail in WAI-ARIA Authoring Practices, [2.19 Menu or Menu bar](https://www.w3.org/TR/wai-aria-practices/#menu).
