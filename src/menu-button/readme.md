@@ -19,6 +19,7 @@ downward pointing arrow or triangle to hint that activating the button will disp
     * <kbd>Up Arrow</kbd> or <kbd>Left Arrow</kbd>: move focus to previous menu item.
     * <kbd>Down Arrow</kbd> or <kbd>Right Arrow</kbd>: Move focus to next menu item.
     * <kbd>Esc</kbd>: Close menu and move focus back to menu button.
+    
 >The keyboard behaviors after the menu is open are described in more detail in WAI-ARIA Authoring Practices, [2.19 Menu or Menu bar](https://www.w3.org/TR/wai-aria-practices/#menu).
 
 ### Menu Button, WAI-ARIA Roles, States, and Properties

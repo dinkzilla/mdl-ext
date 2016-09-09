@@ -68,9 +68,26 @@ import {
    * Open menu
    * @public
    */
-  MaterialExtMenuButton.prototype.openMenu = function() {
+  MaterialExtMenuButton.prototype.openMenu = function(position='first') {
     this.button_.setAttribute('aria-expanded', 'true');
     this.menu_.removeAttribute('hidden');
+
+    let menuItem = null;
+    switch (position.toLowerCase()) {
+      case 'first':
+        menuItem = this.menu_.firstElementChild;
+        break;
+      case 'last':
+        menuItem = this.menu_.lastElementChild;
+        break;
+      case 'selected':
+        menuItem = this.menu_.querySelector(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`);
+        break;
+    }
+
+    if(menuItem) {
+      menuItem.focus();
+    }
   };
   MaterialExtMenuButton.prototype['openMenu'] = MaterialExtMenuButton.prototype.openMenu;
 
@@ -109,6 +126,15 @@ import {
 
     const addWaiAria = () => {
 
+      let buttonId;
+      if (!this.button_.hasAttribute('id')) {
+        buttonId = `menu-button-button-${randomString()}`;
+        this.button_.id = buttonId;
+      }
+      else {
+        buttonId = this.button_.id;
+      }
+
       if(!this.button_.hasAttribute('tabindex')) {
         this.button_.setAttribute('tabindex', '0');
       }
@@ -123,7 +149,7 @@ import {
         this.button_.setAttribute('aria-haspopup', 'true');
 
         let menuId;
-        if (!this.button_.hasAttribute('id')) {
+        if (!this.menu_.hasAttribute('id')) {
           menuId = `menu-button-menu-${randomString()}`;
           this.menu_.id = menuId;
         }
@@ -132,6 +158,7 @@ import {
         }
 
         this.button_.setAttribute('aria-controls', menuId);
+        this.menu_.setAttribute('aria-labelledby', buttonId);
 
         this.menu_.setAttribute('tabindex', '-1');
         this.menu_.setAttribute('role', 'menu');
@@ -157,7 +184,7 @@ import {
 
       switch (event.keyCode) {
         case VK_ARROW_UP:
-          this.openMenu();
+          this.openMenu('last');
           break;
 
         case VK_ARROW_DOWN:
@@ -192,11 +219,11 @@ import {
     // Button
 
     // Remove listeners ...just in case
-    this.button_.removeEventListener('keyup', buttonKeyUpHandler);
+    this.button_.removeEventListener('keydown', buttonKeyUpHandler);
     this.button_.removeEventListener('click', buttonClickHandler);
 
     // Add listeners
-    this.button_.addEventListener('keyup', buttonKeyUpHandler);
+    this.button_.addEventListener('keydown', buttonKeyUpHandler);
     this.button_.addEventListener('click', buttonClickHandler);
 
     // Menu
