@@ -5,11 +5,15 @@ import jsdomify from 'jsdomify';
 import {patchJsDom} from '../testutils/patch-jsdom';
 import { removeChildElements } from '../testutils/dom-utils';
 import {
+  VK_TAB,
   VK_ENTER,
+  VK_ESC,
   VK_SPACE,
+  VK_ARROW_LEFT,
   VK_ARROW_UP,
+  VK_ARROW_RIGHT,
   VK_ARROW_DOWN,
-  VK_TAB
+  IS_FOCUSED,
 } from '../../src/utils/constants';
 
 const describe = require('mocha').describe;
@@ -110,6 +114,7 @@ describe('MaterialExtMenuButton', () => {
         'openMenu',
         'closeMenu',
         'upgrade',
+        'selectedMenuItem'
       ];
       methods.forEach( fn => {
         expect(component.MaterialExtMenuButton[fn]).to.be.a('function');
@@ -184,77 +189,84 @@ describe('MaterialExtMenuButton', () => {
       component = document.querySelector('#default-fixture .mdlext-menu-button');
       button = component.querySelector('.mdlext-menu-button__button');
       menu = component.querySelector('.mdlext-menu-button__menu');
+
+      [...menu.querySelectorAll('.mdlext-menu-button__menu[aria-selected="true"]')]
+        .forEach(selectedItem => selectedItem.removeAttribute('aria-selected'));
     });
 
-    it('opens the menu when button is clicked', () => {
+
+    it('sets focus class on component when button is focused', () => {
+      dispatchEventEvent(button, 'focus');
+      assert.isTrue(component.classList.contains(IS_FOCUSED), `Expected menu button component to have class "${IS_FOCUSED}"`);
+    });
+
+    it('removes focus class from component when button is blured', () => {
+      dispatchEventEvent(button, 'focus');
+      assert.isTrue(component.classList.contains(IS_FOCUSED), `Expected menu button component to have class "${IS_FOCUSED}"`);
+
+      dispatchEventEvent(button, 'blur');
+      assert.isFalse(component.classList.contains(IS_FOCUSED), `Expected menu button component to not have class "${IS_FOCUSED}"`);
+    });
+
+    it('opens the menu when button is clicked and move focus to the first menu item', () => {
       component.MaterialExtMenuButton.closeMenu();
 
       // Trigger click event to toggle menu
-      button.dispatchEvent(
-        new MouseEvent('click', {
-          bubbles: true,
-          cancelable: true,
-          view: window
-        })
-      );
+      dispatchMouseEvent(button, 'click');
       assert.equal(button.getAttribute('aria-expanded'), 'true', 'Mouse click: Expected button to have aria-expanded=true');
       assert.isFalse(menu.hasAttribute('hidden'), 'Mouse click: Expected menu to not have hidden attribute');
       assert.equal(menu.firstElementChild, document.activeElement, 'Mouse click: Expected first menu item to have focus');
     });
 
-    it('opens the menu when Enter or Space key is pressed', () => {
+    it('opens the menu when button is clicked and move focus to a previously selected menu item', () => {
       component.MaterialExtMenuButton.closeMenu();
-      button.dispatchEvent(
-        new KeyboardEvent('keydown', {
-          bubbles: true,
-          cancelable: true,
-          keyCode: VK_SPACE,
-          shiftKey: false
-        })
-      );
+      const selectedItem = menu.childNodes[1];
+      selectedItem.setAttribute('aria-selected', 'true');
+
+      // Trigger click event to toggle menu
+      dispatchMouseEvent(button, 'click');
+      const n = component.MaterialExtMenuButton.selectedMenuItem();
+      assert.equal(selectedItem, n, 'Mouse click: Expected second menu item to have focus');
+    });
+
+    it('opens the menu when Enter or Space key is pressed and move focus to the first menu item', () => {
+      component.MaterialExtMenuButton.closeMenu();
+      dispatchKeyDownEvent(button, VK_SPACE);
       assert.equal(button.getAttribute('aria-expanded'), 'true', 'Space key: Expected button to have aria-expanded=true');
       assert.isFalse(menu.hasAttribute('hidden'), 'Space key: Expected menu to not have hidden attribute');
       assert.equal(menu.firstElementChild, document.activeElement, 'Space key: Expected first menu item to have focus');
 
       component.MaterialExtMenuButton.closeMenu();
-      button.dispatchEvent(
-        new KeyboardEvent('keydown', {
-          bubbles: true,
-          cancelable: true,
-          keyCode: VK_ENTER,
-          shiftKey: false
-        })
-      );
+      dispatchKeyDownEvent(button, VK_ENTER);
       assert.equal(button.getAttribute('aria-expanded'), 'true', 'Enter key: Expected button to have aria-expanded=true');
       assert.isFalse(menu.hasAttribute('hidden'), 'Enter key: Expected menu to not have hidden attribute');
       assert.equal(menu.firstElementChild, document.activeElement, 'Enter key: Expected first menu item to have focus');
     });
 
-    it('opens the menu and move focus to the last menu item when arrowUp key is pressed', () => {
+    it('opens the menu when Enter or Space key is pressed and move focus to the previously selected menu item', () => {
       component.MaterialExtMenuButton.closeMenu();
-      button.dispatchEvent(
-        new KeyboardEvent('keydown', {
-          bubbles: true,
-          cancelable: true,
-          keyCode: VK_ARROW_UP,
-          shiftKey: false
-        })
-      );
+      const selectedItem = menu.childNodes[1];
+      selectedItem.setAttribute('aria-selected', 'true');
+
+      dispatchKeyDownEvent(button, VK_SPACE);
+      assert.equal(selectedItem, component.MaterialExtMenuButton.selectedMenuItem(), 'Space key: Expected second menu item to have focus');
+
+      component.MaterialExtMenuButton.closeMenu();
+      dispatchKeyDownEvent(button, VK_ENTER);
+      assert.equal(selectedItem, component.MaterialExtMenuButton.selectedMenuItem(), 'Enter key: Expected second menu item to have focus');
+    });
+
+    it('opens the menu and move focus to the last menu item when arrow up key is pressed', () => {
+      component.MaterialExtMenuButton.closeMenu();
+      dispatchKeyDownEvent(button, VK_ARROW_UP);
       assert.equal(button.getAttribute('aria-expanded'), 'true', 'Arrow up key: Expected button to have aria-expanded=true');
       assert.isFalse(menu.hasAttribute('hidden'), 'Arrow up key: Expected menu to not have hidden attribute');
       assert.equal(menu.lastElementChild, document.activeElement, 'Arrow up key: Expected last menu item to have focus');
     });
 
-    it('opens the menu and move focus to the first menu item when arrowDown key is pressed', () => {
+    it('opens the menu and move focus to the first menu item when arrow down key is pressed', () => {
       component.MaterialExtMenuButton.closeMenu();
-      button.dispatchEvent(
-        new KeyboardEvent('keydown', {
-          bubbles: true,
-          cancelable: true,
-          keyCode: VK_ARROW_DOWN,
-          shiftKey: false
-        })
-      );
+      dispatchKeyDownEvent(button, VK_ARROW_DOWN);
       assert.equal(button.getAttribute('aria-expanded'), 'true', 'Arrow down key: Expected button to have aria-expanded=true');
       assert.isFalse(menu.hasAttribute('hidden'), 'Arrow down key: Expected menu to not have hidden attribute');
       assert.equal(menu.firstElementChild, document.activeElement, 'Arrow down key: Expected first menu item to have focus');
@@ -262,18 +274,54 @@ describe('MaterialExtMenuButton', () => {
 
     it('closes the menu when tab key is pressed', () => {
       component.MaterialExtMenuButton.openMenu();
-      button.dispatchEvent(
-        new KeyboardEvent('keydown', {
-          bubbles: true,
-          cancelable: true,
-          keyCode: VK_TAB,
-          shiftKey: false
-        })
-      );
+      dispatchKeyDownEvent(button, VK_TAB);
+      assert.equal(button.getAttribute('aria-expanded'), 'false', 'Tab key: Expected button to have aria-expanded=false');
+      assert.isTrue(menu.hasAttribute('hidden'), 'Tab key: Expected menu to have hidden attribute');
+    });
+
+    it('closes the menu when esc key is pressed', () => {
+      component.MaterialExtMenuButton.openMenu();
+      dispatchKeyDownEvent(button, VK_ESC);
       assert.equal(button.getAttribute('aria-expanded'), 'false', 'Tab key: Expected button to have aria-expanded=false');
       assert.isTrue(menu.hasAttribute('hidden'), 'Tab key: Expected menu to have hidden attribute');
     });
 
   });
 
+
+  describe('Menu interactions', () => {
+
+  });
+
+
+  function dispatchKeyDownEvent(target, keyCode, shiftKey=false) {
+    target.dispatchEvent(
+      new KeyboardEvent('keydown', {
+        bubbles: true,
+        cancelable: true,
+        keyCode: keyCode,
+        shiftKey: shiftKey
+      })
+    );
+  }
+
+  function dispatchEventEvent(target, name) {
+    target.dispatchEvent(
+      new Event(name, {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      })
+    );
+  }
+
+  function dispatchMouseEvent(target, name) {
+    target.dispatchEvent(
+      new MouseEvent(name, {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      })
+    );
+  }
 });

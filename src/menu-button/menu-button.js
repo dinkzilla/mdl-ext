@@ -26,11 +26,15 @@
  */
 import { randomString } from '../utils/string-utils';
 import {
-  VK_ENTER,
-  VK_SPACE,
-  VK_ARROW_UP,
-  VK_ARROW_DOWN,
   VK_TAB,
+  VK_ENTER,
+  VK_ESC,
+  VK_SPACE,
+  VK_ARROW_LEFT,
+  VK_ARROW_UP,
+  VK_ARROW_RIGHT,
+  VK_ARROW_DOWN,
+  IS_FOCUSED,
   IS_UPGRADED,
   MDL_RIPPLE_EFFECT,
   MDL_RIPPLE_EFFECT_IGNORE_EVENTS
@@ -44,14 +48,13 @@ import {
   const MENU_BUTTON_MENU = 'mdlext-menu-button__menu';
   const MENU_BUTTON_MENU_ITEM = 'mdlext-menu-button__menu__item';
 
+
   /**
    * https://github.com/google/material-design-lite/issues/4205
    * @constructor
    * @param {Element} element The element that will be upgraded.
    */
   const MaterialExtMenuButton = function MaterialExtMenuButton(element) {
-    //console.log('***** MaterialExtMenuButton constructor');
-
     this.element_ = element;
     this.button_ = null;
     this.menu_ = null;
@@ -82,6 +85,10 @@ import {
         break;
       case 'selected':
         menuItem = this.menu_.querySelector(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`);
+        if(!menuItem) {
+          this.openMenu('first');
+          return;
+        }
         break;
     }
 
@@ -102,25 +109,19 @@ import {
   MaterialExtMenuButton.prototype['closeMenu'] = MaterialExtMenuButton.prototype.closeMenu;
 
   /**
-   * Toggle menu
+   * Get selected menu item
    * @public
-
-  MaterialExtMenuButton.prototype.toggleMenu = function() {
-    if (this.button_.getAttribute('aria-expanded').toLowerCase() === 'false') {
-      this.openMenu();
-    }
-    else {
-      this.closeMenu();
-    }
+   * @returns {Element} The selected menu item or null if no item selected
+   */
+  MaterialExtMenuButton.prototype.selectedMenuItem = function() {
+    return this.menu_.querySelector(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`);
   };
-  MaterialExtMenuButton.prototype['toggleMenu'] = MaterialExtMenuButton.prototype.toggleMenu;
-  */
-
-
+  MaterialExtMenuButton.prototype['selectedMenuItem'] = MaterialExtMenuButton.prototype.selectedMenuItem;
 
   /**
    * Upgrades component
    * Call this method if you add/remove elements to the component during runtime
+   * @public
    */
   MaterialExtMenuButton.prototype.upgrade = function() {
 
@@ -180,7 +181,7 @@ import {
       }
     };
 
-    const buttonKeyUpHandler = event => {
+    const buttonKeyDownHandler = event => {
 
       switch (event.keyCode) {
         case VK_ARROW_UP:
@@ -193,7 +194,11 @@ import {
 
         case VK_SPACE:
         case VK_ENTER:
-          this.openMenu();
+          this.openMenu('selected');
+          break;
+
+        case VK_ESC:
+          this.closeMenu();
           break;
 
         case VK_TAB:
@@ -208,8 +213,99 @@ import {
       event.preventDefault();
     };
 
+    const buttonFocusHandler = () => {
+      this.element_.classList.add(IS_FOCUSED);
+    };
+
+    const buttonBlurHandler = () => {
+      this.element_.classList.remove(IS_FOCUSED);
+    };
+
     const buttonClickHandler = () => {
-      this.openMenu();
+      this.openMenu('selected');
+    };
+
+    // ----------------------------------
+
+    const removeSelected = () => {
+      [...this.menu_.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`)]
+        .forEach(selectedItem => selectedItem.removeAttribute('aria-selected'));
+    };
+
+    const addSelected = item => {
+      if( item && !item.hasAttribute('aria-selected') ) {
+        removeSelected();
+        item.setAttribute('aria-selected', 'true');
+      }
+    };
+
+    const menuKeyDownHandler = event => {
+      let n = document.activeElement;
+
+      switch (event.keyCode) {
+        case VK_ARROW_UP:
+        case VK_ARROW_LEFT:
+          n = n.previousElementSibling;
+          if(!n) {
+            n = this.menu_.lastElementChild;
+          }
+          n.focus();
+          break;
+
+        case VK_ARROW_DOWN:
+        case VK_ARROW_RIGHT:
+          n = n.nextElementSibling;
+          if(!n) {
+            n = this.menu_.firstElementChild;
+          }
+          n.focus();
+          break;
+
+        case VK_SPACE:
+        case VK_ENTER:
+          addSelected(n);
+          this.closeMenu();
+          this.button_.focus();
+          // TODO: trigger onchange
+          break;
+
+        case VK_ESC:
+          removeSelected();
+          this.closeMenu();
+          this.button_.focus();
+          break;
+
+        case VK_TAB:
+          removeSelected();
+          this.closeMenu();
+          return;
+
+        default:
+          return;
+      }
+      event.stopPropagation();
+      event.preventDefault();
+    };
+
+    const menuClickHandler = (event) => {
+      if(event.target !== this.menu_) {
+        addSelected(event.target);
+        // TODO: trigger onchange
+      }
+      this.closeMenu();
+      this.button_.focus();
+    };
+
+    const menuFocusHandler =() => {
+      this.element_.classList.add(IS_FOCUSED);
+    };
+
+    const menuBlurHandler = event => {
+      if(!(this.menu_.contains(event.relatedTarget) || this.button_.contains(event.relatedTarget))) {
+        // Find a better solution
+        this.element_.classList.remove(IS_FOCUSED);
+        setTimeout(() => this.closeMenu(), 300);
+      }
     };
 
 
@@ -219,15 +315,27 @@ import {
     // Button
 
     // Remove listeners ...just in case
-    this.button_.removeEventListener('keydown', buttonKeyUpHandler);
+    this.button_.removeEventListener('keydown', buttonKeyDownHandler);
     this.button_.removeEventListener('click', buttonClickHandler);
+    this.button_.removeEventListener('focus', buttonFocusHandler);
+    this.button_.removeEventListener('blur', buttonBlurHandler);
 
     // Add listeners
-    this.button_.addEventListener('keydown', buttonKeyUpHandler);
+    this.button_.addEventListener('keydown', buttonKeyDownHandler);
     this.button_.addEventListener('click', buttonClickHandler);
+    this.button_.addEventListener('focus', buttonFocusHandler);
+    this.button_.addEventListener('blur', buttonBlurHandler);
 
     // Menu
+    this.menu_.removeEventListener('keydown', menuKeyDownHandler);
+    this.menu_.removeEventListener('click', menuClickHandler);
+    this.menu_.removeEventListener('focus', menuFocusHandler);
+    this.menu_.removeEventListener('blur', menuBlurHandler);
 
+    this.menu_.addEventListener('keydown', menuKeyDownHandler);
+    this.menu_.addEventListener('click', menuClickHandler);
+    this.menu_.addEventListener('focus', menuFocusHandler, true);
+    this.menu_.addEventListener('blur', menuBlurHandler, true);
   };
 
   MaterialExtMenuButton.prototype['upgrade'] = MaterialExtMenuButton.prototype.upgrade;
@@ -257,8 +365,6 @@ import {
 
       // Set upgraded flag
       this.element_.classList.add(IS_UPGRADED);
-
-      //console.log('***** MaterialExtMenuButton upgraded');
     }
   };
 
@@ -268,7 +374,9 @@ import {
    */
   MaterialExtMenuButton.prototype.mdlDowngrade_ = function() {
     'use strict';
-    //console.log('***** MaterialExtMenuButton downgraded');
+    this.button_ = null;
+    this.menu_ = null;
+    this.element_ = null;
   };
 
   // The component registers itself. It can assume componentHandler is available
