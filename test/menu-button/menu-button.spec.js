@@ -190,7 +190,7 @@ describe('MaterialExtMenuButton', () => {
       button = component.querySelector('.mdlext-menu-button__button');
       menu = component.querySelector('.mdlext-menu-button__menu');
 
-      [...menu.querySelectorAll('.mdlext-menu-button__menu[aria-selected="true"]')]
+      [...menu.querySelectorAll('.mdlext-menu-button__menu__item[aria-selected="true"]')]
         .forEach(selectedItem => selectedItem.removeAttribute('aria-selected'));
     });
 
@@ -220,7 +220,7 @@ describe('MaterialExtMenuButton', () => {
 
     it('opens the menu when button is clicked and move focus to a previously selected menu item', () => {
       component.MaterialExtMenuButton.closeMenu();
-      const selectedItem = menu.childNodes[1];
+      const selectedItem = menu.children[1];
       selectedItem.setAttribute('aria-selected', 'true');
 
       // Trigger click event to toggle menu
@@ -245,7 +245,7 @@ describe('MaterialExtMenuButton', () => {
 
     it('opens the menu when Enter or Space key is pressed and move focus to the previously selected menu item', () => {
       component.MaterialExtMenuButton.closeMenu();
-      const selectedItem = menu.childNodes[1];
+      const selectedItem = menu.children[1];
       selectedItem.setAttribute('aria-selected', 'true');
 
       dispatchKeyDownEvent(button, VK_SPACE);
@@ -291,8 +291,111 @@ describe('MaterialExtMenuButton', () => {
 
   describe('Menu interactions', () => {
 
-  });
+    let component;
+    let button;
+    let menu;
 
+    beforeEach( () => {
+      component = document.querySelector('#default-fixture .mdlext-menu-button');
+      button = component.querySelector('.mdlext-menu-button__button');
+      menu = component.querySelector('.mdlext-menu-button__menu');
+
+      [...menu.querySelectorAll('.mdlext-menu-button__menu__item[aria-selected="true"]')]
+        .forEach(selectedItem => selectedItem.removeAttribute('aria-selected'));
+    });
+
+    it('closes the menu when tab key is pressed', () => {
+      component.MaterialExtMenuButton.openMenu();
+      dispatchKeyDownEvent(menu, VK_TAB);
+      assert.isTrue(menu.hasAttribute('hidden'), 'Tab key: Expected menu to have hidden attribute');
+    });
+
+    it('closes the menu when ESC key is pressed and moves focus to button', () => {
+      component.MaterialExtMenuButton.openMenu();
+      dispatchKeyDownEvent(menu, VK_ESC);
+      assert.isTrue(menu.hasAttribute('hidden'), 'ESC key: Expected menu to have hidden attribute');
+      assert.equal(button, document.activeElement, 'ESC: Expected button to have focus');
+    });
+
+    it('moves focus to previous menu item when Arrow up or Arrow left key is pressed', () => {
+      component.MaterialExtMenuButton.openMenu();
+      const selectedItem = menu.children[1];
+      selectedItem.focus();
+      dispatchKeyDownEvent(menu, VK_ARROW_UP);
+      assert.equal(menu.children[0], document.activeElement, 'Arrow Up: Expected previous menu item have focus');
+
+      selectedItem.focus();
+      dispatchKeyDownEvent(menu, VK_ARROW_LEFT);
+      assert.equal(menu.children[0], document.activeElement, 'Arrow Left: Expected previous menu item have focus');
+    });
+
+    it('moves focus to next menu item when Arrow down or Arrow right key is pressed', () => {
+      component.MaterialExtMenuButton.openMenu();
+      const selectedItem = menu.children[1];
+      selectedItem.focus();
+      dispatchKeyDownEvent(menu, VK_ARROW_DOWN);
+      assert.equal(menu.children[2], document.activeElement, 'Arrow Down: Expected next menu item have focus');
+
+      selectedItem.focus();
+      dispatchKeyDownEvent(menu, VK_ARROW_RIGHT);
+      assert.equal(menu.children[2], document.activeElement, 'Arrow Right: Expected next menu item have focus');
+    });
+
+    it('moves focus to first menu item when focus is on last menu item and Arrow down is pressed', () => {
+      component.MaterialExtMenuButton.openMenu();
+      const selectedItem = menu.children[menu.children.length-1];
+      selectedItem.focus();
+      dispatchKeyDownEvent(menu, VK_ARROW_DOWN);
+      assert.equal(menu.firstElementChild, document.activeElement, 'Arrow Down: Expected first menu item have focus');
+    });
+
+    it('moves focus to last menu item when focus is on first menu item and Arrow up key is pressed', () => {
+      component.MaterialExtMenuButton.openMenu();
+      const selectedItem = menu.firstElementChild;
+      selectedItem.focus();
+      dispatchKeyDownEvent(menu, VK_ARROW_UP);
+      assert.equal(menu.children[menu.children.length-1], document.activeElement, 'Arrow Up: Expected last menu item have focus');
+    });
+
+    it('trigges onchange when Enter or Space key is pressed, then closes the menu', () => {
+      component.MaterialExtMenuButton.openMenu();
+      let selectedItem = menu.children[1];
+      selectedItem.focus();
+      dispatchKeyDownEvent(menu, VK_ENTER);
+      assert.equal(menu.children[1].getAttribute('aria-selected'), 'true', 'Enter key: Expected menu item to have aria-selected="true"');
+      assert.isTrue(menu.hasAttribute('hidden'), 'ESC key: Expected menu to have hidden attribute');
+
+      component.MaterialExtMenuButton.openMenu();
+      selectedItem = menu.children[0];
+      selectedItem.focus();
+      dispatchKeyDownEvent(menu, VK_SPACE);
+      assert.equal(menu.children[0].getAttribute('aria-selected'), 'true', 'Space key: Expected menu item to have aria-selected="true"');
+      assert.isTrue(menu.hasAttribute('hidden'), 'ESC key: Expected menu to have hidden attribute');
+    });
+
+    it('trigges onchange when menu item is clicked, then closes the menu', () => {
+      component.MaterialExtMenuButton.openMenu();
+      const selectedItem = menu.children[1];
+      selectedItem.focus();
+      dispatchMouseEvent(selectedItem, 'click');
+      assert.equal(menu.children[1].getAttribute('aria-selected'), 'true', 'Mouse cick: Expected menu item to have aria-selected="true"');
+      assert.isTrue(menu.hasAttribute('hidden'), 'Mouse click: Expected menu to have hidden attribute');
+    });
+
+    it('listens to blur event', () => {
+      component.MaterialExtMenuButton.openMenu();
+
+      const spy = sinon.spy();
+      menu.addEventListener('blur', spy);
+
+      const selectedItem = menu.children[1];
+      dispatchEventEvent(selectedItem, 'blur');
+
+      menu.removeEventListener('blur', spy);
+      assert.isTrue(spy.calledOnce, `Expected blur to fire once`);
+    });
+
+  });
 
   function dispatchKeyDownEvent(target, keyCode, shiftKey=false) {
     target.dispatchEvent(

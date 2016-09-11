@@ -227,14 +227,14 @@ import {
 
     // ----------------------------------
 
-    const removeSelected = () => {
+    const removeAllAriaSelected = () => {
       [...this.menu_.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`)]
         .forEach(selectedItem => selectedItem.removeAttribute('aria-selected'));
     };
 
-    const addSelected = item => {
+    const addAriaSelected = item => {
       if( item && !item.hasAttribute('aria-selected') ) {
-        removeSelected();
+        removeAllAriaSelected();
         item.setAttribute('aria-selected', 'true');
       }
     };
@@ -263,20 +263,20 @@ import {
 
         case VK_SPACE:
         case VK_ENTER:
-          addSelected(n);
+          addAriaSelected(n);
           this.closeMenu();
           this.button_.focus();
           // TODO: trigger onchange
           break;
 
         case VK_ESC:
-          removeSelected();
+          removeAllAriaSelected();
           this.closeMenu();
           this.button_.focus();
           break;
 
         case VK_TAB:
-          removeSelected();
+          removeAllAriaSelected();
           this.closeMenu();
           return;
 
@@ -287,17 +287,13 @@ import {
       event.preventDefault();
     };
 
-    const menuClickHandler = (event) => {
+    const menuClickHandler = event => {
       if(event.target !== this.menu_) {
-        addSelected(event.target);
+        addAriaSelected(event.target);
         // TODO: trigger onchange
       }
       this.closeMenu();
       this.button_.focus();
-    };
-
-    const menuFocusHandler =() => {
-      this.element_.classList.add(IS_FOCUSED);
     };
 
     const menuBlurHandler = event => {
@@ -329,12 +325,10 @@ import {
     // Menu
     this.menu_.removeEventListener('keydown', menuKeyDownHandler);
     this.menu_.removeEventListener('click', menuClickHandler);
-    this.menu_.removeEventListener('focus', menuFocusHandler);
     this.menu_.removeEventListener('blur', menuBlurHandler);
 
     this.menu_.addEventListener('keydown', menuKeyDownHandler);
     this.menu_.addEventListener('click', menuClickHandler);
-    this.menu_.addEventListener('focus', menuFocusHandler, true);
     this.menu_.addEventListener('blur', menuBlurHandler, true);
   };
 

@@ -12,7 +12,7 @@
     "test": "./node_modules/.bin/mocha  -w --opts ./mocha.opts './test/**/*.spec.js'",
     "test:pattern": "./node_modules/.bin/mocha  -w --opts ./mocha.opts './test/**/*.spec.js' --grep $pattern",
     "test:coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/istanbul cover --root ./src ./node_modules/.bin/_mocha -- --opts ./mocha.opts  -r .istanbul-mocha.config.js './test/**/*.spec.js'",
-    "check-coverage": "./node_modules/.bin/istanbul check-coverage --statements 75 --branches 75 --functions 75 --lines 75",
+    "check-coverage": "./node_modules/.bin/istanbul check-coverage --statements 95 --branches 75 --functions 95 --lines 95",
     "report-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/codecov",
     "clean": "./node_modules/.bin/rimraf lib && mkdir lib",
     "prebuild": "npm run clean && ./node_modules/.bin/webpack",
