@@ -34,154 +34,196 @@ import {
   VK_ARROW_UP,
   VK_ARROW_RIGHT,
   VK_ARROW_DOWN,
-  IS_FOCUSED,
   IS_UPGRADED,
   MDL_RIPPLE_EFFECT,
   MDL_RIPPLE_EFFECT_IGNORE_EVENTS
 } from '../utils/constants';
 
-(function() {
-  'use strict';
 
-  //const MENU_BUTTON = 'mdlext-menu-button';
-  const MENU_BUTTON_BUTTON = 'mdlext-menu-button__button';
-  const MENU_BUTTON_MENU = 'mdlext-menu-button__menu';
-  const MENU_BUTTON_MENU_ITEM = 'mdlext-menu-button__menu__item';
+//const MENU_BUTTON = 'mdlext-menu-button';
+const MENU_BUTTON_BUTTON = 'mdlext-menu-button__button';
+const MENU_BUTTON_MENU = 'mdlext-menu-button__menu';
+const MENU_BUTTON_MENU_ITEM = 'mdlext-menu-button__menu__item';
 
+const menuFactory = (element, controlledBy) => {
 
-  /**
-   * https://github.com/google/material-design-lite/issues/4205
-   * @constructor
-   * @param {Element} element The element that will be upgraded.
-   */
-  const MaterialExtMenuButton = function MaterialExtMenuButton(element) {
-    this.element_ = element;
-    this.button_ = null;
-    this.menu_ = null;
+  const addWaiAria = () => {
 
-    // Initialize instance.
-    this.init();
+    if (!element.hasAttribute('id')) {
+      element.id = `button-menu-${randomString()}`;
+    }
+    element.setAttribute('tabindex', '-1');
+    element.setAttribute('role', 'menu');
+    element.setAttribute('hidden', '');
+
+    [...element.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}`)].forEach( menuitem => {
+      menuitem.setAttribute('tabindex', '-1');
+      menuitem.setAttribute('role', 'menuitem');
+    });
+
   };
-  window['MaterialExtMenuButton'] = MaterialExtMenuButton;
 
+  const removeAllAriaSelected = () => {
+    [...element.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`)]
+      .forEach(selectedItem => selectedItem.removeAttribute('aria-selected'));
+  };
 
-  // Public methods.
+  const addAriaSelected = item => {
+    if( item && !item.hasAttribute('aria-selected') ) {
+      removeAllAriaSelected();
+      item.setAttribute('aria-selected', 'true');
+    }
+  };
 
-  /**
-   * Open menu
-   * @public
-   */
-  MaterialExtMenuButton.prototype.openMenu = function(position='first') {
-    this.button_.setAttribute('aria-expanded', 'true');
-    this.menu_.removeAttribute('hidden');
+  const getSelected = () => {
+    return element.querySelector(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`);
+  };
 
-    let menuItem = null;
+  const open = (position='first') => {
+    element.removeAttribute('hidden');
+    let item = null;
     switch (position.toLowerCase()) {
       case 'first':
-        menuItem = this.menu_.firstElementChild;
+        item = element.firstElementChild;
         break;
       case 'last':
-        menuItem = this.menu_.lastElementChild;
+        item = element.lastElementChild;
         break;
       case 'selected':
-        menuItem = this.menu_.querySelector(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`);
-        if(!menuItem) {
-          this.openMenu('first');
+        item = getSelected();
+        if(!item) {
+          open('first');
           return;
         }
         break;
     }
-
-    if(menuItem) {
-      menuItem.focus();
+    if(item) {
+      item.focus();
     }
   };
-  MaterialExtMenuButton.prototype['openMenu'] = MaterialExtMenuButton.prototype.openMenu;
 
-  /**
-   * Close menu
-   * @public
-   */
-  MaterialExtMenuButton.prototype.closeMenu = function() {
-    this.button_.setAttribute('aria-expanded', 'false');
-    this.menu_.setAttribute('hidden', '');
+  const close = () => {
+    element.setAttribute('hidden', '');
   };
-  MaterialExtMenuButton.prototype['closeMenu'] = MaterialExtMenuButton.prototype.closeMenu;
 
-  /**
-   * Get selected menu item
-   * @public
-   * @returns {Element} The selected menu item or null if no item selected
-   */
-  MaterialExtMenuButton.prototype.selectedMenuItem = function() {
-    return this.menu_.querySelector(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`);
+  const keyDownHandler = event => {
+    let item = document.activeElement;
+
+    switch (event.keyCode) {
+      case VK_ARROW_UP:
+      case VK_ARROW_LEFT:
+        item = item.previousElementSibling;
+        if(!item) {
+          item = element.lastElementChild;
+        }
+        item.focus();
+        break;
+
+      case VK_ARROW_DOWN:
+      case VK_ARROW_RIGHT:
+        item = item.nextElementSibling;
+        if(!item) {
+          item = element.firstElementChild;
+        }
+        item.focus();
+        break;
+
+      case VK_SPACE:
+      case VK_ENTER:
+        addAriaSelected(item);
+        close();
+        controlledBy.focus();
+        // TODO: trigger onchange
+        break;
+
+      case VK_ESC:
+        removeAllAriaSelected();
+        close();
+        controlledBy.focus();
+        break;
+
+      case VK_TAB:
+        removeAllAriaSelected();
+        close();
+        return;
+
+      default:
+        return;
+    }
+    event.stopPropagation();
+    event.preventDefault();
   };
-  MaterialExtMenuButton.prototype['selectedMenuItem'] = MaterialExtMenuButton.prototype.selectedMenuItem;
 
-  /**
-   * Upgrades component
-   * Call this method if you add/remove elements to the component during runtime
-   * @public
-   */
-  MaterialExtMenuButton.prototype.upgrade = function() {
+  const clickHandler = event => {
+    if(event.target !== element) {
+      addAriaSelected(event.target);
+      // TODO: trigger onchange
+    }
+    close();
+    controlledBy.focus();
+  };
 
-    const addWaiAria = () => {
+  const blurHandler = event => {
+    if(!(element.contains(event.relatedTarget) || controlledBy.element.contains(event.relatedTarget))) {
+      // Find a better solution?
+      setTimeout(() => close(), 200);
+    }
+  };
 
-      let buttonId;
-      if (!this.button_.hasAttribute('id')) {
-        buttonId = `menu-button-button-${randomString()}`;
-        this.button_.id = buttonId;
-      }
-      else {
-        buttonId = this.button_.id;
-      }
+  const addListeners = () => {
+    element.removeEventListener('keydown', keyDownHandler);
+    element.removeEventListener('click', clickHandler);
+    element.removeEventListener('blur', blurHandler);
 
-      if(!this.button_.hasAttribute('tabindex')) {
-        this.button_.setAttribute('tabindex', '0');
-      }
+    element.addEventListener('keydown', keyDownHandler);
+    element.addEventListener('click', clickHandler);
+    element.addEventListener('blur', blurHandler, true);
+  };
 
-      this.button_.setAttribute('role', 'button');
+  addWaiAria();
+  addListeners();
 
-      if(!this.button_.hasAttribute('aria-expanded')) {
-        this.button_.setAttribute('aria-expanded', 'false');
-      }
+  return {
+    element: element,
+    controlledBy: controlledBy,
 
-      if(this.menu_) {
-        this.button_.setAttribute('aria-haspopup', 'true');
+    /**
+     * Get the selected menu item
+     * @returns {Element} the menu item having attribute aria-selected="true", or null ...
+     */
+    get selected() {
+      return getSelected();
+    },
 
-        let menuId;
-        if (!this.menu_.hasAttribute('id')) {
-          menuId = `menu-button-menu-${randomString()}`;
-          this.menu_.id = menuId;
-        }
-        else {
-          menuId = this.menu_.id;
-        }
+    /**
+     * Open menu
+     * @param position menuElement item to receive focus after element is opened
+     */
+    open: (position='first') => open(position),
 
-        this.button_.setAttribute('aria-controls', menuId);
-        this.menu_.setAttribute('aria-labelledby', buttonId);
+    /**
+     * Closes the menu
+     */
+    close: () => close(),
+  };
+};
 
-        this.menu_.setAttribute('tabindex', '-1');
-        this.menu_.setAttribute('role', 'menu');
 
-        if (this.button_.getAttribute('aria-expanded').toLowerCase() === 'false') {
-          this.menu_.setAttribute('hidden', '');
-        }
-        else {
-          this.menu_.removeAttribute('hidden');
-        }
+/**
+ *
+ */
 
-        [...this.menu_.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}`)].forEach( menuitem => {
-          menuitem.setAttribute('tabindex', '-1');
-          menuitem.setAttribute('role', 'menuitem');
-        });
-      }
-      else {
-        this.button_.setAttribute('aria-haspopup', 'false');
-      }
-    };
+class MenuButton {
 
-    const buttonKeyDownHandler = event => {
+  constructor(element) {
+    this.element = element;
+    this.menu = undefined;
+
+    this.init();
+  }
+
+  init() {
+    const keyDownHandler = event => {
 
       switch (event.keyCode) {
         case VK_ARROW_UP:
@@ -213,127 +255,113 @@ import {
       event.preventDefault();
     };
 
-    const buttonFocusHandler = () => {
-      this.element_.classList.add(IS_FOCUSED);
-    };
-
-    const buttonBlurHandler = () => {
-      this.element_.classList.remove(IS_FOCUSED);
-    };
-
-    const buttonClickHandler = () => {
+    const clickHandler = () => {
       this.openMenu('selected');
     };
 
-    // ----------------------------------
+    const addListeners = () => {
+      this.element.removeEventListener('keydown', keyDownHandler);
+      this.element.removeEventListener('click', clickHandler);
 
-    const removeAllAriaSelected = () => {
-      [...this.menu_.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`)]
-        .forEach(selectedItem => selectedItem.removeAttribute('aria-selected'));
+      this.element.addEventListener('keydown', keyDownHandler);
+      this.element.addEventListener('click', clickHandler);
     };
 
-    const addAriaSelected = item => {
-      if( item && !item.hasAttribute('aria-selected') ) {
-        removeAllAriaSelected();
-        item.setAttribute('aria-selected', 'true');
+    const addWaiAria = () => {
+      if(!this.element.hasAttribute('tabindex')) {
+        this.element.setAttribute('tabindex', '0');
       }
+      this.element.setAttribute('role', 'button');
+      this.element.setAttribute('aria-expanded', 'false');
+      this.element.setAttribute('aria-haspopup', 'true');
     };
 
-    const menuKeyDownHandler = event => {
-      let n = document.activeElement;
-
-      switch (event.keyCode) {
-        case VK_ARROW_UP:
-        case VK_ARROW_LEFT:
-          n = n.previousElementSibling;
-          if(!n) {
-            n = this.menu_.lastElementChild;
-          }
-          n.focus();
-          break;
-
-        case VK_ARROW_DOWN:
-        case VK_ARROW_RIGHT:
-          n = n.nextElementSibling;
-          if(!n) {
-            n = this.menu_.firstElementChild;
-          }
-          n.focus();
-          break;
-
-        case VK_SPACE:
-        case VK_ENTER:
-          addAriaSelected(n);
-          this.closeMenu();
-          this.button_.focus();
-          // TODO: trigger onchange
-          break;
-
-        case VK_ESC:
-          removeAllAriaSelected();
-          this.closeMenu();
-          this.button_.focus();
-          break;
-
-        case VK_TAB:
-          removeAllAriaSelected();
-          this.closeMenu();
-          return;
-
-        default:
-          return;
+    const findMenuElement = () => {
+      let menuElement;
+      const menuElementId = this.element.getAttribute('aria-controls');
+      if(menuElementId !== null) {
+        menuElement = document.querySelector(`#${menuElementId }`);
       }
-      event.stopPropagation();
-      event.preventDefault();
-    };
-
-    const menuClickHandler = event => {
-      if(event.target !== this.menu_) {
-        addAriaSelected(event.target);
-        // TODO: trigger onchange
+      else {
+        menuElement = this.element.parentNode.querySelector(`.${MENU_BUTTON_MENU}`);
       }
-      this.closeMenu();
-      this.button_.focus();
+      return menuElement;
     };
 
-    const menuBlurHandler = event => {
-      if(!(this.menu_.contains(event.relatedTarget) || this.button_.contains(event.relatedTarget))) {
-        // Find a better solution
-        this.element_.classList.remove(IS_FOCUSED);
-        setTimeout(() => this.closeMenu(), 300);
-      }
+    const addMenu = () => {
+      const menuElement = findMenuElement();
+      this.menu = menuFactory(menuElement, this);
+      this.element.setAttribute('aria-controls', this.menu.element.id);
     };
 
-
-    // Add WAI-ARIA
     addWaiAria();
+    addMenu();
+    addListeners();
+  }
 
-    // Button
+  openMenu(position='first') {
+    this.element.setAttribute('aria-expanded', 'true');
+    this.menu.open(position);
+  }
 
-    // Remove listeners ...just in case
-    this.button_.removeEventListener('keydown', buttonKeyDownHandler);
-    this.button_.removeEventListener('click', buttonClickHandler);
-    this.button_.removeEventListener('focus', buttonFocusHandler);
-    this.button_.removeEventListener('blur', buttonBlurHandler);
+  closeMenu() {
+    this.element.setAttribute('aria-expanded', 'false');
+    this.menu.close();
+  }
 
-    // Add listeners
-    this.button_.addEventListener('keydown', buttonKeyDownHandler);
-    this.button_.addEventListener('click', buttonClickHandler);
-    this.button_.addEventListener('focus', buttonFocusHandler);
-    this.button_.addEventListener('blur', buttonBlurHandler);
+  focus() {
+    this.element.focus();
+  }
+}
 
-    // Menu
-    this.menu_.removeEventListener('keydown', menuKeyDownHandler);
-    this.menu_.removeEventListener('click', menuClickHandler);
-    this.menu_.removeEventListener('blur', menuBlurHandler);
+(function() {
+  'use strict';
 
-    this.menu_.addEventListener('keydown', menuKeyDownHandler);
-    this.menu_.addEventListener('click', menuClickHandler);
-    this.menu_.addEventListener('blur', menuBlurHandler, true);
+  /**
+   * https://github.com/google/material-design-lite/issues/4205
+   * @constructor
+   * @param {Element} element The element that will be upgraded.
+   */
+  const MaterialExtMenuButton = function MaterialExtMenuButton(element) {
+    this.element_ = element;
+    this.button_ = null;
+    this.menuButton_ = null;
+
+    // Initialize instance.
+    this.init();
   };
+  window['MaterialExtMenuButton'] = MaterialExtMenuButton;
 
-  MaterialExtMenuButton.prototype['upgrade'] = MaterialExtMenuButton.prototype.upgrade;
 
+  // Public methods.
+
+  /**
+   * Open menu
+   * @public
+   */
+  MaterialExtMenuButton.prototype.openMenu = function(position='first') {
+    this.menuButton_.openMenu(position);
+  };
+  MaterialExtMenuButton.prototype['openMenu'] = MaterialExtMenuButton.prototype.openMenu;
+
+  /**
+   * Close menu
+   * @public
+   */
+  MaterialExtMenuButton.prototype.closeMenu = function() {
+    this.menuButton_.closeMenu();
+  };
+  MaterialExtMenuButton.prototype['closeMenu'] = MaterialExtMenuButton.prototype.closeMenu;
+
+  /**
+   * Get selected menu item
+   * @public
+   * @returns {Element} The selected menu item or null if no item selected
+   */
+  MaterialExtMenuButton.prototype.selectedMenuItem = function() {
+    return this.menuButton_.menu.selected;
+  };
+  MaterialExtMenuButton.prototype['selectedMenuItem'] = MaterialExtMenuButton.prototype.selectedMenuItem;
 
   /**
    * Initialize component
@@ -347,12 +375,9 @@ import {
         this.element_.classList.add(MDL_RIPPLE_EFFECT_IGNORE_EVENTS);
       }
 
-      this.button_ = this.element_.querySelector(`.${MENU_BUTTON_BUTTON}`);
-      this.menu_ = this.element_.querySelector(`.${MENU_BUTTON_MENU}`);
-
       this.element_.setAttribute('role', 'presentation');
-
-      this.upgrade();
+      this.button_ = this.element_.querySelector(`.${MENU_BUTTON_BUTTON}`);
+      this.menuButton_ = new MenuButton(this.button_);
 
       // Listen to 'mdl-componentdowngraded' event
       this.element_.addEventListener('mdl-componentdowngraded', this.mdlDowngrade_.bind(this));
@@ -369,7 +394,7 @@ import {
   MaterialExtMenuButton.prototype.mdlDowngrade_ = function() {
     'use strict';
     this.button_ = null;
-    this.menu_ = null;
+    this.menuButton_ = null;
     this.element_ = null;
   };
 

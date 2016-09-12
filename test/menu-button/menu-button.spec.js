@@ -50,11 +50,11 @@ describe('MaterialExtMenuButton', () => {
     aria-controls="menu-example-dropdown"
     aria-expanded="true"
     tabindex="0">
-    <span class="mdlext-menu-button__label">I'm the label!</span>
+    <span class="mdlext-menu-button__label" id="menu-example-button-label">I'm the label!</span>
   </button>
   <ul id="menu-example-dropdown" class="mdlext-menu-button__menu"
       role="menu"
-      aria-labelledby="menu-example-button">
+      aria-labelledby="menu-example-button-label">
     <li class="mdlext-menu-button__menu__item" role="menuitem">Menu item #1</li>
     <li class="mdlext-menu-button__menu__item" role="menuitem">Menu item #2</li>
     <li class="mdlext-menu-button__menu__item" role="menuitem">Menu item #n</li>
@@ -113,7 +113,6 @@ describe('MaterialExtMenuButton', () => {
       const methods = [
         'openMenu',
         'closeMenu',
-        'upgrade',
         'selectedMenuItem'
       ];
       methods.forEach( fn => {
@@ -154,9 +153,6 @@ describe('MaterialExtMenuButton', () => {
       const menu = component.querySelector('.mdlext-menu-button__menu');
       assert.isNotNull(menu, 'Expected menu button menu not to be null');
 
-      assert.isTrue(button.hasAttribute('id'), 'Expected menu button button to have an id attribute');
-      assert.isTrue(menu.hasAttribute('id'), 'Expected menu button menu to have an id attribute');
-
       assert.equal(component.getAttribute('role'), 'presentation', 'Expected menu button to have role="presentation"');
       assert.equal(button.getAttribute('role'), 'button', 'Expected menu button button to have role="button"');
       assert.equal(button.getAttribute('aria-haspopup'), 'true', 'Expected menu button button to have role="button"');
@@ -167,8 +163,6 @@ describe('MaterialExtMenuButton', () => {
       assert.isTrue(button.hasAttribute('tabindex'), 'Expected menu button button to have attribute "tabindex"');
 
       assert.equal(menu.getAttribute('role'), 'menu', 'Expected menu button menu to have role="menu"');
-      assert.isTrue(menu.hasAttribute('aria-labelledby'), 'Expected menu button menu to have an aria-labelledby attribute');
-      assert.equal(menu.getAttribute('aria-labelledby'), button.id, 'Menu button menu aria-labelledby has wrong value');
 
       const menuItems = menu.querySelectorAll('.mdlext-menu-button__menu__item');
       assert.isAtLeast(menuItems.length, 1, 'Expected menu button menu to have at leaset one menu item');
@@ -192,20 +186,6 @@ describe('MaterialExtMenuButton', () => {
 
       [...menu.querySelectorAll('.mdlext-menu-button__menu__item[aria-selected="true"]')]
         .forEach(selectedItem => selectedItem.removeAttribute('aria-selected'));
-    });
-
-
-    it('sets focus class on component when button is focused', () => {
-      dispatchEventEvent(button, 'focus');
-      assert.isTrue(component.classList.contains(IS_FOCUSED), `Expected menu button component to have class "${IS_FOCUSED}"`);
-    });
-
-    it('removes focus class from component when button is blured', () => {
-      dispatchEventEvent(button, 'focus');
-      assert.isTrue(component.classList.contains(IS_FOCUSED), `Expected menu button component to have class "${IS_FOCUSED}"`);
-
-      dispatchEventEvent(button, 'blur');
-      assert.isFalse(component.classList.contains(IS_FOCUSED), `Expected menu button component to not have class "${IS_FOCUSED}"`);
     });
 
     it('opens the menu when button is clicked and move focus to the first menu item', () => {
@@ -280,7 +260,7 @@ describe('MaterialExtMenuButton', () => {
     });
 
     it('closes the menu when esc key is pressed', () => {
-      component.MaterialExtMenuButton.openMenu();
+      component.MaterialExtMenuButton.openMenu('first');
       dispatchKeyDownEvent(button, VK_ESC);
       assert.equal(button.getAttribute('aria-expanded'), 'false', 'Tab key: Expected button to have aria-expanded=false');
       assert.isTrue(menu.hasAttribute('hidden'), 'Tab key: Expected menu to have hidden attribute');
