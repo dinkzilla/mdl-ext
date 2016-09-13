@@ -17,6 +17,7 @@ Components built with the [Google Material Design Lite](https://github.com/googl
 * **Grid**<br/>A responsive grid based on element queries in favour of media queries.
 * **Lightboard**<br/>A lightboard is a translucent surface illuminated from behind, used for situations where a shape laid upon the surface needs to be seen with high contrast. In the "old days" of photography photograpers used a lightboard to get a quick view of, sorting and organizing their slides.
 * **Lightbox**<br/>A lightbox displays an image filling the screen, and dimming out the rest of the web page. It acts as a modal dialog using the `<dialog>` element as a container for the lightbox.
+* **Menu Button**<br/>A WAI-ARIA friendly menu button.
 * **Selectfield**<br/>The Material Design Lite Ext (MDLEXT) select field component is an enhanced version of the standard HTML `<select>` element.
 * **Sticky Header**<br/>A sticky header makes site navigation easily accessible anywhere on the page and saves content space at the same.
 
@@ -220,6 +221,10 @@ of photography photograpers used a lightboard to get a quick view of, sorting an
 A [**lightbox**](./src/lightbox/) displays an image filling the screen, and dimming out the rest of the web page. 
 It acts as a modal dialog using the `<dialog>` element as a container for the lightbox.
 
+### Menu Button
+A [**menu button**](./src/menu-button/) is a button that opens a menu. It has roles, attributes and behaviour as outlined in 
+[WAI-ARIA Authoring Practices, Menu Button](https://www.w3.org/TR/wai-aria-practices/#menubutton).
+
 ### Selectfield
 ![Selectfield](./etc/select-element.png)
 
@@ -233,7 +238,6 @@ A [**sticky header**](./src/sticky-header/) makes site navigation easily accessi
 
 The header should auto-hide, i.e. hiding the header automatically when a user starts scrolling down the page and 
 bringing the header back when a user might need it: they reach the bottom of the page or start scrolling up.
-
 
 ## Notes
 >A Live demo of MDLEXT is available [here](http://leifoolsen.github.io/mdl-ext/index.html).<br/>
@@ -249,8 +253,9 @@ how you can set up MDL with Babel(6) and Webpack, and how to self host Font Robo
 
 ### Using Material Design Lite in a Single Page Application (SPA)
 If you use Material Design Lite in a dynamic page, e.g. a single page application, you must call 
-`componentHandler.downgradeElements` to properly clean up component resources. 
-In a static web application there should be no need to call `componentHandler.downgradeElements`.
+`componentHandler.upgradeElement` and `componentHandler.downgradeElements` accordingly to properly initialize an clean up 
+component resources when sections of the page is updated. In a static web application there should be no need to call 
+`componentHandler.downgradeElements`.
 
 The following code snippet demonstrates how to properly clean up MDL components before removing them from DOM.
 

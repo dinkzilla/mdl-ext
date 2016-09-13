@@ -245,7 +245,7 @@ const menuFactory = (element, controlledBy) => {
   const blurHandler = event => {
     if(!(element.contains(event.relatedTarget) || controlledBy.element.contains(event.relatedTarget))) {
       // Find a better solution?
-      setTimeout(() => close(), 200);
+      setTimeout(() => close(), 100);
     }
   };
 
@@ -324,41 +324,48 @@ class MenuButton {
     this.init();
   }
 
+  isDisabled() {
+    return this.element.hasAttribute('disabled');
+  }
+
   init() {
     const keyDownHandler = event => {
 
-      switch (event.keyCode) {
-        case VK_ARROW_UP:
-          this.openMenu('last');
-          break;
+      if(!this.isDisabled()) {
+        switch (event.keyCode) {
+          case VK_ARROW_UP:
+            this.openMenu('last');
+            break;
 
-        case VK_ARROW_DOWN:
-          this.openMenu();
-          break;
+          case VK_ARROW_DOWN:
+            this.openMenu();
+            break;
 
-        case VK_SPACE:
-        case VK_ENTER:
-          this.openMenu('selected');
-          break;
+          case VK_SPACE:
+          case VK_ENTER:
+            this.openMenu('selected');
+            break;
 
-        case VK_ESC:
-          this.closeMenu();
-          break;
+          case VK_ESC:
+            this.closeMenu();
+            break;
 
-        case VK_TAB:
-          this.closeMenu();
-          return;
+          case VK_TAB:
+            this.closeMenu();
+            return;
 
-        default:
-          return;
+          default:
+            return;
+        }
       }
-
       event.stopPropagation();
       event.preventDefault();
     };
 
     const clickHandler = () => {
-      this.openMenu('selected');
+      if(!this.isDisabled()) {
+        this.openMenu('selected');
+      }
     };
 
     const removeListeners = () => {
@@ -405,8 +412,10 @@ class MenuButton {
   }
 
   openMenu(position='first') {
-    this.element.setAttribute('aria-expanded', 'true');
-    this.menu.open(position);
+    if(!this.isDisabled()) {
+      this.element.setAttribute('aria-expanded', 'true');
+      this.menu.open(position);
+    }
   }
 
   closeMenu() {
@@ -415,7 +424,9 @@ class MenuButton {
   }
 
   focus() {
-    this.element.focus();
+    if(!this.isDisabled()) {
+      this.element.focus();
+    }
   }
 
   dispatchSelect(item) {

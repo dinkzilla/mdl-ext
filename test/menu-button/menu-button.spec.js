@@ -46,7 +46,7 @@ describe('MaterialExtMenuButton', () => {
   </ul>
 </div>`;
 
-  const menu_button__with_disabled_item_fixture = `
+  const menu_button_with_disabled_item_fixture = `
 <div role="presentation">
   <button class="mdlext-menu-button mdlext-js-menu-button">
     <span class="mdlext-menu-button__label">I'm the label!</span>
@@ -57,6 +57,16 @@ describe('MaterialExtMenuButton', () => {
     <li class="mdlext-menu__item-divider">-- divider --</li>
     <li class="mdlext-menu__item" disabled>Menu item #3</li>
     <li class="mdlext-menu__item">Menu item #n</li>
+  </ul>
+</div>`;
+
+  const disabled_menu_button_fixture = `
+<div role="presentation">
+  <button class="mdlext-menu-button mdlext-js-menu-button" disabled>
+    <span class="mdlext-menu-button__label">I'm disabled!</span>
+  </button>
+  <ul class="mdlext-menu">
+    <li class="mdlext-menu__item">Menu item #1</li>
   </ul>
 </div>`;
 
@@ -276,6 +286,37 @@ describe('MaterialExtMenuButton', () => {
       assert.isTrue(menu.hasAttribute('hidden'), 'Tab key: Expected menu to have hidden attribute');
     });
 
+    it('does nothing when menu button is disabled', () => {
+      const container = document.querySelector('#mount');
+      try {
+        container.insertAdjacentHTML('beforeend', disabled_menu_button_fixture);
+        button = container.querySelector(`.${MENU_BUTTON}`);
+        menu = container.querySelector(`.${MENU_BUTTON_MENU}`);
+        componentHandler.upgradeElement(button, 'MaterialExtMenuButton');
+
+        button.MaterialExtMenuButton.openMenu();
+        assert.equal(menu.hasAttribute('hidden'), true, 'Expected disabled menu button not to open the menu');
+
+        dispatchKeyDownEvent(button, VK_ARROW_DOWN);
+        assert.equal(menu.hasAttribute('hidden'), true, 'Expected disabled menu button not to open the menu');
+
+        dispatchKeyDownEvent(button, VK_ARROW_UP);
+        assert.equal(menu.hasAttribute('hidden'), true, 'Expected disabled menu button not to open the menu');
+
+        dispatchKeyDownEvent(button, VK_ENTER);
+        assert.equal(menu.hasAttribute('hidden'), true, 'Expected disabled menu button not to open the menu');
+
+        dispatchKeyDownEvent(button, VK_SPACE);
+        assert.equal(menu.hasAttribute('hidden'), true, 'Expected disabled menu button not to open the menu');
+
+        dispatchMouseEvent(button, 'click');
+        assert.equal(menu.hasAttribute('hidden'), true, 'Expected disabled menu button not to open the menu');
+      }
+      finally {
+        removeChildElements(container);
+      }
+    });
+
   });
 
 
@@ -438,7 +479,7 @@ describe('MaterialExtMenuButton', () => {
     it('does not emit a custom select event when a disabled menu item is clicked', () => {
       const container = document.querySelector('#mount');
       try {
-        container.insertAdjacentHTML('beforeend', menu_button__with_disabled_item_fixture);
+        container.insertAdjacentHTML('beforeend', menu_button_with_disabled_item_fixture);
         button = container.querySelector(`.${MENU_BUTTON}`);
         menu = container.querySelector(`.${MENU_BUTTON_MENU}`);
         componentHandler.upgradeElement(button, 'MaterialExtMenuButton');
@@ -465,7 +506,7 @@ describe('MaterialExtMenuButton', () => {
     it('does not focus a disabled menu item', () => {
       const container = document.querySelector('#mount');
       try {
-        container.insertAdjacentHTML('beforeend', menu_button__with_disabled_item_fixture);
+        container.insertAdjacentHTML('beforeend', menu_button_with_disabled_item_fixture);
         button = container.querySelector(`.${MENU_BUTTON}`);
         menu = container.querySelector(`.${MENU_BUTTON_MENU}`);
         componentHandler.upgradeElement(button, 'MaterialExtMenuButton');
@@ -510,7 +551,7 @@ describe('MaterialExtMenuButton', () => {
     it('should not focus a menu divider', () => {
       const container = document.querySelector('#mount');
       try {
-        container.insertAdjacentHTML('beforeend', menu_button__with_disabled_item_fixture);
+        container.insertAdjacentHTML('beforeend', menu_button_with_disabled_item_fixture);
         button = container.querySelector(`.${MENU_BUTTON}`);
         menu = container.querySelector(`.${MENU_BUTTON_MENU}`);
         componentHandler.upgradeElement(button, 'MaterialExtMenuButton');

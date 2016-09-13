@@ -1,4 +1,5 @@
-# MenuButtom
+# Menu Buttom
+A WAI-ARIA friendly menu button.
 
 ## Introduction
 A menu button is a [button](https://www.w3.org/TR/wai-aria-practices/#button) that opens a 
