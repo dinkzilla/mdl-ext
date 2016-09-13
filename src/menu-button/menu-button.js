@@ -181,12 +181,22 @@ const menuFactory = (element, controlledBy) => {
     switch (event.keyCode) {
       case VK_ARROW_UP:
       case VK_ARROW_LEFT:
-        prev(item);
+        if(item) {
+          prev(item);
+        }
+        else {
+          first();
+        }
         break;
 
       case VK_ARROW_DOWN:
       case VK_ARROW_RIGHT:
-        next(item);
+        if(item) {
+          next(item);
+        }
+        else {
+          last();
+        }
         break;
 
       case VK_HOME:

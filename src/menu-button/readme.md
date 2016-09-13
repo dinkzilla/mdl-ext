@@ -4,7 +4,8 @@ A WAI-ARIA friendly menu button.
 ## Introduction
 A menu button is a [button](https://www.w3.org/TR/wai-aria-practices/#button) that opens a 
 [menu](https://www.w3.org/TR/wai-aria-practices/#menu). It is often styled as a typical push button with a 
-downward pointing arrow or triangle to hint that activating the button will display a menu.
+downward pointing arrow or triangle to hint that activating the button will display a menu. 
+The menu button has roles, attributes and behaviour as outlined in WAI-ARIA Authoring Practices.
 
 ## Characteristics
 
@@ -20,7 +21,7 @@ downward pointing arrow or triangle to hint that activating the button will disp
     
 ### Keyboard interaction, Menu
 * With focus on the menu:
-    * <kbd>Space</kbd> or <kbd>Enter</kbd>: sets `ariaselected="true"` on active menu item, trigger a `change` event, closes menu and moves focus back to menu button.
+    * <kbd>Space</kbd> or <kbd>Enter</kbd>: sets `aria-selected="true"` on active menu item, closes menu and moves focus back to menu button. The button emits a custom `select` event with a referfence to the selected menu element.
     * <kbd>Home</kbd>: move focus to first menu item.
     * <kbd>End</kbd>: move focus to last menu item.
     * <kbd>Up Arrow</kbd> or <kbd>Left Arrow</kbd>: move focus to previous menu item.
@@ -29,12 +30,9 @@ downward pointing arrow or triangle to hint that activating the button will disp
 
 >The keyboard behaviors after the menu is open are described in more detail in WAI-ARIA Authoring Practices, [2.19 Menu or Menu bar](https://www.w3.org/TR/wai-aria-practices/#menu).
 
-* With focus on the menu:
-    * <kbd>Click</kbd>: sets `ariaselected="true"` on active menu item, trigger a `change` event, closes menu and moves focus back to menu button.
-
 ### Mouse interaction, Menu
 * With focus on the menu:
-    * <kbd>Space</kbd> or <kbd>Enter</kbd>: closes menu and moves focus back to menu button. Trigger a `change` event.
+    * <kbd>Click</kbd>: sets `aria-selected="true"` on active menu item, closes menu and moves focus back to menu button. The button emits a custom `select` event with a referfence to the selected menu element. 
 
 ### Menu Button, WAI-ARIA Roles, States, and Properties
 * `role="button"`: the element that opens the menu has role [button](http://www.w3.org/TR/wai-aria-1.1/#button).
@@ -47,7 +45,7 @@ downward pointing arrow or triangle to hint that activating the button will disp
 * `role="menu"`: identifies the element as a menu widget.
 * `role="menuitem"`: identifies an element as a menu item widget.
 * `aria-labelledby`: use to provide a label for the menu widget.
-* `aria-selected`: 
+* `aria-selected`: identifies the selected menu item.
 * `tabindex`:
  
 >The roles, states, and properties needed for the menu are described in more detail in WAI-ARIA Authoring Practices, [2.19 Menu or Menu bar](https://www.w3.org/TR/wai-aria-practices/#menu).
