@@ -9,6 +9,8 @@ import {
   VK_ENTER,
   VK_ESC,
   VK_SPACE,
+  VK_END,
+  VK_HOME,
   VK_ARROW_LEFT,
   VK_ARROW_UP,
   VK_ARROW_RIGHT,
@@ -40,6 +42,20 @@ describe('MaterialExtMenuButton', () => {
   <ul class="mdlext-menu">
     <li class="mdlext-menu__item">Menu item #1</li>
     <li class="mdlext-menu__item">Menu item #2</li>
+    <li class="mdlext-menu__item">Menu item #n</li>
+  </ul>
+</div>`;
+
+  const menu_button__with_disabled_item_fixture = `
+<div role="presentation">
+  <button class="mdlext-menu-button mdlext-js-menu-button">
+    <span class="mdlext-menu-button__label">I'm the label!</span>
+  </button>
+  <ul class="mdlext-menu">
+    <li class="mdlext-menu__item">Menu item #1</li>
+    <li class="mdlext-menu__item">Menu item #2</li>
+    <li class="mdlext-menu__item-divider">-- divider --</li>
+    <li class="mdlext-menu__item" disabled>Menu item #3</li>
     <li class="mdlext-menu__item">Menu item #n</li>
   </ul>
 </div>`;
@@ -323,12 +339,28 @@ describe('MaterialExtMenuButton', () => {
       assert.equal(menu.firstElementChild, document.activeElement, 'Arrow Down: Expected first menu item have focus');
     });
 
+    it('moves focus to first menu item when Home key is pressed', () => {
+      button.MaterialExtMenuButton.openMenu();
+      const selectedItem = menu.children[menu.children.length-1];
+      selectedItem.focus();
+      dispatchKeyDownEvent(selectedItem, VK_HOME);
+      assert.equal(menu.firstElementChild, document.activeElement, 'Home key: Expected first menu item have focus');
+    });
+
     it('moves focus to last menu item when focus is on first menu item and Arrow up key is pressed', () => {
       button.MaterialExtMenuButton.openMenu();
       const selectedItem = menu.firstElementChild;
       selectedItem.focus();
       dispatchKeyDownEvent(selectedItem, VK_ARROW_UP);
       assert.equal(menu.children[menu.children.length-1], document.activeElement, 'Arrow Up: Expected last menu item have focus');
+    });
+
+    it('moves focus to last menu item when End key is pressed', () => {
+      button.MaterialExtMenuButton.openMenu();
+      const selectedItem = menu.firstElementChild;
+      selectedItem.focus();
+      dispatchKeyDownEvent(selectedItem, VK_END);
+      assert.equal(menu.children[menu.children.length-1], document.activeElement, 'End key: Expected last menu item have focus');
     });
 
     it('trigges onclick when Enter or Space key is pressed, then closes the menu', () => {
@@ -376,7 +408,7 @@ describe('MaterialExtMenuButton', () => {
       assert.isTrue(spy.calledOnce, 'Expected blur to fire once');
     });
 
-    it('emmits a custom select event when a menu item is selected', () => {
+    it('emits a custom select event when a menu item is selected', () => {
       button.MaterialExtMenuButton.openMenu();
       const selectedItem = menu.children[1];
       selectedItem.focus();
@@ -403,7 +435,106 @@ describe('MaterialExtMenuButton', () => {
       assert.isTrue(spy.called, 'Expected "select" custom event to fire');
     });
 
+    it('does not emit a custom select event when a disabled menu item is clicked', () => {
+      const container = document.querySelector('#mount');
+      try {
+        container.insertAdjacentHTML('beforeend', menu_button__with_disabled_item_fixture);
+        button = container.querySelector(`.${MENU_BUTTON}`);
+        menu = container.querySelector(`.${MENU_BUTTON_MENU}`);
+        componentHandler.upgradeElement(button, 'MaterialExtMenuButton');
+
+        button.MaterialExtMenuButton.openMenu();
+        const disabledItem = menu.children[3];
+        disabledItem.focus();
+
+        const spy = sinon.spy();
+        button.addEventListener('select', spy);
+        try {
+          dispatchMouseEvent(disabledItem, 'click');
+        }
+        finally {
+          button.removeEventListener('select', spy);
+        }
+        assert.isFalse(spy.called, 'Expected "select" custom event NOT to fire for a disabled menu item');
+      }
+      finally {
+        removeChildElements(container);
+      }
+    });
+
+    it('does not focus a disabled menu item', () => {
+      const container = document.querySelector('#mount');
+      try {
+        container.insertAdjacentHTML('beforeend', menu_button__with_disabled_item_fixture);
+        button = container.querySelector(`.${MENU_BUTTON}`);
+        menu = container.querySelector(`.${MENU_BUTTON_MENU}`);
+        componentHandler.upgradeElement(button, 'MaterialExtMenuButton');
+
+        button.MaterialExtMenuButton.openMenu();
+        const disabledItem = menu.children[3];
+
+        let item = menu.children[1];
+        item.focus();
+        dispatchKeyDownEvent(item, VK_ARROW_DOWN);
+        assert.notEqual(disabledItem, document.activeElement, 'Arrow down: Did not expect a disabled menu item have focus');
+
+        item = menu.children[4];
+        item.focus();
+        dispatchKeyDownEvent(item, VK_ARROW_UP);
+        assert.notEqual(disabledItem, document.activeElement, 'Arrow up: Did not expect a disabled menu item have focus');
+
+        menu.children[0].setAttribute('disabled', '');
+        dispatchKeyDownEvent(item, VK_HOME);
+        assert.notEqual(menu.children[0], document.activeElement, 'Home key: Did not expect a disabled menu item have focus');
+
+        menu.children[menu.children.length-1].setAttribute('disabled', '');
+        dispatchKeyDownEvent(item, VK_END);
+        assert.notEqual(menu.children[menu.children.length-1], document.activeElement, 'End key: Did not expect a disabled menu item have focus');
+
+        // Only one menu item is enabled
+        item = menu.children[1];
+        item.focus();
+        dispatchKeyDownEvent(item, VK_ARROW_DOWN);
+        assert.equal(item, document.activeElement, 'Arrow down: Expected second menu item to have focus');
+
+        // Only one menu item is enabled
+        item.focus();
+        dispatchKeyDownEvent(item, VK_ARROW_UP);
+        assert.equal(item, document.activeElement, 'Arrow up: Expected second menu item to have focus');
+      }
+      finally {
+        removeChildElements(container);
+      }
+    });
+
+    it('should not focus a menu divider', () => {
+      const container = document.querySelector('#mount');
+      try {
+        container.insertAdjacentHTML('beforeend', menu_button__with_disabled_item_fixture);
+        button = container.querySelector(`.${MENU_BUTTON}`);
+        menu = container.querySelector(`.${MENU_BUTTON_MENU}`);
+        componentHandler.upgradeElement(button, 'MaterialExtMenuButton');
+
+        button.MaterialExtMenuButton.openMenu();
+        const dividerItem = menu.children[2];
+
+        let item = menu.children[1];
+        item.focus();
+        dispatchKeyDownEvent(item, VK_ARROW_DOWN);
+        assert.notEqual(dividerItem, document.activeElement, 'Arrow down: Did not expect a menu divider item have focus');
+
+        item = menu.children[4];
+        item.focus();
+        dispatchKeyDownEvent(item, VK_ARROW_UP);
+        assert.notEqual(dividerItem, document.activeElement, 'Arrow up: Did not expect a menu divider item have focus');
+      }
+      finally {
+        removeChildElements(container);
+      }
+    });
+
   });
+
 
   function dispatchKeyDownEvent(target, keyCode, shiftKey=false) {
     target.dispatchEvent(

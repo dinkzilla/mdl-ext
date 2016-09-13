@@ -30,6 +30,8 @@ import {
   VK_ENTER,
   VK_ESC,
   VK_SPACE,
+  VK_END,
+  VK_HOME,
   VK_ARROW_LEFT,
   VK_ARROW_UP,
   VK_ARROW_RIGHT,
@@ -43,6 +45,7 @@ import {
 //const MENU_BUTTON = 'mdlext-menu-button';
 const MENU_BUTTON_MENU = 'mdlext-menu';
 const MENU_BUTTON_MENU_ITEM = 'mdlext-menu__item';
+const MENU_BUTTON_MENU_ITEM_DIVIDER = 'mdlext-menu__item-divider';
 
 const menuFactory = (element, controlledBy) => {
 
@@ -62,49 +65,113 @@ const menuFactory = (element, controlledBy) => {
     return element.querySelector(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`);
   };
 
-  const open = (position='first') => {
-    element.removeAttribute('hidden');
-    let item = null;
-    switch (position.toLowerCase()) {
-      case 'first':
-        item = element.firstElementChild;
-        break;
-      case 'last':
-        item = element.lastElementChild;
-        break;
-      case 'selected':
-        item = getSelected();
-        if(!item) {
-          open('first');
-          return;
-        }
-        break;
+  const isDisabled = item => item && item.hasAttribute('disabled');
+
+  const isDivider = item => item && item.classList.contains(MENU_BUTTON_MENU_ITEM_DIVIDER);
+
+  const focus = item => {
+    if(item) {
+      item = item.closest(`.${MENU_BUTTON_MENU_ITEM}`);
     }
     if(item) {
       item.focus();
     }
   };
 
-  const close = () => {
-    element.setAttribute('hidden', '');
-  };
-
   const next = current => {
-    // TODO: Check for disabled items
     let n = current.nextElementSibling;
     if(!n) {
-      n = current.parentNode.firstElementChild;
+      n = element.firstElementChild;
     }
-    n.focus();
+    if(!isDisabled(n) && !isDivider(n)) {
+      focus(n);
+    }
+    else {
+      let i = element.children.length;
+      while(n && i-- > 0) {
+        if(isDisabled(n) || isDivider(n)) {
+          n = n.nextElementSibling;
+          if(!n) {
+            n = element.firstElementChild;
+          }
+        }
+        else {
+          focus(n);
+          break;
+        }
+      }
+    }
   };
 
   const prev = current => {
-    // TODO: Check for disabled items
     let p = current.previousElementSibling;
     if(!p) {
-      p = current.parentNode.lastElementChild;
+      p = element.lastElementChild;
     }
-    p.focus();
+    if(!isDisabled(p) && !isDivider(p)) {
+      focus(p);
+    }
+    else {
+      let i = element.children.length;
+      while(p && i-- > 0) {
+        if(isDisabled(p) || isDivider(p)) {
+          p = p.previousElementSibling;
+          if(!p) {
+            p = element.lastElementChild;
+          }
+        }
+        else {
+          focus(p);
+          break;
+        }
+      }
+    }
+  };
+
+  const first = () => {
+    const item = element.firstElementChild;
+    if(isDisabled(item) || isDivider(item) ) {
+      next(item);
+    }
+    else {
+      focus(item);
+    }
+  };
+
+  const last = () => {
+    const item = element.lastElementChild;
+    if(isDisabled(item) || isDivider(item)) {
+      prev(item);
+    }
+    else {
+      focus(item);
+    }
+  };
+
+  const open = (position='first') => {
+    element.removeAttribute('hidden');
+    let item = null;
+    switch (position.toLowerCase()) {
+      case 'first':
+        first();
+        break;
+      case 'last':
+        last();
+        break;
+      case 'selected':
+        item = getSelected();
+        if(item && !item.hasAttribute('disabled')) {
+          focus(item);
+        }
+        else {
+          first();
+        }
+        break;
+    }
+  };
+
+  const close = () => {
+    element.setAttribute('hidden', '');
   };
 
   const keyDownHandler = event => {
@@ -120,6 +187,14 @@ const menuFactory = (element, controlledBy) => {
       case VK_ARROW_DOWN:
       case VK_ARROW_RIGHT:
         next(item);
+        break;
+
+      case VK_HOME:
+        first();
+        break;
+
+      case VK_END:
+        last();
         break;
 
       case VK_SPACE:
@@ -151,13 +226,19 @@ const menuFactory = (element, controlledBy) => {
   };
 
   const clickHandler = event => {
-    close();
-    controlledBy.focus();
-
     if(event.target !== element) {
       const item = event.target.closest(`.${MENU_BUTTON_MENU_ITEM}`);
-      addAriaSelected(item);
-      controlledBy.dispatchSelect(item);
+
+      if(item && !isDisabled(item) && !isDivider(item)) {
+        addAriaSelected(item);
+        controlledBy.dispatchSelect(item);
+        close();
+        controlledBy.focus();
+      }
+      else {
+        event.stopPropagation();
+        event.preventDefault();
+      }
     }
   };
 
@@ -345,7 +426,6 @@ class MenuButton {
         detail: { source: item }
       })
     );
-
   }
 }
 

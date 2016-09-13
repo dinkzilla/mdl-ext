@@ -20,6 +20,8 @@ downward pointing arrow or triangle to hint that activating the button will disp
 ### Keyboard interaction, Menu
 * With focus on the menu:
     * <kbd>Space</kbd> or <kbd>Enter</kbd>: sets `ariaselected="true"` on active menu item, trigger a `change` event, closes menu and moves focus back to menu button.
+    * <kbd>Home</kbd>: move focus to first menu item.
+    * <kbd>End</kbd>: move focus to last menu item.
     * <kbd>Up Arrow</kbd> or <kbd>Left Arrow</kbd>: move focus to previous menu item.
     * <kbd>Down Arrow</kbd> or <kbd>Right Arrow</kbd>: Move focus to next menu item.
     * <kbd>Esc</kbd>: Close menu and move focus back to menu button.
