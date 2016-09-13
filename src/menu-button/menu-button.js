@@ -35,33 +35,16 @@ import {
   VK_ARROW_RIGHT,
   VK_ARROW_DOWN,
   IS_UPGRADED,
-  MDL_RIPPLE_EFFECT,
-  MDL_RIPPLE_EFFECT_IGNORE_EVENTS
+  //MDL_RIPPLE_EFFECT,
+  //MDL_RIPPLE_EFFECT_IGNORE_EVENTS
 } from '../utils/constants';
 
 
 //const MENU_BUTTON = 'mdlext-menu-button';
-const MENU_BUTTON_BUTTON = 'mdlext-menu-button__button';
-const MENU_BUTTON_MENU = 'mdlext-menu-button__menu';
-const MENU_BUTTON_MENU_ITEM = 'mdlext-menu-button__menu__item';
+const MENU_BUTTON_MENU = 'mdlext-menu';
+const MENU_BUTTON_MENU_ITEM = 'mdlext-menu__item';
 
 const menuFactory = (element, controlledBy) => {
-
-  const addWaiAria = () => {
-
-    if (!element.hasAttribute('id')) {
-      element.id = `button-menu-${randomString()}`;
-    }
-    element.setAttribute('tabindex', '-1');
-    element.setAttribute('role', 'menu');
-    element.setAttribute('hidden', '');
-
-    [...element.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}`)].forEach( menuitem => {
-      menuitem.setAttribute('tabindex', '-1');
-      menuitem.setAttribute('role', 'menuitem');
-    });
-
-  };
 
   const removeAllAriaSelected = () => {
     [...element.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`)]
@@ -106,44 +89,57 @@ const menuFactory = (element, controlledBy) => {
     element.setAttribute('hidden', '');
   };
 
+  const next = current => {
+    // TODO: Check for disabled items
+    let n = current.nextElementSibling;
+    if(!n) {
+      n = current.parentNode.firstElementChild;
+    }
+    n.focus();
+  };
+
+  const prev = current => {
+    // TODO: Check for disabled items
+    let p = current.previousElementSibling;
+    if(!p) {
+      p = current.parentNode.lastElementChild;
+    }
+    p.focus();
+  };
+
   const keyDownHandler = event => {
-    let item = document.activeElement;
+
+    const item = event.target.closest(`.${MENU_BUTTON_MENU_ITEM}`);
 
     switch (event.keyCode) {
       case VK_ARROW_UP:
       case VK_ARROW_LEFT:
-        item = item.previousElementSibling;
-        if(!item) {
-          item = element.lastElementChild;
-        }
-        item.focus();
+        prev(item);
         break;
 
       case VK_ARROW_DOWN:
       case VK_ARROW_RIGHT:
-        item = item.nextElementSibling;
-        if(!item) {
-          item = element.firstElementChild;
-        }
-        item.focus();
+        next(item);
         break;
 
       case VK_SPACE:
       case VK_ENTER:
-        addAriaSelected(item);
-        close();
-        controlledBy.focus();
-        // TODO: trigger onchange
+        // Trigger click
+        item.dispatchEvent(
+          new MouseEvent('click', {
+            'view': window,
+            'bubbles': true,
+            'cancelable': true
+          })
+        );
         break;
 
       case VK_ESC:
-        removeAllAriaSelected();
         close();
         controlledBy.focus();
         break;
 
       case VK_TAB:
-        removeAllAriaSelected();
         close();
         return;
 
@@ -155,12 +151,14 @@ const menuFactory = (element, controlledBy) => {
   };
 
   const clickHandler = event => {
-    if(event.target !== element) {
-      addAriaSelected(event.target);
-      // TODO: trigger onchange
-    }
     close();
     controlledBy.focus();
+
+    if(event.target !== element) {
+      const item = event.target.closest(`.${MENU_BUTTON_MENU_ITEM}`);
+      addAriaSelected(item);
+      controlledBy.dispatchSelect(item);
+    }
   };
 
   const blurHandler = event => {
@@ -170,18 +168,41 @@ const menuFactory = (element, controlledBy) => {
     }
   };
 
-  const addListeners = () => {
+  const addWaiAria = () => {
+
+    if (!element.hasAttribute('id')) {
+      element.id = `button-menu-${randomString()}`;
+    }
+    element.setAttribute('tabindex', '-1');
+    element.setAttribute('role', 'menu');
+    element.setAttribute('hidden', '');
+
+    [...element.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}`)].forEach( menuitem => {
+      menuitem.setAttribute('tabindex', '-1');
+      menuitem.setAttribute('role', 'menuitem');
+    });
+
+  };
+
+  const removeListeners = () => {
     element.removeEventListener('keydown', keyDownHandler);
     element.removeEventListener('click', clickHandler);
     element.removeEventListener('blur', blurHandler);
+  };
 
+  const addListeners = () => {
     element.addEventListener('keydown', keyDownHandler);
     element.addEventListener('click', clickHandler);
     element.addEventListener('blur', blurHandler, true);
   };
 
-  addWaiAria();
-  addListeners();
+  const init = () => {
+    addWaiAria();
+    removeListeners();
+    addListeners();
+  };
+
+  init();
 
   return {
     element: element,
@@ -210,7 +231,7 @@ const menuFactory = (element, controlledBy) => {
 
 
 /**
- *
+ * The menubutton component
  */
 
 class MenuButton {
@@ -259,10 +280,12 @@ class MenuButton {
       this.openMenu('selected');
     };
 
-    const addListeners = () => {
+    const removeListeners = () => {
       this.element.removeEventListener('keydown', keyDownHandler);
       this.element.removeEventListener('click', clickHandler);
+    };
 
+    const addListeners = () => {
       this.element.addEventListener('keydown', keyDownHandler);
       this.element.addEventListener('click', clickHandler);
     };
@@ -296,6 +319,7 @@ class MenuButton {
 
     addWaiAria();
     addMenu();
+    removeListeners();
     addListeners();
   }
 
@@ -312,6 +336,17 @@ class MenuButton {
   focus() {
     this.element.focus();
   }
+
+  dispatchSelect(item) {
+    this.element.dispatchEvent(
+      new CustomEvent('select', {
+        bubbles: true,
+        cancelable: true,
+        detail: { source: item }
+      })
+    );
+
+  }
 }
 
 (function() {
@@ -324,7 +359,6 @@ class MenuButton {
    */
   const MaterialExtMenuButton = function MaterialExtMenuButton(element) {
     this.element_ = element;
-    this.button_ = null;
     this.menuButton_ = null;
 
     // Initialize instance.
@@ -367,22 +401,9 @@ class MenuButton {
    * Initialize component
    */
   MaterialExtMenuButton.prototype.init = function() {
-
     if (this.element_) {
-      // Do the init required for this component to work
-
-      if (this.element_.classList.contains(MDL_RIPPLE_EFFECT)) {
-        this.element_.classList.add(MDL_RIPPLE_EFFECT_IGNORE_EVENTS);
-      }
-
-      this.element_.setAttribute('role', 'presentation');
-      this.button_ = this.element_.querySelector(`.${MENU_BUTTON_BUTTON}`);
-      this.menuButton_ = new MenuButton(this.button_);
-
-      // Listen to 'mdl-componentdowngraded' event
+      this.menuButton_ = new MenuButton(this.element_);
       this.element_.addEventListener('mdl-componentdowngraded', this.mdlDowngrade_.bind(this));
-
-      // Set upgraded flag
       this.element_.classList.add(IS_UPGRADED);
     }
   };
@@ -393,9 +414,9 @@ class MenuButton {
    */
   MaterialExtMenuButton.prototype.mdlDowngrade_ = function() {
     'use strict';
-    this.button_ = null;
+
+    // TODO: call this.menuButton_.downgrade();
     this.menuButton_ = null;
-    this.element_ = null;
   };
 
   // The component registers itself. It can assume componentHandler is available

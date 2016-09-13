@@ -173,7 +173,7 @@ describe('MaterialExtLightboard', () => {
     const selectListener = ( event ) => {
       assert.isDefined(event.detail, 'Expected detail to be defined in event');
       assert.isDefined(event.detail.source, 'Expected detail.source to be defined in event');
-      assert.isTrue(event.detail.source.classList.contains('mdlext-lightboard__slide'), 'Expected accordion to have class "mdlext-lightboard__slide"');
+      assert.isTrue(event.detail.source.classList.contains('mdlext-lightboard__slide'), 'Expected detail.source to have class "mdlext-lightboard__slide"');
     };
     lightboard.addEventListener('select', selectListener);
 

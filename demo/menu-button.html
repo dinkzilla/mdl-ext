@@ -143,26 +143,24 @@
   <main id="mount" class="mdl-layout__content">
     <h5 class="mdlext-demo-header">Menu Button</h5>
 
-<div class="mdlext-menu-button mdlext-js-menu-button" role="presentation">
-  <button id="menu-example-button" class="mdlext-menu-button__button" role="button" aria-haspopup="true" aria-controls="menu-example-dropdown" aria-expanded="true" tabindex="0">
-    <span id="menu-example-button-label" class="mdlext-menu-button__label">I'm the label!</span>
-  </button>
-  <ul id="menu-example-dropdown" class="mdlext-menu-button__menu" role="menu" aria-labelledby="menu-example-button-label">
-    <li class="mdlext-menu-button__menu__item" role="menuitem">Menu item #1</li>
-    <li class="mdlext-menu-button__menu__item" role="menuitem">Menu item #2</li>
-    <li class="mdlext-menu-button__menu__item" role="menuitem">Menu item #n</li>
-  </ul>
-</div>
+<button class="mdlext-menu-button mdlext-js-menu-button" role="button" aria-haspopup="true" aria-controls="menu-example-dropdown" aria-expanded="false" tabindex="0">
+  <span class="mdlext-menu-button__label">I'm the label!</span>
+</button>
+<ul id="menu-example-dropdown" class="mdlext-menu" role="menu">
+  <li class="mdlext-menu__item" role="menuitem">Menu item #1</li>
+  <li class="mdlext-menu__item" role="menuitem">Menu item #2</li>
+  <li class="mdlext-menu__item" role="menuitem">Menu item #n</li>
+</ul>
 
 
-<div class="mdlext-menu-button mdlext-js-menu-button">
-  <button class="mdlext-menu-button__button">
+<div role="presentation">
+  <button class="mdlext-menu-button mdlext-js-menu-button">
     <span class="mdlext-menu-button__label">I'm the label!</span>
   </button>
-  <ul class="mdlext-menu-button__menu">
-    <li class="mdlext-menu-button__menu__item">Menu item #1</li>
-    <li class="mdlext-menu-button__menu__item">Menu item #2</li>
-    <li class="mdlext-menu-button__menu__item">Menu item #n</li>
+  <ul class="mdlext-menu">
+    <li class="mdlext-menu__item">Menu item #1</li>
+    <li class="mdlext-menu__item">Menu item #2</li>
+    <li class="mdlext-menu__item">Menu item #n</li>
   </ul>
 </div>
 

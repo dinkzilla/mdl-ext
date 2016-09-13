@@ -26,40 +26,40 @@ const sinon = require('sinon');
 
 import { shouldBehaveLikeAMdlComponent } from '../testutils/shared-component-behaviours';
 
+const MENU_BUTTON = 'mdlext-menu-button';
+const MENU_BUTTON_MENU = 'mdlext-menu';
+const MENU_BUTTON_MENU_ITEM = 'mdlext-menu__item';
 
 describe('MaterialExtMenuButton', () => {
 
   const menu_button_fixture = `
-<div class="mdlext-menu-button mdlext-js-menu-button">
-  <button class="mdlext-menu-button__button">
+<div role="presentation">
+  <button class="mdlext-menu-button mdlext-js-menu-button">
     <span class="mdlext-menu-button__label">I'm the label!</span>
   </button>
-  <ul class="mdlext-menu-button__menu">
-    <li class="mdlext-menu-button__menu__item">Menu item #1</li>
-    <li class="mdlext-menu-button__menu__item">Menu item #2</li>
-    <li class="mdlext-menu-button__menu__item">Menu item #n</li>
+  <ul class="mdlext-menu">
+    <li class="mdlext-menu__item">Menu item #1</li>
+    <li class="mdlext-menu__item">Menu item #2</li>
+    <li class="mdlext-menu__item">Menu item #n</li>
   </ul>
 </div>`;
 
-
   const menu_button_with_aria_fixture = `
-<div class="mdlext-menu-button mdlext-js-menu-button" role="presentation">
-  <button id="menu-example-button" class="mdlext-menu-button__button"
-    role="button"
-    aria-haspopup="true"
-    aria-controls="menu-example-dropdown"
-    aria-expanded="true"
-    tabindex="0">
-    <span class="mdlext-menu-button__label" id="menu-example-button-label">I'm the label!</span>
-  </button>
-  <ul id="menu-example-dropdown" class="mdlext-menu-button__menu"
-      role="menu"
-      aria-labelledby="menu-example-button-label">
-    <li class="mdlext-menu-button__menu__item" role="menuitem">Menu item #1</li>
-    <li class="mdlext-menu-button__menu__item" role="menuitem">Menu item #2</li>
-    <li class="mdlext-menu-button__menu__item" role="menuitem">Menu item #n</li>
-  </ul>
-</div> `;
+<button class="mdlext-menu-button mdlext-js-menu-button"
+        role="button"
+        aria-haspopup="true"
+        aria-controls="menu-example-dropdown"
+        aria-expanded="false"
+        tabindex="0">
+  <span class="mdlext-menu-button__label">I'm the label!</span>
+</button>
+<ul id="menu-example-dropdown"
+    class="mdlext-menu"
+    role="menu">
+  <li class="mdlext-menu__item" role="menuitem">Menu item #1</li>
+  <li class="mdlext-menu__item" role="menuitem">Menu item #2</li>
+  <li class="mdlext-menu__item" role="menuitem">Menu item #n</li>
+</ul>`;
 
   const fixture = `
 <!DOCTYPE html>
@@ -73,10 +73,10 @@ describe('MaterialExtMenuButton', () => {
   <div id="default-fixture">
     ${menu_button_fixture}
   </div>
-  <div id="mount">
-  </div>
   <div id="aria-fixture">
     ${menu_button_with_aria_fixture}
+  </div>
+  <div id="mount">
   </div>
 </main>
 </body>
@@ -109,7 +109,7 @@ describe('MaterialExtMenuButton', () => {
     });
 
     it('should have public methods available via widget', () => {
-      const component = document.querySelector('#default-fixture .mdlext-menu-button');
+      const component = document.querySelector(`#default-fixture .${MENU_BUTTON}`);
       const methods = [
         'openMenu',
         'closeMenu',
@@ -124,7 +124,7 @@ describe('MaterialExtMenuButton', () => {
       const container = document.querySelector('#mount');
       try {
         container.insertAdjacentHTML('beforeend', menu_button_fixture);
-        const component = container.querySelector('.mdlext-menu-button');
+        const component = container.querySelector(`.${MENU_BUTTON}`);
 
         componentHandler.upgradeElement(component, 'MaterialExtMenuButton');
 
@@ -144,27 +144,23 @@ describe('MaterialExtMenuButton', () => {
   describe('WAI-ARIA', () => {
 
     it('has appended all the required WAI-ARIA attributes', () => {
-      const component = document.querySelector('#default-fixture .mdlext-menu-button');
-      assert.isNotNull(component, 'Expected menu button not to be null');
+      const button = document.querySelector(`#default-fixture .${MENU_BUTTON}`);
+      assert.isNotNull(button, 'Expected menu button not to be null');
 
-      const button = component.querySelector('.mdlext-menu-button__button');
-      assert.isNotNull(button, 'Expected menu button button not to be null');
-
-      const menu = component.querySelector('.mdlext-menu-button__menu');
+      const menu = document.querySelector(`#default-fixture .${MENU_BUTTON_MENU}`);
       assert.isNotNull(menu, 'Expected menu button menu not to be null');
 
-      assert.equal(component.getAttribute('role'), 'presentation', 'Expected menu button to have role="presentation"');
-      assert.equal(button.getAttribute('role'), 'button', 'Expected menu button button to have role="button"');
-      assert.equal(button.getAttribute('aria-haspopup'), 'true', 'Expected menu button button to have role="button"');
-      assert.isTrue(button.hasAttribute('aria-controls'), 'Expected menu button button to have attribute "aria-controls"');
-      assert.equal(button.getAttribute('aria-controls'), menu.id, 'Menu button button aria-controls has wrong value');
+      assert.equal(button.getAttribute('role'), 'button', 'Expected menu button to have role="button"');
+      assert.equal(button.getAttribute('aria-haspopup'), 'true', 'Expected menu button to have aria-haspoput="true"');
+      assert.isTrue(button.hasAttribute('aria-controls'), 'Expected menu button to have attribute "aria-controls"');
+      assert.equal(button.getAttribute('aria-controls'), menu.id, 'Menu button aria-controls has wrong value');
 
-      assert.isTrue(button.hasAttribute('aria-expanded'), 'Expected menu button button to have attribute "aria-expanded"');
+      assert.isTrue(button.hasAttribute('aria-expanded'), 'Expected menu button to have attribute "aria-expanded"');
       assert.isTrue(button.hasAttribute('tabindex'), 'Expected menu button button to have attribute "tabindex"');
 
       assert.equal(menu.getAttribute('role'), 'menu', 'Expected menu button menu to have role="menu"');
 
-      const menuItems = menu.querySelectorAll('.mdlext-menu-button__menu__item');
+      const menuItems = menu.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}`);
       assert.isAtLeast(menuItems.length, 1, 'Expected menu button menu to have at leaset one menu item');
 
       [...menu.querySelectorAll('.mdlext-menu-button__menu__item')].forEach( menuitem => {
@@ -175,21 +171,19 @@ describe('MaterialExtMenuButton', () => {
   });
 
   describe('Button interactions', () => {
-    let component;
     let button;
     let menu;
 
     beforeEach( () => {
-      component = document.querySelector('#default-fixture .mdlext-menu-button');
-      button = component.querySelector('.mdlext-menu-button__button');
-      menu = component.querySelector('.mdlext-menu-button__menu');
+      button = document.querySelector(`#default-fixture .${MENU_BUTTON}`);
+      menu = document.querySelector(`#default-fixture .${MENU_BUTTON_MENU}`);
 
-      [...menu.querySelectorAll('.mdlext-menu-button__menu__item[aria-selected="true"]')]
+      [...menu.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`)]
         .forEach(selectedItem => selectedItem.removeAttribute('aria-selected'));
     });
 
     it('opens the menu when button is clicked and move focus to the first menu item', () => {
-      component.MaterialExtMenuButton.closeMenu();
+      button.MaterialExtMenuButton.closeMenu();
 
       // Trigger click event to toggle menu
       dispatchMouseEvent(button, 'click');
@@ -199,24 +193,24 @@ describe('MaterialExtMenuButton', () => {
     });
 
     it('opens the menu when button is clicked and move focus to a previously selected menu item', () => {
-      component.MaterialExtMenuButton.closeMenu();
+      button.MaterialExtMenuButton.closeMenu();
       const selectedItem = menu.children[1];
       selectedItem.setAttribute('aria-selected', 'true');
 
       // Trigger click event to toggle menu
       dispatchMouseEvent(button, 'click');
-      const n = component.MaterialExtMenuButton.selectedMenuItem();
+      const n = button.MaterialExtMenuButton.selectedMenuItem();
       assert.equal(selectedItem, n, 'Mouse click: Expected second menu item to have focus');
     });
 
     it('opens the menu when Enter or Space key is pressed and move focus to the first menu item', () => {
-      component.MaterialExtMenuButton.closeMenu();
+      button.MaterialExtMenuButton.closeMenu();
       dispatchKeyDownEvent(button, VK_SPACE);
       assert.equal(button.getAttribute('aria-expanded'), 'true', 'Space key: Expected button to have aria-expanded=true');
       assert.isFalse(menu.hasAttribute('hidden'), 'Space key: Expected menu to not have hidden attribute');
       assert.equal(menu.firstElementChild, document.activeElement, 'Space key: Expected first menu item to have focus');
 
-      component.MaterialExtMenuButton.closeMenu();
+      button.MaterialExtMenuButton.closeMenu();
       dispatchKeyDownEvent(button, VK_ENTER);
       assert.equal(button.getAttribute('aria-expanded'), 'true', 'Enter key: Expected button to have aria-expanded=true');
       assert.isFalse(menu.hasAttribute('hidden'), 'Enter key: Expected menu to not have hidden attribute');
@@ -224,20 +218,20 @@ describe('MaterialExtMenuButton', () => {
     });
 
     it('opens the menu when Enter or Space key is pressed and move focus to the previously selected menu item', () => {
-      component.MaterialExtMenuButton.closeMenu();
+      button.MaterialExtMenuButton.closeMenu();
       const selectedItem = menu.children[1];
       selectedItem.setAttribute('aria-selected', 'true');
 
       dispatchKeyDownEvent(button, VK_SPACE);
-      assert.equal(selectedItem, component.MaterialExtMenuButton.selectedMenuItem(), 'Space key: Expected second menu item to have focus');
+      assert.equal(selectedItem, button.MaterialExtMenuButton.selectedMenuItem(), 'Space key: Expected second menu item to have focus');
 
-      component.MaterialExtMenuButton.closeMenu();
+      button.MaterialExtMenuButton.closeMenu();
       dispatchKeyDownEvent(button, VK_ENTER);
-      assert.equal(selectedItem, component.MaterialExtMenuButton.selectedMenuItem(), 'Enter key: Expected second menu item to have focus');
+      assert.equal(selectedItem, button.MaterialExtMenuButton.selectedMenuItem(), 'Enter key: Expected second menu item to have focus');
     });
 
     it('opens the menu and move focus to the last menu item when arrow up key is pressed', () => {
-      component.MaterialExtMenuButton.closeMenu();
+      button.MaterialExtMenuButton.closeMenu();
       dispatchKeyDownEvent(button, VK_ARROW_UP);
       assert.equal(button.getAttribute('aria-expanded'), 'true', 'Arrow up key: Expected button to have aria-expanded=true');
       assert.isFalse(menu.hasAttribute('hidden'), 'Arrow up key: Expected menu to not have hidden attribute');
@@ -245,7 +239,7 @@ describe('MaterialExtMenuButton', () => {
     });
 
     it('opens the menu and move focus to the first menu item when arrow down key is pressed', () => {
-      component.MaterialExtMenuButton.closeMenu();
+      button.MaterialExtMenuButton.closeMenu();
       dispatchKeyDownEvent(button, VK_ARROW_DOWN);
       assert.equal(button.getAttribute('aria-expanded'), 'true', 'Arrow down key: Expected button to have aria-expanded=true');
       assert.isFalse(menu.hasAttribute('hidden'), 'Arrow down key: Expected menu to not have hidden attribute');
@@ -253,14 +247,14 @@ describe('MaterialExtMenuButton', () => {
     });
 
     it('closes the menu when tab key is pressed', () => {
-      component.MaterialExtMenuButton.openMenu();
+      button.MaterialExtMenuButton.openMenu();
       dispatchKeyDownEvent(button, VK_TAB);
       assert.equal(button.getAttribute('aria-expanded'), 'false', 'Tab key: Expected button to have aria-expanded=false');
       assert.isTrue(menu.hasAttribute('hidden'), 'Tab key: Expected menu to have hidden attribute');
     });
 
     it('closes the menu when esc key is pressed', () => {
-      component.MaterialExtMenuButton.openMenu('first');
+      button.MaterialExtMenuButton.openMenu('first');
       dispatchKeyDownEvent(button, VK_ESC);
       assert.equal(button.getAttribute('aria-expanded'), 'false', 'Tab key: Expected button to have aria-expanded=false');
       assert.isTrue(menu.hasAttribute('hidden'), 'Tab key: Expected menu to have hidden attribute');
@@ -271,90 +265,97 @@ describe('MaterialExtMenuButton', () => {
 
   describe('Menu interactions', () => {
 
-    let component;
     let button;
     let menu;
 
     beforeEach( () => {
-      component = document.querySelector('#default-fixture .mdlext-menu-button');
-      button = component.querySelector('.mdlext-menu-button__button');
-      menu = component.querySelector('.mdlext-menu-button__menu');
+      button = document.querySelector(`#default-fixture .${MENU_BUTTON}`);
+      menu = document.querySelector(`#default-fixture .${MENU_BUTTON_MENU}`);
 
-      [...menu.querySelectorAll('.mdlext-menu-button__menu__item[aria-selected="true"]')]
+      [...menu.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`)]
         .forEach(selectedItem => selectedItem.removeAttribute('aria-selected'));
     });
 
     it('closes the menu when tab key is pressed', () => {
-      component.MaterialExtMenuButton.openMenu();
-      dispatchKeyDownEvent(menu, VK_TAB);
+      button.MaterialExtMenuButton.openMenu();
+      const item = menu.children[1];
+      dispatchKeyDownEvent(item, VK_TAB);
       assert.isTrue(menu.hasAttribute('hidden'), 'Tab key: Expected menu to have hidden attribute');
     });
 
     it('closes the menu when ESC key is pressed and moves focus to button', () => {
-      component.MaterialExtMenuButton.openMenu();
-      dispatchKeyDownEvent(menu, VK_ESC);
+      button.MaterialExtMenuButton.openMenu();
+      const item = menu.children[0];
+      dispatchKeyDownEvent(item, VK_ESC);
       assert.isTrue(menu.hasAttribute('hidden'), 'ESC key: Expected menu to have hidden attribute');
       assert.equal(button, document.activeElement, 'ESC: Expected button to have focus');
     });
 
     it('moves focus to previous menu item when Arrow up or Arrow left key is pressed', () => {
-      component.MaterialExtMenuButton.openMenu();
+      button.MaterialExtMenuButton.openMenu();
       const selectedItem = menu.children[1];
       selectedItem.focus();
-      dispatchKeyDownEvent(menu, VK_ARROW_UP);
+      dispatchKeyDownEvent(selectedItem, VK_ARROW_UP);
       assert.equal(menu.children[0], document.activeElement, 'Arrow Up: Expected previous menu item have focus');
 
       selectedItem.focus();
-      dispatchKeyDownEvent(menu, VK_ARROW_LEFT);
+      dispatchKeyDownEvent(selectedItem, VK_ARROW_LEFT);
       assert.equal(menu.children[0], document.activeElement, 'Arrow Left: Expected previous menu item have focus');
     });
 
     it('moves focus to next menu item when Arrow down or Arrow right key is pressed', () => {
-      component.MaterialExtMenuButton.openMenu();
+      button.MaterialExtMenuButton.openMenu();
       const selectedItem = menu.children[1];
       selectedItem.focus();
-      dispatchKeyDownEvent(menu, VK_ARROW_DOWN);
+      dispatchKeyDownEvent(selectedItem, VK_ARROW_DOWN);
       assert.equal(menu.children[2], document.activeElement, 'Arrow Down: Expected next menu item have focus');
 
       selectedItem.focus();
-      dispatchKeyDownEvent(menu, VK_ARROW_RIGHT);
+      dispatchKeyDownEvent(selectedItem, VK_ARROW_RIGHT);
       assert.equal(menu.children[2], document.activeElement, 'Arrow Right: Expected next menu item have focus');
     });
 
     it('moves focus to first menu item when focus is on last menu item and Arrow down is pressed', () => {
-      component.MaterialExtMenuButton.openMenu();
+      button.MaterialExtMenuButton.openMenu();
       const selectedItem = menu.children[menu.children.length-1];
       selectedItem.focus();
-      dispatchKeyDownEvent(menu, VK_ARROW_DOWN);
+      dispatchKeyDownEvent(selectedItem, VK_ARROW_DOWN);
       assert.equal(menu.firstElementChild, document.activeElement, 'Arrow Down: Expected first menu item have focus');
     });
 
     it('moves focus to last menu item when focus is on first menu item and Arrow up key is pressed', () => {
-      component.MaterialExtMenuButton.openMenu();
+      button.MaterialExtMenuButton.openMenu();
       const selectedItem = menu.firstElementChild;
       selectedItem.focus();
-      dispatchKeyDownEvent(menu, VK_ARROW_UP);
+      dispatchKeyDownEvent(selectedItem, VK_ARROW_UP);
       assert.equal(menu.children[menu.children.length-1], document.activeElement, 'Arrow Up: Expected last menu item have focus');
     });
 
-    it('trigges onchange when Enter or Space key is pressed, then closes the menu', () => {
-      component.MaterialExtMenuButton.openMenu();
+    it('trigges onclick when Enter or Space key is pressed, then closes the menu', () => {
+      const spy = sinon.spy();
+      menu.addEventListener('click', spy);
+
+      button.MaterialExtMenuButton.openMenu();
       let selectedItem = menu.children[1];
       selectedItem.focus();
-      dispatchKeyDownEvent(menu, VK_ENTER);
+      dispatchKeyDownEvent(selectedItem, VK_ENTER);
       assert.equal(menu.children[1].getAttribute('aria-selected'), 'true', 'Enter key: Expected menu item to have aria-selected="true"');
       assert.isTrue(menu.hasAttribute('hidden'), 'ESC key: Expected menu to have hidden attribute');
+      assert.isTrue(spy.calledOnce, 'Expected click to fire after Enter key was pressed');
 
-      component.MaterialExtMenuButton.openMenu();
+      button.MaterialExtMenuButton.openMenu();
       selectedItem = menu.children[0];
       selectedItem.focus();
-      dispatchKeyDownEvent(menu, VK_SPACE);
+      dispatchKeyDownEvent(selectedItem, VK_SPACE);
       assert.equal(menu.children[0].getAttribute('aria-selected'), 'true', 'Space key: Expected menu item to have aria-selected="true"');
       assert.isTrue(menu.hasAttribute('hidden'), 'ESC key: Expected menu to have hidden attribute');
+      assert.isTrue(spy.calledTwice, 'Expected click to fire after space key was pressed');
+
+      menu.removeEventListener('blur', spy);
     });
 
-    it('trigges onchange when menu item is clicked, then closes the menu', () => {
-      component.MaterialExtMenuButton.openMenu();
+    it('trigges onclick when menu item is clicked, then closes the menu', () => {
+      button.MaterialExtMenuButton.openMenu();
       const selectedItem = menu.children[1];
       selectedItem.focus();
       dispatchMouseEvent(selectedItem, 'click');
@@ -363,7 +364,7 @@ describe('MaterialExtMenuButton', () => {
     });
 
     it('listens to blur event', () => {
-      component.MaterialExtMenuButton.openMenu();
+      button.MaterialExtMenuButton.openMenu();
 
       const spy = sinon.spy();
       menu.addEventListener('blur', spy);
@@ -372,7 +373,34 @@ describe('MaterialExtMenuButton', () => {
       dispatchEventEvent(selectedItem, 'blur');
 
       menu.removeEventListener('blur', spy);
-      assert.isTrue(spy.calledOnce, `Expected blur to fire once`);
+      assert.isTrue(spy.calledOnce, 'Expected blur to fire once');
+    });
+
+    it('emmits a custom select event when a menu item is selected', () => {
+      button.MaterialExtMenuButton.openMenu();
+      const selectedItem = menu.children[1];
+      selectedItem.focus();
+
+      const spy = sinon.spy();
+      button.addEventListener('select', spy);
+
+      const selectListener = event => {
+        assert.isDefined(event.detail, 'Expected detail to be defined in event');
+        assert.isDefined(event.detail.source, 'Expected detail.source to be defined in event');
+        assert.isTrue(event.detail.source.classList.contains('MENU_BUTTON_MENU_ITEM'), `Expected detail.source to have class "${MENU_BUTTON_MENU_ITEM}"`);
+      };
+      button.addEventListener('select', selectListener);
+
+      try {
+        // Trigger click
+        dispatchMouseEvent(selectedItem, 'click');
+      }
+      finally {
+        button.removeEventListener('select', spy);
+        button.removeEventListener('select', selectListener);
+      }
+
+      assert.isTrue(spy.called, 'Expected "select" custom event to fire');
     });
 
   });
