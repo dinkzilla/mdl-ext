@@ -144,7 +144,7 @@
     <h5 class="mdlext-demo-header">Menu Button</h5>
 
 <p>This menu button has WAI-Aria roles and attributes coded in markup</p>
-<button class="mdlext-menu-button mdlext-js-menu-button" role="button" aria-haspopup="true" aria-controls="menu-example-dropdown" aria-expanded="false" tabindex="0">
+<button class="mdlext-menu-button mdlext-js-menu-button" role="button" aria-haspopup="true" aria-controls="menu-example-dropdown" aria-expanded="false" tabindex="0" onselect="this.querySelector('span').innerHTML = event.detail.source.innerHTML;">
   <span class="mdlext-menu-button__label">I'm the label!</span>
   <i class="mdlext-aria-expanded-more-less"></i>
 </button>
@@ -192,6 +192,64 @@
   </ul>
 </div>
 
+<p>Menu buttons inside a table</p>
+
+<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+  <thead>
+  <tr>
+    <th class="mdl-data-table__cell--non-numeric">Material</th>
+    <th>Quantity</th>
+    <th>Unit price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
+    <td>
+      <button class="mdlext-menu-button mdlext-js-menu-button" style="width:86px;" onselect="this.querySelector('span').innerHTML = event.detail.source.innerHTML;">
+        <span class="mdlext-menu-button__label">Select</span>
+        <i class="mdlext-aria-expanded-more-less"></i>
+      </button>
+      <ul class="mdlext-menu" hidden="">
+        <li class="mdlext-menu__item">10</li>
+        <li class="mdlext-menu__item">25</li>
+        <li class="mdlext-menu__item">50</li>
+      </ul>
+    </td>
+    <td>$2.90</td>
+  </tr>
+  <tr>
+    <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
+    <td>
+      <button class="mdlext-menu-button mdlext-js-menu-button" style="width:86px;" onselect="this.querySelector('span').innerHTML = event.detail.source.innerHTML;">
+        <span class="mdlext-menu-button__label">Select</span>
+        <i class="mdlext-aria-expanded-more-less"></i>
+      </button>
+      <ul class="mdlext-menu" hidden="">
+        <li class="mdlext-menu__item">10</li>
+        <li class="mdlext-menu__item">25</li>
+        <li class="mdlext-menu__item">50</li>
+      </ul>
+    </td>
+    <td>$1.25</td>
+  </tr>
+  <tr>
+    <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
+    <td>
+      <button class="mdlext-menu-button mdlext-js-menu-button" style="width:86px;" onselect="this.querySelector('span').innerHTML = event.detail.source.innerHTML;">
+        <span class="mdlext-menu-button__label">Select</span>
+        <i class="mdlext-aria-expanded-more-less"></i>
+      </button>
+      <ul class="mdlext-menu" hidden="">
+        <li class="mdlext-menu__item">10</li>
+        <li class="mdlext-menu__item">25</li>
+        <li class="mdlext-menu__item">50</li>
+      </ul>
+    </td>
+    <td>$2.35</td>
+  </tr>
+  </tbody>
+</table>
 <!--
 https://www.w3.org/TR/wai-aria-practices/#menubutton
 http://w3c.github.io/aria-practices/examples/menu-button/menu-button-1.html

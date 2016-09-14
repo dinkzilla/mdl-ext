@@ -149,113 +149,100 @@ const menuFactory = (element, controlledBy) => {
   };
 
 
-  // -------------------------
-  /*
-  const findPos = (el) => {
-    let xPosition = 0;
-    let yPosition = 0;
+  /**
+   * Get a list of offset parents for given element
+   * @see https://www.benpickles.com/articles/51-finding-a-dom-nodes-common-ancestor-using-javascript
+   * @param el the element
+   * @return {Array} a list of offset parents
+   */
+  const offsetParents = el => {
+    const elements = [];
+    for (; el; el = el.offsetParent) {
+      elements.unshift(el);
+    }
+    if(!elements.find(e => e === document.body)) {
+      elements.unshift(document.body);
+    }
+    return elements;
+  };
+
+  /**
+   * Finds the common offset ancestor of two DOM nodes
+   * @see https://www.benpickles.com/articles/51-finding-a-dom-nodes-common-ancestor-using-javascript
+   * @see https://gist.github.com/benpickles/4059636
+   * @param a
+   * @param b
+   * @return {Element} The common offset ancestor of a and b
+   */
+  const commonOffsetAncestor = (a, b) => {
+    const parentsA = offsetParents(a);
+    const parentsB = offsetParents(b);
+
+    for (let i = 0; i < parentsA.length; i++) {
+      if (parentsA[i] !== parentsB[i]) return parentsA[i-1];
+    }
+  };
+
+
+  /**
+   * Calculate position relative to a target element
+   * @see http://stackoverflow.com/questions/21064101/understanding-offsetwidth-clientwidth-scrollwidth-and-height-respectively
+   * @param target
+   * @param el
+   * @return {{x: number, y: number}}
+   */
+  const positionRelativeToTarget = (target, el) => {
+    let x = 0;
+    let y = 0;
 
     while(el) {
-      xPosition += (el.offsetLeft - el.scrollLeft + el.clientLeft);
-      yPosition += (el.offsetTop - el.scrollTop + el.clientTop);
+      x += (el.offsetLeft - el.scrollLeft + el.clientLeft) || 0;
+      y += (el.offsetTop - el.scrollTop + el.clientTop) || 0;
       el = el.offsetParent;
 
-      if(el.classList.contains('mdl-layout__content')) {
+      if(el === target) {
         break;
       }
     }
-    return { top: yPosition, left: xPosition };
+    return { x: x, y: y };
   };
 
-
-  // https://github.com/camwiegert/in-view
-  const isInViewport = (el) => {
-    const { top, height } = el.getBoundingClientRect();
-    console.log(window.innerHeight, top+height);
+  /**
+   * Check whether an element is in the window viewport
+   * @see http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport/
+   * @param rect
+   * @return {boolean}
+   */
+  const rectInsideWindowViewport = rect => {
+    const { top, right, bottom, left } = rect;
+    return top >= 0 &&
+      left >= 0 &&
+      bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      right <= (window.innerWidth || document.documentElement.clientWidth);
   };
 
-  */
-
-
-  /*
-  // https://github.com/micro-js/compute-placement
-  function computePlacement (placement, nodeDims, nearRect, opts) {
-    opts = opts || {};
-
-    var relative = opts.relative;
-    var space = opts.space || 0;
-
-    var width = nodeDims.width;
-    var height = nodeDims.height;
-
-    var top = relative ? 0 : nearRect.top;
-    var left = relative ? 0 : nearRect.left;
-    var vmid = top + (nearRect.height / 2 - height / 2);
-    var hmid = left + (nearRect.width / 2 - width / 2);
-
-    switch (placement) {
-      case 'left':
-        return {
-          left: left - (width + space),
-          top: vmid
-        };
-      case 'right':
-        return {
-          left: left + nearRect.width + space,
-          top: vmid
-        };
-      case 'top':
-        return {
-          left: hmid,
-          top: top - (height + space)
-        };
-      case 'bottom':
-        return {
-          left: hmid,
-          top: top + nearRect.height + space
-        }
-    }
-  }
-
-
-  // https://github.com/micro-js/element-rect
-  function elementRect (node, offsetParent) {
-    if (offsetParent === true) offsetParent = node.offsetParent;
-
-    var rect = node.getBoundingClientRect();
-    var prect = offsetParent
-      ? offsetParent.getBoundingClientRect()
-      : {left: 0, top: 0};
-
-    return {
-      left: rect.left - prect.left,
-      top: rect.top - prect.top,
-      width: rect.width,
-      height: rect.height
-    }
-  }
-
+  /**
+   * Position menu next to button
+   * @TODO Positioning strategy needs improvement
+   */
   const tether = () => {
-    //const pos = findPos(controlledBy.element);
-    //const br = controlledBy.element.getBoundingClientRect();
-    //
-    //element.style.top  = `${pos.top + br.height}px`;
-    //element.style.left = `${pos.left}px`;
+    const ancestor = commonOffsetAncestor(controlledBy.element, element);
+    const { x, y } = positionRelativeToTarget(ancestor, controlledBy.element);
+    const { height } = element.getBoundingClientRect();
 
-    var dims = elementRect(element);
-    var nearRect = elementRect(controlledBy.element, false);
-    var pos = computePlacement('bottom', dims, nearRect);
-    element.style.top  = `${pos.top}px`;
-    element.style.left = `${pos.left}px`;
+    element.style.left = `${x}px`;
+    element.style.top  = `${y + (controlledBy.element.clientHeight || 0)}px`;
 
+    if(!rectInsideWindowViewport(element.getBoundingClientRect())) {
+      element.style.top  = `${y - (height || 0) - 2}px`;
+    }
   };
-  */
-  // -------------------------
 
 
   const open = (position='first') => {
     controlledBy.element.setAttribute('aria-expanded', 'true');
     element.removeAttribute('hidden');
+    tether();
 
     let item = null;
 

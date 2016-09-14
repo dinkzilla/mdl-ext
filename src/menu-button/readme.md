@@ -1,6 +1,8 @@
 # Menu Buttom
 A WAI-ARIA friendly menu button.
 
+>**Note:** Documentation is not completed. 
+
 ## Introduction
 A menu button is a [button](https://www.w3.org/TR/wai-aria-practices/#button) that opens a 
 [menu](https://www.w3.org/TR/wai-aria-practices/#menu). It is often styled as a typical push button with a 
@@ -49,3 +51,16 @@ The menu button has roles, attributes and behaviour as outlined in WAI-ARIA Auth
 * `tabindex`:
  
 >The roles, states, and properties needed for the menu are described in more detail in WAI-ARIA Authoring Practices, [2.19 Menu or Menu bar](https://www.w3.org/TR/wai-aria-practices/#menu).
+
+
+## To include a MDLEXT **menu button** component:
+TBD
+
+
+### Example
+TBD
+
+
+### More examples
+* The [snippets/menu-button.html](./snippets/menu-button.html) and the [tests](../../test/menu-button/menu-button.spec.js) provides more detailed examples.
+* Try out the [live demo](http://leifoolsen.github.io/mdl-ext/demo/menu-button.html)
