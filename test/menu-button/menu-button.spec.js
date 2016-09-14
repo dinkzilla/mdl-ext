@@ -81,7 +81,8 @@ describe('MaterialExtMenuButton', () => {
 </button>
 <ul id="menu-example-dropdown"
     class="mdlext-menu"
-    role="menu">
+    role="menu"
+    hidden>
   <li class="mdlext-menu__item" role="menuitem">Menu item #1</li>
   <li class="mdlext-menu__item" role="menuitem">Menu item #2</li>
   <li class="mdlext-menu__item" role="menuitem">Menu item #n</li>
@@ -282,8 +283,8 @@ describe('MaterialExtMenuButton', () => {
     it('closes the menu when esc key is pressed', () => {
       button.MaterialExtMenuButton.openMenu('first');
       dispatchKeyDownEvent(button, VK_ESC);
-      assert.equal(button.getAttribute('aria-expanded'), 'false', 'Tab key: Expected button to have aria-expanded=false');
-      assert.isTrue(menu.hasAttribute('hidden'), 'Tab key: Expected menu to have hidden attribute');
+      assert.equal(button.getAttribute('aria-expanded'), 'false', 'ESC key: Expected button to have aria-expanded=false');
+      assert.isTrue(menu.hasAttribute('hidden'), 'ESC key: Expected menu to have hidden attribute');
     });
 
     it('does nothing when menu button is disabled', () => {
@@ -435,6 +436,19 @@ describe('MaterialExtMenuButton', () => {
       assert.equal(menu.children[1].getAttribute('aria-selected'), 'true', 'Mouse cick: Expected menu item to have aria-selected="true"');
       assert.isTrue(menu.hasAttribute('hidden'), 'Mouse click: Expected menu to have hidden attribute');
     });
+
+    it('closes the menu and sets aria-expanded="false" for button and hidden attribute for menu', () => {
+      button.MaterialExtMenuButton.openMenu('first');
+      const item = menu.children[1];
+      item.focus();
+      assert.equal(button.getAttribute('aria-expanded'), 'true', 'Beforer closing menu: Expected button to have aria-expanded=false');
+      assert.isFalse(menu.hasAttribute('hidden'), 'Before closing menu: Expected menu to have hidden attribute');
+
+      dispatchKeyDownEvent(item, VK_ESC);
+      assert.equal(button.getAttribute('aria-expanded'), 'false', 'After closing menu: Expected button to have aria-expanded=false');
+      assert.isTrue(menu.hasAttribute('hidden'), 'After closing menu: Expected menu to have hidden attribute');
+    });
+
 
     it('listens to blur event', () => {
       button.MaterialExtMenuButton.openMenu();

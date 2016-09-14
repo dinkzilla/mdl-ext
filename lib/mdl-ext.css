@@ -2412,6 +2412,36 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   bottom: 0;
 }
 
+.mdlext-aria-expanded-more-less {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.5em;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'liga';
+}
+
+.mdlext-aria-expanded-more-less::after {
+  content: "expand_more";
+  margin-left: -8px;
+}
+
+[aria-expanded='true'] > .mdlext-aria-expanded-more-less::after {
+  content: "expand_less";
+  margin-left: -8px;
+}
+
 .mdlext-menu-button,
 .mdlext-menu,
 .mdlext-menu__item {
@@ -2431,15 +2461,54 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0;
-  min-width: 100px;
-  cursor: pointer;
+  max-width: 480px;
+  -ms-flex-align: center;
+      -ms-grid-row-align: center;
+      align-items: center;
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  overflow: hidden;
+  text-decoration: none;
 }
 
 .mdlext-menu-button[disabled] {
+  color: rgb(189,189,189);
+  cursor: auto;
   pointer-events: none;
 }
 
+.mdlext-menu-button[disabled] > * {
+  color: rgb(189,189,189);
+}
+
+.mdlext-menu-button__label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mdlext-menu-button > * {
+  margin: 0;
+  padding: 0 0 0 8px;
+}
+
+.mdlext-menu-button > *:first-child {
+  padding-left: 0;
+}
+
+.mdlext-menu-button > *:last-child:not(:only-child):not(.mdlext-menu-button__label) {
+  margin-left: auto;
+  padding-left: 16px;
+  padding-right: 8px;
+}
+
 .mdlext-menu {
+  min-width: 100px;
+  max-width: 480px;
   border-radius: 2px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   display: -ms-inline-flexbox;
@@ -2447,9 +2516,24 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   -ms-flex-direction: column;
       flex-direction: column;
   padding: 8px 0;
-  min-width: 100px;
-  color: #000000;
+  color: rgba(0,0,0, 0.87);
   background-color: rgb(255,255,255);
+}
+
+.mdlext-menu:focus {
+  outline-offset: -1px;
+  outline-width: 1px;
+}
+
+.mdlext-menu[hidden] {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }
 
 .mdlext-menu__item {
@@ -2471,6 +2555,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
       -ms-user-select: none;
           user-select: none;
   min-height: 40px;
+  overflow: hidden;
 }
 
 .mdlext-menu__item:active,
@@ -2483,7 +2568,14 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 }
 
 .mdlext-menu__item:focus {
+  outline-offset: -1px;
+  outline-width: 1px;
+  outline-style: solid;
   background-color: rgb(238,238,238);
+}
+
+.mdlext-menu__item::-moz-focus-inner {
+  border: 0;
 }
 
 .mdlext-menu__item[disabled] {
@@ -2497,11 +2589,29 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   color: rgb(189,189,189);
 }
 
-.mdlext-menu__item::-moz-focus-inner {
-  border: 0;
+.mdlext-menu__item > span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mdlext-menu__item > * {
+  margin: 0;
+  padding: 0 0 0 8px;
+}
+
+.mdlext-menu__item > *:first-child {
+  padding-left: 0;
+}
+
+.mdlext-menu__item > *:last-child:not(:only-child):not(.mdlext-menu__item__label) {
+  margin-left: auto;
 }
 
 .mdlext-menu__item-divider {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   border-bottom: 1px solid rgba(0,0,0, 0.12);
 }
 

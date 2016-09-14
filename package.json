@@ -103,7 +103,7 @@
     "istanbul": "1.0.0-alpha.2",
     "jsdom": "9.5.0",
     "jsdomify": "2.1.0",
-    "material-design-lite": "1.2.0",
+    "material-design-lite": "1.2.1",
     "mocha": "3.0.2",
     "mutation-observer": "1.0.2",
     "node-sass": "3.9.0",

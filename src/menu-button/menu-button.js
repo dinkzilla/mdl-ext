@@ -149,8 +149,10 @@ const menuFactory = (element, controlledBy) => {
   };
 
   const open = (position='first') => {
+    controlledBy.element.setAttribute('aria-expanded', 'true');
     element.removeAttribute('hidden');
     let item = null;
+
     switch (position.toLowerCase()) {
       case 'first':
         first();
@@ -172,6 +174,7 @@ const menuFactory = (element, controlledBy) => {
 
   const close = () => {
     element.setAttribute('hidden', '');
+    controlledBy.element.setAttribute('aria-expanded', 'false');
   };
 
   const keyDownHandler = event => {
@@ -254,8 +257,7 @@ const menuFactory = (element, controlledBy) => {
 
   const blurHandler = event => {
     if(!(element.contains(event.relatedTarget) || controlledBy.element.contains(event.relatedTarget))) {
-      // Find a better solution?
-      setTimeout(() => close(), 100);
+      setTimeout(() => close(), 200);  // Find a better solution?
     }
   };
 
@@ -291,6 +293,7 @@ const menuFactory = (element, controlledBy) => {
     addWaiAria();
     removeListeners();
     addListeners();
+    element.style['min-width'] = `${Math.max(100, controlledBy.element.getBoundingClientRect().width)}px`;
   };
 
   init();
@@ -423,13 +426,11 @@ class MenuButton {
 
   openMenu(position='first') {
     if(!this.isDisabled()) {
-      this.element.setAttribute('aria-expanded', 'true');
       this.menu.open(position);
     }
   }
 
   closeMenu() {
-    this.element.setAttribute('aria-expanded', 'false');
     this.menu.close();
   }
 
