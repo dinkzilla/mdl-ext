@@ -2434,12 +2434,12 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 
 .mdlext-aria-expanded-more-less::after {
   content: "expand_more";
-  margin-left: -8px;
+  margin-left: 0;
 }
 
 [aria-expanded='true'] > .mdlext-aria-expanded-more-less::after {
   content: "expand_less";
-  margin-left: -8px;
+  margin-left: 0;
 }
 
 .mdlext-menu-button,
@@ -2475,6 +2475,14 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   text-decoration: none;
 }
 
+.mdlext-menu-button:focus {
+  outline-width: 1px;
+}
+
+.mdlext-menu-button::-moz-focus-inner {
+  border: 0;
+}
+
 .mdlext-menu-button[disabled] {
   color: rgb(189,189,189);
   cursor: auto;
@@ -2502,20 +2510,21 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 
 .mdlext-menu-button > *:last-child:not(:only-child):not(.mdlext-menu-button__label) {
   margin-left: auto;
-  padding-left: 16px;
-  padding-right: 8px;
+  padding-right: 16px;
 }
 
 .mdlext-menu {
+  position: absolute;
+  z-index: 1000;
   min-width: 100px;
   max-width: 480px;
   border-radius: 2px;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
   display: -ms-inline-flexbox;
   display: inline-flex;
   -ms-flex-direction: column;
       flex-direction: column;
-  padding: 8px 0;
+  padding: 4px 0;
   color: rgba(0,0,0, 0.87);
   background-color: rgb(255,255,255);
 }
@@ -2534,6 +2543,8 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   padding: 0;
   position: absolute;
   width: 1px;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .mdlext-menu__item {
@@ -2570,7 +2581,6 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-menu__item:focus {
   outline-offset: -1px;
   outline-width: 1px;
-  outline-style: solid;
   background-color: rgb(238,238,238);
 }
 
@@ -3098,6 +3108,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-accordion__tab:focus {
   outline-offset: -2px;
   outline-color: default;
+  outline-width: 1px;
 }
 
 .mdlext-accordion__tab[aria-expanded='true'] {

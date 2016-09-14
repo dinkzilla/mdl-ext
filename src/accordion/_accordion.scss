@@ -45,6 +45,7 @@
     &:focus {
       outline-offset: -2px;
       outline-color: $mdlext-accordion-header-focus-outline-color;
+      outline-width: 1px;
     }
 
     &[aria-expanded='true'] {

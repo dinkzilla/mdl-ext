@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .mdlext-aria-expanded-more-less {
-  @include mdlext-aria-toggle($font-size: 1.5em, $icon: 'expand_more', $icon-expanded: 'expand_less', $icon-offset: -$mdlext-accordion-header-padding);
+  @include mdlext-aria-toggle($font-size: 1.5em, $icon: 'expand_more', $icon-expanded: 'expand_less', $icon-offset: 0);
 }
 
 .mdlext-menu-button,
@@ -24,6 +24,14 @@
   user-select: none;
   overflow: hidden;
   text-decoration: none;
+
+  &:focus {
+    outline-width: 1px;
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
 
   &[disabled] {
     color: $disabled-item-text-color;
@@ -52,19 +60,21 @@
 
   > *:last-child:not(:only-child):not(.mdlext-menu-button__label) {
     margin-left: auto; // If more than one element, push last element to the right
-    padding-left: 16px;
-    padding-right: 8px;
+    padding-right: 16px;
   }
 }
 
 .mdlext-menu {
+  position: absolute;
+
+  z-index: 1000;
   min-width: 100px;
   max-width: 480px;
   border-radius: 2px;
-  @include shadow-2dp();
+  @include shadow-3dp();
   display: inline-flex;
   flex-direction: column;
-  padding: 8px 0;
+  padding: 4px 0;
   color: $default-item-text-color;
   background-color: $default-dropdown-bg-color;
 
@@ -75,6 +85,8 @@
 
   &[hidden] {
     @include mdlext-visually-hidden;
+    z-index: 0;
+    pointer-events: none;
   }
 
   &__item {
@@ -101,7 +113,6 @@
     &:focus {
       outline-offset: -1px;
       outline-width: 1px;
-      outline-style: solid;
       background-color: $default-item-focus-bg-color;
     }
 

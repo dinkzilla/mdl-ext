@@ -78,7 +78,7 @@ const menuFactory = (element, controlledBy) => {
     }
   };
 
-  const next = current => {
+  const nextItem = current => {
     let n = current.nextElementSibling;
     if(!n) {
       n = element.firstElementChild;
@@ -103,7 +103,7 @@ const menuFactory = (element, controlledBy) => {
     }
   };
 
-  const prev = current => {
+  const previousItem = current => {
     let p = current.previousElementSibling;
     if(!p) {
       p = element.lastElementChild;
@@ -128,37 +128,76 @@ const menuFactory = (element, controlledBy) => {
     }
   };
 
-  const first = () => {
+  const firstItem = () => {
     const item = element.firstElementChild;
     if(isDisabled(item) || isDivider(item) ) {
-      next(item);
+      nextItem(item);
     }
     else {
       focus(item);
     }
   };
 
-  const last = () => {
+  const lastItem = () => {
     const item = element.lastElementChild;
     if(isDisabled(item) || isDivider(item)) {
-      prev(item);
+      previousItem(item);
     }
     else {
       focus(item);
     }
   };
 
+
+/*
+  // -------------------------
+  const findPos = (el) => {
+    let xPosition = 0;
+    let yPosition = 0;
+
+    while(el) {
+      xPosition += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+      yPosition += (el.offsetTop - el.scrollTop + el.clientTop);
+      el = el.offsetParent;
+
+      if(el.classList.contains('mdl-layout__content')) {
+        break;
+      }
+    }
+    return { top: yPosition, left: xPosition };
+  };
+
+
+  const isInViewport = (el) => {
+    const { top, height } = el.getBoundingClientRect();
+    console.log(window.innerHeight, top+height);
+  };
+
+
+  const tether = () => {
+    const pos = findPos(controlledBy.element);
+    const br = controlledBy.element.getBoundingClientRect();
+
+    isInViewport(element);
+
+    element.style.top  = `${pos.top + br.height}px`;
+    element.style.left = `${pos.left}px`;
+  };
+  // -------------------------
+*/
+  
   const open = (position='first') => {
     controlledBy.element.setAttribute('aria-expanded', 'true');
     element.removeAttribute('hidden');
+
     let item = null;
 
     switch (position.toLowerCase()) {
       case 'first':
-        first();
+        firstItem();
         break;
       case 'last':
-        last();
+        lastItem();
         break;
       case 'selected':
         item = getSelected();
@@ -166,7 +205,7 @@ const menuFactory = (element, controlledBy) => {
           focus(item);
         }
         else {
-          first();
+          firstItem();
         }
         break;
     }
@@ -185,29 +224,29 @@ const menuFactory = (element, controlledBy) => {
       case VK_ARROW_UP:
       case VK_ARROW_LEFT:
         if(item) {
-          prev(item);
+          previousItem(item);
         }
         else {
-          first();
+          firstItem();
         }
         break;
 
       case VK_ARROW_DOWN:
       case VK_ARROW_RIGHT:
         if(item) {
-          next(item);
+          nextItem(item);
         }
         else {
-          last();
+          lastItem();
         }
         break;
 
       case VK_HOME:
-        first();
+        firstItem();
         break;
 
       case VK_END:
-        last();
+        lastItem();
         break;
 
       case VK_SPACE:
