@@ -149,8 +149,8 @@ const menuFactory = (element, controlledBy) => {
   };
 
 
-/*
   // -------------------------
+  /*
   const findPos = (el) => {
     let xPosition = 0;
     let yPosition = 0;
@@ -168,24 +168,91 @@ const menuFactory = (element, controlledBy) => {
   };
 
 
+  // https://github.com/camwiegert/in-view
   const isInViewport = (el) => {
     const { top, height } = el.getBoundingClientRect();
     console.log(window.innerHeight, top+height);
   };
 
+  */
+
+
+  /*
+  // https://github.com/micro-js/compute-placement
+  function computePlacement (placement, nodeDims, nearRect, opts) {
+    opts = opts || {};
+
+    var relative = opts.relative;
+    var space = opts.space || 0;
+
+    var width = nodeDims.width;
+    var height = nodeDims.height;
+
+    var top = relative ? 0 : nearRect.top;
+    var left = relative ? 0 : nearRect.left;
+    var vmid = top + (nearRect.height / 2 - height / 2);
+    var hmid = left + (nearRect.width / 2 - width / 2);
+
+    switch (placement) {
+      case 'left':
+        return {
+          left: left - (width + space),
+          top: vmid
+        };
+      case 'right':
+        return {
+          left: left + nearRect.width + space,
+          top: vmid
+        };
+      case 'top':
+        return {
+          left: hmid,
+          top: top - (height + space)
+        };
+      case 'bottom':
+        return {
+          left: hmid,
+          top: top + nearRect.height + space
+        }
+    }
+  }
+
+
+  // https://github.com/micro-js/element-rect
+  function elementRect (node, offsetParent) {
+    if (offsetParent === true) offsetParent = node.offsetParent;
+
+    var rect = node.getBoundingClientRect();
+    var prect = offsetParent
+      ? offsetParent.getBoundingClientRect()
+      : {left: 0, top: 0};
+
+    return {
+      left: rect.left - prect.left,
+      top: rect.top - prect.top,
+      width: rect.width,
+      height: rect.height
+    }
+  }
 
   const tether = () => {
-    const pos = findPos(controlledBy.element);
-    const br = controlledBy.element.getBoundingClientRect();
+    //const pos = findPos(controlledBy.element);
+    //const br = controlledBy.element.getBoundingClientRect();
+    //
+    //element.style.top  = `${pos.top + br.height}px`;
+    //element.style.left = `${pos.left}px`;
 
-    isInViewport(element);
-
-    element.style.top  = `${pos.top + br.height}px`;
+    var dims = elementRect(element);
+    var nearRect = elementRect(controlledBy.element, false);
+    var pos = computePlacement('bottom', dims, nearRect);
+    element.style.top  = `${pos.top}px`;
     element.style.left = `${pos.left}px`;
+
   };
+  */
   // -------------------------
-*/
-  
+
+
   const open = (position='first') => {
     controlledBy.element.setAttribute('aria-expanded', 'true');
     element.removeAttribute('hidden');
