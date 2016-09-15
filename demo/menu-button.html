@@ -146,7 +146,7 @@
 <p>This menu button has WAI-Aria roles and attributes coded in markup</p>
 <button class="mdlext-menu-button mdlext-js-menu-button" role="button" aria-haspopup="true" aria-controls="menu-example-dropdown" aria-expanded="false" tabindex="0" onselect="this.querySelector('span').innerHTML = event.detail.source.innerHTML;">
   <span class="mdlext-menu-button__label">I'm the label!</span>
-  <i class="mdlext-aria-expanded-more-less"></i>
+  <i class="material-icons mdlext-aria-expanded-more-less"></i>
 </button>
 <ul id="menu-example-dropdown" class="mdlext-menu" role="menu" hidden="">
   <li class="mdlext-menu__item" role="menuitem">Menu item #1</li>
@@ -194,6 +194,8 @@
 
 <p>Menu buttons inside a table</p>
 
+<div style="position:relative; border:2px solid green">
+<div>
 <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
   <thead>
   <tr>
@@ -206,7 +208,7 @@
   <tr>
     <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
     <td>
-      <button class="mdlext-menu-button mdlext-js-menu-button" style="width:86px;" onselect="this.querySelector('span').innerHTML = event.detail.source.innerHTML;">
+      <button class="mdlext-menu-button mdlext-js-menu-button" style="min-width:90px;" onselect="this.querySelector('span').innerHTML = event.detail.source.innerHTML;">
         <span class="mdlext-menu-button__label">Select</span>
         <i class="mdlext-aria-expanded-more-less"></i>
       </button>
@@ -221,7 +223,7 @@
   <tr>
     <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
     <td>
-      <button class="mdlext-menu-button mdlext-js-menu-button" style="width:86px;" onselect="this.querySelector('span').innerHTML = event.detail.source.innerHTML;">
+      <button class="mdlext-menu-button mdlext-js-menu-button" style="min-width:90px;" onselect="this.querySelector('span').innerHTML = event.detail.source.innerHTML;">
         <span class="mdlext-menu-button__label">Select</span>
         <i class="mdlext-aria-expanded-more-less"></i>
       </button>
@@ -236,7 +238,7 @@
   <tr>
     <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
     <td>
-      <button class="mdlext-menu-button mdlext-js-menu-button" style="width:86px;" onselect="this.querySelector('span').innerHTML = event.detail.source.innerHTML;">
+      <button class="mdlext-menu-button mdlext-js-menu-button" style="min-width:90px;" onselect="this.querySelector('span').innerHTML = event.detail.source.innerHTML;">
         <span class="mdlext-menu-button__label">Select</span>
         <i class="mdlext-aria-expanded-more-less"></i>
       </button>
@@ -250,6 +252,8 @@
   </tr>
   </tbody>
 </table>
+</div>
+</div>
 <!--
 https://www.w3.org/TR/wai-aria-practices/#menubutton
 http://w3c.github.io/aria-practices/examples/menu-button/menu-button-1.html
@@ -264,6 +268,7 @@ https://codepen.io/dapacreative/pen/WQoLzb
 https://codepen.io/gabrieltomescu/pen/ZGGyPK
 https://codepen.io/Idered/pen/vowrB
 https://codepen.io/Stedesign/pen/DbAJh
+http://markbirbeck.com/2015/10/14/a-mixin-approach-to-material-design-lite-using-sass/
 -->
 
   </main>

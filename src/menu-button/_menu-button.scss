@@ -24,26 +24,25 @@
   @include mdlext-aria-toggle($font-size: 1.5em, $icon: 'expand_more', $icon-expanded: 'expand_less');
 }
 
-.mdlext-menu-button,
-.mdlext-menu,
-.mdlext-menu__item {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  list-style: none;
-  display: flex;
-}
-
 .mdlext-menu-button {
-  padding: 8px;
+  display: inline-block; // Note: A button element can not use display:flex!!
   @include typo-menu();
   max-width: 480px;
-  align-items: center;
-  align-self: stretch;
   user-select: none;
   overflow: hidden;
   text-decoration: none;
+  white-space: nowrap;
+  border: none;
+  border-radius: $button-border-radius;
+  height: $button-height;
+  min-width: $button-min-width;
+  padding: 0 $button-padding;
+  box-sizing: border-box;
+  line-height: $button-height;
+  vertical-align: middle;
+  cursor: pointer;
+  text-align: right;
+  position: relative;
 
   &:focus {
     outline-width: 1px;
@@ -67,11 +66,14 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    // Width of label is calculated in component to avoid pushing left icon(s) out of view
   }
 
   > * {
     margin: 0;
     padding: 0 0 0 8px;
+    white-space: nowrap;
+    float: left;
   }
 
   > *:first-child {
@@ -79,15 +81,26 @@
   }
 
   > *:last-child:not(:only-child):not(.mdlext-menu-button__label) {
-    margin-left: auto; // If more than one element, push last element to the right
-    padding-right: 16px;
+    //margin-left: auto; // If more than one element, push last element to the right
+    //padding-right: 16px;
+    float: none;
+    vertical-align: middle;
   }
+}
+
+.mdlext-menu,
+.mdlext-menu__item {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  list-style: none;
+  display: flex;
 }
 
 .mdlext-menu {
   position: absolute;
-
-  z-index: 1000;
+  z-index: 9999;
   min-width: 100px;
   max-width: 480px;
   border-radius: 2px;
@@ -105,7 +118,7 @@
 
   &[hidden] {
     @include mdlext-visually-hidden;
-    z-index: 0;
+    //z-index: 0;
     pointer-events: none;
   }
 

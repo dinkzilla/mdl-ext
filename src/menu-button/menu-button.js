@@ -43,6 +43,7 @@ import {
 
 
 //const MENU_BUTTON = 'mdlext-menu-button';
+//const MENU_BUTTON_LABEL = 'mdlext-menu-button__label';
 const MENU_BUTTON_MENU = 'mdlext-menu';
 const MENU_BUTTON_MENU_ITEM = 'mdlext-menu__item';
 const MENU_BUTTON_MENU_ITEM_DIVIDER = 'mdlext-menu__item-divider';
@@ -223,18 +224,32 @@ const menuFactory = (element, controlledBy) => {
 
   /**
    * Position menu next to button
-   * @TODO Positioning strategy needs improvement
    */
   const tether = () => {
+    // @TODO Positioning strategy needs improvement
+    // 1. menu.width > viewport.width or menu.height > viewport.height
+    //    1.1 menu.height > viewport.height
+    //        1.1.1 let menu.height = viewport.heigt
+    //        1.1.2 let menu.overflow-y = auto
+    // 2. position menu below button
+    //    2.1 done if menu inside viewport
+    // 3. position menu above button
+    //    3.1 done if menu inside viewport
+    // 4. position menu on button right hand side
+    //    4.1 done if menu inside viewport
+    // 5. position menu on button left hand side
+    //    5.1 done if menu inside viewport
+    // 6. position menu inside viewport
+    // 7. done
+
     const ancestor = commonOffsetAncestor(controlledBy.element, element);
     const { x, y } = positionRelativeToTarget(ancestor, controlledBy.element);
-    const { height } = element.getBoundingClientRect();
 
     element.style.left = `${x}px`;
-    element.style.top  = `${y + (controlledBy.element.clientHeight || 0)}px`;
+    element.style.top  = `${y + (controlledBy.element.offsetHeight || 0)}px`;
 
     if(!rectInsideWindowViewport(element.getBoundingClientRect())) {
-      element.style.top  = `${y - (height || 0) - 2}px`;
+      element.style.top  = `${y - (element.offsetHeight || 0) - 4}px`;
     }
   };
 
@@ -492,6 +507,35 @@ class MenuButton {
       this.element.setAttribute('aria-expanded', 'false');
       this.element.setAttribute('aria-haspopup', 'true');
     };
+
+
+    // Caption must have a max-width defined to prevent pushing elements to the right of the caption out of view.
+    // In JsDom, offsetWidth and offsetHeight properties does not work properly, so this function is not testable.
+    /* istanbul ignore next */
+    /*
+    const calcMaxTabCaptionWidth = () => {
+
+      const label = this.element.querySelector(`.${MENU_BUTTON_LABEL}`);
+      if(label !== null) {
+        const w = [...this.element.children]
+          .filter( el => el.classList && !el.classList.contains(MENU_BUTTON_LABEL) )
+          .reduce( (v, el) => v + el.offsetWidth, 0 );
+
+        const csp = window.getComputedStyle(this.element.parentNode);
+        const cse = window.getComputedStyle(this.element);
+
+        const maxWidth = this.element.parentNode.clientWidth -
+          (parseFloat(csp.paddingLeft) || 0) -
+          (parseFloat(csp.paddingRight) || 0) -
+          (parseFloat(cse.paddingLeft) || 0) -
+          (parseFloat(cse.paddingRight) || 0) - w;
+
+        if(maxWidth > 0 && maxWidth < this.element.clientWidth) {
+          label.style['max-width'] = `${maxWidth}px`;
+        }
+      }
+    };
+    */
 
     const findMenuElement = () => {
       let menuElement;

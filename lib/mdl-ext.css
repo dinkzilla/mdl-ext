@@ -2462,37 +2462,32 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   margin-left: 0;
 }
 
-.mdlext-menu-button,
-.mdlext-menu,
-.mdlext-menu__item {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  list-style: none;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .mdlext-menu-button {
-  padding: 8px;
+  display: inline-block;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0;
   max-width: 480px;
-  -ms-flex-align: center;
-      -ms-grid-row-align: center;
-      align-items: center;
-  -ms-flex-item-align: stretch;
-      align-self: stretch;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   overflow: hidden;
   text-decoration: none;
+  white-space: nowrap;
+  border: none;
+  border-radius: 2px;
+  height: 36px;
+  min-width: 64px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  line-height: 36px;
+  vertical-align: middle;
+  cursor: pointer;
+  text-align: right;
+  position: relative;
 }
 
 .mdlext-menu-button:focus {
@@ -2522,6 +2517,8 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-menu-button > * {
   margin: 0;
   padding: 0 0 0 8px;
+  white-space: nowrap;
+  float: left;
 }
 
 .mdlext-menu-button > *:first-child {
@@ -2529,13 +2526,24 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 }
 
 .mdlext-menu-button > *:last-child:not(:only-child):not(.mdlext-menu-button__label) {
-  margin-left: auto;
-  padding-right: 16px;
+  float: none;
+  vertical-align: middle;
+}
+
+.mdlext-menu,
+.mdlext-menu__item {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  list-style: none;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .mdlext-menu {
   position: absolute;
-  z-index: 1000;
+  z-index: 9999;
   min-width: 100px;
   max-width: 480px;
   border-radius: 2px;
@@ -2563,7 +2571,6 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   padding: 0;
   position: absolute;
   width: 1px;
-  z-index: 0;
   pointer-events: none;
 }
 
