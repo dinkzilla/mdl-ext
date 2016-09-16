@@ -218,10 +218,13 @@ of photography photograpers used a lightboard to get a quick view of, sorting an
 
 ### Lightbox
 ![Lightbox](./etc/lightbox.png)
+
 A [**lightbox**](./src/lightbox/) displays an image filling the screen, and dimming out the rest of the web page. 
 It acts as a modal dialog using the `<dialog>` element as a container for the lightbox.
 
 ### Menu Button
+![Menu button](./etc/menu-button.png)
+
 A [**menu button**](./src/menu-button/) is a button that opens a menu. It has roles, attributes and behaviour as outlined in 
 WAI-ARIA Authoring Practices, [2.20 Menu Button](https://www.w3.org/TR/wai-aria-practices/#menubutton).
 

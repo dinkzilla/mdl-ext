@@ -84,9 +84,11 @@
   word-wrap: normal;
   white-space: nowrap;
   direction: ltr;
+  vertical-align: middle;
 
   // Support for all WebKit browsers.
   -webkit-font-smoothing: antialiased;
+  -webkit-font-feature-settings: 'liga';
 
   // Support for Safari and Chrome.
   text-rendering: optimizeLegibility;
@@ -96,7 +98,6 @@
 
   // Support for IE.
   font-feature-settings: 'liga';
-
 
   &::after {
     content: $icon;

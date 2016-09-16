@@ -1,4 +1,6 @@
 # Menu Buttom
+![Menu button](../../etc/menu-button.png)
+
 A WAI-ARIA friendly menu button.
 
 >**Note:** Documentation is not completed. 

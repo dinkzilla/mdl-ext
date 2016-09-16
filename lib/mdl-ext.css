@@ -2436,7 +2436,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   font-family: "Material Icons";
   font-weight: normal;
   font-style: normal;
-  font-size: 1.5em;
+  font-size: 24px;
   display: inline-block;
   width: 1em;
   height: 1em;
@@ -2446,7 +2446,9 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   word-wrap: normal;
   white-space: nowrap;
   direction: ltr;
+  vertical-align: middle;
   -webkit-font-smoothing: antialiased;
+  -webkit-font-feature-settings: 'liga';
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'liga';
@@ -2463,49 +2465,17 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 }
 
 .mdlext-menu-button {
-  display: inline-block;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0;
-  max-width: 480px;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  overflow: hidden;
-  text-decoration: none;
-  white-space: nowrap;
-  border: none;
-  border-radius: 2px;
+  text-transform: none;
   height: 36px;
-  min-width: 64px;
   padding: 0 16px;
-  box-sizing: border-box;
+  display: inline-block;
   line-height: 36px;
   vertical-align: middle;
-  cursor: pointer;
-  text-align: right;
-  position: relative;
-}
-
-.mdlext-menu-button:focus {
-  outline-width: 1px;
-}
-
-.mdlext-menu-button::-moz-focus-inner {
-  border: 0;
-}
-
-.mdlext-menu-button[disabled] {
-  color: rgb(189,189,189);
-  cursor: auto;
-  pointer-events: none;
-}
-
-.mdlext-menu-button[disabled] > * {
-  color: rgb(189,189,189);
 }
 
 .mdlext-menu-button__label {
@@ -2514,28 +2484,11 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   text-overflow: ellipsis;
 }
 
-.mdlext-menu-button > * {
-  margin: 0;
-  padding: 0 0 0 8px;
-  white-space: nowrap;
-  float: left;
-}
-
-.mdlext-menu-button > *:first-child {
-  padding-left: 0;
-}
-
-.mdlext-menu-button > *:last-child:not(:only-child):not(.mdlext-menu-button__label) {
-  float: none;
-  vertical-align: middle;
-}
-
 .mdlext-menu,
 .mdlext-menu__item {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  position: relative;
   list-style: none;
   display: -ms-flexbox;
   display: flex;
@@ -2543,7 +2496,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 
 .mdlext-menu {
   position: absolute;
-  z-index: 9999;
+  z-index: 1000;
   min-width: 100px;
   max-width: 480px;
   border-radius: 2px;
@@ -2626,7 +2579,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   color: rgb(189,189,189);
 }
 
-.mdlext-menu__item > span {
+.mdlext-menu__item__label {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3038,7 +2991,9 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   word-wrap: normal;
   white-space: nowrap;
   direction: ltr;
+  vertical-align: middle;
   -webkit-font-smoothing: antialiased;
+  -webkit-font-feature-settings: 'liga';
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'liga';
@@ -3068,7 +3023,9 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   word-wrap: normal;
   white-space: nowrap;
   direction: ltr;
+  vertical-align: middle;
   -webkit-font-smoothing: antialiased;
+  -webkit-font-feature-settings: 'liga';
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'liga';

@@ -21,86 +21,38 @@
  */
 
 .mdlext-aria-expanded-more-less {
-  @include mdlext-aria-toggle($font-size: 1.5em, $icon: 'expand_more', $icon-expanded: 'expand_less');
+  @include mdlext-aria-toggle($font-size: 24px, $icon: 'expand_more', $icon-expanded: 'expand_less');
 }
 
 .mdlext-menu-button {
-  display: inline-block; // Note: A button element can not use display:flex!!
   @include typo-menu();
-  max-width: 480px;
-  user-select: none;
-  overflow: hidden;
-  text-decoration: none;
-  white-space: nowrap;
-  border: none;
-  border-radius: $button-border-radius;
+  text-transform: none;
   height: $button-height;
-  min-width: $button-min-width;
   padding: 0 $button-padding;
-  box-sizing: border-box;
+  display: inline-block;
   line-height: $button-height;
   vertical-align: middle;
-  cursor: pointer;
-  text-align: right;
-  position: relative;
-
-  &:focus {
-    outline-width: 1px;
-  }
-
-  &::-moz-focus-inner {
-    border: 0;
-  }
-
-  &[disabled] {
-    color: $disabled-item-text-color;
-    cursor: auto;
-    pointer-events: none;
-
-    > * {
-      color: $disabled-item-text-color;
-    }
-  }
 
   &__label {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    // Width of label is calculated in component to avoid pushing left icon(s) out of view
-  }
-
-  > * {
-    margin: 0;
-    padding: 0 0 0 8px;
-    white-space: nowrap;
-    float: left;
-  }
-
-  > *:first-child {
-    padding-left: 0;
-  }
-
-  > *:last-child:not(:only-child):not(.mdlext-menu-button__label) {
-    //margin-left: auto; // If more than one element, push last element to the right
-    //padding-right: 16px;
-    float: none;
-    vertical-align: middle;
   }
 }
+
 
 .mdlext-menu,
 .mdlext-menu__item {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  position: relative;
   list-style: none;
   display: flex;
 }
 
 .mdlext-menu {
   position: absolute;
-  z-index: 9999;
+  z-index: 1000;
   min-width: 100px;
   max-width: 480px;
   border-radius: 2px;
@@ -164,7 +116,7 @@
       }
     }
 
-    > span {
+    &__label {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;

@@ -246,7 +246,7 @@ const menuFactory = (element, controlledBy) => {
     const { x, y } = positionRelativeToTarget(ancestor, controlledBy.element);
 
     element.style.left = `${x}px`;
-    element.style.top  = `${y + (controlledBy.element.offsetHeight || 0)}px`;
+    element.style.top  = `${y + (controlledBy.element.offsetHeight || 0) + 2}px`;
 
     if(!rectInsideWindowViewport(element.getBoundingClientRect())) {
       element.style.top  = `${y - (element.offsetHeight || 0) - 4}px`;
