@@ -156,7 +156,8 @@ const menuFactory = (element, controlledBy) => {
    * @param el the element
    * @return {Array} a list of offset parents
    */
-  const offsetParents = el => {
+  /*
+  const offsetParents = (el) => {
     const elements = [];
     for (; el; el = el.offsetParent) {
       elements.unshift(el);
@@ -166,6 +167,7 @@ const menuFactory = (element, controlledBy) => {
     }
     return elements;
   };
+  */
 
   /**
    * Finds the common offset ancestor of two DOM nodes
@@ -175,6 +177,7 @@ const menuFactory = (element, controlledBy) => {
    * @param b
    * @return {Element} The common offset ancestor of a and b
    */
+  /*
   const commonOffsetAncestor = (a, b) => {
     const parentsA = offsetParents(a);
     const parentsB = offsetParents(b);
@@ -183,7 +186,7 @@ const menuFactory = (element, controlledBy) => {
       if (parentsA[i] !== parentsB[i]) return parentsA[i-1];
     }
   };
-
+  */
 
   /**
    * Calculate position relative to a target element
@@ -192,6 +195,7 @@ const menuFactory = (element, controlledBy) => {
    * @param el
    * @return {{x: number, y: number}}
    */
+  /*
   const positionRelativeToTarget = (target, el) => {
     let x = 0;
     let y = 0;
@@ -207,15 +211,18 @@ const menuFactory = (element, controlledBy) => {
     }
     return { x: x, y: y };
   };
+  */
 
   /**
    * Check whether an element is in the window viewport
    * @see http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport/
-   * @param rect
+   * @param top
+   * @param left
+   * @param bottom
+   * @param right
    * @return {boolean}
    */
-  const rectInsideWindowViewport = rect => {
-    const { top, right, bottom, left } = rect;
+  const rectInsideWindowViewport = ({ top, left, bottom, right }) => {
     return top >= 0 &&
       left >= 0 &&
       bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
@@ -226,7 +233,7 @@ const menuFactory = (element, controlledBy) => {
    * Position menu next to button
    */
   const tether = () => {
-    // @TODO Positioning strategy needs improvement
+    // Positioning strategy needs improvement
     // 1. menu.width > viewport.width or menu.height > viewport.height
     //    1.1 menu.height > viewport.height
     //        1.1.1 let menu.height = viewport.heigt
@@ -242,6 +249,7 @@ const menuFactory = (element, controlledBy) => {
     // 6. position menu inside viewport
     // 7. done
 
+    /*
     const ancestor = commonOffsetAncestor(controlledBy.element, element);
     const { x, y } = positionRelativeToTarget(ancestor, controlledBy.element);
 
@@ -251,8 +259,54 @@ const menuFactory = (element, controlledBy) => {
     if(!rectInsideWindowViewport(element.getBoundingClientRect())) {
       element.style.top  = `${y - (element.offsetHeight || 0) - 4}px`;
     }
-  };
+    */
 
+    //const commonAncestor = commonOffsetAncestor(controlledBy.element, element);
+    //const commonAncestorRect = commonAncestor.getBoundingClientRect();
+    const controlRect = controlledBy.element.getBoundingClientRect();
+    const menuRect = element.getBoundingClientRect();
+    const dx = controlRect.left - menuRect.left;
+    const dy = controlRect.top - menuRect.top;
+
+    // 1: Will menu fit inside viewport
+    if(menuRect.height >= window.innerHeight) {
+      element.style.height = `${window.innerHeight-2}px`;
+      element.style.overflowY = 'auto';
+    }
+    else {
+      element.style.height = '';
+      element.style.overflowY = '';
+    }
+
+    if(menuRect.width >= window.innerWidth) {
+      element.style.width = `${window.innerWidth-2}px`;
+    }
+    else {
+      element.style.width = '';
+    }
+
+    // 2: Position menu below the control element ,aligned to its left
+    let x = element.offsetLeft + dx;
+    let y = element.offsetTop + dy + controlRect.height;
+
+    if(rectInsideWindowViewport({
+      top: menuRect.top+dy+controlRect.height,
+      left: menuRect.left+dx,
+      bottom: menuRect.top+dy+controlRect.height+menuRect.height,
+      right: menuRect.left+dx+menuRect.width })) {
+
+      element.style.left = `${x}px`;
+      element.style.top = `${y}px`;
+      return;
+    }
+
+    // 3: Position menu above the control element, aligned to its left.
+    x = element.offsetLeft + dx;
+    y = element.offsetTop + dy - menuRect.height;
+
+    element.style.left = `${x}px`;
+    element.style.top = `${y}px`;
+  };
 
   const open = (position='first') => {
     controlledBy.element.setAttribute('aria-expanded', 'true');
@@ -507,35 +561,6 @@ class MenuButton {
       this.element.setAttribute('aria-expanded', 'false');
       this.element.setAttribute('aria-haspopup', 'true');
     };
-
-
-    // Caption must have a max-width defined to prevent pushing elements to the right of the caption out of view.
-    // In JsDom, offsetWidth and offsetHeight properties does not work properly, so this function is not testable.
-    /* istanbul ignore next */
-    /*
-    const calcMaxTabCaptionWidth = () => {
-
-      const label = this.element.querySelector(`.${MENU_BUTTON_LABEL}`);
-      if(label !== null) {
-        const w = [...this.element.children]
-          .filter( el => el.classList && !el.classList.contains(MENU_BUTTON_LABEL) )
-          .reduce( (v, el) => v + el.offsetWidth, 0 );
-
-        const csp = window.getComputedStyle(this.element.parentNode);
-        const cse = window.getComputedStyle(this.element);
-
-        const maxWidth = this.element.parentNode.clientWidth -
-          (parseFloat(csp.paddingLeft) || 0) -
-          (parseFloat(csp.paddingRight) || 0) -
-          (parseFloat(cse.paddingLeft) || 0) -
-          (parseFloat(cse.paddingRight) || 0) - w;
-
-        if(maxWidth > 0 && maxWidth < this.element.clientWidth) {
-          label.style['max-width'] = `${maxWidth}px`;
-        }
-      }
-    };
-    */
 
     const findMenuElement = () => {
       let menuElement;

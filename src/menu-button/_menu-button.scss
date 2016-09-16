@@ -70,7 +70,6 @@
 
   &[hidden] {
     @include mdlext-visually-hidden;
-    //z-index: 0;
     pointer-events: none;
   }
 
@@ -134,6 +133,7 @@
     > *:last-child:not(:only-child):not(.mdlext-menu__item__label) {
       margin-left: auto; // If more than one element, push last element to the right
     }
+
   }
 
   &__item-divider {
