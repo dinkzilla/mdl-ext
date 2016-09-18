@@ -151,67 +151,17 @@ const menuFactory = (element, controlledBy) => {
 
 
   /**
-   * Get a list of offset parents for given element
-   * @see https://www.benpickles.com/articles/51-finding-a-dom-nodes-common-ancestor-using-javascript
-   * @param el the element
-   * @return {Array} a list of offset parents
+   * Get the browser viewport dimensions
+   * @see http://stackoverflow.com/questions/1248081/get-the-browser-viewport-dimensions-with-javascript
+   * @return {{windowWidth: number, windowHeight: number}}
    */
-  /*
-  const offsetParents = (el) => {
-    const elements = [];
-    for (; el; el = el.offsetParent) {
-      elements.unshift(el);
-    }
-    if(!elements.find(e => e === document.body)) {
-      elements.unshift(document.body);
-    }
-    return elements;
+  const windowViewport = () => {
+    return {
+      viewportWidth: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
+      viewportHeight: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+    };
   };
-  */
 
-  /**
-   * Finds the common offset ancestor of two DOM nodes
-   * @see https://www.benpickles.com/articles/51-finding-a-dom-nodes-common-ancestor-using-javascript
-   * @see https://gist.github.com/benpickles/4059636
-   * @param a
-   * @param b
-   * @return {Element} The common offset ancestor of a and b
-   */
-  /*
-  const commonOffsetAncestor = (a, b) => {
-    const parentsA = offsetParents(a);
-    const parentsB = offsetParents(b);
-
-    for (let i = 0; i < parentsA.length; i++) {
-      if (parentsA[i] !== parentsB[i]) return parentsA[i-1];
-    }
-  };
-  */
-
-  /**
-   * Calculate position relative to a target element
-   * @see http://stackoverflow.com/questions/21064101/understanding-offsetwidth-clientwidth-scrollwidth-and-height-respectively
-   * @param target
-   * @param el
-   * @return {{x: number, y: number}}
-   */
-  /*
-  const positionRelativeToTarget = (target, el) => {
-    let x = 0;
-    let y = 0;
-
-    while(el) {
-      x += (el.offsetLeft - el.scrollLeft + el.clientLeft) || 0;
-      y += (el.offsetTop - el.scrollTop + el.clientTop) || 0;
-      el = el.offsetParent;
-
-      if(el === target) {
-        break;
-      }
-    }
-    return { x: x, y: y };
-  };
-  */
 
   /**
    * Check whether an element is in the window viewport
@@ -223,92 +173,177 @@ const menuFactory = (element, controlledBy) => {
    * @return {boolean}
    */
   const rectInsideWindowViewport = ({ top, left, bottom, right }) => {
+    const { viewportWidth, viewportHeight } = windowViewport();
     return top >= 0 &&
       left >= 0 &&
-      bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-      right <= (window.innerWidth || document.documentElement.clientWidth);
+      bottom <= viewportHeight &&
+      right <= viewportWidth;
   };
 
   /**
    * Position menu next to button
+   *
+   * Positioning strategy
+   * 1. menu.height > viewport.height
+   *      let menu.height = viewport.heigt
+   *      let menu.overflow-y = auto
+   * 2. menu.width > viewport.width
+   *      let menu.width = viewport.width
+   * 3. position menu below button, aligned to its left
+   *        done if menu inside viewport
+   * 4. position menu below button, aligned to its right
+   *        done if menu inside viewport
+   * 5. position menu above button, aligned to its left
+   *        done if menu inside viewport
+   * 6. position menu at button right hand side
+   *        done if menu inside viewport
+   * 8. position menu at button left hand side
+   *        done if menu inside viewport
+   * 8. position menu inside viewport
+   *    8.1 position menu at viewport bottom
+   *    8.2 position menu at button right hand side
+   *        done if menu inside viewport
+   *    8.3 position menu at button left hand side
+   *        done if menu inside viewport
+   *    8.4 position menu at viewport right
+   * 9. done
    */
   const tether = () => {
-    // Positioning strategy needs improvement
-    // 1. menu.width > viewport.width or menu.height > viewport.height
-    //    1.1 menu.height > viewport.height
-    //        1.1.1 let menu.height = viewport.heigt
-    //        1.1.2 let menu.overflow-y = auto
-    // 2. position menu below button
-    //    2.1 done if menu inside viewport
-    // 3. position menu above button
-    //    3.1 done if menu inside viewport
-    // 4. position menu on button right hand side
-    //    4.1 done if menu inside viewport
-    // 5. position menu on button left hand side
-    //    5.1 done if menu inside viewport
-    // 6. position menu inside viewport
-    // 7. done
-
-    /*
-    const ancestor = commonOffsetAncestor(controlledBy.element, element);
-    const { x, y } = positionRelativeToTarget(ancestor, controlledBy.element);
-
-    element.style.left = `${x}px`;
-    element.style.top  = `${y + (controlledBy.element.offsetHeight || 0) + 2}px`;
-
-    if(!rectInsideWindowViewport(element.getBoundingClientRect())) {
-      element.style.top  = `${y - (element.offsetHeight || 0) - 4}px`;
-    }
-    */
-
-    //const commonAncestor = commonOffsetAncestor(controlledBy.element, element);
-    //const commonAncestorRect = commonAncestor.getBoundingClientRect();
     const controlRect = controlledBy.element.getBoundingClientRect();
-    const menuRect = element.getBoundingClientRect();
-    const dx = controlRect.left - menuRect.left;
-    const dy = controlRect.top - menuRect.top;
 
-    // 1: Will menu fit inside viewport
-    if(menuRect.height >= window.innerHeight) {
-      element.style.height = `${window.innerHeight-2}px`;
+    // 1. will menu fit inside window viewport?
+    const { viewportWidth, viewportHeight } = windowViewport();
+
+    element.style.height = 'auto';
+    element.style.overflowY = 'hidden';
+    if(element.offsetHeight > viewportHeight) {
+      element.style.height = `${viewportHeight-4}px`;
       element.style.overflowY = 'auto';
     }
-    else {
-      element.style.height = '';
-      element.style.overflowY = '';
+
+    // 2. will menu fit inside window viewport?
+    element.style.width = 'auto';
+    if(element.offsetWidth > viewportWidth) {
+      element.style.width = `${viewportWidth-4}px`;
     }
 
-    if(menuRect.width >= window.innerWidth) {
-      element.style.width = `${window.innerWidth-2}px`;
-    }
-    else {
-      element.style.width = '';
-    }
+    const menuRect = element.getBoundingClientRect();
 
-    // 2: Position menu below the control element ,aligned to its left
-    let x = element.offsetLeft + dx;
-    let y = element.offsetTop + dy + controlRect.height;
+    // menu to control distance
+    const dy = controlRect.top - menuRect.top;
+    const dx = controlRect.left - menuRect.left;
+
+    // Menu rect, window coordinates relative to top,left of control
+    const top = menuRect.top + dy;
+    const left = menuRect.left + dx;
+    const bottom = top + menuRect.height;
+    const right = left + menuRect.width;
+
+    // Position relative to control
+    let ddy = dy;
+    let ddx = dx;
 
     if(rectInsideWindowViewport({
-      top: menuRect.top+dy+controlRect.height,
-      left: menuRect.left+dx,
-      bottom: menuRect.top+dy+controlRect.height+menuRect.height,
-      right: menuRect.left+dx+menuRect.width })) {
+      top: top + controlRect.height,
+      left: left,
+      bottom: bottom + controlRect.height,
+      right: right
+    })) {
+      // 3 position menu below the control element, aligned to its left
+      ddy = controlRect.height + dy;
+      //console.log('***** 3');
+    }
+    else if(rectInsideWindowViewport({
+      top: top + controlRect.height,
+      left: left + controlRect.width - menuRect.width,
+      bottom: bottom + controlRect.height,
+      right: left + controlRect.width
+    })) {
+      // 4 position menu below the control element, aligned to its right
+      ddy = controlRect.height + dy;
+      ddx = dx + controlRect.width - menuRect.width;
+      //console.log('***** 4');
+    }
+    else if(rectInsideWindowViewport({
+      top: top - menuRect.height,
+      left: left,
+      bottom:  - menuRect.height,
+      right: right
+    })) {
+      // 5. position menu above the control element, aligned to its left.
+      ddy = dy - menuRect.height;
+      //console.log('***** 5');
+    }
+    else if(rectInsideWindowViewport({
+      top: top,
+      left: left + controlRect.width,
+      bottom: bottom,
+      right: right + controlRect.width
+    })) {
+      // 6. position menu at button right hand side
+      ddx = controlRect.width + dx;
+      //console.log('***** 6');
+    }
+    else if(rectInsideWindowViewport({
+      top: top,
+      left: left - controlRect.width,
+      bottom: bottom,
+      right: right - controlRect.width
+    })) {
+      // 7. position menu at button left hand side
+      ddx = dx - menuRect.width;
+      //console.log('***** 7');
+    }
+    else {
+      // 8. position menu inside viewport
 
-      element.style.left = `${x}px`;
-      element.style.top = `${y}px`;
-      return;
+      // 8.1 position menu at (near) viewport bottom
+      let t = top;
+      if(t + menuRect.height > viewportHeight) {
+        t = t + menuRect.height - viewportHeight + 4;
+      }
+      ddy = dy - t;
+
+      if(left + menuRect.width + controlRect.width <= viewportWidth) {
+        // 8.2 Position menu at button right hand side
+        ddx = controlRect.width + dx;
+        //console.log('***** 8.2');
+      }
+      else if(left - menuRect.width >= 0) {
+        // 8.3 Position menu at button left hand side
+        ddx = dx - menuRect.width;
+        //console.log('***** 8.3');
+      }
+      else {
+        // 8.4 position menu at (near) viewport right
+        let r = 0;
+        if(left + menuRect.width < viewportWidth) {
+          r = left + menuRect.width - viewportWidth - 4;
+        }
+        ddx = dx - r;
+        //console.log('***** 8.4');
+      }
     }
 
-    // 3: Position menu above the control element, aligned to its left.
-    x = element.offsetLeft + dx;
-    y = element.offsetTop + dy - menuRect.height;
+    // 9. done
+    element.style.top = `${element.offsetTop + ddy}px`;
+    element.style.left = `${element.offsetLeft + ddx}px`;
 
-    element.style.left = `${x}px`;
-    element.style.top = `${y}px`;
+    //console.log('***** 9. done');
+
+    // TODO: Animation (maybe)
   };
 
+
+
   const open = (position='first') => {
+
+    // TODO: Move menu to document.body to make shure the menu is on top of all other z-indexed elements
+    //      Must find out how this affects React.
+    //document.body.appendChild(element);
+    //element.style.visibility = 'hidden';
+    //element.style.visibility = '';
+
     controlledBy.element.setAttribute('aria-expanded', 'true');
     element.removeAttribute('hidden');
     tether();
@@ -677,8 +712,6 @@ class MenuButton {
    * E.g remove listeners and clean up resources
    */
   MaterialExtMenuButton.prototype.mdlDowngrade_ = function() {
-    'use strict';
-
     // TODO: call this.menuButton_.downgrade();
     this.menuButton_ = null;
   };

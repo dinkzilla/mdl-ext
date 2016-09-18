@@ -59,7 +59,7 @@
   @include shadow-3dp();
   display: inline-flex;
   flex-direction: column;
-  padding: 4px 0;
+  padding: 0;
   color: $default-item-text-color;
   background-color: $default-dropdown-bg-color;
 
@@ -95,7 +95,7 @@
     }
 
     &:focus {
-      outline-offset: -1px;
+      outline-offset: -2px;
       outline-width: 1px;
       background-color: $default-item-focus-bg-color;
     }

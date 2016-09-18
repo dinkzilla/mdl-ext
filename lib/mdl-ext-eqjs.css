@@ -2466,7 +2466,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   display: inline-flex;
   -ms-flex-direction: column;
       flex-direction: column;
-  padding: 4px 0;
+  padding: 0;
   color: rgba(0,0,0, 0.87);
   background-color: rgb(255,255,255);
 }
@@ -2520,7 +2520,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 }
 
 .mdlext-menu__item:focus {
-  outline-offset: -1px;
+  outline-offset: -2px;
   outline-width: 1px;
   background-color: rgb(238,238,238);
 }
