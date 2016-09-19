@@ -2432,7 +2432,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
  * which is Licensed under the Apache License, Version 2.0
  */
 
-.mdlext-menu-button__aria-expanded-plus-minus {
+.mdlext-aria-expanded-plus-minus {
   font-family: inherit;
   font-weight: inherit;
   font-style: inherit;
@@ -2454,17 +2454,17 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   font-feature-settings: 'liga';
 }
 
-.mdlext-menu-button__aria-expanded-plus-minus::after {
+.mdlext-aria-expanded-plus-minus::after {
   content: "+";
   margin-left: 0;
 }
 
-[aria-expanded='true'] > .mdlext-menu-button__aria-expanded-plus-minus::after {
+[aria-expanded='true'] > .mdlext-aria-expanded-plus-minus::after {
   content: "-";
   margin-left: 0;
 }
 
-.mdlext-menu-button__aria-expanded-more-less {
+.mdlext-aria-expanded-more-less {
   font-family: "Material Icons";
   font-weight: inherit;
   font-style: inherit;
@@ -2486,12 +2486,12 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   font-feature-settings: 'liga';
 }
 
-.mdlext-menu-button__aria-expanded-more-less::after {
+.mdlext-aria-expanded-more-less::after {
   content: "expand_more";
   margin-left: 0;
 }
 
-[aria-expanded='true'] > .mdlext-menu-button__aria-expanded-more-less::after {
+[aria-expanded='true'] > .mdlext-aria-expanded-more-less::after {
   content: "expand_less";
   margin-left: 0;
 }
@@ -2531,7 +2531,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   position: absolute;
   z-index: 1000;
   min-width: 100px;
-  max-width: 480px;
+  max-width: 400px;
   border-radius: 2px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
   display: -ms-inline-flexbox;

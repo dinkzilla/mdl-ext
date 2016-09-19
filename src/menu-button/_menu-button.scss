@@ -20,12 +20,12 @@
  * which is Licensed under the Apache License, Version 2.0
  */
 
-.mdlext-menu-button__aria-expanded-plus-minus {
-  @include mdlext-aria-expanded-toggle($font-family: inherit, $font-size: 24px);
+.mdlext-aria-expanded-plus-minus {
+  @include mdlext-aria-expanded-toggle($font-family: inherit);
 }
 
-.mdlext-menu-button__aria-expanded-more-less {
-  @include mdlext-aria-expanded-toggle($font-size: 24px, $icon: 'expand_more', $icon-expanded: 'expand_less');
+.mdlext-aria-expanded-more-less {
+  @include mdlext-aria-expanded-toggle($icon: 'expand_more', $icon-expanded: 'expand_less');
 }
 
 .mdlext-menu-button {
@@ -59,7 +59,7 @@
   position: absolute;
   z-index: 1000;
   min-width: 100px;
-  max-width: 480px;
+  max-width: 400px;
   border-radius: 2px;
   @include shadow-3dp();
   display: inline-flex;
