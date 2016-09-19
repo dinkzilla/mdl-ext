@@ -138,26 +138,26 @@ strictly necessary to apply the attributes in markup.
 ## Keyboard interaction
 The accordion interacts with the following keyboard keys.
 
-*   `Tab` - When focus is on an accordion (tab)header, pressing the `Tab` key moves focus in the following manner:
+*   <kbd>Tab</kbd> - When focus is on an accordion (tab)header, pressing the <kbd>Tab</kbd> key moves focus in the following manner:
     1.  If interactive glyphs or menus are present in the accordion header, focus moves to each in order.
     2.  When the corresponding tab panel is expanded (its [aria-expanded](http://www.w3.org/TR/wai-aria-1.1/#aria-expanded) state is 'true'), then focus moves to the first focusable element in the panel.
-    3.  If the panel is collapsed (its aria-expanded state is 'false'), OR, when the last interactive element of a panel is reached, the next `Tab` key press moves focus as follows:
+    3.  If the panel is collapsed (its aria-expanded state is 'false'), OR, when the last interactive element of a panel is reached, the next <kbd>Tab</kbd> key press moves focus as follows:
         *   Moves focus to the next logical accordion header.
         *   When focus reaches the last header, focus moves to the first focusable element outside the accordion component.
-*   `Left arrow`
-    *   When focus is on the accordion header, a press of up/left arrow keys moves focus to the previous logical accordion header.
-    *   When focus reaches the first header, further up/left arrow key presses optionally wrap to the first header.
-*   `Right arrow`
-    *   When focus is on the accordion header, a press of down/right moves focus to the next logical accordion header.
-    *   When focus reaches the last header, further down/right arrow key presses optionally wrap to the first header
-*   `Up arrow` - behaves the same as left arrow
-*   `Down arrow` - behaves the same as right arrow
-*   `End` - When focus is on the accordion header, an `End` key press moves focus to the last accordion header.
-*   `Home` - When focus is on the accordion header, a `Home` key press moves focus to the first accordion header.
-*   `Enter/Space` - When focus is on an accordion header, pressing `Enter`/`Space` toggles the expansion of the corresponding panel.
+*   <kbd>Left arrow</kbd>
+    *   When focus is on the accordion header, a press of <kbd>up</kbd>/<kbd>left</kbd> arrow keys moves focus to the previous logical accordion header.
+    *   When focus reaches the first header, further <kbd>up</kbd>/<kbd>left</kbd> arrow key presses optionally wrap to the first header.
+*   <kbd>Right arrow</kbd>
+    *   When focus is on the accordion header, a press of <kbd>down</kbd>/<kbd>right</kbd> arrow key moves focus to the next logical accordion header.
+    *   When focus reaches the last header, further <kbd>down</kbd>/<kbd>right</kbd> arrow key presses optionally wrap to the first header
+*   <kbd>Up arrow</kbd> - behaves the same as left arrow
+*   <kbd>Down arrow</kbd> - behaves the same as <kbd>right arrow</kbd>
+*   <kbd>End</kbd> - When focus is on the accordion header, an <kbd>End</kbd> key press moves focus to the last accordion header.
+*   <kbd>Home</kbd> - When focus is on the accordion header, a <kbd>Home</kbd> key press moves focus to the first accordion header.
+*   <kbd>Enter</kbd> or <kbd>Space</kbd> - When focus is on an accordion header, pressing <kbd>Enter</kbd> ir <kbd>Space</kbd> toggles the expansion of the corresponding panel.
     *   If collapsed, the panel is expanded, and its aria-expanded state is set to 'true'.
     *   If expanded, the panel is collapsed and its aria-expanded state is set to 'false'.
-*   `Shift+Tab` - Generally the reverse of `Tab`.
+*   <kbd>Shift+Tab</kbd> - Generally the reverse of <kbd>Tab</kbd>.
 
 
 ## Events

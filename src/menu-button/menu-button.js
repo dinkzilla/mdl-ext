@@ -46,7 +46,7 @@ import {
 //const MENU_BUTTON_LABEL = 'mdlext-menu-button__label';
 const MENU_BUTTON_MENU = 'mdlext-menu';
 const MENU_BUTTON_MENU_ITEM = 'mdlext-menu__item';
-const MENU_BUTTON_MENU_ITEM_DIVIDER = 'mdlext-menu__item-divider';
+const MENU_BUTTON_MENU_ITEM_SEPARATOR = 'mdlext-menu__item-separator';
 
 const menuFactory = (element, controlledBy) => {
 
@@ -68,7 +68,7 @@ const menuFactory = (element, controlledBy) => {
 
   const isDisabled = item => item && item.hasAttribute('disabled');
 
-  const isDivider = item => item && item.classList.contains(MENU_BUTTON_MENU_ITEM_DIVIDER);
+  const isSeparator = item => item && item.classList.contains(MENU_BUTTON_MENU_ITEM_SEPARATOR);
 
   const focus = item => {
     if(item) {
@@ -84,13 +84,13 @@ const menuFactory = (element, controlledBy) => {
     if(!n) {
       n = element.firstElementChild;
     }
-    if(!isDisabled(n) && !isDivider(n)) {
+    if(!isDisabled(n) && !isSeparator(n)) {
       focus(n);
     }
     else {
       let i = element.children.length;
       while(n && i-- > 0) {
-        if(isDisabled(n) || isDivider(n)) {
+        if(isDisabled(n) || isSeparator(n)) {
           n = n.nextElementSibling;
           if(!n) {
             n = element.firstElementChild;
@@ -109,13 +109,13 @@ const menuFactory = (element, controlledBy) => {
     if(!p) {
       p = element.lastElementChild;
     }
-    if(!isDisabled(p) && !isDivider(p)) {
+    if(!isDisabled(p) && !isSeparator(p)) {
       focus(p);
     }
     else {
       let i = element.children.length;
       while(p && i-- > 0) {
-        if(isDisabled(p) || isDivider(p)) {
+        if(isDisabled(p) || isSeparator(p)) {
           p = p.previousElementSibling;
           if(!p) {
             p = element.lastElementChild;
@@ -131,7 +131,7 @@ const menuFactory = (element, controlledBy) => {
 
   const firstItem = () => {
     const item = element.firstElementChild;
-    if(isDisabled(item) || isDivider(item) ) {
+    if(isDisabled(item) || isSeparator(item) ) {
       nextItem(item);
     }
     else {
@@ -141,7 +141,7 @@ const menuFactory = (element, controlledBy) => {
 
   const lastItem = () => {
     const item = element.lastElementChild;
-    if(isDisabled(item) || isDivider(item)) {
+    if(isDisabled(item) || isSeparator(item)) {
       previousItem(item);
     }
     else {
@@ -185,28 +185,29 @@ const menuFactory = (element, controlledBy) => {
    *
    * Positioning strategy
    * 1. menu.height > viewport.height
-   *      let menu.height = viewport.heigt
-   *      let menu.overflow-y = auto
+   *    let menu.height = viewport.heigt
+   *    let menu.overflow-y = auto
    * 2. menu.width > viewport.width
-   *      let menu.width = viewport.width
+   *    let menu.width = viewport.width
    * 3. position menu below button, aligned to its left
-   *        done if menu inside viewport
+   *      done if menu inside viewport
    * 4. position menu below button, aligned to its right
-   *        done if menu inside viewport
+   *      done if menu inside viewport
    * 5. position menu above button, aligned to its left
-   *        done if menu inside viewport
+   *      done if menu inside viewport
    * 6. position menu at button right hand side
-   *        done if menu inside viewport
-   * 8. position menu at button left hand side
-   *        done if menu inside viewport
+   *      done if menu inside viewport
+   * 7. position menu at button left hand side
+   *      done if menu inside viewport
    * 8. position menu inside viewport
-   *    8.1 position menu at viewport bottom
-   *    8.2 position menu at button right hand side
-   *        done if menu inside viewport
-   *    8.3 position menu at button left hand side
-   *        done if menu inside viewport
-   *    8.4 position menu at viewport right
+   *    1 position menu at viewport bottom
+   *    2 position menu at button right hand side
+   *      done if menu inside viewport
+   *    3 position menu at button left hand side
+   *      done if menu inside viewport
+   *    4 position menu at viewport right
    * 9. done
+   *
    */
   const tether = () => {
     const controlRect = controlledBy.element.getBoundingClientRect();
@@ -267,7 +268,7 @@ const menuFactory = (element, controlledBy) => {
     else if(rectInsideWindowViewport({
       top: top - menuRect.height,
       left: left,
-      bottom:  - menuRect.height,
+      bottom: bottom - menuRect.height,
       right: right
     })) {
       // 5. position menu above the control element, aligned to its left.
@@ -338,7 +339,7 @@ const menuFactory = (element, controlledBy) => {
 
   const open = (position='first') => {
 
-    // TODO: Move menu to document.body to make shure the menu is on top of all other z-indexed elements
+    // TODO:To make shure the menu is on top of all other z-indexed elements the menu should be moved to document.body
     //      Must find out how this affects React.
     //document.body.appendChild(element);
     //element.style.visibility = 'hidden';
@@ -439,7 +440,7 @@ const menuFactory = (element, controlledBy) => {
     if(event.target !== element) {
       const item = event.target.closest(`.${MENU_BUTTON_MENU_ITEM}`);
 
-      if(item && !isDisabled(item) && !isDivider(item)) {
+      if(item && !isDisabled(item) && !isSeparator(item)) {
         addAriaSelected(item);
         controlledBy.dispatchSelect(item);
         close();
@@ -472,6 +473,9 @@ const menuFactory = (element, controlledBy) => {
       menuitem.setAttribute('role', 'menuitem');
     });
 
+    [...element.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM_SEPARATOR}`)].forEach( menuitem => {
+      menuitem.setAttribute('role', 'separator');
+    });
   };
 
   const removeListeners = () => {

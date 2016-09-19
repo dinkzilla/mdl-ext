@@ -2432,10 +2432,10 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
  * which is Licensed under the Apache License, Version 2.0
  */
 
-.mdlext-aria-expanded-more-less {
-  font-family: "Material Icons";
-  font-weight: normal;
-  font-style: normal;
+.mdlext-menu-button__aria-expanded-plus-minus {
+  font-family: inherit;
+  font-weight: inherit;
+  font-style: inherit;
   font-size: 24px;
   display: inline-block;
   width: 1em;
@@ -2454,12 +2454,44 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   font-feature-settings: 'liga';
 }
 
-.mdlext-aria-expanded-more-less::after {
+.mdlext-menu-button__aria-expanded-plus-minus::after {
+  content: "+";
+  margin-left: 0;
+}
+
+[aria-expanded='true'] > .mdlext-menu-button__aria-expanded-plus-minus::after {
+  content: "-";
+  margin-left: 0;
+}
+
+.mdlext-menu-button__aria-expanded-more-less {
+  font-family: "Material Icons";
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 24px;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  vertical-align: middle;
+  -webkit-font-smoothing: antialiased;
+  -webkit-font-feature-settings: 'liga';
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'liga';
+}
+
+.mdlext-menu-button__aria-expanded-more-less::after {
   content: "expand_more";
   margin-left: 0;
 }
 
-[aria-expanded='true'] > .mdlext-aria-expanded-more-less::after {
+[aria-expanded='true'] > .mdlext-menu-button__aria-expanded-more-less::after {
   content: "expand_less";
   margin-left: 0;
 }
@@ -2471,6 +2503,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   line-height: 1;
   letter-spacing: 0;
   text-transform: none;
+  position: relative;
   height: 36px;
   padding: 0 16px;
   display: inline-block;
@@ -2528,11 +2561,12 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 }
 
 .mdlext-menu__item {
-  padding: 0 8px;
   font-size: 14px;
   font-weight: 400;
   line-height: 24px;
   letter-spacing: 0;
+  position: relative;
+  padding: 0 8px;
   -ms-flex-align: center;
       -ms-grid-row-align: center;
       align-items: center;
@@ -2598,8 +2632,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   margin-left: auto;
 }
 
-.mdlext-menu__item-divider {
-  box-sizing: border-box;
+.mdlext-menu__item-separator {
   margin: 0;
   padding: 0;
   border-bottom: 1px solid rgba(0,0,0, 0.12);
@@ -2938,6 +2971,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 }
 
 /**
+ * @license
  * Copyright 2016 Leif Olsen. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -2951,36 +2985,15 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * This code is built with Google Material Design Lite,
+ * which is Licensed under the Apache License, Version 2.0
  */
-
-/* stylelint-disable */
-
-/* stylelint-enable */
-
-/* ==========   Sticky Header   ========== */
-
-/* stylelint-disable */
-
-/* stylelint-enable */
-
-/* ==========     Accordion     ========== */
-
-/* ==========     Dialog     ========== */
-
-/* ==========     Lightbox     ========== */
-
-/* ==========  Lightboard  ========== */
-
-/* ==========  Carousel  ========== */
-
-/* ==========  Bordered fields  ========== */
-
-/* ==========  Color Themes  ========== */
 
 .mdlext-aria-toggle-plus-minus {
   font-family: inherit;
-  font-weight: normal;
-  font-style: normal;
+  font-weight: inherit;
+  font-style: inherit;
   font-size: 1.4em;
   display: inline-block;
   width: 1em;
@@ -3011,8 +3024,8 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 
 .mdlext-aria-toggle-material-icons {
   font-family: "Material Icons";
-  font-weight: normal;
-  font-style: normal;
+  font-weight: inherit;
+  font-style: inherit;
   font-size: 1.3em;
   display: inline-block;
   width: 1em;
@@ -3277,7 +3290,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 
 .mdlext-accordion--horizontal .mdlext-accordion__tab__caption {
   transform: rotate(-90deg) translateX(50%);
-  padding-right: 24px;
+  padding-right: 16px;
 }
 
 .mdlext-accordion--horizontal .mdlext-accordion__tab--ripple[aria-selected='true']::before {

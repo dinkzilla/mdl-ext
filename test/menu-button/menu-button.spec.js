@@ -31,6 +31,7 @@ import { shouldBehaveLikeAMdlComponent } from '../testutils/shared-component-beh
 const MENU_BUTTON = 'mdlext-menu-button';
 const MENU_BUTTON_MENU = 'mdlext-menu';
 const MENU_BUTTON_MENU_ITEM = 'mdlext-menu__item';
+const MENU_BUTTON_MENU_ITEM_SEPARATOR = 'mdlext-menu__item-separator';
 
 describe('MaterialExtMenuButton', () => {
 
@@ -54,7 +55,7 @@ describe('MaterialExtMenuButton', () => {
   <ul class="mdlext-menu">
     <li class="mdlext-menu__item">Menu item #1</li>
     <li class="mdlext-menu__item">Menu item #2</li>
-    <li class="mdlext-menu__item-divider">-- divider --</li>
+    <li class="mdlext-menu__item-separator"></li>
     <li class="mdlext-menu__item" disabled>Menu item #3</li>
     <li class="mdlext-menu__item">Menu item #n</li>
   </ul>
@@ -193,8 +194,25 @@ describe('MaterialExtMenuButton', () => {
       [...menu.querySelectorAll('.mdlext-menu-button__menu__item')].forEach( menuitem => {
         assert.equal(menuitem.getAttribute('role'), 'menuitem', 'Expected menu button menu item to have role="menuitem"');
       });
-
     });
+
+    it('should have a menu separator with role="separator"', () => {
+      const container = document.querySelector('#mount');
+      try {
+        container.insertAdjacentHTML('beforeend', menu_button_with_disabled_item_fixture);
+        const button = container.querySelector(`.${MENU_BUTTON}`);
+        const menu = container.querySelector(`.${MENU_BUTTON_MENU}`);
+        componentHandler.upgradeElement(button, 'MaterialExtMenuButton');
+
+        const separatorItem = menu.querySelector(`.${MENU_BUTTON_MENU_ITEM_SEPARATOR}`);
+        assert.isNotNull(separatorItem, `Expected menu item with class ${MENU_BUTTON_MENU_ITEM_SEPARATOR}`);
+        assert.equal(separatorItem.getAttribute('role'), 'separator', 'Expected menu item to have role="separator"');
+      }
+      finally {
+        removeChildElements(container);
+      }
+    });
+
   });
 
   describe('Button interactions', () => {
@@ -562,7 +580,7 @@ describe('MaterialExtMenuButton', () => {
       }
     });
 
-    it('should not focus a menu divider', () => {
+    it('should not focus a menu separator', () => {
       const container = document.querySelector('#mount');
       try {
         container.insertAdjacentHTML('beforeend', menu_button_with_disabled_item_fixture);
@@ -571,17 +589,17 @@ describe('MaterialExtMenuButton', () => {
         componentHandler.upgradeElement(button, 'MaterialExtMenuButton');
 
         button.MaterialExtMenuButton.openMenu();
-        const dividerItem = menu.children[2];
+        const separatorItem = menu.children[2];
 
         let item = menu.children[1];
         item.focus();
         dispatchKeyDownEvent(item, VK_ARROW_DOWN);
-        assert.notEqual(dividerItem, document.activeElement, 'Arrow down: Did not expect a menu divider item have focus');
+        assert.notEqual(separatorItem, document.activeElement, 'Arrow down: Did not expect a menu separator item have focus');
 
         item = menu.children[4];
         item.focus();
         dispatchKeyDownEvent(item, VK_ARROW_UP);
-        assert.notEqual(dividerItem, document.activeElement, 'Arrow up: Did not expect a menu divider item have focus');
+        assert.notEqual(separatorItem, document.activeElement, 'Arrow up: Did not expect a menu separator item have focus');
       }
       finally {
         removeChildElements(container);

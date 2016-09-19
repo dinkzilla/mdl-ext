@@ -56,7 +56,7 @@
 ///
 /// @example - +/- toggle
 ///   .plus-minus {
-///     @include mdlext-aria-toggle($font-family: inherit, $font-size: inherit);
+///     @include mdlext-aria-expanded-toggle($font-family: inherit, $font-size: inherit);
 ///   }
 ///   <div aria-expanded="false">
 ///     <i class="plus-minus"></i>
@@ -64,16 +64,16 @@
 ///
 /// @example - Material Icons, expand-more/expand_less
 ///   .more-less {
-///     @include mdlext-aria-toggle($content: 'expand_more', $content-expanded: 'expand_less');
+///     @include mdlext-aria-expanded-toggle($content: 'expand_more', $content-expanded: 'expand_less');
 ///   }
 ///   <div aria-expanded="true">
 ///     <i class="more-less"></i>
 ///   </div>
 
-@mixin mdlext-aria-toggle($font-family: 'Material Icons', $font-size: 24px, $icon: '+', $icon-expanded: '-', $icon-offset: 0) {
+@mixin mdlext-aria-expanded-toggle($font-family: 'Material Icons', $font-size: 24px, $icon: '+', $icon-expanded: '-', $icon-offset: 0) {
   font-family: $font-family;
-  font-weight: normal;
-  font-style: normal;
+  font-weight: inherit;
+  font-style: inherit;
   font-size: $font-size;  // Preferred icon size
   display: inline-block;
   width: 1em;

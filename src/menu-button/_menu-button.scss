@@ -20,13 +20,18 @@
  * which is Licensed under the Apache License, Version 2.0
  */
 
-.mdlext-aria-expanded-more-less {
-  @include mdlext-aria-toggle($font-size: 24px, $icon: 'expand_more', $icon-expanded: 'expand_less');
+.mdlext-menu-button__aria-expanded-plus-minus {
+  @include mdlext-aria-expanded-toggle($font-family: inherit, $font-size: 24px);
+}
+
+.mdlext-menu-button__aria-expanded-more-less {
+  @include mdlext-aria-expanded-toggle($font-size: 24px, $icon: 'expand_more', $icon-expanded: 'expand_less');
 }
 
 .mdlext-menu-button {
   @include typo-menu();
   text-transform: none;
+  position: relative;
   height: $button-height;
   padding: 0 $button-padding;
   display: inline-block;
@@ -74,8 +79,9 @@
   }
 
   &__item {
-    padding: 0 8px;
     @include typo-body-1();
+    position: relative;
+    padding: 0 8px;
     align-items: center;
     align-self: stretch;
     text-decoration: none;
@@ -135,11 +141,10 @@
     }
 
   }
-
-  &__item-divider {
-    box-sizing: border-box;
+  &__item-separator {
     margin: 0;
     padding: 0;
     border-bottom: 1px solid $default-item-divider-color;
   }
+
 }

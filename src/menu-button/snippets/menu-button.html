@@ -5,7 +5,7 @@
   <button class="mdl-button mdl-button--raised mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button">
     <i class="material-icons">gesture</i>
     <span class="mdlext-menu-button__label">Select</span>
-    <i class="material-icons mdlext-aria-expanded-more-less"></i>
+    <i class="material-icons mdlext-menu-button__aria-expanded-more-less"></i>
   </button>
   <ul class="mdlext-menu" hidden >
     <li class="mdlext-menu__item">
@@ -17,11 +17,12 @@
       <span class="mdlext-menu__item__label">Menu item #2</span>
       <i class="material-icons md-18">radio</i>
     </li>
-    <li class="mdlext-menu__item-divider"></li>
+    <li class="mdlext-menu__item-separator"></li>
     <li class="mdlext-menu__item" disabled>
       <span class="mdlext-menu__item__label">Menu item #3, disabled</span>
       <i class="material-icons md-18">accessibility</i>
     </li>
+    <li class="mdlext-menu__item-separator"></li>
     <li class="mdlext-menu__item">
       <span class="mdlext-menu__item__label">Menu item #IV</span>
       <i class="material-icons md-18">build</i>
@@ -30,6 +31,7 @@
       <span class="mdlext-menu__item__label">Menu item #V</span>
       <i class="material-icons md-18">build</i>
     </li>
+    <li class="mdlext-menu__item-separator"></li>
     <li class="mdlext-menu__item">
       <span class="mdlext-menu__item__label">Menu item #VI</span>
       <i class="material-icons md-18">build</i>
@@ -49,7 +51,7 @@
   <button class="mdl-button mdl-button--raised mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button">
     <i class="material-icons">gesture</i>
     <span class="mdlext-menu-button__label">Select</span>
-    <i class="material-icons mdlext-aria-expanded-more-less"></i>
+    <i class="material-icons mdlext-menu-button__aria-expanded-more-less"></i>
   </button>
   <ul class="mdlext-menu" hidden >
     <li class="mdlext-menu__item">
@@ -61,11 +63,11 @@
       <span class="mdlext-menu__item__label">Menu item #2</span>
       <i class="material-icons md-18">radio</i>
     </li>
-    <li class="mdlext-menu__item-divider"></li>
     <li class="mdlext-menu__item" disabled>
       <span class="mdlext-menu__item__label">Menu item #3, disabled</span>
       <i class="material-icons md-18">accessibility</i>
     </li>
+    <li class="mdlext-menu__item-separator"></li>
     <li class="mdlext-menu__item">
       <span class="mdlext-menu__item__label">Menu item #IV</span>
       <i class="material-icons md-18">build</i>
@@ -93,7 +95,7 @@
   <button class="mdl-button mdl-button--raised mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button">
     <i class="material-icons">gesture</i>
     <span class="mdlext-menu-button__label">Select</span>
-    <i class="material-icons mdlext-aria-expanded-more-less"></i>
+    <i class="material-icons mdlext-menu-button__aria-expanded-more-less"></i>
   </button>
   <ul class="mdlext-menu" hidden >
     <li class="mdlext-menu__item">
@@ -105,7 +107,6 @@
       <span class="mdlext-menu__item__label">Menu item #2</span>
       <i class="material-icons md-18">radio</i>
     </li>
-    <li class="mdlext-menu__item-divider"></li>
     <li class="mdlext-menu__item" disabled>
       <span class="mdlext-menu__item__label">Menu item #3, disabled</span>
       <i class="material-icons md-18">accessibility</i>
@@ -114,6 +115,7 @@
       <span class="mdlext-menu__item__label">Menu item #IV</span>
       <i class="material-icons md-18">build</i>
     </li>
+    <li class="mdlext-menu__item-separator"></li>
     <li class="mdlext-menu__item">
       <span class="mdlext-menu__item__label">Menu item #V</span>
       <i class="material-icons md-18">build</i>
@@ -142,7 +144,7 @@
         tabindex="0"
         onselect="this.querySelector('span').innerHTML = event.detail.source.innerHTML;">
   <span class="mdlext-menu-button__label">I'm the label!</span>
-  <i class="mdlext-aria-expanded-more-less"></i>
+  <i class="mdlext-menu-button__aria-expanded-plus-minus"></i>
 </button>
 <ul id="menu-example-dropdown"
     class="mdlext-menu"
@@ -150,6 +152,7 @@
     hidden >
   <li class="mdlext-menu__item" role="menuitem">Menu item #1</li>
   <li class="mdlext-menu__item" role="menuitem">Menu item #2</li>
+  <li class="mdlext-menu__item-separator" role="separator"></li>
   <li class="mdlext-menu__item" role="menuitem">Menu item #n</li>
 </ul>
 
@@ -157,7 +160,7 @@
 <div role="presentation">
   <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdlext-js-menu-button" disabled>
     <span class="mdlext-menu-button__label">Disabled</span>
-    <i class="material-icons mdlext-aria-expanded-more-less"></i>
+    <i class="material-icons mdlext-menu-button__aria-expanded-more-less"></i>
   </button>
   <ul class="mdlext-menu" hidden>
     <li class="mdlext-menu__item">Menu item #1</li>
@@ -191,7 +194,7 @@
       <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdlext-js-menu-button"
               aria-controls="menu-before-table-example"
               onselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.innerHTML;">
-        <i class="mdlext-aria-expanded-more-less"></i>
+        <i class="mdlext-menu-button__aria-expanded-more-less"></i>
       </button>
     </td>
     <td>$2.90</td>
@@ -202,7 +205,7 @@
       <span style="width:40px; display: inline-block;"></span>
       <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdlext-js-menu-button"
               onselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.innerHTML;">
-        <i class="mdlext-aria-expanded-more-less"></i>
+        <i class="mdlext-menu-button__aria-expanded-more-less"></i>
       </button>
       <ul class="mdlext-menu" hidden >
         <li class="mdlext-menu__item">10</li>
@@ -219,7 +222,7 @@
       <button class="mdl-button mdl-button--icon mdl-button--primary mdl-js-button mdlext-js-menu-button"
               aria-controls="menu-after-table-example"
         onselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.innerHTML;">
-        <i class="mdlext-aria-expanded-more-less"></i>
+        <i class="mdlext-menu-button__aria-expanded-more-less"></i>
       </button>
     </td>
     <td>$2.35</td>
