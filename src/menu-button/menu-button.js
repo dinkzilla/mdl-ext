@@ -465,7 +465,7 @@ const menuFactory = (element, controlledBy) => {
   const addWaiAria = () => {
 
     if (!element.hasAttribute('id')) {
-      element.id = `button-menu-${randomString()}`;
+      element.id = `menu-button-${randomString()}`;
     }
     element.setAttribute('tabindex', '-1');
     element.setAttribute('role', 'menu');
