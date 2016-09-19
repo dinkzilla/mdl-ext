@@ -864,6 +864,42 @@
 }
 
 
+// mdlext/src/menu-button/_menu-button.scss
+// ----------------------------------------
+.mdlext-dark-color-theme {
+  .mdlext-menu {
+    background: $mdlext-dark-default-dropdown-bg-color;
+
+    &__item {
+      color: $mdlext-dark-default-item-text-color;
+      background-color: $mdlext-dark-default-dropdown-bg-color;
+
+      &:active,
+      &[aria-selected='true'] {
+        background-color: $mdlext-dark-default-item-active-bg-color;
+      }
+      &:hover:not([disabled]) {
+        background-color: $mdlext-dark-default-item-hover-bg-color;
+      }
+      &:focus {
+        outline-color: $mdlext-dark-default-item-outline-color;
+        background-color: $mdlext-dark-default-item-focus-bg-color;
+      }
+      &[disabled] {
+        color: $mdlext-dark-disabled-item-text-color;
+
+        > * {
+          color: $mdlext-dark-disabled-item-text-color;
+        }
+      }
+    }
+    &__item-separator {
+      border-bottom: 1px solid $mdlext-dark-default-item-divider-color;
+    }
+  }
+}
+
+
 // mdlext/src/bordered-fields/_bordered-fields.scss
 // -------------------------------------------------
 .mdlext-dark-color-theme {

@@ -43,7 +43,7 @@ import {
 
 
 //const MENU_BUTTON = 'mdlext-menu-button';
-//const MENU_BUTTON_LABEL = 'mdlext-menu-button__label';
+//const MENU_BUTTON_CAPTION = 'mdlext-menu-button__caption';
 const MENU_BUTTON_MENU = 'mdlext-menu';
 const MENU_BUTTON_MENU_ITEM = 'mdlext-menu__item';
 const MENU_BUTTON_MENU_ITEM_SEPARATOR = 'mdlext-menu__item-separator';
@@ -212,7 +212,7 @@ const menuFactory = (element, controlledBy) => {
   const tether = () => {
     const controlRect = controlledBy.element.getBoundingClientRect();
 
-    // 1. will menu fit inside window viewport?
+    // 1. will menu height fit inside window viewport?
     const { viewportWidth, viewportHeight } = windowViewport();
 
     element.style.height = 'auto';
@@ -222,7 +222,7 @@ const menuFactory = (element, controlledBy) => {
       element.style.overflowY = 'auto';
     }
 
-    // 2. will menu fit inside window viewport?
+    // 2. will menu width fit inside window viewport?
     element.style.width = 'auto';
     if(element.offsetWidth > viewportWidth) {
       element.style.width = `${viewportWidth-4}px`;
@@ -296,14 +296,16 @@ const menuFactory = (element, controlledBy) => {
       //console.log('***** 7');
     }
     else {
-      // 8. position menu inside viewport
+      // 8. position menu inside viewport, near controlrect if possible
 
-      // 8.1 position menu at (near) viewport bottom
-      let t = top;
-      if(t + menuRect.height > viewportHeight) {
-        t = t + menuRect.height - viewportHeight + 4;
+      // 8.1 position menu near controlrect bottom or top
+      ddy = dy - top;
+      if(top + controlRect.height >= 0 && bottom + controlRect.height <= viewportHeight) {
+        ddy = controlRect.height + dy;
       }
-      ddy = dy - t;
+      else if(top - menuRect.height >= 0 && bottom - menuRect.height <= viewportHeight) {
+        ddy = dy - menuRect.height;
+      }
 
       if(left + menuRect.width + controlRect.width <= viewportWidth) {
         // 8.2 Position menu at button right hand side

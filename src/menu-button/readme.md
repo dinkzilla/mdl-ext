@@ -138,41 +138,41 @@ of the button.
 <button class="mdl-button mdl-button--raised mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button"
   aria-controls="demo-menu">
   <i class="material-icons">gesture</i>
-  <span class="mdlext-menu-button__label">Select</span>
+  <span class="mdlext-menu-button__caption">Select</span>
   <i class="material-icons mdlext-aria-expanded-more-less"></i>
 </button>
 
 <ul id="demo-menu" class="mdlext-menu" hidden>
   <li class="mdlext-menu__item">
     <i class="material-icons md-18">info</i>
-    <span class="mdlext-menu__item__label">Menu item #1</span>
+    <span class="mdlext-menu__item__caption">Menu item #1</span>
   </li>
   <li class="mdlext-menu__item">
     <i class="material-icons md-18">help_outline</i>
-    <span class="mdlext-menu__item__label">Menu item #2. A long text to check overflow ellipsis 0123456789</span>
+    <span class="mdlext-menu__item__caption">Menu item #2. A long text to check ellipsis overflow 0123456789</span>
     <i class="material-icons md-18">radio</i>
   </li>
   <li class="mdlext-menu__item-separator"></li>
   <li class="mdlext-menu__item" disabled>
-    <span class="mdlext-menu__item__label">Menu item #3, disabled</span>
+    <span class="mdlext-menu__item__caption">Menu item #3, disabled</span>
     <i class="material-icons md-18">accessibility</i>
   </li>
   <li class="mdlext-menu__item-separator"></li>
   <li class="mdlext-menu__item">
-    <span class="mdlext-menu__item__label">Menu item #IV</span>
+    <span class="mdlext-menu__item__caption">Menu item #IV</span>
     <i class="material-icons md-18">build</i>
   </li>
   <li class="mdlext-menu__item">
-    <span class="mdlext-menu__item__label">Menu item #V</span>
+    <span class="mdlext-menu__item__caption">Menu item #V</span>
     <i class="material-icons md-18">build</i>
   </li>
   <li class="mdlext-menu__item-separator"></li>
   <li class="mdlext-menu__item">
-    <span class="mdlext-menu__item__label">Menu item #VI</span>
+    <span class="mdlext-menu__item__caption">Menu item #VI</span>
     <i class="material-icons md-18">build</i>
   </li>
   <li class="mdlext-menu__item">
-    <span class="mdlext-menu__item__label">Menu item #VII</span>
+    <span class="mdlext-menu__item__caption">Menu item #VII</span>
     <i class="material-icons md-18">build</i>
   </li>
   <li class="mdlext-menu__item">
@@ -222,6 +222,7 @@ The menu button has the following roles, states and properties set by the menu b
 * `aria-controls`: identfies the content on the page (e.g. using IDREFs) that this menu button controls.
 * `aria-expanded`: the element with role `button` has [aria-expanded](https://www.w3.org/TR/wai-aria-1.1/#aria-expanded) set to `true` if the corresponding menu is open, oterwise false.
 * `aria-expanded`: when a menu item is disabled, `aria-disabled` is set to `true`.
+* `disabled"`: indicates that a button is disabled, otherwise not present.
 
 ### Menu, WAI-ARIA Roles
 * `role="menu"`: identifies the element as a menu widget.
@@ -296,10 +297,11 @@ The table below lists the available classes and their effects.
 |`mdl-button--icon`                | Applies icon (small plain circular) display effect to button | Optional on button element |
 |`mdl-button--xxxxxxxxxx`          | Apply any of the mdl-button classes | See: Material Design Lite, [BUTTONS](https://getmdl.io/components/index.html#buttons-section) |
 |`mdlext-js-menu-button`           | Assigns basic MDLEXT behavior to menu button. Identifies the element as a menu button component | Required on the element that should act as a menu button |
+|`mdlext-menu-button__caption`     | Holds the button text | Optional on span element inside button element - but required if you want to decorate a button with icons. More than one caption can be used to control various aspects of the button text, e.g. font size. |
 |`material-icons`                  | Defines span as a material icon | Required on an inline element. Decorates button or menu item with an icon |
 |`mdlext-menu`                     | Defines an unordered list container as an MDLEXT component | Required on ul element |
 |`mdlext-menu__item`               | Defines menu options | Required on list item elements |
-|`mdlext-menu__item__label`        | Holds the menu text | Optional on span element inside list item element - but required if you want to decorate a menu item with icons. More than one label can be used to control warious aspects of the menu text, e.g. font size. |
+|`mdlext-menu__item__caption`      | Holds the menu text | Optional on span element inside list item element - but required if you want to decorate a menu item with icons. More than one caption can be used to control various aspects of the menu text, e.g. font size. |
 |`mdlext-menu__item-separator`     | Items in a menu may be divided into groups by placing an element with a role of `separator` between groups. | Optional; goes on unordered list element |
 |`mdlext-aria-expanded-plus-minus` | State icon. Displays '+' or '-' | Optional; goes on button element |
 |`mdlext-aria-expanded-more-less`  | State icon. Displays 'more' or 'less' Material Design icons | Optional; goes on button element |
@@ -315,7 +317,18 @@ The table below lists the available classes and their effects.
 ```html
 <button class="mdl-button mdl-button--raised mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button">
   <i class="material-icons">gesture</i>
-  <span class="mdlext-menu-button__label">Select</span>
+  <span class="mdlext-menu-button__caption">Select</span>
   <i class="material-icons mdlext-menu-button__aria-expanded-more-less"></i>
 </button>
+```
+
+> If you decorate a menu item with icons, wrap the menu item text inside a span to separate icons and text 
+```html
+<ul id="demo-menu" class="mdlext-menu" hidden>
+  <li class="mdlext-menu__item">
+    <i class="material-icons md-18">help_outline</i>
+    <span class="mdlext-menu__item__caption">Menu item</span>
+    <i class="material-icons">info</i>
+  </li>
+</ul>
 ```

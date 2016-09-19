@@ -2467,12 +2467,15 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   position: relative;
   height: 36px;
   padding: 0 16px;
-  display: inline-block;
-  line-height: 36px;
-  vertical-align: middle;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
 }
 
-.mdlext-menu-button__label {
+.mdlext-menu-button__caption {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2490,9 +2493,10 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 
 .mdlext-menu {
   position: absolute;
+  background: rgb(255,255,255);
   z-index: 1000;
-  min-width: 100px;
-  max-width: 400px;
+  min-width: 124px;
+  max-width: 390px;
   border-radius: 2px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
   display: -ms-inline-flexbox;
@@ -2500,8 +2504,6 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   -ms-flex-direction: column;
       flex-direction: column;
   padding: 0;
-  color: rgba(0,0,0, 0.87);
-  background-color: rgb(255,255,255);
 }
 
 .mdlext-menu:focus {
@@ -2526,8 +2528,10 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   font-weight: 400;
   line-height: 24px;
   letter-spacing: 0;
+  color: rgba(0,0,0, 0.87);
+  background-color: rgb(255,255,255);
   position: relative;
-  padding: 0 8px;
+  padding: 0 16px;
   -ms-flex-align: center;
       -ms-grid-row-align: center;
       align-items: center;
@@ -2556,6 +2560,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-menu__item:focus {
   outline-offset: -2px;
   outline-width: 1px;
+  outline-color: rgb(189,189,189);
   background-color: rgb(238,238,238);
 }
 
@@ -2574,7 +2579,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   color: rgb(189,189,189);
 }
 
-.mdlext-menu__item__label {
+.mdlext-menu__item__caption {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2589,7 +2594,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   padding-left: 0;
 }
 
-.mdlext-menu__item > *:last-child:not(:only-child):not(.mdlext-menu__item__label) {
+.mdlext-menu__item > *:last-child:not(:only-child):not(.mdlext-menu__item__caption) {
   margin-left: auto;
 }
 
@@ -4243,6 +4248,41 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   color: #D32F2F;
 }
 
+.mdlext-light-color-theme .mdlext-menu {
+  background: #FFFFFF;
+}
+
+.mdlext-light-color-theme .mdlext-menu__item {
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #FFFFFF;
+}
+
+.mdlext-light-color-theme .mdlext-menu__item:active,
+.mdlext-light-color-theme .mdlext-menu__item[aria-selected='true'] {
+  background-color: #E0E0E0;
+}
+
+.mdlext-light-color-theme .mdlext-menu__item:hover:not([disabled]) {
+  background-color: #EEEEEE;
+}
+
+.mdlext-light-color-theme .mdlext-menu__item:focus {
+  outline-color: #BDBDBD;
+  background-color: #EEEEEE;
+}
+
+.mdlext-light-color-theme .mdlext-menu__item[disabled] {
+  color: #BDBDBD;
+}
+
+.mdlext-light-color-theme .mdlext-menu__item[disabled] > * {
+  color: #BDBDBD;
+}
+
+.mdlext-light-color-theme .mdlext-menu__item-separator {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
 .mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield .mdl-textfield__input,
 .mdlext-light-color-theme .mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select,
 .mdlext-light-color-theme .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input,
@@ -5209,6 +5249,41 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
 
 .mdlext-dark-color-theme .mdlext-selectfield__error {
   color: #FF1744;
+}
+
+.mdlext-dark-color-theme .mdlext-menu {
+  background: #000000;
+}
+
+.mdlext-dark-color-theme .mdlext-menu__item {
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #000000;
+}
+
+.mdlext-dark-color-theme .mdlext-menu__item:active,
+.mdlext-dark-color-theme .mdlext-menu__item[aria-selected='true'] {
+  background-color: #424242;
+}
+
+.mdlext-dark-color-theme .mdlext-menu__item:hover:not([disabled]) {
+  background-color: #212121;
+}
+
+.mdlext-dark-color-theme .mdlext-menu__item:focus {
+  outline-color: #616161;
+  background-color: #212121;
+}
+
+.mdlext-dark-color-theme .mdlext-menu__item[disabled] {
+  color: #9E9E9E;
+}
+
+.mdlext-dark-color-theme .mdlext-menu__item[disabled] > * {
+  color: #9E9E9E;
+}
+
+.mdlext-dark-color-theme .mdlext-menu__item-separator {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .mdlext-dark-color-theme .mdlext-bordered-fields .mdl-textfield .mdl-textfield__input,
