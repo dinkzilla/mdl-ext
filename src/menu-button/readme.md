@@ -264,7 +264,7 @@ Open menu at given position. Position is on of `first`, `last` or `selected`. De
 * `selected` focus previously selected menu item
 
 ```javascript
-const menuButton = document.querySelector('#my-enu-button');
+const menuButton = document.querySelector('#my-menu-button');
 menuButton.MaterialExtMenuButton.openMenu();
 ```
 
@@ -272,7 +272,7 @@ menuButton.MaterialExtMenuButton.openMenu();
 Closes an open menu. Moves focus to button.
 
 ```javascript
-const menuButton = document.querySelector('#my-enu-button');
+const menuButton = document.querySelector('#my-menu-button');
 menuButton.MaterialExtMenuButton.closeMenu();
 ```
 
@@ -280,7 +280,7 @@ menuButton.MaterialExtMenuButton.closeMenu();
 Get a selected menu item, null if no item selected.
 
 ```javascript
-const menuButton = document.querySelector('#my-enu-button');
+const menuButton = document.querySelector('#my-menu-button');
 const element = menuButton.MaterialExtMenuButton.selectedMenuItem();
 console.log('Selected menu item', element);
 ```
