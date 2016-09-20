@@ -56,7 +56,7 @@
 }
 
 .mdlext-menu {
-  position: absolute;
+  position: fixed;
   background: $default-dropdown-bg-color;
   z-index: 1000;
   min-width: 124px;

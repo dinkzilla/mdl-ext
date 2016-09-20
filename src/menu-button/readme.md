@@ -93,7 +93,7 @@ The menu button component is ready for use.
 the `id` attribute of the menu may be skipped.
 
 ```html
-<div role="presentaion">
+<div role="presentation">
   <button class="mdl-button mdl-js-button mdlext-js-menu-button">
     <span>Select a value</span>
     <i class="material-icons">more_vert</i>

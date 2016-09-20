@@ -47,6 +47,7 @@ import {
 const MENU_BUTTON_MENU = 'mdlext-menu';
 const MENU_BUTTON_MENU_ITEM = 'mdlext-menu__item';
 const MENU_BUTTON_MENU_ITEM_SEPARATOR = 'mdlext-menu__item-separator';
+const MDL_LAYOUT_CONTENT = 'mdl-layout__content';
 
 const menuFactory = (element, controlledBy) => {
 
@@ -537,6 +538,7 @@ class MenuButton {
   constructor(element) {
     this.element = element;
     this.menu = undefined;
+    this.scrollArea = undefined;
 
     this.init();
   }
@@ -620,22 +622,37 @@ class MenuButton {
       const menuElement = findMenuElement();
       this.menu = menuFactory(menuElement, this);
       this.element.setAttribute('aria-controls', this.menu.element.id);
+      this.scrollArea = this.element.closest(`.${MDL_LAYOUT_CONTENT}`) || document.body;
     };
 
     addWaiAria();
     addMenu();
     removeListeners();
     addListeners();
+
   }
+
+  /**
+   * Close menu if content is scrolled
+   * @see https://javascriptweblog.wordpress.com/2015/11/02/of-classes-and-arrow-functions-a-cautionary-tale/
+   */
+  scrollHandler = () => {
+    this.closeMenu( true );
+  };
 
   openMenu(position='first') {
     if(!this.isDisabled()) {
+      this.scrollArea.addEventListener('scroll', this.scrollHandler);
       this.menu.open(position);
     }
   }
 
-  closeMenu() {
+  closeMenu( forceFocus = false ) {
+    this.scrollArea.removeEventListener('scroll', this.scrollHandler);
     this.menu.close();
+    if (forceFocus) {
+      this.element.focus();
+    }
   }
 
   focus() {
