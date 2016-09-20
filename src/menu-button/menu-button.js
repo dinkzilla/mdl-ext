@@ -298,9 +298,10 @@ const menuFactory = (element, controlledBy) => {
     }
     else {
       // 8. position menu inside viewport, near controlrect if possible
+      //console.log('***** 8');
 
-      // 8.1 position menu near controlrect bottom or top
-      ddy = dy - top;
+      // 8.1 position menu near controlrect bottom
+      ddy =  dy - bottom + viewportHeight;
       if(top + controlRect.height >= 0 && bottom + controlRect.height <= viewportHeight) {
         ddy = controlRect.height + dy;
       }
@@ -321,7 +322,7 @@ const menuFactory = (element, controlledBy) => {
       else {
         // 8.4 position menu at (near) viewport right
         let r = 0;
-        if(left + menuRect.width < viewportWidth) {
+        if(left + menuRect.width > viewportWidth) {
           r = left + menuRect.width - viewportWidth - 4;
         }
         ddx = dx - r;
@@ -622,6 +623,8 @@ class MenuButton {
       const menuElement = findMenuElement();
       this.menu = menuFactory(menuElement, this);
       this.element.setAttribute('aria-controls', this.menu.element.id);
+
+      // Unfortunatley, MDL has moved scroll from document.body to a div element.
       this.scrollArea = this.element.closest(`.${MDL_LAYOUT_CONTENT}`) || document.body;
     };
 
@@ -629,26 +632,29 @@ class MenuButton {
     addMenu();
     removeListeners();
     addListeners();
-
   }
 
   /**
-   * Close menu if content is scrolled
+   * Close menu if content is scrolled, window is resized or orientation change
    * @see https://javascriptweblog.wordpress.com/2015/11/02/of-classes-and-arrow-functions-a-cautionary-tale/
    */
-  scrollHandler = () => {
+  closeMenuHandler = () => {
     this.closeMenu( true );
   };
 
   openMenu(position='first') {
     if(!this.isDisabled()) {
-      this.scrollArea.addEventListener('scroll', this.scrollHandler);
+      this.scrollArea.addEventListener('scroll', this.closeMenuHandler);
+      window.addEventListener('resize', this.closeMenuHandler);
+      window.addEventListener('orientationchange', this.closeMenuHandler);
       this.menu.open(position);
     }
   }
 
   closeMenu( forceFocus = false ) {
-    this.scrollArea.removeEventListener('scroll', this.scrollHandler);
+    this.scrollArea.removeEventListener('scroll', this.closeMenuHandler);
+    window.removeEventListener('resize', this.closeMenuHandler);
+    window.removeEventListener('orientationchange', this.closeMenuHandler);
     this.menu.close();
     if (forceFocus) {
       this.element.focus();
@@ -695,6 +701,7 @@ class MenuButton {
   /**
    * Open menu
    * @public
+   * @param position one of "first", "last" or "selected"
    */
   MaterialExtMenuButton.prototype.openMenu = function(position='first') {
     this.menuButton_.openMenu(position);
@@ -706,7 +713,7 @@ class MenuButton {
    * @public
    */
   MaterialExtMenuButton.prototype.closeMenu = function() {
-    this.menuButton_.closeMenu();
+    this.menuButton_.closeMenu(true);
   };
   MaterialExtMenuButton.prototype['closeMenu'] = MaterialExtMenuButton.prototype.closeMenu;
 
@@ -736,7 +743,7 @@ class MenuButton {
    * E.g remove listeners and clean up resources
    */
   MaterialExtMenuButton.prototype.mdlDowngrade_ = function() {
-    // TODO: call this.menuButton_.downgrade();
+    // TODO: (maybe) call this.menuButton_.downgrade();
     this.menuButton_ = null;
   };
 

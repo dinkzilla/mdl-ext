@@ -317,9 +317,9 @@ The menu button has roles, attributes and behaviour as outlined in
   that positioning works as expected.</p>
 
 <ul id="menu-before-table-example" class="mdlext-menu" hidden="">
-  <li class="mdlext-menu__item">10</li>
-  <li class="mdlext-menu__item">25</li>
-  <li class="mdlext-menu__item">50</li>
+  <li class="mdlext-menu__item" data-value="10">Ten</li>
+  <li class="mdlext-menu__item" data-value="25">Twentyfive</li>
+  <li class="mdlext-menu__item" data-value="50">Fifty</li>
 </ul>
 
 <div style="position:relative; border:2px solid green; overflow: hidden;">
@@ -339,7 +339,7 @@ The menu button has roles, attributes and behaviour as outlined in
     <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
     <td>
       <span style="width:40px; display: inline-block;"></span>
-      <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdlext-js-menu-button" aria-controls="menu-before-table-example" onselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.innerHTML;">
+      <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdlext-js-menu-button" aria-controls="menu-before-table-example" onselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.getAttribute('data-value');">
         <i class="mdlext-aria-expanded-more-less"></i>
       </button>
     </td>
@@ -349,13 +349,13 @@ The menu button has roles, attributes and behaviour as outlined in
     <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
     <td>
       <span style="width:40px; display: inline-block;"></span>
-      <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdlext-js-menu-button" onselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.innerHTML;">
+      <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdlext-js-menu-button" onselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.getAttribute('data-value');">
         <i class="mdlext-aria-expanded-more-less"></i>
       </button>
       <ul class="mdlext-menu" hidden="">
-        <li class="mdlext-menu__item">10</li>
-        <li class="mdlext-menu__item">25</li>
-        <li class="mdlext-menu__item">50</li>
+        <li class="mdlext-menu__item" data-value="10">Ten</li>
+        <li class="mdlext-menu__item" data-value="25">Twentyfive</li>
+        <li class="mdlext-menu__item" data-value="50">Fifty</li>
       </ul>
     </td>
     <td>$1.25</td>
@@ -364,14 +364,14 @@ The menu button has roles, attributes and behaviour as outlined in
     <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
     <td>
       <span style="width:40px; display: inline-block;"></span>
-      <button class="mdl-button mdl-button--icon mdl-button--primary mdl-js-button mdlext-js-menu-button" aria-controls="menu-after-table-example" onselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.innerHTML;">
+      <button class="mdl-button mdl-button--icon mdl-button--primary mdl-js-button mdlext-js-menu-button" aria-controls="menu-after-table-example" onselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.getAttribute('data-value');">
         <i class="mdlext-aria-expanded-more-less"></i>
       </button>
     </td>
     <td>$2.35</td>
   </tr>
   </tbody>
-</table>
+  </table>
 
 
   <div role="presentation" style="width:48%; float:right;">
@@ -418,11 +418,12 @@ The menu button has roles, attributes and behaviour as outlined in
 </div>
 
 <ul id="menu-after-table-example" class="mdlext-menu" hidden="">
-  <li class="mdlext-menu__item">10</li>
-  <li class="mdlext-menu__item">25</li>
-  <li class="mdlext-menu__item">50</li>
+  <li class="mdlext-menu__item" data-value="10">Ten</li>
+  <li class="mdlext-menu__item" data-value="25">Twentyfive</li>
+  <li class="mdlext-menu__item" data-value="50">Fifty</li>
 </ul>
 
+<div style="margin-bottom:256px;"></div>
 
 <!--
 https://www.w3.org/TR/wai-aria-practices/#menubutton

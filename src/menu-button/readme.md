@@ -110,18 +110,18 @@ With this markup the component will generate a random `id` attribute for the men
 of the button.
 
 
-**A menu button with select listener.**
+**A menu button with a select listener. Uses a data-value attribute to pass the actual value.**
 
 ```html
 <div id="selection"></div>
 <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdlext-js-menu-button"
-  onselect="document.querySelector('#selection').innerHTML = 'Selected value: " + event.detail.source.innerHTML;">
+  onselect="document.querySelector('#selection').innerHTML = 'Selected value: " + event.detail.source.getAttribute('data-value';">
   <i class="mdlext-aria-expanded-more-less"></i>
 </button>
 <ul class="mdlext-menu" hidden >
-  <li class="mdlext-menu__item">10</li>
-  <li class="mdlext-menu__item">25</li>
-  <li class="mdlext-menu__item">50</li>
+  <li class="mdlext-menu__item" data-value="10">Ten</li>
+  <li class="mdlext-menu__item" data-value="25">Twentyfive</li>
+  <li class="mdlext-menu__item" data-value="50">Fifty</li>
 </ul>
 ```
 
@@ -237,35 +237,6 @@ The menu button has the following roles, states and properties set by the menu b
  
 >The roles, states, and properties needed for the menu are described in more detail in WAI-ARIA Authoring Practices, [2.19 Menu or Menu bar](https://www.w3.org/TR/wai-aria-practices/#menu).
 
-
-## Strategy used to position a menu when opened
-When a menu is opened, the following strategy is used to position the menu next to the button.
-
-1. menu.height > viewport.height<br/>
-      let menu.height = viewport.heigt<br/>
-      let menu.overflow-y = auto
-2. menu.width > viewport.width<br/>
-      let menu.width = viewport.width
-3. position menu below button, align left edge of menu with button left<br/>
-      done if menu inside viewport
-4. position menu below button, align right edge of menu with button right<br/>
-      done if menu inside viewport
-5. positions menu above button, aligns left edge of menu with button left<br/>
-      done if menu inside viewport
-6. position menu at button right hand side, aligns menu top with button top<br/>
-      done if menu inside viewport
-7. position menu at button left hand side, aligns menu top with button top<br/>
-      done if menu inside viewport
-8. position menu inside viewport
-    1. position menu at viewport bottom
-    2. position menu at button right hand side<br/>
-       done if menu inside viewport
-    3. position menu at button left hand side<br/>
-       done if menu inside viewport
-    4. position menu at viewport right
-9. done
-
-
 ## Events emitted from the component
 The menu button emits a custom `select` event when a menu item is selected. The event has a detail object with the following structure:
 
@@ -283,6 +254,38 @@ document.querySelector('#my-menubutton').addEventListener('select', function(e) 
 ```
 Refer to [snippets/menu-button.html](./snippets/menu-button.html) or the [tests](../../test/menu-button/menu-button.spec.js) for detailed usage.
 
+
+## Public methods
+
+### openMenu(position)
+Open menu at given position. Position is on of `first`, `last` or `selected`. Default value is `first`.
+* `first` focus first menu item
+* `last` focus last menu item
+* `selected` focus previously selected menu item
+
+```javascript
+const menuButton = document.querySelector('#my-enu-button');
+menuButton.MaterialExtMenuButton.openMenu();
+```
+
+### closeMenu()
+Closes an open menu. Moves focus to button.
+
+```javascript
+const menuButton = document.querySelector('#my-enu-button');
+menuButton.MaterialExtMenuButton.closeMenu();
+```
+
+### selectedMenuItem()
+Get a selected menu item, null if no item selected.
+
+```javascript
+const menuButton = document.querySelector('#my-enu-button');
+const element = menuButton.MaterialExtMenuButton.selectedMenuItem();
+console.log('Selected menu item', element);
+```
+
+Refer to [snippets/menu-button.html](./snippets/menu-button.html) or the [tests](../../test/menu-button/menu-button.spec.js) for detailed usage.
 
 ## Configuration options
 

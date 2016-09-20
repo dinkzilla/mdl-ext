@@ -866,7 +866,12 @@
 
 // mdlext/src/menu-button/_menu-button.scss
 // ----------------------------------------
+.mdlext-menu.mdlext-dark-color-theme {
+  background: $mdlext-dark-default-dropdown-bg-color;
+}
+
 .mdlext-dark-color-theme {
+
   .mdlext-menu {
     background: $mdlext-dark-default-dropdown-bg-color;
 

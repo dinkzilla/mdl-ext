@@ -336,6 +336,13 @@ describe('MaterialExtMenuButton', () => {
       }
     });
 
+    it('closes the menu content scroll', () => {
+      button.MaterialExtMenuButton.openMenu('first');
+      document.body.dispatchEvent(new Event('scroll'));
+      assert.equal(button.getAttribute('aria-expanded'), 'false', 'ESC key: Expected button to have aria-expanded=false');
+      assert.isTrue(menu.hasAttribute('hidden'), 'ESC key: Expected menu to have hidden attribute');
+    });
+
   });
 
 

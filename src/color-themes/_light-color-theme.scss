@@ -865,7 +865,12 @@
 
 // mdlext/src/menu-button/_menu-button.scss
 // ----------------------------------------
+.mdlext-menu.mdlext-light-color-theme {
+  background: $mdlext-light-default-dropdown-bg-color;
+}
+
 .mdlext-light-color-theme {
+
   .mdlext-menu {
     background: $mdlext-light-default-dropdown-bg-color;
 

@@ -4248,6 +4248,10 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   color: #D32F2F;
 }
 
+.mdlext-menu.mdlext-light-color-theme {
+  background: #FFFFFF;
+}
+
 .mdlext-light-color-theme .mdlext-menu {
   background: #FFFFFF;
 }
@@ -5249,6 +5253,10 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
 
 .mdlext-dark-color-theme .mdlext-selectfield__error {
   color: #FF1744;
+}
+
+.mdlext-menu.mdlext-dark-color-theme {
+  background: #000000;
 }
 
 .mdlext-dark-color-theme .mdlext-menu {
