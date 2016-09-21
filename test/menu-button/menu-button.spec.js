@@ -336,7 +336,7 @@ describe('MaterialExtMenuButton', () => {
       }
     });
 
-    it('closes the menu content scroll', () => {
+    it('closes the menu when content scroll', () => {
       button.MaterialExtMenuButton.openMenu('first');
       document.body.dispatchEvent(new Event('scroll'));
       assert.equal(button.getAttribute('aria-expanded'), 'false', 'ESC key: Expected button to have aria-expanded=false');

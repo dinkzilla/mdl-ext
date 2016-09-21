@@ -149,7 +149,9 @@ The menu button has roles, attributes and behaviour as outlined in
         aria-controls="menu-example-dropdown"
         aria-expanded="false"
         tabindex="0"
-        onselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
+        onselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;"
+        onchange="console.log('*****', event);"
+>
   <span class="mdlext-menu-button__caption">Select a size</span>
   <i class="mdlext-aria-expanded-plus-minus"></i>
 </button>
@@ -293,6 +295,74 @@ The menu button has roles, attributes and behaviour as outlined in
   <li class="mdlext-menu__item" data-value="25">Twentyfive</li>
   <li class="mdlext-menu__item" data-value="50">Fifty</li>
 </ul>
+
+
+
+<style>
+  .demo-grid {
+    margin-top: 32px;
+  }
+  .demo-grid .mdl-cell {
+    background: rgb(63,81,181);
+    text-align: center;
+    color: white;
+    padding: 16px 8px;
+    border: 1px solid #aaaaaa;
+  }
+  .demo-grid .mdl-cell:nth-child(odd) {
+    background: rgb(33,150,243);
+  }
+</style>
+
+
+<div class="demo-grid">
+  <p>Menu buttons inside <code>mdl-grid</code></p>
+
+  <div class="mdl-grid mdl-grid--no-spacing">
+    <div class="mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
+      <button class="mdl-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button"
+              onselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
+        <span class="mdlext-menu-button__caption">Select a size</span>
+        <i class="mdlext-aria-expanded-plus-minus"></i>
+      </button>
+      <ul class="mdlext-menu"
+          role="menu"
+          hidden >
+        <li class="mdlext-menu__item" role="menuitem">Small</li>
+        <li class="mdlext-menu__item" role="menuitem">Medium</li>
+        <li class="mdlext-menu__item" role="menuitem">Large</li>
+      </ul>
+    </div>
+    <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--3-col-phone">
+      <button class="mdl-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button"
+              onselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
+        <span class="mdlext-menu-button__caption">Select a size</span>
+        <i class="mdlext-aria-expanded-plus-minus"></i>
+      </button>
+      <ul class="mdlext-menu"
+          role="menu"
+          hidden >
+        <li class="mdlext-menu__item" role="menuitem">Small</li>
+        <li class="mdlext-menu__item" role="menuitem">Medium</li>
+        <li class="mdlext-menu__item" role="menuitem">Large</li>
+      </ul>
+    </div>
+    <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--hide-phone">
+      <button class="mdl-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button"
+              onselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
+        <span class="mdlext-menu-button__caption">Select a size</span>
+        <i class="mdlext-aria-expanded-plus-minus"></i>
+      </button>
+      <ul class="mdlext-menu"
+          role="menu"
+          hidden >
+        <li class="mdlext-menu__item" role="menuitem">Small</li>
+        <li class="mdlext-menu__item" role="menuitem">Medium</li>
+        <li class="mdlext-menu__item" role="menuitem">Large</li>
+      </ul>
+    </div>
+  </div>
+</div>
 
 <div style="margin-bottom:256px;"></div>
 

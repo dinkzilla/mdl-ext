@@ -47,7 +47,62 @@ import {
 const MENU_BUTTON_MENU = 'mdlext-menu';
 const MENU_BUTTON_MENU_ITEM = 'mdlext-menu__item';
 const MENU_BUTTON_MENU_ITEM_SEPARATOR = 'mdlext-menu__item-separator';
-const MDL_LAYOUT_CONTENT = 'mdl-layout__content';
+
+
+/**
+ * Get the browser viewport dimensions
+ * @see http://stackoverflow.com/questions/1248081/get-the-browser-viewport-dimensions-with-javascript
+ * @return {{windowWidth: number, windowHeight: number}}
+ * @todo move to utils
+ */
+const windowViewport = () => {
+  return {
+    viewportWidth: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
+    viewportHeight: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+  };
+};
+
+
+/**
+ * Check whether an element is in the window viewport
+ * @see http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport/
+ * @param top
+ * @param left
+ * @param bottom
+ * @param right
+ * @return {boolean} true if rectangle is inside window viewport, otherwise false
+ * @todo move to utils
+ */
+const rectInsideWindowViewport = ({ top, left, bottom, right }) => {
+  const { viewportWidth, viewportHeight } = windowViewport();
+  return top >= 0 &&
+    left >= 0 &&
+    bottom <= viewportHeight &&
+    right <= viewportWidth;
+};
+
+
+/**
+ * Get a list of elements that can possibly scroll
+ * @param el
+ * @returns {Array}
+ * @todo move to utils
+ */
+const scrollParents = el => {
+  const elements = [];
+  for (el = el.parentNode; el; el = el.parentNode) {
+    const cs = window.getComputedStyle(el);
+    if(!(cs.overflowY === 'hidden' && cs.overflowX === 'hidden')) {
+      elements.unshift(el);
+    }
+    if(el === document.body) {
+      break;
+    }
+  }
+  return elements;
+};
+
+
 
 const menuFactory = (element, controlledBy) => {
 
@@ -152,36 +207,6 @@ const menuFactory = (element, controlledBy) => {
 
 
   /**
-   * Get the browser viewport dimensions
-   * @see http://stackoverflow.com/questions/1248081/get-the-browser-viewport-dimensions-with-javascript
-   * @return {{windowWidth: number, windowHeight: number}}
-   */
-  const windowViewport = () => {
-    return {
-      viewportWidth: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
-      viewportHeight: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
-    };
-  };
-
-
-  /**
-   * Check whether an element is in the window viewport
-   * @see http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport/
-   * @param top
-   * @param left
-   * @param bottom
-   * @param right
-   * @return {boolean}
-   */
-  const rectInsideWindowViewport = ({ top, left, bottom, right }) => {
-    const { viewportWidth, viewportHeight } = windowViewport();
-    return top >= 0 &&
-      left >= 0 &&
-      bottom <= viewportHeight &&
-      right <= viewportWidth;
-  };
-
-  /**
    * Position menu next to button
    *
    * Positioning strategy
@@ -209,6 +234,7 @@ const menuFactory = (element, controlledBy) => {
    *    4. position menu at viewport right
    * 9. done
    *
+   * @todo move to utils
    */
   const tether = () => {
     const controlRect = controlledBy.element.getBoundingClientRect();
@@ -539,7 +565,7 @@ class MenuButton {
   constructor(element) {
     this.element = element;
     this.menu = undefined;
-    this.scrollArea = undefined;
+    this.scrollElements = [];
 
     this.init();
   }
@@ -623,9 +649,6 @@ class MenuButton {
       const menuElement = findMenuElement();
       this.menu = menuFactory(menuElement, this);
       this.element.setAttribute('aria-controls', this.menu.element.id);
-
-      // Unfortunatley, MDL has moved scroll from document.body to a div element.
-      this.scrollArea = this.element.closest(`.${MDL_LAYOUT_CONTENT}`) || document.body;
     };
 
     addWaiAria();
@@ -644,17 +667,22 @@ class MenuButton {
 
   openMenu(position='first') {
     if(!this.isDisabled()) {
-      this.scrollArea.addEventListener('scroll', this.closeMenuHandler);
+
+      // Close the menu if button position chang
+      this.scrollElements = scrollParents(this.element);
+      this.scrollElements.forEach(el => el.addEventListener('scroll', this.closeMenuHandler));
       window.addEventListener('resize', this.closeMenuHandler);
       window.addEventListener('orientationchange', this.closeMenuHandler);
+
       this.menu.open(position);
     }
   }
 
   closeMenu( forceFocus = false ) {
-    this.scrollArea.removeEventListener('scroll', this.closeMenuHandler);
+    this.scrollElements.forEach(el => el.removeEventListener('scroll', this.closeMenuHandler));
     window.removeEventListener('resize', this.closeMenuHandler);
     window.removeEventListener('orientationchange', this.closeMenuHandler);
+
     this.menu.close();
     if (forceFocus) {
       this.element.focus();
