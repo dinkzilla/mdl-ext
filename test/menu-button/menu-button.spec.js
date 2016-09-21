@@ -3,7 +3,7 @@
 import requireUncached from 'require-uncached';
 import jsdomify from 'jsdomify';
 import {patchJsDom} from '../testutils/patch-jsdom';
-import { removeChildElements } from '../testutils/dom-utils';
+import { removeChildElements } from '../../src/utils/dom-utils';
 import {
   VK_TAB,
   VK_ENTER,

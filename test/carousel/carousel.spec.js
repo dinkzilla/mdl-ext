@@ -4,7 +4,7 @@ import jsdomify from 'jsdomify';
 import {patchJsDom} from '../testutils/patch-jsdom';
 import { expect, assert } from 'chai';
 import sinon from 'sinon';
-import { removeChildElements } from '../testutils/dom-utils';
+import { removeChildElements } from '../../src/utils/dom-utils';
 import createMockRaf from '../testutils/mock-raf';
 import { shouldBehaveLikeAMdlComponent } from '../testutils/shared-component-behaviours';
 import { spyOnKeyboardEvent } from '../testutils/spy-on-keyboard-event';

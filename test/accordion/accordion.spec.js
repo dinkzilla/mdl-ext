@@ -23,7 +23,7 @@ const expect = require('chai').expect;
 const assert = require('chai').assert;
 const sinon = require('sinon');
 
-import { removeChildElements } from '../testutils/dom-utils';
+import { removeChildElements } from '../../src/utils/dom-utils';
 import { shouldBehaveLikeAMdlComponent } from '../testutils/shared-component-behaviours';
 import { spyOnKeyboardEvent } from '../testutils/spy-on-keyboard-event';
 

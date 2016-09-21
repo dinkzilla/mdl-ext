@@ -1,4 +1,5 @@
 'use strict';
+import 'utils/dom-utils';
 import 'utils/string-utils';
 import 'utils/json-utils';
 import 'utils/full-throttle';

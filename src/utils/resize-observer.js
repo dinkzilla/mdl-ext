@@ -204,7 +204,7 @@ import intervalFunction from './interval-function';
 
     deleteOrphansAndPopulateActiveTargets_() {
 
-      // Works, but to iterations
+      // Works, but two iterations
       //this.observationTargets_ = this.observationTargets_.filter( resizeObervation => !resizeObervation.isOrphan());
       //this.activeTargets_ = this.observationTargets_.filter( resizeObervation => resizeObervation.isActive());
 
