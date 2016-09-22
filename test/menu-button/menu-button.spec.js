@@ -28,7 +28,7 @@ const sinon = require('sinon');
 
 import { shouldBehaveLikeAMdlComponent } from '../testutils/shared-component-behaviours';
 
-const MENU_BUTTON = 'mdlext-menu-button';
+const MENU_BUTTON = 'mdlext-js-menu-button';
 const MENU_BUTTON_MENU = 'mdlext-menu';
 const MENU_BUTTON_MENU_ITEM = 'mdlext-menu__item';
 const MENU_BUTTON_MENU_ITEM_SEPARATOR = 'mdlext-menu__item-separator';
@@ -37,7 +37,7 @@ describe('MaterialExtMenuButton', () => {
 
   const menu_button_fixture = `
 <div role="presentation">
-  <button class="mdlext-menu-button mdlext-js-menu-button">
+  <button class="mdlext-js-menu-button">
     <span class="mdlext-menu-button__label">I'm the label!</span>
   </button>
   <ul class="mdlext-menu">
@@ -49,7 +49,7 @@ describe('MaterialExtMenuButton', () => {
 
   const menu_button_with_disabled_item_fixture = `
 <div role="presentation">
-  <button class="mdlext-menu-button mdlext-js-menu-button">
+  <button class="mdlext-js-menu-button">
     <span class="mdlext-menu-button__label">I'm the label!</span>
   </button>
   <ul class="mdlext-menu">
@@ -63,7 +63,7 @@ describe('MaterialExtMenuButton', () => {
 
   const disabled_menu_button_fixture = `
 <div role="presentation">
-  <button class="mdlext-menu-button mdlext-js-menu-button" disabled>
+  <button class="mdlext-js-menu-button" disabled>
     <span class="mdlext-menu-button__label">I'm disabled!</span>
   </button>
   <ul class="mdlext-menu">
@@ -72,7 +72,7 @@ describe('MaterialExtMenuButton', () => {
 </div>`;
 
   const menu_button_with_aria_fixture = `
-<button class="mdlext-menu-button mdlext-js-menu-button"
+<button class="mdlext-js-menu-button"
         role="button"
         aria-haspopup="true"
         aria-controls="menu-example-dropdown"
@@ -88,6 +88,42 @@ describe('MaterialExtMenuButton', () => {
   <li class="mdlext-menu__item" role="menuitem">Menu item #2</li>
   <li class="mdlext-menu__item" role="menuitem">Menu item #n</li>
 </ul>`;
+
+  const menu_button_with_embedded_focusable_element = `
+<div role="presentation">
+  <div class="mdl-textfield mdl-js-textfield mdlext-js-menu-button">
+    <input class="mdl-textfield__input" type="text" readonly>
+    <label class="mdl-textfield__label">Text...</label>
+  </div>
+  <ul class="mdlext-menu">
+    <li class="mdlext-menu__item" data-value="twitter">
+      <span class="mdlext-menu__item__caption">Item #1</span>
+    </li>
+    <li class="mdlext-menu__item" data-value="github">
+      <span class="mdlext-menu__item__caption">Item #2</span>
+    </li>
+    <li class="mdlext-menu__item" data-value="github">
+      <span class="mdlext-menu__item__caption">Item #3</span>
+    </li>
+  </ul>
+</div>`;
+
+  const menu_button_without_focusable_element = `
+<div role="presentation">
+  <div class="mdl-textfield mdl-js-textfield mdlext-js-menu-button">
+  </div>
+  <ul class="mdlext-menu">
+    <li class="mdlext-menu__item" data-value="twitter">
+      <span class="mdlext-menu__item__caption">Item #1</span>
+    </li>
+    <li class="mdlext-menu__item" data-value="github">
+      <span class="mdlext-menu__item__caption">Item #2</span>
+    </li>
+    <li class="mdlext-menu__item" data-value="github">
+      <span class="mdlext-menu__item__caption">Item #3</span>
+    </li>
+  </ul>
+</div>`;
 
   const fixture = `
 <!DOCTYPE html>
@@ -184,16 +220,43 @@ describe('MaterialExtMenuButton', () => {
       assert.equal(button.getAttribute('aria-controls'), menu.id, 'Menu button aria-controls has wrong value');
 
       assert.isTrue(button.hasAttribute('aria-expanded'), 'Expected menu button to have attribute "aria-expanded"');
-      assert.isTrue(button.hasAttribute('tabindex'), 'Expected menu button button to have attribute "tabindex"');
-
       assert.equal(menu.getAttribute('role'), 'menu', 'Expected menu button menu to have role="menu"');
-
-      const menuItems = menu.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}`);
-      assert.isAtLeast(menuItems.length, 1, 'Expected menu button menu to have at leaset one menu item');
 
       [...menu.querySelectorAll('.mdlext-menu-button__menu__item')].forEach( menuitem => {
         assert.equal(menuitem.getAttribute('role'), 'menuitem', 'Expected menu button menu item to have role="menuitem"');
       });
+
+      const menuItems = menu.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}`);
+      assert.isAtLeast(menuItems.length, 1, 'Expected menu button menu to have at leaset one menu item');
+    });
+
+    it('should have "tabindex=0" if the menu button does not have a focusable element', () => {
+      const container = document.querySelector('#mount');
+      try {
+        container.insertAdjacentHTML('beforeend', menu_button_without_focusable_element);
+        const button = container.querySelector(`.${MENU_BUTTON}`);
+        componentHandler.upgradeElement(button, 'MaterialExtMenuButton');
+        assert.isTrue(button.hasAttribute('tabindex'), 'Expected menu button button to not have attribute "tabindex"');
+      }
+      finally {
+        removeChildElements(container);
+      }
+    });
+
+    it('should not have a tabindex if the menu button is a focusable element, or if an embedded element is focusable', () => {
+      let button = document.querySelector(`#default-fixture .${MENU_BUTTON}`);
+      assert.isFalse(button.hasAttribute('tabindex'), 'Expected menu button button to not have attribute "tabindex"');
+
+      const container = document.querySelector('#mount');
+      try {
+        container.insertAdjacentHTML('beforeend', menu_button_with_embedded_focusable_element);
+        button = container.querySelector(`.${MENU_BUTTON}`);
+        componentHandler.upgradeElement(button, 'MaterialExtMenuButton');
+        assert.isFalse(button.hasAttribute('tabindex'), 'Expected menu button button to not have attribute "tabindex"');
+      }
+      finally {
+        removeChildElements(container);
+      }
     });
 
     it('should have a menu separator with role="separator"', () => {

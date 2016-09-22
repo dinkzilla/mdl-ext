@@ -2476,10 +2476,24 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
       align-self: stretch;
 }
 
+.mdlext-menu-button > * {
+  margin: 0;
+  padding: 0 0 0 8px;
+}
+
+.mdlext-menu-button > *:first-child {
+  padding-left: 0;
+}
+
+.mdlext-menu-button > *:last-child:not(:only-child):not(.mdlext-menu__item__caption) {
+  margin-left: auto;
+}
+
 .mdlext-menu-button__caption {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.2;
 }
 
 .mdlext-menu,

@@ -355,6 +355,7 @@ class MenuButton {
 
   constructor(element) {
     this.element = element;
+    this.focusElement = undefined;
     this.menu = undefined;
     this.scrollElements = [];
 
@@ -416,12 +417,22 @@ class MenuButton {
     };
 
     const addWaiAria = () => {
-      if(!this.element.hasAttribute('tabindex')) {
-        this.element.setAttribute('tabindex', '0');
-      }
       this.element.setAttribute('role', 'button');
       this.element.setAttribute('aria-expanded', 'false');
       this.element.setAttribute('aria-haspopup', 'true');
+    };
+
+    const addFocusElement = () => {
+      this.focusElement = this.element.querySelector('input[type="text"]');
+      if(!this.focusElement) {
+        this.focusElement = this.element;
+
+        if(!(this.focusElement.tagName.toLowerCase() === 'button' || this.focusElement.tagName.toLowerCase() === 'input')) {
+          if (!this.focusElement.hasAttribute('tabindex')) {
+            this.focusElement.setAttribute('tabindex', '0');
+          }
+        }
+      }
     };
 
     const findMenuElement = () => {
@@ -442,6 +453,7 @@ class MenuButton {
       this.element.setAttribute('aria-controls', this.menu.element.id);
     };
 
+    addFocusElement();
     addWaiAria();
     addMenu();
     removeListeners();
@@ -476,13 +488,13 @@ class MenuButton {
 
     this.menu.close();
     if (forceFocus) {
-      this.element.focus();
+      this.focus();
     }
   }
 
   focus() {
     if(!this.isDisabled()) {
-      this.element.focus();
+      this.focusElement.focus();
     }
   }
 

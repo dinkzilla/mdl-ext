@@ -29,22 +29,36 @@
 }
 
 .mdlext-menu-button {
-  // TODO: Create a generic menu button, not necessary based on a button element
   box-sizing: border-box;
   @include typo-menu();
   text-transform: none;
   position: relative;
   height: $button-height;
   padding: 0 $button-padding;
-  display: flex;  // Note: button element does not support flexbox
+  display: flex;
   align-items: center;
   align-self: stretch;
 
-  &__caption {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  > * {
+    margin: 0;
+    padding: 0 0 0 8px;
   }
+
+  > *:first-child {
+    padding-left: 0;
+  }
+
+  > *:last-child:not(:only-child):not(.mdlext-menu__item__caption) {
+    margin-left: auto; // If more than one element, push last element to the right
+  }
+
+}
+
+.mdlext-menu-button__caption {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
 }
 
 .mdlext-menu,
