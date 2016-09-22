@@ -290,6 +290,19 @@ describe('MaterialExtMenuButton', () => {
         .forEach(selectedItem => selectedItem.removeAttribute('aria-selected'));
     });
 
+    it('toggles the menu when button is clicked', () => {
+      button.MaterialExtMenuButton.closeMenu();
+
+      // Trigger click event to toggle menu
+      dispatchMouseEvent(button, 'click');
+      assert.equal(button.getAttribute('aria-expanded'), 'true', 'Mouse click when menu is closed: Expected button to have aria-expanded=true');
+      assert.isFalse(menu.hasAttribute('hidden'), 'Mouse click when menu is closed: Expected menu to not have hidden attribute');
+
+      dispatchMouseEvent(button, 'click');
+      assert.equal(button.getAttribute('aria-expanded'), 'false', 'Mouse click when menu is open: Expected button to have aria-expanded=false');
+      assert.isTrue(menu.hasAttribute('hidden'), 'Mouse click when menu is closed: Expected menu to have hidden attribute');
+    });
+
     it('opens the menu when button is clicked and move focus to the first menu item', () => {
       button.MaterialExtMenuButton.closeMenu();
 

@@ -402,7 +402,12 @@ class MenuButton {
 
     const clickHandler = () => {
       if(!this.isDisabled()) {
-        this.openMenu('selected');
+        if(this.element.getAttribute('aria-expanded').toLowerCase() === 'true') {
+          this.closeMenu();
+        }
+        else {
+          this.openMenu('selected');
+        }
       }
     };
 

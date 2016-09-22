@@ -167,20 +167,21 @@ The menu button has roles, attributes and behaviour as outlined in
   }
 
 
+  .mdl-textfield.mdlext-js-menu-button .mdl-textfield__input {
+    padding-right: 40px;
+  }
+
   .mdl-textfield__icon {
     width: 32px;
-    text-align: center;
+    text-align: left;
     position: absolute;
-    line-height: 1.5;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .mdl-textfield.is-disabled .mdl-textfield__icon {
     color: rgba(0, 0, 0, 0.26) !important;
-  }
-
-  .mdl-textfield__icon ~ * {
-    margin-left: 48px;
-    width: calc(100% - 48px);
   }
 
   .mdl-textfield.is-invalid .mdl-textfield__icon {
@@ -198,9 +199,9 @@ The menu button has roles, attributes and behaviour as outlined in
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--4-col">
     <p><code>mdl-button</code></p>
-    <button style="min-width:220px; height:44px" class="mdl-button mdl-button--colored mdl-button--raised mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button" onselect="this.querySelector('.mdlext-menu-button__caption').innerHTML = signedIn(event.detail.source.getAttribute('data-value'));">
+    <button style="width:100%; max-width:300px; height:44px" class="mdl-button mdl-button--colored mdl-button--raised mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button" onselect="this.querySelector('.mdlext-menu-button__caption').innerHTML = signedIn(event.detail.source.getAttribute('data-value'));">
       <i class="material-icons">person_outline</i>
-      <span class="mdlext-menu-button__caption">Sign in with...&nbsp&nbsp;<i class="size-22 icon ion-social-null"></i>&nbsp;</span>
+      <span class="mdlext-menu-button__caption">Sign in with ...</span>
       <i class="material-icons mdlext-aria-expanded-more-less"></i>
     </button>
     <ul class="mdlext-menu" hidden="">
@@ -231,9 +232,9 @@ The menu button has roles, attributes and behaviour as outlined in
     <p><code>mdl-textfield</code></p>
     <div class="mdl-textfield mdl-js-textfield mdlext-js-menu-button" onselect="this.MaterialTextfield.change(event.detail.source.querySelector('span').innerHTML);">
 
-      <i class="material-icons mdl-textfield__icon mdlext-aria-expanded-more-less"></i>
       <input class="mdl-textfield__input" type="text" readonly="">
-      <label class="mdl-textfield__label">Sign in with...</label>
+      <label class="mdl-textfield__label">Sign in with ...</label>
+      <i class="material-icons mdl-textfield__icon mdlext-aria-expanded-more-less"></i>
     </div>
     <ul class="mdlext-menu" hidden="">
       <li class="mdlext-menu__item" data-value="twitter">
@@ -264,7 +265,7 @@ The menu button has roles, attributes and behaviour as outlined in
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-right mdlext-js-menu-button" onselect="this.MaterialTextfield.change(event.detail.source.querySelector('span').innerHTML);">
 
       <input class="mdl-textfield__input" type="text" readonly="">
-      <label class="mdl-textfield__label">Sign in with...</label>
+      <label class="mdl-textfield__label">Sign in with ...</label>
       <i class="material-icons mdlext-aria-expanded-more-less"></i>
     </div>
 
@@ -295,7 +296,7 @@ The menu button has roles, attributes and behaviour as outlined in
   <div class="mdl-cell mdl-cell--4-col mdlext-bordered-fields">
     <p>custom styled <code>&lt;div&gt;</code></p>
     <div class="mdlext-menu-button mdlext-js-menu-button" style="width:300px; height:44px; max-width:100%;  border:1px solid green" onselect="this.querySelector('span').innerHTML = signedIn(event.detail.source.getAttribute('data-value')) + ', ' + event.detail.source.querySelector('span').innerHTML;">
-      <span class="mdlext-menu-button__caption">Sign in with...</span>
+      <span class="mdlext-menu-button__caption">Sign in with ...</span>
       <i class="material-icons mdlext-aria-expanded-more-less"></i>
     </div>
     <ul class="mdlext-menu" hidden="">
@@ -325,7 +326,7 @@ The menu button has roles, attributes and behaviour as outlined in
 </div>
 
 
-<p style="margin-top: 16px;">Menu buttons positioned left, middle and right, using <code>textalign</code> - to check correct positioning of menu.</p>
+<p style="margin-top: 16px;">Menu buttons positioned left, middle and right, using <code>textalign</code>.</p>
 <div role="presentation">
   <button class="mdl-button mdl-button--raised mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button">
     <i class="material-icons">gesture</i>
@@ -460,7 +461,7 @@ The menu button has roles, attributes and behaviour as outlined in
 </div>
 
 
-<p style="margin-top: 16px">This menu button has WAI-Aria roles and attributes coded in markup</p>
+<p style="margin-top: 16px">This menu button has WAI-ARIS roles and attributes coded in markup</p>
 <button class="mdl-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button" role="button" aria-haspopup="true" aria-controls="menu-example-dropdown" aria-expanded="false" tabindex="0" onselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
   <span class="mdlext-menu-button__caption">Select a size</span>
   <i class="mdlext-aria-expanded-plus-minus"></i>

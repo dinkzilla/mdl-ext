@@ -1,5 +1,5 @@
 # Menu Button
-![Menu button](../../etc/menu-button.png)
+![Menu button](../../etc/menu-button.png)&nbsp;&nbsp;&nbsp;&nbsp; ![Menu button](../../etc/menu-button-2.png)
 
 A WAI-ARIA friendly menu button.
 
@@ -113,16 +113,17 @@ of the button.
 **A menu button with a select listener. Uses a data-value attribute to pass the actual value.**
 
 ```html
-<div id="selection"></div>
-<button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdlext-js-menu-button"
-  onselect="document.querySelector('#selection').innerHTML = 'Selected value: " + event.detail.source.getAttribute('data-value';">
-  <i class="mdlext-aria-expanded-more-less"></i>
-</button>
-<ul class="mdlext-menu" hidden >
-  <li class="mdlext-menu__item" data-value="10">Ten</li>
-  <li class="mdlext-menu__item" data-value="25">Twentyfive</li>
-  <li class="mdlext-menu__item" data-value="50">Fifty</li>
-</ul>
+<div>
+  <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdlext-js-menu-button"
+    onselect="document.querySelector('#selection').innerHTML = 'Selected value: " + event.detail.source.getAttribute('data-value');">
+    <i class="mdlext-aria-expanded-more-less"></i>
+  </button>
+  <ul class="mdlext-menu" hidden >
+    <li class="mdlext-menu__item" data-value="10">Ten</li>
+    <li class="mdlext-menu__item" data-value="25">Twentyfive</li>
+    <li class="mdlext-menu__item" data-value="50">Fifty</li>
+  </ul>
+</div>
 ```
 
 
@@ -181,6 +182,78 @@ of the button.
 </ul>
 ```
 
+**A mdl-textfield component can be used as a menu button.**
+
+```html
+<style>
+  .mdl-textfield.mdlext-js-menu-button .mdl-textfield__input {
+    padding-right: 40px;
+  }
+  .mdl-textfield__icon {
+    width: 32px;
+    text-align: left;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .mdl-textfield.is-disabled .mdl-textfield__icon {
+    color: rgba(0, 0, 0, 0.26) !important;
+  }
+  .mdl-textfield.is-invalid .mdl-textfield__icon {
+    color: #de3226 !important;
+  }
+</style>
+
+<div role="presentation">
+  <div class="mdl-textfield mdl-js-textfield mdlext-js-menu-button"
+       onselect="this.MaterialTextfield.change(event.detail.source.getAttribute('data-key') 
+         + ': ' + event.detail.source.querySelector('span').innerHTML);">
+
+    <input class="mdl-textfield__input" type="text" readonly>
+    <label class="mdl-textfield__label">Sign in with ...</label>
+    <i class="material-icons mdl-textfield__icon mdlext-aria-expanded-more-less"></i>
+  </div>
+  <ul class="mdlext-menu" hidden >
+    <li class="mdlext-menu__item" data-key="S">Small</li>
+    <li class="mdlext-menu__item" data-key="M">Medium</li>
+    <li class="mdlext-menu__item" data-key="L">Large</li>
+  </ul>
+</div>
+```
+
+**Create your own state icon with SASS.**
+The [_mixins.scss](../_mixins.scss) has a mixin which can be used to create custom state icons.  
+
+```sass
+@charset "UTF-8";
+.my-aria-expanded-state {
+  @include mdlext-aria-expanded-toggle($icon: 'arrow_downward', $icon-expanded: 'arrow_upward');
+}
+```
+
+**Use a custom styled `div` as a menu button.**
+
+```html
+<div role="presentation">
+  <div class="mdlext-menu-button mdlext-js-menu-button" 
+       style="width:300px; height:44px; max-width:100%; border:1px solid green"
+       onselect="this.querySelector('span').innerHTML = 
+         event.detail.source.getAttribute('data-key') + ': ' + 
+         event.detail.source.querySelector('span').innerHTML);">
+       
+    <span class="mdlext-menu-button__caption">Select a size ...</span>
+    <i class="material-icons my-aria-expanded-state"></i>
+  </div>
+  <ul class="mdlext-menu" hidden >
+    <li class="mdlext-menu__item" data-key="S">Small</li>
+    <li class="mdlext-menu__item" data-key="M">Medium</li>
+    <li class="mdlext-menu__item" data-key="L">Large</li>
+  </ul>
+</div>
+
+```
+
 ### More examples
 * The [snippets/menu-button.html](./snippets/menu-button.html) and the [tests](../../test/menu-button/menu-button.spec.js) provides more detailed examples.
 * Try out the [live demo](http://leifoolsen.github.io/mdl-ext/demo/menu-button.html)
@@ -197,6 +270,7 @@ of the button.
 ### Mouse interaction, Menu Button 
 * With focus on the button:
     * <kbd>Click</kbd>: opens the menu, sets `aria-expanded="true"`, and place focus on the previously selected menu item - or on the first menu item if no selected menu item.
+    * <kbd>Click</kbd>: a second click closes the menu, sets `aria-expanded="false"` and place focus on button.
     
 ### Keyboard interaction, Menu
 * With focus on the menu:
@@ -294,13 +368,9 @@ The table below lists the available classes and their effects.
 
 | MDLEXT class                     | Effect | Remarks |
 |----------------------------------|--------|---------|
-|`mdl-button`                      | Defines button as an MDL component | Required on button element |
-|`mdl-js-button`                   | Assigns basic MDL behavior to button | Optional on button element |
-|`mdl-js-ripple-effect`            | Applies ripple click effect to button and menu items | Optional on button element |
-|`mdl-button--icon`                | Applies icon (small plain circular) display effect to button | Optional on button element |
-|`mdl-button--xxxxxxxxxx`          | Apply any of the mdl-button classes | See: Material Design Lite, [BUTTONS](https://getmdl.io/components/index.html#buttons-section) |
+|`mdl-menu-button`                 | Basic styling for a menu button | optional on a div element |
 |`mdlext-js-menu-button`           | Assigns basic MDLEXT behavior to menu button. Identifies the element as a menu button component | Required on the element that should act as a menu button |
-|`mdlext-menu-button__caption`     | Holds the button text | Optional on span element inside button element - but required if you want to decorate a button with icons. More than one caption can be used to control various aspects of the button text, e.g. font size. |
+|`mdlext-menu-button__caption`     | Holds the button text | Optional on span element inside menu button element - but required if you want to decorate a button with icons. More than one caption can be used to control various aspects of the button text, e.g. font size. |
 |`material-icons`                  | Defines span as a material icon | Required on an inline element. Decorates button or menu item with an icon |
 |`mdlext-menu`                     | Defines an unordered list container as an MDLEXT component | Required on ul element |
 |`mdlext-menu__item`               | Defines menu options | Required on list item elements |
