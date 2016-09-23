@@ -368,7 +368,7 @@ The table below lists the available classes and their effects.
 
 | MDLEXT class                     | Effect | Remarks |
 |----------------------------------|--------|---------|
-|`mdl-menu-button`                 | Basic styling for a menu button | optional on a div element |
+|`mdlext-menu-button`              | Basic styling for a menu button | Optional on a div element |
 |`mdlext-js-menu-button`           | Assigns basic MDLEXT behavior to menu button. Identifies the element as a menu button component | Required on the element that should act as a menu button |
 |`mdlext-menu-button__caption`     | Holds the button text | Optional on span element inside menu button element - but required if you want to decorate a button with icons. More than one caption can be used to control various aspects of the button text, e.g. font size. |
 |`material-icons`                  | Defines span as a material icon | Required on an inline element. Decorates button or menu item with an icon |
