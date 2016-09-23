@@ -380,13 +380,10 @@ The table below lists the available classes and their effects.
 |`mdlext-aria-expanded-more-less`  | State icon. Displays 'more' or 'less' Material Design icons | Optional; goes on button element |
 
 > **Note:** 
-> Disabled versions of the button are provided, and are invoked with the standard HTML boolean attribute `disabled` 
-`<li class="mdlext-menu__item" disabled>A menu item</li>`. This attribute may be added or removed programmatically via scripting.
-
 > Disabled versions of the menu items are provided, and are invoked with the standard HTML boolean attribute `disabled` 
 `<li class="mdlext-menu__item" disabled>A menu item</li>`. This attribute may be added or removed programmatically via scripting.
 
-> If you decorate the button with icons, wrap the button text inside a span to separate icons and text 
+> If you decorate the menu button with icons, wrap the button text inside a span to separate icons and text 
 ```html
 <button class="mdl-button mdl-button--raised mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button">
   <i class="material-icons">gesture</i>

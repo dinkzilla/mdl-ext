@@ -53,14 +53,14 @@ const MENU_BUTTON_MENU_ITEM_SEPARATOR = 'mdlext-menu__item-separator';
  */
 const menuFactory = (element, controlledBy) => {
 
-  const removeAllAriaSelected = () => {
+  const removeAllSelected = () => {
     [...element.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`)]
       .forEach(selectedItem => selectedItem.removeAttribute('aria-selected'));
   };
 
-  const addAriaSelected = item => {
+  const setSelected = item => {
     if( item && !item.hasAttribute('aria-selected') ) {
-      removeAllAriaSelected();
+      removeAllSelected();
       item.setAttribute('aria-selected', 'true');
     }
   };
@@ -164,7 +164,7 @@ const menuFactory = (element, controlledBy) => {
     //c.appendChild(element);
     //element.style.visibility = 'hidden';
 
-    controlledBy.element.setAttribute('aria-expanded', 'true');
+    element.style['min-width'] = `${Math.max(100, controlledBy.element.getBoundingClientRect().width)}px`;
     element.removeAttribute('hidden');
     tether(controlledBy.element, element);
     //element.style.visibility = '';
@@ -194,7 +194,7 @@ const menuFactory = (element, controlledBy) => {
 
   const close = () => {
     element.setAttribute('hidden', '');
-    controlledBy.element.setAttribute('aria-expanded', 'false');
+    controlledBy.closeMenu(true);
   };
 
   const keyDownHandler = event => {
@@ -244,7 +244,6 @@ const menuFactory = (element, controlledBy) => {
 
       case VK_ESC:
         close();
-        controlledBy.focus();
         break;
 
       case VK_TAB:
@@ -263,10 +262,9 @@ const menuFactory = (element, controlledBy) => {
       const item = event.target.closest(`.${MENU_BUTTON_MENU_ITEM}`);
 
       if(item && !isDisabled(item) && !isSeparator(item)) {
-        addAriaSelected(item);
+        setSelected(item);
         controlledBy.dispatchSelect(item);
         close();
-        controlledBy.focus();
       }
       else {
         event.stopPropagation();
@@ -277,7 +275,7 @@ const menuFactory = (element, controlledBy) => {
 
   const blurHandler = event => {
     if(!(element.contains(event.relatedTarget) || controlledBy.element.contains(event.relatedTarget))) {
-      setTimeout(() => close(), 200);  // Find a better solution?
+      setTimeout(() => close(), 0);  // Find a better solution?
     }
   };
 
@@ -316,7 +314,6 @@ const menuFactory = (element, controlledBy) => {
     addWaiAria();
     removeListeners();
     addListeners();
-    element.style['min-width'] = `${Math.max(100, controlledBy.element.getBoundingClientRect().width)}px`;
   };
 
   init();
@@ -335,7 +332,8 @@ const menuFactory = (element, controlledBy) => {
 
     /**
      * Open menu
-     * @param position menuElement item to receive focus after element is opened
+     *
+     * @param position menuElement item to receive focus after menu element is opened
      */
     open: (position='first') => open(position),
 
@@ -476,13 +474,14 @@ class MenuButton {
   openMenu(position='first') {
     if(!this.isDisabled()) {
 
-      // Close the menu if button position chang
+      // Close the menu if button position change
       this.scrollElements = getScrollParents(this.element);
       this.scrollElements.forEach(el => el.addEventListener('scroll', this.closeMenuHandler));
       window.addEventListener('resize', this.closeMenuHandler);
       window.addEventListener('orientationchange', this.closeMenuHandler);
 
       this.menu.open(position);
+      this.element.setAttribute('aria-expanded', 'true');
     }
   }
 
@@ -491,10 +490,11 @@ class MenuButton {
     window.removeEventListener('resize', this.closeMenuHandler);
     window.removeEventListener('orientationchange', this.closeMenuHandler);
 
-    this.menu.close();
     if (forceFocus) {
       this.focus();
     }
+    this.element.setAttribute('aria-expanded', 'false');
+    this.menu.element.setAttribute('hidden', '');
   }
 
   focus() {

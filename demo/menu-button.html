@@ -196,131 +196,67 @@ The menu button has roles, attributes and behaviour as outlined in
   }
 </script>
 
-<div class="mdl-grid">
+
+<ul id="shared-social-menu" class="mdlext-menu" hidden="">
+  <li class="mdlext-menu__item" data-value="twitter">
+    <span class="mdlext-menu__item__caption">Twitter</span>
+    <i class="icon ion-social-twitter-outline size-22"></i>
+  </li>
+  <li class="mdlext-menu__item" data-value="github">
+    <span class="mdlext-menu__item__caption">GitHub</span>
+    <i class="ion-social-github-outline size-22"></i>
+  </li>
+  <li class="mdlext-menu__item" data-value="googleplus">
+    <span class="mdlext-menu__item__caption">G+</span>
+    <i class="ion-social-googleplus-outline size-22"></i>
+  </li>
+  <li class="mdlext-menu__item" data-value="linkedin">
+    <span class="mdlext-menu__item__caption">LinkedIn</span>
+    <i class="icon ion-social-linkedin-outline size-22"></i>
+  </li>
+  <li class="mdlext-menu__item" data-value="facebook">
+    <span class="mdlext-menu__item__caption">Facebook</span>
+    <i class="icon ion-social-facebook-outline size-22"></i>
+  </li>
+</ul>
+
+<div class="mdl-grid mdl-grid--no-spacing">
   <div class="mdl-cell mdl-cell--4-col">
     <p><code>mdl-button</code></p>
-    <button style="width:100%; max-width:300px; height:44px" class="mdl-button mdl-button--colored mdl-button--raised mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button" onselect="this.querySelector('.mdlext-menu-button__caption').innerHTML = signedIn(event.detail.source.getAttribute('data-value'));">
+    <button aria-controls="shared-social-menu" style="width:100%; max-width:300px; height:46px" class="mdl-button mdl-button--colored mdl-button--raised mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button" onselect="this.querySelector('.mdlext-menu-button__caption').innerHTML = signedIn(event.detail.source.getAttribute('data-value'));">
       <i class="material-icons">person_outline</i>
       <span class="mdlext-menu-button__caption">Sign in with ...</span>
       <i class="material-icons mdlext-aria-expanded-more-less"></i>
     </button>
-    <ul class="mdlext-menu" hidden="">
-      <li class="mdlext-menu__item" data-value="twitter">
-        <span class="mdlext-menu__item__caption">Twitter</span>
-        <i class="icon ion-social-twitter-outline size-22"></i>
-      </li>
-      <li class="mdlext-menu__item" data-value="github">
-        <span class="mdlext-menu__item__caption">GitHub</span>
-        <i class="ion-social-github-outline size-22"></i>
-      </li>
-      <li class="mdlext-menu__item" data-value="googleplus">
-        <span class="mdlext-menu__item__caption">G+</span>
-        <i class="ion-social-googleplus-outline size-22"></i>
-      </li>
-      <li class="mdlext-menu__item" data-value="linkedin">
-        <span class="mdlext-menu__item__caption">LinkedIn</span>
-        <i class="icon ion-social-linkedin-outline size-22"></i>
-      </li>
-      <li class="mdlext-menu__item" data-value="facebook">
-        <span class="mdlext-menu__item__caption">Facebook</span>
-        <i class="icon ion-social-facebook-outline size-22"></i>
-      </li>
-    </ul>
+
   </div> <!--cell -->
 
   <div class="mdl-cell mdl-cell--4-col">
     <p><code>mdl-textfield</code></p>
-    <div class="mdl-textfield mdl-js-textfield mdlext-js-menu-button" onselect="this.MaterialTextfield.change(event.detail.source.querySelector('span').innerHTML);">
+    <div aria-controls="shared-social-menu" class="mdl-textfield mdl-js-textfield mdlext-js-menu-button" onselect="this.MaterialTextfield.change(event.detail.source.querySelector('span').innerHTML);">
 
       <input class="mdl-textfield__input" type="text" readonly="">
       <label class="mdl-textfield__label">Sign in with ...</label>
       <i class="material-icons mdl-textfield__icon mdlext-aria-expanded-more-less"></i>
     </div>
-    <ul class="mdlext-menu" hidden="">
-      <li class="mdlext-menu__item" data-value="twitter">
-        <span class="mdlext-menu__item__caption">Twitter</span>
-        <i class="icon ion-social-twitter-outline size-22"></i>
-      </li>
-      <li class="mdlext-menu__item" data-value="github">
-        <span class="mdlext-menu__item__caption">GitHub</span>
-        <i class="ion-social-github-outline size-22"></i>
-      </li>
-      <li class="mdlext-menu__item" data-value="googleplus">
-        <span class="mdlext-menu__item__caption">G+</span>
-        <i class="ion-social-googleplus-outline size-22"></i>
-      </li>
-      <li class="mdlext-menu__item" data-value="linkedin">
-        <span class="mdlext-menu__item__caption">LinkedIn</span>
-        <i class="icon ion-social-linkedin-outline size-22"></i>
-      </li>
-      <li class="mdlext-menu__item" data-value="facebook">
-        <span class="mdlext-menu__item__caption">Facebook</span>
-        <i class="icon ion-social-facebook-outline size-22"></i>
-      </li>
-    </ul>
   </div> <!--cell -->
 
   <div class="mdl-cell mdl-cell--4-col mdlext-bordered-fields">
     <p><code>mdlext-bordered-fields</code></p>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-right mdlext-js-menu-button" onselect="this.MaterialTextfield.change(event.detail.source.querySelector('span').innerHTML);">
+    <div aria-controls="shared-social-menu" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-right mdlext-js-menu-button" onselect="this.MaterialTextfield.change(event.detail.source.querySelector('span').innerHTML);">
 
       <input class="mdl-textfield__input" type="text" readonly="">
       <label class="mdl-textfield__label">Sign in with ...</label>
       <i class="material-icons mdlext-aria-expanded-more-less"></i>
     </div>
-
-    <ul class="mdlext-menu" hidden="">
-      <li class="mdlext-menu__item" data-value="twitter">
-        <span class="mdlext-menu__item__caption">Twitter</span>
-        <i class="icon ion-social-twitter-outline size-22"></i>
-      </li>
-      <li class="mdlext-menu__item" data-value="github">
-        <span class="mdlext-menu__item__caption">GitHub</span>
-        <i class="ion-social-github-outline size-22"></i>
-      </li>
-      <li class="mdlext-menu__item" data-value="googleplus">
-        <span class="mdlext-menu__item__caption">G+</span>
-        <i class="ion-social-googleplus-outline size-22"></i>
-      </li>
-      <li class="mdlext-menu__item" data-value="linkedin">
-        <span class="mdlext-menu__item__caption">LinkedIn</span>
-        <i class="icon ion-social-linkedin-outline size-22"></i>
-      </li>
-      <li class="mdlext-menu__item" data-value="facebook">
-        <span class="mdlext-menu__item__caption">Facebook</span>
-        <i class="icon ion-social-facebook-outline size-22"></i>
-      </li>
-    </ul>
   </div> <!--cell -->
 
   <div class="mdl-cell mdl-cell--4-col mdlext-bordered-fields">
     <p>custom styled <code>&lt;div&gt;</code></p>
-    <div class="mdlext-menu-button mdlext-js-menu-button" style="width:300px; height:44px; max-width:100%;  border:1px solid green" onselect="this.querySelector('span').innerHTML = signedIn(event.detail.source.getAttribute('data-value')) + ', ' + event.detail.source.querySelector('span').innerHTML;">
+    <div aria-controls="shared-social-menu" class="mdlext-menu-button mdlext-js-menu-button" style="width:300px; height:46px; max-width:100%;  border:1px solid green" onselect="this.querySelector('span').innerHTML = signedIn(event.detail.source.getAttribute('data-value')) + ', ' + event.detail.source.querySelector('span').innerHTML;">
       <span class="mdlext-menu-button__caption">Sign in with ...</span>
       <i class="material-icons mdlext-aria-expanded-more-less"></i>
     </div>
-    <ul class="mdlext-menu" hidden="">
-      <li class="mdlext-menu__item" data-value="twitter">
-        <span class="mdlext-menu__item__caption">Twitter</span>
-        <i class="icon ion-social-twitter-outline size-22"></i>
-      </li>
-      <li class="mdlext-menu__item" data-value="github">
-        <span class="mdlext-menu__item__caption">GitHub</span>
-        <i class="ion-social-github-outline size-22"></i>
-      </li>
-      <li class="mdlext-menu__item" data-value="googleplus">
-        <span class="mdlext-menu__item__caption">G+</span>
-        <i class="ion-social-googleplus-outline size-22"></i>
-      </li>
-      <li class="mdlext-menu__item" data-value="linkedin">
-        <span class="mdlext-menu__item__caption">LinkedIn</span>
-        <i class="icon ion-social-linkedin-outline size-22"></i>
-      </li>
-      <li class="mdlext-menu__item" data-value="facebook">
-        <span class="mdlext-menu__item__caption">Facebook</span>
-        <i class="icon ion-social-facebook-outline size-22"></i>
-      </li>
-    </ul>
   </div> <!--cell -->
 
 </div>

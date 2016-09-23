@@ -2713,7 +2713,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 .mdlext-bordered-fields .mdl-textfield .mdlext-selectfield__select,
 .mdlext-bordered-fields .mdlext-selectfield .mdl-textfield__input,
 .mdlext-bordered-fields .mdlext-selectfield .mdlext-selectfield__select {
-  height: 44px;
+  height: 46px;
   background-color: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(0, 0, 0, 0.26);
   border-radius: 3px;
@@ -2849,7 +2849,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   font-size: 12px;
   font-weight: normal;
   top: auto;
-  bottom: 22px;
+  bottom: 24px;
   visibility: visible;
 }
 
