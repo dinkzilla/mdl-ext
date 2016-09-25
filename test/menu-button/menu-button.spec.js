@@ -125,6 +125,23 @@ describe('MaterialExtMenuButton', () => {
   </ul>
 </div>`;
 
+  const menu_buttons_with_shared_menu = `
+<button class="mdl-button mdl-js-button mdlext-js-menu-button" aria-controls="shared-menu">
+  <span class="mdlext-menu-button__caption">A button</span>
+</button>
+
+<div class="mdl-textfield mdl-js-textfield mdlext-js-menu-button" aria-controls="shared-menu">
+  <input class="mdl-textfield__input" type="text" readonly>
+  <label class="mdl-textfield__label">A MDL textfield</label>
+</div>
+
+<ul id="shared-menu" class="mdlext-menu" hidden>
+  <li class="mdlext-menu__item" role="menuitem">Menu item #1</li>
+  <li class="mdlext-menu__item" role="menuitem">Menu item #2</li>
+  <li class="mdlext-menu__item" role="menuitem">Menu item #n</li>
+</ul>`;
+
+
   const fixture = `
 <!DOCTYPE html>
 <html>
@@ -178,7 +195,8 @@ describe('MaterialExtMenuButton', () => {
         'openMenu',
         'closeMenu',
         'getMenuElement',
-        'getSelectedMenuItem'
+        'getSelectedMenuItem',
+        'setSelectedMenuItem'
       ];
       methods.forEach( fn => {
         expect(component.MaterialExtMenuButton[fn]).to.be.a('function');
@@ -234,6 +252,57 @@ describe('MaterialExtMenuButton', () => {
         assert.equal(menu, menuReturnedByApi, 'Expected menu element returned from api to be equal to queried menu element');
 
         componentHandler.downgradeElements(component);
+      }
+      finally {
+        removeChildElements(container);
+      }
+    });
+
+    it('should share menu with another button', () => {
+      const container = document.querySelector('#mount');
+      try {
+        container.insertAdjacentHTML('beforeend', menu_buttons_with_shared_menu);
+        const [...components] = container.querySelectorAll(`.${MENU_BUTTON}`);
+
+        assert.equal(components.length, 2, 'Expected two buttons');
+
+        componentHandler.upgradeElement(components[0], 'MaterialExtMenuButton');
+        componentHandler.upgradeElement(components[1], 'MaterialExtMenuButton');
+
+        components.forEach( c =>
+          assert.isTrue(c.classList.contains('is-upgraded'), `Expected "${MENU_BUTTON}" to have class "is-upgraded"`)
+        );
+
+        assert.equal(components[0].MaterialExtMenuButton.getMenuElement(),
+          components[0].MaterialExtMenuButton.getMenuElement(), 'Expected buttons to share a menu');
+
+        componentHandler.downgradeElements(components);
+      }
+      finally {
+        removeChildElements(container);
+      }
+    });
+
+    it('should not downgrade menu before last button sharing that menu is downgraded', () => {
+      const container = document.querySelector('#mount');
+      try {
+        container.insertAdjacentHTML('beforeend', menu_buttons_with_shared_menu);
+        const components = container.querySelectorAll(`.${MENU_BUTTON}`);
+        const menu = document.querySelector('#shared-menu');
+
+        assert.isNotNull(menu, 'Expected a menu');
+        assert.equal(components.length, 2, 'Expected two buttons');
+
+        componentHandler.upgradeElement(components[0], 'MaterialExtMenuButton');
+        componentHandler.upgradeElement(components[1], 'MaterialExtMenuButton');
+
+        assert.isTrue(menu.classList.contains('is-upgraded'), `Expected menu to have class "is-upgraded"`);
+
+        componentHandler.downgradeElements(components[0]);
+        assert.isTrue(menu.classList.contains('is-upgraded'), `Expected menu to have class "is-upgraded" after downgrading first menu button`);
+
+        componentHandler.downgradeElements(components[1]);
+        assert.isFalse(menu.classList.contains('is-upgraded'), `Expected menu to not have class "is-upgraded" after downgrading second menu button`);
       }
       finally {
         removeChildElements(container);
@@ -354,22 +423,24 @@ describe('MaterialExtMenuButton', () => {
     it('opens the menu when button is clicked and move focus to a previously selected menu item', () => {
       button.MaterialExtMenuButton.closeMenu();
       const selectedItem = menu.children[1];
-      selectedItem.setAttribute('aria-selected', 'true');
+      button.MaterialExtMenuButton.setSelectedMenuItem(selectedItem);
 
       // Trigger click event to toggle menu
       dispatchMouseEvent(button, 'click');
       const n = button.MaterialExtMenuButton.getSelectedMenuItem();
-      assert.equal(selectedItem, n, 'Mouse click: Expected second menu item to have focus');
+      assert.equal(n, document.activeElement, 'Mouse click: Expected second menu item to have focus');
     });
 
     it('opens the menu when Enter or Space key is pressed and move focus to the first menu item', () => {
       button.MaterialExtMenuButton.closeMenu();
+      button.MaterialExtMenuButton.setSelectedMenuItem(null);
       dispatchKeyDownEvent(button, VK_SPACE);
       assert.equal(button.getAttribute('aria-expanded'), 'true', 'Space key: Expected button to have aria-expanded=true');
       assert.isFalse(menu.hasAttribute('hidden'), 'Space key: Expected menu to not have hidden attribute');
       assert.equal(menu.firstElementChild, document.activeElement, 'Space key: Expected first menu item to have focus');
 
       button.MaterialExtMenuButton.closeMenu();
+      button.MaterialExtMenuButton.setSelectedMenuItem(null);
       dispatchKeyDownEvent(button, VK_ENTER);
       assert.equal(button.getAttribute('aria-expanded'), 'true', 'Enter key: Expected button to have aria-expanded=true');
       assert.isFalse(menu.hasAttribute('hidden'), 'Enter key: Expected menu to not have hidden attribute');
@@ -379,14 +450,16 @@ describe('MaterialExtMenuButton', () => {
     it('opens the menu when Enter or Space key is pressed and move focus to the previously selected menu item', () => {
       button.MaterialExtMenuButton.closeMenu();
       const selectedItem = menu.children[1];
-      selectedItem.setAttribute('aria-selected', 'true');
+      button.MaterialExtMenuButton.setSelectedMenuItem(selectedItem);
 
       dispatchKeyDownEvent(button, VK_SPACE);
-      assert.equal(selectedItem, button.MaterialExtMenuButton.getSelectedMenuItem(), 'Space key: Expected second menu item to have focus');
+      let n = button.MaterialExtMenuButton.getSelectedMenuItem();
+      assert.equal(n, document.activeElement, 'Space key: Expected second menu item to have focus');
 
       button.MaterialExtMenuButton.closeMenu();
       dispatchKeyDownEvent(button, VK_ENTER);
-      assert.equal(selectedItem, button.MaterialExtMenuButton.getSelectedMenuItem(), 'Enter key: Expected second menu item to have focus');
+      n = button.MaterialExtMenuButton.getSelectedMenuItem();
+      assert.equal(n, document.activeElement, 'Enter key: Expected second menu item to have focus');
     });
 
     it('opens the menu and move focus to the last menu item when arrow up key is pressed', () => {

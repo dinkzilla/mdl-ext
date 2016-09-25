@@ -272,6 +272,26 @@ The [_mixins.scss](../_mixins.scss) has a mixin which can be used to create cust
 
 ```
 
+**Many buttons can share a menu.**
+
+```html
+<button class="mdl-button mdl-js-button mdlext-js-menu-button" aria-controls="shared-menu">
+  <span class="mdlext-menu-button__caption">A button</span>
+</button>
+
+<div class="mdl-textfield mdl-js-textfield mdlext-js-menu-button" aria-controls="shared-menu">
+  <input class="mdl-textfield__input" type="text" readonly>
+  <label class="mdl-textfield__label">A MDL textfield</label>
+</div>
+
+<ul id="shared-menu" class="mdlext-menu" hidden>
+  <li class="mdlext-menu__item" role="menuitem">Menu item #1</li>
+  <li class="mdlext-menu__item" role="menuitem">Menu item #2</li>
+  <li class="mdlext-menu__item" role="menuitem">Menu item #n</li>
+</ul>
+```
+
+
 ### More examples
 * The [snippets/menu-button.html](./snippets/menu-button.html) and the [tests](../../test/menu-button/menu-button.spec.js) provides more detailed examples.
 * Try out the [live demo](http://leifoolsen.github.io/mdl-ext/demo/menu-button.html)
@@ -371,13 +391,27 @@ menuButton.MaterialExtMenuButton.closeMenu();
 ### getMenuElement()
 Get the menu element controlled by this button, null if no menu is controlled by this button.
 
+```javascript
+const menuButton = document.querySelector('#my-menu-button');
+const menu = menuButton.MaterialExtMenuButton.getMenuElement(); 
+```
+
 ### getSelectedMenuItem()
 Get a selected menu item element, null if no menu item element selected.
 
 ```javascript
 const menuButton = document.querySelector('#my-menu-button');
-const element = menuButton.MaterialExtMenuButton.selectedMenuItem();
+const element = menuButton.MaterialExtMenuButton.getSelectedMenuItem();
 console.log('Selected menu item', element);
+```
+
+### setSelectedMenuItem(item)
+Set a selected menu item element, typically before menu is opened.
+
+```javascript
+const menuButton = document.querySelector('#my-menu-button');
+const menu = menuButton.MaterialExtMenuButton.getMenuElement(); 
+menuButton.MaterialExtMenuButton.setSelectedMenuItem(menu.children[1]);
 ```
 
 Refer to [snippets/menu-button.html](./snippets/menu-button.html) or the [tests](../../test/menu-button/menu-button.spec.js) for detailed usage.
