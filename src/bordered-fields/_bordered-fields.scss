@@ -30,6 +30,10 @@
 .mdlext-bordered-fields {
   box-sizing: border-box;
 
+  * {
+    box-sizing: border-box;
+  }
+
   // Styling for textfield and selectfield.
   .mdl-textfield,
   .mdlext-selectfield {

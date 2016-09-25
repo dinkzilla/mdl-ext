@@ -177,11 +177,30 @@ describe('MaterialExtMenuButton', () => {
       const methods = [
         'openMenu',
         'closeMenu',
-        'selectedMenuItem'
+        'getMenuElement',
+        'getSelectedMenuItem'
       ];
       methods.forEach( fn => {
         expect(component.MaterialExtMenuButton[fn]).to.be.a('function');
       });
+    });
+
+    it('should have "is-upgraded" class on menu when upgraed successfully', () => {
+      const container = document.querySelector('#mount');
+      try {
+        container.insertAdjacentHTML('beforeend', menu_button_fixture);
+        const component = container.querySelector(`.${MENU_BUTTON}`);
+
+        componentHandler.upgradeElement(component, 'MaterialExtMenuButton');
+
+        const menu = document.querySelector(`#${component.getAttribute('aria-controls')}`);
+        assert.isTrue(menu.classList.contains('is-upgraded'), 'Expected menu element to have class "is-upgraded" after upgrade');
+
+        componentHandler.downgradeElements(component);
+      }
+      finally {
+        removeChildElements(container);
+      }
     });
 
     it('receives a "mdl-componentdowngraded" custom event', () => {
@@ -196,6 +215,25 @@ describe('MaterialExtMenuButton', () => {
         component.addEventListener('mdl-componentdowngraded', spy);
         componentHandler.downgradeElements(component);
         assert.isTrue(spy.calledOnce, 'Expected "mdl-componentdowngraded" event to fire after call to "componentHandler.downgradeElements"');
+      }
+      finally {
+        removeChildElements(container);
+      }
+    });
+
+    it('should return the menu element controlled by the button', () => {
+      const container = document.querySelector('#mount');
+      try {
+        container.insertAdjacentHTML('beforeend', menu_button_fixture);
+        const component = container.querySelector(`.${MENU_BUTTON}`);
+
+        componentHandler.upgradeElement(component, 'MaterialExtMenuButton');
+
+        const menu = document.querySelector(`#${component.getAttribute('aria-controls')}`);
+        const menuReturnedByApi = component.MaterialExtMenuButton.getMenuElement();
+        assert.equal(menu, menuReturnedByApi, 'Expected menu element returned from api to be equal to queried menu element');
+
+        componentHandler.downgradeElements(component);
       }
       finally {
         removeChildElements(container);
@@ -320,7 +358,7 @@ describe('MaterialExtMenuButton', () => {
 
       // Trigger click event to toggle menu
       dispatchMouseEvent(button, 'click');
-      const n = button.MaterialExtMenuButton.selectedMenuItem();
+      const n = button.MaterialExtMenuButton.getSelectedMenuItem();
       assert.equal(selectedItem, n, 'Mouse click: Expected second menu item to have focus');
     });
 
@@ -344,11 +382,11 @@ describe('MaterialExtMenuButton', () => {
       selectedItem.setAttribute('aria-selected', 'true');
 
       dispatchKeyDownEvent(button, VK_SPACE);
-      assert.equal(selectedItem, button.MaterialExtMenuButton.selectedMenuItem(), 'Space key: Expected second menu item to have focus');
+      assert.equal(selectedItem, button.MaterialExtMenuButton.getSelectedMenuItem(), 'Space key: Expected second menu item to have focus');
 
       button.MaterialExtMenuButton.closeMenu();
       dispatchKeyDownEvent(button, VK_ENTER);
-      assert.equal(selectedItem, button.MaterialExtMenuButton.selectedMenuItem(), 'Enter key: Expected second menu item to have focus');
+      assert.equal(selectedItem, button.MaterialExtMenuButton.getSelectedMenuItem(), 'Enter key: Expected second menu item to have focus');
     });
 
     it('opens the menu and move focus to the last menu item when arrow up key is pressed', () => {
@@ -582,6 +620,9 @@ describe('MaterialExtMenuButton', () => {
       try {
         // Trigger click
         dispatchMouseEvent(selectedItem, 'click');
+
+        const selected = button.MaterialExtMenuButton.getSelectedMenuItem();
+        assert.equal(selectedItem, selected, 'Expected "button.MaterialExtMenuButton.getSelectedMenuItem()" return the slected menu item element');
       }
       finally {
         button.removeEventListener('select', spy);
@@ -591,7 +632,7 @@ describe('MaterialExtMenuButton', () => {
       assert.isTrue(spy.called, 'Expected "select" custom event to fire');
     });
 
-    it('does not emit a custom select event when a disabled menu item is clicked', () => {
+    it('should not emit a custom select event when a disabled menu item is clicked', () => {
       const container = document.querySelector('#mount');
       try {
         container.insertAdjacentHTML('beforeend', menu_button_with_disabled_item_fixture);
@@ -618,7 +659,7 @@ describe('MaterialExtMenuButton', () => {
       }
     });
 
-    it('does not focus a disabled menu item', () => {
+    it('should not focus a disabled menu item', () => {
       const container = document.querySelector('#mount');
       try {
         container.insertAdjacentHTML('beforeend', menu_button_with_disabled_item_fixture);

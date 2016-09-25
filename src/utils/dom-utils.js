@@ -103,29 +103,31 @@ const getScrollParents = el => {
  * Position menu next to button
  *
  * Positioning strategy
- * 1. menu.height > viewport.height
- *    let menu.height = viewport.heigt
- *    let menu.overflow-y = auto
- * 2. menu.width > viewport.width
- *    let menu.width = viewport.width
- * 3. position menu below button, align left edge of menu with button left
- *      done if menu inside viewport
- * 4. position menu below button, align right edge of menu with button right
- *      done if menu inside viewport
- * 5. positions menu above button, aligns left edge of menu with button left
- *      done if menu inside viewport
- * 6. position menu at button right hand side, aligns menu top with button top
- *      done if menu inside viewport
- * 7. position menu at button left hand side, aligns menu top with button top
- *      done if menu inside viewport
- * 8. position menu inside viewport
- *    1. position menu at viewport bottom
- *    2. position menu at button right hand side
- *      done if menu inside viewport
- *    3. position menu at button left hand side
- *      done if menu inside viewport
- *    4. position menu at viewport right
- * 9. done
+ *  1. menu.height > viewport.height
+ *     let menu.height = viewport.heigt
+ *     let menu.overflow-y = auto
+ *  2. menu.width > viewport.width
+ *     let menu.width = viewport.width
+ *  3. position menu below button, align left edge of menu with button left
+ *       done if menu inside viewport
+ *  4. position menu below button, align right edge of menu with button right
+ *       done if menu inside viewport
+ *  5. positions menu above button, aligns left edge of menu with button left
+ *       done if menu inside viewport
+ *  6. position menu above the control element, aligned to its right.
+ *       done if menu inside viewport
+ *  7. position menu at button right hand side, aligns menu top with button top
+ *       done if menu inside viewport
+ *  8. position menu at button left hand side, aligns menu top with button top
+ *       done if menu inside viewport
+ *  9. position menu inside viewport
+ *     1. position menu at viewport bottom
+ *     2. position menu at button right hand side
+ *        done if menu inside viewport
+ *     3. position menu at button left hand side
+ *       done if menu inside viewport
+ *     4. position menu at viewport right
+ * 10. done
  *
  */
 const tether = (controlledBy, element) => {
@@ -195,14 +197,25 @@ const tether = (controlledBy, element) => {
     //console.log('***** 5');
   }
   else if(isRectInsideWindowViewport({
+    top: top - menuRect.height,
+    left: left + controlRect.width - menuRect.width,
+    bottom: bottom - menuRect.height,
+    right: left + controlRect.width
+  })) {
+    // 6. position menu above the control element, aligned to its right.
+    ddy = dy - menuRect.height;
+    ddx = dx + controlRect.width - menuRect.width;
+    //console.log('***** 6');
+  }
+  else if(isRectInsideWindowViewport({
     top: top,
     left: left + controlRect.width,
     bottom: bottom,
     right: right + controlRect.width
   })) {
-    // 6. position menu at button right hand side
+    // 7. position menu at button right hand side
     ddx = controlRect.width + dx;
-    //console.log('***** 6');
+    //console.log('***** 7');
   }
   else if(isRectInsideWindowViewport({
     top: top,
@@ -210,15 +223,15 @@ const tether = (controlledBy, element) => {
     bottom: bottom,
     right: right - controlRect.width
   })) {
-    // 7. position menu at button left hand side
+    // 8. position menu at button left hand side
     ddx = dx - menuRect.width;
-    //console.log('***** 7');
+    //console.log('***** 8');
   }
   else {
-    // 8. position menu inside viewport, near controlrect if possible
-    //console.log('***** 8');
+    // 9. position menu inside viewport, near controlrect if possible
+    //console.log('***** 9');
 
-    // 8.1 position menu near controlrect bottom
+    // 9.1 position menu near controlrect bottom
     ddy =  dy - bottom + viewportHeight;
     if(top + controlRect.height >= 0 && bottom + controlRect.height <= viewportHeight) {
       ddy = controlRect.height + dy;
@@ -228,31 +241,30 @@ const tether = (controlledBy, element) => {
     }
 
     if(left + menuRect.width + controlRect.width <= viewportWidth) {
-      // 8.2 Position menu at button right hand side
+      // 9.2 Position menu at button right hand side
       ddx = controlRect.width + dx;
-      //console.log('***** 8.2');
+      //console.log('***** 9.2');
     }
     else if(left - menuRect.width >= 0) {
-      // 8.3 Position menu at button left hand side
+      // 9.3 Position menu at button left hand side
       ddx = dx - menuRect.width;
-      //console.log('***** 8.3');
+      //console.log('***** 9.3');
     }
     else {
-      // 8.4 position menu at (near) viewport right
+      // 9.4 position menu at (near) viewport right
       let r = 0;
       if(left + menuRect.width > viewportWidth) {
         r = left + menuRect.width - viewportWidth - 4;
       }
       ddx = dx - r;
-      //console.log('***** 8.4');
+      //console.log('***** 9.4');
     }
   }
 
-  // 9. done
+  // 10. done
   element.style.top = `${element.offsetTop + ddy}px`;
   element.style.left = `${element.offsetLeft + ddx}px`;
-
-  //console.log('***** 9. done');
+  //console.log('***** 10. done');
 };
 
 

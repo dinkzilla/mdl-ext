@@ -81,6 +81,7 @@
   display: inline-flex;
   flex-direction: column;
   padding: 0;
+  overflow: hidden;
 
   &:focus {
     outline-offset: -1px;

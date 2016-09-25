@@ -2558,6 +2558,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   -ms-flex-direction: column;
       flex-direction: column;
   padding: 0;
+  overflow: hidden;
 }
 
 .mdlext-menu:focus {
@@ -2732,6 +2733,10 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 /* stylelint-enable */
 
 .mdlext-bordered-fields {
+  box-sizing: border-box;
+}
+
+.mdlext-bordered-fields * {
   box-sizing: border-box;
 }
 
@@ -3092,7 +3097,12 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   display: flex;
 }
 
+.mdlext-accordion * {
+  box-sizing: border-box;
+}
+
 .mdlext-accordion__panel {
+  box-sizing: border-box;
   position: relative;
   overflow: hidden;
   display: -ms-flexbox;

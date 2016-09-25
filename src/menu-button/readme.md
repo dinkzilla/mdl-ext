@@ -12,6 +12,8 @@ The menu button has roles, attributes and behaviour as outlined in WAI-ARIA Auth
 A menu is a widget that offers a list of choices to the user, such as a set of actions or functions. A menu is (usually) 
 opened, or made visible, by activating a menu button. When a user activates a choice in a menu, the menu (usually) closes.
 
+In this release a `<button>`, an `<input type="text">` or a `<div>` (mdl-textfield) can control the menu. 
+
 ## To include a MDLEXT **menu button** component:
 
 &nbsp;1. Code a `<button>` element; this is the clickable toggle that will show and hide the menu. Include an `aria-controls` 
@@ -72,6 +74,22 @@ whose value will match the `aria-controls` attribute of the button element.
 ```
 
 The menu button component is ready for use.
+
+>**Note:** After page load, the component will add all required Aria roles and attributes.
+
+```html
+<button class="mdl-button mdl-js-button mdlext-js-menu-button" 
+  role="button" aria-expanded="false" aria-haspopup="true" aria-controls="menu1">
+  <span>Select a value</span>
+  <i class="material-icons">more_vert</i>
+</button>
+<ul  id="menu1" class="mdlext-menu" role="menu" tabindex="-1" hidden>
+  <li class="mdlext-menu__item" role="menuitem" tabindex="-1">Small</li>
+  <li class="mdlext-menu__item" role="menuitem" tabindex="-1">Medium</li>
+  <li class="mdlext-menu__item" role="menuitem" tabindex="-1">Large</li>
+</ul>
+```
+
 
 ### Examples
 
@@ -350,8 +368,11 @@ const menuButton = document.querySelector('#my-menu-button');
 menuButton.MaterialExtMenuButton.closeMenu();
 ```
 
-### selectedMenuItem()
-Get a selected menu item, null if no item selected.
+### getMenuElement()
+Get the menu element controlled by this button, null if no menu is controlled by this button.
+
+### getSelectedMenuItem()
+Get a selected menu item element, null if no menu item element selected.
 
 ```javascript
 const menuButton = document.querySelector('#my-menu-button');

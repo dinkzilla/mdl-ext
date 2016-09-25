@@ -44,12 +44,13 @@ import { getScrollParents, tether } from '../utils/dom-utils';
 const MENU_BUTTON_MENU = 'mdlext-menu';
 const MENU_BUTTON_MENU_ITEM = 'mdlext-menu__item';
 const MENU_BUTTON_MENU_ITEM_SEPARATOR = 'mdlext-menu__item-separator';
+//const MDL_LAYOUT = 'mdl-layout';
 
 /**
  * Creates the menu controlled by the menu button
  * @param element
  * @param controlledBy
- * @return {{element: *, controlledBy: *, selected: Element, open: (function(*=)), close: (function())}}
+ * @return {{element: *, controlledBy: *, selected: Element, open: (function(*=)), close: (function()), downgrade: (function())}}
  */
 const menuFactory = (element, controlledBy) => {
 
@@ -154,20 +155,11 @@ const menuFactory = (element, controlledBy) => {
 
   const open = (position='first') => {
 
-    // TODO: To position the menu on top of all other z-indexed elements the menu should be moved to document.body
-    //       See: https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
-    // TODO: find out how this affects React.
-
-    //const MDL_LAYOUT = 'mdl-layout';
-    //const c = document.querySelector(`.${MDL_LAYOUT}`) || document.body;
-    //console.log('*****', c);
-    //c.appendChild(element);
-    //element.style.visibility = 'hidden';
-
-    element.style['min-width'] = `${Math.max(100, controlledBy.element.getBoundingClientRect().width)}px`;
+    element.style.visibility = 'hidden';
+    element.style['min-width'] = `${Math.max(124, controlledBy.focusElement.getBoundingClientRect().width)}px`;
     element.removeAttribute('hidden');
-    tether(controlledBy.element, element);
-    //element.style.visibility = '';
+    tether(controlledBy.focusElement, element);
+    element.style.visibility = 'visible';
 
     let item = null;
 
@@ -192,9 +184,9 @@ const menuFactory = (element, controlledBy) => {
     }
   };
 
-  const close = () => {
+  const close = (forceFocus = false) => {
     element.setAttribute('hidden', '');
-    controlledBy.closeMenu(true);
+    controlledBy.closeMenu(forceFocus);
   };
 
   const keyDownHandler = event => {
@@ -243,12 +235,13 @@ const menuFactory = (element, controlledBy) => {
         break;
 
       case VK_ESC:
-        close();
+        close(true);
         break;
 
       case VK_TAB:
-        close();
-        return;
+        // We do not have a "natural" tab order from menu, so the best we can do is to set focus back to the button
+        close(true);
+        break;
 
       default:
         return;
@@ -264,7 +257,7 @@ const menuFactory = (element, controlledBy) => {
       if(item && !isDisabled(item) && !isSeparator(item)) {
         setSelected(item);
         controlledBy.dispatchSelect(item);
-        close();
+        close(true);
       }
       else {
         event.stopPropagation();
@@ -275,7 +268,7 @@ const menuFactory = (element, controlledBy) => {
 
   const blurHandler = event => {
     if(!(element.contains(event.relatedTarget) || controlledBy.element.contains(event.relatedTarget))) {
-      setTimeout(() => close(), 0);  // Find a better solution?
+      setTimeout(() => close(false), 0);  // Find a better solution? Animation maybe??
     }
   };
 
@@ -314,6 +307,12 @@ const menuFactory = (element, controlledBy) => {
     addWaiAria();
     removeListeners();
     addListeners();
+    element.classList.add('is-upgraded');
+  };
+
+  const downgrade = () => {
+    removeListeners();
+    element.classList.remove('is-upgraded');
   };
 
   init();
@@ -337,10 +336,7 @@ const menuFactory = (element, controlledBy) => {
      */
     open: (position='first') => open(position),
 
-    /**
-     * Closes the menu
-     */
-    close: () => close(),
+    downgrade: () => downgrade(),
   };
 };
 
@@ -354,69 +350,121 @@ class MenuButton {
   constructor(element) {
     this.element = element;
     this.focusElement = undefined;
-    this.menu = undefined;
     this.scrollElements = [];
+    this.menu = undefined;
 
     this.init();
   }
+
+  keyDownHandler = event => {
+
+    if(!this.isDisabled()) {
+      switch (event.keyCode) {
+        case VK_ARROW_UP:
+          this.openMenu('last');
+          break;
+
+        case VK_ARROW_DOWN:
+          this.openMenu();
+          break;
+
+        case VK_SPACE:
+        case VK_ENTER:
+          this.openMenu('selected');
+          break;
+
+        case VK_ESC:
+          this.closeMenu();
+          break;
+
+        case VK_TAB:
+          this.closeMenu();
+          return;
+
+        default:
+          return;
+      }
+    }
+    event.stopPropagation();
+    event.preventDefault();
+  };
+
+  clickHandler = () => {
+    if(!this.isDisabled()) {
+      if(this.element.getAttribute('aria-expanded').toLowerCase() === 'true') {
+        this.closeMenu(true);
+      }
+      else {
+        this.openMenu('selected');
+      }
+    }
+  };
+
+  /**
+   * Close menu if content is scrolled, window is resized or orientation change
+   * @see https://javascriptweblog.wordpress.com/2015/11/02/of-classes-and-arrow-functions-a-cautionary-tale/
+   */
+  closeMenuHandler = () => {
+    this.closeMenu( true );
+  };
 
   isDisabled() {
     return this.element.hasAttribute('disabled');
   }
 
+  removeListeners() {
+    this.element.removeEventListener('keydown', this.keyDownHandler);
+    this.element.removeEventListener('click', this.clickHandler);
+  }
+
+  openMenu(position='first') {
+    if(!this.isDisabled() && this.menu) {
+
+      // Close the menu if button position change
+      this.scrollElements = getScrollParents(this.element);
+      this.scrollElements.forEach(el => el.addEventListener('scroll', this.closeMenuHandler));
+      window.addEventListener('resize', this.closeMenuHandler);
+      window.addEventListener('orientationchange', this.closeMenuHandler);
+
+      this.menu.open(position);
+      this.element.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  closeMenu( forceFocus = false ) {
+    if(this.menu) {
+      this.scrollElements.forEach(el => el.removeEventListener('scroll', this.closeMenuHandler));
+      window.removeEventListener('resize', this.closeMenuHandler);
+      window.removeEventListener('orientationchange', this.closeMenuHandler);
+
+      if (forceFocus) {
+        this.focus();
+      }
+      this.element.setAttribute('aria-expanded', 'false');
+      this.menu.element.setAttribute('hidden', '');
+    }
+  }
+
+  focus() {
+    if(!this.isDisabled()) {
+      this.focusElement.focus();
+    }
+  }
+
+  dispatchSelect(item) {
+    this.element.dispatchEvent(
+      new CustomEvent('select', {
+        bubbles: true,
+        cancelable: true,
+        detail: { source: item }
+      })
+    );
+  }
+
   init() {
-    const keyDownHandler = event => {
-
-      if(!this.isDisabled()) {
-        switch (event.keyCode) {
-          case VK_ARROW_UP:
-            this.openMenu('last');
-            break;
-
-          case VK_ARROW_DOWN:
-            this.openMenu();
-            break;
-
-          case VK_SPACE:
-          case VK_ENTER:
-            this.openMenu('selected');
-            break;
-
-          case VK_ESC:
-            this.closeMenu();
-            break;
-
-          case VK_TAB:
-            this.closeMenu();
-            return;
-
-          default:
-            return;
-        }
-      }
-      event.stopPropagation();
-      event.preventDefault();
-    };
-
-    const clickHandler = () => {
-      if(!this.isDisabled()) {
-        if(this.element.getAttribute('aria-expanded').toLowerCase() === 'true') {
-          this.closeMenu();
-        }
-        else {
-          this.openMenu('selected');
-        }
-      }
-    };
-
-    const removeListeners = () => {
-      this.element.removeEventListener('keydown', keyDownHandler);
-      this.element.removeEventListener('click', clickHandler);
-    };
-
     const addListeners = () => {
-      this.element.addEventListener('keydown', keyDownHandler);
-      this.element.addEventListener('click', clickHandler);
+      this.element.addEventListener('keydown', this.keyDownHandler);
+      this.element.addEventListener('click', this.clickHandler);
     };
 
     const addWaiAria = () => {
@@ -438,6 +486,23 @@ class MenuButton {
       }
     };
 
+    /*
+    const moveMenuToBody = (element) => {
+      // To position the menu on top of all other z-indexed elements the menu should be moved to document.body
+      //       See: https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+      //const c = document.querySelector(`.${MDL_LAYOUT}`) || document.body;
+      document.body.appendChild(element);
+      return element;
+    };
+
+    const cloneMenu = (menuElement) => {
+      const clonedElement = menuElement.cloneNode(true);
+      clonedElement.id = `${menuElement.id}-${randomString()}`;
+      clonedElement.classList.add('is-clone');
+      return clonedElement;
+    };
+    */
+
     const findMenuElement = () => {
       let menuElement;
       const menuElementId = this.element.getAttribute('aria-controls');
@@ -452,65 +517,24 @@ class MenuButton {
 
     const addMenu = () => {
       const menuElement = findMenuElement();
-      this.menu = menuFactory(menuElement, this);
-      this.element.setAttribute('aria-controls', this.menu.element.id);
+      if(menuElement) {
+        this.menu = menuFactory(menuElement, this);
+        this.element.setAttribute('aria-controls', this.menu.element.id);
+      }
     };
 
     addFocusElement();
     addWaiAria();
     addMenu();
-    removeListeners();
+    this.removeListeners();
     addListeners();
   }
 
-  /**
-   * Close menu if content is scrolled, window is resized or orientation change
-   * @see https://javascriptweblog.wordpress.com/2015/11/02/of-classes-and-arrow-functions-a-cautionary-tale/
-   */
-  closeMenuHandler = () => {
-    this.closeMenu( true );
-  };
-
-  openMenu(position='first') {
-    if(!this.isDisabled()) {
-
-      // Close the menu if button position change
-      this.scrollElements = getScrollParents(this.element);
-      this.scrollElements.forEach(el => el.addEventListener('scroll', this.closeMenuHandler));
-      window.addEventListener('resize', this.closeMenuHandler);
-      window.addEventListener('orientationchange', this.closeMenuHandler);
-
-      this.menu.open(position);
-      this.element.setAttribute('aria-expanded', 'true');
+  downgrade() {
+    if(this.menu) {
+      this.menu.downgrade();
     }
-  }
-
-  closeMenu( forceFocus = false ) {
-    this.scrollElements.forEach(el => el.removeEventListener('scroll', this.closeMenuHandler));
-    window.removeEventListener('resize', this.closeMenuHandler);
-    window.removeEventListener('orientationchange', this.closeMenuHandler);
-
-    if (forceFocus) {
-      this.focus();
-    }
-    this.element.setAttribute('aria-expanded', 'false');
-    this.menu.element.setAttribute('hidden', '');
-  }
-
-  focus() {
-    if(!this.isDisabled()) {
-      this.focusElement.focus();
-    }
-  }
-
-  dispatchSelect(item) {
-    this.element.dispatchEvent(
-      new CustomEvent('select', {
-        bubbles: true,
-        cancelable: true,
-        detail: { source: item }
-      })
-    );
+    this.removeListeners();
   }
 }
 
@@ -535,11 +559,20 @@ class MenuButton {
   // Public methods.
 
   /**
+   * Get the menu element controlled by this button, null if no menu is controlled by this button
+   * @public
+   */
+  MaterialExtMenuButton.prototype.getMenuElement = function() {
+    return this.menuButton_.menu ? this.menuButton_.menu.element : null;
+  };
+  MaterialExtMenuButton.prototype['getMenuElement'] = MaterialExtMenuButton.prototype.getMenuElement;
+
+  /**
    * Open menu
    * @public
    * @param position one of "first", "last" or "selected"
    */
-  MaterialExtMenuButton.prototype.openMenu = function(position='first') {
+  MaterialExtMenuButton.prototype.openMenu = function(position) {
     this.menuButton_.openMenu(position);
   };
   MaterialExtMenuButton.prototype['openMenu'] = MaterialExtMenuButton.prototype.openMenu;
@@ -558,10 +591,10 @@ class MenuButton {
    * @public
    * @returns {Element} The selected menu item or null if no item selected
    */
-  MaterialExtMenuButton.prototype.selectedMenuItem = function() {
-    return this.menuButton_.menu.selected;
+  MaterialExtMenuButton.prototype.getSelectedMenuItem = function() {
+    return this.menuButton_.menu ? this.menuButton_.menu.selected : null;
   };
-  MaterialExtMenuButton.prototype['selectedMenuItem'] = MaterialExtMenuButton.prototype.selectedMenuItem;
+  MaterialExtMenuButton.prototype['getSelectedMenuItem'] = MaterialExtMenuButton.prototype.getSelectedMenuItem;
 
   /**
    * Initialize component
@@ -579,8 +612,7 @@ class MenuButton {
    * E.g remove listeners and clean up resources
    */
   MaterialExtMenuButton.prototype.mdlDowngrade_ = function() {
-    // TODO: (maybe) call this.menuButton_.downgrade();
-    this.menuButton_ = null;
+    this.menuButton_.downgrade();
   };
 
   // The component registers itself. It can assume componentHandler is available

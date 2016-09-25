@@ -35,7 +35,12 @@
   list-style: none;
   display: flex;
 
+  * {
+    box-sizing: border-box;
+  }
+
   &__panel {
+    box-sizing: border-box;
     position: relative;
     overflow: hidden;
     display: flex;

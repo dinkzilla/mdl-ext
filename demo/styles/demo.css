@@ -4,10 +4,11 @@ html {
 *, *::before, *::after, input[type="search"] {
   box-sizing: inherit;
 }
+/*
 body {
   overflow: hidden;
 }
-
+*/
 #mount {
   padding-left: 12px;
   padding-right: 8px;
