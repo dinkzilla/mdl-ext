@@ -23,5 +23,7 @@ catch (e) {
     };
     return ce;
   };
-  window.CustomEvent.prototype = window.Event.prototype;
+  CustomEvent.prototype = window.Event.prototype;
+  window.CustomEvent = CustomEvent; // expose definition to window
+
 }

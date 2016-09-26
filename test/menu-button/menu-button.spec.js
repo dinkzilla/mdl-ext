@@ -669,6 +669,8 @@ describe('MaterialExtMenuButton', () => {
     });
 
     it('emits a custom select event when a menu item is clicked', () => {
+      button.MaterialExtMenuButton.setSelectedMenuItem(menu.children[0]);
+
       button.MaterialExtMenuButton.openMenu();
       const selectedItem = menu.children[1];
       selectedItem.focus();
@@ -696,6 +698,25 @@ describe('MaterialExtMenuButton', () => {
       }
 
       assert.isTrue(spy.called, 'Expected "select" custom event to fire');
+    });
+
+
+    it('should not emit a custom select event when a previously selected menu item is clicked', () => {
+      button.MaterialExtMenuButton.setSelectedMenuItem(menu.children[1]);
+      button.MaterialExtMenuButton.openMenu();
+      const selectedItem = menu.children[1];
+      selectedItem.focus();
+
+      const spy = sinon.spy();
+      button.addEventListener('select', spy);
+      try {
+        // Trigger click
+        dispatchMouseEvent(selectedItem, 'click');
+      }
+      finally {
+        button.removeEventListener('select', spy);
+      }
+      assert.isFalse(spy.called, 'Expected "select" custom event NOT to fire for a previously selected menu item');
     });
 
     it('should not emit a custom select event when a disabled menu item is clicked', () => {

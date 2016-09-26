@@ -415,7 +415,7 @@ class MenuButton {
   closeMenuHandler = event => {
 
     if(event && event.detail) {
-      if(event.detail.item) {
+      if(event.detail.item && event.detail.item !== this.selectedItem) {
         this.selectedItem = event.detail.item;
         this.dispatchSelect();
       }
