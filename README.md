@@ -223,7 +223,8 @@ A [**lightbox**](./src/lightbox/) displays an image filling the screen, and dimm
 It acts as a modal dialog using the `<dialog>` element as a container for the lightbox.
 
 ### Menu Button
-![Menu button](./etc/menu-button.png)
+![Menu button](./etc/menu-button.png)&nbsp;&nbsp;&nbsp;&nbsp; ![Menu button](./etc/menu-button-2.png)
+
 
 A [**menu button**](./src/menu-button/) is a button that opens a menu. It has roles, attributes and behaviour as outlined in 
 WAI-ARIA Authoring Practices, [2.20 Menu Button](https://www.w3.org/TR/wai-aria-practices/#menubutton).

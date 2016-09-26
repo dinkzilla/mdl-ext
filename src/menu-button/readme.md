@@ -12,7 +12,8 @@ The menu button has roles, attributes and behaviour as outlined in WAI-ARIA Auth
 A menu is a widget that offers a list of choices to the user, such as a set of actions or functions. A menu is (usually) 
 opened, or made visible, by activating a menu button. When a user activates a choice in a menu, the menu (usually) closes.
 
-In this release a `<button>`, an `<input type="text">` or a `<div>` (mdl-textfield) can control the menu. 
+In this release a `<button>`, an `<input type="text">` or a `<div>` (mdl-textfield) can have `role="button"` and act as 
+the control for a menu. 
 
 ## To include a MDLEXT **menu button** component:
 
@@ -272,7 +273,7 @@ The [_mixins.scss](../_mixins.scss) has a mixin which can be used to create cust
 
 ```
 
-**Many buttons can share a menu.**
+**Many buttons can share one menu.**
 
 ```html
 <button class="mdl-button mdl-js-button mdlext-js-menu-button" aria-controls="shared-menu">
