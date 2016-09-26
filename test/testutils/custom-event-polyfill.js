@@ -5,13 +5,20 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent#Polyfill
 // https://github.com/webcomponents/webcomponentsjs/blob/v0.7.12/CustomElements.js#L950
 
+// This code is for test purposes only, use a polyfill, e.g. https://github.com/krambuhl/custom-event-polyfill
+
 try {
-  if (!new window.CustomEvent('test')) {
-    throw new Error('No customevents, uess polyfill');
+  const testEvent = new window.CustomEvent('test');
+  testEvent.preventDefault();
+  if (testEvent.defaultPrevented !== true) {
+    // IE has problems with .preventDefault() on custom events
+    // http://stackoverflow.com/questions/23349191
+    throw new Error('Could not prevent default, uses polyfill');
   }
 }
 catch (e) {
-  window.CustomEvent = (inType, params = { bubbles: false, cancelable: false, detail: null }) => {
+  console.info('Uses CustomEvent polyfill');
+  const CustomEvent = (inType, params = { bubbles: false, cancelable: false, detail: null }) => {
     const ce = document.createEvent('CustomEvent');
     ce.initCustomEvent(inType, Boolean(params.bubbles), Boolean(params.cancelable), params.detail);
     ce.preventDefault = () => {
@@ -25,5 +32,4 @@ catch (e) {
   };
   CustomEvent.prototype = window.Event.prototype;
   window.CustomEvent = CustomEvent; // expose definition to window
-
 }

@@ -9,6 +9,7 @@ import {
   VK_ENTER,
   VK_ESC,
   VK_SPACE,
+  VK_PAGE_UP,
   VK_END,
   VK_HOME,
   VK_ARROW_LEFT,
@@ -73,11 +74,10 @@ describe('MaterialExtMenuButton', () => {
 
   const menu_button_with_aria_fixture = `
 <button class="mdlext-js-menu-button"
+        aria-controls="menu-example-dropdown"
         role="button"
         aria-haspopup="true"
-        aria-controls="menu-example-dropdown"
-        aria-expanded="false"
-        tabindex="0">
+        aria-expanded="false">
   <span class="mdlext-menu-button__label">I'm the label!</span>
 </button>
 <ul id="menu-example-dropdown"
@@ -492,6 +492,12 @@ describe('MaterialExtMenuButton', () => {
       assert.isTrue(menu.hasAttribute('hidden'), 'ESC key: Expected menu to have hidden attribute');
     });
 
+    it('does nothing when an "undefined" key i pressed', () => {
+      expect( () => {
+        dispatchKeyDownEvent(button, VK_PAGE_UP);
+      }).to.not.throw(Error);
+    });
+
     it('does nothing when menu button is disabled', () => {
       const container = document.querySelector('#mount');
       try {
@@ -615,6 +621,15 @@ describe('MaterialExtMenuButton', () => {
       selectedItem.focus();
       dispatchKeyDownEvent(selectedItem, VK_END);
       assert.equal(menu.children[menu.children.length-1], document.activeElement, 'End key: Expected last menu item have focus');
+    });
+
+    it('does nothing when an "undefined" key i pressed', () => {
+      button.MaterialExtMenuButton.openMenu();
+      const selectedItem = menu.firstElementChild;
+      selectedItem.focus();
+      expect( () => {
+        dispatchKeyDownEvent(selectedItem, VK_PAGE_UP);
+      }).to.not.throw(Error);
     });
 
     it('closes the menu when Enter or Space key is pressed on a menu item', () => {
