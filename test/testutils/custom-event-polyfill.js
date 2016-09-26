@@ -1,5 +1,3 @@
-'use strict';
-
 // Polyfill for creating CustomEvents on IE11
 
 // code pulled from:
@@ -8,26 +6,22 @@
 // https://github.com/webcomponents/webcomponentsjs/blob/v0.7.12/CustomElements.js#L950
 
 try {
-  new window.CustomEvent('test');
+  if (!new window.CustomEvent('test')) {
+    throw new Error('No customevents, uess polyfill');
+  }
 }
-catch(e) {
-  window.CustomEvent = function(inType, params) {
-    params = params || {
-      bubbles: false,
-      cancelable: false,
-      detail: null
-    };
-
-    const e = document.createEvent('CustomEvent');
-    e.initCustomEvent(inType, Boolean(params.bubbles), Boolean(params.cancelable), params.detail);
-    e.preventDefault = function() {
+catch (e) {
+  window.CustomEvent = (inType, params = { bubbles: false, cancelable: false, detail: null }) => {
+    const ce = document.createEvent('CustomEvent');
+    ce.initCustomEvent(inType, Boolean(params.bubbles), Boolean(params.cancelable), params.detail);
+    ce.preventDefault = () => {
       Object.defineProperty(this, 'defaultPrevented', {
-        get: function() {
+        get: () => {
           return true;
         }
       });
     };
-    return e;
+    return ce;
   };
   window.CustomEvent.prototype = window.Event.prototype;
 }

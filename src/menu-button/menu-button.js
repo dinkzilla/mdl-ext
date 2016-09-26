@@ -154,6 +154,13 @@ const menuFactory = element => {
     }
   };
 
+  const selectItem = item => {
+    if(item && !isDisabled(item) && !isSeparator(item)) {
+      setSelected(item);
+      close(true, item);
+    }
+  };
+
   const keyDownHandler = event => {
 
     const item = event.target.closest(`.${MENU_BUTTON_MENU_ITEM}`);
@@ -189,14 +196,7 @@ const menuFactory = element => {
 
       case VK_SPACE:
       case VK_ENTER:
-        // Trigger click
-        item.dispatchEvent(
-          new MouseEvent('click', {
-            'view': window,
-            'bubbles': true,
-            'cancelable': true
-          })
-        );
+        selectItem(item);
         break;
 
       case VK_ESC:
@@ -218,15 +218,7 @@ const menuFactory = element => {
   const clickHandler = event => {
     if(event.target !== element) {
       const item = event.target.closest(`.${MENU_BUTTON_MENU_ITEM}`);
-
-      if(item && !isDisabled(item) && !isSeparator(item)) {
-        setSelected(item);
-        close(true, item);
-      }
-      else {
-        event.stopPropagation();
-        event.preventDefault();
-      }
+      selectItem(item);
     }
   };
 

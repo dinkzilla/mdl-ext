@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @license
  * Copyright 2016 Leif Olsen. All Rights Reserved.
@@ -37,15 +35,15 @@ export function createCustomEvent( typeArg, customEventInit = { bubbles: false, 
     // Modern browsers
     return new window.CustomEvent(typeArg, customEventInit);
   }
-  catch(e) {
+  catch (e) {
     // Copied from https://github.com/webcomponents/webcomponentsjs/blob/v0.7.12/CustomElements.js#L950
     // Copied from http://stackoverflow.com/questions/23349191/event-preventdefault-is-not-working-in-ie-11-for-custom-events
     const ce = document.createEvent('CustomEvent');
     ce.initCustomEvent(typeArg, customEventInit.bubbles, customEventInit.cancelable, customEventInit.detail);
 
-    ce.preventDefault = function() {
+    ce.preventDefault = () => {
       Object.defineProperty(this, 'defaultPrevented', {
-        get: function() {
+        get: () => {
           return true;
         }
       });

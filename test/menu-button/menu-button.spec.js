@@ -617,17 +617,13 @@ describe('MaterialExtMenuButton', () => {
       assert.equal(menu.children[menu.children.length-1], document.activeElement, 'End key: Expected last menu item have focus');
     });
 
-    it('trigges onclick when Enter or Space key is pressed, then closes the menu', () => {
-      const spy = sinon.spy();
-      menu.addEventListener('click', spy);
-
+    it('closes the menu when Enter or Space key is pressed on a menu item', () => {
       button.MaterialExtMenuButton.openMenu();
       let selectedItem = menu.children[1];
       selectedItem.focus();
       dispatchKeyDownEvent(selectedItem, VK_ENTER);
       assert.equal(menu.children[1].getAttribute('aria-selected'), 'true', 'Enter key: Expected menu item to have aria-selected="true"');
       assert.isTrue(menu.hasAttribute('hidden'), 'ESC key: Expected menu to have hidden attribute');
-      assert.isTrue(spy.calledOnce, 'Expected click to fire after Enter key was pressed');
 
       button.MaterialExtMenuButton.openMenu();
       selectedItem = menu.children[0];
@@ -635,12 +631,9 @@ describe('MaterialExtMenuButton', () => {
       dispatchKeyDownEvent(selectedItem, VK_SPACE);
       assert.equal(menu.children[0].getAttribute('aria-selected'), 'true', 'Space key: Expected menu item to have aria-selected="true"');
       assert.isTrue(menu.hasAttribute('hidden'), 'ESC key: Expected menu to have hidden attribute');
-      assert.isTrue(spy.calledTwice, 'Expected click to fire after space key was pressed');
-
-      menu.removeEventListener('blur', spy);
     });
 
-    it('trigges onclick when menu item is clicked, then closes the menu', () => {
+    it('closes the menu when menu item is clicked', () => {
       button.MaterialExtMenuButton.openMenu();
       const selectedItem = menu.children[1];
       selectedItem.focus();
@@ -675,7 +668,7 @@ describe('MaterialExtMenuButton', () => {
       assert.isTrue(spy.calledOnce, 'Expected blur to fire once');
     });
 
-    it('emits a custom select event when a menu item is selected', () => {
+    it('emits a custom select event when a menu item is clicked', () => {
       button.MaterialExtMenuButton.openMenu();
       const selectedItem = menu.children[1];
       selectedItem.focus();

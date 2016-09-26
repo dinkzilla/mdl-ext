@@ -1,5 +1,3 @@
-'use strict';
-
 /*
  * Code pulled from:
  * https://github.com/jonathantneal/closest/blob/master/closest.js
@@ -21,7 +19,7 @@ if (typeof Element.prototype.matches !== 'function') {
     function matches(selector) {
       const element = this;
       const elements = (element.document || element.ownerDocument).querySelectorAll(selector);
-      let  i = elements.length;
+      let i = elements.length;
       while (--i >= 0 && elements.item(i) !== element);
       return i > -1;
     };
@@ -37,7 +35,7 @@ if (typeof Element.prototype.closest !== 'function') {
     let element = this;
 
     while (element && element.nodeType === Node.ELEMENT_NODE) {
-      if(element.matches(selector)) {
+      if (element.matches(selector)) {
         return element;
       }
       element = element.parentNode;
