@@ -4,6 +4,7 @@ html {
 *, *::before, *::after, input[type="search"] {
   box-sizing: inherit;
 }
+
 body {
   overflow: hidden;
 }
