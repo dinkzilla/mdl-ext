@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <link rel="stylesheet" href="styles/dialog-polyfill.css">
 <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
-<link rel="stylesheet" href="../lib/mdl-ext-eqjs.min.css">
+<link rel="stylesheet" href="../lib/mdl-ext-eqjs.css">
 <link rel="stylesheet" href="./styles/demo.css">
 
   <title>Material Design Lite Extensions - Menu Button</title>
@@ -222,7 +222,7 @@ The menu button has roles, attributes and behaviour as outlined in
 <div class="mdl-grid mdl-grid--no-spacing">
   <div class="mdl-cell mdl-cell--4-col">
     <p><code>mdl-button</code></p>
-    <button style="width:100%; max-width:300px; height:46px" class="mdl-button mdl-button--colored mdl-button--raised mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button" aria-controls="shared-social-menu" onselect="this.querySelector('.mdlext-menu-button__caption').innerHTML = signedIn(event.detail.source.getAttribute('data-value'));">
+    <button style="width:100%; max-width:300px; height:46px" class="mdl-button mdl-button--colored mdl-button--raised mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button" aria-controls="shared-social-menu" menuselect="this.querySelector('.mdlext-menu-button__caption').innerHTML = signedIn(event.detail.source.getAttribute('data-value'));">
       <i class="material-icons">person_outline</i>
       <span class="mdlext-menu-button__caption">Sign in with ...</span>
       <i class="material-icons mdlext-aria-expanded-more-less"></i>
@@ -231,7 +231,7 @@ The menu button has roles, attributes and behaviour as outlined in
 
   <div class="mdl-cell mdl-cell--4-col">
     <p><code>mdl-textfield</code></p>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-js-menu-button" aria-controls="shared-social-menu" onselect="this.MaterialTextfield.change(event.detail.source.querySelector('span').innerHTML);">
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-js-menu-button" aria-controls="shared-social-menu" onmenuselect="this.MaterialTextfield.change(event.detail.source.querySelector('span').innerHTML);">
 
       <input class="mdl-textfield__input" type="text" readonly="">
       <label class="mdl-textfield__label">Sign in with ...</label>
@@ -241,7 +241,7 @@ The menu button has roles, attributes and behaviour as outlined in
 
   <div class="mdl-cell mdl-cell--4-col mdlext-bordered-fields">
     <p><code>mdlext-bordered-fields</code></p>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-right mdlext-js-menu-button" aria-controls="shared-social-menu" onselect="this.MaterialTextfield.change(event.detail.source.querySelector('span').innerHTML);">
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-right mdlext-js-menu-button" aria-controls="shared-social-menu" onmenuselect="this.MaterialTextfield.change(event.detail.source.querySelector('span').innerHTML);">
 
       <input class="mdl-textfield__input" type="text" readonly="">
       <label class="mdl-textfield__label">Sign in with ...</label>
@@ -251,7 +251,7 @@ The menu button has roles, attributes and behaviour as outlined in
 
   <div class="mdl-cell mdl-cell--4-col mdlext-bordered-fields">
     <p>custom styled <code>&lt;div&gt;</code></p>
-    <div class="mdlext-menu-button mdlext-js-menu-button" style="width:300px; height:46px; max-width:100%;  border:1px solid green" aria-controls="shared-social-menu" onselect="this.querySelector('span').innerHTML = signedIn(event.detail.source.getAttribute('data-value')) + ', ' + event.detail.source.querySelector('span').innerHTML;">
+    <div class="mdlext-menu-button mdlext-js-menu-button" style="width:300px; height:46px; max-width:100%;  border:1px solid green" aria-controls="shared-social-menu" onmenuselect="this.querySelector('span').innerHTML = signedIn(event.detail.source.getAttribute('data-value')) + ', ' + event.detail.source.querySelector('span').innerHTML;">
       <span class="mdlext-menu-button__caption">Sign in with ...</span>
       <i class="material-icons mdlext-aria-expanded-more-less"></i>
     </div>
@@ -411,7 +411,7 @@ The menu button has roles, attributes and behaviour as outlined in
 
 
 <p style="margin-top: 16px">This menu button has WAIA roles and attributes coded in markup</p>
-<button class="mdl-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button" role="button" aria-haspopup="true" aria-controls="menu-example-dropdown" aria-expanded="false" tabindex="0" onselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
+<button class="mdl-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button" role="button" aria-haspopup="true" aria-controls="menu-example-dropdown" aria-expanded="false" tabindex="0" onmenuselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
   <span class="mdlext-menu-button__caption">Select a size</span>
   <i class="mdlext-aria-expanded-plus-minus"></i>
 </button>
@@ -458,7 +458,7 @@ The menu button has roles, attributes and behaviour as outlined in
     <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
     <td>
       <span style="width:40px; display: inline-block;"></span>
-      <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdlext-js-menu-button" aria-controls="table-menu-example" onselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.getAttribute('data-value');">
+      <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdlext-js-menu-button" aria-controls="table-menu-example" onmenuselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.getAttribute('data-value');">
         <i class="mdlext-aria-expanded-more-less"></i>
       </button>
     </td>
@@ -468,7 +468,7 @@ The menu button has roles, attributes and behaviour as outlined in
     <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
     <td>
       <span style="width:40px; display: inline-block;"></span>
-      <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdlext-js-menu-button" aria-controls="table-menu-example" onselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.getAttribute('data-value');">
+      <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdlext-js-menu-button" aria-controls="table-menu-example" onmenuselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.getAttribute('data-value');">
         <i class="mdlext-aria-expanded-more-less"></i>
       </button>
     </td>
@@ -478,7 +478,7 @@ The menu button has roles, attributes and behaviour as outlined in
     <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
     <td>
       <span style="width:40px; display: inline-block;"></span>
-      <button class="mdl-button mdl-button--icon mdl-button--primary mdl-js-button mdlext-js-menu-button" aria-controls="table-menu-example" onselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.getAttribute('data-value');">
+      <button class="mdl-button mdl-button--icon mdl-button--primary mdl-js-button mdlext-js-menu-button" aria-controls="table-menu-example" onmenuselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.getAttribute('data-value');">
         <i class="mdlext-aria-expanded-more-less"></i>
       </button>
     </td>
@@ -559,7 +559,7 @@ The menu button has roles, attributes and behaviour as outlined in
 
   <div class="mdl-grid mdl-grid--no-spacing">
     <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
-      <button class="mdl-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button" onselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
+      <button class="mdl-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button" onmenuselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
         <span class="mdlext-menu-button__caption">Select a size</span>
         <i class="mdlext-aria-expanded-plus-minus"></i>
       </button>
@@ -570,7 +570,7 @@ The menu button has roles, attributes and behaviour as outlined in
       </ul>
     </div>
     <div class="mdl-cell mdl-cell--5-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
-      <button class="mdl-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button" onselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
+      <button class="mdl-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button" onmenuselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
         <span class="mdlext-menu-button__caption">Select a size</span>
         <i class="mdlext-aria-expanded-plus-minus"></i>
       </button>
@@ -581,7 +581,7 @@ The menu button has roles, attributes and behaviour as outlined in
       </ul>
     </div>
     <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--hide-phone">
-      <button class="mdl-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button" onselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
+      <button class="mdl-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button" onmenuselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
         <span class="mdlext-menu-button__caption">Select a size</span>
         <i class="mdlext-aria-expanded-plus-minus"></i>
       </button>
@@ -619,7 +619,7 @@ http://markbirbeck.com/2015/10/14/a-mixin-approach-to-material-design-lite-using
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 <script src="scripts/eq.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://code.getmdl.io/1.2.1/material.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../lib/mdl-ext.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../lib/mdl-ext.js" type="text/javascript" charset="utf-8"></script>
 
 <script>
   (function() {

@@ -691,14 +691,14 @@ describe('MaterialExtMenuButton', () => {
       selectedItem.focus();
 
       const spy = sinon.spy();
-      button.addEventListener('select', spy);
+      button.addEventListener('menuselect', spy);
 
       const selectListener = event => {
         assert.isDefined(event.detail, 'Expected detail to be defined in event');
         assert.isDefined(event.detail.source, 'Expected detail.source to be defined in event');
         assert.isTrue(event.detail.source.classList.contains('MENU_BUTTON_MENU_ITEM'), `Expected detail.source to have class "${MENU_BUTTON_MENU_ITEM}"`);
       };
-      button.addEventListener('select', selectListener);
+      button.addEventListener('menuselect', selectListener);
 
       try {
         // Trigger click
@@ -708,8 +708,8 @@ describe('MaterialExtMenuButton', () => {
         assert.equal(selectedItem, selected, 'Expected "button.MaterialExtMenuButton.getSelectedMenuItem()" return the slected menu item element');
       }
       finally {
-        button.removeEventListener('select', spy);
-        button.removeEventListener('select', selectListener);
+        button.removeEventListener('menuselect', spy);
+        button.removeEventListener('menuselect', selectListener);
       }
 
       assert.isTrue(spy.called, 'Expected "select" custom event to fire');
@@ -723,13 +723,13 @@ describe('MaterialExtMenuButton', () => {
       selectedItem.focus();
 
       const spy = sinon.spy();
-      button.addEventListener('select', spy);
+      button.addEventListener('menuselect', spy);
       try {
         // Trigger click
         dispatchMouseEvent(selectedItem, 'click');
       }
       finally {
-        button.removeEventListener('select', spy);
+        button.removeEventListener('menuselect', spy);
       }
       assert.isFalse(spy.called, 'Expected "select" custom event NOT to fire for a previously selected menu item');
     });
@@ -747,12 +747,12 @@ describe('MaterialExtMenuButton', () => {
         disabledItem.focus();
 
         const spy = sinon.spy();
-        button.addEventListener('select', spy);
+        button.addEventListener('menuselect', spy);
         try {
           dispatchMouseEvent(disabledItem, 'click');
         }
         finally {
-          button.removeEventListener('select', spy);
+          button.removeEventListener('menuselect', spy);
         }
         assert.isFalse(spy.called, 'Expected "select" custom event NOT to fire for a disabled menu item');
       }

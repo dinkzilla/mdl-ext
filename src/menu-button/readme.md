@@ -134,7 +134,7 @@ of the button.
 ```html
 <div>
   <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdlext-js-menu-button"
-    onselect="document.querySelector('#selection').innerHTML = 'Selected value: " + event.detail.source.getAttribute('data-value');">
+    onmenuselect="document.querySelector('#selection').innerHTML = 'Selected value: " + event.detail.source.getAttribute('data-value');">
     <i class="mdlext-aria-expanded-more-less"></i>
   </button>
   <ul class="mdlext-menu" hidden >
@@ -226,7 +226,7 @@ of the button.
 
 <div role="presentation">
   <div class="mdl-textfield mdl-js-textfield mdlext-js-menu-button"
-       onselect="this.MaterialTextfield.change(event.detail.source.getAttribute('data-key') 
+       onmenuselect="this.MaterialTextfield.change(event.detail.source.getAttribute('data-key') 
          + ': ' + event.detail.source.querySelector('span').innerHTML);">
 
     <input class="mdl-textfield__input" type="text" readonly>
@@ -257,7 +257,7 @@ The [_mixins.scss](../_mixins.scss) has a mixin which can be used to create cust
 <div role="presentation">
   <div class="mdlext-menu-button mdlext-js-menu-button" 
        style="width:300px; height:44px; max-width:100%; border:1px solid green"
-       onselect="this.querySelector('span').innerHTML = 
+       onmenuselect="this.querySelector('span').innerHTML = 
          event.detail.source.getAttribute('data-key') + ': ' + 
          event.detail.source.querySelector('span').innerHTML);">
        
@@ -351,7 +351,7 @@ The menu button has the following roles, states and properties set by the menu b
 >The roles, states, and properties needed for the menu are described in more detail in WAI-ARIA Authoring Practices, [2.19 Menu or Menu bar](https://www.w3.org/TR/wai-aria-practices/#menu).
 
 ## Events emitted from the component
-The menu button emits a custom `select` event when a menu item is selected. The event has a detail object with the following structure:
+The menu button emits a custom `menuselect` event when a menu item is selected. The event has a detail object with the following structure:
 
 ```javascript
 detail: { 
@@ -361,7 +361,7 @@ detail: {
 
 To set up an event listener to receive the select custom event.
 ```javascript
-document.querySelector('#my-menubutton').addEventListener('select', function(e) {
+document.querySelector('#my-menubutton').addEventListener('menuselect', function(e) {
   console.log('menu item selected:', e.detail.source);
 });
 ```

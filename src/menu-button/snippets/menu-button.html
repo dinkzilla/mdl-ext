@@ -81,7 +81,7 @@ The menu button has roles, attributes and behaviour as outlined in
     <button style="width:100%; max-width:300px; height:46px"
             class="mdl-button mdl-button--colored mdl-button--raised mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button"
             aria-controls="shared-social-menu"
-            onselect="this.querySelector('.mdlext-menu-button__caption').innerHTML = signedIn(event.detail.source.getAttribute('data-value'));" >
+            onmenuselect="this.querySelector('.mdlext-menu-button__caption').innerHTML = signedIn(event.detail.source.getAttribute('data-value'));" >
       <i class="material-icons">person_outline</i>
       <span class="mdlext-menu-button__caption">Sign in with ...</span>
       <i class="material-icons mdlext-aria-expanded-more-less"></i>
@@ -92,7 +92,7 @@ The menu button has roles, attributes and behaviour as outlined in
     <p><code>mdl-textfield</code></p>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-js-menu-button"
          aria-controls="shared-social-menu"
-         onselect="this.MaterialTextfield.change(event.detail.source.querySelector('span').innerHTML);">
+         onmenuselect="this.MaterialTextfield.change(event.detail.source.querySelector('span').innerHTML);">
 
       <input class="mdl-textfield__input" type="text" readonly>
       <label class="mdl-textfield__label">Sign in with ...</label>
@@ -104,7 +104,7 @@ The menu button has roles, attributes and behaviour as outlined in
     <p><code>mdlext-bordered-fields</code></p>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdlext-bordered-fields__icon-right mdlext-js-menu-button"
          aria-controls="shared-social-menu"
-         onselect="this.MaterialTextfield.change(event.detail.source.querySelector('span').innerHTML);">
+         onmenuselect="this.MaterialTextfield.change(event.detail.source.querySelector('span').innerHTML);">
 
       <input class="mdl-textfield__input" type="text" readonly>
       <label class="mdl-textfield__label">Sign in with ...</label>
@@ -116,7 +116,7 @@ The menu button has roles, attributes and behaviour as outlined in
     <p>custom styled <code>&lt;div&gt;</code></p>
     <div class="mdlext-menu-button mdlext-js-menu-button" style="width:300px; height:46px; max-width:100%;  border:1px solid green"
          aria-controls="shared-social-menu"
-         onselect="this.querySelector('span').innerHTML = signedIn(event.detail.source.getAttribute('data-value')) + ', ' + event.detail.source.querySelector('span').innerHTML;">
+         onmenuselect="this.querySelector('span').innerHTML = signedIn(event.detail.source.getAttribute('data-value')) + ', ' + event.detail.source.querySelector('span').innerHTML;">
       <span class="mdlext-menu-button__caption">Sign in with ...</span>
       <i class="material-icons mdlext-aria-expanded-more-less"></i>
     </div>
@@ -284,7 +284,7 @@ The menu button has roles, attributes and behaviour as outlined in
         aria-controls="menu-example-dropdown"
         aria-expanded="false"
         tabindex="0"
-        onselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
+        onmenuselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
   <span class="mdlext-menu-button__caption">Select a size</span>
   <i class="mdlext-aria-expanded-plus-minus"></i>
 </button>
@@ -336,7 +336,7 @@ The menu button has roles, attributes and behaviour as outlined in
       <span style="width:40px; display: inline-block;"></span>
       <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdlext-js-menu-button"
               aria-controls="table-menu-example"
-              onselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.getAttribute('data-value');">
+              onmenuselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.getAttribute('data-value');">
         <i class="mdlext-aria-expanded-more-less"></i>
       </button>
     </td>
@@ -348,7 +348,7 @@ The menu button has roles, attributes and behaviour as outlined in
       <span style="width:40px; display: inline-block;"></span>
       <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdlext-js-menu-button"
               aria-controls="table-menu-example"
-              onselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.getAttribute('data-value');">
+              onmenuselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.getAttribute('data-value');">
         <i class="mdlext-aria-expanded-more-less"></i>
       </button>
     </td>
@@ -360,7 +360,7 @@ The menu button has roles, attributes and behaviour as outlined in
       <span style="width:40px; display: inline-block;"></span>
       <button class="mdl-button mdl-button--icon mdl-button--primary mdl-js-button mdlext-js-menu-button"
               aria-controls="table-menu-example"
-              onselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.getAttribute('data-value');">
+              onmenuselect="this.parentNode.querySelector('span').innerHTML = event.detail.source.getAttribute('data-value');">
         <i class="mdlext-aria-expanded-more-less"></i>
       </button>
     </td>
@@ -442,7 +442,7 @@ The menu button has roles, attributes and behaviour as outlined in
   <div class="mdl-grid mdl-grid--no-spacing">
     <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
       <button class="mdl-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button"
-              onselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
+              onmenuselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
         <span class="mdlext-menu-button__caption">Select a size</span>
         <i class="mdlext-aria-expanded-plus-minus"></i>
       </button>
@@ -456,7 +456,7 @@ The menu button has roles, attributes and behaviour as outlined in
     </div>
     <div class="mdl-cell mdl-cell--5-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
       <button class="mdl-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button"
-              onselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
+              onmenuselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
         <span class="mdlext-menu-button__caption">Select a size</span>
         <i class="mdlext-aria-expanded-plus-minus"></i>
       </button>
@@ -470,7 +470,7 @@ The menu button has roles, attributes and behaviour as outlined in
     </div>
     <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--hide-phone">
       <button class="mdl-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect mdl-js-button mdlext-js-menu-button"
-              onselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
+              onmenuselect="this.querySelector('span').innerHTML = 'Size: ' + event.detail.source.innerHTML;">
         <span class="mdlext-menu-button__caption">Select a size</span>
         <i class="mdlext-aria-expanded-plus-minus"></i>
       </button>

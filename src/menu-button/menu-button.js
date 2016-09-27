@@ -223,6 +223,8 @@ const menuFactory = element => {
   };
 
   const blurHandler = event => {
+    console.log(event);
+
     const r = event.relatedTarget;
     if(!element.contains(r)) {
       close(false, undefined, r);
@@ -417,7 +419,7 @@ class MenuButton {
     if(event && event.detail) {
       if(event.detail.item && event.detail.item !== this.selectedItem) {
         this.selectedItem = event.detail.item;
-        this.dispatchSelect();
+        this.dispatchMenuSelect();
       }
       const t = event.detail.relatedTarget;
       if(!t || (t && t.closest(`.${JS_MENU_BUTTON}`) !== this.element)) {
@@ -426,9 +428,9 @@ class MenuButton {
     }
   };
 
-  dispatchSelect() {
+  dispatchMenuSelect() {
     this.element.dispatchEvent(
-      new CustomEvent('select', {
+      new CustomEvent('menuselect', {
         bubbles: true,
         cancelable: true,
         detail: { source: this.selectedItem }
