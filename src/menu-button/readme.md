@@ -2,7 +2,7 @@
 ![Menu button](../../etc/menu-button.png)&nbsp;&nbsp;&nbsp;&nbsp; ![Menu button](../../etc/menu-button-2.png)
 
 A WAI-ARIA friendly menu button component/widget with roles, attributes and behavior in accordance with the specification 
-given in the WAI-ARIA Authoring Practices, [section 2.20](https://www.w3.org/TR/wai-aria-practices/#button).
+given in WAI-ARIA Authoring Practices, [section 2.20](https://www.w3.org/TR/wai-aria-practices/#button).
 
 ## Introduction
 A menu button is a button that opens a menu. It is often styled as a typical push button with a 
@@ -11,7 +11,7 @@ downward pointing arrow or triangle to hint that activating the button will disp
 A menu is a widget that offers a list of choices to the user, such as a set of actions or functions. A menu is (usually) 
 opened, or made visible, by activating a menu button. When a user activates a choice in a menu, the menu (usually) closes.
 
-In this release a `<button>`, an `<input type="text">` or a `<div>` (mdl-textfield) can have `role="button"` and act as 
+In this release a `<button>`, an `<input type="text">` or a `<div>` (mdl-textfield) can have `role="button"`, and act as 
 the control for a menu. 
 
 ## To include a MDLEXT **menu button** component:
@@ -146,7 +146,7 @@ of the button.
 ```
 ```javascript
 document.querySelector('#my-button').addEventListener('menuselect', function(event) {
-  this.querySelector('span').innerHTML = 'Selected value: " + 
+  this.querySelector('span').innerHTML = 'Selected value: ' + 
     event.detail.source.getAttribute('data-value')
 });
 ```
