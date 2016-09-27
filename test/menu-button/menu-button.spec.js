@@ -669,20 +669,6 @@ describe('MaterialExtMenuButton', () => {
       assert.isTrue(menu.hasAttribute('hidden'), 'After closing menu: Expected menu to have hidden attribute');
     });
 
-
-    it('listens to blur event', () => {
-      button.MaterialExtMenuButton.openMenu();
-
-      const spy = sinon.spy();
-      menu.addEventListener('blur', spy);
-
-      const selectedItem = menu.children[1];
-      dispatchEventEvent(selectedItem, 'blur');
-
-      menu.removeEventListener('blur', spy);
-      assert.isTrue(spy.calledOnce, 'Expected blur to fire once');
-    });
-
     it('emits a custom select event when a menu item is clicked', () => {
       button.MaterialExtMenuButton.setSelectedMenuItem(menu.children[0]);
 

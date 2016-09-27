@@ -1,7 +1,7 @@
 # Menu Button
 ![Menu button](../../etc/menu-button.png)&nbsp;&nbsp;&nbsp;&nbsp; ![Menu button](../../etc/menu-button-2.png)
 
-A WAI-ARIA friendly menu button component/widget with roles, attributes and behaviour in accordance with the specification 
+A WAI-ARIA friendly menu button component/widget with roles, attributes and behavior in accordance with the specification 
 given in the WAI-ARIA Authoring Practices, [section 2.20](https://www.w3.org/TR/wai-aria-practices/#button).
 
 ## Introduction
@@ -133,7 +133,7 @@ of the button.
 ```html
 <div>
   <button id="my-button" class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdlext-js-menu-button"
-    onmenuselect="document.querySelector('#selection').innerHTML = 'Selected value: " + event.detail.source.getAttribute('data-value');">
+    onmenuselect="document.querySelector('#selection').innerHTML = 'Selected value: ' + event.detail.source.getAttribute('data-value');">
     <span>Select</span>
     <i class="mdlext-aria-expanded-more-less"></i>
   </button>
@@ -332,7 +332,7 @@ document.querySelector('#my-div').addEventListener('menuselect', function(event)
     * <kbd>Down Arrow</kbd> or <kbd>Right Arrow</kbd>: Move focus to next menu item.
     * <kbd>Esc</kbd>: Closes the menu, sets `aria-expanded="true"` on menu button, and move focus back to menu button.
 
->The keyboard behaviors after the menu is open are described in more detail in WAI-ARIA Authoring Practices, [2.19 Menu or Menu bar](https://www.w3.org/TR/wai-aria-practices/#menu).
+>The keyboard behavior after the menu is open are described in more detail in WAI-ARIA Authoring Practices, [2.19 Menu or Menu bar](https://www.w3.org/TR/wai-aria-practices/#menu).
 
 ### Mouse interaction, Menu
 * With focus on the menu:

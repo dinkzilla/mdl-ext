@@ -527,6 +527,7 @@ dialog.mdlext-dialog[open] + .backdrop {
 
 .mdlext-grid > .mdlext-cell--middle {
   -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
       align-self: center;
 }
 
@@ -537,6 +538,7 @@ dialog.mdlext-dialog[open] + .backdrop {
 
 .mdlext-grid > .mdlext-cell--stretch {
   -ms-flex-item-align: stretch;
+      -ms-grid-row-align: stretch;
       align-self: stretch;
 }
 
@@ -2549,9 +2551,9 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   position: relative;
   padding: 0 16px 0 24px;
   -ms-flex-align: center;
-      -ms-grid-row-align: center;
       align-items: center;
   -ms-flex-item-align: stretch;
+      -ms-grid-row-align: stretch;
       align-self: stretch;
   text-decoration: none;
   cursor: pointer;
