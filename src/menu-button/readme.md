@@ -147,7 +147,8 @@ of the button.
 ```
 ```javascript
 document.querySelector('#my-button').addEventListener('menuselect', function(event) {
-  this.querySelector('span').innerHTML = 'Selected value: " + event.detail.source.getAttribute('data-value');
+  this.querySelector('span').innerHTML = 'Selected value: " + 
+    event.detail.source.getAttribute('data-value')
 });
 ```
 
@@ -246,7 +247,7 @@ document.querySelector('#my-button').addEventListener('menuselect', function(eve
 ```javascript
 document.querySelector('#my-textfield').addEventListener('menuselect', function(event) {
   this.MaterialTextfield.change(event.detail.source.getAttribute('data-key') 
-           + ': ' + event.detail.source.querySelector('span').innerHTML);;
+           + ': ' + event.detail.source.querySelector('span').innerHTML);
 });
 ```
 
