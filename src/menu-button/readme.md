@@ -1,13 +1,12 @@
 # Menu Button
 ![Menu button](../../etc/menu-button.png)&nbsp;&nbsp;&nbsp;&nbsp; ![Menu button](../../etc/menu-button-2.png)
 
-A WAI-ARIA friendly menu button.
+A WAI-ARIA friendly menu button component/widget with roles, attributes and behaviour in accordance with the specification 
+given in the WAI-ARIA Authoring Practices, [section 2.20](https://www.w3.org/TR/wai-aria-practices/#button).
 
 ## Introduction
-A menu button is a [button](https://www.w3.org/TR/wai-aria-practices/#button) that opens a 
-[menu](https://www.w3.org/TR/wai-aria-practices/#menu). It is often styled as a typical push button with a 
+A menu button is a button that opens a menu. It is often styled as a typical push button with a 
 downward pointing arrow or triangle to hint that activating the button will display a menu. 
-The menu button has roles, attributes and behaviour as outlined in WAI-ARIA Authoring Practices.
 
 A menu is a widget that offers a list of choices to the user, such as a set of actions or functions. A menu is (usually) 
 opened, or made visible, by activating a menu button. When a user activates a choice in a menu, the menu (usually) closes.
