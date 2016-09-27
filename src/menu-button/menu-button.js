@@ -53,6 +53,8 @@ const MENU_BUTTON_MENU_ITEM_SEPARATOR = 'mdlext-menu__item-separator';
  */
 const menuFactory = element => {
 
+  let ariaControls = null;
+
   const removeAllSelected = () => {
     [...element.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`)]
       .forEach(selectedItem => selectedItem.removeAttribute('aria-selected'));
@@ -216,22 +218,35 @@ const menuFactory = element => {
   };
 
   const clickHandler = event => {
-    if(event.target !== element) {
-      const item = event.target.closest(`.${MENU_BUTTON_MENU_ITEM}`);
-      selectItem(item);
-    }
-  };
 
-  const blurHandler = event => {
-    console.log(event);
-
-    const r = event.relatedTarget;
-    if(!element.contains(r)) {
-      close(false, undefined, r);
+    if(event.target) {
+      const t = event.target;
+      if(t.closest(`.${MENU_BUTTON_MENU}`) === element) {
+        const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
+        if(item) {
+          selectItem(item);
+        }
+      }
+      else {
+        const btn = event.target.closest(`.${JS_MENU_BUTTON}`);
+        if(!btn) {
+          close(false);
+        }
+        else if(btn.getAttribute('aria-controls') === element.id) {
+          if(btn !== ariaControls) {
+            close(false);
+          }
+        }
+        else {
+          close(false);
+        }
+      }
     }
   };
 
   const open = (controlElement, position='first') => {
+
+    ariaControls = controlElement.closest(`.${JS_MENU_BUTTON}`);
 
     //element.style.visibility = 'hidden';
     element.style['min-width'] = `${Math.max(124, controlElement.getBoundingClientRect().width)}px`;
@@ -259,14 +274,17 @@ const menuFactory = element => {
         }
         break;
     }
+    document.addEventListener('click', clickHandler);
   };
 
-  const close = (forceFocus = false, item = null, relatedTarget = null) => {
+  const close = (forceFocus = false, item = null) => {
+    document.removeEventListener('click', clickHandler);
+
     element.dispatchEvent(
       new CustomEvent('_closemenu', {
         bubbles: true,
         cancelable: true,
-        detail: { forceFocus: forceFocus, item: item, relatedTarget: relatedTarget }
+        detail: { forceFocus: forceFocus, item: item }
       })
     );
   };
@@ -293,13 +311,13 @@ const menuFactory = element => {
   const removeListeners = () => {
     element.removeEventListener('keydown', keyDownHandler);
     element.removeEventListener('click', clickHandler);
-    element.removeEventListener('blur', blurHandler);
+    //element.removeEventListener('blur', blurHandler);
   };
 
   const addListeners = () => {
     element.addEventListener('keydown', keyDownHandler);
     element.addEventListener('click', clickHandler);
-    element.addEventListener('blur', blurHandler, true);
+    //element.addEventListener('blur', blurHandler, true);
   };
 
   const init = () => {
@@ -421,10 +439,7 @@ class MenuButton {
         this.selectedItem = event.detail.item;
         this.dispatchMenuSelect();
       }
-      const t = event.detail.relatedTarget;
-      if(!t || (t && t.closest(`.${JS_MENU_BUTTON}`) !== this.element)) {
-        this.closeMenu(event.detail.forceFocus);
-      }
+      this.closeMenu(event.detail.forceFocus);
     }
   };
 

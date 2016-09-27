@@ -133,8 +133,9 @@ of the button.
 
 ```html
 <div>
-  <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdlext-js-menu-button"
+  <button id="my-button" class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdlext-js-menu-button"
     onmenuselect="document.querySelector('#selection').innerHTML = 'Selected value: " + event.detail.source.getAttribute('data-value');">
+    <span>Select</span>
     <i class="mdlext-aria-expanded-more-less"></i>
   </button>
   <ul class="mdlext-menu" hidden >
@@ -143,6 +144,11 @@ of the button.
     <li class="mdlext-menu__item" data-value="50">Fifty</li>
   </ul>
 </div>
+```
+```javascript
+document.querySelector('#my-button').addEventListener('menuselect', function(event) {
+  this.querySelector('span').innerHTML = 'Selected value: " + event.detail.source.getAttribute('data-value');
+});
 ```
 
 
@@ -225,10 +231,7 @@ of the button.
 </style>
 
 <div role="presentation">
-  <div class="mdl-textfield mdl-js-textfield mdlext-js-menu-button"
-       onmenuselect="this.MaterialTextfield.change(event.detail.source.getAttribute('data-key') 
-         + ': ' + event.detail.source.querySelector('span').innerHTML);">
-
+  <div id="my-textfield" class="mdl-textfield mdl-js-textfield mdlext-js-menu-button">
     <input class="mdl-textfield__input" type="text" readonly>
     <label class="mdl-textfield__label">Sign in with ...</label>
     <i class="material-icons mdl-textfield__icon mdlext-aria-expanded-more-less"></i>
@@ -239,6 +242,12 @@ of the button.
     <li class="mdlext-menu__item" data-key="L">Large</li>
   </ul>
 </div>
+```
+```javascript
+document.querySelector('#my-textfield').addEventListener('menuselect', function(event) {
+  this.MaterialTextfield.change(event.detail.source.getAttribute('data-key') 
+           + ': ' + event.detail.source.querySelector('span').innerHTML);;
+});
 ```
 
 **Create your own state icon with SASS.**
@@ -255,11 +264,8 @@ The [_mixins.scss](../_mixins.scss) has a mixin which can be used to create cust
 
 ```html
 <div role="presentation">
-  <div class="mdlext-menu-button mdlext-js-menu-button" 
-       style="width:300px; height:44px; max-width:100%; border:1px solid green"
-       onmenuselect="this.querySelector('span').innerHTML = 
-         event.detail.source.getAttribute('data-key') + ': ' + 
-         event.detail.source.querySelector('span').innerHTML);">
+  <div id="my-div" class="mdlext-menu-button mdlext-js-menu-button" 
+       style="width:300px; height:44px; max-width:100%; border:1px solid green">
        
     <span class="mdlext-menu-button__caption">Select a size ...</span>
     <i class="material-icons my-aria-expanded-state"></i>
@@ -270,7 +276,13 @@ The [_mixins.scss](../_mixins.scss) has a mixin which can be used to create cust
     <li class="mdlext-menu__item" data-key="L">Large</li>
   </ul>
 </div>
-
+```
+```javascript
+document.querySelector('#my-div').addEventListener('menuselect', function(event) {
+  this.querySelector('span').innerHTML = 
+     event.detail.source.getAttribute('data-key') + ': ' + 
+     event.detail.source.querySelector('span').innerHTML);
+});
 ```
 
 **Many buttons can share one menu.**
