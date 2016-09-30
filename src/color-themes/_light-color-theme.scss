@@ -3,6 +3,10 @@
 .mdlext-light-color-theme {
   background-color: $mdlext-light-content-background-color;
   color: $mdlext-light-text-color-primary;
+
+  a {
+    outline-color: inherit;
+  }
 }
 
 // mdl/src/palette/_palette.scss
@@ -1013,6 +1017,114 @@
       .mdl-button {
         color: $mdlext-light-bordered-field-disabled-border-color;
       }
+    }
+  }
+}
+
+
+// mdlext/src/accordion/_accordion.scss
+// ----------------------------------------
+.mdlext-light-color-theme {
+
+  .mdlext-accordion {
+
+    &__tab {
+      color: $mdlext-light-accordion-header-secondary-color;
+      background-color: $mdlext-light-accordion-header-background-color;
+
+      &:focus {
+        outline-color: $mdlext-light-accordion-header-focus-outline-color;
+      }
+      &[aria-expanded='true'] {
+        background-color: $mdlext-light-accordion-header-background-open-color;
+      }
+      &[aria-selected='true'] {
+        background-color: $mdlext-light-accordion-header-background-active-color;
+      }
+      &[disabled] {
+        background-color: $mdlext-light-accordion-header-disabled-color;
+        color: $mdlext-light-accordion-header-secondary-color-disabled;
+        pointer-events: none;
+
+        > * {
+          color: $mdlext-light-accordion-header-secondary-color-disabled;
+        }
+      }
+      &:hover:not([disabled]) {
+        background-color: $mdlext-light-accordion-header-background-hover-color;
+      }
+      &--ripple {
+        &[aria-selected='true']::before {
+          background: $mdlext-light-accordion-ripple-color;
+        }
+      }
+    }
+
+    &__tabpanel {
+      color: $mdlext-light-accordion-content-color;
+      background-color: $mdlext-light-accordion-content-background-color;
+    }
+  }
+
+  // Vertical layout
+  .mdlext-accordion {
+
+    &--vertical {
+
+      .mdlext-accordion__tab {
+        border-top: 1px solid $mdlext-light-accordion-header-border-color;
+
+        &[aria-selected='true']::after {
+          background-color: $mdlext-light-accordion-header-highlight-color;
+        }
+      }
+      .mdlext-accordion__tabpanel {
+        border-top: 1px solid $mdlext-light-accordion-header-border-color;
+      }
+    }
+  }
+
+  // Horizontal layout
+  .mdlext-accordion {
+
+    &--horizontal {
+
+      .mdlext-accordion__tab {
+        border-left: 1px solid $mdlext-light-accordion-header-border-color;
+
+        &[aria-selected='true']::after {
+          background-color: $mdlext-light-accordion-header-highlight-color;
+        }
+      }
+      .mdlext-accordion__tabpanel {
+        border-left: 1px solid $mdlext-light-accordion-header-border-color;
+      }
+    }
+  }
+
+  .mdlext-accordion {
+
+    &__panel:first-child > &__tab {
+      // Use container to set outer borders
+      border-top-color: transparent;
+      border-left-color: transparent;
+    }
+  }
+
+  // Making accordion appear disabled.
+  // Note: does not prevent tabbing into a disabled accordion
+  .mdlext-accordion[disabled] {
+    .mdlext-accordion__tab {
+      background-color: $mdlext-light-accordion-header-disabled-color;
+      color: $mdlext-light-accordion-header-secondary-color-disabled;
+
+      > * {
+        color: $mdlext-light-accordion-header-secondary-color-disabled;
+      }
+    }
+    .mdlext-accordion__tabpanel {
+      opacity: 0.8;
+      filter: blur(1px) grayscale(80%);
     }
   }
 }

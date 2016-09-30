@@ -86,12 +86,21 @@
   #demo-drawer-accordion .mdlext-accordion__tabpanel nav {
     padding: 0;
   }
+
+  #demo-drawer-accordion .mdlext-accordion__tabpanel .mdl-navigation__link {
+    color: rgba(255, 255, 255, 0.87);
+  }
+
+  #demo-drawer-accordion .mdlext-accordion__tabpanel .mdl-navigation__link:hover {
+    background-color: #212121;
+  }
+
 </style>
 
 
 <aside class="mdl-layout__drawer">
 
-  <ul id="demo-drawer-accordion" class="mdlext-accordion mdlext-js-accordion mdlext-accordion--vertical mdlext-js-ripple-effect mdlext-js-animation-effect" aria-multiselectable="false">
+  <ul id="demo-drawer-accordion" class="mdlext-accordion mdlext-js-accordion mdlext-accordion--vertical mdlext-js-ripple-effect mdlext-js-animation-effect mdlext-dark-color-theme" aria-multiselectable="false">
 
     <li class="mdlext-accordion__panel">
       <header class="mdlext-accordion__tab" aria-expanded="true">
@@ -180,6 +189,11 @@
 <p>A lightbox displays an image filling the screen, and dimming out the rest of
   the web page. It acts as a modal dialog using the <code>&lt;dialog&gt;</code>
   element as a container for the lightbox.
+</p>
+
+<h4>Menu Button</h4>
+<p>A WAI-ARIA friendly menu button component/widget with roles, attributes and behavior in accordance with the
+  specification given in WAI-ARIA Authoring Practices, section 2.20.
 </p>
 
 <h4>Selectfield</h4>

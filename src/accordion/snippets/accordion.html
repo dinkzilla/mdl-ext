@@ -2,6 +2,7 @@
 <p>A Collection of panels within a common outer pane.</p>
 <p><strong>Note:</strong> The accordion has been refactored and is not compatible with the accordion prior to version 0.9.13</p>
 
+
 <h4>Horizontal accordion, ripple effect, animated tabpanel, aria-multiselectable="false"</h4>
 
 <style>
@@ -309,7 +310,6 @@
     </section>
   </li>
 </ul>
-
 
 
 <h4>Vertical accordion, aria-multiselectable="false"</h4>
@@ -635,7 +635,7 @@
 
 
 
-<h5>Styling the accordion</h5>
+<h4>Styling the accordion</h4>
 
 <style>
   .demo-accordion-7 {
@@ -779,6 +779,183 @@
     </section>
   </li>
 </ul>
+
+
+
+<h4>Color themes</h4>
+
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone mdlext-dark-color-theme">
+
+    <ul class="mdlext-accordion mdlext-js-accordion mdlext-accordion--vertical mdlext-js-ripple-effect mdlext-js-animation-effect"
+        role="tablist" aria-multiselectable="true">
+
+      <li class="mdlext-accordion__panel" role="presentation">
+        <header class="mdlext-accordion__tab" aria-expanded="true" role="tab">
+          <i class="material-icons">info</i>
+          <span class="mdlext-accordion__tab__caption">First section. A long caption should not push the state icon</span>
+          <i class="mdlext-aria-toggle-material-icons"></i>
+        </header>
+        <section class="mdlext-accordion__tabpanel" role="tabpanel" aria-hidden="false">
+          <h5>Content #1 goes here</h5>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique eget augue eget gravida.
+            Etiam eget imperdiet massa. Aliquam nisi eros, molestie a vulputate quis, tempor nec quam. Ut at libero
+            in sem pellentesque imperdiet. Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
+            ac dignissim odio tortor nec quam.Fusce tincidunt leo in est <a href="#">venenatis porta</a>.
+          </p>
+          <p>Maecenas eu vestibulum orci. Ut eget nisi a est sagittis euismod a vel
+            justo. Quisque at dui urna. Duis vel velit leo. Nulla nunc sem, rutrum at aliquet in, aliquet id velit. Duis
+            mattis placerat erat, a aliquam leo rhoncus vel. Sed nec diam ex. Praesent convallis purus lorem, vel porttitor
+            neque gravida quis. Etiam et malesuada dui. Nunc vitae viverra dui. Suspendisse feugiat efficitur augue, quis
+            blandit leo ullamcorper vel.
+          </p>
+        </section>
+      </li>
+      <li class="mdlext-accordion__panel" role="presentation">
+        <header class="mdlext-accordion__tab" aria-expanded="false" role="tab">
+          <span class="mdlext-accordion__tab__caption">Tab #2</span>
+          <i class="mdlext-aria-toggle-material-icons"></i>
+        </header>
+        <section class="mdlext-accordion__tabpanel" role="tabpanel" hidden aria-hidden="true">
+          <h5>Content #2 goes here</h5>
+          <p>Curabitur malesuada placerat nunc, id dapibus justo tempor in. Ut molestie
+            arcu justo, id volutpat eros vestibulum eget. Fusce tincidunt leo in est venenatis porta.
+          </p>
+        </section>
+      </li>
+      <li class="mdlext-accordion__panel" role="presentation">
+        <header class="mdlext-accordion__tab" aria-expanded="false" role="tab" disabled tabindex="0">
+          <i class="material-icons">warning</i>
+          <span class="mdlext-accordion__tab__caption">Tab #3, disabled</span>
+          <i class="mdlext-aria-toggle-material-icons"></i>
+        </header>
+        <section class="mdlext-accordion__tabpanel" role="tabpanel" hidden aria-hidden="true">
+          <h5>Content #3 goes here</h5>
+          <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
+            ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
+            maximus massa felis quis quam. usce tincidunt leo in est venenatis porta.
+          </p>
+        </section>
+      </li>
+      <li class="mdlext-accordion__panel" role="presentation">
+        <header class="mdlext-accordion__tab" aria-expanded="false" role="tab">
+          <i class="material-icons">accessibility</i>
+          <i class="material-icons">help_outline</i>
+          <i class="material-icons">radio</i>
+          <span class="mdlext-accordion__tab__caption">Tab #4, no toggle icon</span>
+        </header>
+        <section class="mdlext-accordion__tabpanel" role="tabpanel" hidden aria-hidden="true">
+          <h5>Content #4 goes here</h5>
+          <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
+            ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
+            maximus massa felis quis quam. usce tincidunt leo in est venenatis porta.
+          </p>
+        </section>
+      </li>
+      <li class="mdlext-accordion__panel" role="presentation">
+        <header class="mdlext-accordion__tab" role="tab">
+          <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">favorite</i></button>
+          <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">share</i></button>
+          <span class="mdlext-accordion__tab__caption">Tab #5, with icon buttons</span>
+          <i class="mdlext-aria-toggle-material-icons"></i>
+        </header>
+        <section class="mdlext-accordion__tabpanel" role="tabpanel">
+          <h5>Content #5 goes here</h5>
+          <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
+            ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
+            maximus massa felis quis quam. usce tincidunt leo in est venenatis porta.
+          </p>
+        </section>
+      </li>
+    </ul>
+  </div>  <!-- mdl-cell -->
+
+  <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+    <ul class="mdlext-accordion mdlext-js-accordion mdlext-accordion--vertical mdlext-js-ripple-effect mdlext-js-animation-effect mdlext-light-color-theme"
+        role="tablist" aria-multiselectable="true">
+
+      <li class="mdlext-accordion__panel" role="presentation">
+        <header class="mdlext-accordion__tab" aria-expanded="true" role="tab">
+          <i class="material-icons">info</i>
+          <span class="mdlext-accordion__tab__caption">First section. A long caption should not push the state icon</span>
+          <i class="mdlext-aria-toggle-material-icons"></i>
+        </header>
+        <section class="mdlext-accordion__tabpanel" role="tabpanel" aria-hidden="false">
+          <h5>Content #1 goes here</h5>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique eget augue eget gravida.
+            Etiam eget imperdiet massa. Aliquam nisi eros, molestie a vulputate quis, tempor nec quam. Ut at libero
+            in sem pellentesque imperdiet. Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
+            ac dignissim odio tortor nec quam.Fusce tincidunt leo in est <a href="#">venenatis porta</a>.
+          </p>
+          <p>Maecenas eu vestibulum orci. Ut eget nisi a est sagittis euismod a vel
+            justo. Quisque at dui urna. Duis vel velit leo. Nulla nunc sem, rutrum at aliquet in, aliquet id velit. Duis
+            mattis placerat erat, a aliquam leo rhoncus vel. Sed nec diam ex. Praesent convallis purus lorem, vel porttitor
+            neque gravida quis. Etiam et malesuada dui. Nunc vitae viverra dui. Suspendisse feugiat efficitur augue, quis
+            blandit leo ullamcorper vel.
+          </p>
+        </section>
+      </li>
+      <li class="mdlext-accordion__panel" role="presentation">
+        <header class="mdlext-accordion__tab" aria-expanded="false" role="tab">
+          <span class="mdlext-accordion__tab__caption">Tab #2</span>
+          <i class="mdlext-aria-toggle-material-icons"></i>
+        </header>
+        <section class="mdlext-accordion__tabpanel" role="tabpanel" hidden aria-hidden="true">
+          <h5>Content #2 goes here</h5>
+          <p>Curabitur malesuada placerat nunc, id dapibus justo tempor in. Ut molestie
+            arcu justo, id volutpat eros vestibulum eget. Fusce tincidunt leo in est venenatis porta.
+          </p>
+        </section>
+      </li>
+      <li class="mdlext-accordion__panel" role="presentation">
+        <header class="mdlext-accordion__tab" aria-expanded="false" role="tab" disabled tabindex="0">
+          <i class="material-icons">warning</i>
+          <span class="mdlext-accordion__tab__caption">Tab #3, disabled</span>
+          <i class="mdlext-aria-toggle-material-icons"></i>
+        </header>
+        <section class="mdlext-accordion__tabpanel" role="tabpanel" hidden aria-hidden="true">
+          <h5>Content #3 goes here</h5>
+          <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
+            ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
+            maximus massa felis quis quam. usce tincidunt leo in est venenatis porta.
+          </p>
+        </section>
+      </li>
+      <li class="mdlext-accordion__panel" role="presentation">
+        <header class="mdlext-accordion__tab" aria-expanded="false" role="tab">
+          <i class="material-icons">accessibility</i>
+          <i class="material-icons">help_outline</i>
+          <i class="material-icons">radio</i>
+          <span class="mdlext-accordion__tab__caption">Tab #4, no toggle icon</span>
+        </header>
+        <section class="mdlext-accordion__tabpanel" role="tabpanel" hidden aria-hidden="true">
+          <h5>Content #4 goes here</h5>
+          <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
+            ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
+            maximus massa felis quis quam. usce tincidunt leo in est venenatis porta.
+          </p>
+        </section>
+      </li>
+      <li class="mdlext-accordion__panel" role="presentation">
+        <header class="mdlext-accordion__tab" role="tab">
+          <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">favorite</i></button>
+          <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">share</i></button>
+          <span class="mdlext-accordion__tab__caption">Tab #5, with icon buttons</span>
+          <i class="mdlext-aria-toggle-material-icons"></i>
+        </header>
+        <section class="mdlext-accordion__tabpanel" role="tabpanel">
+          <h5>Content #5 goes here</h5>
+          <p>Praesent pretium, sapien vel mollis porttitor, felis magna vehicula metus,
+            ac dignissim odio tortor nec quam. Nam molestie, arcu id maximus lacinia, ante ipsum posuere mauris, ac
+            maximus massa felis quis quam. usce tincidunt leo in est venenatis porta.
+          </p>
+        </section>
+      </li>
+    </ul>
+  </div>  <!-- mdl-cell -->
+</div> <!-- mdl-grid -->
+
+
 
 <p class="mdl-typography--caption" style="margin-top: 64px;">
   All images appearing in this page are the exclusive property of Leif Olsen and are protected under the United States and International Copyright laws.

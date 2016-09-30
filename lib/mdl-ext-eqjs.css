@@ -1551,7 +1551,7 @@ ul.mdlext-lightboard {
 
 .mdlext-lightboard .mdlext-lightboard__slide:focus {
   outline-offset: -2px;
-  outline-color: default;
+  outline-color: inherit;
 }
 
 .mdlext-lightboard .mdlext-lightboard__slide[aria-selected='true'] {
@@ -1578,7 +1578,7 @@ ul.mdlext-lightboard {
 .mdlext-lightboard .mdlext-lightboard__slide__frame:focus,
 .mdlext-lightboard .mdlext-lightboard__slide__ripple-container:focus {
   outline-offset: -2px;
-  outline-color: default;
+  outline-color: inherit;
 }
 
 .mdlext-lightboard .mdlext-lightboard__slide__frame .mdl-ripple,
@@ -3106,7 +3106,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 
 .mdlext-accordion__tab:focus {
   outline-offset: -2px;
-  outline-color: default;
+  outline-color: inherit;
   outline-width: 1px;
 }
 
@@ -3517,6 +3517,10 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
 .mdlext-light-color-theme {
   background-color: #FAFAFA;
   color: rgba(0, 0, 0, 0.87);
+}
+
+.mdlext-light-color-theme a {
+  outline-color: inherit;
 }
 
 .mdlext-light-color-theme .mdl-color--primary {
@@ -4464,6 +4468,90 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
   color: rgba(0, 0, 0, 0.12);
 }
 
+.mdlext-light-color-theme .mdlext-accordion__tab {
+  color: #000000;
+  background-color: rgba(117, 117, 117, 0.2);
+}
+
+.mdlext-light-color-theme .mdlext-accordion__tab:focus {
+  outline-color: rgba(109, 109, 109, 0.5);
+}
+
+.mdlext-light-color-theme .mdlext-accordion__tab[aria-expanded='true'] {
+  background-color: rgba(117, 117, 117, 0.3);
+}
+
+.mdlext-light-color-theme .mdlext-accordion__tab[aria-selected='true'] {
+  background-color: rgba(117, 117, 117, 0.4);
+}
+
+.mdlext-light-color-theme .mdlext-accordion__tab[disabled] {
+  background-color: rgba(117, 117, 117, 0.12);
+  color: rgba(0, 0, 0, 0.26);
+  pointer-events: none;
+}
+
+.mdlext-light-color-theme .mdlext-accordion__tab[disabled] > * {
+  color: rgba(0, 0, 0, 0.26);
+}
+
+.mdlext-light-color-theme .mdlext-accordion__tab:hover:not([disabled]) {
+  background-color: rgba(117, 117, 117, 0.4);
+}
+
+.mdlext-light-color-theme .mdlext-accordion__tab--ripple[aria-selected='true']::before {
+  background: rgba(117, 117, 117, 0.4);
+}
+
+.mdlext-light-color-theme .mdlext-accordion__tabpanel {
+  color: inherit;
+  background-color: transparent;
+}
+
+.mdlext-light-color-theme .mdlext-accordion--vertical .mdlext-accordion__tab {
+  border-top: 1px solid rgba(117, 117, 117, 0.5);
+}
+
+.mdlext-light-color-theme .mdlext-accordion--vertical .mdlext-accordion__tab[aria-selected='true']::after {
+  background-color: rgba(102, 102, 102, 0.5);
+}
+
+.mdlext-light-color-theme .mdlext-accordion--vertical .mdlext-accordion__tabpanel {
+  border-top: 1px solid rgba(117, 117, 117, 0.5);
+}
+
+.mdlext-light-color-theme .mdlext-accordion--horizontal .mdlext-accordion__tab {
+  border-left: 1px solid rgba(117, 117, 117, 0.5);
+}
+
+.mdlext-light-color-theme .mdlext-accordion--horizontal .mdlext-accordion__tab[aria-selected='true']::after {
+  background-color: rgba(102, 102, 102, 0.5);
+}
+
+.mdlext-light-color-theme .mdlext-accordion--horizontal .mdlext-accordion__tabpanel {
+  border-left: 1px solid rgba(117, 117, 117, 0.5);
+}
+
+.mdlext-light-color-theme .mdlext-accordion__panel:first-child > .mdlext-light-color-theme .mdlext-accordion__tab {
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+
+.mdlext-light-color-theme .mdlext-accordion[disabled] .mdlext-accordion__tab {
+  background-color: rgba(117, 117, 117, 0.12);
+  color: rgba(0, 0, 0, 0.26);
+}
+
+.mdlext-light-color-theme .mdlext-accordion[disabled] .mdlext-accordion__tab > * {
+  color: rgba(0, 0, 0, 0.26);
+}
+
+.mdlext-light-color-theme .mdlext-accordion[disabled] .mdlext-accordion__tabpanel {
+  opacity: 0.8;
+  -webkit-filter: blur(1px) grayscale(80%);
+          filter: blur(1px) grayscale(80%);
+}
+
 /* -------------------------------------------------------------
    Palette samples. Not part of build
 ----------------------------------------------------------------
@@ -4525,6 +4613,10 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
 .mdlext-dark-color-theme {
   background-color: #303030;
   color: white;
+}
+
+.mdlext-dark-color-theme a {
+  outline-color: inherit;
 }
 
 .mdlext-dark-color-theme .mdl-color--primary {
@@ -5469,6 +5561,90 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
 .mdlext-dark-color-theme .mdlext-bordered-fields fieldset[disabled] .mdlext-selectfield i,
 .mdlext-dark-color-theme .mdlext-bordered-fields fieldset[disabled] .mdlext-selectfield .mdl-button {
   color: rgba(255, 255, 255, 0.12);
+}
+
+.mdlext-dark-color-theme .mdlext-accordion__tab {
+  color: white;
+  background-color: black;
+}
+
+.mdlext-dark-color-theme .mdlext-accordion__tab:focus {
+  outline-color: #a8a8a8;
+}
+
+.mdlext-dark-color-theme .mdlext-accordion__tab[aria-expanded='true'] {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.mdlext-dark-color-theme .mdlext-accordion__tab[aria-selected='true'] {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.mdlext-dark-color-theme .mdlext-accordion__tab[disabled] {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+}
+
+.mdlext-dark-color-theme .mdlext-accordion__tab[disabled] > * {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.mdlext-dark-color-theme .mdlext-accordion__tab:hover:not([disabled]) {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.mdlext-dark-color-theme .mdlext-accordion__tab--ripple[aria-selected='true']::before {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.mdlext-dark-color-theme .mdlext-accordion__tabpanel {
+  color: inherit;
+  background-color: transparent;
+}
+
+.mdlext-dark-color-theme .mdlext-accordion--vertical .mdlext-accordion__tab {
+  border-top: 1px solid #424242;
+}
+
+.mdlext-dark-color-theme .mdlext-accordion--vertical .mdlext-accordion__tab[aria-selected='true']::after {
+  background-color: #a8a8a8;
+}
+
+.mdlext-dark-color-theme .mdlext-accordion--vertical .mdlext-accordion__tabpanel {
+  border-top: 1px solid #424242;
+}
+
+.mdlext-dark-color-theme .mdlext-accordion--horizontal .mdlext-accordion__tab {
+  border-left: 1px solid #424242;
+}
+
+.mdlext-dark-color-theme .mdlext-accordion--horizontal .mdlext-accordion__tab[aria-selected='true']::after {
+  background-color: #a8a8a8;
+}
+
+.mdlext-dark-color-theme .mdlext-accordion--horizontal .mdlext-accordion__tabpanel {
+  border-left: 1px solid #424242;
+}
+
+.mdlext-dark-color-theme .mdlext-accordion__panel:first-child > .mdlext-dark-color-theme .mdlext-accordion__tab {
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+
+.mdlext-dark-color-theme .mdlext-accordion[disabled] .mdlext-accordion__tab {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.mdlext-dark-color-theme .mdlext-accordion[disabled] .mdlext-accordion__tab > * {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.mdlext-dark-color-theme .mdlext-accordion[disabled] .mdlext-accordion__tabpanel {
+  opacity: 0.8;
+  -webkit-filter: blur(1px) grayscale(80%);
+          filter: blur(1px) grayscale(80%);
 }
 
 

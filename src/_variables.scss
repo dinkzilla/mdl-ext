@@ -87,7 +87,7 @@ $mdlext-accordion-header-background-open-color   : rgba($mdlext-accordion-header
 $mdlext-accordion-header-background-active-color : rgba($mdlext-accordion-header-background-color-base, 0.40) !default;
 $mdlext-accordion-header-border-color            : rgba($mdlext-accordion-header-background-color-base, 0.50) !default;
 $mdlext-accordion-header-background-hover-color  : rgba($mdlext-accordion-header-background-color-base, 0.40) !default;
-$mdlext-accordion-header-focus-outline-color     : default !default; //rgba(rgb-string-to-hex($color-primary), 0.30) !default;
+$mdlext-accordion-header-focus-outline-color     : inherit !default;
 $mdlext-accordion-header-disabled-color          : rgba($mdlext-accordion-header-background-color-base, 0.12) !default;
 $mdlext-accordion-header-secondary-color         : $mdlext-color-black !default;
 $mdlext-accordion-header-secondary-color-disabled: rgba($mdlext-color-black, 0.26) !default;
@@ -160,7 +160,7 @@ $mdlext-lightboard-slide-background-color-hover: #E8E8E8 !default;
 $mdlext-lightboard-slide-active-bacground-color: #E8E8E8 !default;
 $mdlext-lightboard-slide-box-shadow-hover      : 2px 2px 12px -1px rgba(219, 215, 219, 1) !default;
 $mdlext-lightboard-ripple-color                : $tab-highlight-color !default;
-$mdlext-lightboard-focus-outline-color         : default !default; //#777777 !default;
+$mdlext-lightboard-focus-outline-color         : inherit !default;
 $mdlext-lightboard-figcaption-text-color       : rgb-string-to-hex($palette-grey-400) !default;
 
 
@@ -363,6 +363,23 @@ $mdlext-selectfield-arrow-width: 0.7em;
 $mdlext-selectfield-arrow-length: 0.5em;
 
 
+// Accordion
+$mdlext-light-accordion-header-background-color-base   : $mdlext-palette-grey-600 !default;
+$mdlext-light-accordion-header-background-color        : rgba($mdlext-light-accordion-header-background-color-base, 0.20) !default;
+$mdlext-light-accordion-header-background-open-color   : rgba($mdlext-light-accordion-header-background-color-base, 0.30) !default;
+$mdlext-light-accordion-header-background-active-color : rgba($mdlext-light-accordion-header-background-color-base, 0.40) !default;
+$mdlext-light-accordion-header-border-color            : rgba($mdlext-light-accordion-header-background-color-base, 0.50) !default;
+$mdlext-light-accordion-header-background-hover-color  : rgba($mdlext-light-accordion-header-background-color-base, 0.40) !default;
+$mdlext-light-accordion-header-focus-outline-color     : darken($mdlext-light-accordion-header-border-color, 3%) !default;
+$mdlext-light-accordion-header-disabled-color          : rgba($mdlext-light-accordion-header-background-color-base, 0.12) !default;
+$mdlext-light-accordion-header-secondary-color         : $mdlext-color-black !default;
+$mdlext-light-accordion-header-secondary-color-disabled: rgba($mdlext-color-black, 0.26) !default;
+$mdlext-light-accordion-header-highlight-color         : darken($mdlext-light-accordion-header-border-color, 6%) !default;
+$mdlext-light-accordion-ripple-color                   : rgba($mdlext-light-accordion-header-background-color-base, 0.4) !default;
+$mdlext-light-accordion-content-color                  : inherit !default;
+$mdlext-light-accordion-content-background-color       : transparent !default;
+
+
 // Bordered fields
 $mdlext-light-bordered-field-input-text-color               : inherit !default;
 $mdlext-light-bordered-field-border-color                   : $mdlext-light-input-text-bottom-border-color !default;
@@ -522,6 +539,23 @@ $mdlext-dark-data-table-dividers:                       1px solid $mdlext-dark-d
 
 // Selectfield
 // Uses variables from textfield
+
+
+// Accordion
+$mdlext-dark-accordion-header-background-color-base   : $mdlext-color-black !default;
+$mdlext-dark-accordion-header-background-color        : rgba($mdlext-dark-accordion-header-background-color-base, 1.0) !default;
+$mdlext-dark-accordion-header-background-open-color   : rgba($mdlext-dark-accordion-header-background-color-base, 0.9) !default;
+$mdlext-dark-accordion-header-border-color            : $mdlext-palette-grey-800 !default;
+$mdlext-dark-accordion-header-background-hover-color  : rgba($mdlext-dark-accordion-header-background-color-base, 0.5) !default;
+$mdlext-dark-accordion-header-background-active-color : rgba($mdlext-dark-accordion-header-background-color-base, 0.6) !default;
+$mdlext-dark-accordion-header-focus-outline-color     : lighten($mdlext-dark-accordion-header-border-color, 40%) !default;
+$mdlext-dark-accordion-header-disabled-color          : rgba($mdlext-dark-accordion-header-background-color-base, 0.4) !default;
+$mdlext-dark-accordion-header-secondary-color         : $mdlext-dark-text-color-primary !default;
+$mdlext-dark-accordion-header-secondary-color-disabled: $mdlext-dark-text-color-disabled !default;
+$mdlext-dark-accordion-header-highlight-color         : lighten($mdlext-dark-accordion-header-border-color, 40%) !default;
+$mdlext-dark-accordion-ripple-color                   : rgba($mdlext-dark-accordion-header-background-color-base, 0.3) !default;
+$mdlext-dark-accordion-content-color                  : inherit !default;
+$mdlext-dark-accordion-content-background-color       : transparent !default;
 
 
 // Bordered fields
