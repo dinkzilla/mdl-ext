@@ -25,15 +25,15 @@ and makes the contents of each panel visible (or not) by interacting with the Ac
 &nbsp;1. Code a `<ul>` element with `class="mdlext-accordion mdlext-js-accordion mdlext-accordion--horizontal"`  to hold the accordion with horizontal layout. 
 ```html
 <ul class="mdlext-accordion mdlext-js-accordion mdlext-accordion--horizontal">
-<ul>
+</ul>
 ```
 
 &nbsp;2. Code a `<li>` element with `class="mdlext-accordion__panel"`  to hold an individual accordion panel. 
 ```html
 <ul class="mdlext-accordion mdlext-js-accordion mdlext-accordion--horizontal">
   <li class="mdlext-accordion__panel">
-  <li>
-<ul>
+  </li>
+</ul>
 ```
 
 &nbsp;3. Code a `<header>` element with `class="mdlext-accordion__tab"`  to hold the accordion tab header. 
@@ -42,8 +42,8 @@ and makes the contents of each panel visible (or not) by interacting with the Ac
   <li class="mdlext-accordion__panel">
     <header class="mdlext-accordion__tab">
     </header>
-  <li>
-<ul>
+  </li>
+</ul>
 ```
 
 &nbsp;4. Code a `<span>` element with `class="mdlext-accordion__tab__caption"` to hold the accordion tab header caption. 
@@ -53,8 +53,8 @@ and makes the contents of each panel visible (or not) by interacting with the Ac
     <header class="mdlext-accordion__tab">
       <span class="mdlext-accordion__tab__caption">A tab caption</span>
     </header>
-  <li>
-<ul>
+  </li>
+</ul>
 ```
 
 &nbsp;5. Code a `<section>` element with `class="mdlext-accordion__tabpanel"`  to hold the tab content. 
@@ -67,8 +67,8 @@ and makes the contents of each panel visible (or not) by interacting with the Ac
     <section class="mdlext-accordion__tabpanel">
       <p>Content goes here ...</p>
     </section>
-  <li>
-<ul>
+  </li>
+</ul>
 ```
 
 &nbsp;6. Repeat steps 2..5 for each accordion panel required. 
