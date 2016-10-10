@@ -45,6 +45,7 @@ const JS_MENU_BUTTON = 'mdlext-js-menu-button';
 const MENU_BUTTON_MENU = 'mdlext-menu';
 const MENU_BUTTON_MENU_ITEM = 'mdlext-menu__item';
 const MENU_BUTTON_MENU_ITEM_SEPARATOR = 'mdlext-menu__item-separator';
+const MDL_LAYOUT_CONTENT = 'mdl-layout__content';
 
 /**
  * Creates the menu controlled by the menu button
@@ -430,10 +431,14 @@ class MenuButton {
    */
   positionChangeHandler = () => {
     this.closeMenu( true );
+
+    // TODO: Calculate scroll distance before closing
+    //       Should accept av few pixels scroll before closing
+    //       Alternatively reposition menu while scrolling
+    //return undefined;
   };
 
   closeMenuHandler = event => {
-
     if(event && event.detail) {
       if(event.detail.item && event.detail.item !== this.selectedItem) {
         this.selectedItem = event.detail.item;
@@ -523,15 +528,17 @@ class MenuButton {
       }
     };
 
-    /*
-    const moveMenuToBody = (element) => {
+    const moveElementToDocumentBody = (element) => {
       // To position the menu on top of all other z-indexed elements the menu should be moved to document.body
       //       See: https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
-      //const c = document.querySelector(`.${MDL_LAYOUT}`) || document.body;
-      document.body.appendChild(element);
+
+      if(element.parentNode !== document.body) {
+        const el = document.querySelector(`.${MDL_LAYOUT_CONTENT}`) || document.body;
+        return el.appendChild(element);
+      }
+
       return element;
     };
-    */
 
     const findMenuElement = () => {
       let menuElement;
@@ -554,6 +561,7 @@ class MenuButton {
         else {
           this.menu = menuFactory(menuElement);
           menuElement.componentInstance = this.menu;
+          moveElementToDocumentBody(menuElement);
         }
         this.element.setAttribute('aria-controls', this.menu.element.id);
       }
@@ -572,6 +580,8 @@ class MenuButton {
       const related = [...document.querySelectorAll(`.${JS_MENU_BUTTON}[aria-controls="${this.element.getAttribute('aria-controls')}"]`)];
       if(related.filter( c => c !== this.element && c.getAttribute('data-upgraded').indexOf('MaterialExtMenuButton') >= 0).length === 0) {
         this.menu.downgrade();
+
+        // TODO: Move menu back remove menu from DOM
       }
     }
     this.removeListeners();

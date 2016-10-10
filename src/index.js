@@ -5,7 +5,6 @@ import 'utils/json-utils';
 import 'utils/full-throttle';
 import 'utils/easing';
 import 'utils/interval-function';
-import 'utils/resize-observer';
 import 'sticky-header/sticky-header';
 import 'selectfield/selectfield';
 import 'accordion/accordion';
