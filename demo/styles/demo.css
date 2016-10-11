@@ -5,9 +5,11 @@ html {
   box-sizing: inherit;
 }
 
+/*
 body {
   overflow: hidden;
 }
+*/
 
 #mount {
   padding-left: 12px;

@@ -7,6 +7,8 @@ The menu button has roles, attributes and behaviour as outlined in
 </p>
 </article>
 
+<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
 <style>
   .size-22 {
     font-size: 22px;
@@ -50,30 +52,10 @@ The menu button has roles, attributes and behaviour as outlined in
   function signedIn(sn) {
     return 'Signed in with&nbsp;&nbsp;<i class="size-22 icon ion-social-' + sn + '"></i>&nbsp;';
   }
+  function signedInIcon(sn) {
+    return '<i class="size-22 icon ion-social-' + sn + '"></i>';
+  }
 </script>
-
-<ul id="shared-social-menu" class="mdlext-menu" hidden >
-  <li class="mdlext-menu__item" data-value="twitter">
-    <span class="mdlext-menu__item__caption">Twitter</span>
-    <i class="icon ion-social-twitter-outline size-22"></i>
-  </li>
-  <li class="mdlext-menu__item" data-value="github">
-    <span class="mdlext-menu__item__caption">GitHub</span>
-    <i class="ion-social-github-outline size-22"></i>
-  </li>
-  <li class="mdlext-menu__item" data-value="googleplus">
-    <span class="mdlext-menu__item__caption">G+</span>
-    <i class="ion-social-googleplus-outline size-22"></i>
-  </li>
-  <li class="mdlext-menu__item" data-value="linkedin">
-    <span class="mdlext-menu__item__caption">LinkedIn</span>
-    <i class="icon ion-social-linkedin-outline size-22"></i>
-  </li>
-  <li class="mdlext-menu__item" data-value="facebook">
-    <span class="mdlext-menu__item__caption">Facebook</span>
-    <i class="icon ion-social-facebook-outline size-22"></i>
-  </li>
-</ul>
 
 <div class="mdl-grid mdl-grid--no-spacing">
   <div class="mdl-cell mdl-cell--4-col">
@@ -124,7 +106,7 @@ The menu button has roles, attributes and behaviour as outlined in
     </script>
   </div> <!--cell -->
 
-  <div class="mdl-cell mdl-cell--4-col mdlext-bordered-fields">
+  <div class="mdl-cell mdl-cell--4-col">
     <p>custom styled <code>&lt;div&gt;</code></p>
     <div id="btn-social-4"
          class="mdlext-menu-button mdlext-js-menu-button" style="width:300px; height:46px; max-width:100%;  border:1px solid green"
@@ -142,23 +124,45 @@ The menu button has roles, attributes and behaviour as outlined in
 
 
   <div class="mdl-cell mdl-cell--4-col">
-    <p>MDL menu</p>
+    <p>mdl-button--icon</p>
 
-    <button id="demo-menu-lower-left" style="height:46px; width:46px;"
-            class="mdl-button mdl-js-button mdl-button--icon">
+    <button id="btn-social-5" style="height:46px; width:46px;"
+            class="mdl-button mdl-js-button mdl-button--icon mdlext-js-menu-button"
+            aria-controls="shared-social-menu">
       <i class="material-icons">more_vert</i>
     </button>
+    <script>
+      document.querySelector('#btn-social-5').addEventListener('menuselect', function(event) {
+        this.innerHTML = signedInIcon(event.detail.source.getAttribute('data-value'));
+      });
+    </script>
 
-    <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
-        for="demo-menu-lower-left">
-      <li class="mdl-menu__item">Some Action</li>
-      <li class="mdl-menu__item mdl-menu__item--full-bleed-divider">Another Action</li>
-      <li disabled class="mdl-menu__item">Disabled Action</li>
-      <li class="mdl-menu__item">Yet Another Action</li>
-    </ul>
   </div> <!--cell -->
 
-</div>
+</div> <!-- grid -->
+
+<ul id="shared-social-menu" class="mdlext-menu" hidden >
+  <li class="mdlext-menu__item" data-value="twitter">
+    <span class="mdlext-menu__item__caption">Twitter</span>
+    <i class="icon ion-social-twitter-outline size-22"></i>
+  </li>
+  <li class="mdlext-menu__item" data-value="github">
+    <span class="mdlext-menu__item__caption">GitHub</span>
+    <i class="ion-social-github-outline size-22"></i>
+  </li>
+  <li class="mdlext-menu__item" data-value="googleplus">
+    <span class="mdlext-menu__item__caption">G+</span>
+    <i class="ion-social-googleplus-outline size-22"></i>
+  </li>
+  <li class="mdlext-menu__item" data-value="linkedin">
+    <span class="mdlext-menu__item__caption">LinkedIn</span>
+    <i class="icon ion-social-linkedin-outline size-22"></i>
+  </li>
+  <li class="mdlext-menu__item" data-value="facebook">
+    <span class="mdlext-menu__item__caption">Facebook</span>
+    <i class="icon ion-social-facebook-outline size-22"></i>
+  </li>
+</ul>
 
 <p style="margin-top: 16px;">Menu buttons positioned left, middle and right, using <code>textalign</code>.</p>
 <div role="presentation">
