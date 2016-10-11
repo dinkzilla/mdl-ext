@@ -4,6 +4,7 @@ import requireUncached from 'require-uncached';
 import jsdomify from 'jsdomify';
 import {patchJsDom} from '../testutils/patch-jsdom';
 import { removeChildElements } from '../../src/utils/dom-utils';
+import createMockRaf from '../testutils/mock-raf';
 import {
   VK_TAB,
   VK_ENTER,
@@ -151,13 +152,15 @@ describe('MaterialExtMenuButton', () => {
 </head>
 <body>
 <main>
-  <div id="default-fixture">
-    ${menu_button_fixture}
-  </div>
-  <div id="aria-fixture">
-    ${menu_button_with_aria_fixture}
-  </div>
-  <div id="mount">
+  <div class="mdl-layout__content">
+    <div id="default-fixture">
+      ${menu_button_fixture}
+    </div>
+    <div id="aria-fixture">
+      ${menu_button_with_aria_fixture}
+    </div>
+    <div id="mount">
+    </div>
   </div>
 </main>
 </body>
@@ -203,7 +206,7 @@ describe('MaterialExtMenuButton', () => {
       });
     });
 
-    it('should have "is-upgraded" class on menu when upgraed successfully', () => {
+    it('should have "is-upgraded" class on menu when upgraded successfully', () => {
       const container = document.querySelector('#mount');
       try {
         container.insertAdjacentHTML('beforeend', menu_button_fixture);
@@ -215,6 +218,29 @@ describe('MaterialExtMenuButton', () => {
         assert.isTrue(menu.classList.contains('is-upgraded'), 'Expected menu element to have class "is-upgraded" after upgrade');
 
         componentHandler.downgradeElements(component);
+      }
+      finally {
+        removeChildElements(container);
+      }
+    });
+
+    it('should move the menu to document.body when upgraded successfully, then move menu back to original parent after downgrade', () => {
+      const container = document.querySelector('#mount');
+      try {
+        container.insertAdjacentHTML('beforeend', menu_button_fixture);
+        const component = container.querySelector(`.${MENU_BUTTON}`);
+
+        const menu = component.parentNode.querySelector(`.${MENU_BUTTON_MENU}`);
+        assert.isNotNull(menu, 'Expected a menu');
+
+        const parentNode = menu.parentNode;
+        assert.notEqual(parentNode, document.body, 'Did not expect menu to be a child of document.body before upgrade');
+
+        componentHandler.upgradeElement(component, 'MaterialExtMenuButton');
+        assert.equal(menu.parentNode, document.body, 'Expected menu to be a child of document.body after upgrade');
+
+        componentHandler.downgradeElements(component);
+        assert.equal(menu.parentNode, parentNode, 'Expected menu to be moved back to original parent node after downgrade');
       }
       finally {
         removeChildElements(container);
@@ -318,7 +344,7 @@ describe('MaterialExtMenuButton', () => {
       const button = document.querySelector(`#default-fixture .${MENU_BUTTON}`);
       assert.isNotNull(button, 'Expected menu button not to be null');
 
-      const menu = document.querySelector(`#default-fixture .${MENU_BUTTON_MENU}`);
+      const menu = button.MaterialExtMenuButton.getMenuElement();
       assert.isNotNull(menu, 'Expected menu button menu not to be null');
 
       assert.equal(button.getAttribute('role'), 'button', 'Expected menu button to have role="button"');
@@ -391,7 +417,10 @@ describe('MaterialExtMenuButton', () => {
 
     beforeEach( () => {
       button = document.querySelector(`#default-fixture .${MENU_BUTTON}`);
-      menu = document.querySelector(`#default-fixture .${MENU_BUTTON_MENU}`);
+      assert.isNotNull(button, 'Expected menu button menu not to be null');
+
+      menu = button.MaterialExtMenuButton.getMenuElement();
+      assert.isNotNull(menu, 'Expected menu button menu not to be null');
 
       [...menu.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`)]
         .forEach(selectedItem => selectedItem.removeAttribute('aria-selected'));
@@ -529,13 +558,52 @@ describe('MaterialExtMenuButton', () => {
       }
     });
 
-    it('closes the menu when content scroll', () => {
-      button.MaterialExtMenuButton.openMenu('first');
-      document.body.dispatchEvent(new Event('scroll'));
-      assert.equal(button.getAttribute('aria-expanded'), 'false', 'ESC key: Expected button to have aria-expanded=false');
-      assert.isTrue(menu.hasAttribute('hidden'), 'ESC key: Expected menu to have hidden attribute');
-    });
+    it('re-positions the menu when content scroll', () => {
+      let realRaf = window.requestAnimationFrame;
+      let realCaf = window.cancelAnimationFrame;
+      let mockRaf = createMockRaf();
+      window.requestAnimationFrame = mockRaf.raf;
+      window.cancelAnimationFrame = mockRaf.raf.cancel;
+      let rAFStub = sinon.stub(window, 'requestAnimationFrame', mockRaf.raf);
+      let clock = sinon.useFakeTimers(Date.now());
+      const interval = 1000/60;
 
+
+      let elementTop = 0;
+      let elementLeft = 0;
+
+      let getBoundingClientRectStub = sinon.stub(button, 'getBoundingClientRect', () => {
+        return {
+          top: elementTop,
+          left: elementLeft
+        };
+      });
+
+      try {
+        const content = document.querySelector('.mdl-layout__content');
+        content.scrollTop = 0;
+        content.style.height = '200px';
+
+        button.MaterialExtMenuButton.openMenu('first');
+
+        const menuTopBeforeScroll = menu.style.top;
+
+        elementTop = -100;
+        content.scrollTop = 100;
+        content.dispatchEvent(new Event('scroll'));
+        clock.tick(interval);
+        mockRaf.step();
+
+        assert.notEqual(menuTopBeforeScroll, menu.style.top, 'Expected menu to reposition');
+      }
+      finally {
+        getBoundingClientRectStub.restore();
+        clock.restore();
+        rAFStub.restore();
+        window.requestAnimationFrame = realRaf;
+        window.cancelAnimationFrame = realCaf;
+      }
+    });
   });
 
 
@@ -546,7 +614,11 @@ describe('MaterialExtMenuButton', () => {
 
     beforeEach( () => {
       button = document.querySelector(`#default-fixture .${MENU_BUTTON}`);
-      menu = document.querySelector(`#default-fixture .${MENU_BUTTON_MENU}`);
+      assert.isNotNull(button, 'Expected menu button menu not to be null');
+
+      menu = button.MaterialExtMenuButton.getMenuElement();
+      assert.isNotNull(menu, 'Expected menu button menu not to be null');
+
 
       [...menu.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`)]
         .forEach(selectedItem => selectedItem.removeAttribute('aria-selected'));

@@ -25,6 +25,7 @@
  * that activating the button will display a menu.
  */
 import { randomString } from '../utils/string-utils';
+import fullThrottle from '../utils/full-throttle';
 import {
   VK_TAB,
   VK_ENTER,
@@ -45,7 +46,7 @@ const JS_MENU_BUTTON = 'mdlext-js-menu-button';
 const MENU_BUTTON_MENU = 'mdlext-menu';
 const MENU_BUTTON_MENU_ITEM = 'mdlext-menu__item';
 const MENU_BUTTON_MENU_ITEM_SEPARATOR = 'mdlext-menu__item-separator';
-const MDL_LAYOUT_CONTENT = 'mdl-layout__content';
+//const MDL_LAYOUT_CONTENT = 'mdl-layout__content';
 
 /**
  * Creates the menu controlled by the menu button
@@ -55,6 +56,7 @@ const MDL_LAYOUT_CONTENT = 'mdl-layout__content';
 const menuFactory = element => {
 
   let ariaControls = null;
+  let parentNode = null;
 
   const removeAllSelected = () => {
     [...element.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`)]
@@ -325,11 +327,15 @@ const menuFactory = element => {
     addWaiAria();
     removeListeners();
     addListeners();
+    parentNode = element.parentNode;
     element.classList.add('is-upgraded');
   };
 
   const downgrade = () => {
     removeListeners();
+    if(element.parentNode !== parentNode) {
+      parentNode.appendChild(element);
+    }
     element.classList.remove('is-upgraded');
   };
 
@@ -376,6 +382,7 @@ class MenuButton {
   constructor(element) {
     this.element = element;
     this.focusElement = undefined;
+    this.focusElementLastScrollPosition = undefined;
     this.scrollElements = [];
     this.menu = undefined;
     this.selectedItem = null;
@@ -426,16 +433,24 @@ class MenuButton {
   };
 
   /**
-   * Close menu if content is scrolled, window is resized or orientation change
+   * Re-position menu if content is scrolled, window is resized or orientation change
    * @see https://javascriptweblog.wordpress.com/2015/11/02/of-classes-and-arrow-functions-a-cautionary-tale/
    */
-  positionChangeHandler = () => {
-    this.closeMenu( true );
+  recalcMenuPosition = fullThrottle( () => {
+    const c = this.focusElement.getBoundingClientRect();
+    const dx = this.focusElementLastScrollPosition.left - c.left;
+    const dy = this.focusElementLastScrollPosition.top - c.top;
+    const left = (parseFloat(this.menu.element.style.left) || 0) - dx;
+    const top = (parseFloat(this.menu.element.style.top) || 0) - dy;
 
-    // TODO: Calculate scroll distance before closing
-    //       Should accept av few pixels scroll before closing
-    //       Alternatively reposition menu while scrolling
-    //return undefined;
+    this.menu.element.style.left = `${left}px`;
+    this.menu.element.style.top = `${top}px`;
+    this.focusElementLastScrollPosition = c;
+  });
+
+
+  positionChangeHandler = () => {
+    this.recalcMenuPosition(this);
   };
 
   closeMenuHandler = event => {
@@ -469,16 +484,24 @@ class MenuButton {
 
   openMenu(position='first') {
     if(!this.isDisabled() && this.menu) {
-      // Close the menu if button position change
-      this.scrollElements = getScrollParents(this.element);
-      this.scrollElements.forEach(el => el.addEventListener('scroll', this.positionChangeHandler));
-      window.addEventListener('resize', this.positionChangeHandler);
-      window.addEventListener('orientationchange', this.positionChangeHandler);
-      this.menu.element.addEventListener('_closemenu', this.closeMenuHandler);
 
-      this.menu.selected = this.selectedItem;
-      this.menu.open(this.focusElement, position);
-      this.element.setAttribute('aria-expanded', 'true');
+      window.setTimeout( () => {
+        // Close the menu if button position change
+        this.scrollElements = getScrollParents(this.element);
+        this.scrollElements.forEach(el => el.addEventListener('scroll', this.positionChangeHandler));
+        window.addEventListener('resize', this.positionChangeHandler);
+        window.addEventListener('orientationchange', this.positionChangeHandler);
+        this.menu.element.addEventListener('_closemenu', this.closeMenuHandler);
+
+        this.menu.selected = this.selectedItem;
+        this.menu.open(this.focusElement, position);
+        this.element.setAttribute('aria-expanded', 'true');
+
+        this.focusElementLastScrollPosition = this.focusElement.getBoundingClientRect();
+      }, 50);
+      // Need a small delay (for some unknown reason).
+      // Probably need to do a focus check after opening menu.
+      // Also need to block execution if timeout is running (debounce this function?)
     }
   }
 
@@ -529,12 +552,11 @@ class MenuButton {
     };
 
     const moveElementToDocumentBody = (element) => {
-      // To position the menu on top of all other z-indexed elements the menu should be moved to document.body
+      // To position an element on top of all other z-indexed elements, the element should be moved to document.body
       //       See: https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
 
       if(element.parentNode !== document.body) {
-        const el = document.querySelector(`.${MDL_LAYOUT_CONTENT}`) || document.body;
-        return el.appendChild(element);
+        return document.body.appendChild(element);
       }
 
       return element;
@@ -580,8 +602,6 @@ class MenuButton {
       const related = [...document.querySelectorAll(`.${JS_MENU_BUTTON}[aria-controls="${this.element.getAttribute('aria-controls')}"]`)];
       if(related.filter( c => c !== this.element && c.getAttribute('data-upgraded').indexOf('MaterialExtMenuButton') >= 0).length === 0) {
         this.menu.downgrade();
-
-        // TODO: Move menu back remove menu from DOM
       }
     }
     this.removeListeners();
