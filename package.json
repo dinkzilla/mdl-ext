@@ -69,7 +69,7 @@
     "material-design-lite": ">= 1.2"
   },
   "devDependencies": {
-    "autoprefixer": "6.5.0",
+    "autoprefixer": "6.5.1",
     "babel-cli": "6.16.0",
     "babel-core": "6.17.0",
     "babel-eslint": "7.0.0",
@@ -90,7 +90,7 @@
     "css-loader": "0.25.0",
     "cz-conventional-changelog": "1.2.0",
     "dialog-polyfill": "0.4.4",
-    "doctrine": "1.4.0",
+    "doctrine": "1.5.0",
     "eq.js": "1.9.0",
     "es6-promise": "4.0.5",
     "eslint": "3.7.1",
