@@ -223,6 +223,8 @@ const menuFactory = element => {
   const clickHandler = event => {
 
     if(event.target) {
+      event.preventDefault();
+
       const t = event.target;
       if(t.closest(`.${MENU_BUTTON_MENU}`) === element) {
         const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
@@ -231,7 +233,7 @@ const menuFactory = element => {
         }
       }
       else {
-        const btn = event.target.closest(`.${JS_MENU_BUTTON}`);
+        const btn = t.closest(`.${JS_MENU_BUTTON}`);
         if(!btn) {
           close(false);
         }
@@ -277,11 +279,15 @@ const menuFactory = element => {
         }
         break;
     }
-    document.addEventListener('click', clickHandler);
+
+    // Handle click/tap outside menu client rect
+    document.documentElement.addEventListener('mouseup', clickHandler);
+    document.documentElement.addEventListener('touchend', clickHandler);
   };
 
   const close = (forceFocus = false, item = null) => {
-    document.removeEventListener('click', clickHandler);
+    document.documentElement.removeEventListener('mouseup', clickHandler);
+    document.documentElement.removeEventListener('touchend', clickHandler);
 
     element.dispatchEvent(
       new CustomEvent('_closemenu', {
@@ -313,14 +319,14 @@ const menuFactory = element => {
 
   const removeListeners = () => {
     element.removeEventListener('keydown', keyDownHandler);
-    element.removeEventListener('click', clickHandler);
-    //element.removeEventListener('blur', blurHandler);
+    element.removeEventListener('mouseup', clickHandler);
+    element.removeEventListener('touchend', clickHandler);
   };
 
   const addListeners = () => {
     element.addEventListener('keydown', keyDownHandler);
-    element.addEventListener('click', clickHandler);
-    //element.addEventListener('blur', blurHandler, true);
+    element.addEventListener('mouseup', clickHandler);
+    element.addEventListener('touchend', clickHandler);
   };
 
   const init = () => {
@@ -417,7 +423,7 @@ class MenuButton {
           return;
       }
     }
-    event.stopPropagation();
+    //event.stopPropagation();
     event.preventDefault();
   };
 
@@ -485,23 +491,24 @@ class MenuButton {
   openMenu(position='first') {
     if(!this.isDisabled() && this.menu) {
 
-      window.setTimeout( () => {
-        // Close the menu if button position change
-        this.scrollElements = getScrollParents(this.element);
-        this.scrollElements.forEach(el => el.addEventListener('scroll', this.positionChangeHandler));
-        window.addEventListener('resize', this.positionChangeHandler);
-        window.addEventListener('orientationchange', this.positionChangeHandler);
-        this.menu.element.addEventListener('_closemenu', this.closeMenuHandler);
+      //window.setTimeout( () => {
+      // Close the menu if button position change
+      this.scrollElements = getScrollParents(this.element);
+      this.scrollElements.forEach(el => el.addEventListener('scroll', this.positionChangeHandler));
+      window.addEventListener('resize', this.positionChangeHandler);
+      window.addEventListener('orientationchange', this.positionChangeHandler);
+      this.menu.element.addEventListener('_closemenu', this.closeMenuHandler);
 
-        this.menu.selected = this.selectedItem;
-        this.menu.open(this.focusElement, position);
-        this.element.setAttribute('aria-expanded', 'true');
+      this.menu.selected = this.selectedItem;
+      this.menu.open(this.focusElement, position);
+      this.element.setAttribute('aria-expanded', 'true');
 
-        this.focusElementLastScrollPosition = this.focusElement.getBoundingClientRect();
-      }, 50);
+      this.focusElementLastScrollPosition = this.focusElement.getBoundingClientRect();
+      //}, 50);
       // Need a small delay (for some unknown reason).
       // Probably need to do a focus check after opening menu.
       // Also need to block execution if timeout is running (debounce this function?)
+      // TODO: How to test?? Some test fails when using settimeout
     }
   }
 
@@ -558,7 +565,6 @@ class MenuButton {
       if(element.parentNode !== document.body) {
         return document.body.appendChild(element);
       }
-
       return element;
     };
 

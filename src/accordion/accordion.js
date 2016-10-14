@@ -283,16 +283,12 @@ import {
       }
     };
 
-    const tabClickHandler = e => {
-      e.preventDefault();
-      e.stopPropagation();
+    const tabClickHandler = () => {
       this.toggleTab_(panel, tab, tabpanel);
       selectTab();
     };
 
-    const tabFocusHandler = e => {
-      e.preventDefault();
-      e.stopPropagation();
+    const tabFocusHandler = () => {
       selectTab();
     };
 

@@ -6,7 +6,7 @@ html {
 }
 
 body {
-  overflow: hidden;
+  overflow: hidden; /* Needed by Chrome OSX and IOS to avoid "double" scrollbars when a menu opens */
 }
 
 #mount {

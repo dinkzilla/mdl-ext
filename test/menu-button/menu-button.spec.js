@@ -724,7 +724,7 @@ describe('MaterialExtMenuButton', () => {
       button.MaterialExtMenuButton.openMenu();
       const selectedItem = menu.children[1];
       selectedItem.focus();
-      dispatchMouseEvent(selectedItem, 'click');
+      dispatchMouseEvent(selectedItem, 'mouseup');
       assert.equal(menu.children[1].getAttribute('aria-selected'), 'true', 'Mouse cick: Expected menu item to have aria-selected="true"');
       assert.isTrue(menu.hasAttribute('hidden'), 'Mouse click: Expected menu to have hidden attribute');
     });
@@ -760,7 +760,7 @@ describe('MaterialExtMenuButton', () => {
 
       try {
         // Trigger click
-        dispatchMouseEvent(selectedItem, 'click');
+        dispatchMouseEvent(selectedItem, 'mouseup');
 
         const selected = button.MaterialExtMenuButton.getSelectedMenuItem();
         assert.equal(selectedItem, selected, 'Expected "button.MaterialExtMenuButton.getSelectedMenuItem()" return the slected menu item element');
