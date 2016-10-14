@@ -87,7 +87,7 @@ $mdlext-accordion-header-background-open-color   : rgba($mdlext-accordion-header
 $mdlext-accordion-header-background-active-color : rgba($mdlext-accordion-header-background-color-base, 0.40) !default;
 $mdlext-accordion-header-border-color            : rgba($mdlext-accordion-header-background-color-base, 0.50) !default;
 $mdlext-accordion-header-background-hover-color  : rgba($mdlext-accordion-header-background-color-base, 0.40) !default;
-$mdlext-accordion-header-focus-outline-color     : inherit !default;
+$mdlext-accordion-header-focus-outline-color     : invert !default;
 $mdlext-accordion-header-disabled-color          : rgba($mdlext-accordion-header-background-color-base, 0.12) !default;
 $mdlext-accordion-header-secondary-color         : $mdlext-color-black !default;
 $mdlext-accordion-header-secondary-color-disabled: rgba($mdlext-color-black, 0.26) !default;

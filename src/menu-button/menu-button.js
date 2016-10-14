@@ -25,6 +25,7 @@
  * that activating the button will display a menu.
  */
 import { randomString } from '../utils/string-utils';
+import fullThrottle from '../utils/full-throttle';
 import {
   VK_TAB,
   VK_ENTER,
@@ -45,6 +46,7 @@ const JS_MENU_BUTTON = 'mdlext-js-menu-button';
 const MENU_BUTTON_MENU = 'mdlext-menu';
 const MENU_BUTTON_MENU_ITEM = 'mdlext-menu__item';
 const MENU_BUTTON_MENU_ITEM_SEPARATOR = 'mdlext-menu__item-separator';
+//const MDL_LAYOUT_CONTENT = 'mdl-layout__content';
 
 /**
  * Creates the menu controlled by the menu button
@@ -54,6 +56,7 @@ const MENU_BUTTON_MENU_ITEM_SEPARATOR = 'mdlext-menu__item-separator';
 const menuFactory = element => {
 
   let ariaControls = null;
+  let parentNode = null;
 
   const removeAllSelected = () => {
     [...element.querySelectorAll(`.${MENU_BUTTON_MENU_ITEM}[aria-selected="true"]`)]
@@ -220,6 +223,8 @@ const menuFactory = element => {
   const clickHandler = event => {
 
     if(event.target) {
+      event.preventDefault();
+
       const t = event.target;
       if(t.closest(`.${MENU_BUTTON_MENU}`) === element) {
         const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
@@ -228,7 +233,7 @@ const menuFactory = element => {
         }
       }
       else {
-        const btn = event.target.closest(`.${JS_MENU_BUTTON}`);
+        const btn = t.closest(`.${JS_MENU_BUTTON}`);
         if(!btn) {
           close(false);
         }
@@ -274,11 +279,15 @@ const menuFactory = element => {
         }
         break;
     }
-    document.addEventListener('click', clickHandler);
+
+    // Handle click/tap outside menu client rect
+    document.documentElement.addEventListener('mouseup', clickHandler);
+    document.documentElement.addEventListener('touchend', clickHandler);
   };
 
   const close = (forceFocus = false, item = null) => {
-    document.removeEventListener('click', clickHandler);
+    document.documentElement.removeEventListener('mouseup', clickHandler);
+    document.documentElement.removeEventListener('touchend', clickHandler);
 
     element.dispatchEvent(
       new CustomEvent('_closemenu', {
@@ -310,25 +319,29 @@ const menuFactory = element => {
 
   const removeListeners = () => {
     element.removeEventListener('keydown', keyDownHandler);
-    element.removeEventListener('click', clickHandler);
-    //element.removeEventListener('blur', blurHandler);
+    element.removeEventListener('mouseup', clickHandler);
+    element.removeEventListener('touchend', clickHandler);
   };
 
   const addListeners = () => {
     element.addEventListener('keydown', keyDownHandler);
-    element.addEventListener('click', clickHandler);
-    //element.addEventListener('blur', blurHandler, true);
+    element.addEventListener('mouseup', clickHandler);
+    element.addEventListener('touchend', clickHandler);
   };
 
   const init = () => {
     addWaiAria();
     removeListeners();
     addListeners();
+    parentNode = element.parentNode;
     element.classList.add('is-upgraded');
   };
 
   const downgrade = () => {
     removeListeners();
+    if(element.parentNode !== parentNode) {
+      parentNode.appendChild(element);
+    }
     element.classList.remove('is-upgraded');
   };
 
@@ -375,6 +388,7 @@ class MenuButton {
   constructor(element) {
     this.element = element;
     this.focusElement = undefined;
+    this.focusElementLastScrollPosition = undefined;
     this.scrollElements = [];
     this.menu = undefined;
     this.selectedItem = null;
@@ -409,7 +423,7 @@ class MenuButton {
           return;
       }
     }
-    event.stopPropagation();
+    //event.stopPropagation();
     event.preventDefault();
   };
 
@@ -425,15 +439,27 @@ class MenuButton {
   };
 
   /**
-   * Close menu if content is scrolled, window is resized or orientation change
+   * Re-position menu if content is scrolled, window is resized or orientation change
    * @see https://javascriptweblog.wordpress.com/2015/11/02/of-classes-and-arrow-functions-a-cautionary-tale/
    */
+  recalcMenuPosition = fullThrottle( () => {
+    const c = this.focusElement.getBoundingClientRect();
+    const dx = this.focusElementLastScrollPosition.left - c.left;
+    const dy = this.focusElementLastScrollPosition.top - c.top;
+    const left = (parseFloat(this.menu.element.style.left) || 0) - dx;
+    const top = (parseFloat(this.menu.element.style.top) || 0) - dy;
+
+    this.menu.element.style.left = `${left}px`;
+    this.menu.element.style.top = `${top}px`;
+    this.focusElementLastScrollPosition = c;
+  });
+
+
   positionChangeHandler = () => {
-    this.closeMenu( true );
+    this.recalcMenuPosition(this);
   };
 
   closeMenuHandler = event => {
-
     if(event && event.detail) {
       if(event.detail.item && event.detail.item !== this.selectedItem) {
         this.selectedItem = event.detail.item;
@@ -464,6 +490,8 @@ class MenuButton {
 
   openMenu(position='first') {
     if(!this.isDisabled() && this.menu) {
+
+      //window.setTimeout( () => {
       // Close the menu if button position change
       this.scrollElements = getScrollParents(this.element);
       this.scrollElements.forEach(el => el.addEventListener('scroll', this.positionChangeHandler));
@@ -474,6 +502,13 @@ class MenuButton {
       this.menu.selected = this.selectedItem;
       this.menu.open(this.focusElement, position);
       this.element.setAttribute('aria-expanded', 'true');
+
+      this.focusElementLastScrollPosition = this.focusElement.getBoundingClientRect();
+      //}, 50);
+      // Need a small delay (for some unknown reason).
+      // Probably need to do a focus check after opening menu.
+      // Also need to block execution if timeout is running (debounce this function?)
+      // TODO: How to test?? Some test fails when using settimeout
     }
   }
 
@@ -523,15 +558,15 @@ class MenuButton {
       }
     };
 
-    /*
-    const moveMenuToBody = (element) => {
-      // To position the menu on top of all other z-indexed elements the menu should be moved to document.body
+    const moveElementToDocumentBody = (element) => {
+      // To position an element on top of all other z-indexed elements, the element should be moved to document.body
       //       See: https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
-      //const c = document.querySelector(`.${MDL_LAYOUT}`) || document.body;
-      document.body.appendChild(element);
+
+      if(element.parentNode !== document.body) {
+        return document.body.appendChild(element);
+      }
       return element;
     };
-    */
 
     const findMenuElement = () => {
       let menuElement;
@@ -554,6 +589,7 @@ class MenuButton {
         else {
           this.menu = menuFactory(menuElement);
           menuElement.componentInstance = this.menu;
+          moveElementToDocumentBody(menuElement);
         }
         this.element.setAttribute('aria-controls', this.menu.element.id);
       }

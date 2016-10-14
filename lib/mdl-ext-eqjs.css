@@ -2509,7 +2509,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 }
 
 .mdlext-menu {
-  position: fixed;
+  position: absolute;
   background: rgb(255,255,255);
   z-index: 1000;
   min-width: 124px;
@@ -3106,8 +3106,8 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 
 .mdlext-accordion__tab:focus {
   outline-offset: -2px;
-  outline-color: inherit;
-  outline-width: 1px;
+  outline-color: invert;
+  outline-width: 2px;
 }
 
 .mdlext-accordion__tab[aria-expanded='true'] {

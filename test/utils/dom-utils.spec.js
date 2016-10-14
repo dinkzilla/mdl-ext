@@ -48,7 +48,7 @@ describe('dom-utils', () => {
     <p>Paragraph #6</p>
     <p class='foo'>Paragraph #7</p>
   </section>
-  <section>  
+  <section>
     <div id="tether-1">
       <div></div>
     </div>
