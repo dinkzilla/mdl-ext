@@ -161,7 +161,7 @@ import {
       lightboxElement.style.maxWidth = '100%';
       const img = lightboxElement.querySelector('img');
       if(img) {
-        lightboxElement.style.maxWidth = img.naturalWidth !== 'undefined' ? `${img.naturalWidth}px` : `${img.width}px` || '100%';
+        lightboxElement.style.maxWidth = img.naturalWidth !== undefined ? `${img.naturalWidth}px` : `${img.width}px` || '100%';
       }
 
       const fh = footerHeight(lightboxElement.querySelector('footer'), lightboxElement.classList.contains(STICKY_FOOTER));

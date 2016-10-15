@@ -300,7 +300,7 @@ describe('MaterialExtMenuButton', () => {
         );
 
         assert.equal(components[0].MaterialExtMenuButton.getMenuElement(),
-          components[0].MaterialExtMenuButton.getMenuElement(), 'Expected buttons to share a menu');
+          components[1].MaterialExtMenuButton.getMenuElement(), 'Expected buttons to share a menu');
 
         componentHandler.downgradeElements(components);
       }
@@ -521,6 +521,36 @@ describe('MaterialExtMenuButton', () => {
       assert.isTrue(menu.hasAttribute('hidden'), 'ESC key: Expected menu to have hidden attribute');
     });
 
+    it('should close an already open menu when another menu button is clicked', () => {
+      const container = document.querySelector('#mount');
+      try {
+        container.insertAdjacentHTML('beforeend', menu_buttons_with_shared_menu);
+        const [...buttons] = container.querySelectorAll(`.${MENU_BUTTON}`);
+
+        assert.equal(buttons.length, 2, 'Expected two buttons');
+
+        componentHandler.upgradeElement(buttons[0], 'MaterialExtMenuButton');
+        componentHandler.upgradeElement(buttons[1], 'MaterialExtMenuButton');
+
+        buttons[0].MaterialExtMenuButton.closeMenu();
+        buttons[1].MaterialExtMenuButton.closeMenu();
+        dispatchMouseEvent(buttons[0], 'click');
+        assert.equal(buttons[0].getAttribute('aria-expanded'), 'true', 'Expected button 1 to have an open menu');
+        assert.equal(buttons[1].getAttribute('aria-expanded'), 'false', 'Expected button 2 to be closed');
+
+        dispatchMouseEvent(buttons[1], 'mousedown');
+        dispatchMouseEvent(buttons[1], 'click');
+        assert.equal(buttons[0].getAttribute('aria-expanded'), 'false', 'Expected button 1 to not have an open menu after clicking button 2');
+        assert.equal(buttons[1].getAttribute('aria-expanded'), 'true', 'Expected button 2 to be open after clicking that button');
+
+        componentHandler.downgradeElements(buttons);
+      }
+      finally {
+        removeChildElements(container);
+      }
+    });
+
+
     it('does nothing when an "undefined" key i pressed', () => {
       expect( () => {
         dispatchKeyDownEvent(button, VK_PAGE_UP);
@@ -724,7 +754,7 @@ describe('MaterialExtMenuButton', () => {
       button.MaterialExtMenuButton.openMenu();
       const selectedItem = menu.children[1];
       selectedItem.focus();
-      dispatchMouseEvent(selectedItem, 'mouseup');
+      dispatchMouseEvent(selectedItem, 'click');
       assert.equal(menu.children[1].getAttribute('aria-selected'), 'true', 'Mouse cick: Expected menu item to have aria-selected="true"');
       assert.isTrue(menu.hasAttribute('hidden'), 'Mouse click: Expected menu to have hidden attribute');
     });
@@ -739,6 +769,14 @@ describe('MaterialExtMenuButton', () => {
       dispatchKeyDownEvent(item, VK_ESC);
       assert.equal(button.getAttribute('aria-expanded'), 'false', 'After closing menu: Expected button to have aria-expanded=false');
       assert.isTrue(menu.hasAttribute('hidden'), 'After closing menu: Expected menu to have hidden attribute');
+    });
+
+    it('closes the menu when when clicking outside the menu rect', () => {
+      button.MaterialExtMenuButton.openMenu();
+      const selectedItem = menu.children[1];
+      selectedItem.focus();
+      dispatchMouseEvent(document.documentElement, 'mousedown');
+      assert.isTrue(menu.hasAttribute('hidden'), 'Mouse down: Expected menu to have hidden attribute after clicking outside menu rect');
     });
 
     it('emits a custom select event when a menu item is clicked', () => {
@@ -760,7 +798,7 @@ describe('MaterialExtMenuButton', () => {
 
       try {
         // Trigger click
-        dispatchMouseEvent(selectedItem, 'mouseup');
+        dispatchMouseEvent(selectedItem, 'click');
 
         const selected = button.MaterialExtMenuButton.getSelectedMenuItem();
         assert.equal(selectedItem, selected, 'Expected "button.MaterialExtMenuButton.getSelectedMenuItem()" return the slected menu item element');

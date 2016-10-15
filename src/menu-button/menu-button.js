@@ -223,7 +223,7 @@ const menuFactory = element => {
   const clickHandler = event => {
 
     if(event.target) {
-      event.preventDefault();
+      //event.preventDefault();
 
       const t = event.target;
       if(t.closest(`.${MENU_BUTTON_MENU}`) === element) {
@@ -281,13 +281,13 @@ const menuFactory = element => {
     }
 
     // Handle click/tap outside menu client rect
-    document.documentElement.addEventListener('mouseup', clickHandler);
-    document.documentElement.addEventListener('touchend', clickHandler);
+    document.documentElement.addEventListener('mousedown', clickHandler);
+    document.documentElement.addEventListener('touchstart', clickHandler);
   };
 
   const close = (forceFocus = false, item = null) => {
-    document.documentElement.removeEventListener('mouseup', clickHandler);
-    document.documentElement.removeEventListener('touchend', clickHandler);
+    document.documentElement.removeEventListener('mousedown', clickHandler);
+    document.documentElement.removeEventListener('toucstart', clickHandler);
 
     element.dispatchEvent(
       new CustomEvent('_closemenu', {
@@ -319,14 +319,12 @@ const menuFactory = element => {
 
   const removeListeners = () => {
     element.removeEventListener('keydown', keyDownHandler);
-    element.removeEventListener('mouseup', clickHandler);
-    element.removeEventListener('touchend', clickHandler);
+    element.removeEventListener('click', clickHandler);
   };
 
   const addListeners = () => {
     element.addEventListener('keydown', keyDownHandler);
-    element.addEventListener('mouseup', clickHandler);
-    element.addEventListener('touchend', clickHandler);
+    element.addEventListener('click', clickHandler);
   };
 
   const init = () => {
