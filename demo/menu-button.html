@@ -187,6 +187,10 @@ The menu button has roles, attributes and behaviour as outlined in
     color: #de3226 !important;
   }
 
+  #max-width-menu {
+    max-width: 400px;
+  }
+
 </style>
 
 <script>
@@ -302,7 +306,7 @@ The menu button has roles, attributes and behaviour as outlined in
     <span class="mdlext-menu-button__caption">Select</span>
     <i class="material-icons mdlext-aria-expanded-more-less"></i>
   </button>
-  <ul class="mdlext-menu" hidden="">
+  <ul id="max-width-menu" class="mdlext-menu" hidden="">
     <li class="mdlext-menu__item">
       <i class="material-icons md-18">info</i>
       <span class="mdlext-menu__item__caption">Menu item #1</span>

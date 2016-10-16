@@ -220,34 +220,73 @@ const menuFactory = element => {
     event.preventDefault();
   };
 
-  const clickHandler = event => {
+  const clickHandler = event => event.preventDefault();
+
+  const startDragging = () => {
+
+    // dragging handler
+    const dragging = e => {
+      e.preventDefault();
+
+      if(e.target) {
+        const t = event.target;
+        if(t.closest(`.${MENU_BUTTON_MENU}`) === element) {
+          const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
+          if(item) {
+            item.focus();
+          }
+        }
+      }
+    };
+
+    // end drag handler
+    const endDrag = e => {
+      e.preventDefault();
+
+      document.documentElement.removeEventListener('mousemove', dragging);
+      document.documentElement.removeEventListener('touchmove', dragging);
+      document.documentElement.removeEventListener('mouseup', endDrag);
+      document.documentElement.removeEventListener('touchend', endDrag);
+
+      if(e.target) {
+        const t = e.target;
+        if(t.closest(`.${MENU_BUTTON_MENU}`) === element) {
+          const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
+          if(item) {
+            selectItem(item);
+          }
+        }
+        else {
+          maybeClose(t);
+        }
+      }
+    };
+
+    document.documentElement.addEventListener('mousemove', dragging);
+    document.documentElement.addEventListener('touchmove', dragging);
+    document.documentElement.addEventListener('mouseup', endDrag);
+    document.documentElement.addEventListener('touchend',endDrag);
+  };
+
+  const dragHandler = event => {
+
+    event.preventDefault();
 
     if(event.target) {
-      //event.preventDefault();
-
       const t = event.target;
       if(t.closest(`.${MENU_BUTTON_MENU}`) === element) {
         const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
         if(item) {
-          selectItem(item);
+          item.focus();
         }
+        startDragging();
       }
       else {
-        const btn = t.closest(`.${JS_MENU_BUTTON}`);
-        if(!btn) {
-          close(false);
-        }
-        else if(btn.getAttribute('aria-controls') === element.id) {
-          if(btn !== ariaControls) {
-            close(false);
-          }
-        }
-        else {
-          close(false);
-        }
+        maybeClose(t);
       }
     }
   };
+
 
   const open = (controlElement, position='first') => {
 
@@ -280,14 +319,31 @@ const menuFactory = element => {
         break;
     }
 
-    // Handle click/tap outside menu client rect
-    document.documentElement.addEventListener('mousedown', clickHandler);
-    document.documentElement.addEventListener('touchstart', clickHandler);
+    // Handle drag
+    document.documentElement.addEventListener('click', clickHandler, true);
+    document.documentElement.addEventListener('mousedown', dragHandler, true);
+    document.documentElement.addEventListener('touchstart', dragHandler, true);
+  };
+
+  const maybeClose = target => {
+    const btn = target.closest(`.${JS_MENU_BUTTON}`);
+    if(!btn) {
+      close(true);
+    }
+    else if(btn.getAttribute('aria-controls') === element.id) {
+      if(btn !== ariaControls) {
+        close(false);
+      }
+    }
+    else {
+      close(false);
+    }
   };
 
   const close = (forceFocus = false, item = null) => {
-    document.documentElement.removeEventListener('mousedown', clickHandler);
-    document.documentElement.removeEventListener('toucstart', clickHandler);
+    document.documentElement.removeEventListener('click', clickHandler, true);
+    document.documentElement.removeEventListener('mousedown', dragHandler, true);
+    document.documentElement.removeEventListener('toucstart', dragHandler, true);
 
     element.dispatchEvent(
       new CustomEvent('_closemenu', {
@@ -319,12 +375,10 @@ const menuFactory = element => {
 
   const removeListeners = () => {
     element.removeEventListener('keydown', keyDownHandler);
-    element.removeEventListener('click', clickHandler);
   };
 
   const addListeners = () => {
     element.addEventListener('keydown', keyDownHandler);
-    element.addEventListener('click', clickHandler);
   };
 
   const init = () => {
@@ -489,7 +543,6 @@ class MenuButton {
   openMenu(position='first') {
     if(!this.isDisabled() && this.menu) {
 
-      //window.setTimeout( () => {
       // Close the menu if button position change
       this.scrollElements = getScrollParents(this.element);
       this.scrollElements.forEach(el => el.addEventListener('scroll', this.positionChangeHandler));
@@ -502,11 +555,6 @@ class MenuButton {
       this.element.setAttribute('aria-expanded', 'true');
 
       this.focusElementLastScrollPosition = this.focusElement.getBoundingClientRect();
-      //}, 50);
-      // Need a small delay (for some unknown reason).
-      // Probably need to do a focus check after opening menu.
-      // Also need to block execution if timeout is running (debounce this function?)
-      // TODO: How to test?? Some test fails when using settimeout
     }
   }
 

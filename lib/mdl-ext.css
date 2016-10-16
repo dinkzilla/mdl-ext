@@ -2552,7 +2552,6 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   background: rgb(255,255,255);
   z-index: 1000;
   min-width: 124px;
-  max-width: 390px;
   border-radius: 2px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
   display: -ms-inline-flexbox;
@@ -2561,6 +2560,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
       flex-direction: column;
   padding: 0;
   overflow: hidden;
+  overflow-y: auto;
 }
 
 .mdlext-menu:focus {
@@ -2605,7 +2605,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
   overflow: hidden;
 }
 
-.mdlext-menu__item:active {
+.mdlext-menu__item[aria-selected='true'] {
   background-color: rgb(224,224,224);
 }
 

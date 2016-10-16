@@ -75,13 +75,13 @@
   background: $default-dropdown-bg-color;
   z-index: 1000;
   min-width: 124px;
-  max-width: 390px;
   border-radius: 2px;
   @include shadow-3dp();
   display: inline-flex;
   flex-direction: column;
   padding: 0;
   overflow: hidden;
+  overflow-y: auto;
 
   &:focus {
     outline-offset: -1px;
@@ -108,7 +108,7 @@
     min-height: 40px;
     overflow: hidden;
 
-    &:active {
+    &[aria-selected='true'] {
       background-color: $default-item-active-bg-color;
     }
 
@@ -122,7 +122,6 @@
       transform: translateY(-50%);
       pointer-events: none;
     }
-
 
     &:hover:not([disabled]) {
       background-color: $default-item-hover-bg-color;

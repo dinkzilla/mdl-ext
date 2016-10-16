@@ -136,17 +136,17 @@ const tether = (controlledBy, element) => {
   // 1. will element height fit inside window viewport?
   const { viewportWidth, viewportHeight } = getWindowViewport();
 
-  //element.style.height = 'auto';
-  element.style.overflowY = 'hidden';
+  element.style.height = 'auto';
+  //element.style.overflowY = 'hidden';
   if(element.offsetHeight > viewportHeight) {
-    element.style.height = `${viewportHeight-4}px`;
+    element.style.height = `${viewportHeight}px`;
     element.style.overflowY = 'auto';
   }
 
   // 2. will element width fit inside window viewport?
-  //element.style.width = 'auto';
+  element.style.width = 'auto';
   if(element.offsetWidth > viewportWidth) {
-    element.style.width = `${viewportWidth-4}px`;
+    element.style.width = `${viewportWidth}px`;
   }
 
   const elementRect = element.getBoundingClientRect();
@@ -252,10 +252,7 @@ const tether = (controlledBy, element) => {
     }
     else {
       // 9.4 position element at (near) viewport right
-      let r = 0;
-      if(left + elementRect.width > viewportWidth) {
-        r = left + elementRect.width - viewportWidth - 4;
-      }
+      const r = left + elementRect.width - viewportWidth;
       ddx = dx - r;
       //console.log('***** 9.4');
     }
