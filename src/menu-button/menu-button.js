@@ -221,9 +221,7 @@ const menuFactory = element => {
   };
 
   const clickHandler = event => {
-    //console.log('***** click', event);
     event.preventDefault();
-    event.stopPropagation();
   };
 
   const drag = (touchItem, startY) => {
@@ -231,7 +229,6 @@ const menuFactory = element => {
     let lastTouchedItem = touchItem;
 
     const dragging = event => {
-      //event.preventDefault();
       const x = (event.clientX || (event.touches !== undefined ? event.touches[event.touches.length-1].clientX : 0));
       const y = (event.clientY || (event.touches !== undefined ? event.touches[event.touches.length-1].clientY : 0));
       let t;
