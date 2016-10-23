@@ -223,6 +223,7 @@ const menuFactory = element => {
   const clickHandler = event => {
     //console.log('***** click', event);
     event.preventDefault();
+    event.stopPropagation();
   };
 
   const drag = (touchItem, startY) => {
