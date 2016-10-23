@@ -255,8 +255,9 @@ const menuFactory = element => {
 
     const endDrag = event => {
       event.preventDefault();
-      document.documentElement.removeEventListener('mousemove', dragging, true);
-      document.documentElement.removeEventListener('touchmove', dragging, true);
+      event.stopPropagation();
+      element.removeEventListener('mousemove', dragging, true);
+      element.removeEventListener('touchmove', dragging, true);
       document.documentElement.removeEventListener('mouseup', endDrag, true);
       document.documentElement.removeEventListener('touchend', endDrag, true);
 
@@ -276,7 +277,6 @@ const menuFactory = element => {
       }
 
       if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
-        event.stopPropagation();
         const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
         if(item === touchItem && Math.abs(y-startY) < 21) {
           selectItem(item);
@@ -287,8 +287,8 @@ const menuFactory = element => {
       }
     };
 
-    document.documentElement.addEventListener('mousemove', dragging, true);
-    document.documentElement.addEventListener('touchmove', dragging, true);
+    element.addEventListener('mousemove', dragging, true);
+    element.addEventListener('touchmove', dragging, true);
     document.documentElement.addEventListener('mouseup', endDrag, true);
     document.documentElement.addEventListener('touchend', endDrag, true);
   };
