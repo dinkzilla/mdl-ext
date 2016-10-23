@@ -754,7 +754,6 @@ describe('MaterialExtMenuButton', () => {
       button.MaterialExtMenuButton.openMenu();
       const selectedItem = menu.children[1];
       selectedItem.focus();
-
       dispatchMouseEvent(selectedItem, 'mousedown');
       dispatchMouseEvent(selectedItem, 'mousemove');
       dispatchMouseEvent(selectedItem, 'mouseup');
@@ -815,7 +814,6 @@ describe('MaterialExtMenuButton', () => {
 
       assert.isTrue(spy.called, 'Expected "select" custom event to fire');
     });
-
 
     it('should not emit a custom select event when a previously selected menu item is clicked', () => {
       button.MaterialExtMenuButton.setSelectedMenuItem(menu.children[1]);

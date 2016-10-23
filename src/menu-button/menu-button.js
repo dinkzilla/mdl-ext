@@ -220,66 +220,93 @@ const menuFactory = element => {
     event.preventDefault();
   };
 
-  const clickHandler = event => event.preventDefault();
+  /*
+  const clickHandler = event => {
+    console.log('***** click', event);
+    event.preventDefault();
+  };
+  */
 
-  const startDragging = () => {
+  const drag = (touchItem, startY) => {
 
-    // dragging handler
-    const dragging = e => {
-      e.preventDefault();
+    let lastTouchedItem = touchItem;
 
-      if(e.target) {
-        const t = event.target;
-        if(t.closest(`.${MENU_BUTTON_MENU}`) === element) {
-          const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
-          if(item) {
-            item.focus();
-          }
+    const dragging = event => {
+      const x = (event.clientX || (event.touches !== undefined ? event.touches[event.touches.length-1].clientX : 0));
+      const y = (event.clientY || (event.touches !== undefined ? event.touches[event.touches.length-1].clientY : 0));
+      let t;
+      try {
+        // There is no event.target for touchmove event,
+        // see: http://stackoverflow.com/questions/3918842/how-to-find-out-the-actual-event-target-of-touchmove-javascript-event
+        // see: https://bugs.chromium.org/p/chromium/issues/detail?id=142187
+        t = document.elementFromPoint(x, y);
+      }
+      catch(err) {
+        // "document.elementFromPoint(x, y)" is not defined in jsdom, see: https://github.com/tmpvar/jsdom/issues/1435
+        // Quick fix to get the tests running
+        t = event.target;
+      }
+
+      if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
+        const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
+        if(item && item !== lastTouchedItem) {
+          item.focus();
+          lastTouchedItem = item;
         }
       }
     };
 
-    // end drag handler
-    const endDrag = e => {
-      e.preventDefault();
+    const endDrag = event => {
+      event.preventDefault();
+      document.documentElement.removeEventListener('mousemove', dragging, true);
+      document.documentElement.removeEventListener('touchmove', dragging, true);
+      document.documentElement.removeEventListener('mouseup', endDrag, true);
+      document.documentElement.removeEventListener('touchend', endDrag, true);
 
-      document.documentElement.removeEventListener('mousemove', dragging);
-      document.documentElement.removeEventListener('touchmove', dragging);
-      document.documentElement.removeEventListener('mouseup', endDrag);
-      document.documentElement.removeEventListener('touchend', endDrag);
+      const x = (event.clientX || (event.changedTouches !== undefined ? event.changedTouches[event.changedTouches.length-1].clientX : 0));
+      const y = (event.clientY || (event.changedTouches !== undefined ? event.changedTouches[event.changedTouches.length-1].clientY : 0));
+      let t;
+      try {
+        // There is no event.target for touchend event,
+        // see: http://stackoverflow.com/questions/3918842/how-to-find-out-the-actual-event-target-of-touchmove-javascript-event
+        // see: https://bugs.chromium.org/p/chromium/issues/detail?id=142187
+        t = document.elementFromPoint(x, y);
+      }
+      catch(err) {
+        // "document.elementFromPoint(x, y)" is not defined in jsdom, see: https://github.com/tmpvar/jsdom/issues/1435
+        // Quick fix to get the tests running
+        t = event.target;
+      }
 
-      if(e.target) {
-        const t = e.target;
-        if(t.closest(`.${MENU_BUTTON_MENU}`) === element) {
-          const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
-          if(item) {
-            selectItem(item);
-          }
+      if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
+        const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
+
+        if(item === touchItem && Math.abs(y-startY) < 21) {
+          selectItem(item);
         }
-        else {
-          maybeClose(t);
-        }
+      }
+      else {
+        maybeClose(t);
       }
     };
 
-    document.documentElement.addEventListener('mousemove', dragging);
-    document.documentElement.addEventListener('touchmove', dragging);
-    document.documentElement.addEventListener('mouseup', endDrag);
-    document.documentElement.addEventListener('touchend',endDrag);
+    document.documentElement.addEventListener('mousemove', dragging, true);
+    document.documentElement.addEventListener('touchmove', dragging, true);
+    document.documentElement.addEventListener('mouseup', endDrag, true);
+    document.documentElement.addEventListener('touchend', endDrag, true);
   };
 
-  const dragHandler = event => {
 
-    event.preventDefault();
-
+  const mouseDownHandler = event => {
     if(event.target) {
       const t = event.target;
-      if(t.closest(`.${MENU_BUTTON_MENU}`) === element) {
+      if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
         const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
         if(item) {
           item.focus();
         }
-        startDragging();
+        const y = (event.clientY || (event.touches !== undefined ? event.touches[event.touches.length-1].clientY : 0));
+        drag(item, y);
       }
       else {
         maybeClose(t);
@@ -292,11 +319,9 @@ const menuFactory = element => {
 
     ariaControls = controlElement.closest(`.${JS_MENU_BUTTON}`);
 
-    //element.style.visibility = 'hidden';
     element.style['min-width'] = `${Math.max(124, controlElement.getBoundingClientRect().width)}px`;
     element.removeAttribute('hidden');
     tether(controlElement, element);
-    //element.style.visibility = 'visible';
 
     let item;
     switch (position.toLowerCase()) {
@@ -320,15 +345,15 @@ const menuFactory = element => {
     }
 
     // Handle drag
-    document.documentElement.addEventListener('click', clickHandler, true);
-    document.documentElement.addEventListener('mousedown', dragHandler, true);
-    document.documentElement.addEventListener('touchstart', dragHandler, true);
+    //document.documentElement.addEventListener('click', clickHandler, true);
+    document.documentElement.addEventListener('mousedown', mouseDownHandler, true);
+    document.documentElement.addEventListener('touchstart', mouseDownHandler, true);
   };
 
   const maybeClose = target => {
-    const btn = target.closest(`.${JS_MENU_BUTTON}`);
+    const btn = (target && target.closest(`.${JS_MENU_BUTTON}`)) || null;
     if(!btn) {
-      close(true);
+      close(false);
     }
     else if(btn.getAttribute('aria-controls') === element.id) {
       if(btn !== ariaControls) {
@@ -341,9 +366,9 @@ const menuFactory = element => {
   };
 
   const close = (forceFocus = false, item = null) => {
-    document.documentElement.removeEventListener('click', clickHandler, true);
-    document.documentElement.removeEventListener('mousedown', dragHandler, true);
-    document.documentElement.removeEventListener('toucstart', dragHandler, true);
+    //document.documentElement.removeEventListener('click', clickHandler, true);
+    document.documentElement.removeEventListener('mousedown', mouseDownHandler, true);
+    document.documentElement.removeEventListener('touchstart', mouseDownHandler, true);
 
     element.dispatchEvent(
       new CustomEvent('_closemenu', {
