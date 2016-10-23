@@ -230,7 +230,7 @@ const menuFactory = element => {
     let lastTouchedItem = touchItem;
 
     const dragging = event => {
-      event.preventDefault();
+      //event.preventDefault();
       const x = (event.clientX || (event.touches !== undefined ? event.touches[event.touches.length-1].clientX : 0));
       const y = (event.clientY || (event.touches !== undefined ? event.touches[event.touches.length-1].clientY : 0));
       let t;
@@ -300,7 +300,7 @@ const menuFactory = element => {
     if(event.target) {
       const t = event.target;
       if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
-        event.preventDefault();
+        //event.preventDefault();
         const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
         if(item) {
           item.focus();
