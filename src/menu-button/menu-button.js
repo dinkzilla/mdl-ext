@@ -256,8 +256,8 @@ const menuFactory = element => {
     const endDrag = event => {
       event.preventDefault();
       event.stopPropagation();
-      element.removeEventListener('mousemove', dragging, true);
-      element.removeEventListener('touchmove', dragging, true);
+      document.documentElement.removeEventListener('mousemove', dragging, true);
+      document.documentElement.removeEventListener('touchmove', dragging, true);
       document.documentElement.removeEventListener('mouseup', endDrag, true);
       document.documentElement.removeEventListener('touchend', endDrag, true);
 
@@ -287,8 +287,8 @@ const menuFactory = element => {
       }
     };
 
-    element.addEventListener('mousemove', dragging, true);
-    element.addEventListener('touchmove', dragging, true);
+    document.documentElement.addEventListener('mousemove', dragging, true);
+    document.documentElement.addEventListener('touchmove', dragging, true);
     document.documentElement.addEventListener('mouseup', endDrag, true);
     document.documentElement.addEventListener('touchend', endDrag, true);
   };
