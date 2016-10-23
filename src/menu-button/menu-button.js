@@ -279,8 +279,8 @@ const menuFactory = element => {
       }
 
       if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
+        event.stopPropagation();
         const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
-
         if(item === touchItem && Math.abs(y-startY) < 21) {
           selectItem(item);
         }
