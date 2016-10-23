@@ -256,6 +256,7 @@ const menuFactory = element => {
     };
 
     const endDrag = event => {
+      event.preventDefault();
       document.documentElement.removeEventListener('mousemove', dragging, true);
       document.documentElement.removeEventListener('touchmove', dragging, true);
       document.documentElement.removeEventListener('mouseup', endDrag, true);
@@ -277,7 +278,6 @@ const menuFactory = element => {
       }
 
       if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
-        event.preventDefault();
         const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
 
         if(item === touchItem && Math.abs(y-startY) < 21) {
