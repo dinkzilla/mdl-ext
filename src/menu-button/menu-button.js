@@ -221,27 +221,6 @@ const menuFactory = element => {
   };
 
 
-
-
-  /*
-  const clickHandler = event => {
-    if(event.target) {
-      const t = event.target;
-      if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
-        event.preventDefault();
-        const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
-        if(item) {
-          selectItem(item);
-        }
-      }
-      else {
-        maybeClose(t);
-      }
-    }
-  };
-  */
-
-
   const clickHandler = event => event.preventDefault();
 
   const drag = (touchItem, startY) => {
@@ -275,7 +254,6 @@ const menuFactory = element => {
 
     const endDrag = event => {
       event.preventDefault();
-      event.stopPropagation();
       document.documentElement.removeEventListener('mousemove', dragging, true);
       document.documentElement.removeEventListener('touchmove', dragging, true);
       document.documentElement.removeEventListener('mouseup', endDrag, true);
@@ -303,7 +281,9 @@ const menuFactory = element => {
         }
       }
       else {
-        maybeClose(t);
+        if(shouldClose(t)) {
+          close(false);
+        }
       }
     };
 
@@ -318,7 +298,6 @@ const menuFactory = element => {
     if(event.target) {
       const t = event.target;
       if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
-        event.stopPropagation();
         const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
         if(item) {
           item.focus();
@@ -327,7 +306,12 @@ const menuFactory = element => {
         drag(item, y);
       }
       else {
-        maybeClose(t);
+        if(shouldClose(t)) {
+          if (event.type === 'touchstart') {
+            event.preventDefault();
+          }
+          close(false);
+        }
       }
     }
   };
@@ -363,24 +347,26 @@ const menuFactory = element => {
     }
 
     // Handle drag
-    document.documentElement.addEventListener('click', clickHandler, true);
+    document.documentElement.addEventListener('click', clickHandler, true); // Not shure if this is needed
     document.documentElement.addEventListener('mousedown', mouseDownHandler, true);
     document.documentElement.addEventListener('touchstart', mouseDownHandler, true);
   };
 
-  const maybeClose = target => {
+  const shouldClose = target => {
+    let result = false;
     const btn = (target && target.closest(`.${JS_MENU_BUTTON}`)) || null;
     if(!btn) {
-      close(false);
+      result = true;
     }
     else if(btn.getAttribute('aria-controls') === element.id) {
       if(btn !== ariaControls) {
-        close(false);
+        result = true;
       }
     }
     else {
-      close(false);
+      result = true;
     }
+    return result;
   };
 
   const close = (forceFocus = false, item = null) => {
