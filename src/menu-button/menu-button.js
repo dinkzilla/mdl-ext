@@ -252,10 +252,10 @@ const menuFactory = element => {
 
     const endDrag = event => {
       event.preventDefault();
-      element.removeEventListener('mousemove', dragging, true);
-      element.removeEventListener('touchmove', dragging, true);
-      element.removeEventListener('mouseup', endDrag, true);
-      element.removeEventListener('touchend', endDrag, true);
+      element.removeEventListener('mousemove', dragging, false);
+      element.removeEventListener('touchmove', dragging, false);
+      element.removeEventListener('mouseup', endDrag, false);
+      element.removeEventListener('touchend', endDrag, false);
 
       const x = (event.clientX || (event.changedTouches !== undefined ? event.changedTouches[event.changedTouches.length-1].clientX : 0));
       const y = (event.clientY || (event.changedTouches !== undefined ? event.changedTouches[event.changedTouches.length-1].clientY : 0));
@@ -286,10 +286,10 @@ const menuFactory = element => {
       }
     };
 
-    element.addEventListener('mousemove', dragging, true);
-    element.addEventListener('touchmove', dragging, true);
-    element.addEventListener('mouseup', endDrag, true);
-    element.addEventListener('touchend', endDrag, true);
+    element.addEventListener('mousemove', dragging, false);
+    element.addEventListener('touchmove', dragging, false);
+    element.addEventListener('mouseup', endDrag, false);
+    element.addEventListener('touchend', endDrag, false);
   };
 
 
