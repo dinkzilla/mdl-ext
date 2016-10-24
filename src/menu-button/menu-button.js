@@ -254,6 +254,7 @@ const menuFactory = element => {
 
     const endDrag = event => {
       event.preventDefault();
+      event.stopPropagation();
       document.documentElement.removeEventListener('mousemove', dragging, true);
       document.documentElement.removeEventListener('touchmove', dragging, true);
       document.documentElement.removeEventListener('mouseup', endDrag, true);
