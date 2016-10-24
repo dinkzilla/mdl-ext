@@ -254,11 +254,11 @@ const menuFactory = element => {
 
     const endDrag = event => {
       event.preventDefault();
-      event.stopPropagation();
-      document.documentElement.removeEventListener('mousemove', dragging, true);
-      document.documentElement.removeEventListener('touchmove', dragging, true);
-      document.documentElement.removeEventListener('mouseup', endDrag, true);
-      document.documentElement.removeEventListener('touchend', endDrag, true);
+      //event.stopPropagation();
+      element.removeEventListener('mousemove', dragging, true);
+      element.removeEventListener('touchmove', dragging, true);
+      element.removeEventListener('mouseup', endDrag, true);
+      element.removeEventListener('touchend', endDrag, true);
 
       const x = (event.clientX || (event.changedTouches !== undefined ? event.changedTouches[event.changedTouches.length-1].clientX : 0));
       const y = (event.clientY || (event.changedTouches !== undefined ? event.changedTouches[event.changedTouches.length-1].clientY : 0));
@@ -288,10 +288,10 @@ const menuFactory = element => {
       }
     };
 
-    document.documentElement.addEventListener('mousemove', dragging, true);
-    document.documentElement.addEventListener('touchmove', dragging, true);
-    document.documentElement.addEventListener('mouseup', endDrag, true);
-    document.documentElement.addEventListener('touchend', endDrag, true);
+    element.addEventListener('mousemove', dragging, true);
+    element.addEventListener('touchmove', dragging, true);
+    element.addEventListener('mouseup', endDrag, true);
+    element.addEventListener('touchend', endDrag, true);
   };
 
 
@@ -310,7 +310,7 @@ const menuFactory = element => {
         if(shouldClose(t)) {
           if (event.type === 'touchstart') {
             event.preventDefault();
-            event.stopPropagation();
+            //event.stopPropagation();
           }
           close(false);
         }
