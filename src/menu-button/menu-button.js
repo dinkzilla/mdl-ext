@@ -309,6 +309,7 @@ const menuFactory = element => {
         if(shouldClose(t)) {
           if (event.type === 'touchstart') {
             event.preventDefault();
+            event.stopPropagation();
           }
           close(false);
         }
