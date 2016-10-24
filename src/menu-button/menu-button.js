@@ -221,8 +221,6 @@ const menuFactory = element => {
   };
 
 
-  const clickHandler = event => event.preventDefault();
-
   const drag = (touchItem, startY) => {
 
     let lastTouchedItem = touchItem;
@@ -254,7 +252,6 @@ const menuFactory = element => {
 
     const endDrag = event => {
       event.preventDefault();
-      //event.stopPropagation();
       element.removeEventListener('mousemove', dragging, true);
       element.removeEventListener('touchmove', dragging, true);
       element.removeEventListener('mouseup', endDrag, true);
@@ -278,6 +275,7 @@ const menuFactory = element => {
       if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
         const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
         if(item === touchItem && Math.abs(y-startY) < 21) {
+          event.stopPropagation();
           selectItem(item);
         }
       }
@@ -349,7 +347,6 @@ const menuFactory = element => {
     }
 
     // Handle drag
-    document.documentElement.addEventListener('click', clickHandler, true); // Not shure if this is needed
     document.documentElement.addEventListener('mousedown', mouseDownHandler, true);
     document.documentElement.addEventListener('touchstart', mouseDownHandler, true);
   };
@@ -372,7 +369,6 @@ const menuFactory = element => {
   };
 
   const close = (forceFocus = false, item = null) => {
-    document.documentElement.removeEventListener('click', clickHandler, true);
     document.documentElement.removeEventListener('mousedown', mouseDownHandler, true);
     document.documentElement.removeEventListener('touchstart', mouseDownHandler, true);
 
