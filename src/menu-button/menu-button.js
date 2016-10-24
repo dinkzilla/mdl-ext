@@ -221,9 +221,23 @@ const menuFactory = element => {
   };
 
   const clickHandler = event => {
-    event.preventDefault();
+    if(event.target) {
+      const t = event.target;
+      if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
+        event.preventDefault();
+        const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
+        if(item) {
+          selectItem(item);
+        }
+      }
+      else {
+        maybeClose(t);
+      }
+    }
   };
 
+
+  /*
   const drag = (touchItem, startY) => {
 
     let lastTouchedItem = touchItem;
@@ -311,7 +325,7 @@ const menuFactory = element => {
       }
     }
   };
-
+  */
 
   const open = (controlElement, position='first') => {
 
@@ -344,8 +358,8 @@ const menuFactory = element => {
 
     // Handle drag
     document.documentElement.addEventListener('click', clickHandler, true);
-    document.documentElement.addEventListener('mousedown', mouseDownHandler, true);
-    document.documentElement.addEventListener('touchstart', mouseDownHandler, true);
+    //document.documentElement.addEventListener('mousedown', mouseDownHandler, true);
+    //document.documentElement.addEventListener('touchstart', mouseDownHandler, true);
   };
 
   const maybeClose = target => {
@@ -365,8 +379,8 @@ const menuFactory = element => {
 
   const close = (forceFocus = false, item = null) => {
     document.documentElement.removeEventListener('click', clickHandler, true);
-    document.documentElement.removeEventListener('mousedown', mouseDownHandler, true);
-    document.documentElement.removeEventListener('touchstart', mouseDownHandler, true);
+    //document.documentElement.removeEventListener('mousedown', mouseDownHandler, true);
+    //document.documentElement.removeEventListener('touchstart', mouseDownHandler, true);
 
     element.dispatchEvent(
       new CustomEvent('_closemenu', {
