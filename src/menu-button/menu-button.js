@@ -221,6 +221,11 @@ const menuFactory = element => {
   };
 
 
+  const clickHandler = event => {
+    //console.log('***** click', event);
+    event.stopImmediatePropagation();
+  };
+
   const drag = (touchItem, startY) => {
 
     let lastTouchedItem = touchItem;
@@ -275,7 +280,7 @@ const menuFactory = element => {
       if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
         const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
         if(item === touchItem && Math.abs(y-startY) < 21) {
-          event.stopPropagation();
+          event.stopImmediatePropagation();
           selectItem(item);
         }
       }
@@ -308,7 +313,7 @@ const menuFactory = element => {
         if(shouldClose(t)) {
           if (event.type === 'touchstart') {
             event.preventDefault();
-            //event.stopPropagation();
+            event.stopImmediatePropagation();
           }
           close(false);
         }
@@ -347,8 +352,9 @@ const menuFactory = element => {
     }
 
     // Handle drag
-    document.documentElement.addEventListener('mousedown', mouseDownHandler, true);
-    document.documentElement.addEventListener('touchstart', mouseDownHandler, true);
+    document.documentElement.addEventListener('click', clickHandler, false);
+    document.documentElement.addEventListener('mousedown', mouseDownHandler, false);
+    document.documentElement.addEventListener('touchstart', mouseDownHandler, false);
   };
 
   const shouldClose = target => {
@@ -369,8 +375,9 @@ const menuFactory = element => {
   };
 
   const close = (forceFocus = false, item = null) => {
-    document.documentElement.removeEventListener('mousedown', mouseDownHandler, true);
-    document.documentElement.removeEventListener('touchstart', mouseDownHandler, true);
+    document.documentElement.removeEventListener('click', clickHandler, false);
+    document.documentElement.removeEventListener('mousedown', mouseDownHandler, false);
+    document.documentElement.removeEventListener('touchstart', mouseDownHandler, false);
 
     element.dispatchEvent(
       new CustomEvent('_closemenu', {
