@@ -221,11 +221,41 @@ const menuFactory = element => {
   };
 
 
-  const clickHandler = event => {
-    //console.log('***** click', event);
-    event.stopImmediatePropagation();
+  const blurHandler = event => {
+    //console.log('***** blur, target, relatedTarget', event.target, event.relatedTarget);
+
+    const t = event.relatedTarget;
+    if(t !== null) {
+      if(t.closest(`.${MENU_BUTTON_MENU}`) !== element && shouldClose(t)) {
+        close();
+      }
+    }
+    else {
+      close();
+    }
+
   };
 
+  const clickHandler = event => {
+    //console.log('***** click, target', event.target);
+    event.preventDefault();
+
+    const t = event.target;
+    if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
+      const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
+      if(item) {
+        selectItem(item);
+      }
+    }
+    else {
+      if(shouldClose(t)) {
+        close();
+      }
+    }
+    return false;
+  };
+
+  /*
   const drag = (touchItem, startY) => {
 
     let lastTouchedItem = touchItem;
@@ -257,10 +287,10 @@ const menuFactory = element => {
 
     const endDrag = event => {
       event.preventDefault();
-      element.removeEventListener('mousemove', dragging, false);
-      element.removeEventListener('touchmove', dragging, false);
-      element.removeEventListener('mouseup', endDrag, false);
-      element.removeEventListener('touchend', endDrag, false);
+      document.documentElement.removeEventListener('mousemove', dragging, false);
+      document.documentElement.removeEventListener('touchmove', dragging, false);
+      document.documentElement.removeEventListener('mouseup', endDrag, false);
+      document.documentElement.removeEventListener('touchend', endDrag, false);
 
       const x = (event.clientX || (event.changedTouches !== undefined ? event.changedTouches[event.changedTouches.length-1].clientX : 0));
       const y = (event.clientY || (event.changedTouches !== undefined ? event.changedTouches[event.changedTouches.length-1].clientY : 0));
@@ -280,26 +310,30 @@ const menuFactory = element => {
       if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
         const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
         if(item === touchItem && Math.abs(y-startY) < 21) {
-          event.stopImmediatePropagation();
           selectItem(item);
         }
       }
       else {
         if(shouldClose(t)) {
+          if (event.type === 'touchend') {
+            event.preventDefault();
+            event.stopPropagation();
+          }
           close(false);
         }
       }
     };
 
-    element.addEventListener('mousemove', dragging, false);
-    element.addEventListener('touchmove', dragging, false);
-    element.addEventListener('mouseup', endDrag, false);
-    element.addEventListener('touchend', endDrag, false);
+    document.documentElement.addEventListener('mousemove', dragging, false);
+    document.documentElement.addEventListener('touchmove', dragging, false);
+    document.documentElement.addEventListener('mouseup', endDrag, false);
+    document.documentElement.addEventListener('touchend', endDrag, false);
   };
 
 
   const mouseDownHandler = event => {
     if(event.target) {
+      event.preventDefault();
       const t = event.target;
       if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
         const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
@@ -312,15 +346,14 @@ const menuFactory = element => {
       else {
         if(shouldClose(t)) {
           if (event.type === 'touchstart') {
-            event.preventDefault();
-            event.stopImmediatePropagation();
+            event.stopPropagation();
           }
           close(false);
         }
       }
     }
   };
-
+  */
 
   const open = (controlElement, position='first') => {
 
@@ -352,10 +385,13 @@ const menuFactory = element => {
     }
 
     // Handle drag
-    document.documentElement.addEventListener('click', clickHandler, false);
-    document.documentElement.addEventListener('mousedown', mouseDownHandler, false);
-    document.documentElement.addEventListener('touchstart', mouseDownHandler, false);
+    element.addEventListener('blur', blurHandler, true);
+    element.addEventListener('click', clickHandler, true);
+
+    //document.documentElement.addEventListener('mousedown', mouseDownHandler, true);
+    //document.documentElement.addEventListener('touchstart', mouseDownHandler, true);
   };
+
 
   const shouldClose = target => {
     let result = false;
@@ -375,9 +411,10 @@ const menuFactory = element => {
   };
 
   const close = (forceFocus = false, item = null) => {
-    document.documentElement.removeEventListener('click', clickHandler, false);
-    document.documentElement.removeEventListener('mousedown', mouseDownHandler, false);
-    document.documentElement.removeEventListener('touchstart', mouseDownHandler, false);
+    element.removeEventListener('blur', blurHandler, true);
+    element.removeEventListener('click', clickHandler, true);
+    //document.documentElement.removeEventListener('mousedown', mouseDownHandler, true);
+    //document.documentElement.removeEventListener('touchstart', mouseDownHandler, true);
 
     element.dispatchEvent(
       new CustomEvent('_closemenu', {
