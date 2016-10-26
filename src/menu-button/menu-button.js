@@ -238,8 +238,8 @@ const menuFactory = element => {
 
   const clickHandler = event => {
     //console.log('***** click, target', event.target);
-    event.preventDefault();
 
+    event.preventDefault();
     const t = event.target;
     if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
       const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
@@ -252,7 +252,20 @@ const menuFactory = element => {
         close();
       }
     }
-    return false;
+  };
+
+  const touchStartHandler = event => {
+    //console.log('***** touchStart, target', event.target);
+
+    const t = event.target;
+    if(!(t && t.closest(`.${MENU_BUTTON_MENU}`) === element)) {
+      if(shouldClose(t)) {
+        if (event.type === 'touchstart') {
+          event.preventDefault();
+        }
+        close();
+      }
+    }
   };
 
   /*
@@ -355,6 +368,7 @@ const menuFactory = element => {
   };
   */
 
+
   const open = (controlElement, position='first') => {
 
     ariaControls = controlElement.closest(`.${JS_MENU_BUTTON}`);
@@ -387,6 +401,7 @@ const menuFactory = element => {
     // Handle drag
     element.addEventListener('blur', blurHandler, true);
     element.addEventListener('click', clickHandler, true);
+    document.documentElement.addEventListener('touchstart', touchStartHandler, true);
 
     //document.documentElement.addEventListener('mousedown', mouseDownHandler, true);
     //document.documentElement.addEventListener('touchstart', mouseDownHandler, true);
@@ -413,6 +428,8 @@ const menuFactory = element => {
   const close = (forceFocus = false, item = null) => {
     element.removeEventListener('blur', blurHandler, true);
     element.removeEventListener('click', clickHandler, true);
+    document.documentElement.removeEventListener('touchstart', touchStartHandler, true);
+
     //document.documentElement.removeEventListener('mousedown', mouseDownHandler, true);
     //document.documentElement.removeEventListener('touchstart', mouseDownHandler, true);
 
