@@ -239,7 +239,7 @@ const menuFactory = element => {
   const clickHandler = event => {
     //console.log('***** click, target', event.target);
 
-    event.preventDefault();
+    //event.preventDefault();
     const t = event.target;
     if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
       const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
