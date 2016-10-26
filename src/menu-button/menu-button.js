@@ -258,12 +258,10 @@ const menuFactory = element => {
 
     const t = event.target;
     if(!(t && t.closest(`.${MENU_BUTTON_MENU}`) === element)) {
-      if(shouldClose(t)) {
-        if (event.type === 'touchstart') {
-          event.preventDefault();
-        }
-        close();
+      if (event.type === 'touchstart') {
+        event.preventDefault();
       }
+      close();
     }
   };
 
