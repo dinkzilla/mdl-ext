@@ -521,7 +521,6 @@ describe('MaterialExtMenuButton', () => {
       assert.isTrue(menu.hasAttribute('hidden'), 'ESC key: Expected menu to have hidden attribute');
     });
 
-    /*
     it('should close an already open menu when another menu button is clicked', () => {
       const container = document.querySelector('#mount');
       try {
@@ -535,12 +534,26 @@ describe('MaterialExtMenuButton', () => {
 
         buttons[0].MaterialExtMenuButton.closeMenu();
         buttons[1].MaterialExtMenuButton.closeMenu();
+
         dispatchMouseEvent(buttons[0], 'click');
         assert.equal(buttons[0].getAttribute('aria-expanded'), 'true', 'Expected button 1 to have an open menu');
         assert.equal(buttons[1].getAttribute('aria-expanded'), 'false', 'Expected button 2 to be closed');
 
-        dispatchMouseEvent(buttons[1], 'mousedown');
+        // Does not behave like in a real browser, must close programatically
+        const m = document.querySelector(`#${buttons[0].getAttribute('aria-controls')}`);
+
+        // 1. Reset document.activeElement
+        m.blur();
+
+        // 2. Send an event to call handlers
+        m.dispatchEvent( new Event( 'blur' ) );
+
+        // 3. Programmatically close
+        buttons[0].MaterialExtMenuButton.closeMenu();
+
+        // Then click
         dispatchMouseEvent(buttons[1], 'click');
+
         assert.equal(buttons[0].getAttribute('aria-expanded'), 'false', 'Expected button 1 to not have an open menu after clicking button 2');
         assert.equal(buttons[1].getAttribute('aria-expanded'), 'true', 'Expected button 2 to be open after clicking that button');
 
@@ -550,7 +563,6 @@ describe('MaterialExtMenuButton', () => {
         removeChildElements(container);
       }
     });
-    */
 
     it('does nothing when an "undefined" key i pressed', () => {
       expect( () => {
@@ -751,18 +763,14 @@ describe('MaterialExtMenuButton', () => {
       assert.isTrue(menu.hasAttribute('hidden'), 'ESC key: Expected menu to have hidden attribute');
     });
 
-    /*
     it('closes the menu when menu item is clicked', () => {
       button.MaterialExtMenuButton.openMenu();
       const selectedItem = menu.children[1];
       selectedItem.focus();
-      dispatchMouseEvent(selectedItem, 'mousedown');
-      dispatchMouseEvent(selectedItem, 'mousemove');
-      dispatchMouseEvent(selectedItem, 'mouseup');
+      dispatchMouseEvent(selectedItem, 'click');
       assert.equal(menu.children[1].getAttribute('aria-selected'), 'true', 'Mouse cick: Expected menu item to have aria-selected="true"');
       assert.isTrue(menu.hasAttribute('hidden'), 'Mouse click: Expected menu to have hidden attribute');
     });
-    */
 
     it('closes the menu and sets aria-expanded="false" for button and hidden attribute for menu', () => {
       button.MaterialExtMenuButton.openMenu('first');
@@ -776,17 +784,14 @@ describe('MaterialExtMenuButton', () => {
       assert.isTrue(menu.hasAttribute('hidden'), 'After closing menu: Expected menu to have hidden attribute');
     });
 
-    /*
-    it('closes the menu when when clicking outside the menu rect', () => {
+    it('closes the menu when when clicking or touching outside the menu rect', () => {
       button.MaterialExtMenuButton.openMenu();
       const selectedItem = menu.children[1];
       selectedItem.focus();
-      dispatchMouseEvent(document.documentElement, 'mousedown');
+      dispatchTouchEvent(document.documentElement, 'touchstart');
       assert.isTrue(menu.hasAttribute('hidden'), 'Mouse down: Expected menu to have hidden attribute after clicking outside menu rect');
     });
-    */
 
-    /*
     it('emits a custom select event when a menu item is clicked', () => {
       button.MaterialExtMenuButton.setSelectedMenuItem(menu.children[0]);
 
@@ -806,9 +811,7 @@ describe('MaterialExtMenuButton', () => {
 
       try {
         // Trigger click
-        dispatchMouseEvent(selectedItem, 'mousedown');
-        dispatchMouseEvent(selectedItem, 'mousemove');
-        dispatchMouseEvent(selectedItem, 'mouseup');
+        dispatchMouseEvent(selectedItem, 'click');
 
         const selected = button.MaterialExtMenuButton.getSelectedMenuItem();
         assert.equal(selectedItem, selected, 'Expected "button.MaterialExtMenuButton.getSelectedMenuItem()" to return the slected menu item element');
@@ -820,7 +823,6 @@ describe('MaterialExtMenuButton', () => {
 
       assert.isTrue(spy.called, 'Expected "select" custom event to fire');
     });
-    */
 
     it('should not emit a custom select event when a previously selected menu item is clicked', () => {
       button.MaterialExtMenuButton.setSelectedMenuItem(menu.children[1]);
@@ -832,8 +834,7 @@ describe('MaterialExtMenuButton', () => {
       button.addEventListener('menuselect', spy);
       try {
         // Trigger click
-        dispatchMouseEvent(selectedItem, 'mousedown');
-        dispatchMouseEvent(selectedItem, 'mouseup');
+        dispatchMouseEvent(selectedItem, 'click');
       }
       finally {
         button.removeEventListener('menuselect', spy);
@@ -856,9 +857,7 @@ describe('MaterialExtMenuButton', () => {
         const spy = sinon.spy();
         button.addEventListener('menuselect', spy);
         try {
-          dispatchMouseEvent(disabledItem, 'mousedown');
-          dispatchMouseEvent(disabledItem, 'mousemove');
-          dispatchMouseEvent(disabledItem, 'mouseup');
+          dispatchMouseEvent(disabledItem, 'click');
         }
         finally {
           button.removeEventListener('menuselect', spy);
@@ -943,7 +942,6 @@ describe('MaterialExtMenuButton', () => {
 
   });
 
-
   function dispatchKeyDownEvent(target, keyCode, shiftKey=false) {
     target.dispatchEvent(
       new KeyboardEvent('keydown', {
@@ -951,16 +949,6 @@ describe('MaterialExtMenuButton', () => {
         cancelable: true,
         keyCode: keyCode,
         shiftKey: shiftKey
-      })
-    );
-  }
-
-  function dispatchEventEvent(target, name) {
-    target.dispatchEvent(
-      new Event(name, {
-        bubbles: true,
-        cancelable: true,
-        view: window
       })
     );
   }
@@ -974,4 +962,15 @@ describe('MaterialExtMenuButton', () => {
       })
     );
   }
+
+  function dispatchTouchEvent(target, name) {
+    target.dispatchEvent(
+      new MouseEvent(name, {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      })
+    );
+  }
+
 });

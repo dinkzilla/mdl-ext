@@ -222,10 +222,15 @@ const menuFactory = element => {
 
 
   const blurHandler = event => {
-    //console.log('***** blur, target, relatedTarget', event.target, event.relatedTarget);
 
-    const t = event.relatedTarget;
-    if(t !== null) {
+    // See: https://github.com/facebook/react/issues/2011
+    const t = event.relatedTarget ||
+      event.explicitOriginalTarget || // FF
+      document.activeElement;         // IE11
+
+    //console.log('***** blur, target, relatedTarget', event.target, t);
+
+    if(t) {
       if(t.closest(`.${MENU_BUTTON_MENU}`) !== element && shouldClose(t)) {
         close();
       }
@@ -266,120 +271,18 @@ const menuFactory = element => {
   };
 
   const addListeners = () => {
-    element.addEventListener('keydown', keyDownHandler);
+    element.addEventListener('keydown', keyDownHandler, false);
     element.addEventListener('blur', blurHandler, true);
     element.addEventListener('click', clickHandler, true);
     document.documentElement.addEventListener('touchstart', touchStartHandler, true);
   };
 
   const removeListeners = () => {
-    element.removeEventListener('keydown', keyDownHandler);
+    element.removeEventListener('keydown', keyDownHandler, false);
     element.removeEventListener('blur', blurHandler, true);
     element.removeEventListener('click', clickHandler, true);
     document.documentElement.removeEventListener('touchstart', touchStartHandler, true);
   };
-
-
-  /*
-  const drag = (touchItem, startY) => {
-
-    let lastTouchedItem = touchItem;
-
-    const dragging = event => {
-      const x = (event.clientX || (event.touches !== undefined ? event.touches[event.touches.length-1].clientX : 0));
-      const y = (event.clientY || (event.touches !== undefined ? event.touches[event.touches.length-1].clientY : 0));
-      let t;
-      try {
-        // There is no event.target for touchmove event,
-        // see: http://stackoverflow.com/questions/3918842/how-to-find-out-the-actual-event-target-of-touchmove-javascript-event
-        // see: https://bugs.chromium.org/p/chromium/issues/detail?id=142187
-        t = document.elementFromPoint(x, y);
-      }
-      catch(err) {
-        // "document.elementFromPoint(x, y)" is not defined in jsdom, see: https://github.com/tmpvar/jsdom/issues/1435
-        // Quick fix to get the tests running
-        t = event.target;
-      }
-
-      if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
-        const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
-        if(item && item !== lastTouchedItem) {
-          item.focus();
-          lastTouchedItem = item;
-        }
-      }
-    };
-
-    const endDrag = event => {
-      event.preventDefault();
-      document.documentElement.removeEventListener('mousemove', dragging, false);
-      document.documentElement.removeEventListener('touchmove', dragging, false);
-      document.documentElement.removeEventListener('mouseup', endDrag, false);
-      document.documentElement.removeEventListener('touchend', endDrag, false);
-
-      const x = (event.clientX || (event.changedTouches !== undefined ? event.changedTouches[event.changedTouches.length-1].clientX : 0));
-      const y = (event.clientY || (event.changedTouches !== undefined ? event.changedTouches[event.changedTouches.length-1].clientY : 0));
-      let t;
-      try {
-        // There is no event.target for touchend event,
-        // see: http://stackoverflow.com/questions/3918842/how-to-find-out-the-actual-event-target-of-touchmove-javascript-event
-        // see: https://bugs.chromium.org/p/chromium/issues/detail?id=142187
-        t = document.elementFromPoint(x, y);
-      }
-      catch(err) {
-        // "document.elementFromPoint(x, y)" is not defined in jsdom, see: https://github.com/tmpvar/jsdom/issues/1435
-        // Quick fix to get the tests running
-        t = event.target;
-      }
-
-      if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
-        const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
-        if(item === touchItem && Math.abs(y-startY) < 21) {
-          selectItem(item);
-        }
-      }
-      else {
-        if(shouldClose(t)) {
-          if (event.type === 'touchend') {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          close(false);
-        }
-      }
-    };
-
-    document.documentElement.addEventListener('mousemove', dragging, false);
-    document.documentElement.addEventListener('touchmove', dragging, false);
-    document.documentElement.addEventListener('mouseup', endDrag, false);
-    document.documentElement.addEventListener('touchend', endDrag, false);
-  };
-
-
-  const mouseDownHandler = event => {
-    if(event.target) {
-      event.preventDefault();
-      const t = event.target;
-      if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
-        const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
-        if(item) {
-          item.focus();
-        }
-        const y = (event.clientY || (event.touches !== undefined ? event.touches[event.touches.length-1].clientY : 0));
-        drag(item, y);
-      }
-      else {
-        if(shouldClose(t)) {
-          if (event.type === 'touchstart') {
-            event.stopPropagation();
-          }
-          close(false);
-        }
-      }
-    }
-  };
-  */
-
 
   const open = (controlElement, position='first') => {
 
@@ -415,6 +318,8 @@ const menuFactory = element => {
 
 
   const shouldClose = target => {
+    //console.log('***** shouldClose');
+
     let result = false;
     const btn = (target && target.closest(`.${JS_MENU_BUTTON}`)) || null;
     if(!btn) {
@@ -564,6 +469,7 @@ class MenuButton {
   };
 
   clickHandler = () => {
+
     if(!this.isDisabled()) {
       if(this.element.getAttribute('aria-expanded').toLowerCase() === 'true') {
         this.closeMenu(true);
