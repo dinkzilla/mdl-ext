@@ -51,8 +51,9 @@ const MENU_BUTTON_MENU_ITEM_SEPARATOR = 'mdlext-menu__item-separator';
 /**
  * Creates the menu controlled by the menu button
  * @param element
- * @return {{element: Element, selected: Element, open: (function(*=)), downgrade: (function())}}
+ * @return {{element: Element, selected: Element, open: (function(*=)), removeListeners: (function()), downgrade: (function())}}
  */
+
 const menuFactory = element => {
 
   let ariaControls = null;
@@ -216,7 +217,6 @@ const menuFactory = element => {
       default:
         return;
     }
-    event.stopPropagation();
     event.preventDefault();
   };
 
@@ -233,13 +233,12 @@ const menuFactory = element => {
     else {
       close();
     }
-
   };
 
   const clickHandler = event => {
     //console.log('***** click, target', event.target);
 
-    //event.preventDefault();
+    event.preventDefault();
     const t = event.target;
     if(t && t.closest(`.${MENU_BUTTON_MENU}`) === element) {
       const item = t.closest(`.${MENU_BUTTON_MENU_ITEM}`);
@@ -267,6 +266,21 @@ const menuFactory = element => {
       }
     }
   };
+
+  const addListeners = () => {
+    element.addEventListener('keydown', keyDownHandler);
+    element.addEventListener('blur', blurHandler, true);
+    element.addEventListener('click', clickHandler, true);
+    document.documentElement.addEventListener('touchstart', touchStartHandler, true);
+  };
+
+  const removeListeners = () => {
+    element.removeEventListener('keydown', keyDownHandler);
+    element.removeEventListener('blur', blurHandler, true);
+    element.removeEventListener('click', clickHandler, true);
+    document.documentElement.removeEventListener('touchstart', touchStartHandler, true);
+  };
+
 
   /*
   const drag = (touchItem, startY) => {
@@ -398,13 +412,7 @@ const menuFactory = element => {
         break;
     }
 
-    // Handle drag
-    element.addEventListener('blur', blurHandler, true);
-    element.addEventListener('click', clickHandler, true);
-    document.documentElement.addEventListener('touchstart', touchStartHandler, true);
-
-    //document.documentElement.addEventListener('mousedown', mouseDownHandler, true);
-    //document.documentElement.addEventListener('touchstart', mouseDownHandler, true);
+    addListeners();
   };
 
 
@@ -426,12 +434,7 @@ const menuFactory = element => {
   };
 
   const close = (forceFocus = false, item = null) => {
-    element.removeEventListener('blur', blurHandler, true);
-    element.removeEventListener('click', clickHandler, true);
-    document.documentElement.removeEventListener('touchstart', touchStartHandler, true);
-
-    //document.documentElement.removeEventListener('mousedown', mouseDownHandler, true);
-    //document.documentElement.removeEventListener('touchstart', mouseDownHandler, true);
+    removeListeners();
 
     element.dispatchEvent(
       new CustomEvent('_closemenu', {
@@ -461,18 +464,8 @@ const menuFactory = element => {
     });
   };
 
-  const removeListeners = () => {
-    element.removeEventListener('keydown', keyDownHandler);
-  };
-
-  const addListeners = () => {
-    element.addEventListener('keydown', keyDownHandler);
-  };
-
   const init = () => {
     addWaiAria();
-    removeListeners();
-    addListeners();
     parentNode = element.parentNode;
     element.classList.add('is-upgraded');
   };
@@ -510,6 +503,11 @@ const menuFactory = element => {
      * @param {String} position menuElement item to receive focus after menu element is opened
      */
     open: (controlElement, position='first') => open(controlElement, position),
+
+    /**
+     * Remove event listeners.
+     */
+    removeListeners: () => removeListeners(),
 
     /**
      * Downgrade menu
@@ -648,6 +646,7 @@ class MenuButton {
 
   closeMenu(forceFocus = false) {
     if(this.menu) {
+      this.menu.removeListeners();
       this.scrollElements.forEach(el => el.removeEventListener('scroll', this.positionChangeHandler));
       window.removeEventListener('resize', this.positionChangeHandler);
       window.removeEventListener('orientationchange', this.positionChangeHandler);
