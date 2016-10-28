@@ -3339,8 +3339,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 
 .mdlext-accordion[disabled] .mdlext-accordion__tabpanel {
   opacity: 0.8;
-  -webkit-filter: blur(1px) grayscale(80%);
-          filter: blur(1px) grayscale(80%);
+  filter: blur(1px) grayscale(80%);
 }
 
 @keyframes mdlext-accordion-tab-ripple {
@@ -4548,8 +4547,7 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
 
 .mdlext-light-color-theme .mdlext-accordion[disabled] .mdlext-accordion__tabpanel {
   opacity: 0.8;
-  -webkit-filter: blur(1px) grayscale(80%);
-          filter: blur(1px) grayscale(80%);
+  filter: blur(1px) grayscale(80%);
 }
 
 /* -------------------------------------------------------------
@@ -5643,8 +5641,7 @@ $mdlext-dark-color-accent-contrast:   #FFFFFF !default;
 
 .mdlext-dark-color-theme .mdlext-accordion[disabled] .mdlext-accordion__tabpanel {
   opacity: 0.8;
-  -webkit-filter: blur(1px) grayscale(80%);
-          filter: blur(1px) grayscale(80%);
+  filter: blur(1px) grayscale(80%);
 }
 
 

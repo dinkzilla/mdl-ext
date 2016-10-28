@@ -226,6 +226,11 @@ import {
    * @param {Element} tabElement The HTML element for the accordion panel.
    */
   MaterialExtAccordion.prototype.upgradeTab = function( tabElement ) {
+    if(tabElement.classList.contains('is-upgraded')){
+      return;
+    }else{
+      tabElement.classList.add('is-upgraded');
+    }
 
     const { panel, tab, tabpanel } = accordionPanelElements( tabElement );
 

@@ -59,16 +59,16 @@ var config = {
     umdNamedDefine: true
   },
   module: {
-    preLoaders: [
-      {
-        loader: 'eslint',
-        test: /\.js[x]?$/,
-        include: [                     // ... or: exclude: /(node_modules|bower_components)/,
-          path.join(__dirname, 'src'),
-          path.join(__dirname, 'test')
-        ]
-      }
-    ],
+    // preLoaders: [
+    //   {
+    //     loader: 'eslint',
+    //     test: /\.js[x]?$/,
+    //     include: [                     // ... or: exclude: /(node_modules|bower_components)/,
+    //       path.join(__dirname, 'src'),
+    //       path.join(__dirname, 'test')
+    //     ]
+    //   }
+    // ],
     loaders: [
       {
         test: /\.js[x]?$/,
@@ -98,11 +98,11 @@ var config = {
       browsers: ['last 2 versions']
     })
   ],
-  eslint: {
-    // config in '.eslintrc'
-    failOnWarning: false,
-    failOnError: true
-  },
+  // eslint: {
+  //   // config in '.eslintrc'
+  //   failOnWarning: false,
+  //   failOnError: true
+  // },
   resolve: {
     root: path.resolve('./src'),
     modulesDirectories: ['src', 'node_modules'],
@@ -113,14 +113,14 @@ var config = {
       disable: false,
       allChunks: true
     }),
-    new StyleLintPlugin({
-      // http://stylelint.io/user-guide/example-config/
-      configFile: '.stylelintrc',
-      context: 'src',
-      files: '**/*.s?(a|c)ss',
-      syntax: 'scss',
-      failOnError: false
-    }),
+    // new StyleLintPlugin({
+    //   // http://stylelint.io/user-guide/example-config/
+    //   configFile: '.stylelintrc',
+    //   context: 'src',
+    //   files: '**/*.s?(a|c)ss',
+    //   syntax: 'scss',
+    //   failOnError: false
+    // }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin()
   ],
