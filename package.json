@@ -15,16 +15,13 @@
     "report-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/codecov",
     "clean": "./node_modules/.bin/rimraf lib && mkdir lib",
     "commit": "git-cz",
-    "prebuild": "npm run clean && ./node_modules/.bin/webpack",
+    "prebuild": "npm run clean",
     "build": "./node_modules/.bin/webpack -p --mode=build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "build-demo": "./node_modules/.bin/gulp build-demo",
     "start": "npm run dev"
   },
   "config": {
-    "ghooks": {
-      "pre-commit": "npm run build && npm run check-coverage"
-    },
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
