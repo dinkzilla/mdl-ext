@@ -3242,7 +3242,7 @@ fieldset[disabled] .mdlext-selectfield .mdlext-selectfield__label,
 
 .mdlext-accordion--vertical .mdlext-accordion__tab {
   height: 56px;
-  border-top: 1px solid rgba(158, 158, 158, 0.5);
+  border: 1px solid rgba(158, 158, 158, 0.5);
   padding-left: 8px;
   padding-right: 8px;
 }
